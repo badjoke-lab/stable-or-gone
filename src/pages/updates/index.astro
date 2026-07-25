@@ -22,7 +22,7 @@ const entries = feed.entries as UpdateFeedEntry[];
 const latestUpdateDate = feed.summary.latest_publication_date ?? 'Not recorded';
 const title = 'Updates — Stable or Gone';
 const description = 'Registry publication changes: additions, corrections, source reviews, guide releases, and interface changes across Stable or Gone.';
-const configJson = JSON.stringify(updateFeedConfig).replace(/</g, '\\u003c');
+const configJson = JSON.stringify(updateFeedConfig).replace(/</g, '\u003c');
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'CollectionPage',
@@ -161,10 +161,10 @@ const jsonLd = {
                 <details class="update-feed-details">
                   <summary>View feed metadata</summary>
                   <dl>
-                    <div><dt>Update ID</dt><dd>{entry.update_id}</dd></div>
+                    <div><dt>Update ID</dt><dd><code data-technical-value>{entry.update_id}</code></dd></div>
                     <div><dt>Publication date</dt><dd>{entry.publication_date}</dd></div>
-                    <div><dt>Category</dt><dd>{entry.category}</dd></div>
-                    <div><dt>Route families</dt><dd>{entry.route_families.join(', ') || 'None recorded'}</dd></div>
+                    <div><dt>Category</dt><dd>{formatPublicLabel(entry.category)}</dd></div>
+                    <div><dt>Route families</dt><dd>{entry.route_families.length ? entry.route_families.map((value) => formatPublicLabel(value)).join(', ') : 'None recorded'}</dd></div>
                   </dl>
                 </details>
               </div>

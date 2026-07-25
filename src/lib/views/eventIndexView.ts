@@ -1,10 +1,11 @@
 import { eventPublicCopy } from '../../data/eventPublicCopy';
 import { getPublicEventCategoryFilterOptions, getRecoveryFilterOptions, resolveEventTaxonomy } from '../../utils/eventTaxonomy';
+import { formatPublicLabel } from '../../utils/displayLabels';
 import { getEvidence, getEvents, getOrganizations, getStablecoins } from '../data/registry';
 import { getCanonicalEvidenceRelations } from '../data/evidenceSources';
 
 const unique = <T>(values: T[]) => [...new Set(values)];
-const option = (value: string, publicLabel = value === 'not_recorded' ? 'Not recorded' : value.replaceAll('_', ' ')) => ({ value, publicLabel });
+const option = (value: string, publicLabel = formatPublicLabel(value)) => ({ value, publicLabel });
 
 export function buildEventIndexView() {
   const events = getEvents();
@@ -39,7 +40,7 @@ export function buildEventIndexView() {
       categoryLabel: taxonomy.public_category_label,
       subtype: taxonomy.canonical_subtype,
       subtypeLabel: taxonomy.canonical_subtype_label,
-      impactLabel: event.impact_level ? event.impact_level.replaceAll('_', ' ') : 'Not recorded',
+      impactLabel: formatPublicLabel(event.impact_level),
       statusEffect: taxonomy.status_effect_category,
       statusEffectLabel: taxonomy.status_effect_label,
       recovery: taxonomy.recovery_category,
@@ -48,7 +49,7 @@ export function buildEventIndexView() {
       stablecoinIds,
       organizationIds,
       sourceIdentityCount: sourceIds.length,
-      confidenceLabel: event.confidence ? event.confidence.replaceAll('_', ' ') : 'Not recorded',
+      confidenceLabel: formatPublicLabel(event.confidence),
       search: [title, description, event.id, ...subjectNames, ...publishers].filter(Boolean).join(' ').normalize('NFKC').toLocaleLowerCase().trim().replace(/\s+/g, ' ')
     };
   }).sort((left, right) => right.eventDate.localeCompare(left.eventDate) || left.title.localeCompare(right.title));

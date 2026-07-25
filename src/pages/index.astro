@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import '../styles/home-v3.css';
-import { formatLifecycleLabel, lifecycleChipClass } from '../utils/publicTaxonomy';
+import { formatLifecycleLabel, formatTaxonomyLabel, lifecycleChipClass } from '../utils/publicTaxonomy';
 import { formatReferenceTargetLabel } from '../utils/referenceTarget';
 import { formatPublicBackingModelLabel } from '../utils/backingModel';
 import { resolvePrimaryRelationshipForStablecoin } from '../utils/primaryDisplayRelationship';
@@ -20,6 +20,10 @@ const organizationById = new Map(organizations.map((organization) => [organizati
 const primaryOrganizationName = (stablecoinId: string) => {
   const relationship = resolvePrimaryRelationshipForStablecoin(stablecoinId, relationships).relationship;
   return relationship ? organizationById.get(relationship.organization_id) ?? 'Unknown organization' : 'Unknown organization';
+};
+const organizationTypeLabel = (organization: { organization_type?: string | null; legacy_issuer_type?: string | null }) => {
+  const value = organization.organization_type ?? organization.legacy_issuer_type;
+  return formatTaxonomyLabel('organization_type', value, 'Organization');
 };
 
 const featuredGuides = getFeaturedGuides(4).map((guide) => ({
@@ -78,9 +82,9 @@ const searchRecords = [
   ...organizations.map((organization) => ({
     type: 'Organization',
     title: organization.name,
-    meta: String(organization.organization_type ?? organization.legacy_issuer_type ?? 'Organization').replaceAll('_', ' '),
+    meta: organizationTypeLabel(organization),
     href: `/issuer/${organization.slug}/`,
-    search: [organization.name, organization.slug, organization.organization_type, organization.legacy_issuer_type].filter(Boolean).join(' ')
+    search: [organization.name, organization.slug, organization.organization_type, organization.legacy_issuer_type, organizationTypeLabel(organization)].filter(Boolean).join(' ')
   })),
   ...events.map((event) => ({
     type: 'Event',

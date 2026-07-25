@@ -74,6 +74,7 @@ for (const route of routes) {
           role,
           element: pathFor(element),
           text: (directText(element) || element.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 140),
+          font_family: style.fontFamily,
           font_size_px: Number(number(style.fontSize).toFixed(2)),
           line_height_ratio: Number(lineRatio(style).toFixed(2)),
           width_px: Math.round(rect.width),
@@ -100,7 +101,9 @@ for (const route of routes) {
         excessive_heading_height: [],
         overlapping_section_heading_content: [],
         ambiguous_internal_accent_links: [],
-        undersized_mobile_targets: []
+        undersized_mobile_targets: [],
+        unexpected_public_font: [],
+        raw_public_enum: []
       };
       const push = (category, value) => {
         if (findings[category].length < 250) findings[category].push(value);
@@ -202,6 +205,56 @@ for (const route of routes) {
         }
       }
 
+      /* Ordinary public UI must use the shared sans stack. Monospace and serif
+       * families are allowed only in explicitly technical surfaces. */
+      const technicalSelector = 'code, pre, kbd, samp, .contract-address, .transaction-hash, [data-long-value], [data-technical-value]';
+      const forbiddenFamilies = new Set([
+        'ui-monospace', 'sfmono-regular', 'menlo', 'monaco', 'consolas',
+        'liberation mono', 'courier', 'courier new', 'monospace',
+        'georgia', 'times', 'times new roman', 'serif'
+      ]);
+      const publicTextSelector = 'body, header, footer, main h1, main h2, main h3, main h4, main h5, main h6, main p, main li, main dt, main dd, main th, main td, main figcaption, main small, main time, main summary, main label, main a, main button, main input, main select, main textarea, main span';
+      const checkedFonts = new Set();
+      for (const element of [...document.querySelectorAll(publicTextSelector)].filter(visible)) {
+        if (element.matches(technicalSelector) || element.closest(technicalSelector)) continue;
+        if (element.closest('[aria-hidden="true"]')) continue;
+        const key = pathFor(element);
+        if (checkedFonts.has(key)) continue;
+        checkedFonts.add(key);
+        const families = getComputedStyle(element).fontFamily
+          .split(',')
+          .map((family) => family.trim().replace(/^['"]|['"]$/g, '').toLowerCase());
+        const forbidden = families.find((family) => forbiddenFamilies.has(family));
+        if (forbidden) push('unexpected_public_font', { ...sample(element, 'public-font'), forbidden_family: forbidden });
+      }
+
+      /* Public copy must not expose internal snake_case enum tokens. Canonical
+       * SOG record IDs remain permitted and technical code surfaces are skipped. */
+      const enumPattern = /\b[a-z][a-z0-9]*(?:_[a-z0-9]+)+\b/g;
+      const checkedEnums = new Set();
+      const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+      let node;
+      while ((node = walker.nextNode())) {
+        const parent = node.parentElement;
+        if (!(parent instanceof HTMLElement) || !visible(parent)) continue;
+        if (parent.closest('script, style, noscript, template, [aria-hidden="true"]')) continue;
+        if (parent.matches(technicalSelector) || parent.closest(technicalSelector)) continue;
+        const text = String(node.textContent ?? '').trim();
+        if (!text) continue;
+        for (const match of text.matchAll(enumPattern)) {
+          const token = match[0];
+          if (token.startsWith('sog_')) continue;
+          const key = `${pathFor(parent)}:${token}`;
+          if (checkedEnums.has(key)) continue;
+          checkedEnums.add(key);
+          push('raw_public_enum', {
+            element: pathFor(parent),
+            token,
+            text: text.replace(/\s+/g, ' ').slice(0, 180)
+          });
+        }
+      }
+
       const counts = Object.fromEntries(Object.entries(findings).map(([key, values]) => [key, values.length]));
       return { thresholds, counts, findings };
     }, { deviceName: device });
@@ -223,12 +276,14 @@ const categories = [
   'excessive_heading_height',
   'overlapping_section_heading_content',
   'ambiguous_internal_accent_links',
-  'undersized_mobile_targets'
+  'undersized_mobile_targets',
+  'unexpected_public_font',
+  'raw_public_enum'
 ];
 const totals = Object.fromEntries(categories.map((category) => [category, records.reduce((sum, record) => sum + Number(record.counts?.[category] ?? 0), 0)]));
 const routesWithFindings = records.filter((record) => categories.some((category) => Number(record.counts?.[category] ?? 0) > 0)).length;
 const output = {
-  schema_version: '1.1',
+  schema_version: '1.2',
   generated_at: new Date().toISOString(),
   device,
   route_count: routes.length,

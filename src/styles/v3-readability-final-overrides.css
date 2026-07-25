@@ -2,6 +2,31 @@
  * Loaded last so earlier phase-specific !important declarations cannot reduce
  * text, links, metadata, or touch targets below the accepted floors. */
 
+/* Public typography is one sans-serif system. Legacy serif and monospace rules
+ * must not survive on ordinary labels, headings, navigation, metadata, or copy.
+ * Monospace is reserved for genuinely technical values below. */
+html body,
+html body :where(button, input, select, textarea),
+html body .site-header,
+html body .site-footer,
+html body #main-content,
+html body #main-content :where(h1, h2, h3, h4, h5, h6, p, li, dt, dd, th, td, figcaption, small, time, summary, label, a, span, blockquote) {
+  font-family: var(--v3-sans) !important;
+}
+
+html body :where(
+  code,
+  pre,
+  kbd,
+  samp,
+  .contract-address,
+  .transaction-hash,
+  [data-long-value],
+  [data-technical-value]
+) {
+  font-family: var(--v3-mono) !important;
+}
+
 /* Shared shell and footer. */
 html body .site-footer .v3-footer-links a {
   min-height: 40px !important;

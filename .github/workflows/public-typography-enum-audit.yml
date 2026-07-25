@@ -1,0 +1,100 @@
+name: Public typography and enum audit
+
+on:
+  pull_request:
+    paths:
+      - 'src/**'
+      - 'scripts/audit-public-typography-enums-direct.mjs'
+      - '.github/workflows/public-typography-enum-audit.yml'
+      - 'package.json'
+      - 'package-lock.json'
+  push:
+    branches:
+      - main
+    paths:
+      - 'src/**'
+      - 'scripts/audit-public-typography-enums-direct.mjs'
+      - '.github/workflows/public-typography-enum-audit.yml'
+      - 'package.json'
+      - 'package-lock.json'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit-rendered-public-ui:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      PUBLIC_UI_AUDIT_BASE_URL: http://127.0.0.1:4173
+      PUBLIC_UI_AUDIT_CONCURRENCY: 8
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Build site
+        run: npm run build:site
+
+      - name: Start local site
+        run: |
+          python3 -m http.server 4173 --directory dist > /tmp/sog-public-ui-audit-server.log 2>&1 &
+          echo $! > /tmp/sog-public-ui-audit-server.pid
+          for attempt in $(seq 1 30); do
+            if curl -fsS "$PUBLIC_UI_AUDIT_BASE_URL/" > /dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/sog-public-ui-audit-server.log
+          exit 1
+
+      - name: Audit every rendered route on desktop and mobile
+        shell: bash
+        run: |
+          mkdir -p artifacts
+          set -o pipefail
+          node scripts/audit-public-typography-enums-direct.mjs 2>&1 | tee artifacts/public-typography-enum-runtime-audit.log
+
+      - name: Upload public UI contract audit
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: public-typography-enum-audit-${{ github.run_id }}
+          if-no-files-found: error
+          retention-days: 30
+          path: |
+            artifacts/public-typography-enum-runtime-audit.json
+            artifacts/public-typography-enum-runtime-audit.log
+            /tmp/sog-public-ui-audit-server.log
+
+      - name: Write audit summary
+        if: always()
+        run: |
+          echo '## Public typography and enum audit' >> "$GITHUB_STEP_SUMMARY"
+          if [ -f artifacts/public-typography-enum-runtime-audit.json ]; then
+            node - <<'NODE' >> "$GITHUB_STEP_SUMMARY"
+          const fs = require('fs');
+          const audit = JSON.parse(fs.readFileSync('artifacts/public-typography-enum-runtime-audit.json', 'utf8'));
+          console.log(`- Result: **${audit.ok ? 'pass' : 'fail'}**`);
+          console.log(`- Routes: **${audit.route_count}**`);
+          console.log(`- Desktop/mobile audits: **${audit.audited_count}/${audit.expected_audit_count}**`);
+          console.log(`- Unexpected public fonts: **${audit.totals.unexpected_public_font}**`);
+          console.log(`- Raw public enums: **${audit.totals.raw_public_enum}**`);
+          console.log(`- Navigation failures: **${audit.navigation_failures.length}**`);
+          NODE
+          else
+            echo '- Audit result: **missing**' >> "$GITHUB_STEP_SUMMARY"
+          fi

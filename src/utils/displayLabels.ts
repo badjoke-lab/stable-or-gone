@@ -8,6 +8,15 @@ const exactLabels: Record<string, string> = {
   protocol_or_company: 'Protocol / company',
   network_or_company_group: 'Network / company group',
   multi_jurisdiction: 'Multiple jurisdictions',
+  global_or_multi_jurisdiction: 'Global / multiple jurisdictions',
+  tax_or_trading_firm: 'Tax / trading firm',
+  central_bank_or_currency_authority: 'Central bank / currency authority',
+  foundation_or_association: 'Foundation / association',
+  admin_legal_technical: 'Administrative, legal, and technical',
+  launch_date: 'Launch date',
+  platform_host: 'Platform host',
+  historical_market_context: 'Historical market context',
+  market_context: 'Market context',
   source_review_needed: 'Public information incomplete',
   partial_or_protocol_transparent: 'Partial / protocol-transparent',
   protocol_transparent: 'Protocol-transparent',
@@ -50,6 +59,7 @@ const acronyms: Record<string, string> = {
   dao: 'DAO',
   defi: 'DeFi',
   lfg: 'LFG',
+  makerdao: 'MakerDAO',
   nyag: 'NYAG',
   psm: 'PSM',
   sec: 'SEC',
@@ -60,6 +70,7 @@ const acronyms: Record<string, string> = {
   v3: 'V3'
 };
 
+const acronymValues = new Set(Object.values(acronyms));
 const minorWords = new Set(['and', 'or', 'of', 'to', 'via', 'with', 'for', 'from', 'as']);
 
 export function formatPublicLabel(value?: string | null, fallback = '—'): string {
@@ -86,6 +97,24 @@ export function formatPublicLabel(value?: string | null, fallback = '—'): stri
       return lower.charAt(0).toUpperCase() + lower.slice(1);
     })
     .join(' ');
+}
+
+export function formatPublicText(value?: string | null, fallback = '—'): string {
+  const normalized = String(value ?? '').trim();
+  if (!normalized) return fallback;
+
+  return normalized.replace(/\b[a-z][a-z0-9]*(?:_[a-z0-9]+)+\b/g, (token) => {
+    if (token.startsWith('sog_')) return token;
+    const label = formatPublicLabel(token, token);
+    return label
+      .split(/(\s+|\/|,)/)
+      .map((part) => {
+        if (!part || /^\s+$/.test(part) || part === '/' || part === ',') return part;
+        if (acronymValues.has(part) || /^[A-Z0-9-]{2,}$/.test(part)) return part;
+        return part.toLowerCase();
+      })
+      .join('');
+  });
 }
 
 export function formatStatusLabel(value?: string | null): string {

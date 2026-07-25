@@ -69,9 +69,9 @@ const capabilitySummary = (yes: number, no: number, unknown: number) => {
       <tbody>
         {relationshipRows.length === 0 ? <tr><td colspan="9">No organization relationships have been added yet.</td></tr> : relationshipRows.map((item: any) => <tr>
           <td>{item.organization ? <a href={`/issuer/${item.organization.slug}/`}>{item.organization.name}</a> : item.relationship.organization_id}</td>
-          <td>{item.taxonomy?.public_category_label ?? 'Not recorded'}</td>
-          <td>{item.taxonomy?.regulatory_character_label ?? 'Not recorded'}</td>
-          <td>{item.taxonomy?.jurisdiction_label ?? 'Not recorded'}</td>
+          <td>{formatPublicLabel(item.taxonomy?.public_category_label, 'Not recorded')}</td>
+          <td>{formatPublicLabel(item.taxonomy?.regulatory_character_label, 'Not recorded')}</td>
+          <td>{formatPublicLabel(item.taxonomy?.jurisdiction_label, 'Not recorded')}</td>
           <td>{getFunctionalRoleLabel(item.relationship.role)}</td>
           <td>{item.isPrimary ? 'Primary display' : 'Additional relationship'}</td>
           <td><ValueStateText value={item.relationship.start_date} /></td>
@@ -84,12 +84,12 @@ const capabilitySummary = (yes: number, no: number, unknown: number) => {
 
   <div class="stablecoin-organization-cards" data-mobile-representation-for="stablecoin-organizations">
     {relationshipRows.map((item: any) => <article>
-      <header><div><span class="record-kicker">{item.taxonomy?.public_category_label ?? 'Organization'}</span><h3>{item.organization ? <a href={`/issuer/${item.organization.slug}/`}>{item.organization.name}</a> : item.relationship.organization_id}</h3></div><span>{item.isPrimary ? 'Primary display' : 'Additional relationship'}</span></header>
+      <header><div><span class="record-kicker">{formatPublicLabel(item.taxonomy?.public_category_label, 'Organization')}</span><h3>{item.organization ? <a href={`/issuer/${item.organization.slug}/`}>{item.organization.name}</a> : item.relationship.organization_id}</h3></div><span>{item.isPrimary ? 'Primary display' : 'Additional relationship'}</span></header>
       <dl>
         <div><dt>Functional role</dt><dd>{getFunctionalRoleLabel(item.relationship.role)}</dd></div>
         <div><dt>Relationship status</dt><dd>{getRelationshipStatusLabel(item.relationship.status ?? 'unknown')}</dd></div>
-        <div><dt>Regulatory character</dt><dd>{item.taxonomy?.regulatory_character_label ?? 'Not recorded'}</dd></div>
-        <div><dt>Jurisdiction</dt><dd>{item.taxonomy?.jurisdiction_label ?? 'Not recorded'}</dd></div>
+        <div><dt>Regulatory character</dt><dd>{formatPublicLabel(item.taxonomy?.regulatory_character_label, 'Not recorded')}</dd></div>
+        <div><dt>Jurisdiction</dt><dd>{formatPublicLabel(item.taxonomy?.jurisdiction_label, 'Not recorded')}</dd></div>
         <div><dt>From</dt><dd>{item.relationship.start_date ?? 'Not recorded'}</dd></div>
         <div><dt>Until</dt><dd>{item.relationship.end_date ?? 'Not recorded'}</dd></div>
       </dl>

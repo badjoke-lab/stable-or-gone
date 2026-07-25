@@ -121,6 +121,7 @@ jobs:
           if-no-files-found: warn
           path: |
             artifacts/ui-v3-cleanup-validation.json
+            artifacts/public-typography-enum-contract-validation.json
             artifacts/ui-v3-cleanup-audit.json
             artifacts/ui-v3-cleanup-audit.md
       - name: Upload build diagnostics
