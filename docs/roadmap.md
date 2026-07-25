@@ -1,7 +1,7 @@
 # Stable or Gone Roadmap
 
-Updated: 2026-07-20  
-Status: canonical 114-asset baseline stable; UI remediation R1 active
+Updated: 2026-07-25  
+Status: UI V3 remediation complete; reviewed data-growth operating mode resumed
 
 ## Current position
 
@@ -17,139 +17,91 @@ Market Access Records: 8
 Archive recorded: 436
 Archive not recorded: 129
 
-Issue #281 UI v3 rebuild: reopened
-UI completion: false
-Previous owner approval: withdrawn after failed visual review
-UI remediation authority: docs/ui-v3-remediation-authority.md
-Current UI phase: R1 authority reset and audit baseline
+Issue #281 UI v3 rebuild: complete and closed
+Issue #457 CYA-dark redesign audit: complete and closed
+UI completion: true
+Final UI merge: PR #463
+Final main commit: 88db81ed27b63ff8798883ef618045f2bbe1a9b3
+Final exhaustive screenshot run: 30147237015
 ```
+
+The canonical data baseline established through PR #433 remains unchanged by the UI closure work. UI remediation did not authorize canonical record, route-semantic, or machine-readable contract changes.
+
+## UI V3 closure
+
+The earlier representative-only completion decision was withdrawn because it did not establish acceptable readability, density, hierarchy, mobile behavior, or full-route coverage. The replacement closure sequence completed the following:
+
+```text
+PR #461  exhaustive V3 color-system repair
+PR #463  exhaustive readability and hierarchy repair
+```
+
+Final verification on the PR #463 head covered:
+
+- 457 desktop routes;
+- 457 mobile routes;
+- 914 regenerated full-page screenshots;
+- zero failed captures;
+- zero blocking exhaustive-UI findings;
+- zero blocking color-system findings;
+- zero blocking readability findings;
+- explicit detection of overlapping section-heading content;
+- repair and direct reinspection of the mobile event-dossier overlap found during artifact review;
+- all repository workflows green before merge.
+
+The final merge commit is `88db81ed27b63ff8798883ef618045f2bbe1a9b3`. Issue #281 and the superseded UI audit threads are closed. The former UI remediation authority is retained as an archived regression contract in `docs/ui-v3-remediation-authority.md`.
 
 ## Canonical data baseline
 
 ```text
-PR #426 Post-UI v3 Data-Growth Reset: complete
-PR #427 Record Growth Candidate Audit v2: complete
-PR #428 Post-PR #427 Review Gate: complete
-PR #429 Record Growth Batch 2 — CHFAU and SEKAU: complete
-PR #432 Generated-output repair workflow: complete
-PR #433 Generated and persisted PR #429 outputs: complete
+PR #426  Post-UI v3 Data-Growth Reset: complete
+PR #427  Record Growth Candidate Audit v2: complete
+PR #428  Post-PR #427 Review Gate: complete
+PR #429  Record Growth Batch 2 — CHFAU and SEKAU: complete
+PR #432  Generated-output repair workflow: complete
+PR #433  Generated and persisted PR #429 outputs: complete
 ```
 
-PR #433 established the current generated and built baseline of 114 stable assets, 107 organizations, 126 relationships, 189 events, 565 Evidence records, and 180 deployments. UI remediation must preserve this canonical baseline unless a separate data authority explicitly authorizes a change.
+PR #433 established the current generated and built baseline of 114 stable assets, 107 organizations, 126 relationships, 189 events, 565 Evidence records, and 180 deployments.
 
-## Withdrawn UI completion sequence
+## Active operating mode
 
-The following sequence was implemented and rendered, but its completion decision is no longer valid:
+The governing operating specification is `docs/post-351-data-growth-operating-spec.md`.
+
+Normal work now proceeds through these lanes:
 
 ```text
-PR #409 design contract and failure gates
-PR #410 review gate
-PR #411 global shell and navigation
-PR #412 review gate
-PR #413 home and stablecoin register
-PR #414 review gate
-PR #415 stablecoin dossier
-PR #416 review gate
-PR #417 events and organizations
-PR #418 review gate
-PR #419 guides and secondary pages
-PR #420 review gate
-PR #421 representative visual closure package
-PR #422 owner approval and completion record
-PR #424 production checker aligned with UI v3
-PR #425 active authority aligned and Issue #281 closed
+reviewed data depth and record growth
+canonical Market Access promotion
+read-only monitoring review
+corrections and Evidence maintenance
+monthly maintenance
+small correctness, accessibility, readability, and broken-link fixes
 ```
 
-The prior closure captured representative states and passed build, route, screenshot-existence, and page-overflow checks. It did not establish acceptable typography, density, hierarchy, mobile browsing, full-route coverage, or runtime data-state quality. Representative automated screenshots are not a substitute for a complete manual product-design review.
+New public pages, dashboards, rankings, explorer families, or major navigation changes remain frozen unless a separate reviewed roadmap amendment and canonical specification authorize them.
 
-## Active UI remediation sequence
+## Next bounded work item
 
-The sole detailed authority is `docs/ui-v3-remediation-authority.md`.
+The next substantive work item is a **post-UI data-growth review gate**. It must recompute the current 114-asset planning state from merged canonical data and choose exactly one bounded follow-on batch from reviewed evidence.
 
-```text
-R1 Authority reset and complete audit baseline: active
-R2 Global shell and tokens: blocked
-R3 Home and Stablecoin Register: blocked
-R4 Stablecoin Dossier: blocked
-R5 Events and Organizations: blocked
-R6 Guides and long-form pages: blocked
-R7 Reference and utility pages: blocked
-R8 Compare and Access/Regulation: blocked
-R9 Timeline and Stats: blocked
-R10 Full visual closure: blocked
-```
+The review gate may authorize one of the existing operating lanes, but it must not pre-authorize an indefinite PR sequence. It must record:
 
-### R1 — Authority reset and audit baseline
+- current dossier-depth and evidence-maintenance gaps;
+- remaining reviewed candidate queue state;
+- Market Access utility and evidence readiness;
+- monitoring leads that are eligible only for manual review;
+- correction and archive-maintenance load;
+- the exact scope, record bound, evidence requirement, and stop condition for the next PR.
 
-- make the remediation memo mandatory in `AGENTS.md`;
-- reopen Issue #281;
-- set UI completion false everywhere;
-- inventory every public route and required loading, empty, error, filtered, ready, desktop, tablet, and mobile state;
-- prevent visible runtime errors from passing visual closure.
+No score, safety ranking, investment recommendation, or automatic canonical promotion is permitted.
 
-### R2 — Global shell and tokens
+## Production publication boundary
 
-- one readable UI font family;
-- monospace only for technical literals;
-- compact one-row desktop and mobile headers;
-- remove the giant decorative Home masthead;
-- normalize type scale, spacing, surfaces, color roles, focus, and footer density.
+`main` remains the source of truth. Production publication follows `docs/deployment-policy.md` through `.github/workflows/deploy-production.yml` and must verify the deployed commit against the intended main commit.
 
-### R3 — Home and Stablecoin Register
-
-- compact registry-first Home;
-- immediate search and current counts;
-- bounded recent content;
-- collapsed filters, selected-filter chips, compact desktop table, compact mobile rows, and clear empty/error states.
-
-### R4 — Stablecoin Dossier
-
-- decision-useful summary first;
-- redemption, backing, issuer/control, events, deployments, unresolved questions, Evidence, and technical fields in that order;
-- bounded related lists and mobile disclosure.
-
-### R5 — Events and Organizations
-
-- compact bounded registers;
-- useful grouping and filtering;
-- remove duplicated detail fields;
-- relationship-first organization details;
-- Evidence shown at appropriate weight.
-
-### R6 — Guides and long-form pages
-
-- readable width and table of contents;
-- responsive tables without card explosions;
-- section navigation;
-- separate appendices and source-heavy reference material where needed.
-
-### R7 — Reference and utility pages
-
-- redesign Glossary, Models, Updates, Maintenance, About, Contact, and Support;
-- ensure every route receives desktop and mobile captures.
-
-### R8 — Compare and Access/Regulation
-
-- fix data-loading and contract-mismatch failures before visual approval;
-- separate loading, empty, error, and ready states;
-- rebuild comparison and access exploration for desktop and mobile.
-
-### R9 — Timeline and Stats
-
-- bounded chronology with year/month navigation;
-- statistics overview and focused detail views;
-- move raw exhaustive tables out of the default mobile experience.
-
-### R10 — Full visual closure
-
-- capture every unique route template and representative state at 1440, 1280, 768, 390, and 320 widths;
-- fail on visible runtime errors, required-request failures, clipping, ordinary-word break-all, horizontal page overflow, unreadable typography, and skipped audit steps;
-- require explicit manual approval of the final contact sheets.
+A repository merge is not itself evidence that production parity has completed. Production parity remains a separately verified deployment result, and Issue #66 remains the long-lived checkpoint record for production consistency.
 
 ## Mandatory operating rule
 
-Every UI issue, pull request, review gate, and completion report must cite `docs/ui-v3-remediation-authority.md`, identify the exact requirement headings addressed, and update its progress table. Do not create a parallel UI plan that can drift from the authority.
-
-## Completion boundary
-
-UI completion remains false until R1–R10 are complete, all mandatory route/state captures exist, Compare and Access/Regulation no longer expose runtime contract errors, and the owner explicitly approves the final desktop and mobile contact sheets. Automated rendering never constitutes approval.
+Every non-trivial PR must identify its governing specification, exact bounded scope, preserved public and canonical boundaries, validation evidence, and next review gate. Old handoffs, stale UI phases, and superseded PR numbers must not be treated as current authority.
