@@ -1,3 +1,23 @@
+/* Registry titles are functional identifiers, not newspaper display copy. */
+html body :where(
+  .home-masthead h1,
+  .event-index-title h1,
+  .organization-index-title h1,
+  .event-detail-title h1,
+  .organization-detail-title h1,
+  .stablecoin-dossier-title-row h1,
+  .stats-page h1,
+  .timeline-page h1,
+  .comparison-page h1,
+  .access-regulation-page h1
+) {
+  font-family: var(--v3-sans) !important;
+  font-size: clamp(2.4rem, 4.6vw, 4.15rem) !important;
+  font-weight: 760 !important;
+  line-height: 1.02 !important;
+  letter-spacing: -.04em !important;
+}
+
 /* Interactive text must not be reduced below the readable UI floor by an
  * earlier page-family stylesheet. Heading links retain their larger 1em size. */
 html body a,
@@ -45,6 +65,23 @@ html body .home-status-ledger dt > .chip.migrated::before,
 html body .home-status-ledger dt > .chip.rebranded::before { background: var(--v3-violet); }
 
 @media (max-width: 820px) {
+  html body :where(
+    .home-masthead h1,
+    .event-index-title h1,
+    .organization-index-title h1,
+    .event-detail-title h1,
+    .organization-detail-title h1,
+    .stablecoin-dossier-title-row h1,
+    .stats-page h1,
+    .timeline-page h1,
+    .comparison-page h1,
+    .access-regulation-page h1
+  ) {
+    font-size: clamp(2rem, 8.5vw, 2.55rem) !important;
+    line-height: 1.08 !important;
+    letter-spacing: -.025em !important;
+  }
+
   html body a,
   html body button,
   html body input,
