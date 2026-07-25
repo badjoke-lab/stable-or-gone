@@ -14,6 +14,8 @@ Evidence: 565
 Evidence Relations: 565
 Deployments: 180
 Market Access Records: 8
+Archive recorded: 436
+Archive not recorded: 129
 
 Issue #281 UI v3 rebuild: complete and closed
 Issue #457 CYA-dark redesign audit: complete and closed
