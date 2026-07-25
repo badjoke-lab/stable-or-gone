@@ -51,6 +51,8 @@ const shellCorrectionsCss = read('src/styles/v3-cya-dark-shell-corrections.css')
 const registryCss = read('src/styles/v3-cya-dark-registry.css');
 const remediationCss = read('src/styles/v3-exhaustive-remediation.css');
 const colorRemediationCss = read('src/styles/v3-color-system-remediation.css');
+const readabilityCss = read('src/styles/v3-readability-hierarchy.css');
+const readabilityComponentCss = read('src/styles/v3-readability-component-corrections.css');
 const packageJson = read('package.json');
 const ci = read('.github/workflows/ci.yml');
 const screenshotWorkflow = read('.github/workflows/capture-screenshots.yml');
@@ -65,10 +67,14 @@ for (const stylesheet of [
   "import '../styles/v3-cya-dark-analysis.css'",
   "import '../styles/v3-cya-dark-research-longform.css'",
   "import '../styles/v3-exhaustive-remediation.css'",
-  "import '../styles/v3-color-system-remediation.css'"
+  "import '../styles/v3-color-system-remediation.css'",
+  "import '../styles/v3-readability-hierarchy.css'",
+  "import '../styles/v3-readability-component-corrections.css'"
 ]) check(brand.includes(stylesheet), `BrandLockup active stylesheet import missing: ${stylesheet}`);
 
 check(brand.indexOf("import '../styles/v3-color-system-remediation.css'") > brand.indexOf("import '../styles/v3-exhaustive-remediation.css'"), 'color-system remediation must load after exhaustive remediation');
+check(brand.indexOf("import '../styles/v3-readability-hierarchy.css'") > brand.indexOf("import '../styles/v3-color-system-remediation.css'"), 'readability hierarchy must load after color-system remediation');
+check(brand.indexOf("import '../styles/v3-readability-component-corrections.css'") > brand.indexOf("import '../styles/v3-readability-hierarchy.css'"), 'readability component corrections must load last');
 
 for (const stylesheet of [
   "import '../styles/editorial-ledger-v3.css'",
@@ -133,6 +139,25 @@ for (const marker of [
   '.organization-unknowns-r5'
 ]) check(colorRemediationCss.includes(marker), `color-system remediation rule missing: ${marker}`);
 
+for (const marker of [
+  '--v3-copy-size: 1rem',
+  '--v3-ui-size: .875rem',
+  '.site-primary-navigation a',
+  '.home-status-label',
+  'Link roles',
+  '.event-detail-title',
+  '.stablecoin-dossier-title-row',
+  '@media (max-width: 820px)'
+]) check(readabilityCss.includes(marker), `readability hierarchy rule missing: ${marker}`);
+
+for (const marker of [
+  'Registry titles are functional identifiers',
+  'font-family: var(--v3-sans)',
+  '.home-status-ledger dt > .chip',
+  'font-size: max(.875rem, 1em)',
+  'font-size: max(.9375rem, 1em)'
+]) check(readabilityComponentCss.includes(marker), `readability component correction missing: ${marker}`);
+
 check(packageJson.includes('"validate:ui-v3-cleanup"'), 'package cleanup validator command missing');
 check(packageJson.includes('"audit:ui-v3-cleanup"'), 'package cleanup audit command missing');
 check(ci.includes('npm run validate:ui-v3-cleanup'), 'CI cleanup validator step missing');
@@ -140,9 +165,12 @@ check(ci.includes('npm run audit:ui-v3-cleanup'), 'CI post-build cleanup audit s
 check(screenshotWorkflow.includes('node scripts/audit-ui-color-system.mjs'), 'desktop color audit workflow step missing');
 check(screenshotWorkflow.includes('node scripts/audit-ui-color-system.mjs --mobile'), 'mobile color audit workflow step missing');
 check(screenshotWorkflow.includes('node scripts/validate-ui-color-system.mjs'), 'blocking color-system validator workflow step missing');
+check(screenshotWorkflow.includes('node scripts/audit-ui-readability.mjs'), 'desktop readability audit workflow step missing');
+check(screenshotWorkflow.includes('node scripts/audit-ui-readability.mjs --mobile'), 'mobile readability audit workflow step missing');
+check(screenshotWorkflow.includes('node scripts/validate-ui-readability.mjs'), 'blocking readability validator workflow step missing');
 
 const result = {
-  schema_version: '3.4',
+  schema_version: '3.5',
   generated_at: new Date().toISOString(),
   ok: failures.length === 0,
   visual_family: 'cya_dark_historical_registry',
@@ -150,6 +178,8 @@ const result = {
   active_shell_corrections: 'src/styles/v3-cya-dark-shell-corrections.css',
   active_exhaustive_remediation: 'src/styles/v3-exhaustive-remediation.css',
   active_color_system_remediation: 'src/styles/v3-color-system-remediation.css',
+  active_readability_hierarchy: 'src/styles/v3-readability-hierarchy.css',
+  active_readability_component_corrections: 'src/styles/v3-readability-component-corrections.css',
   inactive_compatibility_styles: inactiveCompatibilityStyles,
   removed_paths: removedPaths,
   scanned_source_files: sourceFiles.length,
@@ -161,7 +191,8 @@ const result = {
     compact_mobile_navigation: true,
     representative_contrast_gate: true,
     exhaustive_screenshot_gate: true,
-    exhaustive_color_system_gate: true
+    exhaustive_color_system_gate: true,
+    exhaustive_readability_gate: true
   },
   failures
 };
