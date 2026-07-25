@@ -1,86 +1,102 @@
 /* Computed readability floors by semantic role.
- * This file is intentionally last in the stylesheet chain. It mirrors the
- * exhaustive audit roles so no earlier component selector can reduce them. */
+ * This file is intentionally last in the stylesheet chain. The main-content
+ * ID gives these floors enough specificity to defeat legacy component rules. */
 
-html body .site-main p,
-html body .site-main li,
-html body .site-main blockquote {
+html body #main-content p,
+html body #main-content li,
+html body #main-content blockquote {
   font-size: 1rem !important;
   line-height: 1.62 !important;
 }
 
-html body .site-main dd,
-html body .site-main td,
-html body .site-main figcaption {
+html body #main-content dd,
+html body #main-content td,
+html body #main-content figcaption {
   font-size: .9375rem !important;
   line-height: 1.5 !important;
 }
 
-html body .site-main dt,
-html body .site-main th,
-html body .site-main small,
-html body .site-main time,
-html body .site-main .kicker,
-html body .site-main .eyebrow,
-html body .site-main [class*="overline"],
-html body .site-main [class*="meta"] {
+html body #main-content dt,
+html body #main-content th,
+html body #main-content small,
+html body #main-content time,
+html body #main-content .kicker,
+html body #main-content .eyebrow,
+html body #main-content [class*="overline"],
+html body #main-content [class*="meta"] {
   font-size: .75rem !important;
   line-height: 1.45 !important;
 }
 
-html body a:not(.brand-lockup),
-html body button,
-html body input,
-html body select,
-html body textarea,
-html body summary,
-html body label {
+html body #main-content a:not(.brand-lockup),
+html body #main-content button,
+html body #main-content input,
+html body #main-content select,
+html body #main-content textarea,
+html body #main-content summary,
+html body #main-content label {
   font-size: .875rem !important;
 }
 
-html body h1 a,
-html body h2 a,
-html body h3 a,
-html body h4 a,
-html body h5 a,
-html body h6 a {
+html body #main-content h1 a,
+html body #main-content h2 a,
+html body #main-content h3 a,
+html body #main-content h4 a,
+html body #main-content h5 a,
+html body #main-content h6 a {
   font-size: inherit !important;
 }
 
+html body #main-content .editorial-page-title h1 {
+  font-family: var(--v3-sans) !important;
+  font-size: clamp(2.35rem, 4.2vw, 4rem) !important;
+  font-weight: 760 !important;
+  line-height: 1.06 !important;
+  letter-spacing: -.035em !important;
+  text-wrap: balance;
+}
+
 @media (max-width: 820px) {
-  html body a:not(.brand-lockup),
-  html body button,
-  html body input,
-  html body select,
-  html body textarea,
-  html body summary,
-  html body label {
+  html body #main-content a:not(.brand-lockup),
+  html body #main-content button,
+  html body #main-content input,
+  html body #main-content select,
+  html body #main-content textarea,
+  html body #main-content summary,
+  html body #main-content label {
     font-size: .9375rem !important;
   }
 
-  html body h1 a,
-  html body h2 a,
-  html body h3 a,
-  html body h4 a,
-  html body h5 a,
-  html body h6 a {
+  html body #main-content h1 a,
+  html body #main-content h2 a,
+  html body #main-content h3 a,
+  html body #main-content h4 a,
+  html body #main-content h5 a,
+  html body #main-content h6 a {
     font-size: inherit !important;
   }
 
+  html body #main-content .editorial-page-title h1 {
+    font-size: clamp(2rem, 8vw, 2.5rem) !important;
+    line-height: 1.1 !important;
+    letter-spacing: -.025em !important;
+    text-wrap: pretty;
+  }
+
   html body nav a,
-  html body summary,
-  html body button,
-  html body input,
-  html body select,
-  html body textarea,
-  html body [class*="action"] a,
-  html body a[class*="button"] {
+  html body #main-content summary,
+  html body #main-content button,
+  html body #main-content input,
+  html body #main-content select,
+  html body #main-content textarea,
+  html body #main-content [class*="action"] a,
+  html body #main-content a[class*="button"] {
     min-height: 44px !important;
   }
 
   html body nav a,
-  html body [class*="action"] a,
-  html body a[class*="button"] {
+  html body #main-content [class*="action"] a,
+  html body #main-content a[class*="button"] {
     display: inline-flex !important;
     align-items: center !important;
   }
