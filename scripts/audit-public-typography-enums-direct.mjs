@@ -64,9 +64,12 @@ for (const device of devices) {
         });
         const result = await page.evaluate(() => {
           const technicalSelector = 'code, pre, kbd, samp, .contract-address, .transaction-hash, [data-long-value], [data-technical-value]';
-          const forbiddenFamilies = new Set([
+          const editorialSerifSelector = 'main h1, main h2, main [data-editorial-serif], main [data-editorial-number]';
+          const monospaceFamilies = new Set([
             'ui-monospace', 'sfmono-regular', 'menlo', 'monaco', 'consolas',
-            'liberation mono', 'courier', 'courier new', 'monospace',
+            'liberation mono', 'courier', 'courier new', 'monospace'
+          ]);
+          const serifFamilies = new Set([
             'iowan old style', 'palatino linotype', 'palatino', 'georgia',
             'times', 'times new roman', 'serif'
           ]);
@@ -118,14 +121,16 @@ for (const device of devices) {
             const fontFamily = getComputedStyle(element).fontFamily;
             const families = fontFamily
               .split(',')
-              .map((family) => family.trim().replace(/^['"]|['"]$/g, '').toLowerCase());
-            const forbidden = families.find((family) => forbiddenFamilies.has(family));
+              .map((family) => family.trim().replace(/^[\'"]|[\'"]$/g, '').toLowerCase());
+            const allowsSerif = element.matches(editorialSerifSelector) || Boolean(element.closest(editorialSerifSelector));
+            const forbidden = families.find((family) => monospaceFamilies.has(family) || (!allowsSerif && serifFamilies.has(family)));
             if (!forbidden) continue;
             unexpectedFonts.push({
               element: key,
               text: displayText(element).slice(0, 160),
               font_family: fontFamily,
-              forbidden_family: forbidden
+              forbidden_family: forbidden,
+              expected_role: allowsSerif ? 'editorial-serif' : 'ordinary-sans'
             });
             if (unexpectedFonts.length >= 100) break;
           }
@@ -193,7 +198,7 @@ const totals = {
 const routesWithFindings = records.filter((record) => record.counts.unexpected_public_font > 0 || record.counts.raw_public_enum > 0).length;
 const expectedAuditCount = routes.length * devices.length;
 const result = {
-  schema_version: '1.0',
+  schema_version: '1.1',
   generated_at: new Date().toISOString(),
   ok: navigationFailures.length === 0
     && records.length === expectedAuditCount
@@ -204,6 +209,11 @@ const result = {
   expected_audit_count: expectedAuditCount,
   audited_count: records.length,
   routes_with_findings: routesWithFindings,
+  typography_roles: {
+    ordinary: 'sans-serif',
+    editorial_headings: 'serif',
+    technical_values: 'monospace'
+  },
   totals,
   navigation_failures: navigationFailures,
   records
@@ -216,6 +226,7 @@ console.log(JSON.stringify({
   expected_audit_count: result.expected_audit_count,
   audited_count: result.audited_count,
   routes_with_findings: result.routes_with_findings,
+  typography_roles: result.typography_roles,
   totals: result.totals,
   navigation_failure_count: result.navigation_failures.length
 }, null, 2));
