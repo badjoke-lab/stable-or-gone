@@ -205,13 +205,18 @@ for (const route of routes) {
         }
       }
 
-      /* Ordinary public UI must use the shared sans stack. Monospace and serif
-       * families are allowed only in explicitly technical surfaces. */
+      /* CYA-aligned role contract: body copy and controls are sans-serif,
+       * h1/h2 editorial headings may use serif, and monospace is reserved for
+       * explicitly technical surfaces. */
       const technicalSelector = 'code, pre, kbd, samp, .contract-address, .transaction-hash, [data-long-value], [data-technical-value]';
-      const forbiddenFamilies = new Set([
+      const editorialSerifSelector = 'main h1, main h2, main [data-editorial-serif], main [data-editorial-number]';
+      const monospaceFamilies = new Set([
         'ui-monospace', 'sfmono-regular', 'menlo', 'monaco', 'consolas',
-        'liberation mono', 'courier', 'courier new', 'monospace',
-        'georgia', 'times', 'times new roman', 'serif'
+        'liberation mono', 'courier', 'courier new', 'monospace'
+      ]);
+      const serifFamilies = new Set([
+        'iowan old style', 'palatino linotype', 'palatino', 'georgia',
+        'times', 'times new roman', 'serif'
       ]);
       const publicTextSelector = 'body, header, footer, main h1, main h2, main h3, main h4, main h5, main h6, main p, main li, main dt, main dd, main th, main td, main figcaption, main small, main time, main summary, main label, main a, main button, main input, main select, main textarea, main span';
       const checkedFonts = new Set();
@@ -223,9 +228,14 @@ for (const route of routes) {
         checkedFonts.add(key);
         const families = getComputedStyle(element).fontFamily
           .split(',')
-          .map((family) => family.trim().replace(/^['"]|['"]$/g, '').toLowerCase());
-        const forbidden = families.find((family) => forbiddenFamilies.has(family));
-        if (forbidden) push('unexpected_public_font', { ...sample(element, 'public-font'), forbidden_family: forbidden });
+          .map((family) => family.trim().replace(/^[\'"]|[\'"]$/g, '').toLowerCase());
+        const allowsSerif = element.matches(editorialSerifSelector) || Boolean(element.closest(editorialSerifSelector));
+        const forbidden = families.find((family) => monospaceFamilies.has(family) || (!allowsSerif && serifFamilies.has(family)));
+        if (forbidden) push('unexpected_public_font', {
+          ...sample(element, 'public-font'),
+          forbidden_family: forbidden,
+          expected_role: allowsSerif ? 'editorial-serif' : 'ordinary-sans'
+        });
       }
 
       /* Public copy must not expose internal snake_case enum tokens. Canonical
@@ -283,17 +293,22 @@ const categories = [
 const totals = Object.fromEntries(categories.map((category) => [category, records.reduce((sum, record) => sum + Number(record.counts?.[category] ?? 0), 0)]));
 const routesWithFindings = records.filter((record) => categories.some((category) => Number(record.counts?.[category] ?? 0) > 0)).length;
 const output = {
-  schema_version: '1.2',
+  schema_version: '1.3',
   generated_at: new Date().toISOString(),
   device,
   route_count: routes.length,
   audited_count: records.length,
   failed_count: failures.length,
   routes_with_findings: routesWithFindings,
+  typography_roles: {
+    ordinary: 'sans-serif',
+    editorial_headings: 'serif',
+    technical_values: 'monospace'
+  },
   totals,
   records,
   failures
 };
 fs.writeFileSync(outputPath, `${JSON.stringify(output, null, 2)}\n`);
-console.log(JSON.stringify({ device, routes: routes.length, audited: records.length, failed: failures.length, routes_with_findings: routesWithFindings, totals }, null, 2));
+console.log(JSON.stringify({ device, routes: routes.length, audited: records.length, failed: failures.length, routes_with_findings: routesWithFindings, typography_roles: output.typography_roles, totals }, null, 2));
 if (failures.length) process.exit(1);
