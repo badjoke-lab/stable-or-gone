@@ -54,6 +54,7 @@ const colorRemediationCss = read('src/styles/v3-color-system-remediation.css');
 const readabilityCss = read('src/styles/v3-readability-hierarchy.css');
 const readabilityComponentCss = read('src/styles/v3-readability-component-corrections.css');
 const readabilityFinalCss = read('src/styles/v3-readability-final-overrides.css');
+const readabilityRoleFloorsCss = read('src/styles/v3-readability-role-floors.css');
 const packageJson = read('package.json');
 const ci = read('.github/workflows/ci.yml');
 const screenshotWorkflow = read('.github/workflows/capture-screenshots.yml');
@@ -71,13 +72,15 @@ for (const stylesheet of [
   "import '../styles/v3-color-system-remediation.css'",
   "import '../styles/v3-readability-hierarchy.css'",
   "import '../styles/v3-readability-component-corrections.css'",
-  "import '../styles/v3-readability-final-overrides.css'"
+  "import '../styles/v3-readability-final-overrides.css'",
+  "import '../styles/v3-readability-role-floors.css'"
 ]) check(brand.includes(stylesheet), `BrandLockup active stylesheet import missing: ${stylesheet}`);
 
 check(brand.indexOf("import '../styles/v3-color-system-remediation.css'") > brand.indexOf("import '../styles/v3-exhaustive-remediation.css'"), 'color-system remediation must load after exhaustive remediation');
 check(brand.indexOf("import '../styles/v3-readability-hierarchy.css'") > brand.indexOf("import '../styles/v3-color-system-remediation.css'"), 'readability hierarchy must load after color-system remediation');
 check(brand.indexOf("import '../styles/v3-readability-component-corrections.css'") > brand.indexOf("import '../styles/v3-readability-hierarchy.css'"), 'readability component corrections must load after readability hierarchy');
-check(brand.indexOf("import '../styles/v3-readability-final-overrides.css'") > brand.indexOf("import '../styles/v3-readability-component-corrections.css'"), 'final readability overrides must load last');
+check(brand.indexOf("import '../styles/v3-readability-final-overrides.css'") > brand.indexOf("import '../styles/v3-readability-component-corrections.css'"), 'final readability overrides must load after component corrections');
+check(brand.indexOf("import '../styles/v3-readability-role-floors.css'") > brand.indexOf("import '../styles/v3-readability-final-overrides.css'"), 'readability role floors must load last');
 
 for (const stylesheet of [
   "import '../styles/editorial-ledger-v3.css'",
@@ -173,6 +176,17 @@ for (const marker of [
   'min-height: 44px !important'
 ]) check(readabilityFinalCss.includes(marker), `final readability override missing: ${marker}`);
 
+for (const marker of [
+  'Computed readability floors by semantic role',
+  '#main-content p',
+  '#main-content dd',
+  '#main-content a:not(.brand-lockup)',
+  '#main-content .editorial-page-title h1',
+  'font-size: 1rem !important',
+  'font-size: .9375rem !important',
+  'min-height: 44px !important'
+]) check(readabilityRoleFloorsCss.includes(marker), `readability role floor missing: ${marker}`);
+
 check(packageJson.includes('"validate:ui-v3-cleanup"'), 'package cleanup validator command missing');
 check(packageJson.includes('"audit:ui-v3-cleanup"'), 'package cleanup audit command missing');
 check(ci.includes('npm run validate:ui-v3-cleanup'), 'CI cleanup validator step missing');
@@ -185,7 +199,7 @@ check(screenshotWorkflow.includes('node scripts/audit-ui-readability.mjs --mobil
 check(screenshotWorkflow.includes('node scripts/validate-ui-readability.mjs'), 'blocking readability validator workflow step missing');
 
 const result = {
-  schema_version: '3.6',
+  schema_version: '3.7',
   generated_at: new Date().toISOString(),
   ok: failures.length === 0,
   visual_family: 'cya_dark_historical_registry',
@@ -196,6 +210,7 @@ const result = {
   active_readability_hierarchy: 'src/styles/v3-readability-hierarchy.css',
   active_readability_component_corrections: 'src/styles/v3-readability-component-corrections.css',
   active_readability_final_overrides: 'src/styles/v3-readability-final-overrides.css',
+  active_readability_role_floors: 'src/styles/v3-readability-role-floors.css',
   inactive_compatibility_styles: inactiveCompatibilityStyles,
   removed_paths: removedPaths,
   scanned_source_files: sourceFiles.length,
