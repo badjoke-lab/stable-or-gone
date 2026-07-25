@@ -15,6 +15,7 @@ const categories = [
   'compressed_line_height',
   'oversized_headings',
   'excessive_heading_height',
+  'overlapping_section_heading_content',
   'ambiguous_internal_accent_links',
   'undersized_mobile_targets'
 ];
@@ -42,7 +43,7 @@ for (const file of files) {
 }
 
 const result = {
-  schema_version: '1.0',
+  schema_version: '1.1',
   generated_at: new Date().toISOString(),
   ok: findings.length === 0,
   policy: {
@@ -52,6 +53,7 @@ const result = {
     metadata: '>=12px',
     line_height: '>=1.45 ordinary and >=1.35 compact',
     headings: 'bounded by device and route role',
+    section_heading_layout: 'direct heading children must not overlap',
     internal_accent_links: 'forbidden outside approved semantic contexts',
     mobile_controls: '>=40px high',
     desktop_and_mobile: 'both exhaustive audits required'
