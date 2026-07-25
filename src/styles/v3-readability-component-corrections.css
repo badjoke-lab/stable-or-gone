@@ -1,3 +1,15 @@
+/* Interactive text must not be reduced below the readable UI floor by an
+ * earlier page-family stylesheet. Heading links retain their larger 1em size. */
+html body a,
+html body button,
+html body input,
+html body select,
+html body textarea,
+html body summary,
+html body label {
+  font-size: max(.875rem, 1em) !important;
+}
+
 /* Aggregate lifecycle counts are a count table, not a row of record badges. */
 html body .home-status-ledger dt > .chip {
   padding: 0 !important;
@@ -31,3 +43,15 @@ html body .home-status-ledger dt > .chip.terminated::before,
 html body .home-status-ledger dt > .chip.collapsed::before { background: var(--v3-danger); }
 html body .home-status-ledger dt > .chip.migrated::before,
 html body .home-status-ledger dt > .chip.rebranded::before { background: var(--v3-violet); }
+
+@media (max-width: 820px) {
+  html body a,
+  html body button,
+  html body input,
+  html body select,
+  html body textarea,
+  html body summary,
+  html body label {
+    font-size: max(.9375rem, 1em) !important;
+  }
+}
