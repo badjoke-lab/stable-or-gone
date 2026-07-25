@@ -114,21 +114,22 @@ const jsonLd = {
     margin: 0;
     color: var(--v3-text-quiet);
     font-family: var(--v3-sans);
-    font-size: .68rem;
+    font-size: .75rem;
     font-weight: 750;
-    letter-spacing: .075em;
+    letter-spacing: .06em;
     text-transform: uppercase;
   }
 
   .static-registry-header h1 {
-    max-width: 980px;
+    max-width: 24ch;
     margin: 0;
     color: var(--v3-text);
-    font-family: var(--v3-serif);
-    font-size: clamp(2.8rem, 6vw, 5.4rem);
-    font-weight: 600;
-    line-height: .94;
-    letter-spacing: -.045em;
+    font-family: var(--v3-sans);
+    font-size: clamp(2.35rem, 4.2vw, 3.75rem);
+    font-weight: 760;
+    line-height: 1.06;
+    letter-spacing: -.035em;
+    text-wrap: balance;
   }
 
   .static-registry-description {
@@ -136,8 +137,8 @@ const jsonLd = {
     margin: 1.15rem 0 0;
     color: var(--v3-text-muted);
     font-family: var(--v3-sans);
-    font-size: .92rem;
-    line-height: 1.65;
+    font-size: 1rem;
+    line-height: 1.62;
   }
 
   .static-registry-note {
@@ -145,7 +146,7 @@ const jsonLd = {
     margin: .55rem 0 0;
     color: var(--v3-text-quiet);
     font-family: var(--v3-sans);
-    font-size: .76rem;
+    font-size: .875rem;
     line-height: 1.55;
   }
 
@@ -173,9 +174,9 @@ const jsonLd = {
   }
 
   .static-registry-number {
-    color: var(--v3-archive);
+    color: var(--v3-text-quiet);
     font-family: var(--v3-sans);
-    font-size: .68rem;
+    font-size: .75rem;
     font-weight: 750;
     font-variant-numeric: tabular-nums;
   }
@@ -197,7 +198,8 @@ const jsonLd = {
 
   .static-registry-list a:hover,
   .static-registry-list a:focus-visible {
-    color: var(--v3-accent);
+    color: var(--v3-text);
+    text-decoration-color: var(--v3-accent);
   }
 
   .static-registry-meta,
@@ -205,7 +207,7 @@ const jsonLd = {
     margin: .45rem 0 0;
     color: var(--v3-text-quiet);
     font-family: var(--v3-sans);
-    font-size: .76rem;
+    font-size: .875rem;
     line-height: 1.5;
     overflow-wrap: anywhere;
   }
@@ -232,8 +234,8 @@ const jsonLd = {
   }
 
   .static-registry-pagination a {
-    min-width: 38px;
-    min-height: 38px;
+    min-width: 44px;
+    min-height: 44px;
     padding: .5rem .7rem;
     display: inline-flex;
     align-items: center;
@@ -242,7 +244,7 @@ const jsonLd = {
     color: var(--v3-text-muted);
     background: transparent;
     font-family: var(--v3-sans);
-    font-size: .74rem;
+    font-size: .875rem;
     font-weight: 750;
     text-decoration: none;
   }
@@ -250,7 +252,7 @@ const jsonLd = {
   .static-registry-pagination a:hover,
   .static-registry-pagination a:focus-visible {
     border-color: var(--v3-accent);
-    color: var(--v3-accent);
+    color: var(--v3-text);
   }
 
   .static-registry-pagination a[aria-current="page"] {
@@ -266,7 +268,7 @@ const jsonLd = {
   .static-registry-return {
     margin: 0;
     font-family: var(--v3-sans);
-    font-size: .76rem;
+    font-size: .875rem;
     text-align: right;
   }
 
@@ -286,7 +288,11 @@ const jsonLd = {
     }
 
     .static-registry-header h1 {
-      font-size: clamp(2.35rem, 12vw, 3.5rem);
+      max-width: none;
+      font-size: clamp(2rem, 8vw, 2.4rem);
+      line-height: 1.1;
+      letter-spacing: -.025em;
+      text-wrap: pretty;
     }
 
     .static-registry-list {
@@ -295,7 +301,7 @@ const jsonLd = {
 
     .static-registry-list li {
       min-height: 0;
-      padding: .9rem .75rem;
+      padding: 1rem .75rem;
       grid-template-columns: 2rem minmax(0, 1fr);
     }
 

@@ -167,7 +167,7 @@ const jsonLd = {
         </div>
         <dl class="home-status-ledger">
           {registryStatuses.map(({ status, count, label }) => (
-            <div><dt><span class={lifecycleChipClass(status)}>{label}</span></dt><dd>{count}</dd></div>
+            <div><dt><span class={`home-status-label home-status-label--${status}`}>{label}</span></dt><dd>{count}</dd></div>
           ))}
         </dl>
         <p class="home-registry-state__note">Lifecycle describes the recorded state of an asset. It is not a safety score, recommendation, or market assessment.</p>

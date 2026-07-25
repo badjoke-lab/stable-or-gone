@@ -1,0 +1,178 @@
+/* Computed readability floors by semantic role.
+ * This file is intentionally last in the stylesheet chain. The main-content
+ * ID gives these floors enough specificity to defeat legacy component rules. */
+
+html body #main-content p,
+html body #main-content li,
+html body #main-content blockquote {
+  font-size: 1rem !important;
+  line-height: 1.62 !important;
+}
+
+html body #main-content dd,
+html body #main-content td,
+html body #main-content figcaption {
+  font-size: .9375rem !important;
+  line-height: 1.5 !important;
+}
+
+html body #main-content dt,
+html body #main-content th,
+html body #main-content small,
+html body #main-content time,
+html body #main-content .kicker,
+html body #main-content .eyebrow,
+html body #main-content [class*="overline"],
+html body #main-content [class*="meta"] {
+  font-size: .75rem !important;
+  line-height: 1.45 !important;
+}
+
+html body #main-content a:not(.brand-lockup),
+html body #main-content button,
+html body #main-content input,
+html body #main-content select,
+html body #main-content textarea,
+html body #main-content summary,
+html body #main-content label {
+  font-size: .875rem !important;
+}
+
+html body #main-content h1 a,
+html body #main-content h2 a,
+html body #main-content h3 a,
+html body #main-content h4 a,
+html body #main-content h5 a,
+html body #main-content h6 a {
+  font-size: inherit !important;
+}
+
+html body #main-content .editorial-page-title h1 {
+  font-family: var(--v3-sans) !important;
+  font-size: clamp(2.35rem, 4.2vw, 4rem) !important;
+  font-weight: 760 !important;
+  line-height: 1.06 !important;
+  letter-spacing: -.035em !important;
+  text-wrap: balance;
+}
+
+@media (max-width: 820px) {
+  html body #main-content a:not(.brand-lockup),
+  html body #main-content button,
+  html body #main-content input,
+  html body #main-content select,
+  html body #main-content textarea,
+  html body #main-content summary,
+  html body #main-content label {
+    font-size: .9375rem !important;
+  }
+
+  html body #main-content h1 a,
+  html body #main-content h2 a,
+  html body #main-content h3 a,
+  html body #main-content h4 a,
+  html body #main-content h5 a,
+  html body #main-content h6 a {
+    font-size: inherit !important;
+  }
+
+  html body #main-content .editorial-page-title h1 {
+    font-size: clamp(2rem, 8vw, 2.5rem) !important;
+    line-height: 1.1 !important;
+    letter-spacing: -.025em !important;
+    text-wrap: pretty;
+  }
+
+  html body nav a,
+  html body #main-content summary,
+  html body #main-content button,
+  html body #main-content input,
+  html body #main-content select,
+  html body #main-content textarea,
+  html body #main-content [class*="action"] a,
+  html body #main-content a[class*="button"] {
+    min-height: 44px !important;
+  }
+
+  html body nav a,
+  html body #main-content [class*="action"] a,
+  html body #main-content a[class*="button"] {
+    display: inline-flex !important;
+    align-items: center !important;
+  }
+
+  /* Mobile section headings must preserve normal document flow. Earlier V3
+   * grid-area rules can otherwise place the eyebrow, title, and explanatory
+   * note on top of one another while still passing font-size audits. */
+  html body #main-content :where(
+    .event-detail-section-heading,
+    .organization-detail-section-heading,
+    .stablecoin-section-heading,
+    .event-index-section-heading,
+    .organization-index-section-heading,
+    .guide-index-section-heading
+  ) {
+    position: static !important;
+    min-height: 0 !important;
+    height: auto !important;
+    margin-bottom: 1rem !important;
+    padding-top: .75rem !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    justify-content: flex-start !important;
+    gap: .4rem !important;
+    grid-template-columns: none !important;
+    grid-template-rows: none !important;
+    grid-template-areas: none !important;
+    overflow: visible !important;
+  }
+
+  html body #main-content :where(
+    .event-detail-section-heading,
+    .organization-detail-section-heading,
+    .stablecoin-section-heading,
+    .event-index-section-heading,
+    .organization-index-section-heading,
+    .guide-index-section-heading
+  ) > * {
+    position: static !important;
+    inset: auto !important;
+    grid-area: auto !important;
+    align-self: auto !important;
+    width: auto !important;
+    max-width: 100% !important;
+    min-height: 0 !important;
+    height: auto !important;
+    margin: 0 !important;
+    transform: none !important;
+  }
+
+  html body #main-content :where(
+    .event-detail-section-heading,
+    .organization-detail-section-heading,
+    .stablecoin-section-heading,
+    .event-index-section-heading,
+    .organization-index-section-heading,
+    .guide-index-section-heading
+  ) > :where(p, span) {
+    display: block !important;
+    line-height: 1.5 !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  html body #main-content :where(
+    .event-detail-section-heading,
+    .organization-detail-section-heading,
+    .stablecoin-section-heading,
+    .event-index-section-heading,
+    .organization-index-section-heading,
+    .guide-index-section-heading
+  ) > h2 {
+    display: block !important;
+    font-family: var(--v3-sans) !important;
+    line-height: 1.12 !important;
+    text-wrap: pretty !important;
+    overflow-wrap: anywhere !important;
+  }
+}
