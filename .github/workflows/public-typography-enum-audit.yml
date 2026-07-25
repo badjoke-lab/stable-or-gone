@@ -62,7 +62,11 @@ jobs:
           exit 1
 
       - name: Audit every rendered route on desktop and mobile
-        run: node scripts/audit-public-typography-enums-direct.mjs
+        shell: bash
+        run: |
+          mkdir -p artifacts
+          set -o pipefail
+          node scripts/audit-public-typography-enums-direct.mjs 2>&1 | tee artifacts/public-typography-enum-runtime-audit.log
 
       - name: Upload public UI contract audit
         if: always()
@@ -73,6 +77,7 @@ jobs:
           retention-days: 30
           path: |
             artifacts/public-typography-enum-runtime-audit.json
+            artifacts/public-typography-enum-runtime-audit.log
             /tmp/sog-public-ui-audit-server.log
 
       - name: Write audit summary
