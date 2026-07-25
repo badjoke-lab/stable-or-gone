@@ -1,0 +1,189 @@
+/*
+ * Final V3 color-system normalization.
+ *
+ * global.css, shell.css, and a few record-family styles still expose legacy
+ * token namespaces. Those files remain as structural compatibility layers,
+ * but their colors must resolve through the V3 palette. Keep this file last.
+ */
+
+:root {
+  /* global.css compatibility */
+  --bg: var(--v3-bg);
+  --bg-soft: var(--v3-bg-raised);
+  --panel: var(--v3-bg-raised);
+  --panel-2: var(--v3-bg-soft);
+  --line: var(--v3-rule-strong);
+  --line-soft: color-mix(in srgb, var(--v3-rule) 78%, transparent);
+  --text: var(--v3-text);
+  --muted: var(--v3-text-muted);
+  --green: var(--v3-positive);
+  --amber: var(--v3-warning);
+  --red: var(--v3-danger);
+  --cyan: var(--v3-accent);
+  --gold: var(--v3-accent);
+
+  /* shell.css compatibility */
+  --sog-background: var(--v3-bg);
+  --sog-background-subtle: var(--v3-bg-raised);
+  --sog-surface: var(--v3-bg-raised);
+  --sog-surface-raised: var(--v3-bg-soft);
+  --sog-surface-emphasis: var(--v3-bg-soft);
+  --sog-line: var(--v3-rule-strong);
+  --sog-line-subtle: var(--v3-rule);
+  --sog-text: var(--v3-text);
+  --sog-text-muted: var(--v3-text-muted);
+  --sog-link: var(--v3-accent);
+  --sog-focus: var(--v3-accent);
+  --sog-positive: var(--v3-positive);
+  --sog-warning: var(--v3-warning);
+  --sog-critical: var(--v3-danger);
+  --sog-unknown: var(--v3-violet);
+  --sog-inactive: var(--v3-text-quiet);
+
+  /* record-family compatibility */
+  --shell-background: var(--v3-bg);
+  --shell-background-subtle: var(--v3-bg-raised);
+  --shell-surface: var(--v3-bg-raised);
+  --shell-surface-raised: var(--v3-bg-soft);
+  --shell-line: var(--v3-rule-strong);
+  --shell-line-subtle: var(--v3-rule);
+  --shell-text: var(--v3-text);
+  --shell-text-muted: var(--v3-text-muted);
+  --shell-link: var(--v3-accent);
+  --shell-focus: var(--v3-accent);
+  --shell-positive: var(--v3-positive);
+  --shell-warning: var(--v3-warning);
+  --shell-critical: var(--v3-danger);
+  --shell-unknown: var(--v3-violet);
+  --shell-inactive: var(--v3-text-quiet);
+  --shell-font-sans: var(--v3-sans);
+  --shell-font-mono: var(--v3-mono);
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Generic labels are hierarchy, not state. */
+html body main :where(.prompt, .bar, [class*="section-heading"] > p, [class*="section-heading"] > div > p:first-child) {
+  color: var(--v3-text-quiet) !important;
+}
+
+html body .registry-summary [data-result-count] {
+  color: var(--v3-text) !important;
+}
+
+/* Donation and maintenance copy must not revive the old gold callout. */
+html body .support-callout,
+html body .support-callout-updates,
+html body .support-callout-about {
+  border: 0 !important;
+  border-top: 1px solid var(--v3-rule-strong) !important;
+  border-bottom: 1px solid var(--v3-rule-strong) !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+html body .support-callout .prompt {
+  color: var(--v3-text-quiet) !important;
+}
+
+html body .support-callout-action {
+  border: 1px solid var(--v3-rule-strong) !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: var(--v3-accent) !important;
+  box-shadow: none !important;
+}
+
+html body .support-callout-action:hover,
+html body .support-callout-action:focus-visible {
+  border-color: var(--v3-accent) !important;
+  background: transparent !important;
+}
+
+html body .footer-support {
+  color: var(--v3-accent) !important;
+}
+
+html body .maintenance-check > span {
+  color: var(--v3-text-quiet) !important;
+}
+
+/* Methodology is an explanatory note, not a warning state. */
+html body .stats-methodology-notice {
+  border-top-color: var(--v3-rule-strong) !important;
+  border-bottom-color: var(--v3-rule-strong) !important;
+}
+
+html body .stats-methodology-notice > a {
+  color: var(--v3-archive) !important;
+}
+
+/* Dates, group labels, indexes, and section labels are neutral metadata. */
+html body .timeline-item__date span,
+html body :where(.timeline-filter-group, .ar-filter-group) legend,
+html body .compare-group-heading > span,
+html body :where(.event-detail-section-heading, .organization-detail-section-heading) > p,
+html body .static-registry-number,
+html body .stablecoin-model-history time,
+html body .stablecoin-model-history time > span,
+html body .stablecoin-dossier-title-row h1 > span,
+html body .record-symbol,
+html body .stablecoin-index-table .record-symbol,
+html body .stablecoin-index-card .record-symbol,
+html body .issuer-control-events__cards article > time {
+  color: var(--v3-text-quiet) !important;
+}
+
+/* Material-change annotations are informative, not automatically warnings. */
+html body .organization-latest-change,
+html body .stablecoin-material-change {
+  border-top-color: var(--v3-rule-strong) !important;
+  border-bottom-color: var(--v3-rule-strong) !important;
+}
+
+html body .organization-latest-change > span,
+html body .organization-latest-change > time,
+html body .stablecoin-material-change > span,
+html body .stablecoin-material-change time {
+  color: var(--v3-text-quiet) !important;
+}
+
+html body .organization-latest-change > a,
+html body .stablecoin-material-change a {
+  color: var(--v3-archive) !important;
+}
+
+/* Completeness values are text states, not a multicolor decoration system. */
+html body [class*="value-state--"] {
+  color: inherit !important;
+}
+
+/* Unknown information is uncertainty, not a danger condition. */
+html body .organization-unknowns-r5 > summary {
+  border-top-color: var(--v3-rule-strong) !important;
+  border-bottom-color: var(--v3-rule-strong) !important;
+}
+
+html body .organization-unknowns-r5 > summary small {
+  color: var(--v3-text-quiet) !important;
+}
+
+/* Preserve semantic color only on explicitly typed state/quality markers. */
+html body :where(
+  [data-status],
+  [data-tone],
+  [class*="status-badge"],
+  [class*="status-chip"],
+  [class*="state-badge"],
+  [class*="reliability"],
+  [class*="severity"],
+  [class*="warning"],
+  [class*="danger"]
+) {
+  forced-color-adjust: none;
+}

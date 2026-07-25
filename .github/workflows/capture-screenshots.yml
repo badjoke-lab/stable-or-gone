@@ -11,6 +11,8 @@ on:
       - 'config/public-routes.json'
       - 'scripts/capture-site-screenshots.mjs'
       - 'scripts/collect-public-routes.mjs'
+      - 'scripts/audit-ui-color-system.mjs'
+      - 'scripts/validate-ui-color-system.mjs'
       - 'scripts/validate-exhaustive-screenshot-audit.mjs'
       - '.github/workflows/capture-screenshots.yml'
       - 'package.json'
@@ -21,6 +23,8 @@ on:
       - 'config/public-routes.json'
       - 'scripts/capture-site-screenshots.mjs'
       - 'scripts/collect-public-routes.mjs'
+      - 'scripts/audit-ui-color-system.mjs'
+      - 'scripts/validate-ui-color-system.mjs'
       - 'scripts/validate-exhaustive-screenshot-audit.mjs'
       - '.github/workflows/capture-screenshots.yml'
       - 'package.json'
@@ -32,7 +36,7 @@ permissions:
 jobs:
   capture-all-public-pages:
     runs-on: ubuntu-latest
-    timeout-minutes: 180
+    timeout-minutes: 240
     env:
       CAPTURE_BASE_URL: http://127.0.0.1:4173
     steps:
@@ -72,8 +76,17 @@ jobs:
       - name: Capture every mobile route
         run: node scripts/capture-site-screenshots.mjs --device mobile --mode exhaustive --base-url "$CAPTURE_BASE_URL"
 
+      - name: Audit computed desktop colors
+        run: node scripts/audit-ui-color-system.mjs
+
+      - name: Audit computed mobile colors
+        run: node scripts/audit-ui-color-system.mjs --mobile
+
       - name: Validate exhaustive screenshot audit
         run: node scripts/validate-exhaustive-screenshot-audit.mjs
+
+      - name: Validate exhaustive color system
+        run: node scripts/validate-ui-color-system.mjs
 
       - name: Upload screenshot manifests and audit
         if: always()
@@ -87,6 +100,9 @@ jobs:
             artifacts/screenshots/routes.json
             artifacts/screenshots/manifest.desktop.json
             artifacts/screenshots/manifest.mobile.json
+            artifacts/screenshots/color-audit.desktop.json
+            artifacts/screenshots/color-audit.mobile.json
+            artifacts/screenshots/color-system-validation.json
             artifacts/screenshots/exhaustive-ui-audit.json
             /tmp/sog-screenshot-server.log
 
@@ -124,12 +140,29 @@ jobs:
             else
               echo "- $DEVICE: manifest missing" >> "$GITHUB_STEP_SUMMARY"
             fi
+            COLOR="artifacts/screenshots/color-audit.$DEVICE.json"
+            if [ -f "$COLOR" ]; then
+              ORDINARY=$(node -e "const x=require('./$COLOR'); console.log(x.colored_ordinary_text_count)")
+              LEGACY=$(node -e "const x=require('./$COLOR'); console.log(x.legacy_palette_hit_count)")
+              SHADOW=$(node -e "const x=require('./$COLOR'); console.log(x.text_shadow_count)")
+              BORDERS=$(node -e "const x=require('./$COLOR'); console.log(x.nonsemantic_colored_border_count)")
+              BACKGROUNDS=$(node -e "const x=require('./$COLOR'); console.log(x.nonsemantic_colored_background_count)")
+              echo "- $DEVICE color findings: ordinary=$ORDINARY legacy=$LEGACY shadow=$SHADOW borders=$BORDERS backgrounds=$BACKGROUNDS" >> "$GITHUB_STEP_SUMMARY"
+            else
+              echo "- $DEVICE color audit: missing" >> "$GITHUB_STEP_SUMMARY"
+            fi
           done
           if [ -f artifacts/screenshots/exhaustive-ui-audit.json ]; then
             FINDINGS=$(node -e "const x=require('./artifacts/screenshots/exhaustive-ui-audit.json'); console.log(x.finding_count)")
             echo "- automated UI findings: $FINDINGS" >> "$GITHUB_STEP_SUMMARY"
           else
             echo "- automated UI findings: audit missing" >> "$GITHUB_STEP_SUMMARY"
+          fi
+          if [ -f artifacts/screenshots/color-system-validation.json ]; then
+            COLOR_FINDINGS=$(node -e "const x=require('./artifacts/screenshots/color-system-validation.json'); console.log(x.finding_count)")
+            echo "- blocking color-system findings: $COLOR_FINDINGS" >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "- color-system validation: missing" >> "$GITHUB_STEP_SUMMARY"
           fi
           echo "- manual screenshot inspection: required" >> "$GITHUB_STEP_SUMMARY"
 
@@ -155,8 +188,10 @@ jobs:
             const mobile = read('mobile');
             const auditFile = 'artifacts/screenshots/exhaustive-ui-audit.json';
             const audit = fs.existsSync(auditFile) ? JSON.parse(fs.readFileSync(auditFile, 'utf8')) : { finding_count: 'missing' };
+            const colorFile = 'artifacts/screenshots/color-system-validation.json';
+            const color = fs.existsSync(colorFile) ? JSON.parse(fs.readFileSync(colorFile, 'utf8')) : { finding_count: 'missing' };
             const marker = '<!-- sog-exhaustive-screenshot-latest -->';
-            const body = `${marker}\n## Exhaustive screenshot run\n\n- Run ID: **${context.runId}**\n- Head: \`${context.sha}\`\n- Workflow result: **${{ job.status }}**\n- Desktop: \`${JSON.stringify(desktop)}\`\n- Mobile: \`${JSON.stringify(mobile)}\`\n- Automated UI findings: **${audit.finding_count}**\n- Manual artifact inspection: **required**\n- Artifacts: \`sog-screenshot-audit-${context.runId}\`, \`sog-desktop-screenshots-${context.runId}\`, \`sog-mobile-screenshots-${context.runId}\``;
+            const body = `${marker}\n## Exhaustive screenshot run\n\n- Run ID: **${context.runId}**\n- Head: \`${context.sha}\`\n- Workflow result: **${{ job.status }}**\n- Desktop: \`${JSON.stringify(desktop)}\`\n- Mobile: \`${JSON.stringify(mobile)}\`\n- Automated UI findings: **${audit.finding_count}**\n- Blocking color-system findings: **${color.finding_count}**\n- Manual artifact inspection: **required**\n- Artifacts: \`sog-screenshot-audit-${context.runId}\`, \`sog-desktop-screenshots-${context.runId}\`, \`sog-mobile-screenshots-${context.runId}\``;
             const comments = await github.paginate(github.rest.issues.listComments, {
               owner: context.repo.owner,
               repo: context.repo.repo,

@@ -218,7 +218,9 @@ async function main() {
   await rm(device.dir, { recursive: true, force: true });
   await mkdir(device.dir, { recursive: true });
 
-  const browser = await chromium.launch();
+  // CI screenshots must use grayscale antialiasing so authored colors are not
+  // confused with Chromium's RGB LCD subpixel fringes.
+  const browser = await chromium.launch({ args: ['--disable-lcd-text'] });
   const context = await browser.newContext({ viewport: device.viewport, deviceScaleFactor: 1, isMobile: device.isMobile ?? false, hasTouch: device.hasTouch ?? false, reducedMotion: 'reduce' });
   const page = await context.newPage();
   const records = [];
@@ -244,11 +246,13 @@ async function main() {
 
   await browser.close();
   const manifest = {
-    schema_version: '3.0',
+    schema_version: '3.1',
     generated_at: new Date().toISOString(),
     device: deviceName,
     viewport: device.viewport,
     capture_mode: mode,
+    text_rasterization: 'grayscale_antialiasing',
+    chromium_args: ['--disable-lcd-text'],
     samples_per_family: samplesPerFamily,
     discovered_route_count: routesManifest.routes.length,
     selected_route_count: selection.routes.length,
@@ -262,7 +266,7 @@ async function main() {
   };
   await writeFile(device.manifest, `${JSON.stringify(manifest, null, 2)}\n`);
   await zipDirectory(device.dir, device.zip);
-  console.log(JSON.stringify({ device: deviceName, mode, discovered: routesManifest.routes.length, selected: selection.routes.length, captured: records.length, failed: failures.length, zip: device.zip }, null, 2));
+  console.log(JSON.stringify({ device: deviceName, mode, discovered: routesManifest.routes.length, selected: selection.routes.length, captured: records.length, failed: failures.length, text_rasterization: 'grayscale_antialiasing', zip: device.zip }, null, 2));
   if (failures.length > 0) process.exitCode = 1;
 }
 
