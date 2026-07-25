@@ -100,4 +100,79 @@ html body #main-content .editorial-page-title h1 {
     display: inline-flex !important;
     align-items: center !important;
   }
+
+  /* Mobile section headings must preserve normal document flow. Earlier V3
+   * grid-area rules can otherwise place the eyebrow, title, and explanatory
+   * note on top of one another while still passing font-size audits. */
+  html body #main-content :where(
+    .event-detail-section-heading,
+    .organization-detail-section-heading,
+    .stablecoin-section-heading,
+    .event-index-section-heading,
+    .organization-index-section-heading,
+    .guide-index-section-heading
+  ) {
+    position: static !important;
+    min-height: 0 !important;
+    height: auto !important;
+    margin-bottom: 1rem !important;
+    padding-top: .75rem !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    justify-content: flex-start !important;
+    gap: .4rem !important;
+    grid-template-columns: none !important;
+    grid-template-rows: none !important;
+    grid-template-areas: none !important;
+    overflow: visible !important;
+  }
+
+  html body #main-content :where(
+    .event-detail-section-heading,
+    .organization-detail-section-heading,
+    .stablecoin-section-heading,
+    .event-index-section-heading,
+    .organization-index-section-heading,
+    .guide-index-section-heading
+  ) > * {
+    position: static !important;
+    inset: auto !important;
+    grid-area: auto !important;
+    align-self: auto !important;
+    width: auto !important;
+    max-width: 100% !important;
+    min-height: 0 !important;
+    height: auto !important;
+    margin: 0 !important;
+    transform: none !important;
+  }
+
+  html body #main-content :where(
+    .event-detail-section-heading,
+    .organization-detail-section-heading,
+    .stablecoin-section-heading,
+    .event-index-section-heading,
+    .organization-index-section-heading,
+    .guide-index-section-heading
+  ) > :where(p, span) {
+    display: block !important;
+    line-height: 1.5 !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  html body #main-content :where(
+    .event-detail-section-heading,
+    .organization-detail-section-heading,
+    .stablecoin-section-heading,
+    .event-index-section-heading,
+    .organization-index-section-heading,
+    .guide-index-section-heading
+  ) > h2 {
+    display: block !important;
+    font-family: var(--v3-sans) !important;
+    line-height: 1.12 !important;
+    text-wrap: pretty !important;
+    overflow-wrap: anywhere !important;
+  }
 }
