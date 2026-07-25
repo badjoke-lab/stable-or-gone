@@ -17,7 +17,9 @@ const categories = [
   'excessive_heading_height',
   'overlapping_section_heading_content',
   'ambiguous_internal_accent_links',
-  'undersized_mobile_targets'
+  'undersized_mobile_targets',
+  'unexpected_public_font',
+  'raw_public_enum'
 ];
 
 for (const file of files) {
@@ -43,7 +45,7 @@ for (const file of files) {
 }
 
 const result = {
-  schema_version: '1.1',
+  schema_version: '1.2',
   generated_at: new Date().toISOString(),
   ok: findings.length === 0,
   policy: {
@@ -56,6 +58,8 @@ const result = {
     section_heading_layout: 'direct heading children must not overlap',
     internal_accent_links: 'forbidden outside approved semantic contexts',
     mobile_controls: '>=40px high',
+    public_typography: 'sans-serif only outside explicit technical values',
+    public_enums: 'raw lowercase snake_case tokens forbidden outside technical values; canonical sog_ IDs exempt',
     desktop_and_mobile: 'both exhaustive audits required'
   },
   summaries,
