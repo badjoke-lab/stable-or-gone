@@ -1,6 +1,7 @@
 ---
 import StaticRegistryPagination from '../../../components/StaticRegistryPagination.astro';
 import { getStablecoins } from '../../../lib/data/registry';
+import { formatIssuanceLabel, formatLifecycleLabel } from '../../../utils/publicTaxonomy';
 
 const PAGE_SIZE = 20;
 
@@ -19,7 +20,7 @@ const totalPages = Math.ceil(records.length / PAGE_SIZE);
 const items = records.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE).map((record) => ({
   title: `${record.name}${record.symbol ? ` (${record.symbol})` : ''}`,
   href: `/stablecoin/${record.slug}/`,
-  meta: `Lifecycle: ${record.lifecycle_status ?? 'not recorded'} · Issuance: ${record.issuance_status ?? 'not recorded'}`
+  meta: `Lifecycle: ${formatLifecycleLabel(record.lifecycle_status)} · Issuance: ${formatIssuanceLabel(record.issuance_status)}`
 }));
 const title = `Stablecoin Register — Page ${page}`;
 const description = `Browse canonical Stable or Gone stablecoin records, page ${page} of ${totalPages}, with ordinary HTML links to each record.`;
