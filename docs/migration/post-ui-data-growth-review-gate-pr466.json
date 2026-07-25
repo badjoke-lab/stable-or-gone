@@ -1,0 +1,93 @@
+{
+  "schema_version": "1.0",
+  "report_id": "sog_post_ui_data_growth_review_gate_pr466_2026_07_25",
+  "status": "reviewed_decision",
+  "recorded_at": "2026-07-25",
+  "canonical_state": {
+    "stable_assets": 114,
+    "organizations": 107,
+    "relationships": 126,
+    "events": 189,
+    "evidence": 565,
+    "evidence_relations": 565,
+    "deployments": 180,
+    "market_access_records": 8,
+    "archive_recorded": 436,
+    "archive_not_recorded": 129
+  },
+  "reviewed_findings": {
+    "pr427_reviewed_candidates": 11,
+    "pr427_ready_for_full_record_review": 4,
+    "promoted_by_pr429": 2,
+    "remaining_review_ready": 2,
+    "canonical_asset_additions_after_pr429": 0,
+    "ui_closure_canonical_changes": 0
+  },
+  "remaining_candidates": [
+    {
+      "candidate_id": "sog_cand_pr427_plnq",
+      "name": "Quantoz PLNQ",
+      "symbol": "PLNQ",
+      "reference_asset": "PLN",
+      "issuer_or_operator": "Quantoz Payments B.V.",
+      "reviewed_disposition": "ready_for_full_record_review",
+      "primary_source_count": 3,
+      "full_record_feasible": true,
+      "fresh_checks_required": [
+        "canonical_duplicate_recheck",
+        "exact_contract_identity_confirmation",
+        "current_official_source_review",
+        "reserve_and_redemption_document_review"
+      ]
+    },
+    {
+      "candidate_id": "sog_cand_pr427_gbpq",
+      "name": "Quantoz GBPQ",
+      "symbol": "GBPQ",
+      "reference_asset": "GBP",
+      "issuer_or_operator": "Quantoz Payments B.V.",
+      "reviewed_disposition": "ready_for_full_record_review",
+      "primary_source_count": 3,
+      "full_record_feasible": true,
+      "fresh_checks_required": [
+        "canonical_duplicate_recheck",
+        "exact_contract_identity_confirmation",
+        "current_official_source_review",
+        "reserve_and_redemption_document_review"
+      ]
+    }
+  ],
+  "decision": {
+    "next_pr": 467,
+    "work_item": "Record Growth Batch 3 — PLNQ and GBPQ",
+    "selected_context_id": "quantoz_regulated_non_eur_expansion",
+    "selected_candidates": [
+      {"candidate_id": "sog_cand_pr427_plnq", "symbol": "PLNQ"},
+      {"candidate_id": "sog_cand_pr427_gbpq", "symbol": "GBPQ"}
+    ],
+    "maximum_new_canonical_assets": 2,
+    "canonical_changes_in_pr466": false,
+    "public_changes_in_pr466": false,
+    "review_gate_after_pr467": true,
+    "automatic_promotion": false,
+    "ranking": false,
+    "score": false,
+    "recommendation": false
+  },
+  "stop_conditions": [
+    "candidate_is_now_an_existing_canonical_duplicate",
+    "exact_deployment_identity_cannot_be_confirmed",
+    "complete_record_families_cannot_be_supported",
+    "current_official_source_material_conflicts_with_pr427",
+    "scope_would_require_market_access_or_ui_changes"
+  ],
+  "protected_boundaries": {
+    "canonical_changes": 0,
+    "public_route_changes": 0,
+    "ui_changes": 0,
+    "market_access_changes": 0,
+    "machine_readable_semantic_changes": 0,
+    "private_monitoring_publication": false
+  },
+  "next_boundary": "REVIEW_GATE_AFTER_PR467"
+}

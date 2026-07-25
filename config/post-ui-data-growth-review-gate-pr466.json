@@ -1,0 +1,90 @@
+{
+  "schema_version": "1.0",
+  "work_item": "post_ui_data_growth_review_gate_pr466",
+  "status": "reviewed_decision",
+  "recorded_at": "2026-07-25",
+  "source_prs": [427, 428, 429, 433, 461, 463, 464, 465],
+  "canonical_baseline": {
+    "stable_assets": 114,
+    "organizations": 107,
+    "relationships": 126,
+    "events": 189,
+    "evidence": 565,
+    "evidence_relations": 565,
+    "deployments": 180,
+    "market_access_records": 8,
+    "archive_recorded": 436,
+    "archive_not_recorded": 129
+  },
+  "reviewed_source_state": {
+    "candidate_audit_pr": 427,
+    "candidate_audit_status": "reviewed_internal_complete",
+    "ready_candidates_at_pr427": 4,
+    "promoted_by_pr429": ["sog_cand_pr427_chfau", "sog_cand_pr427_sekau"],
+    "remaining_review_ready": ["sog_cand_pr427_plnq", "sog_cand_pr427_gbpq"],
+    "new_canonical_assets_since_pr429": 0,
+    "ui_closure_changed_canonical_data": false
+  },
+  "decision": {
+    "authorize_next_pr": 467,
+    "authorize_work_item": "Record Growth Batch 3",
+    "selected_context_id": "quantoz_regulated_non_eur_expansion",
+    "selected_candidate_ids": ["sog_cand_pr427_plnq", "sog_cand_pr427_gbpq"],
+    "selected_symbols": ["PLNQ", "GBPQ"],
+    "maximum_new_canonical_assets": 2,
+    "review_gate_after_pr467": true,
+    "ranking": false,
+    "score": false,
+    "recommendation": false,
+    "automatic_promotion": false
+  },
+  "selection_basis": [
+    "retained_review_ready_context_from_pr428",
+    "distinct_asset_identity_under_existing_quantoz_issuer",
+    "three_primary_source_leads_per_candidate",
+    "official_launch_and_regulatory_disclosure",
+    "reviewed_full_record_feasibility",
+    "coherent_regulated_non_eur_context",
+    "no_canonical_asset_growth_since_pr429"
+  ],
+  "pr467_requirements": {
+    "complete_record_only": true,
+    "thin_records_forbidden": true,
+    "fresh_duplicate_recheck_required": true,
+    "fresh_manual_source_review_required": true,
+    "exact_contract_identity_confirmation_required": true,
+    "unconfirmed_candidate_must_be_withheld": true,
+    "required_record_families": [
+      "stablecoins",
+      "relationships",
+      "classifications",
+      "stablecoin_profiles",
+      "events",
+      "event_details",
+      "evidence",
+      "evidence_relations",
+      "reserve_reports_or_explicit_not_applicable",
+      "known_unknowns",
+      "deployments",
+      "legal_profiles",
+      "reserve_components",
+      "income_profiles"
+    ],
+    "reuse_existing_quantoz_organization": true,
+    "automatic_promotion": false,
+    "public_surface_change": false,
+    "market_access_change": false,
+    "ui_change": false
+  },
+  "protected_boundaries": [
+    "ui_v3",
+    "public_routes",
+    "metadata_contracts",
+    "public_machine_readable_semantics",
+    "market_access_records",
+    "monitoring_private_boundary",
+    "rankings",
+    "scores",
+    "recommendations"
+  ]
+}

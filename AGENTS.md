@@ -4,7 +4,7 @@ Current mandatory authorities:
 
 1. Completed UI V3 regression authority — PR #461 and PR #463 closure, archived in `docs/ui-v3-remediation-authority.md`.
 2. Canonical data baseline — PR #433 generated-output repair on top of PR #429.
-3. Active operating mode — reviewed data growth and maintenance under `docs/post-351-data-growth-operating-spec.md` and `docs/roadmap.md`.
+3. Active data-growth authority — PR #466 Post-UI data-growth review gate, authorizing only PR #467 Record Growth Batch 3 for PLNQ and GBPQ.
 
 ## Mandatory references
 
@@ -30,6 +30,10 @@ docs/quality/record-growth-batch-2-pr429-spec.md
 config/record-growth-batch-2-pr429.json
 data/candidate-promotions-batch-28.json
 docs/migration/record-growth-batch-2-pr429-handoff.json
+docs/roadmap-amendments/2026-07-25-pr466-post-ui-data-growth-review-gate.md
+docs/quality/post-ui-data-growth-review-gate-pr466-spec.md
+config/post-ui-data-growth-review-gate-pr466.json
+docs/migration/post-ui-data-growth-review-gate-pr466.json
 ```
 
 ## Mandatory UI working rule
@@ -70,12 +74,15 @@ PR #433 Generated-output repair: complete
 PR #461 exhaustive UI V3 color-system repair: complete
 PR #463 exhaustive UI V3 readability and hierarchy closure: complete
 PR #464 UI authority and roadmap closure: complete
+PR #465 agent authority synchronization: complete on merge
+PR #466 Post-UI data-growth review gate: active
+PR #467 Record Growth Batch 3 — PLNQ and GBPQ: authorized next
+Next boundary after PR #467: REVIEW GATE
 
 Issue #281 UI v3 rebuild: complete and closed
 Issue #457 CYA-dark redesign audit: complete and closed
 UI v3 completion: true
 UI remediation implementation queue: closed
-Next substantive work item: bounded post-UI 114-asset data-growth review gate
 ```
 
 ## UI authority boundary
@@ -86,11 +93,24 @@ The current UI V3 implementation is the accepted baseline after exhaustive 457-r
 
 A future material UI program requires a new reviewed roadmap amendment. Small correctness, accessibility, readability, and broken-link fixes remain allowed when they preserve the completed regression contract.
 
+## PR #467 canonical-growth boundary
+
+PR #467 is the only authorized next canonical-growth PR. It may add at most the exact reviewed candidates:
+
+```text
+Quantoz PLNQ — sog_cand_pr427_plnq
+Quantoz GBPQ — sog_cand_pr427_gbpq
+```
+
+Before canonical edits, PR #467 must perform a fresh duplicate, current-source, deployment-identity, reserve, and redemption review. It must reuse the existing Quantoz organization. Thin records are prohibited. A candidate that cannot support a complete record must be withheld and may not be replaced by a third candidate.
+
+PR #467 must not change Market Access, monitoring publication, UI, public route families, score or ranking surfaces, or recommendation semantics. Automatic promotion remains prohibited.
+
 ## Data-growth boundary
 
-The next data-growth decision must be made through a review gate. No agent may automatically promote candidates, infer missing facts, create thin canonical records, authorize an indefinite PR sequence, introduce a score or ranking, or treat monitoring observations as canonical evidence.
+No agent may automatically promote candidates, infer missing facts, create thin canonical records, authorize an indefinite PR sequence, introduce a score or ranking, or treat monitoring observations as canonical evidence.
 
-The review gate must use the merged 114-asset state, the PR #427 reviewed handoff, the PR #429 completion state, current evidence, and explicit duplicate review to authorize at most one bounded next batch.
+Unknown values remain explicit. PR #467 exits only to a mandatory review gate based on its actual merged result.
 
 ## Production boundary
 
