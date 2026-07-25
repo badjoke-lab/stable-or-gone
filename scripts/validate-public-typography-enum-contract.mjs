@@ -13,9 +13,10 @@ const homePath = 'src/pages/index.astro';
 const eventIndexViewPath = 'src/lib/views/eventIndexView.ts';
 const maintenancePath = 'src/pages/maintenance/index.astro';
 const auditPath = 'scripts/audit-ui-readability.mjs';
+const directAuditPath = 'scripts/audit-public-typography-enums-direct.mjs';
 const auditValidatorPath = 'scripts/validate-ui-readability.mjs';
 
-for (const file of [brandPath, typographyPath, valueStatePath, homePath, eventIndexViewPath, maintenancePath, auditPath, auditValidatorPath]) {
+for (const file of [brandPath, typographyPath, valueStatePath, homePath, eventIndexViewPath, maintenancePath, auditPath, directAuditPath, auditValidatorPath]) {
   check(fs.existsSync(file), `required public UI contract file missing: ${file}`);
 }
 
@@ -28,6 +29,7 @@ if (failures.length === 0) {
   const eventIndexView = read(eventIndexViewPath);
   const maintenance = read(maintenancePath);
   const audit = read(auditPath);
+  const directAudit = read(directAuditPath);
   const auditValidator = read(auditValidatorPath);
   const typographyImport = "import '../styles/v3-public-typography-contract.css'";
   const roleFloorsImport = "import '../styles/v3-readability-role-floors.css'";
@@ -40,7 +42,10 @@ if (failures.length === 0) {
     'footer.site-footer .site-footer-inner :where(*)',
     '#main-content :where(*)',
     'font-family: var(--v3-sans) !important',
+    'font-family: var(--v3-serif) !important',
     'font-family: var(--v3-mono) !important',
+    '[data-editorial-serif]',
+    '[data-editorial-number]',
     '[data-technical-value]'
   ]) check(typography.includes(marker), `public typography contract marker missing: ${marker}`);
 
@@ -58,8 +63,9 @@ if (failures.length === 0) {
   check(maintenance.includes("import { formatPublicLabel } from '../../utils/displayLabels'"), 'maintenance log does not import the public label formatter');
   check(!maintenance.includes("replaceAll('_', ' ')"), 'maintenance log still formats enums through underscore replacement');
 
-  for (const marker of ['unexpected_public_font', 'raw_public_enum', 'forbiddenFamilies', 'enumPattern']) {
+  for (const marker of ['unexpected_public_font', 'raw_public_enum', 'monospaceFamilies', 'serifFamilies', 'editorialSerifSelector', 'enumPattern']) {
     check(audit.includes(marker), `readability audit contract marker missing: ${marker}`);
+    check(directAudit.includes(marker), `direct public typography audit contract marker missing: ${marker}`);
   }
   for (const marker of ['unexpected_public_font', 'raw_public_enum', 'public_typography', 'public_enums']) {
     check(auditValidator.includes(marker), `readability validator contract marker missing: ${marker}`);
@@ -81,14 +87,14 @@ if (failures.length === 0) {
 }
 
 const result = {
-  schema_version: '1.3',
+  schema_version: '1.4',
   generated_at: new Date().toISOString(),
   ok: failures.length === 0,
   contract: {
-    public_font: 'shared sans-serif stack for all ordinary UI; mono only for explicit technical values',
+    public_font: 'CYA-aligned role system: sans-serif for ordinary copy and controls, serif for primary editorial headings, mono for explicit technical values',
     public_enum: 'known public enum surfaces use canonical taxonomy/display-label helpers; rendered raw snake_case is forbidden',
     static_render_inventory: 'remaining local humanizers are reported for migration but are not treated as proof of a rendered raw token',
-    exhaustive_runtime_gate: 'desktop and mobile readability audits inspect every rendered public route for font-family and raw-enum findings'
+    exhaustive_runtime_gate: 'desktop and mobile audits inspect every rendered public route for role-inappropriate font-family and raw-enum findings'
   },
   ad_hoc_formatter_files: adHocFormatterFiles,
   failures
