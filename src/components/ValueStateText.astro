@@ -1,5 +1,6 @@
 ---
 import { valueStatePresentation, type PublicValueState, type ValueStateOptions } from '../utils/valueState';
+import { formatPublicLabel } from '../utils/displayLabels';
 
 const {
   value,
@@ -34,6 +35,15 @@ const structuralState: PublicValueState | undefined = !detectMarkers && isStruct
     : nullState ?? 'not_recorded'
   : undefined;
 
+const normalizedStringValue = typeof value === 'string' ? value.trim() : '';
+const looksLikePublicEnum = /^[a-z][a-z0-9]*(?:_[a-z0-9]+)+$/.test(normalizedStringValue)
+  && !normalizedStringValue.startsWith('sog_');
+const resolvedDisplayValue = displayValue !== undefined
+  ? displayValue
+  : looksLikePublicEnum
+    ? formatPublicLabel(normalizedStringValue)
+    : undefined;
+
 const presentation = valueStatePresentation(value, {
   policy,
   explicit_state: explicitState ?? structuralState,
@@ -42,7 +52,7 @@ const presentation = valueStatePresentation(value, {
   explicit_unknown_state: explicitUnknownState,
   work_queue_state: workQueueState,
   detect_markers: detectMarkers,
-  display_value: displayValue
+  display_value: resolvedDisplayValue
 });
 ---
 <span class={`value-state value-state--${presentation.state}`} data-value-state={presentation.state} title={presentation.label}>
