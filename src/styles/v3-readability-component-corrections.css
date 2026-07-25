@@ -1,0 +1,33 @@
+/* Aggregate lifecycle counts are a count table, not a row of record badges. */
+html body .home-status-ledger dt > .chip {
+  padding: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: .65rem !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: var(--v3-text) !important;
+  font-family: var(--v3-sans) !important;
+  font-size: .9375rem !important;
+  font-weight: 650 !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+  box-shadow: none !important;
+}
+
+html body .home-status-ledger dt > .chip::before {
+  width: 3px;
+  height: 1.15em;
+  flex: 0 0 auto;
+  content: "";
+  background: var(--v3-rule-strong);
+}
+
+html body .home-status-ledger dt > .chip.active::before { background: var(--v3-positive); }
+html body .home-status-ledger dt > .chip.restricted::before,
+html body .home-status-ledger dt > .chip.winding_down::before { background: var(--v3-warning); }
+html body .home-status-ledger dt > .chip.terminated::before,
+html body .home-status-ledger dt > .chip.collapsed::before { background: var(--v3-danger); }
+html body .home-status-ledger dt > .chip.migrated::before,
+html body .home-status-ledger dt > .chip.rebranded::before { background: var(--v3-violet); }
