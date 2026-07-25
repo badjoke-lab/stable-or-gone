@@ -2,6 +2,31 @@
  * Loaded last so earlier phase-specific !important declarations cannot reduce
  * text, links, metadata, or touch targets below the accepted floors. */
 
+/* Public typography is one sans-serif system. Legacy serif and monospace rules
+ * must not survive on ordinary labels, headings, navigation, metadata, or copy.
+ * Monospace is reserved for genuinely technical values below. */
+html body,
+html body :where(button, input, select, textarea),
+html body .site-header,
+html body .site-footer,
+html body #main-content,
+html body #main-content :where(h1, h2, h3, h4, h5, h6, p, li, dt, dd, th, td, figcaption, small, time, summary, label, a, span, blockquote) {
+  font-family: var(--v3-sans) !important;
+}
+
+html body :where(
+  code,
+  pre,
+  kbd,
+  samp,
+  .contract-address,
+  .transaction-hash,
+  [data-long-value],
+  [data-technical-value]
+) {
+  font-family: var(--v3-mono) !important;
+}
+
 /* Shared shell and footer. */
 html body .site-footer .v3-footer-links a {
   min-height: 40px !important;
@@ -76,264 +101,4 @@ html body .site-main .stablecoin-record-id,
 html body .site-main .stablecoin-aliases {
   font-size: .9375rem !important;
   line-height: 1.5 !important;
-}
-
-html body .site-main .organization-detail-page details#unknowns article p,
-html body .site-main .organization-detail-page [class*="unknown"] article p {
-  font-size: 1rem !important;
-  line-height: 1.62 !important;
-}
-
-/* Desktop table and compact-value floors. */
-html body .site-main .stablecoin-identity-table td,
-html body .site-main .stats-table-wrap td,
-html body .site-main .home-recent td,
-html body .site-main .stablecoin-index-table td,
-html body .site-main .event-index-table td,
-html body .site-main .organization-index-table td {
-  font-size: .9375rem !important;
-  line-height: 1.5 !important;
-}
-
-html body .site-main .stablecoin-identity-table th,
-html body .site-main .stats-table-wrap th,
-html body .site-main .home-recent th,
-html body .site-main .stablecoin-index-table th,
-html body .site-main .event-index-table th,
-html body .site-main .organization-index-table th {
-  font-size: .75rem !important;
-  line-height: 1.45 !important;
-}
-
-/* Stablecoin navigation and disclosure controls. */
-html body .site-main .stablecoin-dossier-nav a,
-html body .site-main .stablecoin-dossier-overline a,
-html body .site-main .stablecoin-coverage-disclosure > summary,
-html body .site-main .stablecoin-dossier details > summary,
-html body .site-main .event-detail-page details > summary,
-html body .site-main .organization-detail-page details > summary,
-html body .site-main .timeline-item-details > summary,
-html body .site-main .stablecoin-index-card-details > summary {
-  min-height: 44px !important;
-  display: flex !important;
-  align-items: center !important;
-  font-size: .875rem !important;
-  line-height: 1.4 !important;
-}
-
-/* Material-change and editorial ledgers must not use compressed leading. */
-html body .site-main .stablecoin-material-change p,
-html body .site-main .editorial-page-ledger dd {
-  line-height: 1.5 !important;
-}
-
-html body .site-main .stablecoin-material-change time,
-html body .site-main .organization-latest-change time,
-html body .site-main .organization-detail-page details#unknowns summary small,
-html body .site-main table td > small,
-html body .site-main .stablecoin-record-identity small,
-html body .site-main .stats-metric-list dt,
-html body .site-main .editorial-page-ledger dt {
-  font-size: .75rem !important;
-  line-height: 1.45 !important;
-}
-
-/* Mobile runtime records: readable data instead of miniature desktop tables. */
-html body .site-main .mobile-record-list > article,
-html body .site-main .mobile-record-list > details,
-html body .site-main .mobile-collapsed-record-list > details,
-html body .site-main .mobile-evidence-list > details {
-  padding: 1rem 0 !important;
-  border-top: 0 !important;
-  border-right: 0 !important;
-  border-left: 0 !important;
-  border-bottom: 1px solid var(--v3-rule) !important;
-  background: transparent !important;
-  box-shadow: none !important;
-}
-
-html body .site-main .mobile-record-list dt,
-html body .site-main .mobile-definition-list dt,
-html body .site-main .mobile-table-record dt,
-html body .site-main .mobile-evidence-record dt,
-html body .site-main .stablecoin-index-card-grid dt {
-  font-size: .75rem !important;
-  line-height: 1.45 !important;
-  letter-spacing: .035em !important;
-}
-
-html body .site-main .mobile-record-list dd,
-html body .site-main .mobile-definition-list dd,
-html body .site-main .mobile-table-record dd,
-html body .site-main .mobile-evidence-record dd,
-html body .site-main .stablecoin-index-card-grid dd {
-  font-size: .9375rem !important;
-  line-height: 1.55 !important;
-}
-
-html body .site-main .mobile-record-list summary,
-html body .site-main .mobile-table-record summary,
-html body .site-main .mobile-evidence-record summary {
-  min-height: 44px !important;
-  padding-block: .65rem !important;
-  font-size: .9375rem !important;
-  line-height: 1.4 !important;
-}
-
-/* Action links and controls need usable targets. */
-html body .site-main .event-detail-actions a,
-html body .site-main .organization-detail-actions a,
-html body .site-main .report-actions a,
-html body .site-main .compare-actions button,
-html body .site-main .ar-search-row button,
-html body .site-main .home-search__popular button,
-html body .site-main .timeline-filter-control select,
-html body .site-main .ar-filter-control select,
-html body .site-main .compare-slot select,
-html body .site-main .stablecoin-index-pagination button {
-  min-height: 44px !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  font-size: .875rem !important;
-}
-
-/* Preserve explicit link roles. */
-html body .site-main :where(
-  .home-material-list__meta,
-  .home-section-heading,
-  .stablecoin-dossier-nav,
-  .event-detail-nav,
-  .organization-detail-nav,
-  .stablecoin-index-pagination,
-  .event-index-pagination,
-  .organization-index-pagination
-) a {
-  color: var(--v3-text) !important;
-  text-decoration-color: var(--v3-rule-strong) !important;
-}
-
-html body .site-main :where(
-  [class*="evidence"],
-  [class*="source"],
-  [class*="archive"]
-) a,
-html body .site-main a[href^="https://"],
-html body .site-main a[href^="http://"] {
-  color: var(--v3-archive) !important;
-}
-
-@media (max-width: 820px) {
-  html body .site-footer .v3-footer-links {
-    display: grid !important;
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    gap: 0 !important;
-  }
-
-  html body .site-footer .v3-footer-links a {
-    min-height: 44px !important;
-    padding: .55rem 0 !important;
-    border-bottom: 1px solid var(--v3-rule) !important;
-    font-size: .9375rem !important;
-  }
-
-  html body .site-header .mobile-navigation-panel .mobile-navigation-links a,
-  html body .site-header .mobile-navigation-panel .mobile-navigation-secondary a,
-  html body .site-header .mobile-navigation-panel .mobile-site-search label,
-  html body .site-header .mobile-navigation-panel .mobile-site-search input,
-  html body .site-header .mobile-navigation-panel .mobile-site-search button,
-  html body .site-header .mobile-navigation > summary {
-    min-height: 44px !important;
-    font-size: .9375rem !important;
-    line-height: 1.4 !important;
-  }
-
-  html body .home-masthead h1,
-  html body .event-index-title h1,
-  html body .organization-index-title h1,
-  html body .guide-index-title h1,
-  html body .event-detail-title h1,
-  html body .organization-detail-title h1,
-  html body .stablecoin-dossier-title-row h1,
-  html body .editorial-page-title h1,
-  html body .guide-article-masthead h1,
-  html body .longform-content h1,
-  html body .analysis-masthead h1,
-  html body .stats-page h1,
-  html body .timeline-page h1,
-  html body .comparison-page h1,
-  html body .compare-page h1,
-  html body .access-regulation-page h1,
-  html body .ar-explorer h1 {
-    max-width: none !important;
-    font-size: clamp(2rem, 8vw, 2.4rem) !important;
-    line-height: 1.1 !important;
-    letter-spacing: -.025em !important;
-    text-wrap: pretty;
-  }
-
-  html body .site-main .stablecoin-dossier p,
-  html body .site-main .event-detail-page p,
-  html body .site-main .organization-detail-page p,
-  html body .site-main .stablecoin-dossier li,
-  html body .site-main .event-detail-page li,
-  html body .site-main .organization-detail-page li,
-  html body .site-main .stablecoin-section-heading > p,
-  html body .site-main .event-detail-section-heading > p,
-  html body .site-main .organization-detail-section-heading > p,
-  html body .site-main .stablecoin-record-id,
-  html body .site-main .stablecoin-aliases {
-    font-size: 1rem !important;
-    line-height: 1.62 !important;
-  }
-
-  html body .site-main .stablecoin-identity-table td,
-  html body .site-main .stats-table-wrap td,
-  html body .site-main .home-recent td,
-  html body .site-main .stablecoin-index-table td,
-  html body .site-main .event-index-table td,
-  html body .site-main .organization-index-table td,
-  html body .site-main .mobile-record-list dd,
-  html body .site-main .mobile-definition-list dd,
-  html body .site-main .mobile-table-record dd,
-  html body .site-main .mobile-evidence-record dd,
-  html body .site-main .stablecoin-index-card-grid dd {
-    font-size: .9375rem !important;
-  }
-
-  html body .site-main .stablecoin-dossier-nav a,
-  html body .site-main .stablecoin-dossier-overline a,
-  html body .site-main .stablecoin-coverage-disclosure > summary,
-  html body .site-main .stablecoin-dossier details > summary,
-  html body .site-main .event-detail-page details > summary,
-  html body .site-main .organization-detail-page details > summary,
-  html body .site-main .timeline-item-details > summary,
-  html body .site-main .stablecoin-index-card-details > summary,
-  html body .site-main .event-detail-actions a,
-  html body .site-main .organization-detail-actions a,
-  html body .site-main .report-actions a,
-  html body .site-main .compare-actions button,
-  html body .site-main .ar-search-row button,
-  html body .site-main .home-search__popular button,
-  html body .site-main .timeline-filter-control select,
-  html body .site-main .ar-filter-control select,
-  html body .site-main .compare-slot select,
-  html body .site-main .stablecoin-index-pagination button {
-    min-height: 44px !important;
-    font-size: .9375rem !important;
-  }
-}
-
-@media (max-width: 520px) {
-  html body .site-footer .v3-footer-links {
-    grid-template-columns: 1fr !important;
-  }
-
-  html body .site-main .stablecoin-dossier-facts,
-  html body .site-main .event-detail-ledger,
-  html body .site-main .organization-detail-ledger,
-  html body .site-main .event-index-ledger,
-  html body .site-main .organization-index-ledger,
-  html body .site-main .guide-index-ledger {
-    grid-template-columns: 1fr !important;
-  }
 }
