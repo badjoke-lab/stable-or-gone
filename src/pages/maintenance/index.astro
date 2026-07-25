@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import '../../styles/maintenance-log.css';
 import { getPublicMaintenanceLog } from '../../lib/maintenanceLogData.mjs';
+import { formatPublicLabel } from '../../utils/displayLabels';
 
 type MaintenanceCheck = { check_id: string; result: string; summary: string };
 type MaintenanceRelease = { id: string; label: string; route: string };
@@ -74,7 +75,7 @@ const jsonLd = {
                 <p>{entry.public_summary}</p>
               </div>
               <dl>
-                <div><dt>Status</dt><dd>{entry.status.replaceAll('_', ' ')}</dd></div>
+                <div><dt>Status</dt><dd>{formatPublicLabel(entry.status)}</dd></div>
                 <div><dt>As of</dt><dd>{entry.as_of}</dd></div>
               </dl>
             </header>
@@ -84,8 +85,8 @@ const jsonLd = {
               <div class="maintenance-check-grid">
                 {entry.checks.map((check) => (
                   <div class="maintenance-check" data-result={check.result}>
-                    <span>{check.result.replaceAll('_', ' ')}</span>
-                    <strong>{check.check_id.replaceAll('_', ' ')}</strong>
+                    <span>{formatPublicLabel(check.result)}</span>
+                    <strong>{formatPublicLabel(check.check_id)}</strong>
                     <p>{check.summary}</p>
                   </div>
                 ))}
@@ -96,7 +97,7 @@ const jsonLd = {
               <h4>Public counts at checkpoint</h4>
               <dl>
                 {Object.entries(entry.counts).map(([key, value]) => (
-                  <div><dt>{key.replaceAll('_', ' ')}</dt><dd>{value}</dd></div>
+                  <div><dt>{formatPublicLabel(key)}</dt><dd>{value}</dd></div>
                 ))}
               </dl>
             </section>
