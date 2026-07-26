@@ -1,6 +1,7 @@
 # SOG full public UI remediation scope
 
 Status: blocking
+Authority: user-supplied production screenshots and CYA visual comparison
 
 The previous typography-only remediation did not resolve the public UI defects. Record growth remains paused until this scope is implemented, audited, merged, and production-verified.
 
