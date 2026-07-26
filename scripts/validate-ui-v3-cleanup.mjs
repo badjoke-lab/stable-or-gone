@@ -29,6 +29,7 @@ const walk = (directory) => {
 walk('src');
 
 let cssImports = [];
+let inlineStyleFiles = [];
 if (failures.length === 0) {
   const layout = read(layoutPath);
   const brand = read(brandPath);
@@ -46,13 +47,18 @@ if (failures.length === 0) {
   check(cssImports[0]?.file === brandPath && cssImports[0]?.import === '../styles/site-ui.css', 'only BrandLockup may import site-ui.css');
   check(!importPattern.test(layout), 'BaseLayout must not import another stylesheet');
 
+  inlineStyleFiles = sourceFiles
+    .filter((file) => file.endsWith('.astro'))
+    .filter((file) => /<style(?:\s|>)/i.test(read(file)));
+  check(inlineStyleFiles.length === 0, `inline Astro style blocks are forbidden; found ${inlineStyleFiles.length}: ${inlineStyleFiles.join(', ')}`);
+
   for (const marker of [
     '--ui-bg:', '--ui-text:', '--ui-copy:', '--ui-muted:', '--ui-link:', '--ui-link-hover:', '--ui-link-visited:',
     '--ui-serif:', '--ui-sans:', '--ui-mono:',
     'a:visited', 'a:hover', 'a:active', ':focus-visible',
     '.chip, [class*="badge"]', 'border-radius: var(--ui-radius-pill)',
     '.event-structured-detail', '.event-detail-evidence-r5',
-    '.home-ledger', '.event-index-page', '.organization-index-page',
+    '.home-ledger', '.stablecoin-index-page', '.event-index-page', '.organization-index-page',
     '@media (max-width: 820px)'
   ]) check(authority.includes(marker), `single UI authority marker missing: ${marker}`);
 
@@ -82,15 +88,16 @@ if (failures.length === 0) {
 }
 
 const result = {
-  schema_version: '4.0',
+  schema_version: '4.1',
   generated_at: new Date().toISOString(),
   ok: failures.length === 0,
   visual_family: 'cya_aligned_single_authority',
   active_stylesheet: authorityPath,
   stylesheet_entrypoints: cssImports,
+  inline_style_files: inlineStyleFiles,
   scanned_source_files: sourceFiles.length,
   contracts: {
-    cascade: 'exactly one public stylesheet import',
+    cascade: 'exactly one public stylesheet import and zero Astro inline style blocks',
     typography: 'serif editorial headings, sans ordinary copy, mono explicit technical values',
     interactions: 'one default, visited, hover, active, and focus palette',
     badges: 'shape, padding, border, background, and readable state text are mandatory',
