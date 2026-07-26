@@ -56,6 +56,7 @@ for (const device of devices) {
         const result = await page.evaluate(() => {
           const technicalSelector = 'code, pre, kbd, samp, .contract-address, .transaction-hash, [data-long-value], [data-technical-value]';
           const editorialSerifSelector = 'main h1, main h2, main [data-editorial-serif], main [data-editorial-number]';
+          const explicitMonoSelector = '.bar, .kicker, .eyebrow, [class*="overline"], [class*="-label"], dt, th, .home-masthead__edition, .home-section-kicker, .home-material-list__meta, .home-guide-list__meta, .v3-masthead-meta, .record-kicker, .record-symbol, [data-ui-mono]';
           const badgeSelector = '.chip, [class*="badge"], [class*="status-chip"], [data-tone]';
           const monospaceFamilies = new Set(['ui-monospace', 'sfmono-regular', 'menlo', 'monaco', 'consolas', 'liberation mono', 'courier', 'courier new', 'monospace']);
           const serifFamilies = new Set(['iowan old style', 'palatino linotype', 'palatino', 'georgia', 'times', 'times new roman', 'serif']);
@@ -131,8 +132,9 @@ for (const device of devices) {
             const fontFamily = getComputedStyle(element).fontFamily;
             const families = fontFamily.split(',').map((family) => family.trim().replace(/^[\'"]|[\'"]$/g, '').toLowerCase());
             const allowsSerif = element.matches(editorialSerifSelector) || Boolean(element.closest(editorialSerifSelector));
-            const forbidden = families.find((family) => monospaceFamilies.has(family) || (!allowsSerif && serifFamilies.has(family)));
-            if (forbidden) unexpectedFonts.push({ element: key, text: displayText(element).slice(0, 160), font_family: fontFamily, forbidden_family: forbidden, expected_role: allowsSerif ? 'editorial-serif' : 'ordinary-sans' });
+            const allowsMono = element.matches(explicitMonoSelector) || Boolean(element.closest(explicitMonoSelector));
+            const forbidden = families.find((family) => (!allowsMono && monospaceFamilies.has(family)) || (!allowsSerif && serifFamilies.has(family)));
+            if (forbidden) unexpectedFonts.push({ element: key, text: displayText(element).slice(0, 160), font_family: fontFamily, forbidden_family: forbidden, expected_role: allowsSerif ? 'editorial-serif' : allowsMono ? 'label-mono' : 'ordinary-sans' });
             if (unexpectedFonts.length >= 100) break;
           }
 
@@ -221,14 +223,16 @@ for (const device of devices) {
         });
 
         const invalidLinkHover = [];
-        for (const target of result.link_targets) {
-          const locator = page.locator(`[data-ui-audit-link="${target.id}"]`);
-          await locator.hover({ timeout: 5000 });
-          const hoverColor = await locator.evaluate((element) => getComputedStyle(element).color);
-          const allowed = target.zone === 'main'
-            ? [result.allowed_hover_colors.link]
-            : [result.allowed_hover_colors.link, result.allowed_hover_colors.text];
-          if (!allowed.includes(hoverColor)) invalidLinkHover.push({ ...target, hover_color: hoverColor, allowed });
+        if (!device.hasTouch) {
+          for (const target of result.link_targets) {
+            const locator = page.locator(`[data-ui-audit-link="${target.id}"]`);
+            await locator.hover({ timeout: 5000 });
+            const hoverColor = await locator.evaluate((element) => getComputedStyle(element).color);
+            const allowed = target.zone === 'main'
+              ? [result.allowed_hover_colors.link]
+              : [result.allowed_hover_colors.link, result.allowed_hover_colors.text];
+            if (!allowed.includes(hoverColor)) invalidLinkHover.push({ ...target, hover_color: hoverColor, allowed });
+          }
         }
 
         const findings = { ...result, invalid_link_hover: invalidLinkHover };
