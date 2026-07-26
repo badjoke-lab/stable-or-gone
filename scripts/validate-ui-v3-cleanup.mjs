@@ -30,6 +30,7 @@ walk('src');
 
 let cssImports = [];
 let inlineStyleFiles = [];
+let inlineStyleAttributeFiles = [];
 if (failures.length === 0) {
   const layout = read(layoutPath);
   const brand = read(brandPath);
@@ -47,10 +48,12 @@ if (failures.length === 0) {
   check(cssImports[0]?.file === brandPath && cssImports[0]?.import === '../styles/site-ui.css', 'only BrandLockup may import site-ui.css');
   check(!importPattern.test(layout), 'BaseLayout must not import another stylesheet');
 
-  inlineStyleFiles = sourceFiles
-    .filter((file) => file.endsWith('.astro'))
-    .filter((file) => /<style(?:\s|>)/i.test(read(file)));
+  const astroFiles = sourceFiles.filter((file) => file.endsWith('.astro'));
+  inlineStyleFiles = astroFiles.filter((file) => /<style(?:\s|>)/i.test(read(file)));
   check(inlineStyleFiles.length === 0, `inline Astro style blocks are forbidden; found ${inlineStyleFiles.length}: ${inlineStyleFiles.join(', ')}`);
+
+  inlineStyleAttributeFiles = astroFiles.filter((file) => /\sstyle\s*=\s*(?:["'{])/i.test(read(file)));
+  check(inlineStyleAttributeFiles.length === 0, `inline style attributes are forbidden; found ${inlineStyleAttributeFiles.length}: ${inlineStyleAttributeFiles.join(', ')}`);
 
   for (const marker of [
     '--ui-bg:', '--ui-text:', '--ui-copy:', '--ui-muted:', '--ui-link:', '--ui-link-hover:', '--ui-link-visited:',
@@ -88,17 +91,18 @@ if (failures.length === 0) {
 }
 
 const result = {
-  schema_version: '4.1',
+  schema_version: '4.2',
   generated_at: new Date().toISOString(),
   ok: failures.length === 0,
   visual_family: 'cya_aligned_single_authority',
   active_stylesheet: authorityPath,
   stylesheet_entrypoints: cssImports,
   inline_style_files: inlineStyleFiles,
+  inline_style_attribute_files: inlineStyleAttributeFiles,
   scanned_source_files: sourceFiles.length,
   contracts: {
-    cascade: 'exactly one public stylesheet import and zero Astro inline style blocks',
-    typography: 'serif editorial headings, sans ordinary copy, mono explicit technical values',
+    cascade: 'exactly one public stylesheet import, zero Astro inline style blocks, and zero inline style attributes',
+    typography: 'serif editorial headings, sans ordinary copy, mono explicit technical values and labels',
     interactions: 'one default, visited, hover, active, and focus palette',
     badges: 'shape, padding, border, background, and readable state text are mandatory',
     runtime: 'all rendered desktop and mobile routes are audited'
