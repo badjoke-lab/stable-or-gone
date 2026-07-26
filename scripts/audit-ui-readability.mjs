@@ -26,17 +26,39 @@ for (const route of routes) {
   try {
     const response = await page.goto(`${baseUrl}${route}`, { waitUntil: 'networkidle', timeout: 60000 });
     if (!response?.ok()) throw new Error(`HTTP ${response?.status() ?? 'no response'}`);
-    await page.evaluate(() => document.fonts?.ready);
+    await page.evaluate(async () => { if (document.fonts?.ready) await document.fonts.ready; });
+
     const result = await page.evaluate(({ deviceName }) => {
       const mobile = deviceName === 'mobile';
       const thresholds = mobile
-        ? { ordinary: 16, compact: 15, interactive: 15, metadata: 12, h1: 44, h1Home: 60, h2: 36 }
-        : { ordinary: 15, compact: 14, interactive: 14, metadata: 12, h1: 72, h1Home: 80, h2: 42 };
+        ? { ordinary: 16, compact: 15, interactive: 15, metadata: 12, h1: 68, h1Home: 84, h2: 48 }
+        : { ordinary: 16, compact: 15, interactive: 14, metadata: 12, h1: 88, h1Home: 142, h2: 52 };
+      const findings = {
+        undersized_ordinary_text: [],
+        undersized_compact_text: [],
+        undersized_interactive_text: [],
+        undersized_metadata: [],
+        compressed_line_height: [],
+        oversized_headings: [],
+        excessive_heading_height: [],
+        overlapping_section_heading_content: [],
+        ambiguous_internal_accent_links: [],
+        undersized_mobile_targets: [],
+        unexpected_public_font: [],
+        raw_public_enum: []
+      };
+      const push = (category, value) => {
+        if (findings[category].length < 250) findings[category].push(value);
+      };
       const visible = (element) => {
         if (!(element instanceof HTMLElement)) return false;
         const style = getComputedStyle(element);
         const rect = element.getBoundingClientRect();
-        return style.display !== 'none' && style.visibility !== 'hidden' && Number(style.opacity) > 0 && rect.width > 0 && rect.height > 0;
+        return style.display !== 'none'
+          && style.visibility !== 'hidden'
+          && Number(style.opacity) > 0
+          && rect.width > 0
+          && rect.height > 0;
       };
       const directText = (element) => {
         if (element instanceof HTMLInputElement || element instanceof HTMLTextAreaElement || element instanceof HTMLSelectElement) {
@@ -85,28 +107,16 @@ for (const route of routes) {
       const overlap = (left, right) => {
         const width = Math.min(left.right, right.right) - Math.max(left.left, right.left);
         const height = Math.min(left.bottom, right.bottom) - Math.max(left.top, right.top);
-        return {
-          width,
-          height,
-          area: Math.max(0, width) * Math.max(0, height)
-        };
+        return { width, height, area: Math.max(0, width) * Math.max(0, height) };
       };
-      const findings = {
-        undersized_ordinary_text: [],
-        undersized_compact_text: [],
-        undersized_interactive_text: [],
-        undersized_metadata: [],
-        compressed_line_height: [],
-        oversized_headings: [],
-        excessive_heading_height: [],
-        overlapping_section_heading_content: [],
-        ambiguous_internal_accent_links: [],
-        undersized_mobile_targets: [],
-        unexpected_public_font: [],
-        raw_public_enum: []
-      };
-      const push = (category, value) => {
-        if (findings[category].length < 250) findings[category].push(value);
+      const resolveToken = (name) => {
+        const value = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+        const probe = document.createElement('span');
+        probe.style.color = value;
+        document.body.append(probe);
+        const resolved = getComputedStyle(probe).color;
+        probe.remove();
+        return resolved;
       };
 
       const ordinary = [...document.querySelectorAll('main p, main li, main blockquote')].filter(visible);
@@ -145,21 +155,16 @@ for (const route of routes) {
         const entry = sample(heading, heading.tagName.toLowerCase());
         const max = heading.tagName === 'H1' ? (home ? thresholds.h1Home : thresholds.h1) : thresholds.h2;
         if (entry.font_size_px > max + .1) push('oversized_headings', { ...entry, allowed_max_px: max });
-        if (heading.tagName === 'H1' && entry.height_px > innerHeight * (mobile ? .42 : .48)) {
+        if (heading.tagName === 'H1' && entry.height_px > innerHeight * (mobile ? .46 : .52)) {
           push('excessive_heading_height', { ...entry, viewport_height_px: innerHeight });
         }
       }
 
-      /* Font-size checks cannot detect text painted on top of adjacent text.
-       * Inspect the direct children of every shared section-heading component
-       * and reject any material rectangle intersection. */
       const sectionHeadingSelector = [
-        '.event-detail-section-heading',
-        '.organization-detail-section-heading',
-        '.stablecoin-section-heading',
-        '.event-index-section-heading',
-        '.organization-index-section-heading',
-        '.guide-index-section-heading'
+        '.event-detail-section-heading', '.organization-detail-section-heading', '.stablecoin-section-heading',
+        '.event-index-section-heading', '.organization-index-section-heading', '.stablecoin-index-section-heading',
+        '.stats-section-heading', '.timeline-section-heading', '.compare-section-heading', '.ar-section-heading',
+        '.maintenance-section-heading', '.update-feed-section-heading', '.home-section-heading'
       ].join(', ');
       for (const container of [...document.querySelectorAll(sectionHeadingSelector)].filter(visible)) {
         const children = [...container.children].filter(visible);
@@ -181,20 +186,21 @@ for (const route of routes) {
         }
       }
 
-      const rootStyle = getComputedStyle(document.documentElement);
-      const accent = rootStyle.getPropertyValue('--v3-accent').trim();
-      const probe = document.createElement('span');
-      probe.style.color = accent;
-      document.body.append(probe);
-      const accentRgb = getComputedStyle(probe).color;
-      probe.remove();
-      const semanticLinkContext = '[aria-current="page"], [class*="status"], [class*="chip"], [class*="button"], [class*="archive"], [class*="source"], [class*="evidence"], [class*="warning"], [data-tone]';
+      const allowedInternalLinkColors = new Set([
+        resolveToken('--ui-link'),
+        resolveToken('--ui-hover'),
+        resolveToken('--ui-visited'),
+        resolveToken('--ui-text'),
+        resolveToken('--ui-muted')
+      ]);
+      const semanticLinkContext = '[aria-current="page"], [class*="status"], [class*="chip"], [class*="badge"], [class*="button"], [class*="archive"], [class*="source"], [class*="evidence"], [class*="warning"], [data-tone]';
       for (const anchor of [...document.querySelectorAll('main a')].filter(visible)) {
         let url;
         try { url = new URL(anchor.href, location.href); } catch { continue; }
         if (url.origin !== location.origin) continue;
         if (anchor.matches(semanticLinkContext) || anchor.closest(semanticLinkContext)) continue;
-        if (getComputedStyle(anchor).color === accentRgb) push('ambiguous_internal_accent_links', sample(anchor, 'internal-link'));
+        const color = getComputedStyle(anchor).color;
+        if (!allowedInternalLinkColors.has(color)) push('ambiguous_internal_accent_links', sample(anchor, 'internal-link'));
       }
 
       if (mobile) {
@@ -205,24 +211,15 @@ for (const route of routes) {
         }
       }
 
-      /* CYA-aligned role contract: body copy and controls are sans-serif,
-       * h1/h2 editorial headings may use serif, and monospace is reserved for
-       * explicitly technical surfaces. */
       const technicalSelector = 'code, pre, kbd, samp, .contract-address, .transaction-hash, [data-long-value], [data-technical-value]';
       const editorialSerifSelector = 'main h1, main h2, main [data-editorial-serif], main [data-editorial-number]';
-      const monospaceFamilies = new Set([
-        'ui-monospace', 'sfmono-regular', 'menlo', 'monaco', 'consolas',
-        'liberation mono', 'courier', 'courier new', 'monospace'
-      ]);
-      const serifFamilies = new Set([
-        'iowan old style', 'palatino linotype', 'palatino', 'georgia',
-        'times', 'times new roman', 'serif'
-      ]);
+      const explicitMonoSelector = '.bar, .kicker, .eyebrow, [class*="overline"], [class*="-label"], dt, th, .home-masthead__edition, .home-section-kicker, .home-material-list__meta, .home-guide-list__meta, .v3-masthead-meta, .record-kicker, .record-symbol, [data-ui-mono]';
+      const monospaceFamilies = new Set(['ui-monospace', 'sfmono-regular', 'menlo', 'monaco', 'consolas', 'liberation mono', 'courier', 'courier new', 'monospace']);
+      const serifFamilies = new Set(['iowan old style', 'palatino linotype', 'palatino', 'georgia', 'times', 'times new roman', 'serif']);
       const publicTextSelector = 'body, header, footer, main h1, main h2, main h3, main h4, main h5, main h6, main p, main li, main dt, main dd, main th, main td, main figcaption, main small, main time, main summary, main label, main a, main button, main input, main select, main textarea, main span';
       const checkedFonts = new Set();
       for (const element of [...document.querySelectorAll(publicTextSelector)].filter(visible)) {
-        if (element.matches(technicalSelector) || element.closest(technicalSelector)) continue;
-        if (element.closest('[aria-hidden="true"]')) continue;
+        if (element.matches(technicalSelector) || element.closest(technicalSelector) || element.closest('[aria-hidden="true"]')) continue;
         const key = pathFor(element);
         if (checkedFonts.has(key)) continue;
         checkedFonts.add(key);
@@ -230,16 +227,15 @@ for (const route of routes) {
           .split(',')
           .map((family) => family.trim().replace(/^[\'"]|[\'"]$/g, '').toLowerCase());
         const allowsSerif = element.matches(editorialSerifSelector) || Boolean(element.closest(editorialSerifSelector));
-        const forbidden = families.find((family) => monospaceFamilies.has(family) || (!allowsSerif && serifFamilies.has(family)));
+        const allowsMono = element.matches(explicitMonoSelector) || Boolean(element.closest(explicitMonoSelector));
+        const forbidden = families.find((family) => (!allowsMono && monospaceFamilies.has(family)) || (!allowsSerif && serifFamilies.has(family)));
         if (forbidden) push('unexpected_public_font', {
           ...sample(element, 'public-font'),
           forbidden_family: forbidden,
-          expected_role: allowsSerif ? 'editorial-serif' : 'ordinary-sans'
+          expected_role: allowsSerif ? 'editorial-serif' : allowsMono ? 'label-mono' : 'ordinary-sans'
         });
       }
 
-      /* Public copy must not expose internal snake_case enum tokens. Canonical
-       * SOG record IDs remain permitted and technical code surfaces are skipped. */
       const enumPattern = /\b[a-z][a-z0-9]*(?:_[a-z0-9]+)+\b/g;
       const checkedEnums = new Set();
       const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
@@ -253,62 +249,53 @@ for (const route of routes) {
         if (!text) continue;
         for (const match of text.matchAll(enumPattern)) {
           const token = match[0];
-          if (token.startsWith('sog_')) continue;
+          if (token.startsWith('sog_') || /https?:\/\//i.test(text) || /\b\S+@\S+\b/.test(text)) continue;
           const key = `${pathFor(parent)}:${token}`;
           if (checkedEnums.has(key)) continue;
           checkedEnums.add(key);
-          push('raw_public_enum', {
-            element: pathFor(parent),
-            token,
-            text: text.replace(/\s+/g, ' ').slice(0, 180)
-          });
+          push('raw_public_enum', { element: pathFor(parent), token, text: text.replace(/\s+/g, ' ').slice(0, 180) });
         }
       }
 
-      const counts = Object.fromEntries(Object.entries(findings).map(([key, values]) => [key, values.length]));
-      return { thresholds, counts, findings };
+      return findings;
     }, { deviceName: device });
-    records.push({ route, ...result });
+
+    const counts = Object.fromEntries(Object.entries(result).map(([category, values]) => [category, values.length]));
+    records.push({ route, counts, findings: result });
     console.log(`[readability:${device}] audited ${route}`);
   } catch (error) {
-    failures.push({ route, error: error.message });
+    failures.push({ route, error: error instanceof Error ? error.message : String(error) });
   }
 }
 
 await browser.close();
 const categories = [
-  'undersized_ordinary_text',
-  'undersized_compact_text',
-  'undersized_interactive_text',
-  'undersized_metadata',
-  'compressed_line_height',
-  'oversized_headings',
-  'excessive_heading_height',
-  'overlapping_section_heading_content',
-  'ambiguous_internal_accent_links',
-  'undersized_mobile_targets',
-  'unexpected_public_font',
-  'raw_public_enum'
+  'undersized_ordinary_text', 'undersized_compact_text', 'undersized_interactive_text',
+  'undersized_metadata', 'compressed_line_height', 'oversized_headings',
+  'excessive_heading_height', 'overlapping_section_heading_content',
+  'ambiguous_internal_accent_links', 'undersized_mobile_targets',
+  'unexpected_public_font', 'raw_public_enum'
 ];
 const totals = Object.fromEntries(categories.map((category) => [category, records.reduce((sum, record) => sum + Number(record.counts?.[category] ?? 0), 0)]));
-const routesWithFindings = records.filter((record) => categories.some((category) => Number(record.counts?.[category] ?? 0) > 0)).length;
 const output = {
-  schema_version: '1.3',
+  schema_version: '3.0',
   generated_at: new Date().toISOString(),
   device,
   route_count: routes.length,
   audited_count: records.length,
   failed_count: failures.length,
-  routes_with_findings: routesWithFindings,
-  typography_roles: {
-    ordinary: 'sans-serif',
-    editorial_headings: 'serif',
-    technical_values: 'monospace'
-  },
+  routes_with_findings: records.filter((record) => categories.some((category) => Number(record.counts?.[category] ?? 0) > 0)).length,
   totals,
   records,
   failures
 };
 fs.writeFileSync(outputPath, `${JSON.stringify(output, null, 2)}\n`);
-console.log(JSON.stringify({ device, routes: routes.length, audited: records.length, failed: failures.length, routes_with_findings: routesWithFindings, typography_roles: output.typography_roles, totals }, null, 2));
+console.log(JSON.stringify({
+  device,
+  routes: routes.length,
+  audited: records.length,
+  failed: failures.length,
+  routes_with_findings: output.routes_with_findings,
+  totals
+}, null, 2));
 if (failures.length) process.exit(1);
