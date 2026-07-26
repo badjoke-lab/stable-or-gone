@@ -40,11 +40,3 @@ const relationshipLabel = record.relationshipStatuses.length ? record.relationsh
   <p class="organization-index-card-r5-jurisdiction">{record.jurisdictionLabel}</p>
   <p class="organization-index-card-r5-relationships">{record.relationshipCount} relationship{record.relationshipCount === 1 ? '' : 's'}<span>{relationshipLabel} · {record.sourceIdentityCount} source{record.sourceIdentityCount === 1 ? '' : 's'}</span></p>
 </article>
-<style is:global>
-  @media (max-width: 760px) {
-    .organization-index-page-r5 .organization-index-card-r5 {
-      max-height: none !important;
-      overflow: visible !important;
-    }
-  }
-</style>

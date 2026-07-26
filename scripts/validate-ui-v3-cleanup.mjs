@@ -76,8 +76,8 @@ if (failures.length === 0) {
   ]) check(screenshotWorkflow.includes(marker), `screenshot workflow gate missing: ${marker}`);
 
   for (const marker of [
-    'unexpected_public_font', 'raw_public_enum', 'low_contrast_text',
-    'legacy_link_hover', 'flattened_badge', 'schema_oriented_label'
+    'unexpected_public_font', 'raw_public_enum', 'low_contrast_public_text',
+    'invalid_link_hover', 'invalid_badge_contract', 'schema_oriented_label'
   ]) check(runtimeAudit.includes(marker), `runtime UI audit marker missing: ${marker}`);
 }
 
