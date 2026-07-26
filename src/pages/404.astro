@@ -7,21 +7,22 @@ import BrandLockup from '../components/BrandLockup.astro';
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex,follow" />
+    <meta name="theme-color" content="#07090b" />
     <title>Page not found — Stable or Gone</title>
     <meta name="description" content="The requested Stable or Gone page was not found." />
     <link rel="icon" href="/brand/sog-mark-on-light.svg" type="image/svg+xml" />
   </head>
-  <body>
-    <main id="main-content" class="site-main" style="min-height:80vh;display:grid;place-items:center;padding:48px 20px;">
-      <section style="width:min(100%,760px);padding:40px;border:1px solid var(--border-color,#d8dee6);background:var(--surface,#fff);">
-        <BrandLockup surface="light" />
-        <p style="margin:48px 0 8px;font-size:.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;">404 · Record not found</p>
-        <h1 style="margin:0;font-family:var(--v3-sans);font-size:clamp(2.4rem,7vw,4.8rem);line-height:1;letter-spacing:-.04em;">This page is not in the registry.</h1>
-        <p style="max-width:620px;margin:24px 0;color:#4f5b66;font-size:1.05rem;">The address may be outdated or incomplete. Use the stablecoin register, project navigation, or the BadJoke-Lab project hub to continue.</p>
-        <nav aria-label="404 recovery links" style="display:flex;flex-wrap:wrap;gap:12px;margin-top:28px;">
-          <a href="/" style="display:inline-flex;padding:10px 14px;border:1px solid currentColor;font-weight:700;">Return to Stable or Gone</a>
-          <a href="/stablecoins/" style="display:inline-flex;padding:10px 14px;border:1px solid #9ca7b1;">Open the stablecoin register</a>
-          <a href="https://badjoke-lab.com/" style="display:inline-flex;padding:10px 14px;border:1px solid #9ca7b1;">BadJoke-Lab projects</a>
+  <body class="not-found-page">
+    <main id="main-content" class="not-found-main">
+      <section class="not-found-panel">
+        <BrandLockup surface="dark" />
+        <p class="not-found-kicker">404 · Record not found</p>
+        <h1>This page is not in the registry.</h1>
+        <p class="not-found-copy">The address may be outdated or incomplete. Use the stablecoin register, project navigation, or the BadJoke-Lab project hub to continue.</p>
+        <nav class="not-found-actions" aria-label="404 recovery links">
+          <a href="/">Return to Stable or Gone</a>
+          <a href="/stablecoins/">Open the stablecoin register</a>
+          <a href="https://badjoke-lab.com/">BadJoke-Lab projects</a>
         </nav>
       </section>
     </main>
