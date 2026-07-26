@@ -2,6 +2,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
+// One-time bounded branch migration. Delete this script after it commits the import removals.
 const roots = ['src/pages', 'src/components', 'src/layouts', 'src/lib', 'src/scripts'];
 const files = [];
 const walk = (directory) => {
