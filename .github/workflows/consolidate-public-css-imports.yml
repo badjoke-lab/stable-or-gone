@@ -1,0 +1,36 @@
+name: Consolidate public CSS imports
+
+on:
+  push:
+    branches:
+      - agent/full-ui-contract-remediation
+
+permissions:
+  contents: write
+
+jobs:
+  consolidate:
+    if: ${{ github.actor != 'github-actions[bot]' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout remediation branch
+        uses: actions/checkout@v4
+        with:
+          ref: agent/full-ui-contract-remediation
+          fetch-depth: 0
+
+      - name: Remove legacy public CSS imports
+        run: node scripts/remove-legacy-public-css-imports.mjs
+
+      - name: Commit bounded consolidation
+        shell: bash
+        run: |
+          if git diff --quiet -- src; then
+            echo 'No legacy CSS imports remain.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add src artifacts/css-import-consolidation.json
+          git commit -m 'Remove remaining legacy public CSS imports'
+          git push origin HEAD:agent/full-ui-contract-remediation
