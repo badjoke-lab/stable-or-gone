@@ -1,7 +1,4 @@
 ---
-import '../styles/global.css';
-import '../styles/shell.css';
-import '../styles/accessibility-utilities.css';
 import BrandLockup from '../components/BrandLockup.astro';
 import { aboutNavigation, globalNavigationGroups } from '../../config/site-architecture.mjs';
 interface Props { title?: string; description?: string; canonicalPath?: string; ogImage?: string; language?: string; jsonLd?: Record<string, unknown> | Record<string, unknown>[]; }
@@ -47,7 +44,7 @@ const footerLinks = [
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#050607" />
+    <meta name="theme-color" content="#07090b" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="icon" href="/brand/sog-mark-on-light.svg" type="image/svg+xml" />
