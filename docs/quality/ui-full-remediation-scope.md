@@ -1,9 +1,24 @@
 # SOG full public UI remediation scope
 
-Status: blocking
-Authority: user-supplied production screenshots and CYA visual comparison
+Status: active implementation, blocking
 
 The previous typography-only remediation did not resolve the public UI defects. Record growth remains paused until this scope is implemented, audited, merged, and production-verified.
+
+Current branch: `agent/full-ui-contract-remediation`
+Current PR: #470
+
+## Implemented so far
+
+- added one global visual authority: `src/styles/site-ui.css`;
+- stopped the 23 shared global stylesheet entrypoints previously loaded by `BaseLayout` and `BrandLockup`;
+- removed the dedicated home, event-index, and organization-index stylesheet imports;
+- defined one documented typography, contrast, interaction, badge, form, table, home, detail, structured-fact, evidence, and responsive contract;
+- replaced the event structured-detail schema table with human-facing fact groups;
+- separated IDs, hashes, addresses, and references into explicit technical-value markup;
+- expanded the rendered-route audit to block low contrast, invalid hover colors, flattened badges, raw enums, and schema-oriented labels;
+- changed static validation to reject more than one public CSS import.
+
+This is not complete and must not be merged yet. The stablecoin index entrypoint and any remaining page/component CSS imports still need removal after their layouts are moved into the authority file.
 
 ## Blocking defects
 
