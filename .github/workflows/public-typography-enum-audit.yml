@@ -1,4 +1,4 @@
-name: Public typography and enum audit
+name: Public UI contract audit
 
 on:
   pull_request:
@@ -72,7 +72,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: public-typography-enum-audit-${{ github.run_id }}
+          name: public-ui-contract-audit-${{ github.run_id }}
           if-no-files-found: error
           retention-days: 30
           path: |
@@ -83,7 +83,7 @@ jobs:
       - name: Write audit summary
         if: always()
         run: |
-          echo '## Public typography and enum audit' >> "$GITHUB_STEP_SUMMARY"
+          echo '## Public UI contract audit' >> "$GITHUB_STEP_SUMMARY"
           if [ -f artifacts/public-typography-enum-runtime-audit.json ]; then
             node - <<'NODE' >> "$GITHUB_STEP_SUMMARY"
           const fs = require('fs');
@@ -91,8 +91,12 @@ jobs:
           console.log(`- Result: **${audit.ok ? 'pass' : 'fail'}**`);
           console.log(`- Routes: **${audit.route_count}**`);
           console.log(`- Desktop/mobile audits: **${audit.audited_count}/${audit.expected_audit_count}**`);
-          console.log(`- Unexpected public fonts: **${audit.totals.unexpected_public_font}**`);
+          console.log(`- Role-inappropriate fonts: **${audit.totals.unexpected_public_font}**`);
+          console.log(`- Low-contrast public text: **${audit.totals.low_contrast_public_text}**`);
+          console.log(`- Invalid badges: **${audit.totals.invalid_badge_contract}**`);
+          console.log(`- Invalid link hover colors: **${audit.totals.invalid_link_hover}**`);
           console.log(`- Raw public enums: **${audit.totals.raw_public_enum}**`);
+          console.log(`- Schema-oriented labels: **${audit.totals.schema_oriented_label}**`);
           console.log(`- Navigation failures: **${audit.navigation_failures.length}**`);
           NODE
           else
