@@ -1,9 +1,14 @@
 name: Apply remaining page-family UI contract
 
 on:
-  push:
+  pull_request:
     branches:
-      - agent/full-ui-contract-remediation
+      - main
+    paths:
+      - 'src/**'
+      - 'scripts/apply-remaining-page-family-contract.mjs'
+      - '.github/workflows/apply-remaining-page-family-contract.yml'
+  workflow_dispatch:
 
 permissions:
   contents: write
