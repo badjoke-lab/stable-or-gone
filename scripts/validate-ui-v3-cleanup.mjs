@@ -7,7 +7,7 @@ const check = (value, message) => { if (!value) failures.push(message); };
 
 const layoutPath = 'src/layouts/BaseLayout.astro';
 const brandPath = 'src/components/BrandLockup.astro';
-const authorityPath = 'src/styles/site-ui.css';
+const authorityPath = 'src/styles/public-ui.css';
 const packagePath = 'package.json';
 const ciPath = '.github/workflows/ci.yml';
 const screenshotWorkflowPath = '.github/workflows/capture-screenshots.yml';
@@ -29,6 +29,7 @@ const walk = (directory) => {
 walk('src');
 
 let cssImports = [];
+let cssFiles = [];
 let inlineStyleFiles = [];
 let inlineStyleAttributeFiles = [];
 if (failures.length === 0) {
@@ -40,28 +41,31 @@ if (failures.length === 0) {
   const screenshotWorkflow = read(screenshotWorkflowPath);
   const runtimeAudit = read(runtimeAuditPath);
 
+  cssFiles = sourceFiles.filter((file) => file.endsWith('.css')).sort();
+  check(cssFiles.length === 1 && cssFiles[0] === authorityPath, `exactly one CSS file is allowed; found ${cssFiles.length}: ${cssFiles.join(', ')}`);
+
   const importPattern = /import\s+['"]([^'"]+\.css)['"]/g;
   for (const file of sourceFiles.filter((file) => !file.endsWith('.css'))) {
     for (const match of read(file).matchAll(importPattern)) cssImports.push({ file, import: match[1] });
   }
   check(cssImports.length === 1, `expected exactly one public CSS import, found ${cssImports.length}`);
-  check(cssImports[0]?.file === brandPath && cssImports[0]?.import === '../styles/site-ui.css', 'only BrandLockup may import site-ui.css');
+  check(cssImports[0]?.file === brandPath && cssImports[0]?.import === '../styles/public-ui.css', 'only BrandLockup may import public-ui.css');
   check(!importPattern.test(layout), 'BaseLayout must not import another stylesheet');
 
   const astroFiles = sourceFiles.filter((file) => file.endsWith('.astro'));
   inlineStyleFiles = astroFiles.filter((file) => /<style(?:\s|>)/i.test(read(file)));
   check(inlineStyleFiles.length === 0, `inline Astro style blocks are forbidden; found ${inlineStyleFiles.length}: ${inlineStyleFiles.join(', ')}`);
-
   inlineStyleAttributeFiles = astroFiles.filter((file) => /\sstyle\s*=\s*(?:["'{])/i.test(read(file)));
   check(inlineStyleAttributeFiles.length === 0, `inline style attributes are forbidden; found ${inlineStyleAttributeFiles.length}: ${inlineStyleAttributeFiles.join(', ')}`);
 
   for (const marker of [
-    '--ui-bg:', '--ui-text:', '--ui-copy:', '--ui-muted:', '--ui-link:', '--ui-link-hover:', '--ui-link-visited:',
+    '--ui-bg:', '--ui-text:', '--ui-copy:', '--ui-muted:', '--ui-link:', '--ui-hover:', '--ui-visited:',
     '--ui-serif:', '--ui-sans:', '--ui-mono:',
     'a:visited', 'a:hover', 'a:active', ':focus-visible',
-    '.chip, [class*="badge"]', 'border-radius: var(--ui-radius-pill)',
+    '.chip, [class*="badge"]', 'border-radius: var(--ui-pill)',
     '.event-structured-detail', '.event-detail-evidence-r5',
     '.home-ledger', '.stablecoin-index-page', '.event-index-page', '.organization-index-page',
+    '.stats-page', '.timeline-page', '.compare-page', '.ar-explorer', '.maintenance-page', '.update-feed-page',
     '@media (max-width: 820px)'
   ]) check(authority.includes(marker), `single UI authority marker missing: ${marker}`);
 
@@ -71,7 +75,7 @@ if (failures.length === 0) {
     "window.matchMedia('(max-width: 820px)').matches"
   ]) check(layout.includes(marker), `BaseLayout accessibility marker missing: ${marker}`);
 
-  check(brand.includes("import '../styles/site-ui.css'"), 'BrandLockup does not load the single UI authority');
+  check(brand.includes("import '../styles/public-ui.css'"), 'BrandLockup does not load the single UI authority');
   check(packageJson.includes('"validate:ui-v3-cleanup"'), 'package cleanup validator command missing');
   check(packageJson.includes('"audit:ui-v3-cleanup"'), 'package cleanup audit command missing');
   check(ci.includes('npm run validate:ui-v3-cleanup'), 'CI cleanup validator step missing');
@@ -91,17 +95,18 @@ if (failures.length === 0) {
 }
 
 const result = {
-  schema_version: '4.2',
+  schema_version: '5.0',
   generated_at: new Date().toISOString(),
   ok: failures.length === 0,
   visual_family: 'cya_aligned_single_authority',
   active_stylesheet: authorityPath,
+  css_files: cssFiles,
   stylesheet_entrypoints: cssImports,
   inline_style_files: inlineStyleFiles,
   inline_style_attribute_files: inlineStyleAttributeFiles,
   scanned_source_files: sourceFiles.length,
   contracts: {
-    cascade: 'exactly one public stylesheet import, zero Astro inline style blocks, and zero inline style attributes',
+    cascade: 'exactly one CSS file, exactly one CSS import, zero Astro style blocks, and zero inline style attributes',
     typography: 'serif editorial headings, sans ordinary copy, mono explicit technical values and labels',
     interactions: 'one default, visited, hover, active, and focus palette',
     badges: 'shape, padding, border, background, and readable state text are mandatory',
