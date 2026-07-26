@@ -115,19 +115,18 @@ async function checkOnce() {
   const organizationsText = visibleText(organizationsResponse.text);
   const eventsText = visibleText(eventsResponse.text);
   const initialStablecoinRangeEnd = Math.min(20, counts.primary_records);
-  const initialEventRangeEnd = Math.min(20, counts.events);
 
-  assert(homeText.includes(`Stablecoins ${counts.primary_records} canonical records`), 'home stablecoin total mismatch');
-  assert(homeText.includes(`Organizations ${breakdown.organizations} connected entities`), 'home organization total mismatch');
-  assert(homeText.includes(`Events ${counts.events} material records`), 'home event total mismatch');
-  assert(homeText.includes(`Source identities ${breakdown.evidence_source_identities} distinct sources`), 'home source identity total mismatch');
+  assert(homeText.includes(`${counts.primary_records} stable assets`), 'home stable asset count mismatch');
+  assert(homeText.includes(`${breakdown.organizations} organizations`), 'home organization count mismatch');
+  assert(homeText.includes(`${counts.events} events`), 'home event count mismatch');
+  assert(homeText.includes(`${breakdown.evidence_source_identities} Source identities`), 'home source identity count mismatch');
   assert(stablecoinsText.includes(`${counts.primary_records} records`), 'stablecoin index record count mismatch');
-  assert(stablecoinsText.includes(`1–${initialStablecoinRangeEnd} of ${counts.primary_records} matching records`), 'stablecoin index initial range mismatch');
+  assert(stablecoinsText.includes(`1–${initialStablecoinRangeEnd} of ${counts.primary_records} records`), 'stablecoin index initial range mismatch');
   assert(stablecoinsText.includes('20 per page'), 'stablecoin index page-size marker missing');
   assert(organizationsText.includes(`Organizations ${breakdown.organizations}`), 'organization index count mismatch');
   assert(organizationsText.includes(`Relationships ${breakdown.relationships}`), 'organization relationship count mismatch');
   assert(eventsText.includes(`Events ${counts.events}`), 'event index count mismatch');
-  assert(eventsText.includes(`1–${initialEventRangeEnd} of ${counts.events} events`), 'event index result count mismatch');
+  assert(eventsText.includes(`${counts.events} of ${counts.events} events`), 'event index result count mismatch');
 
   const stablecoinLinks = uniqueInternalLinks(stablecoinsResponse.text, '/stablecoin/');
   const organizationLinks = uniqueInternalLinks(organizationsResponse.text, '/issuer/');
