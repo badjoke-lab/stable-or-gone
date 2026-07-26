@@ -8,7 +8,7 @@ const read = (file) => fs.readFileSync(file, 'utf8');
 
 const layoutPath = 'src/layouts/BaseLayout.astro';
 const brandPath = 'src/components/BrandLockup.astro';
-const authorityPath = 'src/styles/site-ui.css';
+const authorityPath = 'src/styles/public-ui.css';
 const valueStatePath = 'src/components/ValueStateText.astro';
 const homePath = 'src/pages/index.astro';
 const eventIndexViewPath = 'src/lib/views/eventIndexView.ts';
@@ -23,6 +23,7 @@ for (const file of [layoutPath, brandPath, authorityPath, valueStatePath, homePa
 
 let adHocFormatterFiles = [];
 let cssImportFiles = [];
+let cssFiles = [];
 if (failures.length === 0) {
   const layout = read(layoutPath);
   const brand = read(brandPath);
@@ -34,29 +35,25 @@ if (failures.length === 0) {
   const audit = read(auditPath);
   const directAudit = read(directAuditPath);
   const auditValidator = read(auditValidatorPath);
-  const authorityImport = "import '../styles/site-ui.css'";
+  const authorityImport = "import '../styles/public-ui.css'";
 
   check(brand.includes(authorityImport), 'BrandLockup does not import the single public UI authority');
   check((brand.match(/import\s+['"][^'"]+\.css['"]/g) ?? []).length === 1, 'BrandLockup imports more than one stylesheet');
-  check(!/import\s+['"][^'"]+\.css['"]/.test(layout), 'BaseLayout must not import a second global stylesheet path');
+  check(!/import\s+['"][^'"]+\.css['"]/.test(layout), 'BaseLayout must not import a second stylesheet');
+
+  cssFiles = fs.readdirSync('src/styles').filter((name) => name.endsWith('.css')).sort();
+  check(cssFiles.length === 1 && cssFiles[0] === 'public-ui.css', `exactly one physical CSS file is allowed; found: ${cssFiles.join(', ')}`);
 
   for (const marker of [
-    '--ui-bg:', '--ui-text:', '--ui-copy:', '--ui-muted:', '--ui-link:', '--ui-link-hover:', '--ui-link-visited:',
+    '--ui-bg:', '--ui-text:', '--ui-copy:', '--ui-muted:', '--ui-link:', '--ui-hover:', '--ui-visited:',
     '--ui-serif:', '--ui-sans:', '--ui-mono:',
-    'a:visited', 'a:hover', ':focus-visible',
-    '.chip, [class*="badge"]', 'border-radius: var(--ui-radius-pill)',
+    'a:visited', 'a:hover', 'a:active', ':focus-visible',
+    '.chip, [class*="badge"]', 'border-radius: var(--ui-pill)',
     '.event-structured-detail', '.event-detail-evidence-r5',
+    '.home-ledger', '.stablecoin-index-page', '.event-index-page', '.organization-index-page',
+    '.stats-page', '.timeline-page', '.compare-page', '.ar-explorer', '.maintenance-page', '.update-feed-page',
     '@media (max-width: 820px)'
   ]) check(authority.includes(marker), `single UI authority marker missing: ${marker}`);
-
-  const forbiddenLegacyNames = [
-    'v3-cya-dark-', 'v3-exhaustive-remediation', 'v3-color-system-remediation',
-    'v3-readability-', 'v3-public-typography-contract', 'ui-v2-hardening',
-    'identity-badge-policy', 'global.css', 'shell.css', 'accessibility-utilities.css'
-  ];
-  for (const name of forbiddenLegacyNames) {
-    check(!brand.includes(name) && !layout.includes(name), `legacy stylesheet entrypoint remains active: ${name}`);
-  }
 
   for (const marker of [
     "import { formatPublicLabel } from '../utils/displayLabels'",
@@ -66,7 +63,7 @@ if (failures.length === 0) {
   ]) check(valueState.includes(marker), `ValueStateText enum-label safeguard missing: ${marker}`);
 
   check(home.includes("formatTaxonomyLabel('organization_type'"), 'home organization type does not use the public taxonomy');
-  check(!home.includes("replaceAll('_', ' ')"), 'home still exposes ad-hoc underscore replacement instead of a public taxonomy label');
+  check(!home.includes("replaceAll('_', ' ')"), 'home still exposes ad-hoc underscore replacement');
   check(eventIndexView.includes("import { formatPublicLabel } from '../../utils/displayLabels'"), 'event index does not import the public label formatter');
   check(!eventIndexView.includes("replaceAll('_', ' ')"), 'event index still formats enums through underscore replacement');
   check(maintenance.includes("import { formatPublicLabel } from '../../utils/displayLabels'"), 'maintenance log does not import the public label formatter');
@@ -98,25 +95,27 @@ if (failures.length === 0) {
     for (const match of source.matchAll(cssImportPattern)) cssImportFiles.push({ file, import: match[1] });
   }
   check(cssImportFiles.length === 1, `expected exactly one public CSS import, found ${cssImportFiles.length}`);
-  check(cssImportFiles[0]?.file === brandPath && cssImportFiles[0]?.import === '../styles/site-ui.css', 'the only public CSS import must be BrandLockup -> site-ui.css');
+  check(cssImportFiles[0]?.file === brandPath && cssImportFiles[0]?.import === '../styles/public-ui.css', 'the only public CSS import must be BrandLockup -> public-ui.css');
 
   const adHocUnderscoreFormatter = /replaceAll\(\s*['"]_['"]\s*,\s*['"] ['"]\s*\)/;
   adHocFormatterFiles = publicRenderFiles.filter((file) => adHocUnderscoreFormatter.test(read(file)));
 }
 
 const result = {
-  schema_version: '2.0',
+  schema_version: '3.0',
   generated_at: new Date().toISOString(),
   ok: failures.length === 0,
   contract: {
-    stylesheet_entrypoints: 'exactly one public CSS import: BrandLockup -> src/styles/site-ui.css',
-    cascade_policy: 'phase, correction, hardening, readability, final-override, and legacy global entrypoints are forbidden',
-    public_font: 'sans-serif for ordinary copy and controls, serif for primary editorial headings, mono for explicit technical values',
+    physical_stylesheets: 'exactly one CSS file: src/styles/public-ui.css',
+    stylesheet_entrypoints: 'exactly one CSS import: BrandLockup -> public-ui.css',
+    cascade_policy: 'phase, correction, hardening, readability, final-override, legacy global, inline style block, and inline style attribute paths are forbidden',
+    public_font: 'sans-serif for ordinary copy and controls, serif for primary editorial headings, mono for explicit labels and technical values',
     interaction_palette: 'one documented default, visited, hover, active, and focus palette',
     status_badges: 'semantic badges retain shape, padding, border, background, and readable state text',
-    public_enum: 'known public enum surfaces use canonical taxonomy/display-label helpers; rendered raw snake_case is forbidden',
+    public_enum: 'public surfaces use taxonomy/display-label helpers; rendered raw snake_case is forbidden',
     exhaustive_runtime_gate: 'desktop and mobile audits inspect every rendered public route'
   },
+  css_files: cssFiles,
   css_import_files: cssImportFiles,
   ad_hoc_formatter_files: adHocFormatterFiles,
   failures
