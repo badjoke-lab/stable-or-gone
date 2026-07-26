@@ -58,9 +58,10 @@ for (const route of routes) {
       }));
       const rootStyle = getComputedStyle(document.documentElement);
       const tokens = Object.fromEntries([
-        '--v3-text', '--v3-text-muted', '--v3-text-quiet', '--v3-accent', '--v3-archive',
-        '--v3-positive', '--v3-warning', '--v3-danger', '--v3-violet',
-        '--bg', '--muted', '--gold', '--sog-link', '--sog-warning', '--shell-link', '--shell-warning'
+        '--ui-bg', '--ui-bg-soft', '--ui-surface', '--ui-surface-strong',
+        '--ui-text', '--ui-copy', '--ui-muted', '--ui-quiet',
+        '--ui-line', '--ui-line-soft', '--ui-link', '--ui-hover', '--ui-visited', '--ui-focus',
+        '--ui-positive', '--ui-warning', '--ui-danger', '--ui-neutral'
       ].map((name) => [name, rootStyle.getPropertyValue(name).trim()]));
       const explicitSemantic = '[class*="status"], [class*="badge"], [class*="chip"], [class*="legend"], [class*="chart"], [class*="bar"], [class*="warning"], [class*="danger"], [class*="alert"], [class*="archive"], [class*="reliability"], [class*="severity"], [data-status], [data-tone], [aria-current="page"], [aria-selected="true"]';
       const inventory = new Map();
