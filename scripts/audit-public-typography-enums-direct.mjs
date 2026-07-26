@@ -57,7 +57,7 @@ for (const device of devices) {
           const technicalSelector = 'code, pre, kbd, samp, .contract-address, .transaction-hash, [data-long-value], [data-technical-value]';
           const editorialSerifSelector = 'main h1, main h2, main [data-editorial-serif], main [data-editorial-number]';
           const explicitMonoSelector = '.bar, .kicker, .eyebrow, [class*="overline"], [class*="-label"], dt, th, .home-masthead__edition, .home-section-kicker, .home-material-list__meta, .home-guide-list__meta, .v3-masthead-meta, .record-kicker, .record-symbol, [data-ui-mono]';
-          const badgeSelector = '.chip, [class*="badge"], [class*="status-chip"], [data-tone]';
+          const badgeSelector = '.chip, [class*="badge"], [class*="status-chip"], [data-tone], .home-status-label, .update-feed-category, .ar-chip, .ar-lifecycle';
           const monospaceFamilies = new Set(['ui-monospace', 'sfmono-regular', 'menlo', 'monaco', 'consolas', 'liberation mono', 'courier', 'courier new', 'monospace']);
           const serifFamilies = new Set(['iowan old style', 'palatino linotype', 'palatino', 'georgia', 'times', 'times new roman', 'serif']);
           const visible = (element) => {
@@ -117,7 +117,7 @@ for (const device of devices) {
 
           const rootBackground = parseRgb(resolvedCustomColor('--ui-bg')) ?? [7, 9, 11, 1];
           const allowedHoverColors = {
-            link: resolvedCustomColor('--ui-link-hover'),
+            link: resolvedCustomColor('--ui-hover'),
             text: resolvedCustomColor('--ui-text')
           };
 
