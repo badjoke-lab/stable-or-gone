@@ -12,14 +12,14 @@ import BrandLockup from '../components/BrandLockup.astro';
     <meta name="description" content="The requested Stable or Gone page was not found." />
     <link rel="icon" href="/brand/sog-mark-on-light.svg" type="image/svg+xml" />
   </head>
-  <body class="not-found-page">
-    <main id="main-content" class="not-found-main">
-      <section class="not-found-panel">
+  <body>
+    <main id="main-content" class="site-main">
+      <section class="home-search" aria-labelledby="not-found-title">
         <BrandLockup surface="dark" />
-        <p class="not-found-kicker">404 · Record not found</p>
-        <h1>This page is not in the registry.</h1>
-        <p class="not-found-copy">The address may be outdated or incomplete. Use the stablecoin register, project navigation, or the BadJoke-Lab project hub to continue.</p>
-        <nav class="not-found-actions" aria-label="404 recovery links">
+        <p class="home-section-kicker">404 · Record not found</p>
+        <h1 id="not-found-title">This page is not in the registry.</h1>
+        <p>The address may be outdated or incomplete. Use the stablecoin register, project navigation, or the BadJoke-Lab project hub to continue.</p>
+        <nav class="home-registry-links" aria-label="404 recovery links">
           <a href="/">Return to Stable or Gone</a>
           <a href="/stablecoins/">Open the stablecoin register</a>
           <a href="https://badjoke-lab.com/">BadJoke-Lab projects</a>
