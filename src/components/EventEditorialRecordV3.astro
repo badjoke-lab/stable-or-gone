@@ -2,7 +2,6 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import EventEditorialHeader from './EventEditorialHeader.astro';
 import EventEditorialBody from './EventEditorialBody.astro';
-import '../styles/event-detail-v3.css';
 import { buildEventDetailView } from '../lib/views/eventDetailView';
 const { event } = Astro.props;
 const view = buildEventDetailView(event);

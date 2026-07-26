@@ -1,0 +1,101 @@
+{
+  "schema_version": "1.0",
+  "changed_files": [
+    "src/pages/404.astro",
+    "src/pages/access-regulation/index.astro",
+    "src/pages/compare/index.astro",
+    "src/pages/maintenance/index.astro",
+    "src/pages/stablecoin/[slug].astro",
+    "src/pages/stablecoins/index.astro",
+    "src/pages/stats/index.astro",
+    "src/pages/timeline/index.astro",
+    "src/pages/updates/index.astro",
+    "src/components/EditorialPageHeader.astro",
+    "src/components/EventEditorialRecordV3.astro",
+    "src/components/GuideArticleHeader.astro",
+    "src/components/OrganizationEditorialRecord.astro",
+    "src/components/StablecoinDetailView.astro"
+  ],
+  "removed_imports": [
+    {
+      "file": "src/pages/404.astro",
+      "import": "../styles/global.css"
+    },
+    {
+      "file": "src/pages/404.astro",
+      "import": "../styles/shell.css"
+    },
+    {
+      "file": "src/pages/access-regulation/index.astro",
+      "import": "../../styles/access-regulation-explorer.css"
+    },
+    {
+      "file": "src/pages/compare/index.astro",
+      "import": "../../styles/compare-v1.css"
+    },
+    {
+      "file": "src/pages/compare/index.astro",
+      "import": "../../styles/compare-v1-accessibility.css"
+    },
+    {
+      "file": "src/pages/compare/index.astro",
+      "import": "../../styles/compare-presets.css"
+    },
+    {
+      "file": "src/pages/maintenance/index.astro",
+      "import": "../../styles/maintenance-log.css"
+    },
+    {
+      "file": "src/pages/stablecoin/[slug].astro",
+      "import": "../../styles/stablecoin-dossier-sections.css"
+    },
+    {
+      "file": "src/pages/stablecoins/index.astro",
+      "import": "../../styles/stablecoin-index.css"
+    },
+    {
+      "file": "src/pages/stats/index.astro",
+      "import": "../../styles/stats-foundation.css"
+    },
+    {
+      "file": "src/pages/timeline/index.astro",
+      "import": "../../styles/change-timeline-ui.css"
+    },
+    {
+      "file": "src/pages/updates/index.astro",
+      "import": "../../styles/update-feed.css"
+    },
+    {
+      "file": "src/components/EditorialPageHeader.astro",
+      "import": "../styles/secondary-pages-pr419.css"
+    },
+    {
+      "file": "src/components/EventEditorialRecordV3.astro",
+      "import": "../styles/event-detail-v3.css"
+    },
+    {
+      "file": "src/components/GuideArticleHeader.astro",
+      "import": "../styles/guide-editorial-v3.css"
+    },
+    {
+      "file": "src/components/GuideArticleHeader.astro",
+      "import": "../styles/guide-article-spacing-fix.css"
+    },
+    {
+      "file": "src/components/OrganizationEditorialRecord.astro",
+      "import": "../styles/organization-detail.css"
+    },
+    {
+      "file": "src/components/StablecoinDetailView.astro",
+      "import": "../styles/stablecoin-dossier.css"
+    },
+    {
+      "file": "src/components/StablecoinDetailView.astro",
+      "import": "../styles/stablecoin-dossier-v3-overrides.css"
+    }
+  ],
+  "remaining_authority": {
+    "file": "src/components/BrandLockup.astro",
+    "import": "../styles/site-ui.css"
+  }
+}
