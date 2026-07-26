@@ -2,7 +2,6 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import OrganizationIndexRow from './OrganizationIndexRow.astro';
 import OrganizationIndexCard from './OrganizationIndexCard.astro';
-import '../styles/organization-index.css';
 import { buildOrganizationIndexView } from '../lib/views/organizationIndexView';
 
 const { records, filters, relationshipCount, connectedAssetCount, sourceIdentityCount } = buildOrganizationIndexView();
