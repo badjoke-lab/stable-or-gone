@@ -28,7 +28,8 @@ export function buildOrganizationIndexView() {
     const relationshipStatuses = unique(relatedRelationships.map((relationship) => relationship.status ?? 'unknown')).sort();
     const sourceIdentityCount = new Set(evidenceRelations.filter((relation) => relation.organization_ids.includes(organization.id)).map((relation) => relation.evidence_id)).size;
     const assetNames = relatedCoins.map((coin) => coin!.name).sort();
-    const search = [organization.name, organization.slug, organization.organization_type, organization.legacy_issuer_type, taxonomy.public_category_label, taxonomy.regulatory_character_label, taxonomy.jurisdiction_label, taxonomy.jurisdiction_scope_label, ...roles.map(getFunctionalRoleLabel), ...relationshipStatuses.map(getRelationshipStatusLabel), ...relatedCoins.flatMap((coin) => [coin!.name, coin!.symbol])].filter(Boolean).join(' ').normalize('NFKC').toLocaleLowerCase().trim().replace(/\s+/g, ' ');
+    const publicJurisdictionLabel = formatPublicLabel(taxonomy.jurisdiction_label, 'Unknown or not publicly resolved');
+    const search = [organization.name, organization.slug, organization.organization_type, organization.legacy_issuer_type, taxonomy.public_category_label, taxonomy.regulatory_character_label, publicJurisdictionLabel, taxonomy.jurisdiction_scope_label, ...roles.map(getFunctionalRoleLabel), ...relationshipStatuses.map(getRelationshipStatusLabel), ...relatedCoins.flatMap((coin) => [coin!.name, coin!.symbol])].filter(Boolean).join(' ').normalize('NFKC').toLocaleLowerCase().trim().replace(/\s+/g, ' ');
     return {
       slug: organization.slug,
       name: organization.name,
@@ -38,7 +39,7 @@ export function buildOrganizationIndexView() {
       regulatory: taxonomy.regulatory_character,
       regulatoryLabel: taxonomy.regulatory_character_label,
       jurisdictionScope: taxonomy.jurisdiction_scope,
-      jurisdictionLabel: `${taxonomy.jurisdiction_label} · ${taxonomy.jurisdiction_scope_label}`,
+      jurisdictionLabel: `${publicJurisdictionLabel} · ${taxonomy.jurisdiction_scope_label}`,
       roles,
       relationshipStatuses,
       assetCount: relatedCoins.length,
