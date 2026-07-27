@@ -22,50 +22,52 @@ const rows = deployments.map((deployment) => {
 ---
 <section class="panel registry stablecoin-deployment-panel">
   <div class="bar">Blockchain deployments</div>
-  <table data-table-kind="stablecoin-deployments" data-mobile-table="scroll-preserve">
-    <thead>
-      <tr>
-        <th>Network</th>
-        <th>Network record state</th>
-        <th>Standard</th>
-        <th>Public deployment category</th>
-        <th>Canonical deployment type</th>
-        <th>Operational state</th>
-        <th>Recorded status</th>
-        <th>Change or proposal state</th>
-        <th>Canonicality</th>
-        <th>Canonicality record state</th>
-        <th>Verification state</th>
-        <th>Contract identity state</th>
-        <th>Contract or identifier</th>
-        <th>Freeze</th>
-        <th>Blacklist</th>
-        <th>Control events</th>
-        <th>Notes</th>
-      </tr>
-    </thead>
-    <tbody>
-      {rows.length === 0 ? <tr><td colspan="17">No deployment records have been added yet.</td></tr> : rows.map(({ deployment, taxonomy, rawStatusLabel, freezeValue, blacklistValue, identifier }) => <tr>
-        <td><ValueStateText value={deployment.chain} /></td>
-        <td>{taxonomy.network_identity_state_label}</td>
-        <td><ValueStateText value={deployment.token_standard} /></td>
-        <td>{taxonomy.public_category_label}</td>
-        <td>{formatPublicLabel(taxonomy.canonical_deployment_type)}</td>
-        <td>{taxonomy.operational_state_label}</td>
-        <td><ValueStateText value={taxonomy.canonical_status_raw} displayValue={rawStatusLabel} /></td>
-        <td>{taxonomy.change_state_label}</td>
-        <td>{taxonomy.canonicality_label}</td>
-        <td>{taxonomy.canonicality_record_state_label}</td>
-        <td>{taxonomy.verification_state_label}</td>
-        <td>{taxonomy.contract_identity_state_label}</td>
-        <td>{identifier}</td>
-        <td><ValueStateText value={freezeValue} /></td>
-        <td><ValueStateText value={blacklistValue} /></td>
-        <td>{deployment.control_event_ids?.length ?? 0}</td>
-        <td>{cleanPublicText(deployment.notes, 'No deployment-specific note has been recorded.')}</td>
-      </tr>)}
-    </tbody>
-  </table>
+  <div class="stablecoin-deployment-table-wrap">
+    <table data-table-kind="stablecoin-deployments" data-mobile-table="scroll-preserve">
+      <thead>
+        <tr>
+          <th>Network</th>
+          <th>Network record state</th>
+          <th>Standard</th>
+          <th>Public deployment category</th>
+          <th>Canonical deployment type</th>
+          <th>Operational state</th>
+          <th>Recorded status</th>
+          <th>Change or proposal state</th>
+          <th>Canonicality</th>
+          <th>Canonicality record state</th>
+          <th>Verification state</th>
+          <th>Contract identity state</th>
+          <th>Contract or identifier</th>
+          <th>Freeze</th>
+          <th>Blacklist</th>
+          <th>Control events</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        {rows.length === 0 ? <tr><td colspan="17">No deployment records have been added yet.</td></tr> : rows.map(({ deployment, taxonomy, rawStatusLabel, freezeValue, blacklistValue, identifier }) => <tr>
+          <td><ValueStateText value={deployment.chain} /></td>
+          <td>{taxonomy.network_identity_state_label}</td>
+          <td><ValueStateText value={deployment.token_standard} /></td>
+          <td>{taxonomy.public_category_label}</td>
+          <td>{formatPublicLabel(taxonomy.canonical_deployment_type)}</td>
+          <td>{taxonomy.operational_state_label}</td>
+          <td><ValueStateText value={taxonomy.canonical_status_raw} displayValue={rawStatusLabel} /></td>
+          <td>{taxonomy.change_state_label}</td>
+          <td>{taxonomy.canonicality_label}</td>
+          <td>{taxonomy.canonicality_record_state_label}</td>
+          <td>{taxonomy.verification_state_label}</td>
+          <td>{taxonomy.contract_identity_state_label}</td>
+          <td>{identifier}</td>
+          <td><ValueStateText value={freezeValue} /></td>
+          <td><ValueStateText value={blacklistValue} /></td>
+          <td>{deployment.control_event_ids?.length ?? 0}</td>
+          <td>{cleanPublicText(deployment.notes, 'No deployment-specific note has been recorded.')}</td>
+        </tr>)}
+      </tbody>
+    </table>
+  </div>
 
   <div class="mobile-record-list stablecoin-deployment-cards" data-mobile-representation-for="stablecoin-deployments">
     {rows.length === 0 ? <p class="mobile-empty-record">No deployment records have been added yet.</p> : rows.map(({ deployment, taxonomy, rawStatusLabel, freezeValue, blacklistValue, identifier }) => <article>
