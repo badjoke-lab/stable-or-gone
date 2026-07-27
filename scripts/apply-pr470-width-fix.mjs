@@ -20,6 +20,11 @@ const containmentBlock = `${siteMainLine}
 pre { max-width: 100%; overflow-x: auto; white-space: pre-wrap; overflow-wrap: anywhere; }`;
 css = replaceRequired(css, siteMainLine, containmentBlock, 'CSS containment');
 
+const publicWrappingBlock = `${containmentBlock}
+/* Public long-value wrapping contract */
+main :where(a, dd, li) { overflow-wrap: anywhere; word-break: break-word; }`;
+css = replaceRequired(css, containmentBlock, publicWrappingBlock, 'CSS public long-value wrapping');
+
 const currentTableWrap = '.table-wrap, :where([class*="-table"]:not(table)) { max-width: 100%; overflow-x: auto; border: 1px solid var(--ui-line); border-radius: var(--ui-radius); background: var(--ui-bg-soft); }';
 const containedTableWrap = '.table-wrap, .home-recent__table-wrap, .stats-table-wrap, .evidence-table-wrap, .compare-output, :where(div,section,article,details)[class*="-table"] { width: 100%; min-width: 0; max-width: 100%; overflow-x: auto; border: 1px solid var(--ui-line); border-radius: var(--ui-radius); background: var(--ui-bg-soft); }';
 css = replaceRequired(css, currentTableWrap, containedTableWrap, 'CSS table wrapper');
