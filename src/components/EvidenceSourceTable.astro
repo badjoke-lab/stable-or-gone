@@ -20,11 +20,11 @@ const mobileRows = sourceIdentities.map((source) => {
   const taxonomy = resolveEvidenceTaxonomy(source);
   const claims = source.claim_scopes?.length
     ? source.claim_scopes.map((item: string) => formatPublicLabel(item)).join(', ')
-    : 'No supported-claim label recorded';
+    : 'Supports this record';
   return { source, taxonomy, claims };
 });
 ---
-<div class:list={['evidence-table-wrap', tableKind !== 'event-sources' && 'organization-detail-table']}>
+<div class="evidence-table-wrap">
   {tableKind === 'stablecoin-sources' ? (
     <table data-table-kind="stablecoin-sources" data-mobile-table="scroll-preserve" data-evidence-record-count={evidence.length} data-source-identity-count={sourceIdentities.length}>
       <caption>{identitySummary}</caption>
@@ -46,7 +46,7 @@ const mobileRows = sourceIdentities.map((source) => {
   )}
 </div>
 
-{tableKind !== 'event-sources' && <div class="mobile-record-list evidence-mobile-records" data-mobile-representation-for={tableKind}>
+<div class="mobile-record-list evidence-mobile-records" data-mobile-representation-for={tableKind}>
   {mobileRows.length === 0 ? <p class="mobile-empty-record">{emptyMessage ?? 'No sources have been added yet.'}</p> : mobileRows.map(({ source, taxonomy, claims }) => <article class="mobile-evidence-record">
     <header>
       <div><span class="record-kicker">{taxonomy.public_category_label}</span><h3><a href={source.url}>{source.title}</a></h3></div>
@@ -62,4 +62,4 @@ const mobileRows = sourceIdentities.map((source) => {
       <div><dt>Reliability</dt><dd>{taxonomy.reliability_label}</dd></div>
     </dl>
   </article>)}
-</div>}
+</div>
