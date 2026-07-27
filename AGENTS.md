@@ -2,10 +2,10 @@
 
 Current mandatory authorities:
 
-1. Active owner-directed full public UI contract — PR #470, governed by `docs/roadmap-amendments/2026-07-27-pr470-full-public-ui-contract.md` and `docs/quality/full-public-ui-contract-pr470-spec.md`.
+1. Completed owner-directed full public UI contract — PR #470, governed by `docs/roadmap-amendments/2026-07-27-pr470-full-public-ui-contract.md` and `docs/quality/full-public-ui-contract-pr470-spec.md`.
 2. Completed UI V3 regression authority — PR #461 and PR #463 closure, archived in `docs/ui-v3-remediation-authority.md`.
 3. Canonical data baseline — PR #433 generated-output repair on top of PR #429.
-4. Paused data-growth authority — PR #466 authorizes only PR #467 PLNQ and GBPQ after PR #470 production verification.
+4. Reviewed data-growth authority — PR #466 authorizes only PR #467 PLNQ and GBPQ; PR #467 is at its mandatory review gate after PR #470 production verification.
 
 ## Mandatory references
 
@@ -37,6 +37,9 @@ docs/roadmap-amendments/2026-07-25-pr466-post-ui-data-growth-review-gate.md
 docs/quality/post-ui-data-growth-review-gate-pr466-spec.md
 config/post-ui-data-growth-review-gate-pr466.json
 docs/migration/post-ui-data-growth-review-gate-pr466.json
+docs/quality/record-growth-batch-3-pr467-spec.md
+config/record-growth-batch-3-pr467.json
+docs/migration/record-growth-batch-3-pr467-handoff.json
 ```
 
 ## Mandatory UI working rule
@@ -58,15 +61,15 @@ A material UI pull request that omits these items is out of scope and must not m
 ## Current workstreams
 
 ```text
-Canonical stable assets: 114
+Canonical stable assets: 116
 Organizations: 107
-Relationships: 126
-Events: 189
-Canonical Evidence: 565
-Evidence Relations: 565
-Archive recorded: 436
+Relationships: 128
+Events: 191
+Canonical Evidence: 571
+Evidence Relations: 571
+Archive recorded: 442
 Archive not recorded: 129
-Deployments: 180
+Deployments: 182
 Market Access Records: 8
 
 PR #426 Post-UI v3 Data-Growth Reset: complete
@@ -78,35 +81,35 @@ PR #461 exhaustive UI V3 color-system repair: complete
 PR #463 exhaustive UI V3 readability and hierarchy closure: complete
 PR #464 UI authority and roadmap closure: complete
 PR #465 agent authority synchronization: complete on merge
-PR #466 Post-UI data-growth review gate: active
-PR #470 Full Public UI Contract: active
-PR #467 Record Growth Batch 3 — PLNQ and GBPQ: authorized next; paused until PR #470 production verification
+PR #466 Post-UI data-growth review gate: complete
+PR #470 Full Public UI Contract: complete and production-verified
+PR #467 Record Growth Batch 3 — PLNQ and GBPQ: reviewed complete; REVIEW GATE active
 Next boundary after PR #467: REVIEW GATE
 
 Issue #281 UI v3 rebuild: complete and closed
 Issue #457 CYA-dark redesign audit: complete and closed
 UI v3 regression baseline: preserved
-Full public UI contract remediation: active
+Full public UI contract remediation: complete and production-verified
 ```
 
 ## UI authority boundary
 
-The current UI V3 implementation is the accepted baseline after exhaustive 457-route desktop and mobile verification, direct artifact inspection, repair of the discovered mobile event section-heading overlap, and merge of PR #463.
+The current UI V3 implementation remains the accepted regression baseline after exhaustive route verification and direct artifact review.
 
 `docs/ui-v3-remediation-authority.md` remains mandatory for regression protection and is not reopened as an R1–R10 queue.
 
-The new material UI program is PR #470 only. It is bounded by the 2026-07-27 roadmap amendment and must replace the legacy cascade with the single public UI authority without changing canonical data or routes.
+PR #470 completed the bounded 2026-07-27 material UI program and replaced the legacy cascade with the single public UI authority without changing canonical data or routes.
 
 ## PR #467 canonical-growth boundary
 
-PR #467 remains the only authorized next canonical-growth PR, but it is paused until PR #470 is merged and production-verified. It may add at most the exact reviewed candidates:
+PR #467 remains the only authorized canonical-growth PR after PR #470 production verification and has reached its mandatory review gate. It may add at most the exact reviewed candidates:
 
 ```text
 Quantoz PLNQ — sog_cand_pr427_plnq
 Quantoz GBPQ — sog_cand_pr427_gbpq
 ```
 
-Before canonical edits, PR #467 must perform a fresh duplicate, current-source, deployment-identity, reserve, and redemption review. It must reuse the existing Quantoz organization. Thin records are prohibited. A candidate that cannot support a complete record must be withheld and may not be replaced by a third candidate.
+PR #467 performed the required duplicate, current-source, deployment-identity, reserve, and redemption review, reused the existing Quantoz organization, and preserved explicit unknowns where the sources did not support a fact.
 
 PR #467 must not change Market Access, monitoring publication, UI, public route families, score or ranking surfaces, or recommendation semantics. Automatic promotion remains prohibited.
 
@@ -114,7 +117,7 @@ PR #467 must not change Market Access, monitoring publication, UI, public route 
 
 No agent may automatically promote candidates, infer missing facts, create thin canonical records, authorize an indefinite PR sequence, introduce a score or ranking, or treat monitoring observations as canonical evidence.
 
-Unknown values remain explicit. PR #467 exits only to a mandatory review gate based on its actual merged result.
+Unknown values remain explicit. PR #467 exits only to its mandatory review gate based on its actual merged result.
 
 ## Production boundary
 
