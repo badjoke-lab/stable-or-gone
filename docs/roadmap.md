@@ -1,35 +1,35 @@
 # Stable or Gone Roadmap
 
 Updated: 2026-07-27  
-Status: Full public UI contract remediation active; Record Growth Batch 3 paused
+Status: Full public UI contract complete and production-verified; Record Growth Batch 3 REVIEW GATE
 
 ## Current position
 
 ```text
-Canonical stable assets: 114
+Canonical stable assets: 116
 Organizations: 107
-Relationships: 126
-Events: 189
-Evidence: 565
-Evidence Relations: 565
-Deployments: 180
+Relationships: 128
+Events: 191
+Evidence: 571
+Evidence Relations: 571
+Deployments: 182
 Market Access Records: 8
-Archive recorded: 436
+Archive recorded: 442
 Archive not recorded: 129
 
 Issue #281 UI v3 rebuild: complete and closed
 Issue #457 CYA-dark redesign audit: complete and closed
 UI completion: true
-Final UI merge: PR #463
-Final main commit: 88db81ed27b63ff8798883ef618045f2bbe1a9b3
-Final exhaustive screenshot run: 30147237015
+Current public UI merge: PR #470
+Current public UI main commit: 3e3edf4dd4d6af8e6ab5f9336271f0cca5cd6723
+Current exhaustive screenshot run: 30272641707
 ```
 
-The canonical data baseline established through PR #433 remains unchanged by the UI closure work. UI remediation did not authorize canonical record, route-semantic, or machine-readable contract changes.
+PR #470 changed no canonical record, route-semantic, or machine-readable contract. PR #467 extends the reviewed canonical checkpoint after the public UI production verification completed.
 
-## UI V3 closure
+## UI V3 regression closure
 
-The earlier representative-only completion decision was withdrawn because it did not establish acceptable readability, density, hierarchy, mobile behavior, or full-route coverage. The replacement closure sequence completed the following:
+The earlier representative-only completion decision was withdrawn because it did not establish acceptable readability, density, hierarchy, mobile behavior, or full-route coverage. The replacement closure sequence completed:
 
 ```text
 PR #461  exhaustive V3 color-system repair
@@ -38,20 +38,26 @@ PR #464  roadmap and archived authority closure
 PR #465  top-level agent authority synchronization
 ```
 
-Final verification on the PR #463 head covered:
+The archived regression authority remains in `docs/ui-v3-remediation-authority.md`.
 
-- 457 desktop routes;
-- 457 mobile routes;
-- 914 regenerated full-page screenshots;
-- zero failed captures;
-- zero blocking exhaustive-UI findings;
-- zero blocking color-system findings;
-- zero blocking readability findings;
-- explicit detection of overlapping section-heading content;
-- repair and direct reinspection of the mobile event-dossier overlap found during artifact review;
-- all repository workflows green before merge.
+## Full public UI contract closure
 
-The final UI merge commit is `88db81ed27b63ff8798883ef618045f2bbe1a9b3`. Issue #281 and the superseded UI audit threads are closed. The former UI remediation authority is retained as an archived regression contract in `docs/ui-v3-remediation-authority.md`.
+Owner review later found that the accepted UI V3 implementation still depended on 78 stylesheets, 649,819 source bytes, and 4,905 `!important` declarations after PR #472. The route audit protected rendering but did not establish one maintainable page-family contract.
+
+The owner-directed amendment `docs/roadmap-amendments/2026-07-27-pr470-full-public-ui-contract.md` authorized PR #470. It completed:
+
+- one physical public stylesheet and one import;
+- removal of the accumulated legacy cascade;
+- shared shell, typography, interaction, badge, table, disclosure, and responsive contracts;
+- complete desktop/mobile information preservation;
+- exhaustive rendered UI, screenshot, color, readability, hierarchy, and overflow validation;
+- production verification on the public deployment.
+
+```text
+PR #470 Full Public UI Contract — complete
+PRODUCTION VISUAL VERIFICATION — complete
+Merge commit — 3e3edf4dd4d6af8e6ab5f9336271f0cca5cd6723
+```
 
 ## Canonical data baseline
 
@@ -62,11 +68,13 @@ PR #428  Post-PR #427 Review Gate: complete
 PR #429  Record Growth Batch 2 — CHFAU and SEKAU: complete
 PR #432  Generated-output repair workflow: complete
 PR #433  Generated and persisted PR #429 outputs: complete
+PR #466  Post-UI data-growth review gate: complete
+PR #467  Record Growth Batch 3 — PLNQ and GBPQ: reviewed complete
 ```
 
-PR #433 established the current generated and built baseline of 114 stable assets, 107 organizations, 126 relationships, 189 events, 565 Evidence records, and 180 deployments.
+PR #433 established the generated and built 114-asset baseline. PR #467 extends the reviewed checkpoint to 116 stable assets, 107 organizations, 128 relationships, 191 events, 571 Evidence records, and 182 deployments.
 
-PR #427 retained PLNQ and GBPQ as review-ready candidates. PR #428 deferred them by sequencing rather than rejecting them. PR #429 promoted the other reviewed pair, CHFAU and SEKAU. No canonical assets were added during the subsequent UI closure sequence.
+PR #427 retained PLNQ and GBPQ as review-ready candidates. PR #428 deferred them by sequencing rather than rejecting them. PR #429 promoted CHFAU and SEKAU. PR #466 later authorized exactly PLNQ and GBPQ, and PR #467 completed both records with the existing Quantoz organization and verified Ethereum deployments.
 
 ## Active operating mode
 
@@ -85,41 +93,35 @@ small correctness, accessibility, readability, and broken-link fixes
 
 New public pages, dashboards, rankings, explorer families, or major navigation changes remain frozen unless a separate reviewed roadmap amendment and canonical specification authorize them.
 
-## Active full public UI contract
+## Record Growth Batch 3 result
 
-Owner review found that the accepted UI V3 implementation still depended on 78 stylesheets, 649,819 source bytes, and 4,905 `!important` declarations after PR #472. The full-route audit established regression coverage but did not establish one maintainable or consistently applied page-family contract.
-
-The owner-directed amendment `docs/roadmap-amendments/2026-07-27-pr470-full-public-ui-contract.md` therefore authorizes:
-
-```text
-PR #470 Full Public UI Contract — active
-PRODUCTION VISUAL VERIFICATION
-PR #467 Record Growth Batch 3 — resumes only after verification
-```
-
-PR #470 changes no canonical data, counts, routes, metadata, sitemap, or machine-readable semantics. It replaces the accumulated public cascade with one physical stylesheet and one import, applies the shared design contract to every existing page family, and preserves the exhaustive UI regression gates.
-
-## Active bounded sequence
-
-```text
-PR #466 Post-UI data-growth review gate: active authority (governance work complete)
-PR #470 Full Public UI Contract: active
-PR #467 Record Growth Batch 3 — PLNQ and GBPQ: authorized next; paused until PR #470 production verification
-REVIEW GATE after PR #467
-```
-
-PR #466 is governance-only. It authorizes at most two exact candidates in one coherent Quantoz regulated non-EUR context:
+PR #467 is bounded to the exact reviewed pair:
 
 ```text
 Quantoz PLNQ — sog_cand_pr427_plnq
 Quantoz GBPQ — sog_cand_pr427_gbpq
 ```
 
-Before canonical edits, PR #467 must perform a fresh duplicate, current official-source, exact deployment-identity, reserve, and redemption review. It must reuse the existing Quantoz organization and create no duplicate organization.
+The implementation:
 
-Thin records are prohibited. Each promoted candidate must support all applicable complete canonical layers. A candidate that cannot satisfy the entry gate must be withheld; it may not be replaced by a third candidate.
+- reuses the existing Quantoz Payments organization;
+- adds no duplicate organization;
+- adds no Market Access record;
+- records only verified Ethereum deployments;
+- leaves future Polygon, Stellar, XRPL, Algorand, and Xahau deployments as explicit known unknowns;
+- preserves unsupported reserve-allocation and operational-redemption details as unknown;
+- changes no public UI or route family.
 
-PR #467 may not change Market Access, monitoring publication, UI, route families, dashboards, scores, rankings, recommendation semantics, or unrelated machine-readable contracts. No later batch is pre-authorized.
+## Active bounded sequence
+
+```text
+PR #466 Post-UI data-growth review gate: complete
+PR #470 Full Public UI Contract: complete and production-verified
+PR #467 Record Growth Batch 3 — PLNQ and GBPQ: reviewed complete
+REVIEW GATE: active after PR #467
+```
+
+No later record-growth batch is pre-authorized. The next action after PR #467 is a separate review decision based on its actual merged and deployed result.
 
 ## Production publication boundary
 
