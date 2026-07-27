@@ -64,23 +64,26 @@ const groups = sections.map((section) => ({
 }));
 ---
 {groups.length > 0 && (
-  <div class="event-structured-detail">
-    {groups.map((group) => (
-      <section class="structured-fact-group" aria-label={group.label}>
-        <h3>{group.label}</h3>
-        <dl>
-          {group.fields.map((field) => (
-            <div>
-              <dt>{field.label}</dt>
-              <dd>
-                {field.technical
-                  ? <code data-technical-value>{field.presentation.text}</code>
-                  : <span class={`value-state value-state--${field.presentation.state}`} data-value-state={field.presentation.state} title={field.presentation.label}>{field.presentation.text}</span>}
-              </dd>
-            </div>
-          ))}
-        </dl>
-      </section>
-    ))}
-  </div>
+  <section class="event-structured-detail" aria-labelledby="event-specific-details-heading">
+    <h3 id="event-specific-details-heading">Event-specific details</h3>
+    <div class="structured-fact-groups">
+      {groups.map((group) => (
+        <section class="structured-fact-group" aria-label={group.label}>
+          <h4>{group.label}</h4>
+          <dl>
+            {group.fields.map((field) => (
+              <div>
+                <dt>{field.label}</dt>
+                <dd>
+                  {field.technical
+                    ? <code data-technical-value>{field.presentation.text}</code>
+                    : <span class={`value-state value-state--${field.presentation.state}`} data-value-state={field.presentation.state} title={field.presentation.label}>{field.presentation.text}</span>}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+      ))}
+    </div>
+  </section>
 )}

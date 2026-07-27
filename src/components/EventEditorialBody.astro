@@ -8,18 +8,8 @@ type View = ReturnType<typeof buildEventDetailView>;
 type Subject = { id: string; name: string; slug?: string };
 const { event, view } = Astro.props as { event: any; view: View };
 ---
-<section class="event-detail-section event-detail-overview-r5" id="overview">
-  <div class="event-detail-section-heading"><p>Reviewed explanation</p><h2>What happened</h2><span>The primary date, severity, type, effect, recovery, and Evidence count are already shown above.</span></div>
-  <p class="event-detail-summary-r5">{view.eventDescription}</p>
-  <dl class="event-detail-secondary-r5">
-    <div><dt>Cause or mechanism</dt><dd><ValueStateText value={view.causeOrMechanism} displayValue={formatPublicLabel(view.causeOrMechanism, 'Not recorded')} /></dd></div>
-    <div><dt>Structured detail kind</dt><dd>{view.taxonomy.detail_kind_label}</dd></div>
-    <div><dt>Record confidence</dt><dd><ValueStateText value={event.confidence} displayValue={formatPublicLabel(event.confidence)} /></dd></div>
-  </dl>
-</section>
-
 <section class="event-detail-section" id="subjects">
-  <div class="event-detail-section-heading"><p>Affected records</p><h2>Subjects</h2><span>Stablecoin and organization subjects remain separate record groups.</span></div>
+  <div class="event-detail-section-heading"><p>Connected records</p><h2>Affected records</h2><span>Assets and organizations connected to this event.</span></div>
   <div class="event-subject-list-r5">
     {view.subjectStablecoins.map((item: Subject) => item.slug ? <a href={`/stablecoin/${item.slug}/`}><span>Stablecoin</span><strong>{item.name}</strong></a> : <div><span>Stablecoin</span><strong>{item.name}</strong></div>)}
     {view.subjectOrganizations.map((item: Subject) => item.slug ? <a href={`/issuer/${item.slug}/`}><span>Organization</span><strong>{item.name}</strong></a> : <div><span>Organization</span><strong>{item.name}</strong></div>)}
@@ -27,11 +17,29 @@ const { event, view } = Astro.props as { event: any; view: View };
   </div>
 </section>
 
-{view.hasStructuredDetail && <section class="event-detail-section" id="structured-detail"><div class="event-detail-section-heading"><p>Typed record</p><h2>Structured detail</h2><span>Only event-type-specific facts are shown here.</span></div><StructuredEventDetail event={event} /></section>}
-
 <section class="event-detail-section" id="sources">
-  <div class="event-detail-section-heading"><p>Provenance</p><h2>Evidence</h2><span>Source identity, publisher, publication date, reliability, archive, and relation count remain separate.</span></div>
+  <div class="event-detail-section-heading"><p>Sources</p><h2>Evidence</h2><span>Sources used for this record, with archival copies where available.</span></div>
   <div class="event-detail-table event-detail-evidence-r5"><EvidenceSourceTable evidence={view.evidence} tableKind="event-sources" emptyMessage="No event-specific sources have been added." /></div>
+</section>
+
+<section class="event-detail-section event-record-metadata-section" id="record-details">
+  <details class="event-record-details">
+    <summary><span>Record details</span><small>Classification, review, and event-specific data</small></summary>
+    <dl class="event-detail-secondary-r5 event-record-details-grid">
+      <div><dt>Record ID</dt><dd><code>{event.id}</code></dd></div>
+      <div><dt>Severity</dt><dd><ValueStateText value={event.impact_level} displayValue={formatPublicLabel(event.impact_level)} /></dd></div>
+      <div><dt>Event type</dt><dd>{view.taxonomy.canonical_subtype_label}</dd></div>
+      <div><dt>Public category</dt><dd>{view.taxonomy.public_category_label}</dd></div>
+      <div><dt>Lifecycle effect</dt><dd>{view.taxonomy.status_effect_label}</dd></div>
+      <div><dt>Recovery or reversal</dt><dd>{view.taxonomy.recovery_label}</dd></div>
+      <div><dt>Recovery date</dt><dd><ValueStateText value={view.recoveryDate} /></dd></div>
+      <div><dt>Cause or mechanism</dt><dd><ValueStateText value={view.causeOrMechanism} displayValue={formatPublicLabel(view.causeOrMechanism, 'Not recorded')} /></dd></div>
+      <div><dt>Structured detail kind</dt><dd>{view.taxonomy.detail_kind_label}</dd></div>
+      <div><dt>Record confidence</dt><dd><ValueStateText value={event.confidence} displayValue={formatPublicLabel(event.confidence)} /></dd></div>
+      <div><dt>Evidence relations</dt><dd>{view.eventRelations.length}</dd></div>
+    </dl>
+    {view.hasStructuredDetail && <StructuredEventDetail event={event} />}
+  </details>
 </section>
 
 <section class="event-detail-section event-detail-corrections-r5" id="corrections"><div class="event-detail-section-heading"><p>Maintenance</p><h2>Corrections and further reading</h2><span>Use the documented correction path and methodology.</span></div><div class="event-detail-actions"><a href="/contact/">Submit a correction</a><a href="/methodology/">Methodology</a><a href="/events/">Event register</a><a href="/data/manifest.json">Data manifest</a></div></section>

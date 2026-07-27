@@ -148,7 +148,16 @@ async function measurePage(page) {
     const legacyVisualSelectors = ['.page-hero', '.metric-card', '[class*="blue-purple"]', '[class*="glow-art"]', '[data-saas-dashboard]'];
     const legacyVisualMarkers = legacyVisualSelectors.flatMap((selector) => [...document.querySelectorAll(selector)].filter(visible).map(() => selector));
     const unexpectedEmptySelectors = ['[data-stablecoin-no-results]', '[data-organization-no-results]', '[data-event-no-results]'];
-    const unexpectedEmptyStates = unexpectedEmptySelectors.flatMap((selector) => [...document.querySelectorAll(selector)].filter(visible).map(() => selector));
+    const hiddenMobileTableContent = [...document.querySelectorAll('table[data-table-kind="event-sources"][data-mobile-table="scroll-preserve"]')].flatMap((table) => {
+      const rows = table.querySelectorAll(':scope > tbody > tr').length;
+      const representation = table.nextElementSibling;
+      if (rows === 0 || visible(table) || (representation instanceof HTMLElement && visible(representation))) return [];
+      return [`hidden-mobile-table:${table.getAttribute('data-table-kind') ?? 'unknown'}`];
+    });
+    const unexpectedEmptyStates = [
+      ...unexpectedEmptySelectors.flatMap((selector) => [...document.querySelectorAll(selector)].filter(visible).map(() => selector)),
+      ...hiddenMobileTableContent
+    ];
     const monoTokens = ['ui-monospace', 'sfmono-regular', 'menlo', 'monaco', 'consolas', 'liberation mono', 'monospace'];
     const approvedMonoContainer = 'code, pre, kbd, samp, time, dt, th, .kicker, .eyebrow, [class*="meta"], [class*="overline"], [data-mono], .v3-brand-copy small';
     const textCandidates = [...document.querySelectorAll('a, span, strong, small, p, li, dd, label, button, input, select, textarea, summary, h3')].filter(visible);

@@ -29,7 +29,7 @@ const identitySummary = `${sourceIdentities.length} source ${sourceIdentities.le
 ) : (
   <table data-table-kind="event-sources" data-mobile-table="scroll-preserve" data-evidence-record-count={evidence.length} data-source-identity-count={sourceIdentities.length}>
     <caption>{identitySummary}</caption>
-    <thead><tr><th>Source</th><th>Publisher</th><th>Source category</th><th>Provenance</th><th>Primary or secondary</th><th>Supported claims</th><th>Archive</th><th>Reliability</th></tr></thead>
-    <EvidenceRows evidence={sourceIdentities} emptyMessage={emptyMessage} />
+    <thead><tr><th>Source</th><th>Publisher and date</th><th>Relevance</th><th>Archive</th></tr></thead>
+    <EvidenceRows evidence={sourceIdentities} emptyMessage={emptyMessage} eventCompact />
   </table>
 )}
