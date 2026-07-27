@@ -159,7 +159,7 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'CollectionPage', na
         </table>
       </div>
 
-      <div class="stablecoin-index-cards" data-card-body aria-label="Stablecoin compact records">{records.map((record, index) => <StablecoinIndexCard record={record} initiallyVisible={index < PAGE_SIZE} />)}</div>
+      <div class="stablecoin-index-cards" data-mobile-representation-for="stablecoin-index" data-card-body aria-label="Stablecoin compact records">{records.map((record, index) => <StablecoinIndexCard record={record} initiallyVisible={index < PAGE_SIZE} />)}</div>
       <div class="stablecoin-index-no-results" data-no-results hidden><strong>No stablecoins match this state.</strong><span>Clear the search and filters to restore the register.</span><button class="ui-button stablecoin-index-action" type="button" data-clear-all>Clear all</button></div>
 
       <nav class="stablecoin-index-pagination" data-pagination aria-label="Stablecoin register pages">
