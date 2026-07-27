@@ -133,11 +133,15 @@
       details.className = 'mobile-evidence-record';
       const summary = document.createElement('summary');
       const title = document.createElement('strong');
-      title.textContent = cells[0]?.textContent?.trim() || 'Evidence source';
+      title.textContent = cells[0]?.querySelector('[data-evidence-source-title]')?.textContent?.trim()
+        || cells[0]?.textContent?.trim()
+        || 'Evidence source';
       const meta = document.createElement('span');
-      const publisher = cells[1]?.textContent?.trim() || 'Publisher not recorded';
+      const publisher = cells[1]?.querySelector('[data-evidence-publisher]')?.textContent?.trim()
+        || cells[1]?.textContent?.trim()
+        || 'Publisher not recorded';
       const reliability = cells.at(-1)?.textContent?.trim() || 'Reliability not recorded';
-      meta.textContent = `${publisher} · ${reliability}`;
+      meta.textContent = kind === 'event-sources' ? publisher : `${publisher} · ${reliability}`;
       summary.append(title, meta);
 
       const definition = document.createElement('dl');

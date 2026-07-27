@@ -13,7 +13,7 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'Article', headline:
 <BaseLayout title={title} description={description} canonicalPath={`/event/${event.id}/`} jsonLd={jsonLd}>
   <article class="event-detail-page" data-ui-v3-event-detail>
     <EventEditorialHeader event={event} view={view} />
-    <nav class="event-detail-nav" aria-label="Event record sections"><a href="#overview">Overview</a><a href="#subjects">Subjects</a>{view.hasStructuredDetail && <a href="#structured-detail">Structured detail</a>}<a href="#sources">Sources</a><a href="#corrections">Corrections</a></nav>
+    <nav class="event-detail-nav" aria-label="Event record sections"><a href="#subjects">Affected records</a>{view.hasStructuredDetail && <a href="#structured-detail">Additional facts</a>}<a href="#sources">Evidence</a><a href="#record-details">Record details</a><a href="#corrections">Corrections</a></nav>
     <EventEditorialBody event={event} view={view} />
   </article>
 </BaseLayout>
