@@ -17,7 +17,11 @@ const remainingEvidence = view.evidence.slice(10);
   <div class="organization-detail-table organization-events-r5"><table data-table-kind="organization-events" data-mobile-table="scroll-preserve"><thead><tr><th>Date</th><th>Event</th><th>Type</th><th>Effect</th></tr></thead><tbody>
     {visibleEvents.length === 0 ? <tr><td colspan="4">No organization-level events have been added.</td></tr> : visibleEvents.map(({ event, taxonomy, title }) => <tr><td><ValueStateText value={event.event_date} /></td><td><a href={`/event/${event.id}/`}>{title}</a></td><td>{taxonomy.canonical_subtype_label}<small>{taxonomy.public_category_label}</small></td><td>{taxonomy.status_effect_label}</td></tr>)}
   </tbody></table></div>
-  <div class="organization-event-cards organization-event-cards-r5" data-mobile-representation-for="organization-events">{visibleEvents.map(({ event, taxonomy, title }) => <article><time datetime={event.event_date ?? undefined}>{event.event_date ?? 'Date not recorded'}</time><h3><a href={`/event/${event.id}/`}>{title}</a></h3><p>{taxonomy.canonical_subtype_label}</p><small>{taxonomy.status_effect_label}</small></article>)}</div>
+  <div class="organization-event-cards organization-event-cards-r5" data-mobile-representation-for="organization-events">
+    {visibleEvents.length === 0
+      ? <article class="mobile-empty-record"><p>No organization-level events have been added.</p></article>
+      : visibleEvents.map(({ event, taxonomy, title }) => <article><time datetime={event.event_date ?? undefined}>{event.event_date ?? 'Date not recorded'}</time><h3><a href={`/event/${event.id}/`}>{title}</a></h3><p>{taxonomy.canonical_subtype_label}</p><small>{taxonomy.status_effect_label}</small></article>)}
+  </div>
   {remainingEvents.length > 0 && <details class="organization-detail-more-r5"><summary>Show {remainingEvents.length} earlier event{remainingEvents.length === 1 ? '' : 's'}</summary><ul>{remainingEvents.map(({ event, taxonomy, title }) => <li><time datetime={event.event_date ?? undefined}>{event.event_date ?? 'Date not recorded'}</time><a href={`/event/${event.id}/`}>{title}</a><span>{taxonomy.status_effect_label}</span></li>)}</ul></details>}
 </section>
 
