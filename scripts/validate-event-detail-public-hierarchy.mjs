@@ -13,6 +13,7 @@ const record = read('src/components/EventEditorialRecordV3.astro');
 const evidenceTable = read('src/components/EvidenceSourceTable.astro');
 const evidenceRows = read('src/components/EvidenceRows.astro');
 const mobileRuntime = read('src/components/MobileTableRuntime.astro');
+const capture = read('scripts/capture-site-screenshots.mjs');
 const shell = read('src/styles/v3-cya-dark-shell.css');
 const fix = read('src/styles/event-detail-public-fix.css');
 const brand = read('src/components/BrandLockup.astro');
@@ -30,7 +31,8 @@ check(!body.includes('already shown above'), 'Internal duplicate-field explanati
 check(!body.includes('id="overview"'), 'Duplicate event-summary section remains public');
 check(record.includes('href="#record-details"'), 'Record-details navigation target is missing');
 check(record.includes('>Affected records</a>'), 'Human-facing affected-record navigation is missing');
-check(record.includes('>Additional facts</a>'), 'Human-facing additional-facts navigation is missing');
+check(!record.includes('href="#structured-detail"'), 'Event-specific fields must not remain a primary navigation section');
+check(body.indexOf('<details class="event-record-details">') < body.indexOf('<StructuredEventDetail event={event} />'), 'Event-specific fields must remain inside closed record details');
 
 const eventHeaders = '<thead><tr><th>Source</th><th>Publisher and date</th><th>Relevance</th><th>Archive</th></tr></thead>';
 check(evidenceTable.includes(eventHeaders), 'Event Evidence must expose the four-field public header');
@@ -41,10 +43,11 @@ for (const label of ['Source category', 'Provenance', 'Primary or secondary', 'R
 }
 check(mobileRuntime.includes("kind === 'event-sources' ? publisher"), 'Mobile Event Evidence summary is not simplified');
 check(mobileRuntime.includes("table.dataset.mobileTableBuilt = 'true'"), 'Mobile table enhancement completion marker is missing');
+check(capture.includes('table[data-table-kind="event-sources"][data-mobile-table="scroll-preserve"]'), 'Event Evidence hidden-content screenshot gate is missing');
 
 check(shell.includes('--v3-text-muted: #cbc9c1;'), 'Body-copy brightness token is not at the reviewed value');
 check(shell.includes('--v3-text-quiet: #aeb2b5;'), 'Supporting-copy brightness token is not at the reviewed value');
-check(fix.includes('table[data-table-kind="event-sources"]'), 'Event Evidence width and wrapping repair is missing');
+check(fix.includes('table[data-table-kind=event-sources]'), 'Event Evidence width and wrapping repair is missing');
 check(fix.includes(':not([data-mobile-table-built=true])'), 'Event Evidence progressive fallback is missing');
 check(fix.includes('[data-mobile-representation-for=event-sources]'), 'Event Evidence mobile representation visibility repair is missing');
 check(fix.includes('.event-record-details-grid'), 'Closed record-details layout is missing');

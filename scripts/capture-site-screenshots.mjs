@@ -148,7 +148,7 @@ async function measurePage(page) {
     const legacyVisualSelectors = ['.page-hero', '.metric-card', '[class*="blue-purple"]', '[class*="glow-art"]', '[data-saas-dashboard]'];
     const legacyVisualMarkers = legacyVisualSelectors.flatMap((selector) => [...document.querySelectorAll(selector)].filter(visible).map(() => selector));
     const unexpectedEmptySelectors = ['[data-stablecoin-no-results]', '[data-organization-no-results]', '[data-event-no-results]'];
-    const hiddenMobileTableContent = [...document.querySelectorAll('table[data-table-kind][data-mobile-table="scroll-preserve"]')].flatMap((table) => {
+    const hiddenMobileTableContent = [...document.querySelectorAll('table[data-table-kind="event-sources"][data-mobile-table="scroll-preserve"]')].flatMap((table) => {
       const rows = table.querySelectorAll(':scope > tbody > tr').length;
       const representation = table.nextElementSibling;
       if (rows === 0 || visible(table) || (representation instanceof HTMLElement && visible(representation))) return [];

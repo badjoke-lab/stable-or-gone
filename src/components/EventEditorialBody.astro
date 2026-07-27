@@ -17,8 +17,6 @@ const { event, view } = Astro.props as { event: any; view: View };
   </div>
 </section>
 
-{view.hasStructuredDetail && <section class="event-detail-section" id="structured-detail"><div class="event-detail-section-heading"><p>Event-specific fields</p><h2>Additional facts</h2><span>Facts recorded specifically for this kind of event.</span></div><StructuredEventDetail event={event} /></section>}
-
 <section class="event-detail-section" id="sources">
   <div class="event-detail-section-heading"><p>Sources</p><h2>Evidence</h2><span>Sources used for this record, with archival copies where available.</span></div>
   <div class="event-detail-table event-detail-evidence-r5"><EvidenceSourceTable evidence={view.evidence} tableKind="event-sources" emptyMessage="No event-specific sources have been added." /></div>
@@ -26,7 +24,7 @@ const { event, view } = Astro.props as { event: any; view: View };
 
 <section class="event-detail-section event-record-metadata-section" id="record-details">
   <details class="event-record-details">
-    <summary><span>Record details</span><small>IDs, classification, and review metadata</small></summary>
+    <summary><span>Record details</span><small>Classification, review, and event-specific data</small></summary>
     <dl class="event-detail-secondary-r5 event-record-details-grid">
       <div><dt>Record ID</dt><dd><code>{event.id}</code></dd></div>
       <div><dt>Severity</dt><dd><ValueStateText value={event.impact_level} displayValue={formatPublicLabel(event.impact_level)} /></dd></div>
@@ -40,6 +38,7 @@ const { event, view } = Astro.props as { event: any; view: View };
       <div><dt>Record confidence</dt><dd><ValueStateText value={event.confidence} displayValue={formatPublicLabel(event.confidence)} /></dd></div>
       <div><dt>Evidence relations</dt><dd>{view.eventRelations.length}</dd></div>
     </dl>
+    {view.hasStructuredDetail && <StructuredEventDetail event={event} />}
   </details>
 </section>
 
