@@ -103,6 +103,8 @@ a:active { color: var(--ui-text); }
 /* Horizontal containment contract */
 .site-main > *, .home-ledger, .home-ledger > *, .home-recent, .stats-page, .stats-page > *, .stats-section, .stablecoin-dossier, .stablecoin-dossier > *, .stablecoin-dossier-section, .stablecoin-dossier-section > *, .panel, .registry { min-width: 0; max-width: 100%; }
 pre { max-width: 100%; overflow-x: auto; white-space: pre-wrap; overflow-wrap: anywhere; }
+/* Public long-value wrapping contract */
+main :where(a, dd, li) { overflow-wrap: anywhere; word-break: break-word; }
 .site-footer { border-top: 1px solid var(--ui-line); background: var(--ui-bg-soft); }
 .site-footer-inner { width: min(calc(100% - 2rem), var(--ui-shell)); margin: 0 auto; padding: 2rem 0; display: grid; grid-template-columns: minmax(0,1fr) minmax(280px,.7fr); gap: 1.5rem 2rem; }
 .site-footer-intro p, .site-footer-meta { color: var(--ui-muted); font-size: .9375rem; }
