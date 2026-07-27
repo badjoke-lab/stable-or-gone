@@ -42,7 +42,12 @@ for (const label of ['Source category', 'Provenance', 'Primary or secondary', 'R
 }
 check(mobileRuntime.includes("kind === 'event-sources' ? publisher"), 'Mobile Event Evidence summary is not simplified');
 check(mobileRuntime.includes("table.dataset.mobileTableBuilt = 'true'"), 'Mobile table enhancement completion marker is missing');
-check(capture.includes('table[data-table-kind="event-sources"][data-mobile-table="scroll-preserve"]'), 'Event Evidence hidden-content screenshot gate is missing');
+check(
+  capture.includes('table[data-table-kind][data-mobile-table]')
+    && capture.includes('hidden-mobile-table:')
+    && capture.includes('duplicate-mobile-table:'),
+  'All mobile table surfaces, including Event Evidence, must have hidden- and duplicate-content screenshot gates'
+);
 
 check(ui.includes('--ui-copy: #dddcd6;'), 'Body-copy brightness token is not at the reviewed value');
 check(ui.includes('--ui-muted: #b6bbba;'), 'Supporting-copy brightness token is not at the reviewed value');

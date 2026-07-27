@@ -35,8 +35,8 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; }
-html { min-height: 100%; overflow-x: hidden; scroll-behavior: smooth; scroll-padding-top: 8rem; background: var(--ui-bg); }
-body { min-height: 100%; margin: 0; overflow-x: hidden; background: linear-gradient(180deg, #0b0f12 0, var(--ui-bg) 34rem); color: var(--ui-copy); font: 400 17px/1.68 var(--ui-sans); text-rendering: optimizeLegibility; }
+html { min-height: 100%; scroll-behavior: smooth; scroll-padding-top: 8rem; background: var(--ui-bg); }
+body { min-height: 100%; margin: 0; background: linear-gradient(180deg, #0b0f12 0, var(--ui-bg) 34rem); color: var(--ui-copy); font: 400 17px/1.68 var(--ui-sans); text-rendering: optimizeLegibility; }
 img, svg { display: block; max-width: 100%; }
 button, input, select, textarea, summary { font: inherit; color: inherit; }
 button, input, select, textarea { min-height: 44px; }
@@ -122,7 +122,7 @@ button:hover, .ui-button:hover { border-color: var(--ui-hover); background: colo
 :where(.chip.collapsed, .chip.failed, .chip.fail, [data-tone="danger"], [data-tone="critical"], .home-status-label--collapsed, [data-state="failed"], [data-state="error"]) { border-color: color-mix(in srgb, var(--ui-danger) 70%, var(--ui-line)); background: color-mix(in srgb, var(--ui-danger) 13%, var(--ui-surface)); color: var(--ui-danger); }
 
 /* Tables */
-.table-wrap, [class*="-table"] { max-width: 100%; overflow-x: auto; border: 1px solid var(--ui-line); border-radius: var(--ui-radius); background: var(--ui-bg-soft); }
+.table-wrap, :where([class*="-table"]:not(table)) { max-width: 100%; overflow-x: auto; border: 1px solid var(--ui-line); border-radius: var(--ui-radius); background: var(--ui-bg-soft); }
 table { width: 100%; border-collapse: collapse; font-size: .9375rem; line-height: 1.55; }
 caption { padding: .8rem 1rem; color: var(--ui-muted); font-size: .875rem; text-align: left; }
 th, td { padding: .9rem 1rem; border-bottom: 1px solid var(--ui-line-soft); text-align: left; vertical-align: top; }
@@ -131,6 +131,7 @@ td { color: var(--ui-copy); }
 tbody tr:hover td { background: color-mix(in srgb, var(--ui-link) 6%, var(--ui-bg-soft)); }
 td a { font-weight: 700; }
 td small { display: block; margin-top: .35rem; }
+table[data-mobile-table] { display: block; width: 100%; min-width: 0; max-width: 100%; overflow-x: auto; }
 
 /* Home */
 .home-ledger { display: grid; gap: 3rem; }
@@ -215,9 +216,18 @@ td small { display: block; margin-top: .35rem; }
 :where(.stablecoin-dossier-overline,.event-detail-overline,.organization-detail-overline) a { font-family: var(--ui-sans); font-size: .9375rem; text-transform: none; }
 :where(.event-detail-title,.organization-detail-title,.stablecoin-dossier-title-row) { padding: 1.5rem 0 1.25rem; display: grid; grid-template-columns: minmax(0,1.35fr) minmax(300px,.65fr); gap: 2.5rem; align-items: end; }
 :where(.event-detail-title,.organization-detail-title) > p { padding-top: 1rem; border-top: 1px solid var(--ui-line); font-size: 1rem; line-height: 1.75; }
+.stablecoin-dossier-title-row h1 { display: flex; flex-wrap: wrap; gap: .12em .25em; align-items: baseline; }
+.stablecoin-dossier-title-row h1 i { color: var(--ui-muted); font-size: .58em; font-style: normal; }
 :where(.event-detail-ledger,.organization-detail-ledger,.stablecoin-dossier-facts) { margin: 0; display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); border-top: 1px solid var(--ui-line); border-left: 1px solid var(--ui-line); }
 :where(.event-detail-ledger,.organization-detail-ledger,.stablecoin-dossier-facts) > div { min-width: 0; min-height: 104px; padding: .95rem 1rem; display: grid; align-content: space-between; border-right: 1px solid var(--ui-line); border-bottom: 1px solid var(--ui-line); }
 :where(.event-detail-ledger,.organization-detail-ledger,.stablecoin-dossier-facts) dd { margin: .35rem 0 0; color: var(--ui-text); font-family: var(--ui-sans); font-size: 1.125rem; line-height: 1.4; overflow-wrap: anywhere; }
+:where(.event-detail-ledger,.organization-detail-ledger,.stablecoin-dossier-facts) dd > small { display: block; margin-top: .3rem; }
+:where(.stablecoin-material-change,.organization-latest-change) { margin-top: 1rem; padding-top: 1rem; display: grid; grid-template-columns: minmax(12rem,.35fr) minmax(0,1fr); gap: .5rem 1.5rem; border-top: 1px solid var(--ui-line-soft); }
+:where(.stablecoin-material-change,.organization-latest-change) > span { color: var(--ui-muted); font: 700 .8125rem/1.4 var(--ui-mono); letter-spacing: .055em; text-transform: uppercase; }
+.stablecoin-material-change > div { display: grid; grid-template-columns: auto minmax(0,1fr); gap: .2rem 1rem; }
+.stablecoin-material-change > div p { max-width: none; }
+.stablecoin-material-change > div small { grid-column: 1 / -1; }
+.organization-latest-change { grid-template-columns: minmax(12rem,.35fr) auto minmax(0,1fr); align-items: baseline; }
 :where(.event-detail-nav,.organization-detail-nav,.stablecoin-dossier-nav) { position: sticky; z-index: 20; top: 124px; display: flex; overflow-x: auto; border-bottom: 1px solid var(--ui-line); background: rgba(7,9,11,.98); }
 :where(.event-detail-nav,.organization-detail-nav,.stablecoin-dossier-nav) a { min-height: 46px; padding: 0 .9rem; display: inline-flex; align-items: center; border-right: 1px solid var(--ui-line-soft); border-bottom: 3px solid transparent; color: var(--ui-muted); font-size: .9375rem; font-weight: 700; text-decoration: none; white-space: nowrap; }
 :where(.event-detail-nav,.organization-detail-nav,.stablecoin-dossier-nav) a:hover { color: var(--ui-hover); border-bottom-color: var(--ui-hover); }
@@ -468,11 +478,16 @@ main a:hover, footer a:hover, main a:focus-visible, footer a:focus-visible { col
   h1 { font-size: clamp(2.5rem,12vw,4.25rem); }
   h2 { font-size: clamp(1.8rem,8vw,2.7rem); }
   .home-masthead__title, .home-lead, .home-reference, .stablecoin-register-header, :where(.event-index-title,.organization-index-title), :where(.stablecoin-index-section-heading,.event-index-section-heading,.organization-index-section-heading), :where(.event-detail-title,.organization-detail-title,.stablecoin-dossier-title-row), :where(.event-detail-section-heading,.organization-detail-section-heading,.stablecoin-section-heading) { grid-template-columns: 1fr; gap: 1rem; }
+  .home-search__heading, .home-section-heading { align-items: flex-start; flex-direction: column; }
+  :where(.event-detail-section-heading,.organization-detail-section-heading,.stablecoin-section-heading) { grid-template-areas: "eyebrow" "title" "note"; }
+  :where(.stablecoin-material-change,.organization-latest-change), .stablecoin-material-change > div { grid-template-columns: 1fr; }
+  .stablecoin-material-change > div small { grid-column: auto; }
   .home-register-strip { grid-template-columns: repeat(2,minmax(0,1fr)); }
   :where(.event-index-ledger,.organization-index-ledger), :where(.event-detail-ledger,.organization-detail-ledger,.stablecoin-dossier-facts) { grid-template-columns: repeat(2,minmax(0,1fr)); }
   :where(.stablecoin-index-toolbar,.event-index-toolbar,.organization-index-toolbar) { grid-template-columns: 1fr; }
   :where(.stablecoin-index-filter-options,.event-index-filter-options,.organization-index-filter-options) { position: static; width: 100%; max-height: none; box-shadow: none; }
-  :where(.stablecoin-index-table,.event-index-table,.organization-index-table), .organization-detail-table { display: none; }
+  :where(.stablecoin-index-table,.event-index-table,.organization-index-table,.stablecoin-identity-table,.stablecoin-organizations-table,.organization-relationships-r5,.organization-events-r5,.issuer-control-events__table) { display: none; }
+  table[data-mobile-table-built="true"] { display: none; }
   .event-detail-table { display: block; max-width: 100%; overflow-x: auto; }
   .event-detail-table > table[data-mobile-table-built="true"] { display: none; }
   .event-detail-table > table:not([data-mobile-table-built="true"]) { display: table; }

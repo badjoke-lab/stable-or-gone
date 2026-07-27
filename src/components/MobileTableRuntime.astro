@@ -202,7 +202,16 @@
     document.querySelectorAll('table[data-table-kind][data-mobile-table="scroll-preserve"]').forEach((table) => {
       if (!(table instanceof HTMLTableElement)) return;
       const kind = table.dataset.tableKind;
-      if (!kind || document.querySelector(mobileRepresentationSelector(kind))) return;
+      if (!kind) return;
+      const adjacentRepresentation = table.nextElementSibling;
+      const parentAdjacentRepresentation = table.parentElement?.nextElementSibling;
+      const existingRepresentation = [adjacentRepresentation, parentAdjacentRepresentation]
+        .find((candidate) => candidate instanceof HTMLElement && candidate.matches(mobileRepresentationSelector(kind)));
+      if (existingRepresentation instanceof HTMLElement) {
+        table.dataset.mobileTableBuilt = 'true';
+        table.dataset.mobileRepresentationLocation = table.parentElement?.contains(existingRepresentation) ? 'inside' : 'outside';
+        return;
+      }
       const hasColumnHeaders = table.querySelector(':scope > thead th') !== null;
       const representation = evidenceKinds.has(kind)
         ? createEvidenceRepresentation(table, kind)
@@ -213,6 +222,7 @@
             : createDefinitionRepresentation(table, kind);
       table.insertAdjacentElement('afterend', representation);
       table.dataset.mobileTableBuilt = 'true';
+      table.dataset.mobileRepresentationLocation = 'inside';
     });
     bindGeneratedCopyControls();
   };
