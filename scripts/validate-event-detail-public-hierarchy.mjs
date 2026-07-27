@@ -40,10 +40,13 @@ for (const label of ['Source category', 'Provenance', 'Primary or secondary', 'R
   check(evidenceRows.includes(`<dt>${label}</dt>`), `Event source details are missing ${label}`);
 }
 check(mobileRuntime.includes("kind === 'event-sources' ? publisher"), 'Mobile Event Evidence summary is not simplified');
+check(mobileRuntime.includes("table.dataset.mobileTableBuilt = 'true'"), 'Mobile table enhancement completion marker is missing');
 
 check(shell.includes('--v3-text-muted: #cbc9c1;'), 'Body-copy brightness token is not at the reviewed value');
 check(shell.includes('--v3-text-quiet: #aeb2b5;'), 'Supporting-copy brightness token is not at the reviewed value');
 check(fix.includes('table[data-table-kind="event-sources"]'), 'Event Evidence width and wrapping repair is missing');
+check(fix.includes(':not([data-mobile-table-built=true])'), 'Event Evidence progressive fallback is missing');
+check(fix.includes('[data-mobile-representation-for=event-sources]'), 'Event Evidence mobile representation visibility repair is missing');
 check(fix.includes('.event-record-details-grid'), 'Closed record-details layout is missing');
 
 const fixImport = "import '../styles/event-detail-public-fix.css'";

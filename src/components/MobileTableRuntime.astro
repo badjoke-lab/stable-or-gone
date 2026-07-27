@@ -212,6 +212,7 @@
             ? createRecordRepresentation(table, kind)
             : createDefinitionRepresentation(table, kind);
       table.insertAdjacentElement('afterend', representation);
+      table.dataset.mobileTableBuilt = 'true';
     });
     bindGeneratedCopyControls();
   };
