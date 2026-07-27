@@ -1,0 +1,30 @@
+[
+  {
+    "id": "sog_ev_plnq_launch_pr467",
+    "stablecoin_id": "sog_st_plnq",
+    "issuer_id": "sog_issuer_quantoz_payments",
+    "event_type": "launch",
+    "event_date": "2026-04-14",
+    "title": "Quantoz launches PLNQ as a Polish-złoty electronic-money token",
+    "description": "Quantoz announced PLNQ as launched and initially issued on Ethereum, with Zodia Markets named as the initial institutional distribution partner.",
+    "impact_level": "high",
+    "confidence": "high",
+    "source_count": 4,
+    "event_status_effect": "active",
+    "notes": "The event records the official launch and verified initial Ethereum deployment; later announced networks remain unverified."
+  },
+  {
+    "id": "sog_ev_gbpq_launch_pr467",
+    "stablecoin_id": "sog_st_gbpq",
+    "issuer_id": "sog_issuer_quantoz_payments",
+    "event_type": "launch",
+    "event_date": "2026-04-14",
+    "title": "Quantoz launches GBPQ as a British-pound electronic-money token",
+    "description": "Quantoz announced GBPQ as launched and initially issued on Ethereum, with Zodia Markets named as the initial institutional distribution partner.",
+    "impact_level": "high",
+    "confidence": "high",
+    "source_count": 4,
+    "event_status_effect": "active",
+    "notes": "The event records the official launch and verified initial Ethereum deployment; later announced networks remain unverified."
+  }
+]

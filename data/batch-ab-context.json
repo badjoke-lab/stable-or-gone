@@ -1,0 +1,26 @@
+[
+  {
+    "id": "sog_rr_plnq_reserve_context_pr467",
+    "stablecoin_id": "sog_st_plnq",
+    "issuer_id": "sog_issuer_quantoz_payments",
+    "publisher": "Quantoz Payments B.V.",
+    "report_type": "official_reserve_policy_context",
+    "asset_categories": ["cash", "government_securities"],
+    "url": "https://www.quantoz.com/transparency",
+    "archived_url": "https://web.archive.org/web/*/https://www.quantoz.com/transparency",
+    "confidence": "high",
+    "notes": "Quantoz states an issuer-wide policy of cash deposits and government bonds in safeguarded segregated accounts. No token-specific PLNQ allocation is inferred."
+  },
+  {
+    "id": "sog_rr_gbpq_reserve_context_pr467",
+    "stablecoin_id": "sog_st_gbpq",
+    "issuer_id": "sog_issuer_quantoz_payments",
+    "publisher": "Quantoz Payments B.V.",
+    "report_type": "official_reserve_policy_context",
+    "asset_categories": ["cash", "government_securities"],
+    "url": "https://www.quantoz.com/transparency",
+    "archived_url": "https://web.archive.org/web/*/https://www.quantoz.com/transparency",
+    "confidence": "high",
+    "notes": "Quantoz states an issuer-wide policy of cash deposits and government bonds in safeguarded segregated accounts. No token-specific GBPQ allocation is inferred."
+  }
+]

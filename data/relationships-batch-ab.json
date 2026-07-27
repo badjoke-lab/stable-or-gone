@@ -1,0 +1,24 @@
+[
+  {
+    "id": "sog_rel_plnq_quantoz_pr467",
+    "stablecoin_id": "sog_st_plnq",
+    "organization_id": "sog_issuer_quantoz_payments",
+    "role": "legal_issuer",
+    "start_date": "2026-04-14",
+    "end_date": null,
+    "status": "active",
+    "evidence_ids": ["sog_src_quantoz_launch_pr467", "sog_src_plnq_whitepaper_pr467", "sog_src_dnb_quantoz_pr467"],
+    "notes": "Quantoz Payments B.V. is recorded as the issuer and statutory redemption counterparty for PLNQ."
+  },
+  {
+    "id": "sog_rel_gbpq_quantoz_pr467",
+    "stablecoin_id": "sog_st_gbpq",
+    "organization_id": "sog_issuer_quantoz_payments",
+    "role": "legal_issuer",
+    "start_date": "2026-04-14",
+    "end_date": null,
+    "status": "active",
+    "evidence_ids": ["sog_src_quantoz_launch_pr467", "sog_src_gbpq_whitepaper_pr467", "sog_src_dnb_quantoz_pr467"],
+    "notes": "Quantoz Payments B.V. is recorded as the issuer and statutory redemption counterparty for GBPQ."
+  }
+]

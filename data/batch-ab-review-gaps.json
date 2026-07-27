@@ -1,0 +1,62 @@
+[
+  {
+    "id": "sog_ku_plnq_reserve_series_pr467",
+    "stablecoin_id": "sog_st_plnq",
+    "issuer_id": "sog_issuer_quantoz_payments",
+    "topic": "token_specific_reserve_series",
+    "description": "The issuer-wide reserve policy is documented, but a complete PLNQ-specific monthly supply, allocation, and assurance series has not been normalized.",
+    "severity": "high",
+    "last_checked_at": "2026-07-25",
+    "notes": "No PLNQ-specific instrument allocation is inferred from aggregate issuer disclosures."
+  },
+  {
+    "id": "sog_ku_plnq_redemption_operations_pr467",
+    "stablecoin_id": "sog_st_plnq",
+    "issuer_id": "sog_issuer_quantoz_payments",
+    "topic": "redemption_fees_limits_and_channels",
+    "description": "The par-redemption right is documented, but current PLNQ-specific fees, minimums, limits, settlement timing, onboarding, and direct channel availability remain unresolved.",
+    "severity": "medium",
+    "last_checked_at": "2026-07-25",
+    "notes": "Legal entitlement and operational access are kept separate."
+  },
+  {
+    "id": "sog_ku_plnq_network_and_distribution_inventory_pr467",
+    "stablecoin_id": "sog_st_plnq",
+    "issuer_id": "sog_issuer_quantoz_payments",
+    "topic": "complete_deployment_and_distribution_inventory",
+    "description": "The Ethereum contract and initial institutional distribution partner are verified. Activation dates and exact identifiers for announced later networks, plus the complete current distribution inventory, remain unresolved.",
+    "severity": "medium",
+    "last_checked_at": "2026-07-25",
+    "notes": "Future network announcements are not converted into deployment records."
+  },
+  {
+    "id": "sog_ku_gbpq_reserve_series_pr467",
+    "stablecoin_id": "sog_st_gbpq",
+    "issuer_id": "sog_issuer_quantoz_payments",
+    "topic": "token_specific_reserve_series",
+    "description": "The issuer-wide reserve policy is documented, but a complete GBPQ-specific monthly supply, allocation, and assurance series has not been normalized.",
+    "severity": "high",
+    "last_checked_at": "2026-07-25",
+    "notes": "No GBPQ-specific instrument allocation is inferred from aggregate issuer disclosures."
+  },
+  {
+    "id": "sog_ku_gbpq_redemption_operations_pr467",
+    "stablecoin_id": "sog_st_gbpq",
+    "issuer_id": "sog_issuer_quantoz_payments",
+    "topic": "redemption_fees_limits_and_channels",
+    "description": "The par-redemption right is documented, but current GBPQ-specific fees, minimums, limits, settlement timing, onboarding, and direct channel availability remain unresolved.",
+    "severity": "medium",
+    "last_checked_at": "2026-07-25",
+    "notes": "Legal entitlement and operational access are kept separate."
+  },
+  {
+    "id": "sog_ku_gbpq_network_and_distribution_inventory_pr467",
+    "stablecoin_id": "sog_st_gbpq",
+    "issuer_id": "sog_issuer_quantoz_payments",
+    "topic": "complete_deployment_and_distribution_inventory",
+    "description": "The Ethereum contract and initial institutional distribution partner are verified. Activation dates and exact identifiers for announced later networks, plus the complete current distribution inventory, remain unresolved.",
+    "severity": "medium",
+    "last_checked_at": "2026-07-25",
+    "notes": "Future network announcements are not converted into deployment records."
+  }
+]

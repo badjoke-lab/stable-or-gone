@@ -1,0 +1,16 @@
+[
+  {
+    "candidate_id": "sog_cand_000115",
+    "status": "promoted",
+    "promotion_pr": 467,
+    "promoted_record_id": "sog_st_plnq",
+    "notes": "Reviewed in PR #427, authorized by PR #466, and promoted after the PR #467 complete supporting record layers were verified."
+  },
+  {
+    "candidate_id": "sog_cand_000116",
+    "status": "promoted",
+    "promotion_pr": 467,
+    "promoted_record_id": "sog_st_gbpq",
+    "notes": "Reviewed in PR #427, authorized by PR #466, and promoted after the PR #467 complete supporting record layers were verified."
+  }
+]

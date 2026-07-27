@@ -1,0 +1,34 @@
+[
+  {
+    "id": "sog_dep_plnq_ethereum_pr467",
+    "stablecoin_id": "sog_st_plnq",
+    "chain": "ethereum",
+    "deployment_type": "issuer_native_token",
+    "token_standard": "erc20",
+    "contract_address": "0x00B81d7B21955837890d9346e4978b6b43762b3A",
+    "status": "active",
+    "canonicality": "issuer_native",
+    "is_primary": true,
+    "mint_authority_type": "issuer_controlled",
+    "verification_status": "verified",
+    "control_event_ids": ["sog_ev_plnq_launch_pr467"],
+    "evidence_ids": ["sog_src_quantoz_launch_pr467", "sog_src_quantoz_marketing_pr467"],
+    "notes": "The official launch announcement and MiCAR marketing-communications page identify this Ethereum Token ID."
+  },
+  {
+    "id": "sog_dep_gbpq_ethereum_pr467",
+    "stablecoin_id": "sog_st_gbpq",
+    "chain": "ethereum",
+    "deployment_type": "issuer_native_token",
+    "token_standard": "erc20",
+    "contract_address": "0xb92e69fd39bf33ee1f81e56b0b7933bdc49df46e",
+    "status": "active",
+    "canonicality": "issuer_native",
+    "is_primary": true,
+    "mint_authority_type": "issuer_controlled",
+    "verification_status": "verified",
+    "control_event_ids": ["sog_ev_gbpq_launch_pr467"],
+    "evidence_ids": ["sog_src_quantoz_launch_pr467", "sog_src_quantoz_marketing_pr467"],
+    "notes": "The official launch announcement and MiCAR marketing-communications page identify this Ethereum Token ID."
+  }
+]

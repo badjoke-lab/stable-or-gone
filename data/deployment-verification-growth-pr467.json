@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "status": "reviewed_growth_overlay",
+  "review_pr": 467,
+  "reviewed_at": "2026-07-25",
+  "source_review": "data/editorial-research/record-growth-batch-3-pr467-source-review.json",
+  "expected_additions": 2,
+  "status_counts": {
+    "verified": 2,
+    "identifier_recorded_unverified": 0,
+    "source_linked_no_identifier": 0,
+    "review_needed": 0,
+    "unknown": 0,
+    "not_recorded": 0
+  },
+  "status_ids": {
+    "verified": [
+      "sog_dep_plnq_ethereum_pr467",
+      "sog_dep_gbpq_ethereum_pr467"
+    ],
+    "identifier_recorded_unverified": [],
+    "source_linked_no_identifier": [],
+    "review_needed": [],
+    "unknown": [],
+    "not_recorded": []
+  },
+  "reviewed_records": [
+    {
+      "id": "sog_dep_plnq_ethereum_pr467",
+      "identifier_type": "evm_contract",
+      "identifier": "0x00B81d7B21955837890d9346e4978b6b43762b3A",
+      "source_url": "https://www.quantoz.com/marketing-communications"
+    },
+    {
+      "id": "sog_dep_gbpq_ethereum_pr467",
+      "identifier_type": "evm_contract",
+      "identifier": "0xb92e69fd39bf33ee1f81e56b0b7933bdc49df46e",
+      "source_url": "https://www.quantoz.com/marketing-communications"
+    }
+  ]
+}

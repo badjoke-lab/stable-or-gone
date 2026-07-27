@@ -1,14 +1,14 @@
 {
   "schema_version": "1.0",
   "status": "reviewed_growth_checkpoint",
-  "checkpoint_id": "sog_record_growth_batch_2_114_checkpoint_pr429_2026_07_18",
+  "checkpoint_id": "sog_record_growth_batch_3_116_checkpoint_pr467_2026_07_25",
   "checkpoint_kind": "controlled_growth_checkpoint",
-  "recorded_at": "2026-07-18",
-  "registry_version": "pr429-record-growth-batch-2",
-  "asset_count": 114,
-  "source_checkpoint_id": "sog_evidence_archive_maintenance_batch_7_112_checkpoint_pr400_2026_07_16",
-  "canonical_checkpoint_id": "sog_record_growth_batch_2_canonical_114_checkpoint_pr429_2026_07_18",
-  "previous_history_checkpoint_id": "sog_evidence_archive_maintenance_batch_7_112_checkpoint_pr400_2026_07_16",
-  "growth_pr": 429,
-  "notes": "Reviewed controlled-growth checkpoint for PR #429. It adds the exact CHFAU and SEKAU records, advances canonical assets from 112 to 114, preserves eight Market Access Records, and stops at a mandatory review gate."
+  "recorded_at": "2026-07-25",
+  "registry_version": "pr467-record-growth-batch-3",
+  "asset_count": 116,
+  "source_checkpoint_id": "sog_record_growth_batch_2_114_checkpoint_pr429_2026_07_18",
+  "canonical_checkpoint_id": "sog_record_growth_batch_3_canonical_116_checkpoint_pr467_2026_07_25",
+  "previous_history_checkpoint_id": "sog_record_growth_batch_2_114_checkpoint_pr429_2026_07_18",
+  "growth_pr": 467,
+  "notes": "Reviewed controlled-growth checkpoint for PR #467. It adds exactly PLNQ and GBPQ, advances canonical assets from 114 to 116, preserves eight Market Access Records, and stops at REVIEW GATE."
 }

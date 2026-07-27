@@ -44,6 +44,7 @@ import stablecoinsBatchXData from '../../../data/stablecoins-batch-x.json';
 import stablecoinsBatchYData from '../../../data/stablecoins-batch-y.json';
 import stablecoinsBatchZData from '../../../data/stablecoins-batch-z.json';
 import stablecoinsBatchAAData from '../../../data/stablecoins-batch-aa.json';
+import stablecoinsBatchABData from '../../../data/stablecoins-batch-ab.json';
 
 import stablecoinClassificationBatchKData from '../../../data/stablecoin-classification-batch-k.json';
 import stablecoinClassificationBatchLData from '../../../data/stablecoin-classification-batch-l.json';
@@ -62,6 +63,7 @@ import stablecoinClassificationBatchXData from '../../../data/stablecoin-classif
 import stablecoinClassificationBatchYData from '../../../data/stablecoin-classification-batch-y.json';
 import stablecoinClassificationBatchZData from '../../../data/stablecoin-classification-batch-z.json';
 import stablecoinClassificationBatchAAData from '../../../data/stablecoin-classification-batch-aa.json';
+import stablecoinClassificationBatchABData from '../../../data/stablecoin-classification-batch-ab.json';
 
 import organizationsBatchKData from '../../../data/organizations-batch-k.json';
 import organizationsBatchLData from '../../../data/organizations-batch-l.json';
@@ -97,6 +99,7 @@ import relationshipsBatchXData from '../../../data/relationships-batch-x.json';
 import relationshipsBatchYData from '../../../data/relationships-batch-y.json';
 import relationshipsBatchZData from '../../../data/relationships-batch-z.json';
 import relationshipsBatchAAData from '../../../data/relationships-batch-aa.json';
+import relationshipsBatchABData from '../../../data/relationships-batch-ab.json';
 
 import eventsBatchKData from '../../../data/events-batch-k.json';
 import eventsBatchLData from '../../../data/events-batch-l.json';
@@ -115,6 +118,7 @@ import eventsBatchXData from '../../../data/events-batch-x.json';
 import eventsBatchYData from '../../../data/events-batch-y.json';
 import eventsBatchZData from '../../../data/events-batch-z.json';
 import eventsBatchAAData from '../../../data/events-batch-aa.json';
+import eventsBatchABData from '../../../data/events-batch-ab.json';
 
 import eventDetailsBatchKData from '../../../data/event-details-batch-k.json';
 import eventDetailsBatchLData from '../../../data/event-details-batch-l.json';
@@ -134,6 +138,7 @@ import eventDetailsBatchXData from '../../../data/event-details-batch-x.json';
 import eventDetailsBatchYData from '../../../data/event-details-batch-y.json';
 import eventDetailsBatchZData from '../../../data/event-details-batch-z.json';
 import eventDetailsBatchAAData from '../../../data/event-details-batch-aa.json';
+import eventDetailsBatchABData from '../../../data/event-details-batch-ab.json';
 
 import evidenceBatchKData from '../../../data/evidence-batch-k.json';
 import evidenceBatchLAData from '../../../data/evidence-batch-l-a.json';
@@ -158,6 +163,7 @@ import evidenceBatchXData from '../../../data/evidence-batch-x.json';
 import evidenceBatchYData from '../../../data/evidence-batch-y.json';
 import evidenceBatchZData from '../../../data/evidence-batch-z.json';
 import evidenceBatchAAData from '../../../data/evidence-batch-aa.json';
+import evidenceBatchABData from '../../../data/evidence-batch-ab.json';
 import evidenceQualityPr219Data from '../../../data/evidence-quality-pr219.json';
 
 import reserveReportsBatchKData from '../../../data/reserve-reports-batch-k.json';
@@ -178,6 +184,7 @@ import reserveReportsBatchXData from '../../../data/batch-x-context.json';
 import reserveReportsBatchYData from '../../../data/batch-y-context.json';
 import reserveReportsBatchZData from '../../../data/batch-z-context.json';
 import reserveReportsBatchAAData from '../../../data/batch-aa-context.json';
+import reserveReportsBatchABData from '../../../data/batch-ab-context.json';
 
 import knownUnknownsBatchKData from '../../../data/known-unknowns-batch-k.json';
 import knownUnknownsBatchLAData from '../../../data/known-unknowns-batch-l-a.json';
@@ -197,6 +204,7 @@ import knownUnknownsBatchXData from '../../../data/batch-x-review-gaps.json';
 import knownUnknownsBatchYData from '../../../data/batch-y-review-gaps.json';
 import knownUnknownsBatchZData from '../../../data/batch-z-review-gaps.json';
 import knownUnknownsBatchAAData from '../../../data/batch-aa-review-gaps.json';
+import knownUnknownsBatchABData from '../../../data/batch-ab-review-gaps.json';
 
 import deploymentsBatchKData from '../../../data/deployments-batch-k.json';
 import deploymentsBatchLData from '../../../data/deployments-batch-l.json';
@@ -215,6 +223,7 @@ import deploymentsBatchXData from '../../../data/batch-x-deployments.json';
 import deploymentsBatchYData from '../../../data/batch-y-deployments.json';
 import deploymentsBatchZData from '../../../data/batch-z-deployments.json';
 import deploymentsBatchAAData from '../../../data/batch-aa-deployments.json';
+import deploymentsBatchABData from '../../../data/batch-ab-deployments.json';
 
 const registryBaseRuntimeFiles = `
 stablecoins-batch-v.json
@@ -275,7 +284,7 @@ const classificationById = new Map([
   ...(stablecoinClassificationBatchSData as StablecoinRow[]), ...(stablecoinClassificationBatchTData as StablecoinRow[]),
   ...(stablecoinClassificationBatchUData as StablecoinRow[]), ...(stablecoinClassificationBatchVData as StablecoinRow[]),
   ...(stablecoinClassificationBatchWData as StablecoinRow[]), ...(stablecoinClassificationBatchXData as StablecoinRow[]),
-  ...(stablecoinClassificationBatchYData as StablecoinRow[]), ...(stablecoinClassificationBatchZData as StablecoinRow[]), ...(stablecoinClassificationBatchAAData as unknown as StablecoinRow[])
+  ...(stablecoinClassificationBatchYData as StablecoinRow[]), ...(stablecoinClassificationBatchZData as StablecoinRow[]), ...(stablecoinClassificationBatchAAData as unknown as StablecoinRow[]), ...(stablecoinClassificationBatchABData as unknown as StablecoinRow[])
 ].map((row) => [row.id, row] as const));
 const detailsById = new Map([
   ...(eventDetailsBatchKData as EventRow[]), ...(eventDetailsBatchLData as EventRow[]),
@@ -285,7 +294,7 @@ const detailsById = new Map([
   ...(eventDetailsBatchSData as EventRow[]), ...(eventDetailsBatchTAData as EventRow[]),
   ...(eventDetailsBatchTBData as EventRow[]), ...(eventDetailsBatchUData as EventRow[]),
   ...(eventDetailsBatchVData as EventRow[]), ...(eventDetailsBatchWData as EventRow[]),
-  ...(eventDetailsBatchXData as EventRow[]), ...(eventDetailsBatchYData as EventRow[]), ...(eventDetailsBatchZData as EventRow[]), ...(eventDetailsBatchAAData as unknown as EventRow[])
+  ...(eventDetailsBatchXData as EventRow[]), ...(eventDetailsBatchYData as EventRow[]), ...(eventDetailsBatchZData as EventRow[]), ...(eventDetailsBatchAAData as unknown as EventRow[]), ...(eventDetailsBatchABData as unknown as EventRow[])
 ].map((row) => [row.id, row] as const));
 const batchStablecoins = [
   ...(stablecoinsBatchKData as StablecoinRow[]), ...(stablecoinsBatchLData as StablecoinRow[]),
@@ -295,7 +304,7 @@ const batchStablecoins = [
   ...(stablecoinsBatchSData as StablecoinRow[]), ...(stablecoinsBatchTData as StablecoinRow[]),
   ...(stablecoinsBatchUData as StablecoinRow[]), ...(stablecoinsBatchVData as StablecoinRow[]),
   ...(stablecoinsBatchWData as StablecoinRow[]), ...(stablecoinsBatchXData as StablecoinRow[]),
-  ...(stablecoinsBatchYData as StablecoinRow[]), ...(stablecoinsBatchZData as StablecoinRow[]), ...(stablecoinsBatchAAData as unknown as StablecoinRow[])
+  ...(stablecoinsBatchYData as StablecoinRow[]), ...(stablecoinsBatchZData as StablecoinRow[]), ...(stablecoinsBatchAAData as unknown as StablecoinRow[]), ...(stablecoinsBatchABData as unknown as StablecoinRow[])
 ].map((row) => ({ ...row, ...(classificationById.get(row.id) ?? {}), ...(getStablecoinProfile(row.id) ?? {}) }));
 const batchOrganizations = [
   ...(organizationsBatchKData as OrganizationRow[]), ...(organizationsBatchLData as OrganizationRow[]),
@@ -315,7 +324,7 @@ const batchRelationships = [
   ...(relationshipsBatchSData as RelationshipRow[]), ...(relationshipsBatchTData as RelationshipRow[]),
   ...(relationshipsBatchUData as RelationshipRow[]), ...(relationshipsBatchVData as RelationshipRow[]),
   ...(relationshipsBatchWData as RelationshipRow[]), ...(relationshipsBatchXData as RelationshipRow[]),
-  ...(relationshipsBatchYData as RelationshipRow[]), ...(relationshipsBatchZData as RelationshipRow[]), ...(relationshipsBatchAAData as unknown as RelationshipRow[])
+  ...(relationshipsBatchYData as RelationshipRow[]), ...(relationshipsBatchZData as RelationshipRow[]), ...(relationshipsBatchAAData as unknown as RelationshipRow[]), ...(relationshipsBatchABData as unknown as RelationshipRow[])
 ];
 const batchEvents = [
   ...(eventsBatchKData as EventRow[]), ...(eventsBatchLData as EventRow[]),
@@ -325,7 +334,7 @@ const batchEvents = [
   ...(eventsBatchSData as EventRow[]), ...(eventsBatchTData as EventRow[]),
   ...(eventsBatchUData as EventRow[]), ...(eventsBatchVData as EventRow[]),
   ...(eventsBatchWData as EventRow[]), ...(eventsBatchXData as EventRow[]),
-  ...(eventsBatchYData as EventRow[]), ...(eventsBatchZData as EventRow[]), ...(eventsBatchAAData as unknown as EventRow[])
+  ...(eventsBatchYData as EventRow[]), ...(eventsBatchZData as EventRow[]), ...(eventsBatchAAData as unknown as EventRow[]), ...(eventsBatchABData as unknown as EventRow[])
 ].map((row) => ({ ...row, ...(detailsById.get(row.id) ?? {}) }));
 const batchEvidence = [
   ...(evidenceBatchKData as EvidenceRow[]), ...(evidenceBatchLAData as EvidenceRow[]),
@@ -338,7 +347,7 @@ const batchEvidence = [
   ...(evidenceBatchTB1Data as EvidenceRow[]), ...(evidenceBatchTB2Data as EvidenceRow[]),
   ...(evidenceBatchUData as EvidenceRow[]), ...(evidenceBatchVData as EvidenceRow[]),
   ...(evidenceBatchWData as EvidenceRow[]), ...(evidenceBatchXData as EvidenceRow[]),
-  ...(evidenceBatchYData as EvidenceRow[]), ...(evidenceBatchZData as EvidenceRow[]), ...(evidenceBatchAAData as unknown as EvidenceRow[]), ...(evidenceQualityPr219Data as EvidenceRow[])
+  ...(evidenceBatchYData as EvidenceRow[]), ...(evidenceBatchZData as EvidenceRow[]), ...(evidenceBatchAAData as unknown as EvidenceRow[]), ...(evidenceBatchABData as unknown as EvidenceRow[]), ...(evidenceQualityPr219Data as EvidenceRow[])
 ].map((row) => ({
   ...row,
   stablecoin_ids: unique([...(row.stablecoin_ids ?? []), row.stablecoin_id]),
@@ -362,10 +371,10 @@ export function getRelationships(): RelationshipRow[] { return [...getBaseRelati
 export function getEvents(): EventRow[] { return [...getBaseEvents(), ...batchEvents].map((row) => ({ ...row, subject_stablecoin_ids: [...(row.subject_stablecoin_ids ?? [])], subject_organization_ids: [...(row.subject_organization_ids ?? [])], evidence_ids: [...(row.evidence_ids ?? [])] })); }
 export function getEvidence(): EvidenceRow[] { return [...getBaseEvidence(), ...batchEvidence].map((row) => ({ ...row, stablecoin_ids: [...(row.stablecoin_ids ?? [])], organization_ids: [...(row.organization_ids ?? [])], event_ids: [...(row.event_ids ?? [])], claim_scopes: [...(row.claim_scopes ?? [])] })); }
 export function getEvidenceRelations(): EvidenceRelationRow[] { return [...getBaseEvidenceRelations(), ...batchEvidenceRelations].map((row) => ({ ...row, stablecoin_ids: [...row.stablecoin_ids], organization_ids: [...row.organization_ids], event_ids: [...row.event_ids], claim_scopes: [...row.claim_scopes] })); }
-export function getReserveReports(): ReserveReportRow[] { return [...getBaseReserveReports(), ...(reserveReportsBatchKData as ReserveReportRow[]), ...(reserveReportsBatchLData as ReserveReportRow[]), ...(reserveReportsBatchMAData as ReserveReportRow[]), ...(reserveReportsBatchMBData as ReserveReportRow[]), ...(reserveReportsBatchNData as ReserveReportRow[]), ...(reserveReportsBatchOData as ReserveReportRow[]), ...(reserveReportsBatchPData as ReserveReportRow[]), ...(reserveReportsBatchQData as ReserveReportRow[]), ...(reserveReportsBatchRData as ReserveReportRow[]), ...(reserveReportsBatchSData as ReserveReportRow[]), ...(reserveReportsBatchTData as ReserveReportRow[]), ...(reserveReportsBatchUData as ReserveReportRow[]), ...(reserveReportsBatchVData as ReserveReportRow[]), ...(reserveReportsBatchWData as ReserveReportRow[]), ...(reserveReportsBatchXData as ReserveReportRow[]), ...(reserveReportsBatchYData as ReserveReportRow[]), ...(reserveReportsBatchZData as ReserveReportRow[]), ...(reserveReportsBatchAAData as unknown as ReserveReportRow[])].map((row) => ({ ...row })); }
-export function getKnownUnknowns(): KnownUnknownRow[] { return [...getBaseKnownUnknowns(), ...(knownUnknownsBatchKData as KnownUnknownRow[]), ...(knownUnknownsBatchLAData as KnownUnknownRow[]), ...(knownUnknownsBatchLBData as KnownUnknownRow[]), ...(knownUnknownsBatchMData as KnownUnknownRow[]), ...(knownUnknownsBatchNData as KnownUnknownRow[]), ...(knownUnknownsBatchOData as KnownUnknownRow[]), ...(knownUnknownsBatchPData as KnownUnknownRow[]), ...(knownUnknownsBatchQData as KnownUnknownRow[]), ...(knownUnknownsBatchRData as KnownUnknownRow[]), ...(knownUnknownsBatchSData as KnownUnknownRow[]), ...(knownUnknownsBatchTData as KnownUnknownRow[]), ...(knownUnknownsBatchUData as KnownUnknownRow[]), ...(knownUnknownsBatchVData as KnownUnknownRow[]), ...(knownUnknownsBatchWData as KnownUnknownRow[]), ...(knownUnknownsBatchXData as KnownUnknownRow[]), ...(knownUnknownsBatchYData as KnownUnknownRow[]), ...(knownUnknownsBatchZData as KnownUnknownRow[]), ...(knownUnknownsBatchAAData as unknown as KnownUnknownRow[])].map((row) => ({ ...row })); }
+export function getReserveReports(): ReserveReportRow[] { return [...getBaseReserveReports(), ...(reserveReportsBatchKData as ReserveReportRow[]), ...(reserveReportsBatchLData as ReserveReportRow[]), ...(reserveReportsBatchMAData as ReserveReportRow[]), ...(reserveReportsBatchMBData as ReserveReportRow[]), ...(reserveReportsBatchNData as ReserveReportRow[]), ...(reserveReportsBatchOData as ReserveReportRow[]), ...(reserveReportsBatchPData as ReserveReportRow[]), ...(reserveReportsBatchQData as ReserveReportRow[]), ...(reserveReportsBatchRData as ReserveReportRow[]), ...(reserveReportsBatchSData as ReserveReportRow[]), ...(reserveReportsBatchTData as ReserveReportRow[]), ...(reserveReportsBatchUData as ReserveReportRow[]), ...(reserveReportsBatchVData as ReserveReportRow[]), ...(reserveReportsBatchWData as ReserveReportRow[]), ...(reserveReportsBatchXData as ReserveReportRow[]), ...(reserveReportsBatchYData as ReserveReportRow[]), ...(reserveReportsBatchZData as ReserveReportRow[]), ...(reserveReportsBatchAAData as unknown as ReserveReportRow[]), ...(reserveReportsBatchABData as unknown as ReserveReportRow[])].map((row) => ({ ...row })); }
+export function getKnownUnknowns(): KnownUnknownRow[] { return [...getBaseKnownUnknowns(), ...(knownUnknownsBatchKData as KnownUnknownRow[]), ...(knownUnknownsBatchLAData as KnownUnknownRow[]), ...(knownUnknownsBatchLBData as KnownUnknownRow[]), ...(knownUnknownsBatchMData as KnownUnknownRow[]), ...(knownUnknownsBatchNData as KnownUnknownRow[]), ...(knownUnknownsBatchOData as KnownUnknownRow[]), ...(knownUnknownsBatchPData as KnownUnknownRow[]), ...(knownUnknownsBatchQData as KnownUnknownRow[]), ...(knownUnknownsBatchRData as KnownUnknownRow[]), ...(knownUnknownsBatchSData as KnownUnknownRow[]), ...(knownUnknownsBatchTData as KnownUnknownRow[]), ...(knownUnknownsBatchUData as KnownUnknownRow[]), ...(knownUnknownsBatchVData as KnownUnknownRow[]), ...(knownUnknownsBatchWData as KnownUnknownRow[]), ...(knownUnknownsBatchXData as KnownUnknownRow[]), ...(knownUnknownsBatchYData as KnownUnknownRow[]), ...(knownUnknownsBatchZData as KnownUnknownRow[]), ...(knownUnknownsBatchAAData as unknown as KnownUnknownRow[]), ...(knownUnknownsBatchABData as unknown as KnownUnknownRow[])].map((row) => ({ ...row })); }
 export { getRegulatoryNotes, getRegistryUpdates };
-export function getDeployments(): DeploymentRow[] { return [...getBaseDeployments(), ...(deploymentsBatchKData as DeploymentRow[]), ...(deploymentsBatchLData as DeploymentRow[]), ...(deploymentsBatchMData as DeploymentRow[]), ...(deploymentsBatchNData as DeploymentRow[]), ...(deploymentsBatchOData as DeploymentRow[]), ...(deploymentsBatchPData as DeploymentRow[]), ...(deploymentsBatchQData as DeploymentRow[]), ...(deploymentsBatchRData as DeploymentRow[]), ...(deploymentsBatchSData as DeploymentRow[]), ...(deploymentsBatchTData as DeploymentRow[]), ...(deploymentsBatchUData as DeploymentRow[]), ...(deploymentsBatchVData as DeploymentRow[]), ...(deploymentsBatchWData as DeploymentRow[]), ...(deploymentsBatchXData as DeploymentRow[]), ...(deploymentsBatchYData as DeploymentRow[]), ...(deploymentsBatchZData as DeploymentRow[]), ...(deploymentsBatchAAData as unknown as DeploymentRow[])].map((row) => ({ ...row, control_event_ids: [...(row.control_event_ids ?? [])], evidence_ids: [...(row.evidence_ids ?? [])] })); }
+export function getDeployments(): DeploymentRow[] { return [...getBaseDeployments(), ...(deploymentsBatchKData as DeploymentRow[]), ...(deploymentsBatchLData as DeploymentRow[]), ...(deploymentsBatchMData as DeploymentRow[]), ...(deploymentsBatchNData as DeploymentRow[]), ...(deploymentsBatchOData as DeploymentRow[]), ...(deploymentsBatchPData as DeploymentRow[]), ...(deploymentsBatchQData as DeploymentRow[]), ...(deploymentsBatchRData as DeploymentRow[]), ...(deploymentsBatchSData as DeploymentRow[]), ...(deploymentsBatchTData as DeploymentRow[]), ...(deploymentsBatchUData as DeploymentRow[]), ...(deploymentsBatchVData as DeploymentRow[]), ...(deploymentsBatchWData as DeploymentRow[]), ...(deploymentsBatchXData as DeploymentRow[]), ...(deploymentsBatchYData as DeploymentRow[]), ...(deploymentsBatchZData as DeploymentRow[]), ...(deploymentsBatchAAData as unknown as DeploymentRow[]), ...(deploymentsBatchABData as unknown as DeploymentRow[])].map((row) => ({ ...row, control_event_ids: [...(row.control_event_ids ?? [])], evidence_ids: [...(row.evidence_ids ?? [])] })); }
 export function getPrimaryRelationship(stablecoinId: string): RelationshipRow | undefined {
   const preferredRoles: OrganizationRole[] = ['legal_issuer', 'protocol_operator', 'brand_owner', 'reserve_manager', 'governance_body', 'redemption_agent', 'custodian', 'technology_provider', 'other'];
   return getRelationships().filter((row) => row.stablecoin_id === stablecoinId).sort((a, b) => preferredRoles.indexOf(a.role) - preferredRoles.indexOf(b.role))[0];

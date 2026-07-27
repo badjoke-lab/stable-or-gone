@@ -8,7 +8,7 @@ const replacement = `
 const baselineBase = readJson(baselinePath) ?? {};
 const baselineGroups = { ...(baselineBase.data_groups ?? {}) };
 const minimumCounts = { ...(baselineBase.minimum_counts ?? {}) };
-for (const suffix of ['o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'za', 'zb']) {
+for (const suffix of ['o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'za', 'zb', 'zc']) {
   const overlayPath = \`docs/migration/registry-v2-baseline-batch-\${suffix}.json\`;
   const overlay = readJson(overlayPath) ?? {};
   for (const [name, value] of Object.entries(overlay.minimum_counts ?? {})) {

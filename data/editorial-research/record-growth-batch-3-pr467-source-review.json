@@ -1,0 +1,173 @@
+{
+  "schema_version": "1.0",
+  "review_id": "sog_record_growth_batch_3_pr467_source_review_2026_07_25",
+  "status": "reviewed_entry_gate_pass",
+  "reviewed_at": "2026-07-25",
+  "authority_pr": 466,
+  "implementation_pr": 467,
+  "canonical_baseline": {
+    "stable_assets": 114,
+    "organizations": 107,
+    "relationships": 126,
+    "events": 189,
+    "evidence": 565,
+    "deployments": 180
+  },
+  "issuer": {
+    "canonical_organization_id": "sog_issuer_quantoz_payments",
+    "legal_name": "Quantoz Payments B.V.",
+    "reuse_existing_organization": true,
+    "new_organization_required": false,
+    "regulator": "De Nederlandsche Bank",
+    "dnb_relation_number": "R186418",
+    "license_state": "active_electronic_money_institution",
+    "license_activities": ["issuance_of_electronic_money", "distribution_of_electronic_money", "redemption_of_electronic_money"],
+    "official_register_url": "https://www.dnb.nl/en/public-register/information-detail/?registerCode=WFTEG&relationNumber=R186418",
+    "register_last_updated": "2026-07-24"
+  },
+  "shared_sources": [
+    {
+      "source_id": "pr467_quantoz_launch_plnq_gbpq",
+      "publisher": "Quantoz Payments B.V.",
+      "url": "https://www.quantoz.com/blog/quantoz-payments-becomes-europes-leading-stablecoin-issuer-with-five-licensed-tokens-adding-polish-zloty-and-british-pound",
+      "source_type": "official_launch_announcement",
+      "published_at": "2026-04-14",
+      "primary": true,
+      "claim_scopes": ["asset_identity", "launch_date", "issuer_identity", "micar_emt_positioning", "initial_ethereum_issuance", "initial_distribution_partner"]
+    },
+    {
+      "source_id": "pr467_quantoz_resources_current",
+      "publisher": "Quantoz Payments B.V.",
+      "url": "https://www.quantoz.com/resources",
+      "source_type": "official_resource_index",
+      "observed_at": "2026-07-25",
+      "primary": true,
+      "claim_scopes": ["current_whitepaper_versions", "terms_version", "archived_document_versions"]
+    },
+    {
+      "source_id": "pr467_quantoz_marketing_communications",
+      "publisher": "Quantoz Payments B.V.",
+      "url": "https://www.quantoz.com/marketing-communications",
+      "source_type": "official_micar_marketing_communications",
+      "observed_at": "2026-07-25",
+      "primary": true,
+      "claim_scopes": ["availability", "ethereum_contract_identity", "issuer_identity", "redemption_at_par"]
+    },
+    {
+      "source_id": "pr467_quantoz_transparency",
+      "publisher": "Quantoz Payments B.V.",
+      "url": "https://www.quantoz.com/transparency",
+      "source_type": "official_reserve_transparency",
+      "updated_at": "2026-06-30",
+      "primary": true,
+      "claim_scopes": ["reserve_composition", "segregated_accounts", "bankruptcy_remote_structure", "overcollateralization_claim", "redemption_one_to_one"]
+    },
+    {
+      "source_id": "pr467_dnb_quantoz_register",
+      "publisher": "De Nederlandsche Bank",
+      "url": "https://www.dnb.nl/en/public-register/information-detail/?registerCode=WFTEG&relationNumber=R186418",
+      "source_type": "official_regulatory_register",
+      "updated_at": "2026-07-24",
+      "primary": true,
+      "claim_scopes": ["legal_identity", "electronic_money_license", "issuance_authority", "distribution_authority", "redemption_authority", "stichting_quantoz_relationship"]
+    }
+  ],
+  "candidates": [
+    {
+      "candidate_id": "sog_cand_pr427_plnq",
+      "canonical_id": "sog_st_plnq",
+      "slug": "plnq",
+      "name": "Quantoz PLNQ",
+      "symbol": "PLNQ",
+      "reference_asset": "PLN",
+      "status_hypothesis": "active",
+      "launch_date": "2026-04-14",
+      "ethereum_contract": "0x00B81d7B21955837890d9346e4978b6b43762b3A",
+      "whitepaper": {
+        "current_version": "1.1",
+        "current_date": "2026-04-30",
+        "archived_version": "1.0",
+        "archived_date": "2026-04-07"
+      },
+      "duplicate_review": {
+        "canonical_id_match": false,
+        "slug_match": false,
+        "symbol_match": false,
+        "name_match": false,
+        "contract_match": false,
+        "organization_match": true,
+        "decision": "distinct_asset_reuse_existing_issuer"
+      },
+      "entry_gate": {
+        "current_official_launch_confirmed": true,
+        "current_contract_identity_confirmed": true,
+        "current_whitepaper_confirmed": true,
+        "current_issuer_license_confirmed": true,
+        "reserve_and_redemption_basis_confirmed": true,
+        "complete_record_review_allowed": true
+      }
+    },
+    {
+      "candidate_id": "sog_cand_pr427_gbpq",
+      "canonical_id": "sog_st_gbpq",
+      "slug": "gbpq",
+      "name": "Quantoz GBPQ",
+      "symbol": "GBPQ",
+      "reference_asset": "GBP",
+      "status_hypothesis": "active",
+      "launch_date": "2026-04-14",
+      "ethereum_contract": "0xb92e69fd39bf33ee1f81e56b0b7933bdc49df46e",
+      "whitepaper": {
+        "current_version": "1.1",
+        "current_date": "2026-04-30",
+        "archived_version": "1.0",
+        "archived_date": "2026-04-07"
+      },
+      "duplicate_review": {
+        "canonical_id_match": false,
+        "slug_match": false,
+        "symbol_match": false,
+        "name_match": false,
+        "contract_match": false,
+        "organization_match": true,
+        "decision": "distinct_asset_reuse_existing_issuer"
+      },
+      "entry_gate": {
+        "current_official_launch_confirmed": true,
+        "current_contract_identity_confirmed": true,
+        "current_whitepaper_confirmed": true,
+        "current_issuer_license_confirmed": true,
+        "reserve_and_redemption_basis_confirmed": true,
+        "complete_record_review_allowed": true
+      }
+    }
+  ],
+  "shared_record_semantics": {
+    "mechanism": "fiat_backed_micar_e_money_token",
+    "collateral_model": "fiat_backed_e_money_token_with_cash_and_government_bond_reserves",
+    "reserve_disclosure_status": "issuer_transparency",
+    "redemption_status": "redemption_at_par",
+    "who_can_redeem": "Eligible holders may redeem against Quantoz Payments B.V. at par, subject to onboarding, terms, and supported redemption channels.",
+    "reserve_notes": "Quantoz states that its stablecoins are backed by cash deposits and government bonds, with safeguarded segregated accounts and reserves exceeding circulation.",
+    "distribution_notes": "Quantoz announced Zodia Markets as the initial institutional distribution partner for PLNQ and GBPQ.",
+    "initial_network": "ethereum"
+  },
+  "remaining_unknowns": [
+    "token_specific_monthly_supply_and_reserve_allocation_series",
+    "complete_secondary_market_and_distribution_inventory",
+    "future_non_ethereum_deployment_activation_dates",
+    "minimum_direct_redemption_threshold_by_customer_type",
+    "token_specific_fee_schedule"
+  ],
+  "decision": {
+    "entry_gate_passed": true,
+    "maximum_canonical_additions": 2,
+    "complete_record_only": true,
+    "thin_records_forbidden": true,
+    "automatic_promotion": false,
+    "public_surface_change": false,
+    "market_access_change": false,
+    "ui_change": false,
+    "next_step": "BUILD_COMPLETE_CANONICAL_RECORD_LAYERS"
+  }
+}
