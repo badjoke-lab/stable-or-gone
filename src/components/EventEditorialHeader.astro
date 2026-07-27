@@ -1,17 +1,18 @@
 ---
 import ValueStateText from './ValueStateText.astro';
-import { formatPublicLabel } from '../utils/displayLabels';
 const { event, view } = Astro.props;
+const subjectParts = [
+  view.subjectStablecoins.length > 0 ? `${view.subjectStablecoins.length} stablecoin${view.subjectStablecoins.length === 1 ? '' : 's'}` : null,
+  view.subjectOrganizations.length > 0 ? `${view.subjectOrganizations.length} organization${view.subjectOrganizations.length === 1 ? '' : 's'}` : null
+].filter(Boolean);
+const subjectSummary = subjectParts.length > 0 ? subjectParts.join(' · ') : 'No linked records';
 ---
 <header class="event-detail-masthead event-detail-masthead-r5">
   <div class="event-detail-overline"><span>Event record</span><div><a href="/events/">Event register</a><a href="/contact/">Report a correction</a></div></div>
-  <div class="event-detail-title"><div><p>Record <code>{event.id}</code></p><h1>{view.eventTitle}</h1></div><p>{view.eventDescription}</p></div>
+  <div class="event-detail-title"><div><p>Reviewed event</p><h1>{view.eventTitle}</h1></div><p>{view.eventDescription}</p></div>
   <dl class="event-detail-ledger event-detail-ledger-r5" aria-label="Primary reviewed event facts">
     <div><dt>Date</dt><dd><ValueStateText value={event.event_date} /></dd></div>
-    <div><dt>Severity</dt><dd><ValueStateText value={event.impact_level} displayValue={formatPublicLabel(event.impact_level)} /></dd></div>
-    <div><dt>Type</dt><dd>{view.taxonomy.canonical_subtype_label}<small>{view.taxonomy.public_category_label}</small></dd></div>
-    <div><dt>Lifecycle effect</dt><dd>{view.taxonomy.status_effect_label}</dd></div>
-    <div><dt>Recovery</dt><dd>{view.taxonomy.recovery_label}<small><ValueStateText value={view.recoveryDate} /></small></dd></div>
-    <div><dt>Evidence</dt><dd><a href="#sources">{view.sourceIdentities.length} source record{view.sourceIdentities.length === 1 ? '' : 's'}</a><small>{view.eventRelations.length} relation{view.eventRelations.length === 1 ? '' : 's'}</small></dd></div>
+    <div><dt>Affected records</dt><dd><a href="#subjects">{view.subjectCount} linked record{view.subjectCount === 1 ? '' : 's'}</a><small>{subjectSummary}</small></dd></div>
+    <div><dt>Evidence</dt><dd><a href="#sources">{view.sourceIdentities.length} source{view.sourceIdentities.length === 1 ? '' : 's'}</a><small>{view.eventRelations.length} evidence relation{view.eventRelations.length === 1 ? '' : 's'}</small></dd></div>
   </dl>
 </header>

@@ -52,8 +52,8 @@ function valueFor(key: string, value: unknown): PresentedValue {
 const rows = sections.flatMap((section) => Object.entries(section.value as Record<string, unknown>).map(([key, value]) => ({ label: `${section.label} — ${labelFor(key)}`, presentation: valueFor(key, value) })));
 ---
 {rows.length > 0 && (
-  <section class="event-structured-detail">
-    <div class="bar">Structured event detail</div>
+  <section class="event-structured-detail" aria-labelledby="event-specific-details-heading">
+    <h3 id="event-specific-details-heading">Event-specific details</h3>
     <div class="event-detail-table"><table data-table-kind="event-detail-overlay" data-mobile-table="scroll-preserve"><tbody>{rows.map((row) => <tr><th>{row.label}</th><td><span class={`value-state value-state--${row.presentation.state}`} data-value-state={row.presentation.state} title={row.presentation.label}>{row.presentation.text}</span></td></tr>)}</tbody></table></div>
     <dl class="event-structured-cards" data-mobile-representation-for="event-detail-overlay">{rows.map((row) => <div><dt>{row.label}</dt><dd><span class={`value-state value-state--${row.presentation.state}`} data-value-state={row.presentation.state} title={row.presentation.label}>{row.presentation.text}</span></dd></div>)}</dl>
   </section>

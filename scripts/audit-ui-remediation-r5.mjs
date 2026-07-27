@@ -119,7 +119,7 @@ for (const viewport of viewports) {
       if (state.mode === 'filtered' && audit.activeFilterChips < 1) stateFailures.push('organization filtered state missing chip');
     }
     if (state.family === 'event-detail') {
-      if (audit.eventPrimaryFacts !== 6) stateFailures.push(`event primary facts ${audit.eventPrimaryFacts}/6`);
+      if (audit.eventPrimaryFacts !== 3) stateFailures.push(`event primary facts ${audit.eventPrimaryFacts}/3`);
       if (audit.duplicateEventOverviewCards !== 0) stateFailures.push('duplicate event overview cards');
       if (audit.duplicateEventSourceCards !== 0) stateFailures.push('duplicate event source cards');
     }

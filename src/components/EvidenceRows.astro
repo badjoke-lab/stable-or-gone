@@ -4,17 +4,35 @@ import { resolveEvidenceTaxonomy } from '../utils/evidenceTaxonomy';
 import ValueStateText from './ValueStateText.astro';
 import type { EvidenceRow } from '../lib/data/registryBase';
 
-const { evidence, emptyMessage = 'No sources have been added yet.' } = Astro.props as {
+const { evidence, emptyMessage = 'No sources have been added yet.', eventCompact = false } = Astro.props as {
   evidence: EvidenceRow[];
   emptyMessage?: string;
+  eventCompact?: boolean;
 };
 ---
 <tbody>
-  {evidence.length === 0 ? <tr><td colspan="8">{emptyMessage}</td></tr> : evidence.map((source) => {
+  {evidence.length === 0 ? <tr><td colspan={eventCompact ? 4 : 8}>{emptyMessage}</td></tr> : evidence.map((source) => {
     const taxonomy = resolveEvidenceTaxonomy(source);
     const claims = source.claim_scopes?.length
       ? source.claim_scopes.map((item: string) => formatPublicLabel(item)).join(', ')
       : null;
+    if (eventCompact) return <tr>
+      <td>
+        <a href={source.url} data-evidence-source-title>{source.title}</a>
+        <details class="event-evidence-source-details">
+          <summary>Source details</summary>
+          <dl class="event-detail-secondary-r5 event-evidence-source-detail-grid">
+            <div><dt>Source category</dt><dd>{taxonomy.public_category_label}</dd></div>
+            <div><dt>Provenance</dt><dd>{taxonomy.provenance_label}</dd></div>
+            <div><dt>Primary or secondary</dt><dd>{taxonomy.primary_state_label}</dd></div>
+            <div><dt>Reliability</dt><dd>{taxonomy.reliability_label}</dd></div>
+          </dl>
+        </details>
+      </td>
+      <td><span data-evidence-publisher><ValueStateText value={source.publisher} /></span><br /><small>Published <ValueStateText value={source.published_at} /></small></td>
+      <td data-evidence-relevance><ValueStateText value={claims} displayValue={claims ?? 'Supports this event record'} /></td>
+      <td>{source.archived_url ? <a href={source.archived_url}>{taxonomy.archive_state_label}</a> : taxonomy.archive_state_label}</td>
+    </tr>;
     return <tr>
       <td><a href={source.url}>{source.title}</a><br /><small>Published <ValueStateText value={source.published_at} /></small></td>
       <td><ValueStateText value={source.publisher} /></td>
