@@ -21,7 +21,7 @@ const { evidence, emptyMessage = 'No sources have been added yet.', eventCompact
         <a href={source.url} data-evidence-source-title>{source.title}</a>
         <details class="event-evidence-source-details">
           <summary>Source details</summary>
-          <dl>
+          <dl class="event-detail-secondary-r5 event-evidence-source-detail-grid">
             <div><dt>Source category</dt><dd>{taxonomy.public_category_label}</dd></div>
             <div><dt>Provenance</dt><dd>{taxonomy.provenance_label}</dd></div>
             <div><dt>Primary or secondary</dt><dd>{taxonomy.primary_state_label}</dd></div>

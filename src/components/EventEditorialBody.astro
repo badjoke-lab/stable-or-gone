@@ -27,7 +27,7 @@ const { event, view } = Astro.props as { event: any; view: View };
 <section class="event-detail-section event-record-metadata-section" id="record-details">
   <details class="event-record-details">
     <summary><span>Record details</span><small>IDs, classification, and review metadata</small></summary>
-    <dl class="event-record-details-grid">
+    <dl class="event-detail-secondary-r5 event-record-details-grid">
       <div><dt>Record ID</dt><dd><code>{event.id}</code></dd></div>
       <div><dt>Severity</dt><dd><ValueStateText value={event.impact_level} displayValue={formatPublicLabel(event.impact_level)} /></dd></div>
       <div><dt>Event type</dt><dd>{view.taxonomy.canonical_subtype_label}</dd></div>
