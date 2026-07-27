@@ -253,7 +253,11 @@ for (const device of devices) {
             if (!(target instanceof HTMLAnchorElement)) continue;
             const id = `${zone}-${linkTargets.length}`;
             target.dataset.uiAuditLink = id;
-            linkTargets.push({ id, zone, element: pathFor(target), text: displayText(target).slice(0, 100), default_color: getComputedStyle(target).color });
+            const defaultColor = getComputedStyle(target).color;
+            const auditUrl = new URL(target.href, window.location.href);
+            auditUrl.searchParams.set('__sog_ui_audit', crypto.randomUUID());
+            target.href = auditUrl.href;
+            linkTargets.push({ id, zone, element: pathFor(target), text: displayText(target).slice(0, 100), default_color: defaultColor });
           }
 
           return {
