@@ -87,7 +87,7 @@ for (const route of routes) {
         entry.count += 1;
         if (entry.samples.length < 4) entry.samples.push({ element: pathFor(element), text: text.slice(0, 100) });
         inventory.set(style.color, entry);
-        const isInteractive = element.matches('a,button') || Boolean(element.closest('a,button'));
+        const isInteractive = element.matches('a,button,summary') || Boolean(element.closest('a,button,summary'));
         const isSemantic = Boolean(element.closest(explicitSemantic));
         const sat = saturation(parsed.rgb);
         const brightness = Math.max(...parsed.rgb);
