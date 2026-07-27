@@ -24,7 +24,7 @@ const mobileRows = sourceIdentities.map((source) => {
   return { source, taxonomy, claims };
 });
 ---
-<div class="organization-detail-table evidence-table-wrap">
+<div class:list={['evidence-table-wrap', tableKind !== 'event-sources' && 'organization-detail-table']}>
   {tableKind === 'stablecoin-sources' ? (
     <table data-table-kind="stablecoin-sources" data-mobile-table="scroll-preserve" data-evidence-record-count={evidence.length} data-source-identity-count={sourceIdentities.length}>
       <caption>{identitySummary}</caption>
