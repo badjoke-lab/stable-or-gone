@@ -55,8 +55,53 @@ for (const device of devices) {
 
         const result = await page.evaluate(() => {
           const technicalSelector = 'code, pre, kbd, samp, .contract-address, .transaction-hash, [data-long-value], [data-technical-value]';
-          const editorialSerifSelector = 'main h1, main h2, main [data-editorial-serif], main [data-editorial-number]';
-          const explicitMonoSelector = '.bar, .kicker, .eyebrow, [class*="overline"], [class*="-label"], dt, th, .home-masthead__edition, .home-section-kicker, .home-material-list__meta, .home-guide-list__meta, .v3-masthead-meta, .record-kicker, .record-symbol, [data-ui-mono]';
+          const editorialSerifSelector = [
+            'main h1',
+            'main h2',
+            'main h3',
+            'main h4',
+            'main h5',
+            'main h6',
+            'main [data-editorial-serif]',
+            'main [data-editorial-number]',
+            '.home-register-strip strong',
+            '.home-status-ledger dd',
+            '.stablecoin-register-count strong',
+            '.event-index-ledger dd',
+            '.organization-index-ledger dd',
+            '.maintenance-counts dd',
+            '.stats-kpi-grid dd',
+            '.stats-mini-kpi-grid dd',
+            '.update-analysis__deck',
+            '.analysis-deck'
+          ].join(', ');
+          const explicitMonoSelector = [
+            '.bar',
+            '.kicker',
+            '.eyebrow',
+            '[class*="eyebrow"]',
+            '[class*="kicker"]',
+            '[class*="overline"]',
+            '[class*="-label"]',
+            'dt',
+            'th',
+            '.home-masthead__edition',
+            '.home-section-kicker',
+            '.home-search__popular > span',
+            '.home-material-list__meta',
+            '.home-guide-list__meta',
+            '.v3-masthead-meta',
+            '.record-kicker',
+            '.record-symbol',
+            '.stablecoin-section-heading > p',
+            '.event-detail-section-heading > p',
+            '.organization-detail-section-heading > p',
+            '.static-registry-range',
+            '.timeline-item__date',
+            '.update-feed-item__date',
+            '.update-feed-paths',
+            '[data-ui-mono]'
+          ].join(', ');
           const badgeSelector = '.chip, [class*="badge"], [class*="status-chip"], [data-tone], .home-status-label, .update-feed-category, .ar-chip, .ar-lifecycle';
           const monospaceFamilies = new Set(['ui-monospace', 'sfmono-regular', 'menlo', 'monaco', 'consolas', 'liberation mono', 'courier', 'courier new', 'monospace']);
           const serifFamilies = new Set(['iowan old style', 'palatino linotype', 'palatino', 'georgia', 'times', 'times new roman', 'serif']);
@@ -226,7 +271,9 @@ for (const device of devices) {
         if (!device.hasTouch) {
           for (const target of result.link_targets) {
             const locator = page.locator(`[data-ui-audit-link="${target.id}"]`);
+            await locator.evaluate((element) => element.scrollIntoView({ block: 'center', inline: 'center' }));
             await locator.hover({ timeout: 5000 });
+            await locator.evaluate(() => new Promise((resolve) => requestAnimationFrame(() => resolve())));
             const hoverColor = await locator.evaluate((element) => getComputedStyle(element).color);
             const allowed = target.zone === 'main'
               ? [result.allowed_hover_colors.link]

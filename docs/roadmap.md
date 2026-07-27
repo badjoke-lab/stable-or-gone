@@ -102,9 +102,9 @@ PR #470 changes no canonical data, counts, routes, metadata, sitemap, or machine
 ## Active bounded sequence
 
 ```text
-PR #466 Post-UI data-growth review gate: complete
+PR #466 Post-UI data-growth review gate: active authority (governance work complete)
 PR #470 Full Public UI Contract: active
-PR #467 Record Growth Batch 3 — PLNQ and GBPQ: authorized but paused until PR #470 production verification
+PR #467 Record Growth Batch 3 — PLNQ and GBPQ: authorized next; paused until PR #470 production verification
 REVIEW GATE after PR #467
 ```
 

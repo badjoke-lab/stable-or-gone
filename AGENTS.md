@@ -80,7 +80,7 @@ PR #464 UI authority and roadmap closure: complete
 PR #465 agent authority synchronization: complete on merge
 PR #466 Post-UI data-growth review gate: active
 PR #470 Full Public UI Contract: active
-PR #467 Record Growth Batch 3 — PLNQ and GBPQ: authorized and paused until PR #470 production verification
+PR #467 Record Growth Batch 3 — PLNQ and GBPQ: authorized next; paused until PR #470 production verification
 Next boundary after PR #467: REVIEW GATE
 
 Issue #281 UI v3 rebuild: complete and closed
