@@ -126,8 +126,22 @@ async function measurePage(page) {
       }
       return parts.join(' > ');
     };
-    const fontFor = (selector) => {
-      const element = [...document.querySelectorAll(selector)].find(visible);
+    const approvedMonoContainer = [
+      'code', 'pre', 'kbd', 'samp', 'time', 'dt', 'th',
+      '.bar', '.kicker', '.eyebrow', '[class*="eyebrow"]', '[class*="kicker"]', '[class*="overline"]', '[class*="-label"]',
+      '.home-masthead__edition', '.home-section-kicker', '.home-search__popular > span',
+      '.home-material-list__meta', '.home-guide-list__meta', '.v3-masthead-meta',
+      '.record-kicker', '.record-symbol',
+      '.stablecoin-section-heading > p', '.event-detail-section-heading > p', '.organization-detail-section-heading > p',
+      '.static-registry-eyebrow', '.static-registry-range',
+      '.timeline-item__date', '.update-feed-item__date', '.update-feed-paths',
+      '[data-ui-mono]', '[data-mono]', '.v3-brand-copy small'
+    ].join(', ');
+    const fontFor = (selector, excludedContainer = null) => {
+      const element = [...document.querySelectorAll(selector)].find((candidate) => (
+        visible(candidate)
+        && (!excludedContainer || (!candidate.matches(excludedContainer) && !candidate.closest(excludedContainer)))
+      ));
       return element instanceof HTMLElement ? getComputedStyle(element).fontFamily : null;
     };
     const root = document.documentElement;
@@ -148,19 +162,24 @@ async function measurePage(page) {
     const legacyVisualSelectors = ['.page-hero', '.metric-card', '[class*="blue-purple"]', '[class*="glow-art"]', '[data-saas-dashboard]'];
     const legacyVisualMarkers = legacyVisualSelectors.flatMap((selector) => [...document.querySelectorAll(selector)].filter(visible).map(() => selector));
     const unexpectedEmptySelectors = ['[data-stablecoin-no-results]', '[data-organization-no-results]', '[data-event-no-results]'];
-    const hiddenMobileTableContent = [...document.querySelectorAll('table[data-table-kind="event-sources"][data-mobile-table="scroll-preserve"]')].flatMap((table) => {
+    const mobileRepresentationSelector = (kind) => `[data-mobile-representation-for="${CSS.escape(kind)}"]`;
+    const hiddenMobileTableContent = innerWidth > 820 ? [] : [...document.querySelectorAll('table[data-table-kind][data-mobile-table]')].flatMap((table) => {
+      const kind = table.getAttribute('data-table-kind') ?? 'unknown';
       const rows = table.querySelectorAll(':scope > tbody > tr').length;
-      const representation = table.nextElementSibling;
-      if (rows === 0 || visible(table) || (representation instanceof HTMLElement && visible(representation))) return [];
-      return [`hidden-mobile-table:${table.getAttribute('data-table-kind') ?? 'unknown'}`];
+      const representation = [table.nextElementSibling, table.parentElement?.nextElementSibling]
+        .find((candidate) => candidate instanceof HTMLElement && candidate.matches(mobileRepresentationSelector(kind)));
+      const tableVisible = visible(table);
+      const representationVisible = representation instanceof HTMLElement && visible(representation);
+      if (rows === 0 || (tableVisible && !representationVisible) || (!tableVisible && representationVisible)) return [];
+      if (tableVisible && representationVisible) return [`duplicate-mobile-table:${kind}`];
+      return [`hidden-mobile-table:${kind}`];
     });
     const unexpectedEmptyStates = [
       ...unexpectedEmptySelectors.flatMap((selector) => [...document.querySelectorAll(selector)].filter(visible).map(() => selector)),
       ...hiddenMobileTableContent
     ];
     const monoTokens = ['ui-monospace', 'sfmono-regular', 'menlo', 'monaco', 'consolas', 'liberation mono', 'monospace'];
-    const approvedMonoContainer = 'code, pre, kbd, samp, time, dt, th, .kicker, .eyebrow, [class*="meta"], [class*="overline"], [data-mono], .v3-brand-copy small';
-    const textCandidates = [...document.querySelectorAll('a, span, strong, small, p, li, dd, label, button, input, select, textarea, summary, h3')].filter(visible);
+    const textCandidates = [...document.querySelectorAll('a, span, strong, small, p, li, dd, label, button, input, select, textarea, summary, h1, h2, h3, h4, h5, h6')].filter(visible);
     const legacyFontViolations = textCandidates.flatMap((element) => {
       const text = element instanceof HTMLInputElement || element instanceof HTMLTextAreaElement
         ? element.value || element.placeholder || ''
@@ -192,8 +211,8 @@ async function measurePage(page) {
       fontRoles: {
         body: getComputedStyle(document.body).fontFamily,
         h1: fontFor('h1'),
-        h2: fontFor('h2'),
-        h3: fontFor('h3'),
+        h2: fontFor('h2', approvedMonoContainer),
+        h3: fontFor('h3', approvedMonoContainer),
         paragraph: fontFor('p'),
         link: fontFor('a'),
         strong: fontFor('strong'),
@@ -243,7 +262,12 @@ async function main() {
       if (!response || !response.ok()) throw new Error(`HTTP ${response?.status() ?? 'no response'}`);
       await page.evaluate(() => document.fonts?.ready);
       const metrics = await measurePage(page);
-      await page.screenshot({ path: file, fullPage: true });
+      const screenshot = await page.screenshot({ path: file, fullPage: true });
+      const screenshotWidth = screenshot.readUInt32BE(16);
+      const screenshotOverflowPx = Math.max(0, screenshotWidth - device.viewport.width);
+      metrics.screenshotWidth = screenshotWidth;
+      metrics.horizontalOverflowPx = Math.max(metrics.horizontalOverflowPx, screenshotOverflowPx);
+      metrics.horizontalOverflow = metrics.horizontalOverflowPx > 2;
       const screenshotBytes = (await stat(file)).size;
       records.push({ url, path: route, device: deviceName, file, screenshot_bytes: screenshotBytes, metrics });
       console.log(`[${deviceName}] captured ${route}`);

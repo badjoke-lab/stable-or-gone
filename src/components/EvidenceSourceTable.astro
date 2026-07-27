@@ -1,7 +1,10 @@
 ---
 import EvidenceRows from './EvidenceRows.astro';
+import ValueStateText from './ValueStateText.astro';
 import { getEvidenceSourceIdentities } from '../lib/data/evidenceSources';
 import { resolveEvidenceIdentityId } from '../../config/evidence-source-identities.mjs';
+import { resolveEvidenceTaxonomy } from '../utils/evidenceTaxonomy';
+import { formatPublicLabel } from '../utils/displayLabels';
 import type { EvidenceRow } from '../lib/data/registryBase';
 
 const { evidence, tableKind, emptyMessage } = Astro.props as {
@@ -13,30 +16,50 @@ const { evidence, tableKind, emptyMessage } = Astro.props as {
 const requestedIdentityIds = new Set(evidence.map((source) => resolveEvidenceIdentityId(source.id)));
 const sourceIdentities = getEvidenceSourceIdentities().filter((source) => requestedIdentityIds.has(source.id));
 const identitySummary = `${sourceIdentities.length} source ${sourceIdentities.length === 1 ? 'identity' : 'identities'} · ${evidence.length} evidence ${evidence.length === 1 ? 'relation' : 'relations'}`;
+const mobileRows = sourceIdentities.map((source) => {
+  const taxonomy = resolveEvidenceTaxonomy(source);
+  const claims = source.claim_scopes?.length
+    ? source.claim_scopes.map((item: string) => formatPublicLabel(item)).join(', ')
+    : 'Supports this record';
+  return { source, taxonomy, claims };
+});
 ---
-{tableKind === 'stablecoin-sources' ? (
-  <table data-table-kind="stablecoin-sources" data-mobile-table="scroll-preserve" data-evidence-record-count={evidence.length} data-source-identity-count={sourceIdentities.length}>
-    <caption>{identitySummary}</caption>
-    <thead><tr><th>Source</th><th>Publisher</th><th>Source category</th><th>Provenance</th><th>Primary or secondary</th><th>Supported claims</th><th>Archive</th><th>Reliability</th></tr></thead>
-    <EvidenceRows evidence={sourceIdentities} emptyMessage={emptyMessage} />
-  </table>
-) : tableKind === 'organization-sources' ? (
-  <table data-table-kind="organization-sources" data-mobile-table="scroll-preserve" data-evidence-record-count={evidence.length} data-source-identity-count={sourceIdentities.length}>
-    <caption>{identitySummary}</caption>
-    <thead><tr><th>Source</th><th>Publisher</th><th>Source category</th><th>Provenance</th><th>Primary or secondary</th><th>Supported claims</th><th>Archive</th><th>Reliability</th></tr></thead>
-    <EvidenceRows evidence={sourceIdentities} emptyMessage={emptyMessage} />
-  </table>
-) : (
-  <table data-table-kind="event-sources" data-mobile-table="scroll-preserve" data-evidence-record-count={evidence.length} data-source-identity-count={sourceIdentities.length}>
-    <caption>{identitySummary}</caption>
-    <thead><tr><th>Source</th><th>Publisher and date</th><th>Relevance</th><th>Archive</th></tr></thead>
-    <EvidenceRows evidence={sourceIdentities} emptyMessage={emptyMessage} eventCompact />
-  </table>
-)}
+<div class="evidence-table-wrap">
+  {tableKind === 'stablecoin-sources' ? (
+    <table data-table-kind="stablecoin-sources" data-mobile-table="scroll-preserve" data-evidence-record-count={evidence.length} data-source-identity-count={sourceIdentities.length}>
+      <caption>{identitySummary}</caption>
+      <thead><tr><th>Source</th><th>Publisher</th><th>Source category</th><th>Provenance</th><th>Primary or secondary</th><th>Supported claims</th><th>Archive</th><th>Reliability</th></tr></thead>
+      <EvidenceRows evidence={sourceIdentities} emptyMessage={emptyMessage} />
+    </table>
+  ) : tableKind === 'organization-sources' ? (
+    <table data-table-kind="organization-sources" data-mobile-table="scroll-preserve" data-evidence-record-count={evidence.length} data-source-identity-count={sourceIdentities.length}>
+      <caption>{identitySummary}</caption>
+      <thead><tr><th>Source</th><th>Publisher</th><th>Source category</th><th>Provenance</th><th>Primary or secondary</th><th>Supported claims</th><th>Archive</th><th>Reliability</th></tr></thead>
+      <EvidenceRows evidence={sourceIdentities} emptyMessage={emptyMessage} />
+    </table>
+  ) : (
+    <table data-table-kind="event-sources" data-mobile-table="scroll-preserve" data-evidence-record-count={evidence.length} data-source-identity-count={sourceIdentities.length}>
+      <caption>{identitySummary}</caption>
+      <thead><tr><th>Source</th><th>Publisher and date</th><th>Relevance</th><th>Archive</th></tr></thead>
+      <EvidenceRows evidence={sourceIdentities} emptyMessage={emptyMessage} eventCompact />
+    </table>
+  )}
+</div>
 
-<style is:global>
-  .stablecoin-dossier-r4 .stablecoin-r4-evidence-table table th,
-  .stablecoin-dossier-r4 .stablecoin-r4-evidence-table table td {
-    font-size: 0.875rem !important;
-  }
-</style>
+<div class="mobile-record-list evidence-mobile-records" data-mobile-representation-for={tableKind}>
+  {mobileRows.length === 0 ? <p class="mobile-empty-record">{emptyMessage ?? 'No sources have been added yet.'}</p> : mobileRows.map(({ source, taxonomy, claims }) => <article class="mobile-evidence-record">
+    <header>
+      <div><span class="record-kicker">{taxonomy.public_category_label}</span><h3><a href={source.url}>{source.title}</a></h3></div>
+      <span>{taxonomy.reliability_label}</span>
+    </header>
+    <dl>
+      <div><dt>Publisher</dt><dd><ValueStateText value={source.publisher} /></dd></div>
+      <div><dt>Published</dt><dd><ValueStateText value={source.published_at} /></dd></div>
+      <div><dt>Provenance</dt><dd>{taxonomy.provenance_label}</dd></div>
+      <div><dt>Primary or secondary</dt><dd>{taxonomy.primary_state_label}</dd></div>
+      <div><dt>Supported claims</dt><dd>{claims}</dd></div>
+      <div><dt>Archive</dt><dd>{source.archived_url ? <a href={source.archived_url}>{taxonomy.archive_state_label}</a> : taxonomy.archive_state_label}</dd></div>
+      <div><dt>Reliability</dt><dd>{taxonomy.reliability_label}</dd></div>
+    </dl>
+  </article>)}
+</div>

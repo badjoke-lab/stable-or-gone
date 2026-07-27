@@ -3,7 +3,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import OrganizationEditorialHeader from './OrganizationEditorialHeader.astro';
 import OrganizationEditorialIdentity from './OrganizationEditorialIdentity.astro';
 import OrganizationEditorialHistory from './OrganizationEditorialHistory.astro';
-import '../styles/organization-detail.css';
 import { buildOrganizationDetailView } from '../lib/views/organizationDetailView';
 const { organization } = Astro.props;
 const view = buildOrganizationDetailView(organization);

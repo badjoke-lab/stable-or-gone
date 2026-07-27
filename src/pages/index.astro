@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import '../styles/home-v3.css';
 import { formatLifecycleLabel, formatTaxonomyLabel, lifecycleChipClass } from '../utils/publicTaxonomy';
 import { formatReferenceTargetLabel } from '../utils/referenceTarget';
 import { formatPublicBackingModelLabel } from '../utils/backingModel';
@@ -26,11 +25,7 @@ const organizationTypeLabel = (organization: { organization_type?: string | null
   return formatTaxonomyLabel('organization_type', value, 'Organization');
 };
 
-const featuredGuides = getFeaturedGuides(4).map((guide) => ({
-  guide,
-  label: guide.regionLabel ?? 'Guide'
-}));
-
+const featuredGuides = getFeaturedGuides(4).map((guide) => ({ guide, label: guide.regionLabel ?? 'Guide' }));
 const lifecycleOrder = ['active', 'restricted', 'winding_down', 'terminated', 'collapsed', 'migrated', 'rebranded', 'unknown'];
 const lifecycleCounts = stablecoins.reduce<Record<string, number>>((counts, coin) => {
   const key = String(coin.lifecycle_status || 'unknown');

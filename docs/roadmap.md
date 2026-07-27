@@ -1,7 +1,7 @@
 # Stable or Gone Roadmap
 
-Updated: 2026-07-25  
-Status: UI V3 remediation complete; Record Growth Batch 3 review gate active
+Updated: 2026-07-27  
+Status: Full public UI contract remediation active; Record Growth Batch 3 paused
 
 ## Current position
 
@@ -85,11 +85,26 @@ small correctness, accessibility, readability, and broken-link fixes
 
 New public pages, dashboards, rankings, explorer families, or major navigation changes remain frozen unless a separate reviewed roadmap amendment and canonical specification authorize them.
 
+## Active full public UI contract
+
+Owner review found that the accepted UI V3 implementation still depended on 78 stylesheets, 649,819 source bytes, and 4,905 `!important` declarations after PR #472. The full-route audit established regression coverage but did not establish one maintainable or consistently applied page-family contract.
+
+The owner-directed amendment `docs/roadmap-amendments/2026-07-27-pr470-full-public-ui-contract.md` therefore authorizes:
+
+```text
+PR #470 Full Public UI Contract — active
+PRODUCTION VISUAL VERIFICATION
+PR #467 Record Growth Batch 3 — resumes only after verification
+```
+
+PR #470 changes no canonical data, counts, routes, metadata, sitemap, or machine-readable semantics. It replaces the accumulated public cascade with one physical stylesheet and one import, applies the shared design contract to every existing page family, and preserves the exhaustive UI regression gates.
+
 ## Active bounded sequence
 
 ```text
-PR #466 Post-UI data-growth review gate: active
-PR #467 Record Growth Batch 3 — PLNQ and GBPQ: authorized next
+PR #466 Post-UI data-growth review gate: active authority (governance work complete)
+PR #470 Full Public UI Contract: active
+PR #467 Record Growth Batch 3 — PLNQ and GBPQ: authorized next; paused until PR #470 production verification
 REVIEW GATE after PR #467
 ```
 

@@ -2,9 +2,10 @@
 
 Current mandatory authorities:
 
-1. Completed UI V3 regression authority — PR #461 and PR #463 closure, archived in `docs/ui-v3-remediation-authority.md`.
-2. Canonical data baseline — PR #433 generated-output repair on top of PR #429.
-3. Active data-growth authority — PR #466 Post-UI data-growth review gate, authorizing only PR #467 Record Growth Batch 3 for PLNQ and GBPQ.
+1. Active owner-directed full public UI contract — PR #470, governed by `docs/roadmap-amendments/2026-07-27-pr470-full-public-ui-contract.md` and `docs/quality/full-public-ui-contract-pr470-spec.md`.
+2. Completed UI V3 regression authority — PR #461 and PR #463 closure, archived in `docs/ui-v3-remediation-authority.md`.
+3. Canonical data baseline — PR #433 generated-output repair on top of PR #429.
+4. Paused data-growth authority — PR #466 authorizes only PR #467 PLNQ and GBPQ after PR #470 production verification.
 
 ## Mandatory references
 
@@ -14,6 +15,8 @@ docs/spec-governance.md
 docs/roadmap.md
 docs/deployment-policy.md
 docs/ui-v3-remediation-authority.md
+docs/roadmap-amendments/2026-07-27-pr470-full-public-ui-contract.md
+docs/quality/full-public-ui-contract-pr470-spec.md
 docs/post-351-data-growth-operating-spec.md
 docs/roadmap-amendments/2026-07-18-pr426-post-ui-v3-data-growth-reset.md
 docs/quality/record-growth-candidate-audit-v2-pr427-spec.md
@@ -76,26 +79,27 @@ PR #463 exhaustive UI V3 readability and hierarchy closure: complete
 PR #464 UI authority and roadmap closure: complete
 PR #465 agent authority synchronization: complete on merge
 PR #466 Post-UI data-growth review gate: active
-PR #467 Record Growth Batch 3 — PLNQ and GBPQ: authorized next
+PR #470 Full Public UI Contract: active
+PR #467 Record Growth Batch 3 — PLNQ and GBPQ: authorized next; paused until PR #470 production verification
 Next boundary after PR #467: REVIEW GATE
 
 Issue #281 UI v3 rebuild: complete and closed
 Issue #457 CYA-dark redesign audit: complete and closed
-UI v3 completion: true
-UI remediation implementation queue: closed
+UI v3 regression baseline: preserved
+Full public UI contract remediation: active
 ```
 
 ## UI authority boundary
 
 The current UI V3 implementation is the accepted baseline after exhaustive 457-route desktop and mobile verification, direct artifact inspection, repair of the discovered mobile event section-heading overlap, and merge of PR #463.
 
-`docs/ui-v3-remediation-authority.md` remains mandatory for regression protection, but it is no longer an active R1–R10 implementation queue. Do not reopen superseded UI phases or drafts as current authority.
+`docs/ui-v3-remediation-authority.md` remains mandatory for regression protection and is not reopened as an R1–R10 queue.
 
-A future material UI program requires a new reviewed roadmap amendment. Small correctness, accessibility, readability, and broken-link fixes remain allowed when they preserve the completed regression contract.
+The new material UI program is PR #470 only. It is bounded by the 2026-07-27 roadmap amendment and must replace the legacy cascade with the single public UI authority without changing canonical data or routes.
 
 ## PR #467 canonical-growth boundary
 
-PR #467 is the only authorized next canonical-growth PR. It may add at most the exact reviewed candidates:
+PR #467 remains the only authorized next canonical-growth PR, but it is paused until PR #470 is merged and production-verified. It may add at most the exact reviewed candidates:
 
 ```text
 Quantoz PLNQ — sog_cand_pr427_plnq

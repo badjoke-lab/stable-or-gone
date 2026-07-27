@@ -6,38 +6,47 @@ import { resolveDeploymentTaxonomy } from '../utils/deploymentTaxonomy';
 import type { DeploymentV3View } from '../lib/data/registryV3';
 
 const { deployments } = Astro.props as { deployments: DeploymentV3View[] };
+const rows = deployments.map((deployment) => {
+  const taxonomy = resolveDeploymentTaxonomy(deployment);
+  const freezeValue = deployment.freeze_capability === true ? 'Yes' : deployment.freeze_capability === false ? 'No' : null;
+  const blacklistValue = deployment.blacklist_capability === true ? 'Yes' : deployment.blacklist_capability === false ? 'No' : null;
+  return {
+    deployment,
+    taxonomy,
+    rawStatusLabel: formatPublicLabel(taxonomy.canonical_status_raw),
+    freezeValue,
+    blacklistValue,
+    identifier: taxonomy.contract_identity_state === 'recorded_identifier' ? deployment.contract_address : taxonomy.contract_identity_state_label
+  };
+});
 ---
-<section class="panel registry">
+<section class="panel registry stablecoin-deployment-panel">
   <div class="bar">Blockchain deployments</div>
-  <table data-table-kind="stablecoin-deployments" data-mobile-table="scroll-preserve">
-    <thead>
-      <tr>
-        <th>Network</th>
-        <th>Network record state</th>
-        <th>Standard</th>
-        <th>Public deployment category</th>
-        <th>Canonical deployment type</th>
-        <th>Operational state</th>
-        <th>Recorded status</th>
-        <th>Change or proposal state</th>
-        <th>Canonicality</th>
-        <th>Canonicality record state</th>
-        <th>Verification state</th>
-        <th>Contract identity state</th>
-        <th>Contract or identifier</th>
-        <th>Freeze</th>
-        <th>Blacklist</th>
-        <th>Control events</th>
-        <th>Notes</th>
-      </tr>
-    </thead>
-    <tbody>
-      {deployments.length === 0 ? <tr><td colspan="17">No deployment records have been added yet.</td></tr> : deployments.map((deployment) => {
-        const taxonomy = resolveDeploymentTaxonomy(deployment);
-        const rawStatusLabel = formatPublicLabel(taxonomy.canonical_status_raw);
-        const freezeValue = deployment.freeze_capability === true ? 'Yes' : deployment.freeze_capability === false ? 'No' : null;
-        const blacklistValue = deployment.blacklist_capability === true ? 'Yes' : deployment.blacklist_capability === false ? 'No' : null;
-        return <tr>
+  <div class="organization-detail-table stablecoin-deployment-table-wrap">
+    <table data-table-kind="stablecoin-deployments" data-mobile-table="scroll-preserve">
+      <thead>
+        <tr>
+          <th>Network</th>
+          <th>Network record state</th>
+          <th>Standard</th>
+          <th>Public deployment category</th>
+          <th>Canonical deployment type</th>
+          <th>Operational state</th>
+          <th>Recorded status</th>
+          <th>Change or proposal state</th>
+          <th>Canonicality</th>
+          <th>Canonicality record state</th>
+          <th>Verification state</th>
+          <th>Contract identity state</th>
+          <th>Contract or identifier</th>
+          <th>Freeze</th>
+          <th>Blacklist</th>
+          <th>Control events</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        {rows.length === 0 ? <tr><td colspan="17">No deployment records have been added yet.</td></tr> : rows.map(({ deployment, taxonomy, rawStatusLabel, freezeValue, blacklistValue, identifier }) => <tr>
           <td><ValueStateText value={deployment.chain} /></td>
           <td>{taxonomy.network_identity_state_label}</td>
           <td><ValueStateText value={deployment.token_standard} /></td>
@@ -50,13 +59,39 @@ const { deployments } = Astro.props as { deployments: DeploymentV3View[] };
           <td>{taxonomy.canonicality_record_state_label}</td>
           <td>{taxonomy.verification_state_label}</td>
           <td>{taxonomy.contract_identity_state_label}</td>
-          <td>{taxonomy.contract_identity_state === 'recorded_identifier' ? deployment.contract_address : taxonomy.contract_identity_state_label}</td>
+          <td>{identifier}</td>
           <td><ValueStateText value={freezeValue} /></td>
           <td><ValueStateText value={blacklistValue} /></td>
           <td>{deployment.control_event_ids?.length ?? 0}</td>
           <td>{cleanPublicText(deployment.notes, 'No deployment-specific note has been recorded.')}</td>
-        </tr>;
-      })}
-    </tbody>
-  </table>
+        </tr>)}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="mobile-record-list stablecoin-deployment-cards" data-mobile-representation-for="stablecoin-deployments">
+    {rows.length === 0 ? <p class="mobile-empty-record">No deployment records have been added yet.</p> : rows.map(({ deployment, taxonomy, rawStatusLabel, freezeValue, blacklistValue, identifier }) => <article>
+      <header>
+        <div><span class="record-kicker">Network</span><h3>{formatPublicLabel(deployment.chain, 'Network not recorded')}</h3></div>
+        <span>{taxonomy.operational_state_label}</span>
+      </header>
+      <dl>
+        <div><dt>Network record state</dt><dd>{taxonomy.network_identity_state_label}</dd></div>
+        <div><dt>Standard</dt><dd><ValueStateText value={deployment.token_standard} /></dd></div>
+        <div><dt>Public deployment category</dt><dd>{taxonomy.public_category_label}</dd></div>
+        <div><dt>Canonical deployment type</dt><dd>{formatPublicLabel(taxonomy.canonical_deployment_type)}</dd></div>
+        <div><dt>Recorded status</dt><dd><ValueStateText value={taxonomy.canonical_status_raw} displayValue={rawStatusLabel} /></dd></div>
+        <div><dt>Change or proposal state</dt><dd>{taxonomy.change_state_label}</dd></div>
+        <div><dt>Canonicality</dt><dd>{taxonomy.canonicality_label}</dd></div>
+        <div><dt>Canonicality record state</dt><dd>{taxonomy.canonicality_record_state_label}</dd></div>
+        <div><dt>Verification state</dt><dd>{taxonomy.verification_state_label}</dd></div>
+        <div><dt>Contract identity state</dt><dd>{taxonomy.contract_identity_state_label}</dd></div>
+        <div><dt>Contract or identifier</dt><dd data-technical-value>{identifier}</dd></div>
+        <div><dt>Freeze</dt><dd><ValueStateText value={freezeValue} /></dd></div>
+        <div><dt>Blacklist</dt><dd><ValueStateText value={blacklistValue} /></dd></div>
+        <div><dt>Control events</dt><dd>{deployment.control_event_ids?.length ?? 0}</dd></div>
+        <div><dt>Notes</dt><dd>{cleanPublicText(deployment.notes, 'No deployment-specific note has been recorded.')}</dd></div>
+      </dl>
+    </article>)}
+  </div>
 </section>

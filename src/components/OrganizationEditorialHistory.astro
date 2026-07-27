@@ -23,8 +23,8 @@ const remainingEvidence = view.evidence.slice(10);
 
 <section class="organization-detail-section" id="evidence">
   <div class="organization-detail-section-heading"><p>Provenance</p><h2>Evidence</h2><span>The first ten source records are shown initially. Source identity, publication date, reliability, and archive state remain separate.</span></div>
-  <div class="organization-detail-table organization-evidence-r5"><EvidenceSourceTable evidence={visibleEvidence} tableKind="organization-sources" emptyMessage="No organization-related sources have been added." /></div>
-  {remainingEvidence.length > 0 && <details class="organization-detail-more-r5"><summary>Show {remainingEvidence.length} additional source record{remainingEvidence.length === 1 ? '' : 's'}</summary><div class="organization-detail-table"><EvidenceSourceTable evidence={remainingEvidence} tableKind="organization-sources" /></div></details>}
+  <div class="organization-evidence-r5"><EvidenceSourceTable evidence={visibleEvidence} tableKind="organization-sources" emptyMessage="No organization-related sources have been added." /></div>
+  {remainingEvidence.length > 0 && <details class="organization-detail-more-r5"><summary>Show {remainingEvidence.length} additional source record{remainingEvidence.length === 1 ? '' : 's'}</summary><div><EvidenceSourceTable evidence={remainingEvidence} tableKind="organization-sources" /></div></details>}
 </section>
 
 <details class="organization-detail-section organization-unknowns-r5" id="unknowns" open>

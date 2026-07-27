@@ -1,3 +1,0 @@
-.home-entry-card { grid-template-columns: 1fr; grid-template-areas: 'title' 'copy' 'action'; }
-.home-entry-card__icon { display: none; }
-:where(.stablecoin-index-filter summary > span:last-child, .organization-index-filter summary > span:last-child, .event-index-filter summary > span:last-child) { min-width: 28px; width: auto; padding-inline: 6px; border-radius: 6px; }

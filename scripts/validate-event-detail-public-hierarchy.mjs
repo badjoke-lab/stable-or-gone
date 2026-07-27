@@ -14,8 +14,7 @@ const evidenceTable = read('src/components/EvidenceSourceTable.astro');
 const evidenceRows = read('src/components/EvidenceRows.astro');
 const mobileRuntime = read('src/components/MobileTableRuntime.astro');
 const capture = read('scripts/capture-site-screenshots.mjs');
-const shell = read('src/styles/v3-cya-dark-shell.css');
-const fix = read('src/styles/event-detail-public-fix.css');
+const ui = read('src/styles/public-ui.css');
 const brand = read('src/components/BrandLockup.astro');
 
 check(!header.includes('<code>{event.id}</code>'), 'Record ID must not appear in the event masthead');
@@ -43,19 +42,23 @@ for (const label of ['Source category', 'Provenance', 'Primary or secondary', 'R
 }
 check(mobileRuntime.includes("kind === 'event-sources' ? publisher"), 'Mobile Event Evidence summary is not simplified');
 check(mobileRuntime.includes("table.dataset.mobileTableBuilt = 'true'"), 'Mobile table enhancement completion marker is missing');
-check(capture.includes('table[data-table-kind="event-sources"][data-mobile-table="scroll-preserve"]'), 'Event Evidence hidden-content screenshot gate is missing');
+check(
+  capture.includes('table[data-table-kind][data-mobile-table]')
+    && capture.includes('hidden-mobile-table:')
+    && capture.includes('duplicate-mobile-table:'),
+  'All mobile table surfaces, including Event Evidence, must have hidden- and duplicate-content screenshot gates'
+);
 
-check(shell.includes('--v3-text-muted: #cbc9c1;'), 'Body-copy brightness token is not at the reviewed value');
-check(shell.includes('--v3-text-quiet: #aeb2b5;'), 'Supporting-copy brightness token is not at the reviewed value');
-check(fix.includes('table[data-table-kind=event-sources]'), 'Event Evidence width and wrapping repair is missing');
-check(fix.includes(':not([data-mobile-table-built=true])'), 'Event Evidence progressive fallback is missing');
-check(fix.includes('[data-mobile-representation-for=event-sources]'), 'Event Evidence mobile representation visibility repair is missing');
-check(fix.includes('.event-record-details-grid'), 'Closed record-details layout is missing');
+check(ui.includes('--ui-copy: #dddcd6;'), 'Body-copy brightness token is not at the reviewed value');
+check(ui.includes('--ui-muted: #b6bbba;'), 'Supporting-copy brightness token is not at the reviewed value');
+check(ui.includes('.event-detail-evidence-r5 table'), 'Event Evidence width and wrapping repair is missing');
+check(ui.includes('table:not([data-mobile-table-built="true"])'), 'Event Evidence progressive fallback is missing');
+check(ui.includes('.event-detail-evidence-r5 .mobile-evidence-record'), 'Event Evidence mobile representation repair is missing');
+check(ui.includes('.event-record-details-grid'), 'Closed record-details layout is missing');
 
-const fixImport = "import '../styles/event-detail-public-fix.css'";
-const typographyImport = "import '../styles/v3-public-typography-contract.css'";
-check(brand.includes(fixImport), 'Event detail repair stylesheet is not loaded');
-check(brand.indexOf(typographyImport) > brand.indexOf(fixImport), 'Public typography contract must remain last');
+const publicUiImport = "import '../styles/public-ui.css'";
+check(brand.includes(publicUiImport), 'Single public UI authority is not loaded');
+check(!brand.includes('event-detail-public-fix.css'), 'Event detail repair must not reintroduce a second stylesheet');
 
 const result = {
   schema_version: '1.0',

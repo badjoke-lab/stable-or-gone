@@ -2,7 +2,6 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import EventIndexRow from './EventIndexRow.astro';
 import EventIndexCard from './EventIndexCard.astro';
-import '../styles/event-index.css';
 import { buildEventIndexView } from '../lib/views/eventIndexView';
 
 const { records, filters, stablecoinSubjectCount, organizationSubjectCount, sourceIdentityCount } = buildEventIndexView();
@@ -24,7 +23,7 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'CollectionPage', na
       <div class="event-index-filter-grid" aria-label="Event filters" data-event-category>{filters.map((filter) => <details class="event-index-filter"><summary data-summary-label="0 selected">{filter.label} <span aria-hidden="true" data-event-filter-count={filter.id}>0</span></summary><div class="event-index-filter-options">{filter.options.map((item) => <label><input type="checkbox" data-event-filter-group={filter.id} data-label={item.publicLabel} value={item.value} /><span>{item.publicLabel}</span></label>)}</div></details>)}</div>
       <div class="event-index-summary"><div class="event-index-active-filters" data-event-active-filters aria-label="Active event filters"></div><div class="event-index-result-count" aria-live="polite"><span data-event-result-count>{records.length}</span> of {records.length} events</div></div>
       <div class="event-index-table"><table data-table-kind="event-index" data-mobile-table="scroll-preserve"><caption>Event registry results. Compact records follow for small screens.</caption><thead><tr><th>Date</th><th>Event</th><th>Subtype</th><th>Impact / status effect</th><th>Recovery</th><th>Sources</th></tr></thead><tbody data-event-body>{records.map((record) => <EventIndexRow record={record} />)}</tbody></table></div>
-      <div class="event-index-cards" data-event-card-body aria-label="Event compact records">{records.map((record) => <EventIndexCard record={record} />)}</div>
+      <div class="event-index-cards" data-mobile-representation-for="event-index" data-event-card-body aria-label="Event compact records">{records.map((record) => <EventIndexCard record={record} />)}</div>
       <div class="event-index-no-results" data-event-no-results hidden><strong>No events match this state.</strong><span>Clear the search and filters to restore all event records.</span><button class="event-index-action" type="button" data-event-clear-all>Clear all</button></div>
     </section>
   </div>

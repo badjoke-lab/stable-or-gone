@@ -5,20 +5,20 @@ import { valueStatePresentation, type PublicValueState } from '../utils/valueSta
 
 const { event } = Astro.props as { event: Record<string, any> };
 const sections = [
-  { key: 'depeg_detail', label: 'Depeg detail' },
-  { key: 'regulatory_detail', label: 'Regulatory detail' },
-  { key: 'reserve_change_detail', label: 'Reserve-change detail' },
-  { key: 'redemption_change_detail', label: 'Redemption-change detail' },
-  { key: 'migration_detail', label: 'Migration detail' },
-  { key: 'issuer_control_detail', label: 'Issuer-control detail' },
-  { key: 'security_incident_detail', label: 'Security-incident detail' },
-  { key: 'oracle_failure_detail', label: 'Oracle-failure detail' },
-  { key: 'collateral_impairment_detail', label: 'Collateral-impairment detail' },
-  { key: 'insolvency_detail', label: 'Insolvency detail' },
-  { key: 'governance_change_detail', label: 'Governance-change detail' },
-  { key: 'bridge_or_chain_incident_detail', label: 'Bridge or chain incident detail' },
-  { key: 'termination_detail', label: 'Termination detail' },
-  { key: 'launch_detail', label: 'Launch detail' }
+  { key: 'depeg_detail', label: 'Price and peg' },
+  { key: 'regulatory_detail', label: 'Regulatory action' },
+  { key: 'reserve_change_detail', label: 'Reserve change' },
+  { key: 'redemption_change_detail', label: 'Redemption change' },
+  { key: 'migration_detail', label: 'Migration' },
+  { key: 'issuer_control_detail', label: 'Issuer control' },
+  { key: 'security_incident_detail', label: 'Security incident' },
+  { key: 'oracle_failure_detail', label: 'Oracle failure' },
+  { key: 'collateral_impairment_detail', label: 'Collateral impairment' },
+  { key: 'insolvency_detail', label: 'Insolvency' },
+  { key: 'governance_change_detail', label: 'Governance change' },
+  { key: 'bridge_or_chain_incident_detail', label: 'Bridge or chain incident' },
+  { key: 'termination_detail', label: 'Termination' },
+  { key: 'launch_detail', label: 'Launch' }
 ].map((section) => ({ ...section, value: event[section.key] })).filter((section) => section.value && typeof section.value === 'object');
 
 const fieldLabels: Record<string, string> = {
@@ -36,7 +36,7 @@ function valueFor(key: string, value: unknown): PresentedValue {
   if (Array.isArray(value)) return valueStatePresentation(value, { policy, display_value: value.map((item) => String(item)).join(', ') });
   if (value && typeof value === 'object') {
     const record = value as Record<string, unknown>;
-    if (typeof record.display_text === 'string' && record.display_text.length > 0) return valueStatePresentation(record.display_text, { policy, display_value: record.display_text });
+    if (typeof record.display_text === 'string' && record.display_text.length > 0) return valueStatePresentation(record.display_text, { policy, display_value: cleanPublicText(record.display_text) });
     const valueText = record.value !== null && record.value !== undefined ? String(record.value) : '';
     const symbol = typeof record.symbol === 'string' ? record.symbol : '';
     if (valueText) return knownValue(`${valueText}${symbol ? ` ${symbol}` : ''}`);
@@ -46,15 +46,44 @@ function valueFor(key: string, value: unknown): PresentedValue {
   let displayValue = String(value);
   if (key.endsWith('_bps')) displayValue = `${displayValue} bps`;
   else if (key.endsWith('_minutes')) displayValue = `${displayValue} minutes`;
-  else displayValue = formatPublicLabel(displayValue, displayValue);
+  else if (!isTechnicalKey(key)) displayValue = formatPublicLabel(displayValue, displayValue);
   return valueStatePresentation(value, { policy, display_value: displayValue });
 }
-const rows = sections.flatMap((section) => Object.entries(section.value as Record<string, unknown>).map(([key, value]) => ({ label: `${section.label} — ${labelFor(key)}`, presentation: valueFor(key, value) })));
+function isTechnicalKey(key: string) {
+  return /(?:^|_)(?:id|ids|hash|hashes|address|addresses|reference)$/.test(key)
+    || key === 'deployment_id'
+    || key === 'case_reference';
+}
+const groups = sections.map((section) => ({
+  label: section.label,
+  fields: Object.entries(section.value as Record<string, unknown>).map(([key, value]) => ({
+    label: labelFor(key),
+    presentation: valueFor(key, value),
+    technical: isTechnicalKey(key)
+  }))
+}));
 ---
-{rows.length > 0 && (
+{groups.length > 0 && (
   <section class="event-structured-detail" aria-labelledby="event-specific-details-heading">
     <h3 id="event-specific-details-heading">Event-specific details</h3>
-    <div class="event-detail-table"><table data-table-kind="event-detail-overlay" data-mobile-table="scroll-preserve"><tbody>{rows.map((row) => <tr><th>{row.label}</th><td><span class={`value-state value-state--${row.presentation.state}`} data-value-state={row.presentation.state} title={row.presentation.label}>{row.presentation.text}</span></td></tr>)}</tbody></table></div>
-    <dl class="event-structured-cards" data-mobile-representation-for="event-detail-overlay">{rows.map((row) => <div><dt>{row.label}</dt><dd><span class={`value-state value-state--${row.presentation.state}`} data-value-state={row.presentation.state} title={row.presentation.label}>{row.presentation.text}</span></dd></div>)}</dl>
+    <div class="structured-fact-groups">
+      {groups.map((group) => (
+        <section class="structured-fact-group" aria-label={group.label}>
+          <h4>{group.label}</h4>
+          <dl>
+            {group.fields.map((field) => (
+              <div>
+                <dt>{field.label}</dt>
+                <dd>
+                  {field.technical
+                    ? <code data-technical-value>{field.presentation.text}</code>
+                    : <span class={`value-state value-state--${field.presentation.state}`} data-value-state={field.presentation.state} title={field.presentation.label}>{field.presentation.text}</span>}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+      ))}
+    </div>
   </section>
 )}
