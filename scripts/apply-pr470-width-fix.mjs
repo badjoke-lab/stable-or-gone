@@ -91,7 +91,7 @@ const diagnosticRootMetrics = `    const root = document.documentElement;
         return { element: elementPath(element), left: Math.round(rect.left), right: Math.round(rect.right), width: Math.round(rect.width), outside_px: Math.round(outsidePx) };
       })
       .filter((entry) => entry.outside_px > 2)
-      .sort((left, right) => right.outside_px - left.outsidePx)
+      .sort((left, right) => right.outside_px - left.outside_px)
       .slice(0, 40);`;
 if (!capture.includes('const overflowElements = [...document.querySelectorAll')) {
   capture = replaceRequired(capture, currentRootMetrics, diagnosticRootMetrics, 'DOM overflow diagnostics');
