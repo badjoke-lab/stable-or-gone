@@ -27,6 +27,16 @@ const walk = (directory) => {
   }
 };
 walk('src');
+const physicalCssFiles = [];
+const walkCss = (directory) => {
+  if (!fs.existsSync(directory)) return;
+  for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
+    const target = path.join(directory, entry.name);
+    if (entry.isDirectory()) walkCss(target);
+    else if (entry.name.endsWith('.css')) physicalCssFiles.push(target);
+  }
+};
+for (const root of ['src', 'public']) walkCss(root);
 
 let cssImports = [];
 let cssFiles = [];
@@ -41,7 +51,7 @@ if (failures.length === 0) {
   const screenshotWorkflow = read(screenshotWorkflowPath);
   const runtimeAudit = read(runtimeAuditPath);
 
-  cssFiles = sourceFiles.filter((file) => file.endsWith('.css')).sort();
+  cssFiles = physicalCssFiles.sort();
   check(cssFiles.length === 1 && cssFiles[0] === authorityPath, `exactly one CSS file is allowed; found ${cssFiles.length}: ${cssFiles.join(', ')}`);
 
   const importPattern = /import\s+['"]([^'"]+\.css)['"]/g;

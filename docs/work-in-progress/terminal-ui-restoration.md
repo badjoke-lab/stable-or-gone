@@ -68,7 +68,7 @@ Required visual traits:
 The current branch changes only presentation files and this memo:
 
 - `src/styles/shell.css` — restores a compact SOG shell while preserving all navigation and search;
-- `public/ui-remediation-r2.css` — removes the generic global flattening and applies SOG-specific Home, register, dossier, and reading-page presentation;
+- the retired `public/ui-remediation-r2.css` browser-final override was removed when PR #470 established `src/styles/public-ui.css` as the only physical stylesheet;
 - this memo.
 
 The correction must not modify Astro behavior, JavaScript, canonical data, routes, schemas, or machine-readable output.

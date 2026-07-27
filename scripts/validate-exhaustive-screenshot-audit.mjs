@@ -82,9 +82,9 @@ const result = {
   ok: findings.length === 0,
   manual_review_required: true,
   font_policy: {
-    sans_body_and_primary_headings_required: true,
+    sans_body_and_serif_editorial_headings_required: true,
     editorial_metadata_monospace_allowed: true,
-    static_pagination_monospace_forbidden: true
+    static_registry_labels_and_ranges_monospace_allowed: true
   },
   devices,
   observed_monospace_count: monospaceObservations.length,

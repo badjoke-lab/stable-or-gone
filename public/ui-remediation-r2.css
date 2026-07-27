@@ -1,1 +1,0 @@
-/* Disabled: exact pre-v2 terminal restoration uses the original component and page styles from commit 884351842fc01c028eeceb32bcd9fcc1ef7ffa09. This browser-final override caused the HEI/SaaS regression and must not alter presentation. */

@@ -41,8 +41,17 @@ if (failures.length === 0) {
   check((brand.match(/import\s+['"][^'"]+\.css['"]/g) ?? []).length === 1, 'BrandLockup imports more than one stylesheet');
   check(!/import\s+['"][^'"]+\.css['"]/.test(layout), 'BaseLayout must not import a second stylesheet');
 
-  cssFiles = fs.readdirSync('src/styles').filter((name) => name.endsWith('.css')).sort();
-  check(cssFiles.length === 1 && cssFiles[0] === 'public-ui.css', `exactly one physical CSS file is allowed; found: ${cssFiles.join(', ')}`);
+  const walkCss = (directory) => {
+    if (!fs.existsSync(directory)) return;
+    for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
+      const target = path.join(directory, entry.name);
+      if (entry.isDirectory()) walkCss(target);
+      else if (entry.name.endsWith('.css')) cssFiles.push(target);
+    }
+  };
+  for (const root of ['src', 'public']) walkCss(root);
+  cssFiles.sort();
+  check(cssFiles.length === 1 && cssFiles[0] === authorityPath, `exactly one physical CSS file is allowed; found: ${cssFiles.join(', ')}`);
 
   for (const marker of [
     '--ui-bg:', '--ui-text:', '--ui-copy:', '--ui-muted:', '--ui-link:', '--ui-hover:', '--ui-visited:',

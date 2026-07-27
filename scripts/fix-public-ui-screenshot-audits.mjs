@@ -7,12 +7,8 @@ const colorPath = 'scripts/audit-ui-color-system.mjs';
 let readability = fs.readFileSync(readabilityPath, 'utf8');
 readability = readability.replace("const accent = rootStyle.getPropertyValue('--v3-accent').trim();", "const accent = rootStyle.getPropertyValue('--ui-danger').trim();");
 
-const editorialLine = "      const editorialSerifSelector = 'main h1, main h2, main [data-editorial-serif], main [data-editorial-number]';";
-const monoLine = "      const explicitMonoSelector = '.bar, .kicker, .eyebrow, [class*=\"overline\"], [class*=\"-label\"], dt, th, .home-masthead__edition, .home-section-kicker, .home-material-list__meta, .home-guide-list__meta, .v3-masthead-meta, .record-kicker, .record-symbol, [data-ui-mono]';";
-if (!readability.includes(monoLine)) {
-  if (!readability.includes(editorialLine)) throw new Error('readability editorial selector missing');
-  readability = readability.replace(editorialLine, `${editorialLine}\n${monoLine}`);
-}
+if (!readability.includes('const editorialSerifSelector = [')) throw new Error('readability editorial selector missing');
+if (!readability.includes('const explicitMonoSelector = [')) throw new Error('readability mono selector missing');
 
 const oldFontBlock = `        const allowsSerif = element.matches(editorialSerifSelector) || Boolean(element.closest(editorialSerifSelector));
         const forbidden = families.find((family) => monospaceFamilies.has(family) || (!allowsSerif && serifFamilies.has(family)));

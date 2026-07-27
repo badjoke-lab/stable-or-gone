@@ -32,7 +32,7 @@ for (const route of routes) {
       const mobile = deviceName === 'mobile';
       const thresholds = mobile
         ? { ordinary: 16, compact: 15, interactive: 15, metadata: 12, h1: 68, h1Home: 84, h2: 48 }
-        : { ordinary: 16, compact: 15, interactive: 14, metadata: 12, h1: 88, h1Home: 142, h2: 52 };
+        : { ordinary: 16, compact: 14, interactive: 14, metadata: 12, h1: 88, h1Home: 142, h2: 52 };
       const findings = {
         undersized_ordinary_text: [],
         undersized_compact_text: [],
@@ -118,11 +118,28 @@ for (const route of routes) {
         probe.remove();
         return resolved;
       };
+      const technicalSelector = 'code, pre, kbd, samp, .contract-address, .transaction-hash, [data-long-value], [data-technical-value]';
+      const editorialSerifSelector = [
+        'main h1', 'main h2', 'main h3', 'main h4', 'main h5', 'main h6',
+        'main [data-editorial-serif]', 'main [data-editorial-number]',
+        '.home-register-strip strong', '.home-status-ledger dd', '.stablecoin-register-count strong',
+        '.event-index-ledger dd', '.organization-index-ledger dd', '.maintenance-counts dd',
+        '.stats-kpi-grid dd', '.stats-mini-kpi-grid dd', '.update-analysis__deck', '.analysis-deck'
+      ].join(', ');
+      const explicitMonoSelector = [
+        '.bar', '.kicker', '.eyebrow', '[class*="eyebrow"]', '[class*="kicker"]', '[class*="overline"]', '[class*="-label"]',
+        'dt', 'th', '.home-masthead__edition', '.home-section-kicker', '.home-search__popular > span',
+        '.home-material-list__meta', '.home-guide-list__meta', '.v3-masthead-meta', '.record-kicker', '.record-symbol',
+        '.stablecoin-section-heading > p', '.event-detail-section-heading > p', '.organization-detail-section-heading > p',
+        '.static-registry-eyebrow', '.static-registry-range', '.timeline-item__date', '.update-feed-item__date',
+        '.update-feed-paths', '[data-ui-mono]'
+      ].join(', ');
 
       const ordinary = [...document.querySelectorAll('main p, main li, main blockquote')].filter(visible);
       for (const element of ordinary) {
         if (!directText(element) && element.children.length > 0) continue;
-        if (element.closest('[class*="overline"], [class*="meta"], .kicker, .eyebrow, [aria-hidden="true"]')) continue;
+        if (element.matches(explicitMonoSelector) || element.closest(explicitMonoSelector)) continue;
+        if (element.closest('td, dd, figcaption, [aria-hidden="true"]')) continue;
         const entry = sample(element, 'ordinary');
         if (entry.font_size_px < thresholds.ordinary) push('undersized_ordinary_text', entry);
         if (entry.line_height_ratio < 1.45) push('compressed_line_height', entry);
@@ -143,7 +160,12 @@ for (const route of routes) {
         if (entry.font_size_px < thresholds.interactive) push('undersized_interactive_text', entry);
       }
 
-      const metadata = [...document.querySelectorAll('main time, main dt, main th, main small, main .kicker, main .eyebrow, main [class*="overline"], main [class*="meta"]')].filter(visible);
+      const metadata = [...document.querySelectorAll([
+        'main time', 'main dt', 'main th', 'main small', 'main .bar', 'main .kicker', 'main .eyebrow',
+        'main [class*="eyebrow"]', 'main [class*="kicker"]', 'main [class*="overline"]', 'main [class*="-label"]',
+        'main .stablecoin-section-heading > p', 'main .event-detail-section-heading > p', 'main .organization-detail-section-heading > p',
+        'main .static-registry-eyebrow', 'main .static-registry-range', 'main [data-ui-mono]'
+      ].join(', '))].filter(visible);
       for (const element of metadata) {
         if (!directText(element)) continue;
         const entry = sample(element, 'metadata');
@@ -204,16 +226,17 @@ for (const route of routes) {
       }
 
       if (mobile) {
-        const controls = [...document.querySelectorAll('button, input, select, textarea, summary, nav a, [class*="action"] a, a[class*="button"]')].filter(visible);
+        const rawControls = [...document.querySelectorAll('button, input, select, textarea, summary, nav a, [class*="action"] a, a[class*="button"]')];
+        const controls = [...new Set([
+          ...rawControls.filter((element) => !(element instanceof HTMLInputElement && ['checkbox', 'radio'].includes(element.type))),
+          ...[...document.querySelectorAll('label')].filter((label) => label.querySelector('input[type="checkbox"], input[type="radio"]'))
+        ])].filter(visible);
         for (const element of controls) {
           const rect = element.getBoundingClientRect();
           if (rect.height < 40) push('undersized_mobile_targets', { ...sample(element, 'mobile-target'), required_height_px: 40 });
         }
       }
 
-      const technicalSelector = 'code, pre, kbd, samp, .contract-address, .transaction-hash, [data-long-value], [data-technical-value]';
-      const editorialSerifSelector = 'main h1, main h2, main [data-editorial-serif], main [data-editorial-number]';
-      const explicitMonoSelector = '.bar, .kicker, .eyebrow, [class*="overline"], [class*="-label"], dt, th, .home-masthead__edition, .home-section-kicker, .home-material-list__meta, .home-guide-list__meta, .v3-masthead-meta, .record-kicker, .record-symbol, [data-ui-mono]';
       const monospaceFamilies = new Set(['ui-monospace', 'sfmono-regular', 'menlo', 'monaco', 'consolas', 'liberation mono', 'courier', 'courier new', 'monospace']);
       const serifFamilies = new Set(['iowan old style', 'palatino linotype', 'palatino', 'georgia', 'times', 'times new roman', 'serif']);
       const publicTextSelector = 'body, header, footer, main h1, main h2, main h3, main h4, main h5, main h6, main p, main li, main dt, main dd, main th, main td, main figcaption, main small, main time, main summary, main label, main a, main button, main input, main select, main textarea, main span';

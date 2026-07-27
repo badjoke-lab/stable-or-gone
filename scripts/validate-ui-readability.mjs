@@ -49,7 +49,7 @@ const result = {
   generated_at: new Date().toISOString(),
   ok: findings.length === 0,
   policy: {
-    ordinary_copy: '>=15px desktop and >=16px mobile',
+    ordinary_copy: '>=16px desktop and mobile',
     compact_values: '>=14px desktop and >=15px mobile',
     interactive_text: '>=14px desktop and >=15px mobile',
     metadata: '>=12px',

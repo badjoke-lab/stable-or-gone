@@ -126,8 +126,22 @@ async function measurePage(page) {
       }
       return parts.join(' > ');
     };
-    const fontFor = (selector) => {
-      const element = [...document.querySelectorAll(selector)].find(visible);
+    const approvedMonoContainer = [
+      'code', 'pre', 'kbd', 'samp', 'time', 'dt', 'th',
+      '.bar', '.kicker', '.eyebrow', '[class*="eyebrow"]', '[class*="kicker"]', '[class*="overline"]', '[class*="-label"]',
+      '.home-masthead__edition', '.home-section-kicker', '.home-search__popular > span',
+      '.home-material-list__meta', '.home-guide-list__meta', '.v3-masthead-meta',
+      '.record-kicker', '.record-symbol',
+      '.stablecoin-section-heading > p', '.event-detail-section-heading > p', '.organization-detail-section-heading > p',
+      '.static-registry-eyebrow', '.static-registry-range',
+      '.timeline-item__date', '.update-feed-item__date', '.update-feed-paths',
+      '[data-ui-mono]', '[data-mono]', '.v3-brand-copy small'
+    ].join(', ');
+    const fontFor = (selector, excludedContainer = null) => {
+      const element = [...document.querySelectorAll(selector)].find((candidate) => (
+        visible(candidate)
+        && (!excludedContainer || (!candidate.matches(excludedContainer) && !candidate.closest(excludedContainer)))
+      ));
       return element instanceof HTMLElement ? getComputedStyle(element).fontFamily : null;
     };
     const root = document.documentElement;
@@ -159,8 +173,7 @@ async function measurePage(page) {
       ...hiddenMobileTableContent
     ];
     const monoTokens = ['ui-monospace', 'sfmono-regular', 'menlo', 'monaco', 'consolas', 'liberation mono', 'monospace'];
-    const approvedMonoContainer = 'code, pre, kbd, samp, time, dt, th, .kicker, .eyebrow, [class*="meta"], [class*="overline"], [data-mono], .v3-brand-copy small';
-    const textCandidates = [...document.querySelectorAll('a, span, strong, small, p, li, dd, label, button, input, select, textarea, summary, h3')].filter(visible);
+    const textCandidates = [...document.querySelectorAll('a, span, strong, small, p, li, dd, label, button, input, select, textarea, summary, h1, h2, h3, h4, h5, h6')].filter(visible);
     const legacyFontViolations = textCandidates.flatMap((element) => {
       const text = element instanceof HTMLInputElement || element instanceof HTMLTextAreaElement
         ? element.value || element.placeholder || ''
@@ -192,8 +205,8 @@ async function measurePage(page) {
       fontRoles: {
         body: getComputedStyle(document.body).fontFamily,
         h1: fontFor('h1'),
-        h2: fontFor('h2'),
-        h3: fontFor('h3'),
+        h2: fontFor('h2', approvedMonoContainer),
+        h3: fontFor('h3', approvedMonoContainer),
         paragraph: fontFor('p'),
         link: fontFor('a'),
         strong: fontFor('strong'),
