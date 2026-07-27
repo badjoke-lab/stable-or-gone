@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import fs from 'node:fs';
 
+// Idempotent migration: it changes only the single public stylesheet authority.
 const cssPath = 'src/styles/public-ui.css';
 
 const replaceRequired = (source, before, after, label) => {
