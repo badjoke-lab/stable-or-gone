@@ -37,10 +37,10 @@ const records = [];
 const navigationFailures = [];
 
 for (const device of devices) {
-  const context = await browser.newContext({ viewport: device.viewport, isMobile: device.isMobile, hasTouch: device.hasTouch, reducedMotion: 'reduce' });
   let cursor = 0;
 
   const worker = async () => {
+    const context = await browser.newContext({ viewport: device.viewport, isMobile: device.isMobile, hasTouch: device.hasTouch, reducedMotion: 'reduce' });
     const page = await context.newPage();
     while (true) {
       const index = cursor++;
@@ -296,10 +296,10 @@ for (const device of devices) {
       }
     }
     await page.close();
+    await context.close();
   };
 
   await Promise.all(Array.from({ length: Math.min(concurrency, routes.length) }, () => worker()));
-  await context.close();
 }
 
 await browser.close();
