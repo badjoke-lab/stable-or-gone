@@ -87,7 +87,7 @@ const redemptionProfile = coin.redemption_profile;
     <section class="stablecoin-dossier-section stablecoin-assessment" id="assessment">
       <div class="stablecoin-section-heading"><p>Reviewed assessment</p><h2>Identity and current state</h2><span>This summary reports reviewed facts and uncertainty. It is not a rating or recommendation.</span></div>
       <div class="stablecoin-assessment-copy"><p>{publicSummary}</p></div>
-      <div class="stablecoin-identity-table">
+      <div class="organization-detail-table stablecoin-identity-table">
         <table data-table-kind="stablecoin-overview" data-mobile-table="scroll-preserve"><tbody>
           <tr><th>Name</th><td>{coin.name}</td></tr><tr><th>Symbol</th><td><ValueStateText value={coin.symbol} /></td></tr><tr><th>Aliases</th><td>{aliases.length > 0 ? aliases.join(', ') : 'None recorded'}</td></tr><tr><th>Asset class</th><td>{formatPublicLabel(assetClass, 'Unknown')}</td></tr><tr><th>Lifecycle status</th><td>{formatLifecycleLabel(coin.lifecycle_status)}</td></tr><tr><th>Issuance status</th><td>{formatIssuanceLabel(coin.issuance_status)}</td></tr><tr><th>Canonical record ID</th><td><code>{coin.id}</code></td></tr><tr><th>Route slug</th><td><code>{coin.slug}</code></td></tr><tr><th>Record confidence</th><td><ValueStateText value={coin.confidence} displayValue={formatPublicLabel(coin.confidence)} /></td></tr><tr><th>Last reviewed</th><td><ValueStateText value={coin.last_verified_at} /></td></tr>
         </tbody></table>
