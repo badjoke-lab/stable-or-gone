@@ -40,7 +40,7 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'CollectionPage', na
       </div>
       <div class="organization-index-summary"><div class="organization-index-active-filters" data-organization-active-filters aria-label="Active organization filters"></div><div class="organization-index-result-count" aria-live="polite"><span data-organization-result-count>{records.length}</span> of {records.length} organizations</div></div>
       <div class="organization-index-table"><table data-table-kind="organization-index" data-mobile-table="scroll-preserve"><caption>Organization registry results. Compact records follow for small screens.</caption><thead><tr><th>Organization</th><th>Regulatory / jurisdiction</th><th>Functional roles</th><th>Relationship state</th><th>Assets / relationships</th><th>Sources / confidence</th></tr></thead><tbody data-organization-body>{records.map((record) => <OrganizationIndexRow record={record} />)}</tbody></table></div>
-      <div class="organization-index-cards" data-organization-card-body aria-label="Organization compact records">{records.map((record) => <OrganizationIndexCard record={record} />)}</div>
+      <div class="organization-index-cards" data-mobile-representation-for="organization-index" data-organization-card-body aria-label="Organization compact records">{records.map((record) => <OrganizationIndexCard record={record} />)}</div>
       <div class="organization-index-no-results" data-organization-no-results hidden><strong>No organizations match this state.</strong><span>Clear the search and filters to restore all organization records.</span><button class="organization-index-action" type="button" data-organization-clear-all>Clear all</button></div>
     </section>
   </div>
