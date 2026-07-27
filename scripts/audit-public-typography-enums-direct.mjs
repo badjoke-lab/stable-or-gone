@@ -35,6 +35,19 @@ const devices = [
 const browser = await chromium.launch({ args: ['--disable-lcd-text'] });
 const records = [];
 const navigationFailures = [];
+let hoverTail = Promise.resolve();
+
+const withHoverLock = async (callback) => {
+  const previous = hoverTail;
+  let release;
+  hoverTail = new Promise((resolve) => { release = resolve; });
+  await previous;
+  try {
+    return await callback();
+  } finally {
+    release();
+  }
+};
 
 for (const device of devices) {
   let cursor = 0;
@@ -271,20 +284,52 @@ for (const device of devices) {
           };
         });
 
-        const invalidLinkHover = [];
-        if (!device.hasTouch) {
+        const invalidLinkHover = device.hasTouch ? [] : await withHoverLock(async () => {
+          const findings = [];
           for (const target of result.link_targets) {
             const locator = page.locator(`[data-ui-audit-link="${target.id}"]`);
-            await locator.evaluate((element) => element.scrollIntoView({ block: 'center', inline: 'center' }));
+            await locator.scrollIntoViewIfNeeded();
+            await page.mouse.move(0, 0);
             await locator.hover({ timeout: 5000 });
-            await locator.evaluate(() => new Promise((resolve) => requestAnimationFrame(() => resolve())));
-            const hoverColor = await locator.evaluate((element) => getComputedStyle(element).color);
+            await locator.evaluate(() => new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve))));
+            let hoverState = await locator.evaluate((element) => {
+              const rect = element.getBoundingClientRect();
+              const topElement = document.elementFromPoint(rect.left + rect.width / 2, rect.top + rect.height / 2);
+              return {
+                active: element.matches(':hover'),
+                color: getComputedStyle(element).color,
+                pointer_element: topElement instanceof HTMLElement
+                  ? `${topElement.tagName.toLowerCase()}${topElement.id ? `#${topElement.id}` : ''}${[...topElement.classList].map((name) => `.${name}`).join('')}`
+                  : null
+              };
+            });
+            if (!hoverState.active) {
+              const box = await locator.boundingBox();
+              if (box) {
+                await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+                await locator.evaluate(() => new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve))));
+                hoverState = await locator.evaluate((element) => ({
+                  active: element.matches(':hover'),
+                  color: getComputedStyle(element).color,
+                  pointer_element: null
+                }));
+              }
+            }
             const allowed = target.zone === 'main'
               ? [result.allowed_hover_colors.link]
               : [result.allowed_hover_colors.link, result.allowed_hover_colors.text];
-            if (!allowed.includes(hoverColor)) invalidLinkHover.push({ ...target, hover_color: hoverColor, allowed });
+            if (!hoverState.active || !allowed.includes(hoverState.color)) {
+              findings.push({
+                ...target,
+                hover_active: hoverState.active,
+                hover_color: hoverState.color,
+                pointer_element: hoverState.pointer_element,
+                allowed
+              });
+            }
           }
-        }
+          return findings;
+        });
 
         const findings = { ...result, invalid_link_hover: invalidLinkHover };
         delete findings.link_targets;
