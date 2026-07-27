@@ -2,8 +2,6 @@
 import fs from 'node:fs';
 
 const cssPath = 'src/styles/public-ui.css';
-const capturePath = 'scripts/capture-site-screenshots.mjs';
-const validatorPath = 'scripts/validate-exhaustive-screenshot-audit.mjs';
 
 const replaceRequired = (source, before, after, label) => {
   if (source.includes(after)) return source;
@@ -12,6 +10,7 @@ const replaceRequired = (source, before, after, label) => {
 };
 
 let css = fs.readFileSync(cssPath, 'utf8');
+
 const siteMainLine = '.site-main { width: min(calc(100% - 2rem), var(--ui-content)); margin: 0 auto; padding: 2.25rem 0 5rem; outline: none; }';
 const containmentBlock = `${siteMainLine}
 
@@ -42,9 +41,8 @@ css = replaceRequired(css, currentMobileTable, boundedMobileTable, 'CSS mobile t
 const mobileMarker = '@media (max-width: 820px) {';
 const mobileContainment = `@media (max-width: 820px) {
   /* Mobile records replace wide desktop tables without dropping fields. */
-  .stablecoin-identity-table, .stablecoin-organizations-table, .stablecoin-dossier table[data-mobile-table="scroll-preserve"] { display: none; }
+  .organization-detail-table, .stablecoin-identity-table, .stablecoin-organizations-table, .stablecoin-deployment-table-wrap, .evidence-table-wrap { display: none; }
   .stablecoin-coverage-disclosure table[data-table-kind="stablecoin-record-coverage"] { display: table; width: 100%; min-width: 0; table-layout: fixed; }
-  .stablecoin-deployment-table-wrap, .evidence-table-wrap { display: none; }
   .stats-wide-table, .stats-table-wrap table { width: 100%; min-width: 0; table-layout: fixed; }
   .stats-table-wrap { overflow: visible; }
   .home-recent__table-wrap { overflow: visible; border: 0; background: transparent; }
@@ -63,86 +61,6 @@ const mobileContainment = `@media (max-width: 820px) {
 if (!css.includes('/* Mobile records replace wide desktop tables without dropping fields. */')) {
   css = replaceRequired(css, mobileMarker, mobileContainment, 'CSS mobile containment');
 }
+
 fs.writeFileSync(cssPath, css);
-
-let capture = fs.readFileSync(capturePath, 'utf8');
-const measureMarker = 'async function measurePage(page) {';
-const pngHelper = `async function readPngDimensions(file) {
-  const buffer = await readFile(file);
-  if (buffer.length < 24 || buffer.toString('ascii', 1, 4) !== 'PNG') throw new Error(\`Invalid PNG: \${file}\`);
-  return { width: buffer.readUInt32BE(16), height: buffer.readUInt32BE(20) };
-}
-
-${measureMarker}`;
-if (!capture.includes('async function readPngDimensions(file)')) {
-  capture = replaceRequired(capture, measureMarker, pngHelper, 'PNG dimension helper');
-}
-
-const currentRootMetrics = `    const root = document.documentElement;
-    const overflowPx = Math.max(0, root.scrollWidth - root.clientWidth);`;
-const diagnosticRootMetrics = `    const root = document.documentElement;
-    const viewportWidth = root.clientWidth;
-    const overflowPx = Math.max(0, root.scrollWidth - viewportWidth);
-    const overflowElements = [...document.querySelectorAll('body *')]
-      .filter(visible)
-      .map((element) => {
-        const rect = element.getBoundingClientRect();
-        const outsidePx = Math.max(0, rect.right - viewportWidth, -rect.left, rect.width - viewportWidth);
-        return { element: elementPath(element), left: Math.round(rect.left), right: Math.round(rect.right), width: Math.round(rect.width), outside_px: Math.round(outsidePx) };
-      })
-      .filter((entry) => entry.outside_px > 2)
-      .sort((left, right) => right.outside_px - left.outside_px)
-      .slice(0, 40);`;
-if (!capture.includes('const overflowElements = [...document.querySelectorAll')) {
-  capture = replaceRequired(capture, currentRootMetrics, diagnosticRootMetrics, 'DOM overflow diagnostics');
-}
-
-capture = replaceRequired(capture, '      viewportWidth: root.clientWidth,', `      viewportWidth,
-      overflowElements,`, 'DOM overflow return');
-
-const currentScreenshotRecord = `      await page.screenshot({ path: file, fullPage: true });
-      const screenshotBytes = (await stat(file)).size;
-      records.push({ url, path: route, device: deviceName, file, screenshot_bytes: screenshotBytes, metrics });`;
-const diagnosticScreenshotRecord = `      await page.screenshot({ path: file, fullPage: true });
-      const screenshotBytes = (await stat(file)).size;
-      const screenshotDimensions = await readPngDimensions(file);
-      records.push({
-        url,
-        path: route,
-        device: deviceName,
-        file,
-        screenshot_bytes: screenshotBytes,
-        screenshot_width_px: screenshotDimensions.width,
-        screenshot_height_px: screenshotDimensions.height,
-        expected_viewport_width_px: device.viewport.width,
-        screenshot_horizontal_overflow_px: Math.max(0, screenshotDimensions.width - device.viewport.width),
-        metrics
-      });`;
-if (!capture.includes('screenshot_width_px: screenshotDimensions.width')) {
-  capture = replaceRequired(capture, currentScreenshotRecord, diagnosticScreenshotRecord, 'screenshot dimensions');
-}
-capture = capture.replace("schema_version: '3.1'", "schema_version: '3.2'");
-fs.writeFileSync(capturePath, capture);
-
-let validator = fs.readFileSync(validatorPath, 'utf8');
-const currentOverflowCheck = "    if (metrics.horizontalOverflow) add(device, route, 'horizontal_overflow', metrics.horizontalOverflowPx);";
-const screenshotWidthCheck = `    if (metrics.horizontalOverflow) add(device, route, 'horizontal_overflow', metrics.horizontalOverflowPx);
-    const screenshotWidth = Number(record.screenshot_width_px ?? 0);
-    const expectedWidth = Number(record.expected_viewport_width_px ?? metrics.viewportWidth ?? 0);
-    if (!screenshotWidth || !expectedWidth) {
-      add(device, route, 'screenshot_dimensions_missing', { screenshot_width_px: screenshotWidth, expected_viewport_width_px: expectedWidth });
-    } else if (screenshotWidth > expectedWidth + 2) {
-      add(device, route, 'screenshot_width_overflow', {
-        screenshot_width_px: screenshotWidth,
-        expected_viewport_width_px: expectedWidth,
-        overflow_px: screenshotWidth - expectedWidth,
-        overflow_elements: metrics.overflowElements ?? []
-      });
-    }`;
-if (!validator.includes("'screenshot_width_overflow'")) {
-  validator = replaceRequired(validator, currentOverflowCheck, screenshotWidthCheck, 'screenshot width validator');
-}
-validator = validator.replace("schema_version: '1.1'", "schema_version: '1.2'");
-fs.writeFileSync(validatorPath, validator);
-
-console.log(JSON.stringify({ cssPath, capturePath, validatorPath }, null, 2));
+console.log(JSON.stringify({ cssPath }, null, 2));
