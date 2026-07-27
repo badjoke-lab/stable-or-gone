@@ -63,7 +63,12 @@ for (const route of routes) {
         '--ui-line', '--ui-line-soft', '--ui-link', '--ui-hover', '--ui-visited', '--ui-focus',
         '--ui-positive', '--ui-warning', '--ui-danger', '--ui-neutral'
       ].map((name) => [name, rootStyle.getPropertyValue(name).trim()]));
+      const interactiveSelector = 'a, button, summary, [role="button"], [role="link"]';
       const explicitSemantic = '[class*="status"], [class*="badge"], [class*="chip"], [class*="legend"], [class*="chart"], [class*="bar"], [class*="warning"], [class*="danger"], [class*="alert"], [class*="archive"], [class*="reliability"], [class*="severity"], [data-status], [data-tone], [aria-current="page"], [aria-selected="true"]';
+      const neutralBorderHexes = new Set([
+        tokens['--ui-line'],
+        tokens['--ui-line-soft']
+      ].map((value) => value.toLowerCase()).filter(Boolean));
       const inventory = new Map();
       const legacyPaletteHits = [];
       const coloredOrdinaryText = [];
@@ -87,7 +92,7 @@ for (const route of routes) {
         entry.count += 1;
         if (entry.samples.length < 4) entry.samples.push({ element: pathFor(element), text: text.slice(0, 100) });
         inventory.set(style.color, entry);
-        const isInteractive = element.matches('a,button,summary') || Boolean(element.closest('a,button,summary'));
+        const isInteractive = element.matches(interactiveSelector) || Boolean(element.closest(interactiveSelector));
         const isSemantic = Boolean(element.closest(explicitSemantic));
         const sat = saturation(parsed.rgb);
         const brightness = Math.max(...parsed.rgb);
@@ -102,7 +107,7 @@ for (const route of routes) {
       const structureElements = [...document.querySelectorAll('main section, main article, main aside, main header, main footer, main nav, main table, main details, main [class*="panel"], main [class*="notice"], main [class*="callout"]')].filter(visible);
       for (const element of structureElements) {
         const style = getComputedStyle(element);
-        const isInteractive = element.matches('a,button') || Boolean(element.closest('a,button'));
+        const isInteractive = element.matches(interactiveSelector) || Boolean(element.closest(interactiveSelector));
         const isSemantic = Boolean(element.closest(explicitSemantic));
         const properties = ['borderTopColor', 'borderRightColor', 'borderBottomColor', 'borderLeftColor'];
         for (const property of properties) {
@@ -112,7 +117,8 @@ for (const route of routes) {
           noteLegacy(element, property, value, parsed);
           const sat = saturation(parsed.rgb);
           const brightness = Math.max(...parsed.rgb);
-          if (sat >= 0.22 && brightness >= 60 && !isInteractive && !isSemantic && coloredBorders.length < 300) {
+          const isNeutralBorder = neutralBorderHexes.has(toHex(parsed.rgb));
+          if (sat >= 0.22 && brightness >= 60 && !isNeutralBorder && !isInteractive && !isSemantic && coloredBorders.length < 300) {
             coloredBorders.push({ element: pathFor(element), property, color: value, saturation: Number(sat.toFixed(3)) });
           }
         }
