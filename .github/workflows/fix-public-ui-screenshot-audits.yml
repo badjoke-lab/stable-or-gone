@@ -10,7 +10,7 @@ on:
       - 'scripts/audit-ui-color-system.mjs'
       - 'scripts/capture-site-screenshots.mjs'
       - 'scripts/validate-exhaustive-screenshot-audit.mjs'
-      - 'scripts/fix-public-ui-screenshot-audits.mjs'
+      - 'scripts/apply-pr470-width-fix.mjs'
       - '.github/workflows/fix-public-ui-screenshot-audits.yml'
   workflow_dispatch:
 
@@ -28,21 +28,19 @@ jobs:
           ref: agent/full-ui-contract-remediation
           fetch-depth: 0
 
-      - name: Update screenshot and containment contracts
-        run: node scripts/fix-public-ui-screenshot-audits.mjs
+      - name: Apply screenshot-width and containment migration
+        run: node scripts/apply-pr470-width-fix.mjs
 
       - name: Commit bounded UI audit and containment migration
         shell: bash
         run: |
           TARGETS=(
             src/styles/public-ui.css
-            scripts/audit-ui-readability.mjs
-            scripts/audit-ui-color-system.mjs
             scripts/capture-site-screenshots.mjs
             scripts/validate-exhaustive-screenshot-audit.mjs
           )
           if git diff --quiet -- "${TARGETS[@]}"; then
-            echo 'Screenshot and containment contracts already match the public UI authority.'
+            echo 'Screenshot-width and containment contracts already match the public UI authority.'
             exit 0
           fi
           git config user.name 'github-actions[bot]'
