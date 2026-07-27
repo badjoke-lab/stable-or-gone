@@ -15,7 +15,7 @@ const failures = [];
 const expect = (condition, message) => { if (!condition) failures.push(message); };
 const expectedApplicabilityQueueAssets = 12;
 const expectedCoveredAssets = checkpoint.asset_count - expectedApplicabilityQueueAssets;
-const expectedNoDateRows = 78;
+const expectedNoDateRows = 80;
 const expectedRedemptionSourceReviewNeededFields = 9;
 
 expect(report.audit_id === 'sog_registry_100_reserve_redemption_backing_pr300', `unexpected audit_id ${report.audit_id}`);
@@ -42,6 +42,8 @@ expect(noDateRows.includes('sog_rr_xusd_attestation_index_pr358'), 'XUSD reserve
 expect(noDateRows.includes('sog_rr_usdb_protocol_backing_pr358'), 'USDB reserve context must remain in the no-date review queue');
 expect(noDateRows.includes('sog_rr_chfau_reserve_context_pr429'), 'CHFAU reserve context must remain in the no-date review queue');
 expect(noDateRows.includes('sog_rr_sekau_reserve_context_pr429'), 'SEKAU reserve context must remain in the no-date review queue');
+expect(noDateRows.includes('sog_rr_plnq_reserve_context_pr467'), 'PLNQ reserve context must remain in the no-date review queue');
+expect(noDateRows.includes('sog_rr_gbpq_reserve_context_pr467'), 'GBPQ reserve context must remain in the no-date review queue');
 expect(JSON.stringify(report.review_queues?.lifecycle_redemption_warnings ?? []) === JSON.stringify([
   { stablecoin_id: 'sog_st_fei', lifecycle_status: 'terminated', redemption_status: 'restricted' }
 ]), 'FEI lifecycle/redemption review queue changed');

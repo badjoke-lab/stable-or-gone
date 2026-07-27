@@ -1,8 +1,8 @@
 {
   "schema_version":"2.0",
-  "status":"batch_028_complete",
-  "candidate_files":["data/candidate-stable-assets.json","data/candidate-stable-assets-growth-70.json","data/candidate-stable-assets-growth-75.json","data/candidate-stable-assets-growth-80.json","data/candidate-stable-assets-emergency-msusd.json","data/candidate-stable-assets-emergency-jpysc.json","data/candidate-stable-assets-growth-85.json","data/candidate-stable-assets-growth-90.json","data/candidate-stable-assets-growth-100.json","data/candidate-stable-assets-growth-110.json","data/candidate-stable-assets-growth-112.json","data/candidate-stable-assets-growth-114.json"],
-  "protected_minimums":{"total_candidates":114,"promoted_candidates":114,"pending_candidates":0},
+  "status":"batch_029_complete",
+  "candidate_files":["data/candidate-stable-assets.json","data/candidate-stable-assets-growth-70.json","data/candidate-stable-assets-growth-75.json","data/candidate-stable-assets-growth-80.json","data/candidate-stable-assets-emergency-msusd.json","data/candidate-stable-assets-emergency-jpysc.json","data/candidate-stable-assets-growth-85.json","data/candidate-stable-assets-growth-90.json","data/candidate-stable-assets-growth-100.json","data/candidate-stable-assets-growth-110.json","data/candidate-stable-assets-growth-112.json","data/candidate-stable-assets-growth-114.json","data/candidate-stable-assets-growth-116.json"],
+  "protected_minimums":{"total_candidates":116,"promoted_candidates":116,"pending_candidates":0},
   "planned_batches":{
     "batch_006":{"minimum_candidates":5,"theme":"current USD and regulated assets"},
     "batch_007":{"minimum_candidates":5,"theme":"protocol stablecoins"},
@@ -26,6 +26,7 @@
     "batch_025":{"minimum_candidates":2,"theme":"Canadian dollar and South African rand stablecoins"},
     "batch_026":{"minimum_candidates":2,"theme":"Australian and New Zealand dollar stablecoins"},
     "batch_027":{"minimum_candidates":2,"theme":"current USD payment stablecoins with distinct stabilization models"},
-    "batch_028":{"minimum_candidates":2,"theme":"regulated AllUnity CHF and SEK electronic-money tokens"}
+    "batch_028":{"minimum_candidates":2,"theme":"regulated AllUnity CHF and SEK electronic-money tokens"},
+    "batch_029":{"minimum_candidates":2,"theme":"regulated Quantoz PLN and GBP electronic-money tokens"}
   }
 }

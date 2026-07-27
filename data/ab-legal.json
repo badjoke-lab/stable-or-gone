@@ -1,0 +1,46 @@
+[
+  {
+    "id": "sog_st_plnq",
+    "classifications": [
+      {
+        "classification": "e_money_token",
+        "jurisdiction": "European Union / Netherlands",
+        "effective_from": "2026-04-14",
+        "effective_to": null,
+        "authority_or_basis": "MiCAR electronic-money-token issuance by Quantoz Payments B.V. as a DNB-authorized electronic-money institution",
+        "confidence": "high",
+        "evidence_ids": ["sog_src_plnq_whitepaper_pr467", "sog_src_dnb_quantoz_pr467"]
+      }
+    ],
+    "holder_claim_type": "direct_claim_on_issuer",
+    "claim_against_organization_ids": ["sog_issuer_quantoz_payments"],
+    "reserve_ownership": "issuer_owned_for_holders",
+    "reserve_segregation": "legally_segregated",
+    "bankruptcy_remoteness": "stated",
+    "licensed_or_regulated_as": ["Dutch electronic money institution", "MiCA electronic-money-token issuer"],
+    "evidence_ids": ["sog_src_plnq_whitepaper_pr467", "sog_src_quantoz_transparency_pr467", "sog_src_dnb_quantoz_pr467"],
+    "notes": "Quantoz Payments B.V. is the recorded legal issuer and redemption counterparty. Quantoz states that safeguarded reserves are segregated and bankruptcy remote; no deposit-insurance conclusion is inferred."
+  },
+  {
+    "id": "sog_st_gbpq",
+    "classifications": [
+      {
+        "classification": "e_money_token",
+        "jurisdiction": "European Union / Netherlands",
+        "effective_from": "2026-04-14",
+        "effective_to": null,
+        "authority_or_basis": "MiCAR electronic-money-token issuance by Quantoz Payments B.V. as a DNB-authorized electronic-money institution",
+        "confidence": "high",
+        "evidence_ids": ["sog_src_gbpq_whitepaper_pr467", "sog_src_dnb_quantoz_pr467"]
+      }
+    ],
+    "holder_claim_type": "direct_claim_on_issuer",
+    "claim_against_organization_ids": ["sog_issuer_quantoz_payments"],
+    "reserve_ownership": "issuer_owned_for_holders",
+    "reserve_segregation": "legally_segregated",
+    "bankruptcy_remoteness": "stated",
+    "licensed_or_regulated_as": ["Dutch electronic money institution", "MiCA electronic-money-token issuer"],
+    "evidence_ids": ["sog_src_gbpq_whitepaper_pr467", "sog_src_quantoz_transparency_pr467", "sog_src_dnb_quantoz_pr467"],
+    "notes": "Quantoz Payments B.V. is the recorded legal issuer and redemption counterparty. Quantoz states that safeguarded reserves are segregated and bankruptcy remote; no deposit-insurance conclusion is inferred."
+  }
+]

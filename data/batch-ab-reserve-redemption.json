@@ -1,0 +1,56 @@
+[
+  {
+    "id": "sog_st_plnq",
+    "reserve_profile": {
+      "backing_types": ["cash", "government_securities"],
+      "summary": "Quantoz states that its stablecoins are backed by cash deposits and government bonds in safeguarded segregated accounts, with reserves exceeding circulation. No token-specific PLNQ allocation is inferred.",
+      "disclosure_status": "issuer_transparency",
+      "as_of_date": "2026-07-25",
+      "latest_report_id": "sog_rr_plnq_reserve_context_pr467",
+      "confidence": "high",
+      "evidence_ids": ["sog_src_plnq_whitepaper_pr467", "sog_src_quantoz_transparency_pr467"]
+    },
+    "redemption_profile": {
+      "status": "eligible_customers_only",
+      "settlement_asset": "PLN",
+      "eligible_parties": "Eligible holders have a par-redemption right against Quantoz Payments B.V.; operational access remains subject to onboarding, current terms, and supported channels.",
+      "retail_access": "statutory_holder_right_operational_channel_subject_to_terms",
+      "institutional_access": "available_subject_to_quantoz_onboarding",
+      "minimum_amount_text": "Not established in the reviewed public source set.",
+      "fee_text": "Token-specific current fees are not established in the reviewed public source set.",
+      "settlement_time_text": "No universal PLNQ settlement-time guarantee is established in the reviewed public source set.",
+      "jurisdiction_restrictions": ["Customer eligibility, onboarding, sanctions controls, and current issuer terms apply.", "Direct operational channel availability is not inferred from the statutory redemption right."],
+      "redemption_url": "https://www.quantoz.com/token-redemption",
+      "as_of_date": "2026-07-25",
+      "confidence": "high",
+      "evidence_ids": ["sog_src_plnq_whitepaper_pr467", "sog_src_quantoz_marketing_pr467", "sog_src_dnb_quantoz_pr467"]
+    }
+  },
+  {
+    "id": "sog_st_gbpq",
+    "reserve_profile": {
+      "backing_types": ["cash", "government_securities"],
+      "summary": "Quantoz states that its stablecoins are backed by cash deposits and government bonds in safeguarded segregated accounts, with reserves exceeding circulation. No token-specific GBPQ allocation is inferred.",
+      "disclosure_status": "issuer_transparency",
+      "as_of_date": "2026-07-25",
+      "latest_report_id": "sog_rr_gbpq_reserve_context_pr467",
+      "confidence": "high",
+      "evidence_ids": ["sog_src_gbpq_whitepaper_pr467", "sog_src_quantoz_transparency_pr467"]
+    },
+    "redemption_profile": {
+      "status": "eligible_customers_only",
+      "settlement_asset": "GBP",
+      "eligible_parties": "Eligible holders have a par-redemption right against Quantoz Payments B.V.; operational access remains subject to onboarding, current terms, and supported channels.",
+      "retail_access": "statutory_holder_right_operational_channel_subject_to_terms",
+      "institutional_access": "available_subject_to_quantoz_onboarding",
+      "minimum_amount_text": "Not established in the reviewed public source set.",
+      "fee_text": "Token-specific current fees are not established in the reviewed public source set.",
+      "settlement_time_text": "No universal GBPQ settlement-time guarantee is established in the reviewed public source set.",
+      "jurisdiction_restrictions": ["Customer eligibility, onboarding, sanctions controls, and current issuer terms apply.", "Direct operational channel availability is not inferred from the statutory redemption right."],
+      "redemption_url": "https://www.quantoz.com/token-redemption",
+      "as_of_date": "2026-07-25",
+      "confidence": "high",
+      "evidence_ids": ["sog_src_gbpq_whitepaper_pr467", "sog_src_quantoz_marketing_pr467", "sog_src_dnb_quantoz_pr467"]
+    }
+  }
+]

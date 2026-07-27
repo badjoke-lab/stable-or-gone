@@ -1,0 +1,32 @@
+[
+  {
+    "id": "sog_ev_plnq_launch_pr467",
+    "title": "Quantoz launches PLNQ as a Polish-złoty electronic-money token",
+    "subject_stablecoin_ids": ["sog_st_plnq"],
+    "subject_organization_ids": ["sog_issuer_quantoz_payments"],
+    "evidence_ids": ["sog_src_quantoz_launch_pr467", "sog_src_plnq_whitepaper_pr467", "sog_src_quantoz_marketing_pr467", "sog_src_dnb_quantoz_pr467"],
+    "event_detail_kind": "launch",
+    "launch_detail": {
+      "summary": "Official launch of PLNQ with initial Ethereum issuance, issuer reserve backing, and par redemption.",
+      "status": "active",
+      "resolution_date": null,
+      "affected_deployment_ids": ["sog_dep_plnq_ethereum_pr467"],
+      "related_organization_ids": ["sog_issuer_quantoz_payments"]
+    }
+  },
+  {
+    "id": "sog_ev_gbpq_launch_pr467",
+    "title": "Quantoz launches GBPQ as a British-pound electronic-money token",
+    "subject_stablecoin_ids": ["sog_st_gbpq"],
+    "subject_organization_ids": ["sog_issuer_quantoz_payments"],
+    "evidence_ids": ["sog_src_quantoz_launch_pr467", "sog_src_gbpq_whitepaper_pr467", "sog_src_quantoz_marketing_pr467", "sog_src_dnb_quantoz_pr467"],
+    "event_detail_kind": "launch",
+    "launch_detail": {
+      "summary": "Official launch of GBPQ with initial Ethereum issuance, issuer reserve backing, and par redemption.",
+      "status": "active",
+      "resolution_date": null,
+      "affected_deployment_ids": ["sog_dep_gbpq_ethereum_pr467"],
+      "related_organization_ids": ["sog_issuer_quantoz_payments"]
+    }
+  }
+]

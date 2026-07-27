@@ -1,0 +1,30 @@
+[
+  {
+    "id": "sog_st_plnq",
+    "lifecycle_status": "active",
+    "issuance_status": "restricted",
+    "peg_reference": {"kind": "fiat", "asset": "PLN", "target_value": 1, "notes": "PLNQ targets one Polish złoty through issuer reserve backing and par redemption."},
+    "backing_types": ["cash", "government_securities"],
+    "stabilization_mechanism": "issuer_redemption",
+    "governance_model": "centralized",
+    "asset_class": "stablecoin",
+    "reference_target": "fiat",
+    "redemption_or_exit_model": "issuer_redemption",
+    "yield_or_rebase_profile": {"mode": "none", "accrual_target": "none", "yield_source": "none", "accrual_mechanism": "none", "rate_type": "none", "rate_source": null, "notes": "No issuer-native PLNQ yield or balance rebase is asserted."},
+    "classification_notes": "MiCAR electronic-money token with safeguarded reserves, controlled issuance, and par redemption against the issuer."
+  },
+  {
+    "id": "sog_st_gbpq",
+    "lifecycle_status": "active",
+    "issuance_status": "restricted",
+    "peg_reference": {"kind": "fiat", "asset": "GBP", "target_value": 1, "notes": "GBPQ targets one British pound through issuer reserve backing and par redemption."},
+    "backing_types": ["cash", "government_securities"],
+    "stabilization_mechanism": "issuer_redemption",
+    "governance_model": "centralized",
+    "asset_class": "stablecoin",
+    "reference_target": "fiat",
+    "redemption_or_exit_model": "issuer_redemption",
+    "yield_or_rebase_profile": {"mode": "none", "accrual_target": "none", "yield_source": "none", "accrual_mechanism": "none", "rate_type": "none", "rate_source": null, "notes": "No issuer-native GBPQ yield or balance rebase is asserted."},
+    "classification_notes": "MiCAR electronic-money token with safeguarded reserves, controlled issuance, and par redemption against the issuer."
+  }
+]

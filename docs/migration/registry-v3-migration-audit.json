@@ -8,14 +8,14 @@
     "income_profiles": "docs/migration/registry-v3-income-profiles.json"
   },
   "minimum_counts": {
-    "legal_profiles": 114,
+    "legal_profiles": 116,
     "stable_asset_relationships": 5,
-    "reserve_components": 147,
-    "deployments": 180,
-    "income_profiles": 114
+    "reserve_components": 149,
+    "deployments": 182,
+    "income_profiles": 116
   },
   "coverage": {
-    "protected_stablecoins": 114,
+    "protected_stablecoins": 116,
     "legal_profiles_required_for_each": true,
     "reserve_components_required_for_each": true,
     "income_profiles_required_for_each": true

@@ -1,0 +1,22 @@
+[
+  {
+    "id": "sog_st_plnq",
+    "availability": "none",
+    "source": "none",
+    "accrual": "none",
+    "rate": "none",
+    "related_asset_ids": [],
+    "evidence_ids": ["sog_src_plnq_whitepaper_pr467"],
+    "notes": "No issuer-native PLNQ yield or balance rebase is asserted. Third-party opportunities are outside this profile."
+  },
+  {
+    "id": "sog_st_gbpq",
+    "availability": "none",
+    "source": "none",
+    "accrual": "none",
+    "rate": "none",
+    "related_asset_ids": [],
+    "evidence_ids": ["sog_src_gbpq_whitepaper_pr467"],
+    "notes": "No issuer-native GBPQ yield or balance rebase is asserted. Third-party opportunities are outside this profile."
+  }
+]

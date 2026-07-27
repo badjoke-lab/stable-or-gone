@@ -1,0 +1,67 @@
+{
+  "schema_version": "1.0",
+  "handoff_id": "sog_record_growth_batch_3_pr467_handoff_2026_07_25",
+  "status": "reviewed_complete",
+  "recorded_at": "2026-07-25",
+  "source_pr": 467,
+  "authority_pr": 466,
+  "candidate_audit_pr": 427,
+  "selected_context_id": "quantoz_regulated_non_eur_expansion",
+  "promoted_assets": [
+    {
+      "candidate_id": "sog_cand_pr427_plnq",
+      "stablecoin_id": "sog_st_plnq",
+      "symbol": "PLNQ"
+    },
+    {
+      "candidate_id": "sog_cand_pr427_gbpq",
+      "stablecoin_id": "sog_st_gbpq",
+      "symbol": "GBPQ"
+    }
+  ],
+  "canonical_counts": {
+    "assets": 116,
+    "organizations": 107,
+    "relationships": 128,
+    "events": 191,
+    "evidence": 571,
+    "evidence_relations": 571,
+    "reserve_reports": 124,
+    "known_unknowns": 337,
+    "deployments": 182,
+    "legal_profiles": 116,
+    "stable_asset_relationships": 5,
+    "reserve_components": 149,
+    "income_profiles": 116,
+    "market_access_records": 8,
+    "archive_recorded": 442,
+    "archive_not_recorded": 129
+  },
+  "verified_deployments": {
+    "PLNQ": [
+      {
+        "network": "ethereum",
+        "contract": "0x00B81d7B21955837890d9346e4978b6b43762b3A"
+      }
+    ],
+    "GBPQ": [
+      {
+        "network": "ethereum",
+        "contract": "0xb92e69fd39bf33ee1f81e56b0b7933bdc49df46e"
+      }
+    ]
+  },
+  "preserved_boundaries": {
+    "third_asset_added": false,
+    "quantoz_organization_reused": true,
+    "future_network_announcement_promoted": false,
+    "market_access_change": false,
+    "public_surface_change": false,
+    "ui_change": false,
+    "automatic_promotion": false,
+    "ranking": false,
+    "score": false,
+    "recommendation": false
+  },
+  "next_work_item": "REVIEW_GATE"
+}
