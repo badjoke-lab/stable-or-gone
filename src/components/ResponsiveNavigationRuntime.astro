@@ -1,0 +1,33 @@
+<script>
+  const installResponsiveNavigation = () => {
+    const primary = document.querySelector<HTMLElement>('.site-primary-navigation');
+    const panel = document.querySelector<HTMLElement>('.site-more-navigation-panel');
+    if (!primary || !panel || primary.dataset.responsiveNavigationInstalled === 'true') return;
+    primary.dataset.responsiveNavigationInstalled = 'true';
+
+    const links = Array.from(primary.querySelectorAll<HTMLAnchorElement>(':scope > a'));
+    const movedLinks = links.slice(3);
+    if (movedLinks.length === 0) return;
+
+    const mobileGroup = document.createElement('div');
+    mobileGroup.className = 'site-more-mobile-primary';
+    mobileGroup.setAttribute('aria-label', 'Additional registry and research links');
+    const media = window.matchMedia('(max-width: 640px)');
+
+    const sync = () => {
+      if (media.matches) {
+        if (!mobileGroup.isConnected) panel.prepend(mobileGroup);
+        for (const link of movedLinks) mobileGroup.append(link);
+      } else {
+        for (const link of movedLinks) primary.append(link);
+        mobileGroup.remove();
+      }
+    };
+
+    sync();
+    media.addEventListener?.('change', sync);
+  };
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', installResponsiveNavigation, { once: true });
+  else installResponsiveNavigation();
+</script>
