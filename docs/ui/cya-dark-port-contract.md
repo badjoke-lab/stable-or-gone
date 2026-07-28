@@ -18,4 +18,4 @@ SOG may change colors, copy, routes, and record fields. It must not replace the 
 
 ## Enforcement
 
-The single public stylesheet, rendered-route audit, screenshot audit, text contrast audit, mobile evidence preservation checks, active-link state, and flat status-label contract are blocking gates.
+The single public stylesheet, typed registry controls, rendered-route audit, screenshot audit, text contrast audit, mobile evidence preservation checks, active-link state, and flat status-label contract are blocking gates.
