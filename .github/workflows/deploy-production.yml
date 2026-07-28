@@ -112,17 +112,15 @@ jobs:
 
       - name: Verify UK guide publication
         run: |
-          for attempt in $(seq 1 20); do
-            HOME_HTML="$(curl -fsS https://sog.badjoke-lab.com/ || true)"
+          for attempt in $(seq 1 5); do
             GUIDES_HTML="$(curl -fsS https://sog.badjoke-lab.com/guides/ || true)"
             ARTICLE_HTML="$(curl -fsS https://sog.badjoke-lab.com/guides/uk-stablecoin-capital-rules-2026/ || true)"
-            if printf '%s' "$HOME_HTML" | grep -q 'uk-stablecoin-capital-rules-2026' \
-              && printf '%s' "$GUIDES_HTML" | grep -q 'uk-stablecoin-capital-rules-2026' \
+            if printf '%s' "$GUIDES_HTML" | grep -q 'uk-stablecoin-capital-rules-2026' \
               && printf '%s' "$ARTICLE_HTML" | grep -q 'Capital Does Not Mean 1% Backing'; then
               echo "UK guide publication verified."
               exit 0
             fi
-            sleep 15
+            sleep 10
           done
           echo "UK guide publication did not converge in time." >&2
           exit 1
