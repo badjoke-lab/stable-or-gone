@@ -22,9 +22,9 @@ const ROUTES = [
   {
     path: '/',
     roles: {
-      body: ['.home-masthead__title p', '.home-material-list p', '.home-guide-list p', '.home-reference-index nav a span'],
-      muted: ['.home-masthead__edition', '.home-register-strip a', '.home-section-heading > a', '.home-registry-links a'],
-      quiet: ['.home-search__heading p', '.home-search__popular', '.home-material-list__meta', '.home-registry-state__note', '.home-guide-list__meta']
+      body: ['.home-intro .lede', '.section-heading > p', '.directory-copy small', '.home-registry-table td'],
+      muted: ['.archive-note', '.registry-count', '.home-registry-table th'],
+      quiet: ['.home-registry-table td small']
     }
   },
   {

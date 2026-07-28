@@ -11,7 +11,7 @@
   --ui-text: #f1eee6;
   --ui-copy: #d6d3ca;
   --ui-muted: #979d99;
-  --ui-quiet: #7f8784;
+  --ui-quiet: #848c89;
   --ui-line: #343a3b;
   --ui-line-soft: #252a2b;
   --ui-line-strong: #707675;
@@ -90,6 +90,7 @@ code { padding: 2px 5px; border: 1px solid var(--ui-line); background: var(--ui-
 .footer-grid > p { max-width: 760px; margin: 0; color: var(--ui-muted); font-size: .75rem; }
 .footer-links, .v3-footer-links { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 14px; }
 .footer-links a, .v3-footer-links a { min-height: 0; padding: 0; border-bottom: 1px solid var(--ui-line-strong); color: var(--ui-muted); font-size: .7rem; }
+.footer-links a:hover, .v3-footer-links a:hover { color: var(--ui-hover); border-color: var(--ui-hover); }
 
 .panel, .surface, .card, .stat, .fact, :where([class$="-card"],[class*="-card "]) { border: 1px solid var(--ui-line-strong); border-radius: 0; background: transparent; box-shadow: none; }
 .bar, .kicker, .eyebrow, [class*="overline"], [class*="-label"], dt, th, .home-section-kicker { width: fit-content; max-width: 100%; color: var(--ui-muted); font: 700 .64rem/1.4 var(--ui-mono); letter-spacing: .09em; text-transform: uppercase; }
@@ -115,6 +116,9 @@ th { background: transparent; }
 tbody tr:hover td { background: rgba(255,255,255,.025); }
 td a { color: var(--ui-link); font-weight: 700; border-bottom: 1px solid currentColor; }
 td small { display: block; margin-top: 3px; }
+.home-registry-table td small { color: var(--ui-quiet); }
+.compare-preset { background: transparent; color: var(--ui-text); }
+.compare-preset small { color: var(--ui-muted); }
 .record-name, .archive-link { color: var(--ui-link); border-bottom: 1px solid currentColor; }
 .comparison-choice { margin-top: 6px; font-size: .68rem; }
 
@@ -126,6 +130,7 @@ td small { display: block; margin-top: 3px; }
 .home-facts { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); align-self: stretch; margin: 0; border-top: 1px solid var(--ui-text); border-left: 1px solid var(--ui-text); }
 .home-facts div { min-height: 124px; padding: 14px; display: grid; align-content: space-between; border-right: 1px solid var(--ui-text); border-bottom: 1px solid var(--ui-text); }
 .home-facts dd { margin: 0; color: var(--ui-text); font: 600 2.4rem var(--ui-serif); letter-spacing: -.03em; }
+.home-facts dd small { display: block; margin-top: 4px; color: var(--ui-muted); font: 700 .64rem/1.4 var(--ui-mono); letter-spacing: .06em; text-transform: uppercase; }
 .archive-note { display: flex; align-items: center; border-bottom: 1px solid var(--ui-line-strong); color: var(--ui-muted); font: 700 .64rem var(--ui-mono); letter-spacing: .07em; text-transform: uppercase; }
 .archive-note span { padding: 9px 12px 9px 0; }
 .archive-note span + span::before { content: "·"; margin-right: 12px; }
@@ -228,7 +233,7 @@ pre { max-width: 100%; overflow-x: auto; white-space: pre-wrap; }
   .site-shell { width: min(calc(100% - 28px),var(--ui-shell)); }
   .masthead-row, .v3-masthead-row { align-items: flex-start; padding-block: 11px; }
   .brand-copy small, .v3-brand-copy small, .masthead-meta span, .v3-masthead-meta span { display: none; }
-  .site-nav, .site-primary-navigation { margin-inline: -14px; padding-inline: 14px; }
+  .site-nav, .site-primary-navigation { padding-inline: 0; }
   .site-nav a, .site-primary-navigation a { padding: 9px 9px 8px; font-size: .68rem; }
   .site-main { padding-top: 20px; padding-bottom: 48px; }
   h1 { font-size: clamp(2.4rem,12vw,3.25rem); }
@@ -259,7 +264,8 @@ pre { max-width: 100%; overflow-x: auto; white-space: pre-wrap; }
   :where(.stablecoin-index-card,.event-index-card,.organization-index-card) { padding: 12px 0; display: grid; gap: 10px; border: 0; border-bottom: 1px solid var(--ui-text); border-radius: 0; background: transparent; }
   .stablecoin-index-card-grid { grid-template-columns: 1fr; }
   [data-mobile-representation-for] { display: grid; gap: 0; }
-  :where(.organization-detail-table,.event-detail-table,.stablecoin-detail-table,.evidence-table-wrap) { display: none; }
+  table[data-mobile-table] { display: none; }
+  .evidence-table-wrap { display: block; overflow: visible; }
   :where(.event-index-ledger,.organization-index-ledger,.event-detail-ledger,.organization-detail-ledger,.stablecoin-dossier-facts,.stats-kpi-grid,.stats-mini-kpi-grid,.maintenance-counts dl) { grid-template-columns: 1fr 1fr; }
   :where(.timeline-search-row,.ar-search-row,.update-feed-search-row,.ar-card-layers,.stats-lifecycle-layout,.stats-analysis-grid,.stats-analysis-grid--three,.maintenance-entry__header) { grid-template-columns: 1fr; }
   .timeline-item, .update-feed-item { grid-template-columns: 1fr; }

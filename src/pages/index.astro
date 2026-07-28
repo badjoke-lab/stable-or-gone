@@ -4,12 +4,14 @@ import { formatLifecycleLabel } from '../utils/publicTaxonomy';
 import { formatReferenceTargetLabel } from '../utils/referenceTarget';
 import { resolvePrimaryRelationshipForStablecoin } from '../utils/primaryDisplayRelationship';
 import { getStablecoins, getOrganizations, getRelationships, getEvents, getEvidence } from '../lib/data/registry';
+import { getEvidenceSourceIdentitySummary } from '../lib/data/evidenceSources';
 
 const stablecoins = getStablecoins();
 const organizations = getOrganizations();
 const relationships = getRelationships();
 const events = getEvents();
 const evidence = getEvidence();
+const evidenceSummary = getEvidenceSourceIdentitySummary();
 
 const organizationById = new Map(organizations.map((organization) => [organization.id, organization] as const));
 const primaryOrganization = (stablecoinId: string) => {
@@ -87,10 +89,10 @@ const jsonLd = {
         <p class="lede">Stable or Gone documents how stable assets launched, changed, lost access, migrated, recovered, wound down, or collapsed. It connects asset identity, organizations, events, evidence, and known unknowns.</p>
       </div>
       <dl class="home-facts" aria-label="Registry summary">
-        <div><dt>Stablecoins</dt><dd>{stablecoins.length}</dd></div>
-        <div><dt>Organizations</dt><dd>{organizations.length}</dd></div>
-        <div><dt>Events</dt><dd>{events.length}</dd></div>
-        <div><dt>Evidence</dt><dd>{evidence.length}</dd></div>
+        <div><dt>Stablecoins</dt><dd>{stablecoins.length}<small> stable assets</small></dd></div>
+        <div><dt>Organizations</dt><dd>{organizations.length}<small> organizations</small></dd></div>
+        <div><dt>Events</dt><dd>{events.length}<small> events</small></dd></div>
+        <div><dt>Evidence</dt><dd>{evidence.length}<small> source records</small><small>Source identities {evidenceSummary.source_identities}</small></dd></div>
       </dl>
     </section>
 

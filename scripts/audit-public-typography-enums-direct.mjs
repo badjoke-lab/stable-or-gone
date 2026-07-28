@@ -78,6 +78,8 @@ for (const device of devices) {
             'main [data-editorial-serif]',
             'main [data-editorial-number]',
             '.home-register-strip strong',
+            '.home-facts dd',
+            '.directory-copy strong',
             '.home-status-ledger dd',
             '.stablecoin-register-count strong',
             '.event-index-ledger dd',
@@ -99,6 +101,16 @@ for (const device of devices) {
             'dt',
             'th',
             '.home-masthead__edition',
+            '.archive-note',
+            '.directory-number',
+            '.chip',
+            '[class*="badge"]',
+            '[class*="status-chip"]',
+            '[data-tone]',
+            '.home-status-label',
+            '.update-feed-category',
+            '.ar-chip',
+            '.ar-lifecycle',
             '.home-section-kicker',
             '.home-search__popular > span',
             '.home-material-list__meta',
@@ -217,12 +229,11 @@ for (const device of devices) {
             const style = getComputedStyle(element);
             const rect = element.getBoundingClientRect();
             const radius = Number.parseFloat(style.borderTopLeftRadius) || 0;
-            const paddingInline = (Number.parseFloat(style.paddingLeft) || 0) + (Number.parseFloat(style.paddingRight) || 0);
-            const borderWidth = Number.parseFloat(style.borderTopWidth) || 0;
+            const borderBottomWidth = Number.parseFloat(style.borderBottomWidth) || 0;
             const background = parseRgb(style.backgroundColor);
             const transparent = !background || background[3] < .08;
-            if (rect.height < 24 || radius < 8 || paddingInline < 10 || borderWidth < 1 || transparent) {
-              invalidBadges.push({ element: pathFor(element), text: displayText(element).slice(0, 100), height_px: Math.round(rect.height), border_radius_px: radius, padding_inline_px: Number(paddingInline.toFixed(1)), border_width_px: borderWidth, background: style.backgroundColor });
+            if (rect.height < 14 || radius !== 0 || borderBottomWidth < 1 || !transparent) {
+              invalidBadges.push({ element: pathFor(element), text: displayText(element).slice(0, 100), height_px: Math.round(rect.height), border_radius_px: radius, border_bottom_width_px: borderBottomWidth, background: style.backgroundColor });
             }
             if (invalidBadges.length >= 100) break;
           }
@@ -363,7 +374,7 @@ const result = {
   audited_count: records.length,
   routes_with_findings: routesWithFindings,
   typography_roles: { ordinary: 'sans-serif', editorial_headings: 'serif', technical_values: 'monospace' },
-  interaction_contract: { hover: '--ui-link-hover or --ui-text in navigation', badges: 'bordered filled pills', text_contrast: 'WCAG AA' },
+  interaction_contract: { hover: '--ui-hover or --ui-text in navigation', badges: 'flat square underlined status labels', text_contrast: 'WCAG AA' },
   totals,
   navigation_failures: navigationFailures,
   records
