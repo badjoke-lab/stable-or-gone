@@ -30,8 +30,6 @@ const evidenceCount = (stablecoinId: string) => evidence.filter((item) =>
 const eventCount = (stablecoinId: string) => events.filter((event) =>
   event.stablecoin_id === stablecoinId || (event.subject_stablecoin_ids ?? []).includes(stablecoinId)
 ).length;
-const lifecycleOptions = [...new Set(stablecoins.map((coin) => coin.lifecycle_status || 'unknown'))]
-  .sort((left, right) => formatLifecycleLabel(left).localeCompare(formatLifecycleLabel(right)));
 const latestVerified = stablecoins.map((coin) => coin.last_verified_at).filter(Boolean).sort().at(-1) ?? '—';
 
 const entryCards = [
@@ -39,35 +37,25 @@ const entryCards = [
   { href: '/issuers/', number: '02', title: 'Organizations', text: 'Issuers, operators, reserve managers, custodians, governance bodies, and related institutions.' },
   { href: '/events/', number: '03', title: 'Material events', text: 'Launches, restrictions, depegs, migrations, wind-downs, collapses, recoveries, and regulatory actions.' },
   { href: '/timeline/', number: '04', title: 'Historical timeline', text: 'Chronological access to the events that changed stablecoin records and their institutional context.' },
-  { href: '/access-and-regulation/', number: '05', title: 'Access and regulation', text: 'Market access, regional distribution, regulatory treatment, and documented availability constraints.' },
+  { href: '/access-regulation/', number: '05', title: 'Access and regulation', text: 'Market access, regional distribution, regulatory treatment, and documented availability constraints.' },
   { href: '/stats/', number: '06', title: 'Registry statistics', text: 'Lifecycle, model, organization, event, evidence, access, and data-quality distributions.' }
 ];
 
-const rows = [...stablecoins].sort((left, right) => left.name.localeCompare(right.name)).map((coin) => {
-  const organization = primaryOrganization(coin.id);
-  const domain = recordDomain(coin);
-  const lifecycle = coin.lifecycle_status || 'unknown';
-  return {
-    coin,
-    organization,
-    domain,
-    lifecycle,
-    reference: formatReferenceTargetLabel(coin),
-    evidence: evidenceCount(coin.id),
-    events: eventCount(coin.id),
-    search: [
-      coin.name,
-      coin.symbol,
-      coin.slug,
-      ...(coin.aliases ?? []),
-      domain,
-      organization?.name,
-      lifecycle,
-      formatLifecycleLabel(lifecycle),
-      formatReferenceTargetLabel(coin)
-    ].filter(Boolean).join(' ').normalize('NFKC').toLocaleLowerCase().replace(/\s+/g, ' ').trim()
-  };
-});
+const previewRows = [...stablecoins]
+  .sort((left, right) => String(right.last_verified_at ?? '').localeCompare(String(left.last_verified_at ?? '')) || left.name.localeCompare(right.name))
+  .slice(0, 20)
+  .map((coin) => {
+    const organization = primaryOrganization(coin.id);
+    return {
+      coin,
+      organization,
+      domain: recordDomain(coin),
+      lifecycle: coin.lifecycle_status || 'unknown',
+      reference: formatReferenceTargetLabel(coin),
+      evidence: evidenceCount(coin.id),
+      events: eventCount(coin.id)
+    };
+  });
 
 const title = 'Stable or Gone — Stablecoin Historical Registry';
 const description = 'A source-backed historical registry of stablecoins, connected organizations, material events, access conditions, and evidence.';
@@ -121,49 +109,27 @@ const jsonLd = {
       </div>
     </section>
 
+    <aside class="context-support-callout" aria-label="Support Stable or Gone">
+      <p><strong>Help preserve the public record.</strong> Support source verification, broken-link review, new records, and ongoing archive maintenance. Support does not affect listings or editorial decisions.</p>
+      <a class="support-cta" href="/support/">View support wallets</a>
+    </aside>
+
     <section class="registry-section" aria-labelledby="registry-title">
       <div class="section-heading">
         <div>
-          <p class="kicker">Stablecoin registry</p>
-          <h2 id="registry-title">Browse all records</h2>
+          <p class="kicker">Recently reviewed</p>
+          <h2 id="registry-title">Twenty current registry entries</h2>
         </div>
-        <p>Search and filter the complete canonical stablecoin registry. Current view state remains shareable by URL.</p>
+        <p>The complete searchable and filterable registry is kept on the dedicated Stablecoins page rather than duplicated in full here.</p>
       </div>
 
       <div class="registry-panel">
-        <div class="controls" aria-label="Registry filters">
-          <label class="control-field search-field">
-            <span>Search</span>
-            <input id="registrySearch" type="search" placeholder="Name, symbol, alias, domain, organization…" autocomplete="off" />
-          </label>
-          <label class="control-field">
-            <span>Lifecycle</span>
-            <select id="lifecycleFilter">
-              <option value="">All lifecycle states</option>
-              {lifecycleOptions.map((status) => <option value={status}>{formatLifecycleLabel(status)}</option>)}
-            </select>
-          </label>
-          <label class="control-field">
-            <span>Sort</span>
-            <select id="sortSelect">
-              <option value="name-asc">Name A–Z</option>
-              <option value="name-desc">Name Z–A</option>
-              <option value="review-desc">Recently reviewed</option>
-              <option value="evidence-desc">Most evidence</option>
-              <option value="lifecycle-asc">Lifecycle A–Z</option>
-            </select>
-          </label>
-          <button id="copyCurrentView" class="ghost-button" type="button">Copy view link</button>
-          <button id="clearFilters" class="ghost-button" type="button">Clear</button>
+        <div class="registry-count">
+          Showing <strong>{previewRows.length}</strong> recently reviewed records from <strong>{stablecoins.length}</strong> stablecoins
+          <a class="registry-full-link" href="/stablecoins/">Browse the full registry →</a>
         </div>
-
-        <div class="registry-count" aria-live="polite">
-          Showing <strong id="visibleCount">{rows.length}</strong> of <strong>{rows.length}</strong> stablecoins
-          <span id="copyStatus" class="copy-status" aria-live="polite"></span>
-        </div>
-
         <div class="table-wrap home-registry-table-wrap">
-          <table id="registryTable" class="home-registry-table">
+          <table class="home-registry-table">
             <thead>
               <tr>
                 <th>Stablecoin</th>
@@ -174,16 +140,9 @@ const jsonLd = {
                 <th>Evidence / events</th>
               </tr>
             </thead>
-            <tbody id="registryBody">
-              {rows.map(({ coin, organization, domain, lifecycle, reference, evidence: sourceCount, events: linkedEvents, search }) => (
-                <tr
-                  data-row="stablecoin"
-                  data-search={search}
-                  data-name={coin.name}
-                  data-lifecycle={lifecycle}
-                  data-review={coin.last_verified_at || ''}
-                  data-evidence={sourceCount}
-                >
+            <tbody>
+              {previewRows.map(({ coin, organization, domain, lifecycle, reference, evidence: sourceCount, events: linkedEvents }) => (
+                <tr>
                   <td data-label="Stablecoin">
                     <a href={`/stablecoin/${coin.slug}/`}><strong>{coin.name}</strong></a>
                     <small>{coin.symbol || 'No symbol'}{domain ? ` · ${domain}` : ''}</small>
@@ -199,98 +158,11 @@ const jsonLd = {
               ))}
             </tbody>
           </table>
-          <p id="emptyState" class="empty-state" hidden>No stablecoins match the current filters.</p>
+        </div>
+        <div class="registry-count registry-count--footer">
+          <a class="support-cta" href="/stablecoins/">Open all stablecoin records</a>
         </div>
       </div>
     </section>
   </div>
-
-  <script>
-    const searchInput = document.querySelector('#registrySearch');
-    const lifecycleFilter = document.querySelector('#lifecycleFilter');
-    const sortSelect = document.querySelector('#sortSelect');
-    const copyButton = document.querySelector('#copyCurrentView');
-    const clearButton = document.querySelector('#clearFilters');
-    const visibleCount = document.querySelector('#visibleCount');
-    const emptyState = document.querySelector('#emptyState');
-    const copyStatus = document.querySelector('#copyStatus');
-    const tbody = document.querySelector('#registryBody');
-    const rows = Array.from(document.querySelectorAll<HTMLTableRowElement>('[data-row="stablecoin"]'));
-    type RegistryControls = { q: string; lifecycle: string; sort: string };
-
-    function compareRows(a: HTMLTableRowElement, b: HTMLTableRowElement, sort: string) {
-      if (!(a instanceof HTMLElement) || !(b instanceof HTMLElement)) return 0;
-      if (sort === 'name-desc') return String(b.dataset.name).localeCompare(String(a.dataset.name));
-      if (sort === 'review-desc') return String(b.dataset.review).localeCompare(String(a.dataset.review)) || String(a.dataset.name).localeCompare(String(b.dataset.name));
-      if (sort === 'evidence-desc') return Number(b.dataset.evidence || 0) - Number(a.dataset.evidence || 0) || String(a.dataset.name).localeCompare(String(b.dataset.name));
-      if (sort === 'lifecycle-asc') return String(a.dataset.lifecycle).localeCompare(String(b.dataset.lifecycle)) || String(a.dataset.name).localeCompare(String(b.dataset.name));
-      return String(a.dataset.name).localeCompare(String(b.dataset.name));
-    }
-
-    function readControls(): RegistryControls {
-      return {
-        q: searchInput instanceof HTMLInputElement ? searchInput.value.trim() : '',
-        lifecycle: lifecycleFilter instanceof HTMLSelectElement ? lifecycleFilter.value : '',
-        sort: sortSelect instanceof HTMLSelectElement ? sortSelect.value : 'name-asc'
-      };
-    }
-
-    function writeUrlState(controls: RegistryControls) {
-      const params = new URLSearchParams();
-      if (controls.q) params.set('q', controls.q);
-      if (controls.lifecycle) params.set('lifecycle', controls.lifecycle);
-      if (controls.sort && controls.sort !== 'name-asc') params.set('sort', controls.sort);
-      const nextUrl = `${window.location.pathname}${params.toString() ? `?${params.toString()}` : ''}`;
-      window.history.replaceState(null, '', nextUrl);
-    }
-
-    function restoreFromUrl() {
-      const params = new URLSearchParams(window.location.search);
-      if (searchInput instanceof HTMLInputElement) searchInput.value = params.get('q') || '';
-      if (lifecycleFilter instanceof HTMLSelectElement) lifecycleFilter.value = params.get('lifecycle') || '';
-      if (sortSelect instanceof HTMLSelectElement) sortSelect.value = params.get('sort') || 'name-asc';
-    }
-
-    function applyFilters() {
-      if (!(tbody instanceof HTMLElement)) return;
-      const controls = readControls();
-      const query = controls.q.normalize('NFKC').toLocaleLowerCase().replace(/\s+/g, ' ');
-      let shown = 0;
-      for (const row of [...rows].sort((a, b) => compareRows(a, b, controls.sort))) {
-        if (!(row instanceof HTMLTableRowElement)) continue;
-        const visible = (!query || String(row.dataset.search).includes(query))
-          && (!controls.lifecycle || row.dataset.lifecycle === controls.lifecycle);
-        row.hidden = !visible;
-        tbody.appendChild(row);
-        if (visible) shown += 1;
-      }
-      if (visibleCount instanceof HTMLElement) visibleCount.textContent = String(shown);
-      if (emptyState instanceof HTMLElement) emptyState.hidden = shown !== 0;
-      writeUrlState(controls);
-    }
-
-    async function copyCurrentView() {
-      writeUrlState(readControls());
-      try {
-        await navigator.clipboard.writeText(window.location.href);
-        if (copyStatus instanceof HTMLElement) copyStatus.textContent = 'View link copied';
-      } catch {
-        if (copyStatus instanceof HTMLElement) copyStatus.textContent = 'Copy failed';
-      }
-      window.setTimeout(() => { if (copyStatus instanceof HTMLElement) copyStatus.textContent = ''; }, 1800);
-    }
-
-    restoreFromUrl();
-    applyFilters();
-    searchInput?.addEventListener('input', applyFilters);
-    lifecycleFilter?.addEventListener('change', applyFilters);
-    sortSelect?.addEventListener('change', applyFilters);
-    copyButton?.addEventListener('click', copyCurrentView);
-    clearButton?.addEventListener('click', () => {
-      if (searchInput instanceof HTMLInputElement) searchInput.value = '';
-      if (lifecycleFilter instanceof HTMLSelectElement) lifecycleFilter.value = '';
-      if (sortSelect instanceof HTMLSelectElement) sortSelect.value = 'name-asc';
-      applyFilters();
-    });
-  </script>
 </BaseLayout>
