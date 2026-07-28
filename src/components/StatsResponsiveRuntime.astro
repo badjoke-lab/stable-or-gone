@@ -1,0 +1,50 @@
+<script>
+  const installStatsResponsiveSections = () => {
+    const page = document.querySelector<HTMLElement>('.stats-page');
+    if (!page || page.dataset.responsiveSectionsInstalled === 'true') return;
+    page.dataset.responsiveSectionsInstalled = 'true';
+
+    const sections = Array.from(page.querySelectorAll<HTMLElement>(':scope > .stats-section'));
+    const collapsible = sections.slice(2);
+    if (collapsible.length === 0) return;
+    const media = window.matchMedia('(max-width: 640px)');
+    const records = collapsible.map((section) => {
+      const placeholder = document.createComment('stats-section-placeholder');
+      const details = document.createElement('details');
+      details.className = 'panel registry stats-mobile-disclosure';
+      details.dataset.statsMobileDisclosure = 'true';
+      const summary = document.createElement('summary');
+      const heading = section.querySelector('h2, h3');
+      summary.textContent = heading?.textContent?.trim() || 'Additional statistics';
+      const content = document.createElement('div');
+      content.className = 'stats-mobile-disclosure__content';
+      details.append(summary, content);
+      return { section, placeholder, details, content };
+    });
+
+    const collapse = () => {
+      for (const record of records) {
+        if (record.details.isConnected) continue;
+        record.section.before(record.placeholder);
+        record.content.append(record.section);
+        record.placeholder.after(record.details);
+      }
+    };
+
+    const restore = () => {
+      for (const record of records) {
+        if (!record.details.isConnected) continue;
+        record.placeholder.after(record.section);
+        record.details.remove();
+        record.placeholder.remove();
+      }
+    };
+
+    const sync = () => media.matches ? collapse() : restore();
+    sync();
+    media.addEventListener?.('change', sync);
+  };
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', installStatsResponsiveSections, { once: true });
+  else installStatsResponsiveSections();
+</script>
