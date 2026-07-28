@@ -44,7 +44,7 @@ const jsonLd = {
         <div>
           <p class="timeline-eyebrow">Filter</p>
           <h2 id="timeline-controls-heading">Narrow the canonical timeline</h2>
-          <p>Search by title, summary, asset, organization, or change type. Filters use deterministic catalogs from the PR #348 projection. Result order always follows the projection's canonical date-descending order.</p>
+          <p>Search by title, summary, asset, organization, or change type. Filters use deterministic catalogs from the canonical projection. Result order always follows the projection's date-descending order.</p>
         </div>
         <p class="timeline-machine-link"><a href="/data/change-timeline.json">Machine-readable timeline</a> · canonical data only</p>
       </div>
@@ -59,13 +59,16 @@ const jsonLd = {
         <span data-timeline-copy-status aria-live="polite"></span>
       </div>
 
-      <div class="timeline-filter-groups" data-timeline-filter-groups>
-        <fieldset class="timeline-filter-group"><legend>Provenance</legend><div data-timeline-filter-slot="provenance"></div></fieldset>
-        <fieldset class="timeline-filter-group"><legend>Date semantics</legend><div data-timeline-filter-slot="date_semantics"></div></fieldset>
-        <fieldset class="timeline-filter-group"><legend>Subject</legend><div data-timeline-filter-slot="subject"></div></fieldset>
-        <fieldset class="timeline-filter-group"><legend>Time</legend><div data-timeline-filter-slot="time"></div></fieldset>
-        <fieldset class="timeline-filter-group"><legend>Scope</legend><div data-timeline-filter-slot="scope"></div></fieldset>
-      </div>
+      <details class="advanced-filter-disclosure timeline-advanced-filters">
+        <summary>Advanced timeline filters</summary>
+        <div class="timeline-filter-groups" data-timeline-filter-groups>
+          <fieldset class="timeline-filter-group"><legend>Provenance</legend><div data-timeline-filter-slot="provenance"></div></fieldset>
+          <fieldset class="timeline-filter-group"><legend>Date semantics</legend><div data-timeline-filter-slot="date_semantics"></div></fieldset>
+          <fieldset class="timeline-filter-group"><legend>Subject</legend><div data-timeline-filter-slot="subject"></div></fieldset>
+          <fieldset class="timeline-filter-group"><legend>Time</legend><div data-timeline-filter-slot="time"></div></fieldset>
+          <fieldset class="timeline-filter-group"><legend>Scope</legend><div data-timeline-filter-slot="scope"></div></fieldset>
+        </div>
+      </details>
 
       <div class="timeline-active-filters" data-timeline-active-filters aria-live="polite"></div>
       <div class="timeline-alert" data-timeline-alert role="alert" aria-live="assertive"></div>
