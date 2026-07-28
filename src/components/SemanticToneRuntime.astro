@@ -1,0 +1,14 @@
+<script>
+  const applySemanticTones = () => {
+    document.querySelectorAll<HTMLElement>('.context-support-callout').forEach((element) => {
+      element.dataset.tone = 'support';
+    });
+    document.querySelectorAll<HTMLElement>('.timeline-item__date, .update-feed-item__date').forEach((element) => {
+      element.dataset.tone = 'temporal';
+    });
+  };
+
+  applySemanticTones();
+  const observer = new MutationObserver(applySemanticTones);
+  observer.observe(document.body, { childList: true, subtree: true });
+</script>
