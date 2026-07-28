@@ -5,6 +5,7 @@ SOG uses the actual Crypto Yield Archive implementation as its public UI structu
 ## Required structure
 
 - compact masthead and horizontally scrollable primary navigation;
+- one valid brand link, without nested anchors or duplicated mobile brand copy;
 - editorial introduction beside a 2 x 2 registry facts grid;
 - archive scope strip;
 - numbered two-column directory;
@@ -18,4 +19,4 @@ SOG may change colors, copy, routes, and record fields. It must not replace the 
 
 ## Enforcement
 
-The single public stylesheet, typed registry controls, rendered-route audit, screenshot audit, text contrast audit, mobile evidence preservation checks, active-link state, and flat status-label contract are blocking gates.
+The single public stylesheet, typed registry controls, rendered-route audit, screenshot audit, text contrast audit, mobile evidence preservation checks, zero document overflow, active-link state, and flat status-label contract are blocking gates.
