@@ -42,6 +42,7 @@ let cssImports = [];
 let cssFiles = [];
 let inlineStyleFiles = [];
 let inlineStyleAttributeFiles = [];
+let authorityLineCount = 0;
 if (failures.length === 0) {
   const layout = read(layoutPath);
   const brand = read(brandPath);
@@ -53,6 +54,11 @@ if (failures.length === 0) {
 
   cssFiles = physicalCssFiles.sort();
   check(cssFiles.length === 1 && cssFiles[0] === authorityPath, `exactly one CSS file is allowed; found ${cssFiles.length}: ${cssFiles.join(', ')}`);
+
+  authorityLineCount = authority.split(/\r?\n/).length;
+  check(authorityLineCount < 553, `public-ui.css must stay below the rejected 553-line baseline; found ${authorityLineCount}`);
+  check(!authority.includes('!important'), 'public-ui.css must not contain !important');
+  check(!/@import\s/i.test(authority), 'public-ui.css must not contain @import');
 
   const importPattern = /import\s+['"]([^'"]+\.css)['"]/g;
   for (const file of sourceFiles.filter((file) => !file.endsWith('.css'))) {
@@ -105,18 +111,20 @@ if (failures.length === 0) {
 }
 
 const result = {
-  schema_version: '5.0',
+  schema_version: '5.1',
   generated_at: new Date().toISOString(),
   ok: failures.length === 0,
   visual_family: 'cya_aligned_single_authority',
   active_stylesheet: authorityPath,
+  active_stylesheet_line_count: authorityLineCount,
+  rejected_stylesheet_line_baseline: 553,
   css_files: cssFiles,
   stylesheet_entrypoints: cssImports,
   inline_style_files: inlineStyleFiles,
   inline_style_attribute_files: inlineStyleAttributeFiles,
   scanned_source_files: sourceFiles.length,
   contracts: {
-    cascade: 'exactly one CSS file, exactly one CSS import, zero Astro style blocks, and zero inline style attributes',
+    cascade: 'exactly one CSS file, exactly one CSS import, zero Astro style blocks, zero inline style attributes, zero !important, and fewer than 553 lines',
     typography: 'serif editorial headings, sans ordinary copy, mono explicit technical values and labels',
     interactions: 'one default, visited, hover, active, and focus palette',
     badges: 'shape, padding, border, background, and readable state text are mandatory',

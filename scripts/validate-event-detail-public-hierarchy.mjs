@@ -49,8 +49,8 @@ check(
   'All mobile table surfaces, including Event Evidence, must have hidden- and duplicate-content screenshot gates'
 );
 
-check(ui.includes('--ui-copy: #dddcd6;'), 'Body-copy brightness token is not at the reviewed value');
-check(ui.includes('--ui-muted: #b6bbba;'), 'Supporting-copy brightness token is not at the reviewed value');
+check(ui.includes('--ui-copy: #e1dfd9;'), 'Body-copy brightness token is not at the legible reviewed value');
+check(ui.includes('--ui-muted: #b9bfbe;'), 'Supporting-copy brightness token is not at the legible reviewed value');
 check(ui.includes('.event-detail-evidence-r5 table'), 'Event Evidence width and wrapping repair is missing');
 check(ui.includes('table:not([data-mobile-table-built="true"])'), 'Event Evidence progressive fallback is missing');
 check(ui.includes('.event-detail-evidence-r5 .mobile-evidence-record'), 'Event Evidence mobile representation repair is missing');
@@ -61,11 +61,13 @@ check(brand.includes(publicUiImport), 'Single public UI authority is not loaded'
 check(!brand.includes('event-detail-public-fix.css'), 'Event detail repair must not reintroduce a second stylesheet');
 
 const result = {
-  schema_version: '1.0',
+  schema_version: '1.1',
   ok: failures.length === 0,
   primary_event_facts: 3,
   event_evidence_public_fields: 4,
   record_metadata_default: 'closed',
+  public_copy_token: '#e1dfd9',
+  public_muted_token: '#b9bfbe',
   failures
 };
 

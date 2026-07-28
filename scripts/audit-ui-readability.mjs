@@ -31,8 +31,8 @@ for (const route of routes) {
     const result = await page.evaluate(({ deviceName }) => {
       const mobile = deviceName === 'mobile';
       const thresholds = mobile
-        ? { ordinary: 16, compact: 15, interactive: 15, metadata: 12, h1: 68, h1Home: 84, h2: 48 }
-        : { ordinary: 16, compact: 14, interactive: 14, metadata: 12, h1: 88, h1Home: 142, h2: 52 };
+        ? { ordinary: 16, compact: 15, interactive: 15, metadata: 13, h1: 60, h1Home: 72, h2: 44 }
+        : { ordinary: 17, compact: 15, interactive: 15, metadata: 13, h1: 80, h1Home: 96, h2: 48 };
       const findings = {
         undersized_ordinary_text: [],
         undersized_compact_text: [],
