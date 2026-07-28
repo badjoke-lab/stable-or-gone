@@ -6,6 +6,8 @@ import path from 'node:path';
 const root = process.cwd();
 const origin = (process.env.SOG_BASE_URL || 'https://sog.badjoke-lab.com').replace(/\/$/, '');
 const concurrency = Number(process.env.SOG_PARITY_CONCURRENCY || 12);
+const expectedCommit = process.env.SOG_EXPECTED_COMMIT || process.env.GITHUB_SHA || null;
+const cacheBust = encodeURIComponent(expectedCommit || String(Date.now()));
 
 function assert(condition, message) {
   if (!condition) throw new Error(message);
@@ -57,11 +59,12 @@ function extractJsonLd(html) {
 }
 
 async function read(pathname, expectedType) {
-  const response = await fetch(`${origin}${pathname}`, {
+  const separator = pathname.includes('?') ? '&' : '?';
+  const response = await fetch(`${origin}${pathname}${separator}sog_build=${cacheBust}`, {
     headers: {
       accept: expectedType,
-      'user-agent': 'sog-production-output-parity/1.0',
-      'cache-control': 'no-cache'
+      'user-agent': 'sog-production-output-parity/1.1',
+      'cache-control': 'no-store'
     }
   });
   assert(response.ok, `${pathname}: HTTP ${response.status}`);
@@ -106,6 +109,7 @@ const [versionText, manifestText, stablecoinIndex, organizationIndex, eventIndex
 const version = JSON.parse(versionText);
 const manifest = JSON.parse(manifestText);
 assert(isDeepStrictEqual(version.build, manifest.build), 'version and manifest provenance differ');
+if (expectedCommit) assert(version.build?.commit === expectedCommit, `production commit ${version.build?.commit} does not match expected ${expectedCommit}`);
 assert(version.data?.record_counts?.primary_records === stablecoins.length, 'production stablecoin count mismatch');
 assert(version.data?.record_count_breakdown?.organizations === organizations.length, 'production organization count mismatch');
 assert(version.data?.record_counts?.events === events.length, 'production event count mismatch');
