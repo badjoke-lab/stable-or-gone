@@ -101,11 +101,14 @@ jobs:
             --commit-message "Automatic main publication"
 
       - name: Verify deployed production
+        shell: bash
         env:
           SOG_EXPECTED_COMMIT: ${{ steps.source.outputs.sha }}
           SOG_SMOKE_ATTEMPTS: '20'
           SOG_SMOKE_DELAY_MS: '15000'
-        run: npm run check:production
+        run: |
+          set -o pipefail
+          npm run check:production 2>&1 | tee production-smoke.log
 
       - name: Verify UK guide publication
         run: |
@@ -145,10 +148,17 @@ jobs:
           JOB_STATUS: ${{ job.status }}
         with:
           script: |
+            const fs = require('fs');
             const runUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            let diagnostic = '';
+            if (fs.existsSync('production-smoke.log')) {
+              const lines = fs.readFileSync('production-smoke.log', 'utf8').trim().split(/\r?\n/);
+              diagnostic = lines.slice(-12).join('\n').slice(-3000);
+            }
+            const diagnosticBlock = diagnostic ? `\n\n### Production smoke tail\n\n\`\`\`text\n${diagnostic}\n\`\`\`` : '';
             await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: 475,
-              body: `Production deployment finished.\n\n- Result: **${process.env.JOB_STATUS}**\n- Source commit: \`${process.env.SOURCE_SHA}\`\n- Trigger: \`${process.env.EVENT_NAME}\`\n- Run: ${runUrl}`
+              body: `Production deployment finished.\n\n- Result: **${process.env.JOB_STATUS}**\n- Source commit: \`${process.env.SOURCE_SHA}\`\n- Trigger: \`${process.env.EVENT_NAME}\`\n- Run: ${runUrl}${diagnosticBlock}`
             });
