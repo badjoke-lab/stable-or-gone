@@ -6,7 +6,9 @@
 
     const sections = Array.from(page.querySelectorAll<HTMLElement>(':scope > .stats-section'));
     const collapsible = sections.slice(2);
-    if (collapsible.length === 0) return;
+    const stackedLayouts = Array.from(page.querySelectorAll<HTMLElement>('.stats-lifecycle-layout, .stats-analysis-grid'));
+    if (collapsible.length === 0 && stackedLayouts.length === 0) return;
+
     const media = window.matchMedia('(max-width: 640px)');
     const records = collapsible.map((section) => {
       const placeholder = document.createComment('stats-section-placeholder');
@@ -21,6 +23,13 @@
       details.append(summary, content);
       return { section, placeholder, details, content };
     });
+
+    const setStackedLayouts = (stacked: boolean) => {
+      for (const layout of stackedLayouts) {
+        if (stacked) layout.style.setProperty('grid-template-columns', 'minmax(0, 1fr)');
+        else layout.style.removeProperty('grid-template-columns');
+      }
+    };
 
     const collapse = () => {
       for (const record of records) {
@@ -40,7 +49,16 @@
       }
     };
 
-    const sync = () => media.matches ? collapse() : restore();
+    const sync = () => {
+      if (media.matches) {
+        setStackedLayouts(true);
+        collapse();
+      } else {
+        restore();
+        setStackedLayouts(false);
+      }
+    };
+
     sync();
     media.addEventListener?.('change', sync);
   };
