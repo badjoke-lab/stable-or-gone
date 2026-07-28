@@ -64,7 +64,7 @@ jobs:
             await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              issue_number: 477,
+              issue_number: 479,
               body: `Production deployment started.\n\n- Source commit: \`${process.env.SOURCE_SHA}\`\n- Trigger: \`${process.env.EVENT_NAME}\`\n- Run: ${runUrl}`
             });
 
@@ -157,6 +157,6 @@ jobs:
             await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              issue_number: 477,
+              issue_number: 479,
               body: `Production deployment finished.\n\n- Result: **${process.env.JOB_STATUS}**\n- Source commit: \`${process.env.SOURCE_SHA}\`\n- Trigger: \`${process.env.EVENT_NAME}\`\n- Run: ${runUrl}${diagnosticBlock}`
             });
