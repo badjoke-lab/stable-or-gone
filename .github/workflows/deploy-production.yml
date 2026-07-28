@@ -64,7 +64,7 @@ jobs:
             await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              issue_number: 475,
+              issue_number: 477,
               body: `Production deployment started.\n\n- Source commit: \`${process.env.SOURCE_SHA}\`\n- Trigger: \`${process.env.EVENT_NAME}\`\n- Run: ${runUrl}`
             });
 
@@ -104,8 +104,8 @@ jobs:
         shell: bash
         env:
           SOG_EXPECTED_COMMIT: ${{ steps.source.outputs.sha }}
-          SOG_SMOKE_ATTEMPTS: '1'
-          SOG_SMOKE_DELAY_MS: '0'
+          SOG_SMOKE_ATTEMPTS: '5'
+          SOG_SMOKE_DELAY_MS: '10000'
         run: |
           set -o pipefail
           npm run check:production 2>&1 | tee production-smoke.log
@@ -159,6 +159,6 @@ jobs:
             await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              issue_number: 475,
+              issue_number: 477,
               body: `Production deployment finished.\n\n- Result: **${process.env.JOB_STATUS}**\n- Source commit: \`${process.env.SOURCE_SHA}\`\n- Trigger: \`${process.env.EVENT_NAME}\`\n- Run: ${runUrl}${diagnosticBlock}`
             });
