@@ -6,6 +6,7 @@ import DisclosureRuntime from './DisclosureRuntime.astro';
 import TechnicalTokenRuntime from './TechnicalTokenRuntime.astro';
 import ResponsiveNavigationRuntime from './ResponsiveNavigationRuntime.astro';
 import StatsResponsiveRuntime from './StatsResponsiveRuntime.astro';
+import SemanticToneRuntime from './SemanticToneRuntime.astro';
 
 interface Props {
   compact?: boolean;
@@ -28,4 +29,4 @@ const loadsGlobalRuntime = className.split(/\s+/).includes('site-brand');
 <a class:list={['brand-lockup', compact && 'brand-lockup--compact', className]} href={href} aria-label="Stable or Gone home">
   <img src={asset} alt="Stable or Gone" width={compact ? 56 : 228} height={compact ? 56 : 56} decoding="async" />
 </a>
-{loadsGlobalRuntime && <><MobileTableRuntime /><DisclosureRuntime /><TechnicalTokenRuntime /><ResponsiveNavigationRuntime /><StatsResponsiveRuntime /></>}
+{loadsGlobalRuntime && <><MobileTableRuntime /><DisclosureRuntime /><TechnicalTokenRuntime /><ResponsiveNavigationRuntime /><StatsResponsiveRuntime /><SemanticToneRuntime /></>}
