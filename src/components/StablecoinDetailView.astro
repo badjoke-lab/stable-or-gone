@@ -101,10 +101,28 @@ const redemptionProfile = coin.redemption_profile;
     <StablecoinOrganizationsControl coin={coin} relationships={relationships} primaryResolution={primaryResolution} primaryRelationship={primaryRelationship} primaryOrganization={primaryOrganization} organizations={organizations} deployments={deployments} issuerControlEvents={issuerControlEvents} />
 
     <section class="stablecoin-dossier-section stablecoin-mechanism" id="mechanism">
-      <div class="stablecoin-section-heading"><p>Mechanism</p><h2>How the asset works</h2><span>Reference, backing, stabilization, exit, valuation, and yield remain separate facts.</span></div>
-      <dl class="stablecoin-mechanism-ledger">
-        <div><dt>Reference target</dt><dd>{reference.public_label}</dd></div><div><dt>Reference kind</dt><dd>{reference.reference_kind_label}</dd></div><div><dt>Comparison category</dt><dd>{reference.comparison_category_label}</dd></div><div><dt>Target value</dt><dd><ValueStateText value={reference.target_value} /></dd></div><div class="wide"><dt>Reference methodology</dt><dd><ValueStateText value={reference.methodology_description} displayValue={reference.methodology_description} detectMarkers={false} /></dd></div><div><dt>Public backing model</dt><dd>{model.public_label}</dd></div><div><dt>Canonical backing types</dt><dd>{model.canonical_backing_type_labels.join(', ') || 'Not recorded'}</dd></div><div><dt>Reserve component categories</dt><dd>{reserveComponents.map((component) => formatPublicLabel(component.asset_category)).join(', ') || 'Not recorded'}</dd></div><div><dt>Primary stabilization mechanism</dt><dd>{model.stabilization_label}</dd></div><div class="wide"><dt>Recorded model description</dt><dd>{model.recorded_model_description ?? 'Not recorded'}</dd></div><div><dt>Redemption / exit model</dt><dd>{formatPublicLabel(exitModel, 'Unknown')}</dd></div><div><dt>Valuation source</dt><dd>{valuationSource?.url ? <a href={valuationSource.url}>{valuationText}</a> : valuationText}</dd></div><div><dt>Yield / rebase profile</dt><dd>{yieldText}</dd></div><div class="wide"><dt>Classification notes</dt><dd>{coin.classification_notes ?? 'Not recorded'}</dd></div>
+      <div class="stablecoin-section-heading"><p>Mechanism</p><h2>How the asset works</h2><span>Primary operating facts are shown first. Classification and methodology details remain available below.</span></div>
+      <dl class="stablecoin-mechanism-ledger stablecoin-mechanism-ledger--primary">
+        <div><dt>Reference target</dt><dd>{reference.public_label}</dd></div>
+        <div><dt>Public backing model</dt><dd>{model.public_label}</dd></div>
+        <div><dt>Primary stabilization mechanism</dt><dd>{model.stabilization_label}</dd></div>
+        <div><dt>Redemption / exit model</dt><dd>{formatPublicLabel(exitModel, 'Unknown')}</dd></div>
+        <div><dt>Valuation source</dt><dd>{valuationSource?.url ? <a href={valuationSource.url}>{valuationText}</a> : valuationText}</dd></div>
+        <div><dt>Yield / rebase profile</dt><dd>{yieldText}</dd></div>
       </dl>
+      <details class="stablecoin-mechanism-details">
+        <summary>Classification and mechanism details</summary>
+        <dl class="stablecoin-mechanism-ledger stablecoin-mechanism-ledger--secondary">
+          <div><dt>Reference kind</dt><dd>{reference.reference_kind_label}</dd></div>
+          <div><dt>Comparison category</dt><dd>{reference.comparison_category_label}</dd></div>
+          <div><dt>Target value</dt><dd><ValueStateText value={reference.target_value} /></dd></div>
+          <div class="wide"><dt>Reference methodology</dt><dd><ValueStateText value={reference.methodology_description} displayValue={reference.methodology_description} detectMarkers={false} /></dd></div>
+          <div><dt>Canonical backing types</dt><dd>{model.canonical_backing_type_labels.join(', ') || 'Not recorded'}</dd></div>
+          <div><dt>Reserve component categories</dt><dd>{reserveComponents.map((component) => formatPublicLabel(component.asset_category)).join(', ') || 'Not recorded'}</dd></div>
+          <div class="wide"><dt>Recorded model description</dt><dd>{model.recorded_model_description ?? 'Not recorded'}</dd></div>
+          <div class="wide"><dt>Classification notes</dt><dd>{coin.classification_notes ?? 'Not recorded'}</dd></div>
+        </dl>
+      </details>
     </section>
 
     <StablecoinReserveSection coin={coin} reserveComponents={reserveComponents} reserveProfile={reserveProfile} redemptionProfile={redemptionProfile} model={model} reserveReports={reserveReports} regulatoryNotes={regulatoryNotes} openQuestions={openQuestions} />
