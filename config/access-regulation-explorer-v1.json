@@ -3,8 +3,8 @@
   "config_id": "sog_access_regulation_explorer_pr347_v1",
   "source_endpoint": "/data/access-regulation-index.json",
   "route": "/access-regulation/",
-  "initial_result_limit": 50,
-  "result_limit_increment": 25,
+  "initial_result_limit": 12,
+  "result_limit_increment": 12,
   "filters": [
     {"id":"lifecycle_status","label":"Lifecycle","query_param":"lifecycle","group":"record_state"},
     {"id":"legal_profile_state","label":"Legal profile state","query_param":"legal_state","group":"legal"},
