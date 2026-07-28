@@ -7,10 +7,15 @@ const root = process.cwd();
 const origin = (process.env.SOG_BASE_URL || 'https://sog.badjoke-lab.com').replace(/\/$/, '');
 const concurrency = Number(process.env.SOG_PARITY_CONCURRENCY || 12);
 const expectedCommit = process.env.SOG_EXPECTED_COMMIT || process.env.GITHUB_SHA || null;
-const cacheBust = encodeURIComponent(expectedCommit || String(Date.now()));
+const attempts = Number(process.env.SOG_SMOKE_ATTEMPTS || 5);
+const delayMs = Number(process.env.SOG_SMOKE_DELAY_MS || 10000);
 
 function assert(condition, message) {
   if (!condition) throw new Error(message);
+}
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 function readRows(relativePath) {
@@ -58,12 +63,12 @@ function extractJsonLd(html) {
   return values;
 }
 
-async function read(pathname, expectedType) {
+async function read(pathname, expectedType, cacheBust) {
   const separator = pathname.includes('?') ? '&' : '?';
-  const response = await fetch(`${origin}${pathname}${separator}sog_build=${cacheBust}`, {
+  const response = await fetch(`${origin}${pathname}${separator}sog_build=${encodeURIComponent(cacheBust)}`, {
     headers: {
       accept: expectedType,
-      'user-agent': 'sog-production-output-parity/1.1',
+      'user-agent': 'sog-production-output-parity/1.2',
       'cache-control': 'no-store'
     }
   });
@@ -71,6 +76,31 @@ async function read(pathname, expectedType) {
   const contentType = response.headers.get('content-type') || '';
   assert(contentType.includes(expectedType), `${pathname}: unexpected content type ${contentType || 'missing'}`);
   return response.text();
+}
+
+async function waitForCoherentSource() {
+  let lastError;
+  for (let attempt = 1; attempt <= attempts; attempt += 1) {
+    const cacheBust = `${expectedCommit || 'unknown'}-${attempt}-${Date.now()}`;
+    try {
+      const [versionText, manifestText] = await Promise.all([
+        read('/version.json', 'application/json', cacheBust),
+        read('/data/manifest.json', 'application/json', cacheBust)
+      ]);
+      const version = JSON.parse(versionText);
+      const manifest = JSON.parse(manifestText);
+      assert(isDeepStrictEqual(version.build, manifest.build), 'version and manifest provenance differ');
+      if (expectedCommit) {
+        assert(version.build?.commit === expectedCommit, `production commit ${version.build?.commit} does not match expected ${expectedCommit}`);
+      }
+      return { version, manifest, cacheBust, attempt };
+    } catch (error) {
+      lastError = error;
+      console.error(`Production parity convergence attempt ${attempt}/${attempts} failed: ${error.message}`);
+      if (attempt < attempts) await sleep(delayMs);
+    }
+  }
+  throw lastError;
 }
 
 async function mapConcurrent(items, limit, worker) {
@@ -97,19 +127,14 @@ const expected = {
   events: new Set(events.map((row) => `/event/${row.id}/`))
 };
 
-const [versionText, manifestText, stablecoinIndex, organizationIndex, eventIndex, sitemap] = await Promise.all([
-  read('/version.json', 'application/json'),
-  read('/data/manifest.json', 'application/json'),
-  read('/stablecoins/', 'text/html'),
-  read('/issuers/', 'text/html'),
-  read('/events/', 'text/html'),
-  read('/sitemap-index.xml', 'application/xml')
+const { version, cacheBust, attempt: convergenceAttempt } = await waitForCoherentSource();
+const [stablecoinIndex, organizationIndex, eventIndex, sitemap] = await Promise.all([
+  read('/stablecoins/', 'text/html', cacheBust),
+  read('/issuers/', 'text/html', cacheBust),
+  read('/events/', 'text/html', cacheBust),
+  read('/sitemap-index.xml', 'application/xml', cacheBust)
 ]);
 
-const version = JSON.parse(versionText);
-const manifest = JSON.parse(manifestText);
-assert(isDeepStrictEqual(version.build, manifest.build), 'version and manifest provenance differ');
-if (expectedCommit) assert(version.build?.commit === expectedCommit, `production commit ${version.build?.commit} does not match expected ${expectedCommit}`);
 assert(version.data?.record_counts?.primary_records === stablecoins.length, 'production stablecoin count mismatch');
 assert(version.data?.record_count_breakdown?.organizations === organizations.length, 'production organization count mismatch');
 assert(version.data?.record_counts?.events === events.length, 'production event count mismatch');
@@ -132,7 +157,7 @@ assertSameSet(sitemapSets.events, expected.events, 'production sitemap events');
 
 const detailPaths = [...expected.stablecoins, ...expected.organizations, ...expected.events];
 await mapConcurrent(detailPaths, concurrency, async (pathname) => {
-  const html = await read(pathname, 'text/html');
+  const html = await read(pathname, 'text/html', cacheBust);
   const expectedUrl = `${origin}${pathname}`;
   assert(extractCanonical(html) === expectedUrl, `${pathname}: canonical URL mismatch`);
   const jsonLd = extractJsonLd(html);
@@ -145,6 +170,7 @@ console.log(JSON.stringify({
   origin,
   source_commit: version.build.commit,
   canonical_data_hash: version.build.canonical_data_hash,
+  convergence_attempt: convergenceAttempt,
   exact_sets: {
     stablecoins: stablecoins.length,
     organizations: organizations.length,
