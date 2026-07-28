@@ -215,9 +215,10 @@ const jsonLd = {
     const emptyState = document.querySelector('#emptyState');
     const copyStatus = document.querySelector('#copyStatus');
     const tbody = document.querySelector('#registryBody');
-    const rows = Array.from(document.querySelectorAll('[data-row="stablecoin"]'));
+    const rows = Array.from(document.querySelectorAll<HTMLTableRowElement>('[data-row="stablecoin"]'));
+    type RegistryControls = { q: string; lifecycle: string; sort: string };
 
-    function compareRows(a, b, sort) {
+    function compareRows(a: HTMLTableRowElement, b: HTMLTableRowElement, sort: string) {
       if (!(a instanceof HTMLElement) || !(b instanceof HTMLElement)) return 0;
       if (sort === 'name-desc') return String(b.dataset.name).localeCompare(String(a.dataset.name));
       if (sort === 'review-desc') return String(b.dataset.review).localeCompare(String(a.dataset.review)) || String(a.dataset.name).localeCompare(String(b.dataset.name));
@@ -226,7 +227,7 @@ const jsonLd = {
       return String(a.dataset.name).localeCompare(String(b.dataset.name));
     }
 
-    function readControls() {
+    function readControls(): RegistryControls {
       return {
         q: searchInput instanceof HTMLInputElement ? searchInput.value.trim() : '',
         lifecycle: lifecycleFilter instanceof HTMLSelectElement ? lifecycleFilter.value : '',
@@ -234,7 +235,7 @@ const jsonLd = {
       };
     }
 
-    function writeUrlState(controls) {
+    function writeUrlState(controls: RegistryControls) {
       const params = new URLSearchParams();
       if (controls.q) params.set('q', controls.q);
       if (controls.lifecycle) params.set('lifecycle', controls.lifecycle);
