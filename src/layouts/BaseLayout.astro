@@ -1,19 +1,54 @@
 ---
 import BrandLockup from '../components/BrandLockup.astro';
 import { aboutNavigation, globalNavigationGroups } from '../../config/site-architecture.mjs';
-interface Props { title?: string; description?: string; canonicalPath?: string; ogImage?: string; language?: string; jsonLd?: Record<string, unknown> | Record<string, unknown>[]; }
+
+interface Props {
+  title?: string;
+  description?: string;
+  canonicalPath?: string;
+  ogImage?: string;
+  language?: string;
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+}
+
 const siteUrl = 'https://sog.badjoke-lab.com';
 const gaMeasurementId = String(import.meta.env.PUBLIC_GA_MEASUREMENT_ID || '').trim();
-const { title = 'Stable or Gone — Stablecoin History Registry', description = 'Explore stablecoin histories, major events, organizations, reserve information, redemption terms, and the sources behind each record.', canonicalPath = Astro.url.pathname, ogImage = '/og/sog-og.svg', language = 'en', jsonLd } = Astro.props;
+const {
+  title = 'Stable or Gone — Stablecoin History Registry',
+  description = 'Explore stablecoin histories, major events, organizations, reserve information, redemption terms, and the sources behind each record.',
+  canonicalPath = Astro.url.pathname,
+  ogImage = '/og/sog-og.svg',
+  language = 'en',
+  jsonLd
+} = Astro.props;
+
 const pathname = Astro.url.pathname;
 const canonicalUrl = new URL(canonicalPath, siteUrl).toString();
 const ogImageUrl = new URL(ogImage, siteUrl).toString();
 const structuredData = jsonLd ? JSON.stringify(jsonLd).replace(/</g, '\u003c') : '';
 const gaLoaderUrl = gaMeasurementId ? `https://www.google${'tagmanager'}.com/gtag/js?id=${gaMeasurementId}` : '';
-const gaInline = gaMeasurementId ? `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${gaMeasurementId}');` : '';
+const gaInline = gaMeasurementId
+  ? `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${gaMeasurementId}');`
+  : '';
+
 const routeFamilies: Record<string, string[]> = {
-  '/stablecoins/': ['/stablecoins/', '/stablecoin/'], '/issuers/': ['/issuers/', '/issuer/'], '/events/': ['/events/', '/event/'], '/guides/': ['/guides/'], '/glossary/': ['/glossary/'], '/models/': ['/models/'], '/methodology/': ['/methodology/'], '/updates/': ['/updates/'], '/about/': ['/about/'], '/contact/': ['/contact/'], '/support/': ['/support/']
+  '/stablecoins/': ['/stablecoins/', '/stablecoin/'],
+  '/issuers/': ['/issuers/', '/issuer/'],
+  '/events/': ['/events/', '/event/'],
+  '/guides/': ['/guides/'],
+  '/timeline/': ['/timeline/'],
+  '/compare/': ['/compare/'],
+  '/access-and-regulation/': ['/access-and-regulation/'],
+  '/stats/': ['/stats/'],
+  '/glossary/': ['/glossary/'],
+  '/models/': ['/models/'],
+  '/methodology/': ['/methodology/'],
+  '/updates/': ['/updates/'],
+  '/about/': ['/about/'],
+  '/contact/': ['/contact/'],
+  '/support/': ['/support/']
 };
+
 const editorialPrefixes = ['/guides/', '/glossary/', '/models/', '/methodology/', '/updates/', '/about/', '/contact/', '/support/'];
 const pageFamily = editorialPrefixes.some((prefix) => pathname === prefix || pathname.startsWith(prefix)) ? 'editorial' : 'registry';
 const isGuideIndex = pathname === '/guides/';
@@ -23,9 +58,18 @@ const isLongformPage = ['/methodology/', '/about/'].includes(pathname);
 const isUtilityPage = ['/contact/', '/support/'].includes(pathname);
 const pageKind = isGuideIndex ? 'guide-index' : isGuideArticle ? 'guide-article' : isReferencePage ? 'reference' : isLongformPage ? 'longform' : isUtilityPage ? 'utility' : undefined;
 const isCurrent = (href: string) => (routeFamilies[href] ?? [href]).some((prefix) => pathname === prefix || pathname.startsWith(prefix));
-const isAboutCurrent = aboutNavigation.some((item) => isCurrent(item.href));
+
 const registryNavigation = globalNavigationGroups.find((group) => group.id === 'registry')?.items ?? [];
-const shellNavigation = [...registryNavigation, { label: 'Guides', href: '/guides/' }];
+const navMap = new Map<string, { label: string; href: string }>();
+[
+  ...registryNavigation,
+  { label: 'Timeline', href: '/timeline/' },
+  { label: 'Stats', href: '/stats/' },
+  { label: 'Guides', href: '/guides/' },
+  ...aboutNavigation
+].forEach((item) => navMap.set(item.href, item));
+const shellNavigation = [...navMap.values()];
+
 const footerLinks = [
   { label: 'Stablecoins', href: '/stablecoins/' },
   { label: 'Timeline', href: '/timeline/' },
@@ -44,7 +88,7 @@ const footerLinks = [
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#07090b" />
+    <meta name="theme-color" content="#080b0d" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="icon" href="/brand/sog-mark-on-light.svg" type="image/svg+xml" />
@@ -55,87 +99,89 @@ const footerLinks = [
     <link rel="alternate" type="application/json" href="/data/manifest.json" title="SOG public data manifest" />
     <link rel="alternate" type="text/plain" href="/llms.txt" title="SOG LLM guide" />
     <link rel="alternate" type="text/plain" href="/ai.txt" title="SOG AI entrypoint" />
-    <meta property="og:site_name" content="Stable or Gone" /><meta property="og:type" content="website" /><meta property="og:title" content={title} /><meta property="og:description" content={description} /><meta property="og:url" content={canonicalUrl} /><meta property="og:image" content={ogImageUrl} />
-    <meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content={title} /><meta name="twitter:description" content={description} /><meta name="twitter:image" content={ogImageUrl} />
-    {gaLoaderUrl && <script async src={gaLoaderUrl}></script>}{gaInline && <script set:html={gaInline} />}{structuredData && <script type="application/ld+json" set:html={structuredData} />}
+    <meta property="og:site_name" content="Stable or Gone" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+    {gaLoaderUrl && <script async src={gaLoaderUrl}></script>}
+    {gaInline && <script set:html={gaInline} />}
+    {structuredData && <script type="application/ld+json" set:html={structuredData} />}
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to main content</a>
-    <header class="site-header">
-      <div class="site-header-inner">
-        <div class="v3-masthead-row">
-          <div class="v3-brand-block">
-            <BrandLockup class="site-brand" surface="dark" />
-            <span class="v3-brand-copy" aria-hidden="true">
+    <div class="site-frame">
+      <header class="site-header">
+        <div class="masthead-row v3-masthead-row site-shell">
+          <div class="brand v3-brand-block">
+            <BrandLockup class="site-brand" surface="dark" href="/" />
+            <span class="brand-copy v3-brand-copy" aria-hidden="true">
               <strong>Stablecoin history registry</strong>
               <small>Evidence, lifecycle, access, and institutional context</small>
             </span>
           </div>
-          <div class="v3-masthead-meta" aria-label="Registry description">
+          <div class="masthead-meta v3-masthead-meta" aria-label="Registry description">
             <span>Evidence-led</span>
             <span>Static registry</span>
             <a href="/contact/">Submit correction</a>
           </div>
         </div>
-        <div class="v3-nav-row">
-          <nav class="site-primary-navigation" aria-label="Primary navigation">
-            {shellNavigation.map((item) => <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>)}
+        <div class="nav-rule">
+          <nav class="site-nav site-primary-navigation site-shell" aria-label="Primary navigation">
+            {shellNavigation.map((item) => (
+              <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>
+            ))}
           </nav>
-          <form class="site-search" action="/stablecoins/" method="get" role="search">
-            <label class="visually-hidden" for="site-search-input">Search stablecoin records</label>
-            <input id="site-search-input" type="search" name="q" placeholder="Search register" autocomplete="off" />
-            <button type="submit">Search</button>
-          </form>
-          <details class="site-about-menu" data-disclosure>
-            <summary aria-current={isAboutCurrent ? 'page' : undefined} aria-controls="site-about-panel" aria-expanded="false">Reference</summary>
-            <nav class="site-about-panel" id="site-about-panel" aria-label="Reference and project navigation">
-              {aboutNavigation.map((item) => <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>)}
+        </div>
+      </header>
+
+      <main id="main-content" class="site-main site-shell" tabindex="-1" data-page-family={pageFamily} data-page-kind={pageKind}>
+        {isGuideArticle ? (
+          <article class="guide-article-layout" data-guide-article>
+            <details class="guide-article-toc" data-guide-toc data-disclosure open>
+              <summary aria-controls="guide-article-contents" aria-expanded="true">On this page</summary>
+              <ol id="guide-article-contents" data-guide-toc-list></ol>
+            </details>
+            <div class="guide-article-content"><slot /></div>
+            <nav class="guide-article-footer" aria-label="Guide reference navigation">
+              <a href="/guides/">All guides</a>
+              <a href="/glossary/">Glossary</a>
+              <a href="/methodology/">Methodology</a>
+              <a href="/contact/">Submit a correction</a>
             </nav>
-          </details>
-          <details class="mobile-navigation" data-mobile-navigation data-disclosure>
-            <summary aria-label="Open navigation menu" aria-controls="mobile-navigation-panel" aria-expanded="false">Menu</summary>
-            <div class="mobile-navigation-panel" id="mobile-navigation-panel">
-              <nav class="mobile-navigation-links" aria-label="Mobile primary navigation">
-                {shellNavigation.map((item) => <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>)}
-              </nav>
-              <form class="mobile-site-search" action="/stablecoins/" method="get" role="search">
-                <label for="mobile-site-search-input">Search stablecoin records</label>
-                <div><input id="mobile-site-search-input" type="search" name="q" placeholder="Search register" autocomplete="off" /><button type="submit">Search</button></div>
-              </form>
-              <nav class="mobile-navigation-secondary" aria-label="Mobile reference navigation">
-                {aboutNavigation.map((item) => <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>)}
-              </nav>
-            </div>
-          </details>
-        </div>
-      </div>
-    </header>
-    <main id="main-content" class="site-main" tabindex="-1" data-page-family={pageFamily} data-page-kind={pageKind}>
-      {isGuideArticle ? (
-        <article class="guide-article-layout" data-guide-article>
-          <details class="guide-article-toc" data-guide-toc data-disclosure open><summary aria-controls="guide-article-contents" aria-expanded="true">On this page</summary><ol id="guide-article-contents" data-guide-toc-list></ol></details>
-          <div class="guide-article-content"><slot /></div>
-          <nav class="guide-article-footer" aria-label="Guide reference navigation"><a href="/guides/">All guides</a><a href="/glossary/">Glossary</a><a href="/methodology/">Methodology</a><a href="/contact/">Submit a correction</a></nav>
-        </article>
-      ) : isLongformPage ? (
-        <article class="longform-layout" data-longform-article>
-          <details class="longform-toc" data-longform-toc data-disclosure open><summary aria-controls="longform-contents" aria-expanded="true">On this page</summary><ol id="longform-contents" data-longform-toc-list></ol></details>
-          <div class="longform-content"><slot /></div>
-          <nav class="longform-footer" aria-label="Project reference navigation"><a href="/glossary/">Glossary</a><a href="/models/">Models</a><a href="/updates/">Updates</a><a href="/contact/">Corrections</a></nav>
-        </article>
-      ) : <slot />}
-    </main>
-    <footer class="site-footer">
-      <div class="site-footer-inner">
-        <div class="site-footer-intro">
+          </article>
+        ) : isLongformPage ? (
+          <article class="longform-layout" data-longform-article>
+            <details class="longform-toc" data-longform-toc data-disclosure open>
+              <summary aria-controls="longform-contents" aria-expanded="true">On this page</summary>
+              <ol id="longform-contents" data-longform-toc-list></ol>
+            </details>
+            <div class="longform-content"><slot /></div>
+            <nav class="longform-footer" aria-label="Project reference navigation">
+              <a href="/glossary/">Glossary</a>
+              <a href="/models/">Models</a>
+              <a href="/updates/">Updates</a>
+              <a href="/contact/">Corrections</a>
+            </nav>
+          </article>
+        ) : <slot />}
+      </main>
+
+      <footer class="site-footer">
+        <div class="footer-grid site-shell">
           <p>Stable or Gone is a source-backed historical registry, not a ranking, recommendation, or real-time market dashboard.</p>
+          <nav class="footer-links v3-footer-links" aria-label="Footer navigation">
+            {footerLinks.map((item) => <a href={item.href}>{item.label}</a>)}
+          </nav>
         </div>
-        <nav class="v3-footer-links" aria-label="Footer navigation">
-          {footerLinks.map((item) => <a href={item.href}>{item.label}</a>)}
-        </nav>
-        <p class="site-footer-meta">Canonical records, evidence relations, and known unknowns remain preserved across desktop and compact layouts.</p>
-      </div>
-    </footer>
+      </footer>
+    </div>
+
     <script>
       const initialiseDisclosure = (details: HTMLDetailsElement) => {
         const trigger = details.querySelector(':scope > summary');
@@ -150,14 +196,10 @@ const footerLinks = [
           trigger.focus();
         });
       };
-      document.querySelectorAll('[data-disclosure]').forEach((item) => { if (item instanceof HTMLDetailsElement) initialiseDisclosure(item); });
-      const navigation = document.querySelector('[data-mobile-navigation]');
-      if (navigation instanceof HTMLDetailsElement) navigation.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => { navigation.open = false; }));
-      document.addEventListener('click', (event) => {
-        document.querySelectorAll('.site-about-menu[open]').forEach((menu) => {
-          if (menu instanceof HTMLDetailsElement && event.target instanceof Node && !menu.contains(event.target)) menu.open = false;
-        });
+      document.querySelectorAll('[data-disclosure]').forEach((item) => {
+        if (item instanceof HTMLDetailsElement) initialiseDisclosure(item);
       });
+
       const buildContents = (articleSelector: string, tocSelector: string, listSelector: string, sectionSelector: string, headingSelector: string) => {
         const article = document.querySelector(articleSelector);
         const toc = document.querySelector(tocSelector);
@@ -195,8 +237,22 @@ const footerLinks = [
         if (list.children.length === 0) toc.hidden = true;
         if (window.matchMedia('(max-width: 820px)').matches) toc.open = false;
       };
-      buildContents('[data-guide-article]', '[data-guide-toc]', '[data-guide-toc-list]', '.guide-article-content > section.panel.registry, .guide-article-content > section[data-guide-section]', ':scope > .bar, :scope > .guide-article-section-title');
-      buildContents('[data-longform-article]', '[data-longform-toc]', '[data-longform-toc-list]', '.longform-content > section.panel.registry, .longform-content > section[data-longform-section]', ':scope > .bar, :scope > .longform-section-title');
+
+      buildContents(
+        '[data-guide-article]',
+        '[data-guide-toc]',
+        '[data-guide-toc-list]',
+        '.guide-article-content > section.panel.registry, .guide-article-content > section[data-guide-section]',
+        ':scope > .bar, :scope > .guide-article-section-title'
+      );
+      buildContents(
+        '[data-longform-article]',
+        '[data-longform-toc]',
+        '[data-longform-toc-list]',
+        '.longform-content > section.panel.registry, .longform-content > section[data-longform-section]',
+        ':scope > .bar, :scope > .longform-section-title'
+      );
+
       const focusAnchorTarget = (hash: string) => {
         if (!hash || hash === '#') return;
         const target = document.getElementById(decodeURIComponent(hash.slice(1)));
@@ -212,6 +268,7 @@ const footerLinks = [
       });
       window.addEventListener('hashchange', () => focusAnchorTarget(window.location.hash));
       if (window.location.hash) window.setTimeout(() => focusAnchorTarget(window.location.hash), 0);
+
       const fallbackCopy = (value: string) => {
         const textarea = document.createElement('textarea');
         textarea.value = value;
@@ -224,6 +281,7 @@ const footerLinks = [
         textarea.remove();
         return copied;
       };
+
       document.querySelectorAll('[data-copy-value]').forEach((button) => {
         if (!(button instanceof HTMLButtonElement)) return;
         button.addEventListener('click', async () => {
@@ -231,18 +289,27 @@ const footerLinks = [
           const original = button.textContent ?? 'Copy';
           let copied = false;
           try {
-            if (navigator.clipboard && window.isSecureContext) { await navigator.clipboard.writeText(value); copied = true; }
-            else copied = fallbackCopy(value);
-          } catch { copied = fallbackCopy(value); }
+            if (navigator.clipboard && window.isSecureContext) {
+              await navigator.clipboard.writeText(value);
+              copied = true;
+            } else copied = fallbackCopy(value);
+          } catch {
+            copied = fallbackCopy(value);
+          }
           const card = button.closest('[data-copy-container]');
           const feedback = card?.querySelector('[data-copy-feedback]');
           button.textContent = copied ? 'Copied' : 'Copy failed';
           button.dataset.copyState = copied ? 'success' : 'error';
           if (feedback instanceof HTMLElement) {
             feedback.setAttribute('aria-live', 'polite');
-            feedback.textContent = copied ? 'Full identifier copied to clipboard.' : 'Could not copy automatically. Select and copy the full identifier manually.';
+            feedback.textContent = copied
+              ? 'Full identifier copied to clipboard.'
+              : 'Could not copy automatically. Select and copy the full identifier manually.';
           }
-          window.setTimeout(() => { button.textContent = original; delete button.dataset.copyState; }, 1800);
+          window.setTimeout(() => {
+            button.textContent = original;
+            delete button.dataset.copyState;
+          }, 1800);
         });
       });
     </script>

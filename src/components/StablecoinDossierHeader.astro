@@ -27,7 +27,7 @@ const {
   <div class="stablecoin-dossier-title-row">
     <div>
       <p class="stablecoin-record-id">Record <code>{coin.id}</code></p>
-      <h1><span>{coin.symbol ?? '—'}</span><i aria-hidden="true">/</i>{coin.name}</h1>
+      <h1><span>{coin.symbol ?? '—'}</span><i aria-hidden="true">/</i><wbr />{coin.name}</h1>
       <p class="stablecoin-aliases">
         {aliases.length > 0 ? <>Also recorded as {aliases.join(', ')}</> : 'No additional aliases are recorded.'}
       </p>

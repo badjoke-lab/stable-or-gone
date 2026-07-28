@@ -49,25 +49,28 @@ check(
   'All mobile table surfaces, including Event Evidence, must have hidden- and duplicate-content screenshot gates'
 );
 
-check(ui.includes('--ui-copy: #e1dfd9;'), 'Body-copy brightness token is not at the legible reviewed value');
-check(ui.includes('--ui-muted: #b9bfbe;'), 'Supporting-copy brightness token is not at the legible reviewed value');
-check(ui.includes('.event-detail-evidence-r5 table'), 'Event Evidence width and wrapping repair is missing');
-check(ui.includes('table:not([data-mobile-table-built="true"])'), 'Event Evidence progressive fallback is missing');
-check(ui.includes('.event-detail-evidence-r5 .mobile-evidence-record'), 'Event Evidence mobile representation repair is missing');
-check(ui.includes('.event-record-details-grid'), 'Closed record-details layout is missing');
+check(ui.includes('--ui-copy: #d6d3ca;'), 'Body-copy brightness token is not at the CYA dark reviewed value');
+check(ui.includes('--ui-muted: #979d99;'), 'Supporting-copy brightness token is not at the CYA dark reviewed value');
+check(ui.includes('.event-detail-evidence-r5'), 'Event Evidence flat width boundary is missing');
+check(ui.includes('table[data-mobile-table] { display: none; }'), 'Desktop table suppression on compact screens is missing');
+check(ui.includes('[data-mobile-representation-for] { display: grid;'), 'Mobile table representation is not enabled');
+check(ui.includes('.mobile-evidence-record'), 'Event Evidence compact record styling is missing');
+check(ui.includes('.event-structured-detail'), 'Event structured detail flat boundary is missing');
 
 const publicUiImport = "import '../styles/public-ui.css'";
 check(brand.includes(publicUiImport), 'Single public UI authority is not loaded');
 check(!brand.includes('event-detail-public-fix.css'), 'Event detail repair must not reintroduce a second stylesheet');
 
 const result = {
-  schema_version: '1.1',
+  schema_version: '2.0',
   ok: failures.length === 0,
   primary_event_facts: 3,
   event_evidence_public_fields: 4,
   record_metadata_default: 'closed',
-  public_copy_token: '#e1dfd9',
-  public_muted_token: '#b9bfbe',
+  visual_family: 'cya_dark_flat_registry',
+  public_copy_token: '#d6d3ca',
+  public_muted_token: '#979d99',
+  mobile_evidence_contract: 'desktop table hidden, compact evidence records visible',
   failures
 };
 

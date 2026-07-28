@@ -119,14 +119,14 @@ const description = 'Derived statistics for the Stable or Gone canonical registr
     </aside>
 
     <section class="stats-section">
-      <div class="stats-section-heading"><div><p class="stats-kicker">Current checkpoint</p><h2>Registry at a glance</h2></div><p>Exact counts from the audited canonical registry and supporting records.</p></div>
+      <div class="stats-section-heading section-heading"><div><p class="stats-kicker">Current checkpoint</p><h2>Registry at a glance</h2></div><p>Exact counts from the audited canonical registry and supporting records.</p></div>
       <dl class="stats-kpi-grid">
         {kpis.map((item) => <div><dt>{item.label}</dt><dd>{item.value}</dd><p>{item.note}</p></div>)}
       </dl>
     </section>
 
     <section class="stats-section">
-      <div class="stats-section-heading"><div><p class="stats-kicker">Lifecycle</p><h2>Recorded lifecycle composition</h2></div><p>Operating, constrained, historical non-failure, and failed records remain separate.</p></div>
+      <div class="stats-section-heading section-heading"><div><p class="stats-kicker">Lifecycle</p><h2>Recorded lifecycle composition</h2></div><p>Operating, constrained, historical non-failure, and failed records remain separate.</p></div>
       <div class="stats-lifecycle-layout">
         <div class="stats-bar-list">
           {lifecycleGroups.map((row) => <div class="stats-bar-row"><div class="stats-bar-row__label"><span>{row.label}</span><strong>{row.count}</strong></div><meter class="stats-bar-meter" min="0" max="100" value={Math.max(row.percentage, 1)} aria-label={`${row.label}: ${row.percentage}%`}></meter><p>{row.percentage}% of assets</p></div>)}
@@ -136,14 +136,14 @@ const description = 'Derived statistics for the Stable or Gone canonical registr
     </section>
 
     <section class="stats-section">
-      <div class="stats-section-heading"><div><p class="stats-kicker">Classification</p><h2>What the registry contains</h2></div><p>Economic class, reference target, mechanism, governance, backing, currency, and legal classification remain separate dimensions.</p></div>
+      <div class="stats-section-heading section-heading"><div><p class="stats-kicker">Classification</p><h2>What the registry contains</h2></div><p>Economic class, reference target, mechanism, governance, backing, currency, and legal classification remain separate dimensions.</p></div>
       <div class="stats-analysis-grid stats-analysis-grid--three">
         {classificationPanels.map((panel) => <section class="stats-analysis-panel"><h3>{panel.title}</h3><div class="stats-compact-bars">{panel.rows.map((row) => <div class="stats-compact-bar"><div><span>{row.label}</span><strong>{row.count}</strong></div><meter class="stats-bar-meter" min="0" max="100" value={Math.min(100, Math.max(row.percentage, 1))} aria-label={`${row.label}: ${row.percentage}%`}></meter><small>{row.percentage}%</small></div>)}</div></section>)}
       </div>
     </section>
 
     <section class="stats-section">
-      <div class="stats-section-heading"><div><p class="stats-kicker">Historical analysis</p><h2>Events, transitions, and failures</h2></div><p>Incidents, migrations, regulatory actions, wind-downs, recoveries, and collapses are not collapsed into one category.</p></div>
+      <div class="stats-section-heading section-heading"><div><p class="stats-kicker">Historical analysis</p><h2>Events, transitions, and failures</h2></div><p>Incidents, migrations, regulatory actions, wind-downs, recoveries, and collapses are not collapsed into one category.</p></div>
       <div class="stats-analysis-grid">
         <section class="stats-analysis-panel"><h3>Events by year</h3><div class="stats-year-list">{eventYears.map((row) => <div class="stats-year-row"><span>{row.year}</span><meter class="stats-bar-meter" min="0" max="100" value={(row.total / maxEventYear) * 100} aria-label={`${row.year}: ${row.total} events`}></meter><strong>{row.total}</strong></div>)}</div></section>
         <section class="stats-analysis-panel"><h3>Event types</h3><div class="stats-table-wrap"><table><thead><tr><th>Type</th><th>Count</th><th>Share</th></tr></thead><tbody>{eventTypes.map((row) => <tr><th scope="row">{row.label}</th><td>{row.count}</td><td>{row.percentage}%</td></tr>)}</tbody></table></div></section>
@@ -158,7 +158,7 @@ const description = 'Derived statistics for the Stable or Gone canonical registr
     </section>
 
     <section class="stats-section">
-      <div class="stats-section-heading"><div><p class="stats-kicker">Deployments</p><h2>Chain and deployment structure</h2></div><p>Deployment rows and distinct asset reach are shown separately.</p></div>
+      <div class="stats-section-heading section-heading"><div><p class="stats-kicker">Deployments</p><h2>Chain and deployment structure</h2></div><p>Deployment rows and distinct asset reach are shown separately.</p></div>
       <dl class="stats-mini-kpi-grid"><div><dt>Total deployments</dt><dd>{stats.deployments?.total_deployments ?? 0}</dd></div><div><dt>Assets with deployments</dt><dd>{stats.deployments?.assets_with_deployments ?? 0}</dd></div><div><dt>Freeze capability known</dt><dd>{stats.deployments?.control_capability_knowledge?.freeze_capability_known ?? 0}</dd></div><div><dt>Blacklist capability known</dt><dd>{stats.deployments?.control_capability_knowledge?.blacklist_capability_known ?? 0}</dd></div></dl>
       <div class="stats-analysis-grid">
         <section class="stats-analysis-panel"><h3>Chain coverage</h3><div class="stats-chain-list">{deploymentChains.map((row) => <div class="stats-chain-row"><div><strong>{row.chain}</strong><span>{row.assets} assets</span></div><meter class="stats-bar-meter" min="0" max="100" value={(row.deployments / maxDeployments) * 100} aria-label={`${row.chain}: ${row.deployments} deployments`}></meter><strong>{row.deployments}</strong></div>)}</div></section>
@@ -168,12 +168,12 @@ const description = 'Derived statistics for the Stable or Gone canonical registr
     </section>
 
     <section class="stats-section">
-      <div class="stats-section-heading"><div><p class="stats-kicker">Organizations</p><h2>Roles around stable assets</h2></div><p>An organization may hold multiple roles; role rows describe relationship structure.</p></div>
+      <div class="stats-section-heading section-heading"><div><p class="stats-kicker">Organizations</p><h2>Roles around stable assets</h2></div><p>An organization may hold multiple roles; role rows describe relationship structure.</p></div>
       <div class="stats-table-wrap"><table class="stats-wide-table"><thead><tr><th>Role</th><th>Relationships</th><th>Organizations</th><th>Asset reach</th></tr></thead><tbody>{organizationRoles.map((row) => <tr><th scope="row">{row.role}</th><td>{row.relationships}</td><td>{row.organizations}</td><td>{row.assets}</td></tr>)}</tbody></table></div>
     </section>
 
     <section class="stats-section">
-      <div class="stats-section-heading"><div><p class="stats-kicker">Data quality</p><h2>Coverage, evidence depth, and freshness</h2></div><p>These metrics describe registry completeness and review coverage, not the safety of an asset.</p></div>
+      <div class="stats-section-heading section-heading"><div><p class="stats-kicker">Data quality</p><h2>Coverage, evidence depth, and freshness</h2></div><p>These metrics describe registry completeness and review coverage, not the safety of an asset.</p></div>
       <div class="stats-analysis-grid">
         <section class="stats-analysis-panel"><h3>Coverage</h3><div class="stats-table-wrap"><table><thead><tr><th>Metric</th><th>Coverage</th><th>Share</th></tr></thead><tbody>{coverageRows.map((row) => <tr><th scope="row">{row.label}</th><td>{row.count} / {row.denominator}</td><td>{row.percentage}%</td></tr>)}</tbody></table></div></section>
         <section class="stats-analysis-panel"><h3>Evidence and typed events</h3><dl class="stats-metric-list"><div><dt>Average evidence per asset</dt><dd>{stats.data_quality?.evidence_per_asset?.average ?? 0}</dd></div><div><dt>Median evidence per asset</dt><dd>{stats.data_quality?.evidence_per_asset?.median ?? 0}</dd></div><div><dt>Known unknowns</dt><dd>{stats.data_quality?.known_unknowns?.total ?? 0}</dd></div><div><dt>Typed event coverage</dt><dd>{typedEventCoverage.count ?? 0} / {typedEventCoverage.denominator ?? 0}</dd></div></dl></section>
@@ -182,7 +182,7 @@ const description = 'Derived statistics for the Stable or Gone canonical registr
     </section>
 
     <section class="stats-section">
-      <div class="stats-section-heading"><div><p class="stats-kicker">History</p><h2>Registry growth snapshots</h2></div><p>Append-only snapshots show changes in reviewed inventory, not market performance.</p></div>
+      <div class="stats-section-heading section-heading"><div><p class="stats-kicker">History</p><h2>Registry growth snapshots</h2></div><p>Append-only snapshots show changes in reviewed inventory, not market performance.</p></div>
       <div class="stats-table-wrap"><table><thead><tr><th>Recorded at</th><th>Assets</th><th>Events</th><th>Evidence</th></tr></thead><tbody>{snapshots.map((snapshot: any) => <tr><th scope="row">{snapshot.recorded_at}</th><td>{snapshot.asset_count}</td><td>{snapshot.totals?.events ?? 0}</td><td>{snapshot.totals?.evidence ?? 0}</td></tr>)}</tbody></table></div>
     </section>
   </article>
