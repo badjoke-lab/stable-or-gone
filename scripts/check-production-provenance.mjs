@@ -2,17 +2,19 @@ import { isDeepStrictEqual } from 'node:util';
 
 const baseUrl = (process.env.SOG_BASE_URL || 'https://sog.badjoke-lab.com').replace(/\/$/, '');
 const expectedCommit = process.env.SOG_EXPECTED_COMMIT || process.env.GITHUB_SHA || null;
+const cacheBust = encodeURIComponent(expectedCommit || String(Date.now()));
 
 function assert(condition, message) {
   if (!condition) throw new Error(message);
 }
 
 async function readJson(pathname) {
-  const response = await fetch(`${baseUrl}${pathname}`, {
+  const separator = pathname.includes('?') ? '&' : '?';
+  const response = await fetch(`${baseUrl}${pathname}${separator}sog_build=${cacheBust}`, {
     headers: {
       accept: 'application/json',
-      'user-agent': 'sog-production-provenance/1.0',
-      'cache-control': 'no-cache'
+      'user-agent': 'sog-production-provenance/1.1',
+      'cache-control': 'no-store'
     }
   });
   if (!response.ok) throw new Error(`${pathname} returned HTTP ${response.status}`);
