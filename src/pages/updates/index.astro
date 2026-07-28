@@ -72,7 +72,7 @@ const jsonLd = {
         <div>
           <p class="update-feed-eyebrow">Filter</p>
           <h2 id="update-feed-controls-heading">Find publication changes</h2>
-          <p>Search titles, summaries, and related paths, or filter by update category, publication year, and related route family. Feed order remains publication date descending.</p>
+          <p>Search titles, summaries, and related paths. Category, year, and route-family filters remain available as advanced controls.</p>
         </div>
         <p class="update-feed-machine-link"><a href="/data/update-feed.json">Machine-readable feed</a> · publication history only</p>
       </div>
@@ -87,29 +87,32 @@ const jsonLd = {
         <span data-update-feed-copy-status aria-live="polite"></span>
       </div>
 
-      <div class="update-feed-filter-grid">
-        <label class="update-feed-filter-control">
-          <span>Category</span>
-          <select data-update-feed-filter-id="category" data-update-feed-query-param="category">
-            <option value="">All categories</option>
-            {feed.filters.category.map((option) => <option value={option.value}>{formatPublicLabel(option.value)} ({option.item_count})</option>)}
-          </select>
-        </label>
-        <label class="update-feed-filter-control">
-          <span>Publication year</span>
-          <select data-update-feed-filter-id="year" data-update-feed-query-param="year">
-            <option value="">All years</option>
-            {feed.filters.year.map((option) => <option value={option.value}>{option.value} ({option.item_count})</option>)}
-          </select>
-        </label>
-        <label class="update-feed-filter-control">
-          <span>Related route family</span>
-          <select data-update-feed-filter-id="route_family" data-update-feed-query-param="route_family">
-            <option value="">All route families</option>
-            {feed.filters.route_family.map((option) => <option value={option.value}>{formatPublicLabel(option.value)} ({option.item_count})</option>)}
-          </select>
-        </label>
-      </div>
+      <details class="advanced-filter-disclosure update-feed-advanced-filters">
+        <summary>Advanced update filters</summary>
+        <div class="update-feed-filter-grid">
+          <label class="update-feed-filter-control">
+            <span>Category</span>
+            <select data-update-feed-filter-id="category" data-update-feed-query-param="category">
+              <option value="">All categories</option>
+              {feed.filters.category.map((option) => <option value={option.value}>{formatPublicLabel(option.value)} ({option.item_count})</option>)}
+            </select>
+          </label>
+          <label class="update-feed-filter-control">
+            <span>Publication year</span>
+            <select data-update-feed-filter-id="year" data-update-feed-query-param="year">
+              <option value="">All years</option>
+              {feed.filters.year.map((option) => <option value={option.value}>{option.value} ({option.item_count})</option>)}
+            </select>
+          </label>
+          <label class="update-feed-filter-control">
+            <span>Related route family</span>
+            <select data-update-feed-filter-id="route_family" data-update-feed-query-param="route_family">
+              <option value="">All route families</option>
+              {feed.filters.route_family.map((option) => <option value={option.value}>{formatPublicLabel(option.value)} ({option.item_count})</option>)}
+            </select>
+          </label>
+        </div>
+      </details>
 
       <div class="update-feed-active-filters" data-update-feed-active-filters aria-live="polite"></div>
       <div class="update-feed-alert" data-update-feed-alert role="alert" aria-live="assertive"></div>
@@ -132,6 +135,8 @@ const jsonLd = {
       <div class="update-feed-results" data-update-feed-results>
         {entries.map((entry, index) => {
           const publicCopy = updatePublicCopy[entry.update_id];
+          const visiblePaths = entry.related_paths.slice(0, 2);
+          const remainingPaths = entry.related_paths.slice(2);
           return (
             <article
               class="update-feed-item"
@@ -154,17 +159,24 @@ const jsonLd = {
                 </div>
                 <h3>{publicCopy?.title ?? entry.title}</h3>
                 <p>{publicCopy?.summary ?? entry.summary}</p>
-                <div class="update-feed-paths" aria-label="Related public paths">
-                  {entry.related_paths.map((pathname) => <a href={pathname}>{pathname}</a>)}
-                </div>
+                {visiblePaths.length > 0 && (
+                  <div class="update-feed-paths" aria-label="Primary related public paths">
+                    {visiblePaths.map((pathname) => <a href={pathname}>{pathname}</a>)}
+                  </div>
+                )}
                 <details class="update-feed-details">
-                  <summary>View feed metadata</summary>
+                  <summary>{remainingPaths.length > 0 ? `View metadata and ${remainingPaths.length} more path${remainingPaths.length === 1 ? '' : 's'}` : 'View feed metadata'}</summary>
                   <dl>
                     <div><dt>Update ID</dt><dd><code data-technical-value>{entry.update_id}</code></dd></div>
                     <div><dt>Publication date</dt><dd>{entry.publication_date}</dd></div>
                     <div><dt>Category</dt><dd>{formatPublicLabel(entry.category)}</dd></div>
                     <div><dt>Route families</dt><dd>{entry.route_families.length ? entry.route_families.map((value) => formatPublicLabel(value)).join(', ') : 'None recorded'}</dd></div>
                   </dl>
+                  {remainingPaths.length > 0 && (
+                    <div class="update-feed-paths update-feed-paths--secondary" aria-label="Additional related public paths">
+                      {remainingPaths.map((pathname) => <a href={pathname}>{pathname}</a>)}
+                    </div>
+                  )}
                 </details>
               </div>
             </article>
