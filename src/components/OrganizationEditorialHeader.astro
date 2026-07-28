@@ -3,14 +3,17 @@ import { formatPublicLabel } from '../utils/displayLabels';
 const { organization, view } = Astro.props;
 ---
 <header class="organization-detail-masthead organization-detail-masthead-r5">
-  <div class="organization-detail-overline"><span>Organization record</span><div><a href="/issuers/">Organization register</a><a href="/contact/">Report a correction</a></div></div>
+  <div class="organization-detail-overline">
+    <span>Organization record</span>
+    <nav aria-label="Organization record utilities"><a href="/issuers/">Organization register</a><span aria-hidden="true"> · </span><a href="/contact/">Report a correction</a></nav>
+  </div>
   <div class="organization-detail-title"><div><p>Record <code>{organization.id}</code></p><h1>{organization.name}</h1></div><p>{view.summary}</p></div>
   <dl class="organization-detail-ledger organization-detail-ledger-r5" aria-label="Primary reviewed organization facts">
     <div><dt>Category</dt><dd>{formatPublicLabel(view.taxonomy.public_category_label)}</dd></div>
     <div><dt>Regulatory character</dt><dd>{formatPublicLabel(view.taxonomy.regulatory_character_label)}</dd></div>
-    <div><dt>Jurisdiction</dt><dd>{formatPublicLabel(view.taxonomy.jurisdiction_label)}<small>{formatPublicLabel(view.taxonomy.jurisdiction_scope_label)}</small></dd></div>
+    <div><dt>Jurisdiction</dt><dd><span>{formatPublicLabel(view.taxonomy.jurisdiction_label)}</span><br /><small>Scope: {formatPublicLabel(view.taxonomy.jurisdiction_scope_label)}</small></dd></div>
     <div><dt>Connected assets</dt><dd><a href="#relationships">{view.stablecoins.length}</a></dd></div>
-    <div><dt>Relationships</dt><dd>{view.currentRelationships.length} current<small>{view.historicalRelationships.length} historical</small></dd></div>
+    <div><dt>Relationships</dt><dd><span>{view.currentRelationships.length} current</span><br /><small>{view.historicalRelationships.length} historical</small></dd></div>
     <div><dt>Evidence</dt><dd><a href="#evidence">{view.sourceIdentities.length} source record{view.sourceIdentities.length === 1 ? '' : 's'}</a></dd></div>
   </dl>
   {view.latestEvent ? <aside class="stablecoin-material-change"><span class="record-kicker">Latest material change</span><div><time datetime={view.latestEvent.event_date ?? undefined}>{view.latestEvent.event_date}</time><p><a href={`/event/${view.latestEvent.id}/`}>{view.latestEvent.publicTitle}</a></p></div></aside> : <p class="organization-detail-empty">No dated material event is currently recorded.</p>}
