@@ -22,8 +22,8 @@ const ROUTES = [
   {
     path: '/',
     roles: {
-      body: ['.home-intro .lede', '.section-heading > p', '.directory-copy small', '.home-registry-table td'],
-      muted: ['.archive-note', '.registry-count', '.home-registry-table th'],
+      body: ['.home-intro .lede', '.section-heading > p', '.home-registry-table td'],
+      muted: ['.archive-note', '.registry-count', '.home-registry-table th', '.directory-copy small'],
       quiet: ['.home-registry-table td small']
     }
   },

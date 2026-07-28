@@ -46,6 +46,7 @@ img, svg { display: block; max-width: 100%; }
 a { color: inherit; text-decoration: none; }
 a:hover { color: var(--ui-hover); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .18em; }
 a:visited { color: inherit; }
+a:active { color: var(--ui-text); }
 button, input, select, textarea, summary { font: inherit; color: inherit; }
 button { cursor: pointer; }
 p, li, dd, td, figcaption { color: var(--ui-copy); }
@@ -181,6 +182,8 @@ td small { display: block; margin-top: 3px; }
 [data-mobile-representation-for] { display: none; }
 .mobile-definition-list, .mobile-record-list { margin: 0; padding: 0; }
 .mobile-definition-list > div, .mobile-record-list > article, .mobile-table-record, .mobile-evidence-record, .mobile-empty-record { min-width: 0; padding: 12px 0; border: 0; border-bottom: 1px solid var(--ui-text); border-radius: 0; background: transparent; }
+.event-structured-detail { min-width: 0; border-top: 1px solid var(--ui-line-strong); }
+.event-detail-evidence-r5 { min-width: 0; max-width: 100%; }
 .mobile-record-list article > dl > div, .mobile-table-record > dl > div, .mobile-evidence-record > dl > div { padding: 7px 0; border-bottom: 1px solid var(--ui-line); }
 
 :where(.timeline-boundary-grid,.ar-boundary-grid,.maintenance-boundary-grid,.update-feed-boundary-grid,.timeline-method-grid,.compare-method-grid,.ar-method-grid,.maintenance-related-grid,.update-feed-actions,.static-registry-list) { display: grid; grid-template-columns: repeat(auto-fit,minmax(230px,1fr)); gap: 0; border-top: 1px solid var(--ui-text); border-left: 1px solid var(--ui-text); }
