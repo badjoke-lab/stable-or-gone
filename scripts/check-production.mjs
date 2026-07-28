@@ -119,7 +119,7 @@ async function checkOnce() {
   assert(homeText.includes(`${counts.primary_records} stable assets`), 'home stable asset count mismatch');
   assert(homeText.includes(`${breakdown.organizations} organizations`), 'home organization count mismatch');
   assert(homeText.includes(`${counts.events} events`), 'home event count mismatch');
-  assert(homeText.includes(`${breakdown.evidence_source_identities} Source identities`), 'home source identity count mismatch');
+  assert(homeText.includes(`Source identities ${breakdown.evidence_source_identities}`), 'home source identity count mismatch');
   assert(stablecoinsText.includes(`${counts.primary_records} records`), 'stablecoin index record count mismatch');
   assert(stablecoinsText.includes(`1–${initialStablecoinRangeEnd} of ${counts.primary_records} records`), 'stablecoin index initial range mismatch');
   assert(stablecoinsText.includes('20 per page'), 'stablecoin index page-size marker missing');
