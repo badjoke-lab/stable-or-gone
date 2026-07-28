@@ -859,7 +859,7 @@ Update this table after every implementation batch. Do not replace previous rows
 
 | Date / time (UTC) | Status | Sections touched | Routes/templates checked | Commit / PR | Desktop evidence | Mobile evidence | Remaining problems |
 |---|---|---|---|---|---|---|---|
-| 2026-07-28 | Memo created; no UI repair performed in this commit | Documentation only | None | Pending commit SHA | Not reviewed | Not reviewed | All sections above remain open |
+| 2026-07-28 | Memo created; no UI repair performed in this commit | Documentation only | None | `41ad657da18c1cee182f172fb07e5c6631ce4560` | Not reviewed | Not reviewed | All sections above remain open |
 
 # Completion statement restriction
 
