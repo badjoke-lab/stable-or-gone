@@ -55,23 +55,26 @@ if (failures.length === 0) {
 
   for (const marker of [
     '--ui-bg:', '--ui-text:', '--ui-copy:', '--ui-muted:', '--ui-link:', '--ui-hover:', '--ui-visited:',
-    '--ui-serif:', '--ui-sans:', '--ui-mono:',
+    '--ui-serif:', '--ui-sans:', '--ui-mono:', '--ui-radius: 0;', '--ui-pill: 0;',
     'a:visited', 'a:hover', 'a:active', ':focus-visible',
-    '.chip, [class*="badge"]', 'border-radius: var(--ui-pill)',
+    '.chip, [class*="badge"]', 'border-radius: 0', 'background: transparent',
     '.event-structured-detail', '.event-detail-evidence-r5',
-    '.home-ledger', '.stablecoin-index-page', '.event-index-page', '.organization-index-page',
+    '.home-ledger', '.home-intro', '.home-facts', '.editorial-directory', '.registry-panel', '.home-registry-table',
+    '.stablecoin-index-page', '.event-index-page', '.organization-index-page',
     '.stats-page', '.timeline-page', '.compare-page', '.ar-explorer', '.maintenance-page', '.update-feed-page',
-    '@media (max-width: 820px)'
+    '@media (max-width: 640px)'
   ]) check(authority.includes(marker), `single UI authority marker missing: ${marker}`);
 
   for (const marker of [
     "import { formatPublicLabel } from '../utils/displayLabels'",
     'looksLikePublicEnum',
-    'normalizedStringValue.startsWith(\'sog_\')',
+    "normalizedStringValue.startsWith('sog_')",
     'display_value: resolvedDisplayValue'
   ]) check(valueState.includes(marker), `ValueStateText enum-label safeguard missing: ${marker}`);
 
-  check(home.includes("formatTaxonomyLabel('organization_type'"), 'home organization type does not use the public taxonomy');
+  for (const marker of ['formatLifecycleLabel', 'formatReferenceTargetLabel', 'resolvePrimaryRelationshipForStablecoin']) {
+    check(home.includes(marker), `CYA homepage public formatter or relationship marker missing: ${marker}`);
+  }
   check(!home.includes("replaceAll('_', ' ')"), 'home still exposes ad-hoc underscore replacement');
   check(eventIndexView.includes("import { formatPublicLabel } from '../../utils/displayLabels'"), 'event index does not import the public label formatter');
   check(!eventIndexView.includes("replaceAll('_', ' ')"), 'event index still formats enums through underscore replacement');
@@ -111,17 +114,17 @@ if (failures.length === 0) {
 }
 
 const result = {
-  schema_version: '3.0',
+  schema_version: '4.0',
   generated_at: new Date().toISOString(),
   ok: failures.length === 0,
   contract: {
     physical_stylesheets: 'exactly one CSS file: src/styles/public-ui.css',
     stylesheet_entrypoints: 'exactly one CSS import: BrandLockup -> public-ui.css',
-    cascade_policy: 'phase, correction, hardening, readability, final-override, legacy global, inline style block, and inline style attribute paths are forbidden',
-    public_font: 'sans-serif for ordinary copy and controls, serif for primary editorial headings, mono for explicit labels and technical values',
+    cascade_policy: 'no phase, correction, hardening, readability, final-override, legacy global, inline style block, or inline style attribute paths',
+    public_font: 'sans-serif ordinary copy, serif primary editorial headings and facts, mono explicit labels and technical values',
     interaction_palette: 'one documented default, visited, hover, active, and focus palette',
-    status_badges: 'semantic badges retain shape, padding, border, background, and readable state text',
-    public_enum: 'public surfaces use taxonomy/display-label helpers; rendered raw snake_case is forbidden',
+    status_badges: 'semantic state labels are flat, square, transparent, underlined, and readable',
+    public_enum: 'public surfaces use taxonomy and display-label helpers; rendered raw snake_case is forbidden',
     exhaustive_runtime_gate: 'desktop and mobile audits inspect every rendered public route'
   },
   css_files: cssFiles,
