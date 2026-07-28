@@ -7,95 +7,120 @@ The memo remains the repair scope. This progress log must not be used to remove 
 
 **UI REPAIR INCOMPLETE**
 
-## Active branch and PR
+## Active branch
 
 - Branch: `fix/sog-ui-repair-batch-1`
 - Draft PR: `#480`
-- Current head at this update: `623e65e1e459b281256fe207b7574bf65e77edd7`
+- Current recorded head before this progress update: `db7b595f2d1e618f632f2fcd615ad66c85bf0e9e`
+- Production: unchanged
 
-## Implemented so far
+## Implemented
 
-### Global shell and Support discovery
+### Global shell and support discovery
 
-- [x] Replaced the unbounded 16-link header with seven primary links and an explicit More menu.
-- [x] Added a permanently visible `Support this archive` header action on desktop and mobile.
-- [x] Kept `Submit correction` as a secondary desktop action.
-- [x] Replaced the hard-coded footer link list with canonical grouped footer navigation.
-- [x] Added a full-width footer Support explanation and link to the existing wallet page.
-- [x] Added contextual Support blocks to guide and long-form templates.
-- [x] Preserved the existing nine-wallet support model.
-- [x] Added no Stripe, card processor, new wallet, analytics service, or external payment dependency.
-- [x] Fixed the `/access-and-regulation/` navigation mismatch to `/access-regulation/`.
-- [x] Increased common navigation, form, pagination, and action target sizes.
-- [x] Added wallet-address wrapping, full-width mobile copy buttons, and one-column mobile wallet layout.
-
-### Mobile global layout
-
-- [x] Stacked broken three-column section headings on mobile.
-- [x] Changed stablecoin, organization, and event detail section navigation to a visible two-column mobile grid.
-- [x] Added minimum-width containment to Stats surfaces for the previously confirmed 7px document overflow.
+- [x] Bounded primary navigation and explicit More menu replace the unbounded link strip.
+- [x] Mobile primary navigation keeps three core registry links visible and moves the rest into More.
+- [x] Dedicated `Support this archive` action is visible on desktop and mobile.
+- [x] `Submit correction` remains a secondary action.
+- [x] Canonical grouped footer navigation replaces the hard-coded footer list.
+- [x] Footer and contextual Support explanations link to the existing wallet page.
+- [x] Existing nine-wallet support model is preserved.
+- [x] No Stripe, card processor, new wallet, analytics service, or external payment dependency was added.
+- [x] `/access-regulation/` route mismatch was corrected.
+- [x] Common navigation, form, pagination, and action targets were increased.
+- [x] Mobile three-column section headings were stacked.
+- [x] Stablecoin, organization, and event detail navigation became a visible two-column mobile grid.
+- [x] Wallet addresses wrap; mobile wallet cards use one column and full-width Copy actions.
 
 ### Home
 
-- [x] Removed the full 116-record duplicate registry from the homepage.
-- [x] Replaced it with twenty recently reviewed records and a full-registry link.
-- [x] Removed the duplicate homepage search/filter implementation.
-- [x] Added a contextual Support explanation inside the homepage content.
+- [x] Removed the duplicate complete 116-record registry from the homepage.
+- [x] Added a bounded twenty-record recently reviewed preview and full-register link.
+- [x] Removed duplicate homepage search/filter controls.
+- [x] Added contextual Support explanation.
 
-### Index mobile cards
+### Indexes
 
-- [x] Reduced Stablecoin mobile cards to four primary facts with secondary facts inside `More record context`.
-- [x] Reduced Organization mobile cards to category, asset reach, roles, and jurisdiction with regulatory and relationship metadata inside `More organization context`.
-- [x] Reduced Event mobile cards to date, impact, subject, status effect, and recovery with taxonomy and evidence inside `More event context`.
+- [x] Stablecoin, Organization, and Event mobile cards show primary facts first.
+- [x] Secondary taxonomy, relationships, evidence, events, and unknown fields moved into disclosures.
+- [x] Pagination controls and filters use larger targets and readable text.
 
-### Detail-page defects
+### Detail templates
 
-- [x] Separated Organization jurisdiction and jurisdiction scope instead of concatenating them.
-- [x] Separated current and historical Organization relationship counts.
-- [x] Separated Event affected-record and evidence summaries.
-- [x] Added explicit separators between Event subject type and subject name.
-- [x] Separated Event `Record details` title from its explanation.
-- [x] Added explicit separation to Event correction and reference links.
+- [x] Organization jurisdiction and scope are separated.
+- [x] Organization current and historical relationship counts are separated.
+- [x] Event affected-record and evidence summaries are separated.
+- [x] Event subject type and name are explicitly separated.
+- [x] Event Record details title/description and footer links are separated.
+- [x] Stablecoin mechanism content is reduced to six primary facts plus a secondary details disclosure.
+
+### Stats
+
+- [x] Confirmed 7px document overflow was removed in the previous exhaustive structural run.
+- [x] Mobile content after the overview and lifecycle sections is placed in individual disclosures.
+- [x] Bar, label, count, methodology, table, and panel layouts were rebuilt to prevent overlap.
 
 ### Access & Regulation
 
-- [x] Reduced initial result rendering from 50 records to 12 records.
-- [x] Reduced each Show more increment from 25 to 12 records.
-- [x] Kept search visible while moving nine detailed filter axes into an explicit advanced-filter disclosure.
+- [x] Initial results reduced from 50 to 12.
+- [x] Result increment reduced from 25 to 12.
+- [x] Nine filter axes moved into Advanced filters while search remains visible.
+- [x] Three information layers collapse to a single readable column at narrower widths.
 
 ### Compare
 
-- [x] Changed the initial comparison controls from four visible asset selectors to two.
-- [x] Moved the third and fourth selectors into an explicit disclosure.
-- [x] Moved presets and the nineteen-facet control set into optional disclosures.
+- [x] Initial asset selectors reduced from four to two.
+- [x] Third/fourth selectors, presets, and nineteen-facet controls moved into optional disclosures.
+- [x] Mobile comparison output becomes a single-column sequence.
+- [x] Removed stale hard-coded projection totals that rejected the current 116-asset projection.
+- [x] Comparison now validates projection counts dynamically.
 
-## Evidence and run state
+### Timeline and Updates
 
-- All standard checks passed at head `8c52fce85f376efa230ff2d85bab225f3f1f4f55` before the later index/detail changes.
-- Screenshot run `30370560533` captured every desktop and mobile route but was cancelled during the color-audit step after a newer commit superseded it. Its skipped audit steps are not a pass.
-- CI and a new full-page screenshot run were triggered for head `623e65e1e459b281256fe207b7574bf65e77edd7` and were still running when this entry was written.
+- [x] Timeline initial/increment batches reduced to 12/12.
+- [x] Timeline filters moved into an advanced disclosure.
+- [x] Update Feed initial/increment batches reduced to 10/10.
+- [x] Update filters moved into an advanced disclosure.
+- [x] Update paths show two primary paths with remaining paths disclosed.
+- [x] Date, year, category, metadata, and content layout now have explicit spacing.
 
-## Still incomplete or unverified
+### Guides and long-form pages
 
-- [ ] Desktop screenshot review for the current head
-- [ ] Mobile screenshot review for the current head
-- [ ] Confirmed `/stats/` overflow result after current-head screenshots
-- [ ] Stablecoin index PC layout and edge-case review
-- [ ] Organization index PC layout and edge-case review
-- [ ] Event index PC layout and edge-case review
-- [ ] Stablecoin detail content hierarchy and all exceptions
-- [ ] Organization detail full hierarchy and all exceptions
-- [ ] Event detail full hierarchy and all exceptions
-- [ ] Stats full visual redesign
-- [ ] Access & Regulation current-head screenshot review and remaining density repair
-- [ ] Compare current-head screenshot review and mobile result-matrix repair
-- [ ] Timeline hierarchy repair
-- [ ] Updates hierarchy repair
-- [ ] Guide mobile-table transformations
-- [ ] Full 461-route desktop review
-- [ ] Full 461-route mobile review
-- [ ] Screenshot/audit workflow repair
-- [ ] Production deployment
-- [ ] Owner approval
+- [x] Guide tables are transformed into labelled mobile records without deleting fields.
+- [x] Guide and long-form reference links use readable targets.
+- [x] Contextual Support blocks are included.
 
-No item above may be treated as complete without its own implementation and screenshot evidence.
+### Public readability and color system
+
+- [x] Public UI remains a single stylesheet with no override layer.
+- [x] Desktop ordinary copy raised to 17px and mobile ordinary copy to 16px.
+- [x] Compact values and interactive text raised to 15px.
+- [x] Metadata raised to 13px.
+- [x] Controls target at least 44px.
+- [x] Widespread public monospace use removed; technical values remain explicit.
+- [x] Support and temporal accent colors are marked as intentional semantic tones.
+- [x] Supporting-copy color changed to the explicit readability-reviewed token `#a7ada9`.
+
+## Evidence available
+
+- [x] Latest normal CI on head `db7b595f2d1e618f632f2fcd615ad66c85bf0e9e`: success, including UI cleanup, Astro check, build, deployment-output verification, and public-layer verification.
+- [x] Latest representative text-contrast workflow: success.
+- [x] Latest exhaustive Public UI contract audit: 464 routes / 928 desktop-mobile surfaces, zero contract findings.
+- [x] Previous exhaustive screenshot run captured all routes and confirmed document overflow at zero, but exposed remaining color/readability/layout defects that were subsequently repaired.
+- [ ] Current-head exhaustive screenshot and readability workflow is still running.
+- [ ] Current-head screenshot artifacts have not yet been manually reviewed.
+
+## Still not complete
+
+- [ ] Download and inspect the current-head desktop screenshot artifact.
+- [ ] Download and inspect the current-head mobile screenshot artifact.
+- [ ] Read current-head exhaustive color and readability totals.
+- [ ] Review Home, all index roots, paginated indexes, Stats, Access & Regulation, Compare, Timeline, Updates, Support, representative Guides, and three detail-template families.
+- [ ] Review long/edge-case records after template review.
+- [ ] Fix any current-head findings and repeat the exhaustive cycle.
+- [ ] Update the temporary scope memo with final evidence per item.
+- [ ] Production deployment.
+- [ ] Production visual verification.
+- [ ] Owner approval.
+
+No item above may be treated as complete without its implementation and screenshot evidence.
