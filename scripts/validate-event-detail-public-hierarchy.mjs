@@ -50,7 +50,7 @@ check(
 );
 
 check(ui.includes('--ui-copy: #d6d3ca;'), 'Body-copy brightness token is not at the CYA dark reviewed value');
-check(ui.includes('--ui-muted: #979d99;'), 'Supporting-copy brightness token is not at the CYA dark reviewed value');
+check(ui.includes('--ui-muted: #a7ada9;'), 'Supporting-copy brightness token is not at the readability-reviewed value');
 check(ui.includes('.event-detail-evidence-r5'), 'Event Evidence flat width boundary is missing');
 check(ui.includes('table[data-mobile-table] { display: none; }'), 'Desktop table suppression on compact screens is missing');
 check(ui.includes('[data-mobile-representation-for] { display: grid;'), 'Mobile table representation is not enabled');
@@ -62,14 +62,14 @@ check(brand.includes(publicUiImport), 'Single public UI authority is not loaded'
 check(!brand.includes('event-detail-public-fix.css'), 'Event detail repair must not reintroduce a second stylesheet');
 
 const result = {
-  schema_version: '2.0',
+  schema_version: '2.1',
   ok: failures.length === 0,
   primary_event_facts: 3,
   event_evidence_public_fields: 4,
   record_metadata_default: 'closed',
   visual_family: 'cya_dark_flat_registry',
   public_copy_token: '#d6d3ca',
-  public_muted_token: '#979d99',
+  public_muted_token: '#a7ada9',
   mobile_evidence_contract: 'desktop table hidden, compact evidence records visible',
   failures
 };
