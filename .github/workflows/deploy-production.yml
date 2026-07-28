@@ -53,6 +53,21 @@ jobs:
           echo "timestamp=$(git show -s --format=%cI HEAD)" >> "$GITHUB_OUTPUT"
           echo "epoch=$(git show -s --format=%ct HEAD)" >> "$GITHUB_OUTPUT"
 
+      - name: Report deployment start
+        uses: actions/github-script@v7
+        env:
+          SOURCE_SHA: ${{ steps.source.outputs.sha }}
+          EVENT_NAME: ${{ github.event_name }}
+        with:
+          script: |
+            const runUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: 475,
+              body: `Production deployment started.\n\n- Source commit: \`${process.env.SOURCE_SHA}\`\n- Trigger: \`${process.env.EVENT_NAME}\`\n- Run: ${runUrl}`
+            });
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
@@ -120,3 +135,20 @@ jobs:
           echo "- Pages project: stable-or-gone" >> "$GITHUB_STEP_SUMMARY"
           echo "- Public origin: https://sog.badjoke-lab.com/" >> "$GITHUB_STEP_SUMMARY"
           echo "- UK guide publication: passed" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Report deployment result
+        if: always()
+        uses: actions/github-script@v7
+        env:
+          SOURCE_SHA: ${{ steps.source.outputs.sha || github.sha }}
+          EVENT_NAME: ${{ github.event_name }}
+          JOB_STATUS: ${{ job.status }}
+        with:
+          script: |
+            const runUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: 475,
+              body: `Production deployment finished.\n\n- Result: **${process.env.JOB_STATUS}**\n- Source commit: \`${process.env.SOURCE_SHA}\`\n- Trigger: \`${process.env.EVENT_NAME}\`\n- Run: ${runUrl}`
+            });
