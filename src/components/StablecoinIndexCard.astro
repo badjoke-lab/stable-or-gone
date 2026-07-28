@@ -20,27 +20,33 @@ const data = {
   <div class="stablecoin-index-card-heading">
     <div class="stablecoin-index-card-identity">
       <TickerBadge symbol={record.symbol || record.name} label={`${record.name} ticker badge`} />
-      <div><span class="record-symbol">{record.symbol || 'No symbol'}</span><h2><a href={`/stablecoin/${record.slug}/`}>{record.name}</a></h2><small>{record.id}</small></div>
+      <div>
+        <span class="record-symbol">{record.symbol || 'No symbol'}</span>
+        <h2><a href={`/stablecoin/${record.slug}/`}>{record.name}</a></h2>
+      </div>
     </div>
     <span class={lifecycleChipClass(record.lifecycle)}>{formatLifecycleLabel(record.lifecycle)}</span>
   </div>
+
   <dl class="stablecoin-index-card-grid">
-    <div><dt>Issuance</dt><dd>{formatIssuanceLabel(record.issuance)}</dd></div>
     <div><dt>Reference</dt><dd>{record.referenceLabel}</dd></div>
     <div><dt>Backing</dt><dd>{record.backingLabel}</dd></div>
-    <div><dt>Organization</dt><dd>{record.primaryOrganizationName}</dd></div>
-    <div><dt>Relationships</dt><dd>{record.relationshipCount} across {record.organizationCount}</dd></div>
+    <div><dt>Primary organization</dt><dd>{record.primaryOrganizationName}</dd></div>
     <div><dt>Last reviewed</dt><dd>{record.reviewedAt || 'Not recorded'}</dd></div>
   </dl>
+
   <details class="stablecoin-index-card-details">
-    <summary>Record details</summary>
+    <summary>More record context</summary>
     <dl>
+      <div><dt>Issuance</dt><dd>{formatIssuanceLabel(record.issuance)}</dd></div>
       <div><dt>Asset class</dt><dd>{record.assetClassLabel}</dd></div>
+      <div><dt>Relationships</dt><dd>{record.relationshipCount} across {record.organizationCount} organizations</dd></div>
       <div><dt>Evidence</dt><dd>{record.sourceIdentityCount} sources</dd></div>
-      <div><dt>Known unknowns</dt><dd>{record.knownUnknownCount}</dd></div>
       <div><dt>Events</dt><dd>{record.eventCount}</dd></div>
+      <div><dt>Known unknowns</dt><dd>{record.knownUnknownCount}</dd></div>
     </dl>
+    {record.relationshipCount > 1 && <p>{record.organizationSummary}</p>}
   </details>
-  {record.relationshipCount > 1 && <details class="organization-summary"><summary>All connected organizations</summary><p>{record.organizationSummary}</p><small>Includes {record.relationshipCount - 1} additional relationships beyond the primary display.</small></details>}
+
   <label class="comparison-choice comparison-choice-card"><input type="checkbox" data-compare-select value={record.slug} aria-label={`Compare ${record.name}`} /><span>Add to comparison</span></label>
 </article>
