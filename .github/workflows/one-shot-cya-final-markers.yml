@@ -1,0 +1,29 @@
+name: One-shot CYA final marker repair
+
+on:
+  push:
+    branches:
+      - fix/cya-structure-dark-port
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/cya-structure-dark-port
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+      - run: node scripts/apply-cya-port-final-markers.mjs
+      - run: git rm scripts/apply-cya-port-final-markers.mjs .github/workflows/one-shot-cya-final-markers.yml
+      - run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add src/styles/public-ui.css scripts/audit-representative-text-contrast.mjs
+          git commit -m "Complete CYA port interaction and contrast gates"
+          git push origin HEAD:fix/cya-structure-dark-port
