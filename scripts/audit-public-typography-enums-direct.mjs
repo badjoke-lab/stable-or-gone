@@ -112,6 +112,7 @@ for (const device of devices) {
             '.ar-chip',
             '.ar-lifecycle',
             '.home-section-kicker',
+            '.home-facts dd small',
             '.home-search__popular > span',
             '.home-material-list__meta',
             '.home-guide-list__meta',

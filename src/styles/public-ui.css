@@ -234,8 +234,9 @@ pre { max-width: 100%; overflow-x: auto; white-space: pre-wrap; }
 
 @media (max-width: 640px) {
   .site-shell { width: min(calc(100% - 28px),var(--ui-shell)); }
-  .masthead-row, .v3-masthead-row { align-items: flex-start; padding-block: 11px; }
-  .brand-copy small, .v3-brand-copy small, .masthead-meta span, .v3-masthead-meta span { display: none; }
+  .masthead-row, .v3-masthead-row { align-items: center; gap: 12px; padding-block: 11px; }
+  .brand-copy, .v3-brand-copy, .masthead-meta span, .v3-masthead-meta span { display: none; }
+  .masthead-meta, .v3-masthead-meta { flex: 0 0 auto; margin-left: auto; }
   .site-nav, .site-primary-navigation { padding-inline: 0; }
   .site-nav a, .site-primary-navigation a { padding: 9px 9px 8px; font-size: .68rem; }
   .site-main { padding-top: 20px; padding-bottom: 48px; }
