@@ -1,14 +1,43 @@
 <script>
-  const applySemanticTones = () => {
-    document.querySelectorAll<HTMLElement>('.context-support-callout').forEach((element) => {
-      element.dataset.tone = 'support';
+  const applyPaperRegistrySemantics = () => {
+    document.documentElement.style.setProperty('--ui-quiet', '#66645d');
+
+    document.querySelectorAll<HTMLElement>('main small, footer small, header small').forEach((element) => {
+      if (element.matches('[data-ui-mono]') || element.closest('[data-ui-mono]')) return;
+      element.style.fontFamily = 'var(--ui-sans)';
     });
-    document.querySelectorAll<HTMLElement>('.timeline-item__date, .update-feed-item__date').forEach((element) => {
+
+    document.querySelectorAll<HTMLElement>([
+      'main time',
+      '.timeline-item__date',
+      '.update-feed-item__date',
+      '.home-material-list__date',
+      '.home-event-list__date',
+      '.update-feed-date',
+      '.event-index-card-r5-meta time',
+      '.event-index-row-r5 time'
+    ].join(', ')).forEach((element) => {
       element.dataset.tone = 'temporal';
+      element.dataset.uiMono = 'true';
+    });
+
+    document.querySelectorAll<HTMLElement>([
+      '.value-state',
+      '[class*="status-chip"]',
+      '[class*="status-badge"]',
+      '.home-status-label',
+      '.ar-chip',
+      '.ar-lifecycle'
+    ].join(', ')).forEach((element) => {
+      element.dataset.uiMono = 'true';
+    });
+
+    document.querySelectorAll<HTMLElement>('.support-cta, .footer-support, .context-support-callout').forEach((element) => {
+      element.dataset.tone = 'support';
     });
   };
 
-  applySemanticTones();
-  const observer = new MutationObserver(applySemanticTones);
+  applyPaperRegistrySemantics();
+  const observer = new MutationObserver(applyPaperRegistrySemantics);
   observer.observe(document.body, { childList: true, subtree: true });
 </script>
