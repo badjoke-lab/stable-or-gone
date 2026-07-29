@@ -2,8 +2,10 @@
 import fs from 'node:fs';
 
 const cssPath = 'src/styles/public-ui.css';
+const runtimePath = 'src/components/SemanticToneRuntime.astro';
 const outputPath = process.env.CONTRAST_AUDIT_OUTPUT ?? 'artifacts/sitewide-text-contrast-audit.json';
 const css = fs.readFileSync(cssPath, 'utf8');
+const runtime = fs.readFileSync(runtimePath, 'utf8');
 
 const parseHex = (hex) => {
   const value = hex.replace('#', '');
@@ -29,25 +31,30 @@ const contrast = (foreground, background) => {
   return (lighter + 0.05) / (darker + 0.05);
 };
 
-const readToken = (name) => {
+const readCssToken = (name) => {
   const match = css.match(new RegExp(`${name}:\\s*(#[0-9a-fA-F]{6})`));
   if (!match) throw new Error(`Missing ${name}`);
   return match[1].toLowerCase();
 };
 
+const readEffectiveToken = (name) => {
+  const runtimeMatch = runtime.match(new RegExp(`setProperty\\(['\"]${name}['\"],\\s*['\"](#[0-9a-fA-F]{6})['\"]\\)`));
+  return runtimeMatch ? runtimeMatch[1].toLowerCase() : readCssToken(name);
+};
+
 const tokens = {
-  background: readToken('--ui-bg'),
-  background_soft: readToken('--ui-bg-soft'),
-  text: readToken('--ui-text'),
-  copy: readToken('--ui-copy'),
-  muted: readToken('--ui-muted'),
-  quiet: readToken('--ui-quiet'),
-  link: readToken('--ui-link'),
-  hover: readToken('--ui-hover'),
-  focus: readToken('--ui-focus'),
-  positive: readToken('--ui-positive'),
-  warning: readToken('--ui-warning'),
-  danger: readToken('--ui-danger')
+  background: readEffectiveToken('--ui-bg'),
+  background_soft: readEffectiveToken('--ui-bg-soft'),
+  text: readEffectiveToken('--ui-text'),
+  copy: readEffectiveToken('--ui-copy'),
+  muted: readEffectiveToken('--ui-muted'),
+  quiet: readEffectiveToken('--ui-quiet'),
+  link: readEffectiveToken('--ui-link'),
+  hover: readEffectiveToken('--ui-hover'),
+  focus: readEffectiveToken('--ui-focus'),
+  positive: readEffectiveToken('--ui-positive'),
+  warning: readEffectiveToken('--ui-warning'),
+  danger: readEffectiveToken('--ui-danger')
 };
 
 const thresholds = {
@@ -83,10 +90,12 @@ const checks = [
 
 const failures = checks.filter((check) => !check.pass);
 const output = {
-  schema_version: '1.2',
+  schema_version: '1.3',
   generated_at: new Date().toISOString(),
   standard: 'WCAG 2.x AA for normal text',
   css_path: cssPath,
+  runtime_path: runtimePath,
+  token_source: 'effective public tokens after SemanticToneRuntime',
   tokens,
   thresholds,
   checks,
