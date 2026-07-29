@@ -297,7 +297,7 @@ td small { display: block; margin-top: 3px; font-size: 13px; }
 .guide-index-reference > a:hover, main .contact-actions > a:hover { background: rgba(23,23,20,.045); text-decoration: none; }
 .guide-index-reference span { display: block; color: var(--ui-muted); font-size: 15px; line-height: 1.5; }
 main .contact-actions h2 { margin: 0; font-size: 1.35rem; line-height: 1.16; overflow-wrap: normal; word-break: normal; }
-main .contact-actions p { margin: 0; font-size: 15px; line-height: 1.5; }
+main .contact-actions p { margin: 0; font-size: 17px; line-height: 1.5; }
 .report-actions { display: flex; flex-wrap: wrap; gap: 10px 16px; }
 .report-actions a { min-height: 44px; display: inline-flex; align-items: center; border-bottom: 1px solid var(--ui-line-strong); }
 .editorial-utility-page, .wallet-section, .wallet-grid, .wallet-card, .address-block { min-width: 0; max-width: 100%; }
