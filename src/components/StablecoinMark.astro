@@ -15,8 +15,11 @@ const normalizedSymbol = String(symbol || name || '?')
   .toUpperCase()
   .replace(/[^A-Z0-9]/g, '');
 const fallbackSource = normalizedSymbol || '?';
-const monogram = fallbackSource.length <= 4 ? fallbackSource : fallbackSource.slice(0, 3);
-const fallbackFontSize = monogram.length >= 4 ? 25 : monogram.length === 3 ? 29 : 34;
+const fallbackStem = fallbackSource.length > 3 && fallbackSource.endsWith('USD')
+  ? fallbackSource.slice(0, -3)
+  : fallbackSource;
+const monogram = (fallbackStem || fallbackSource).slice(0, 2);
+const fallbackFontSize = monogram.length === 1 ? 42 : 34;
 ---
 {logoSrc ? (
   <img
