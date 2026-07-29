@@ -27,44 +27,43 @@ const rows = deployments.map((deployment) => {
       <thead>
         <tr>
           <th>Network</th>
-          <th>Network record state</th>
           <th>Standard</th>
-          <th>Public deployment category</th>
-          <th>Canonical deployment type</th>
+          <th>Deployment type</th>
           <th>Operational state</th>
-          <th>Recorded status</th>
-          <th>Change or proposal state</th>
-          <th>Canonicality</th>
-          <th>Canonicality record state</th>
-          <th>Verification state</th>
-          <th>Contract identity state</th>
           <th>Contract or identifier</th>
-          <th>Freeze</th>
-          <th>Blacklist</th>
-          <th>Control events</th>
-          <th>Notes</th>
         </tr>
       </thead>
       <tbody>
-        {rows.length === 0 ? <tr><td colspan="17">No deployment records have been added yet.</td></tr> : rows.map(({ deployment, taxonomy, rawStatusLabel, freezeValue, blacklistValue, identifier }) => <tr>
-          <td><ValueStateText value={deployment.chain} /></td>
-          <td>{taxonomy.network_identity_state_label}</td>
-          <td><ValueStateText value={deployment.token_standard} /></td>
-          <td>{taxonomy.public_category_label}</td>
-          <td>{formatPublicLabel(taxonomy.canonical_deployment_type)}</td>
-          <td>{taxonomy.operational_state_label}</td>
-          <td><ValueStateText value={taxonomy.canonical_status_raw} displayValue={rawStatusLabel} /></td>
-          <td>{taxonomy.change_state_label}</td>
-          <td>{taxonomy.canonicality_label}</td>
-          <td>{taxonomy.canonicality_record_state_label}</td>
-          <td>{taxonomy.verification_state_label}</td>
-          <td>{taxonomy.contract_identity_state_label}</td>
-          <td>{identifier}</td>
-          <td><ValueStateText value={freezeValue} /></td>
-          <td><ValueStateText value={blacklistValue} /></td>
-          <td>{deployment.control_event_ids?.length ?? 0}</td>
-          <td>{cleanPublicText(deployment.notes, 'No deployment-specific note has been recorded.')}</td>
-        </tr>)}
+        {rows.length === 0 ? <tr><td colspan="5">No deployment records have been added yet.</td></tr> : rows.map(({ deployment, taxonomy, rawStatusLabel, freezeValue, blacklistValue, identifier }) => <>
+          <tr>
+            <td><ValueStateText value={deployment.chain} /></td>
+            <td><ValueStateText value={deployment.token_standard} /></td>
+            <td>{taxonomy.public_category_label}</td>
+            <td>{taxonomy.operational_state_label}</td>
+            <td data-technical-value>{identifier}</td>
+          </tr>
+          <tr>
+            <td colspan="5">
+              <details class="stablecoin-mechanism-details">
+                <summary>Technical, canonicality, and control fields</summary>
+                <dl class="stablecoin-mechanism-ledger stablecoin-mechanism-ledger--secondary">
+                  <div><dt>Network record state</dt><dd>{taxonomy.network_identity_state_label}</dd></div>
+                  <div><dt>Canonical deployment type</dt><dd>{formatPublicLabel(taxonomy.canonical_deployment_type)}</dd></div>
+                  <div><dt>Recorded status</dt><dd><ValueStateText value={taxonomy.canonical_status_raw} displayValue={rawStatusLabel} /></dd></div>
+                  <div><dt>Change or proposal state</dt><dd>{taxonomy.change_state_label}</dd></div>
+                  <div><dt>Canonicality</dt><dd>{taxonomy.canonicality_label}</dd></div>
+                  <div><dt>Canonicality record state</dt><dd>{taxonomy.canonicality_record_state_label}</dd></div>
+                  <div><dt>Verification state</dt><dd>{taxonomy.verification_state_label}</dd></div>
+                  <div><dt>Contract identity state</dt><dd>{taxonomy.contract_identity_state_label}</dd></div>
+                  <div><dt>Freeze</dt><dd><ValueStateText value={freezeValue} /></dd></div>
+                  <div><dt>Blacklist</dt><dd><ValueStateText value={blacklistValue} /></dd></div>
+                  <div><dt>Control events</dt><dd>{deployment.control_event_ids?.length ?? 0}</dd></div>
+                  <div class="wide"><dt>Notes</dt><dd>{cleanPublicText(deployment.notes, 'No deployment-specific note has been recorded.')}</dd></div>
+                </dl>
+              </details>
+            </td>
+          </tr>
+        </>)}
       </tbody>
     </table>
   </div>
@@ -76,22 +75,27 @@ const rows = deployments.map((deployment) => {
         <span>{taxonomy.operational_state_label}</span>
       </header>
       <dl>
-        <div><dt>Network record state</dt><dd>{taxonomy.network_identity_state_label}</dd></div>
         <div><dt>Standard</dt><dd><ValueStateText value={deployment.token_standard} /></dd></div>
-        <div><dt>Public deployment category</dt><dd>{taxonomy.public_category_label}</dd></div>
-        <div><dt>Canonical deployment type</dt><dd>{formatPublicLabel(taxonomy.canonical_deployment_type)}</dd></div>
-        <div><dt>Recorded status</dt><dd><ValueStateText value={taxonomy.canonical_status_raw} displayValue={rawStatusLabel} /></dd></div>
-        <div><dt>Change or proposal state</dt><dd>{taxonomy.change_state_label}</dd></div>
-        <div><dt>Canonicality</dt><dd>{taxonomy.canonicality_label}</dd></div>
-        <div><dt>Canonicality record state</dt><dd>{taxonomy.canonicality_record_state_label}</dd></div>
-        <div><dt>Verification state</dt><dd>{taxonomy.verification_state_label}</dd></div>
-        <div><dt>Contract identity state</dt><dd>{taxonomy.contract_identity_state_label}</dd></div>
+        <div><dt>Deployment type</dt><dd>{taxonomy.public_category_label}</dd></div>
         <div><dt>Contract or identifier</dt><dd data-technical-value>{identifier}</dd></div>
-        <div><dt>Freeze</dt><dd><ValueStateText value={freezeValue} /></dd></div>
-        <div><dt>Blacklist</dt><dd><ValueStateText value={blacklistValue} /></dd></div>
-        <div><dt>Control events</dt><dd>{deployment.control_event_ids?.length ?? 0}</dd></div>
-        <div><dt>Notes</dt><dd>{cleanPublicText(deployment.notes, 'No deployment-specific note has been recorded.')}</dd></div>
       </dl>
+      <details class="stablecoin-mechanism-details">
+        <summary>Technical, canonicality, and control fields</summary>
+        <dl class="stablecoin-mechanism-ledger stablecoin-mechanism-ledger--secondary">
+          <div><dt>Network record state</dt><dd>{taxonomy.network_identity_state_label}</dd></div>
+          <div><dt>Canonical deployment type</dt><dd>{formatPublicLabel(taxonomy.canonical_deployment_type)}</dd></div>
+          <div><dt>Recorded status</dt><dd><ValueStateText value={taxonomy.canonical_status_raw} displayValue={rawStatusLabel} /></dd></div>
+          <div><dt>Change or proposal state</dt><dd>{taxonomy.change_state_label}</dd></div>
+          <div><dt>Canonicality</dt><dd>{taxonomy.canonicality_label}</dd></div>
+          <div><dt>Canonicality record state</dt><dd>{taxonomy.canonicality_record_state_label}</dd></div>
+          <div><dt>Verification state</dt><dd>{taxonomy.verification_state_label}</dd></div>
+          <div><dt>Contract identity state</dt><dd>{taxonomy.contract_identity_state_label}</dd></div>
+          <div><dt>Freeze</dt><dd><ValueStateText value={freezeValue} /></dd></div>
+          <div><dt>Blacklist</dt><dd><ValueStateText value={blacklistValue} /></dd></div>
+          <div><dt>Control events</dt><dd>{deployment.control_event_ids?.length ?? 0}</dd></div>
+          <div class="wide"><dt>Notes</dt><dd>{cleanPublicText(deployment.notes, 'No deployment-specific note has been recorded.')}</dd></div>
+        </dl>
+      </details>
     </article>)}
   </div>
 </section>
