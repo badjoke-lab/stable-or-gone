@@ -24,12 +24,54 @@ for (const [key, file] of Object.entries(files)) {
   if (fs.existsSync(path.join(root, file))) source[key] = fs.readFileSync(path.join(root, file), 'utf8');
 }
 const contract = JSON.parse(source.implementationContract ?? '{}');
-const logoSlugs = [
-  'aeur', 'dai', 'dola', 'eurc', 'eurt', 'fdusd', 'fei', 'frax', 'gho', 'gusd',
-  'gyen', 'husd', 'iron', 'ist', 'lusd', 'mim', 'ousd', 'pax', 'paxg', 'pyusd',
-  'rai', 'sai', 'susd', 'tryb', 'tusd', 'usdc', 'usdd', 'usde', 'usdt', 'vai',
-  'xaut', 'xsgd'
-];
+const logoMappings = {
+  'agoric-ist': 'ist.svg',
+  'beanstalk-bean': 'beanstalk-bean.svg',
+  'berachain-honey': 'berachain-honey.svg',
+  'crvusd': 'crvusd.svg',
+  'dai': 'dai.svg',
+  'djed': 'djed.svg',
+  'dola': 'dola.svg',
+  'eurc': 'eurc.svg',
+  'eurs': 'eurs.svg',
+  'eurt': 'eurt.svg',
+  'fdusd': 'fdusd.svg',
+  'fei': 'fei.svg',
+  'frax': 'frax.svg',
+  'gho': 'gho.svg',
+  'gusd': 'gusd.svg',
+  'gyen': 'gyen.svg',
+  'husd': 'husd.svg',
+  'iron': 'iron.svg',
+  'lusd': 'lusd.svg',
+  'mim': 'mim.svg',
+  'musd': 'musd.svg',
+  'near-usn': 'near-usn.svg',
+  'origin-dollar': 'ousd.svg',
+  'paxg': 'paxg.svg',
+  'pyusd': 'pyusd.svg',
+  'rai': 'rai.svg',
+  'sai': 'sai.svg',
+  'susd': 'susd.svg',
+  'tryb': 'tryb.svg',
+  'tusd': 'tusd.svg',
+  'united-stables-u': 'united-stables-u.svg',
+  'usdc': 'usdc.svg',
+  'usdd': 'usdd.svg',
+  'usde': 'usde.svg',
+  'usdp': 'pax.svg',
+  'usdt': 'usdt.svg',
+  'vai': 'vai.svg',
+  'xaut': 'xaut.svg',
+  'xsgd': 'xsgd.svg'
+};
+const canonicalStablecoinSlugs = new Set();
+for (const filename of fs.readdirSync(path.join(root, 'data')).filter((name) => /^stablecoins(?:-|\.)/.test(name) && name.endsWith('.json'))) {
+  const parsed = JSON.parse(fs.readFileSync(path.join(root, 'data', filename), 'utf8'));
+  const records = Array.isArray(parsed) ? parsed : parsed.stablecoins ?? parsed.records ?? parsed.items ?? [];
+  for (const record of records) if (record && typeof record.slug === 'string') canonicalStablecoinSlugs.add(record.slug);
+}
+const effectiveLogoRecordCount = Object.keys(logoMappings).filter((slug) => canonicalStablecoinSlugs.has(slug)).length;
 
 for (const forbidden of ['PageHero', 'MetricCard', 'stablecoin-index-hero__visual', 'stablecoin-index-hero__coin', 'stablecoin-index-metrics', 'class="stablecoin-register-count"']) {
   check(!source.page?.includes(forbidden), `superseded Stablecoins composition remains: ${forbidden}`);
@@ -78,10 +120,15 @@ check(!source.mark?.includes('TickerBadge'), 'legacy ticker badge fallback remai
 check(!source.mark?.includes('http://') && !source.mark?.includes('https://'), 'stablecoin mark must not fetch remote images');
 check(source.logoResolver?.includes('LOGOS_BY_SLUG') && source.logoResolver?.includes('LOGOS_BY_AUDITED_UNIQUE_SYMBOL'), 'slug-first audited symbol resolver missing');
 for (const collision of ['USX', 'USDX', 'USDN']) check(source.logoResolver?.includes(collision), `ambiguous symbol guard missing: ${collision}`);
-for (const slug of logoSlugs) {
-  check(source.logoResolver?.includes(`${slug}: '/stablecoin-logos/${slug}.svg'`), `local stablecoin logo mapping missing: ${slug}`);
-  check(fs.existsSync(path.join(root, `public/stablecoin-logos/${slug}.svg`)), `local stablecoin logo asset missing: ${slug}`);
+for (const [slug, filename] of Object.entries(logoMappings)) {
+  check(canonicalStablecoinSlugs.has(slug), `logo mapping does not use a canonical current stablecoin slug: ${slug}`);
+  check(source.logoResolver?.includes(`'${slug}': '/stablecoin-logos/${filename}'`), `local stablecoin logo mapping missing: ${slug} -> ${filename}`);
+  check(fs.existsSync(path.join(root, `public/stablecoin-logos/${filename}`)), `local stablecoin logo asset missing: ${filename}`);
 }
+check(Object.keys(logoMappings).length === 39, 'audited canonical stablecoin logo coverage must be 39 records');
+check(effectiveLogoRecordCount === 39, `effective canonical stablecoin logo coverage must be 39 records, got ${effectiveLogoRecordCount}`);
+check(!source.logoResolver?.includes("'aeur':"), 'obsolete noncanonical AEUR logo mapping remains');
+check(!fs.existsSync(path.join(root, 'public/stablecoin-logos/aeur.svg')), 'obsolete unused AEUR logo asset remains');
 check(source.logoReadme?.includes('113249b982b3ec5e597feee1ad03d15961e6598b'), 'pinned Web3 Icons provenance missing');
 check(source.logoReadme?.includes('same circular mark geometry'), 'mixed logo/fallback rendering rule missing');
 check(source.logoReadme?.includes('Stablecoins index screenshot contains real marks and unsupported-record fallbacks together'), 'mixed index screenshot review rule missing');
@@ -128,7 +175,9 @@ const result = {
   page_size: 20,
   initial_render_authorized_max: 50,
   bounded_rendering_threshold: 100,
-  local_logo_assets: logoSlugs.length,
+  local_logo_assets: Object.keys(logoMappings).length,
+  effective_logo_records: effectiveLogoRecordCount,
+  canonical_stablecoin_records: canonicalStablecoinSlugs.size,
   mixed_mark_geometry: true,
   failures
 };
