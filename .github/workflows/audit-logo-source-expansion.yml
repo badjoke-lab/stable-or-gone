@@ -1,0 +1,51 @@
+name: Audit licensed logo source expansion
+
+on:
+  push:
+    branches:
+      - audit/logo-coverage-batch-2
+    paths:
+      - 'scripts/audit-logo-source-expansion.mjs'
+      - '.github/workflows/audit-logo-source-expansion.yml'
+      - 'data/stablecoins.json'
+      - 'data/deployments.json'
+      - 'src/utils/stablecoinLogo.ts'
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout SOG
+        uses: actions/checkout@v4
+
+      - name: Fetch licensed source trees without blobs
+        run: |
+          set -euo pipefail
+          git clone --depth 1 --filter=blob:none --no-checkout https://github.com/trustwallet/assets.git /tmp/trustwallet-assets
+          git -C /tmp/trustwallet-assets ls-tree -r --name-only HEAD > /tmp/trustwallet-paths.txt
+
+          git clone --depth 1 --filter=blob:none --no-checkout https://github.com/bgd-labs/web3-icons.git /tmp/bgd-web3-icons
+          git -C /tmp/bgd-web3-icons ls-tree -r --name-only HEAD > /tmp/bgd-paths.txt
+
+          git clone --depth 1 --filter=blob:none --no-checkout https://github.com/0xa3k5/web3icons.git /tmp/web3icons
+          git -C /tmp/web3icons ls-tree -r --name-only HEAD > /tmp/web3icons-paths.txt
+
+      - name: Compare canonical records with licensed assets
+        run: node scripts/audit-logo-source-expansion.mjs
+
+      - name: Upload audit report
+        uses: actions/upload-artifact@v4
+        with:
+          name: sog-logo-source-expansion-${{ github.run_id }}
+          retention-days: 14
+          if-no-files-found: error
+          path: |
+            artifacts/logo-source-expansion.json
+            artifacts/logo-source-expansion.md
+
+      - name: Write summary
+        run: cat artifacts/logo-source-expansion.md >> "$GITHUB_STEP_SUMMARY"
