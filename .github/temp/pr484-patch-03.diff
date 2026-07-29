@@ -1,0 +1,226 @@
++        const rect = element.getBoundingClientRect();
++        return style.display !== 'none' && style.visibility !== 'hidden' && rect.width > 0 && rect.height > 0;
++      };
++      const label = (element) => {
++        const className = element instanceof HTMLElement || element instanceof SVGElement ? element.className : '';
++        const classes = typeof className === 'string' ? className.trim().split(/\s+/).slice(0, 3).join('.') : '';
++        return `${element.tagName.toLowerCase()}${element.id ? `#${element.id}` : ''}${classes ? `.${classes}` : ''}`;
++      };
++      const intersection = (left, right) => {
++        const width = Math.min(left.right, right.right) - Math.max(left.left, right.left);
++        const height = Math.min(left.bottom, right.bottom) - Math.max(left.top, right.top);
++        return { width, height, area: Math.max(0, width) * Math.max(0, height) };
++      };
++      const problems = [];
++
++      for (const selector of containerSelectors) {
++        for (const container of document.querySelectorAll(selector)) {
++          if (!visible(container)) continue;
++          const children = [...container.children].filter(visible);
++          for (let leftIndex = 0; leftIndex < children.length; leftIndex += 1) {
++            for (let rightIndex = leftIndex + 1; rightIndex < children.length; rightIndex += 1) {
++              const left = children[leftIndex].getBoundingClientRect();
++              const right = children[rightIndex].getBoundingClientRect();
++              const overlap = intersection(left, right);
++              if (overlap.width > 2 && overlap.height > 2 && overlap.area > 16) {
++                problems.push({
++                  type: 'overlap',
++                  container: label(container),
++                  left: label(children[leftIndex]),
++                  right: label(children[rightIndex]),
++                  overlap_width: Number(overlap.width.toFixed(2)),
++                  overlap_height: Number(overlap.height.toFixed(2))
++                });
++              }
++            }
++          }
++        }
++      }
++
++      for (const selector of headingSelectors) {
++        for (const container of document.querySelectorAll(selector)) {
++          if (!visible(container)) continue;
++          const heading = container.querySelector('h2');
++          if (!(heading instanceof HTMLElement) || !visible(heading)) continue;
++          const containerRect = container.getBoundingClientRect();
++          const headingRect = heading.getBoundingClientRect();
++          const offset = headingRect.left - containerRect.left;
++          if (offset > Math.max(28, containerRect.width * 0.14)) {
++            problems.push({
++              type: 'heading-shifted-right',
++              container: label(container),
++              heading: heading.textContent?.trim().replace(/\s+/g, ' ').slice(0, 120),
++              offset: Number(offset.toFixed(2)),
++              container_width: Number(containerRect.width.toFixed(2))
++            });
++          }
++        }
++      }
++
++      const renderedLineRects = (element) => {
++        const range = document.createRange();
++        range.selectNodeContents(element);
++        return [...range.getClientRects()].filter((rect) => rect.width > 0 && rect.height > 0);
++      };
++
++      for (const element of document.querySelectorAll([
++        '.event-index-overline > span',
++        '.organization-index-overline > span',
++        '.event-detail-overline > span',
++        '.organization-detail-overline > span',
++        '.stablecoin-dossier-overline > span',
++        '.guide-article-overline > span',
++        '.guide-index-overline > span',
++        '.editorial-page-overline > span',
++        '.contact-actions h2'
++      ].join(', '))) {
++        if (!(element instanceof HTMLElement) || !visible(element)) continue;
++        const text = element.textContent?.trim().replace(/\s+/g, ' ') ?? '';
++        if (text.length < 7) continue;
++        const rect = element.getBoundingClientRect();
++        const fontSize = Number.parseFloat(getComputedStyle(element).fontSize) || 13;
++        const lineRects = renderedLineRects(element);
++        const maxLineWidth = lineRects.length ? Math.max(...lineRects.map((line) => line.width)) : rect.width;
++        if (lineRects.length >= 3 && rect.width < fontSize * 5 && maxLineWidth < fontSize * 5) {
++          problems.push({
++            type: 'fragmented-ordinary-label',
++            element: label(element),
++            text: text.slice(0, 120),
++            width: Number(rect.width.toFixed(2)),
++            font_size: Number(fontSize.toFixed(2)),
++            rendered_lines: lineRects.length,
++            maximum_line_width: Number(maxLineWidth.toFixed(2))
++          });
++        }
++      }
++
++      for (const heading of document.querySelectorAll('main h1, main h2, main h3')) {
++        if (!(heading instanceof HTMLElement) || !visible(heading)) continue;
++        const text = heading.textContent?.trim().replace(/\s+/g, ' ') ?? '';
++        if (text.length < 12 || !text.includes(' ')) continue;
++        const lineRects = renderedLineRects(heading);
++        const fontSize = Number.parseFloat(getComputedStyle(heading).fontSize) || 16;
++        const maxLineWidth = lineRects.length ? Math.max(...lineRects.map((rect) => rect.width)) : heading.getBoundingClientRect().width;
++        const width = heading.getBoundingClientRect().width;
++        if (lineRects.length >= 4 && width < fontSize * 5 && maxLineWidth < fontSize * 5) {
++          problems.push({
++            type: 'fragmented-heading',
++            element: label(heading),
++            text: text.slice(0, 120),
++            width: Number(width.toFixed(2)),
++            font_size: Number(fontSize.toFixed(2)),
++            rendered_lines: lineRects.length,
++            maximum_line_width: Number(maxLineWidth.toFixed(2))
++          });
++        }
++      }
++
++      if (location.pathname === '/contact/' && deviceName === 'mobile') {
++        const actions = document.querySelector('.contact-actions');
++        if (actions instanceof HTMLElement && visible(actions)) {
++          const containerWidth = actions.getBoundingClientRect().width;
++          for (const action of actions.querySelectorAll(':scope > a')) {
++            if (!(action instanceof HTMLElement) || !visible(action)) continue;
++            const width = action.getBoundingClientRect().width;
++            if (width < containerWidth * 0.85) {
++              problems.push({ type: 'collapsed-contact-action', text: action.textContent?.trim().replace(/\s+/g, ' ').slice(0, 120), width: Number(width.toFixed(2)), container_width: Number(containerWidth.toFixed(2)) });
++            }
++          }
++        }
++      }
++
++      if (location.pathname === '/guides/' && deviceName === 'mobile') {
++        const table = document.querySelector('.guide-index-table');
++        const mobile = document.querySelector('.guide-index-mobile');
++        if (table && visible(table)) problems.push({ type: 'desktop-guide-table-visible-on-mobile' });
++        if (!mobile || !visible(mobile)) problems.push({ type: 'mobile-guide-cards-hidden' });
++      }
++
++      return { problems };
++    }, { containerSelectors, headingSelectors, deviceName });
++
++    records.push({ device: deviceName, route, problems: result.problems });
++    failures.push(...result.problems.map((problem) => ({ device: deviceName, route, ...problem })));
++  }
++  await context.close();
++}
++
++await browser.close();
++const report = {
++  schema_version: '1.0',
++  generated_at: new Date().toISOString(),
++  audited_routes: records.length,
++  desktop_routes: manifests.desktop.records.length,
++  mobile_routes: manifests.mobile.records.length,
++  failure_count: failures.length,
++  records,
++  failures
++};
++await writeFile('artifacts/screenshots/layout-geometry-audit.json', `${JSON.stringify(report, null, 2)}\n`);
++
++if (failures.length) {
++  console.error(JSON.stringify(report, null, 2));
++  process.exit(1);
++}
++console.log(JSON.stringify({ audited_routes: report.audited_routes, failure_count: 0 }, null, 2));
+--- a/scripts/audit-stablecoin-logo-coverage.mjs
++++ b/scripts/audit-stablecoin-logo-coverage.mjs
+@@ -0,0 +1,77 @@
++#!/usr/bin/env node
++import fs from 'node:fs';
++import path from 'node:path';
++
++const root = process.cwd();
++const dataDir = path.join(root, 'data');
++const logoDir = path.join(root, 'public/stablecoin-logos');
++const resolverPath = path.join(root, 'src/utils/stablecoinLogo.ts');
++const outputPath = path.join(root, 'artifacts/stablecoin-logo-coverage.json');
++
++const recordsBySlug = new Map();
++for (const filename of fs.readdirSync(dataDir).filter((name) => /^stablecoins(?:-|\.)/.test(name) && name.endsWith('.json'))) {
++  const parsed = JSON.parse(fs.readFileSync(path.join(dataDir, filename), 'utf8'));
++  const records = Array.isArray(parsed) ? parsed : parsed.stablecoins ?? parsed.records ?? parsed.items ?? [];
++  for (const record of records) {
++    if (!record || typeof record.slug !== 'string') continue;
++    recordsBySlug.set(record.slug, {
++      slug: record.slug,
++      symbol: String(record.symbol ?? ''),
++      name: String(record.name ?? record.slug)
++    });
++  }
++}
++
++const resolver = fs.readFileSync(resolverPath, 'utf8');
++const mappingBlock = resolver.match(/const LOGOS_BY_SLUG:[\s\S]*?= \{([\s\S]*?)\n\};/)?.[1] ?? '';
++const mappings = [...mappingBlock.matchAll(/^\s*'([^']+)':\s*'([^']+)'\s*,?$/gm)].map((match) => ({ slug: match[1], asset: match[2] }));
++const mappedSlugs = new Set(mappings.map((mapping) => mapping.slug));
++const mappedAssets = new Set(mappings.map((mapping) => path.basename(mapping.asset)));
++const localAssets = fs.readdirSync(logoDir).filter((name) => name.endsWith('.svg')).sort();
++const failures = [];
++
++if (recordsBySlug.size !== 116) failures.push(`expected 116 canonical stablecoin records, found ${recordsBySlug.size}`);
++if (mappings.length !== 39) failures.push(`expected 39 canonical logo mappings, found ${mappings.length}`);
++for (const mapping of mappings) {
++  if (!recordsBySlug.has(mapping.slug)) failures.push(`noncanonical or obsolete logo mapping: ${mapping.slug}`);
++  if (!mapping.asset.startsWith('/stablecoin-logos/')) failures.push(`nonlocal logo asset path for ${mapping.slug}: ${mapping.asset}`);
++  if (!fs.existsSync(path.join(root, 'public', mapping.asset))) failures.push(`missing logo asset for ${mapping.slug}: ${mapping.asset}`);
++}
++for (const asset of localAssets) {
++  if (!mappedAssets.has(asset)) failures.push(`orphan local stablecoin logo asset: ${asset}`);
++}
++for (const collision of ['USX', 'USDX', 'USDN']) {
++  if (!resolver.includes(collision)) failures.push(`ambiguous symbol guard missing: ${collision}`);
++}
++for (const requiredSlug of ['beanstalk-bean', 'berachain-honey', 'crvusd', 'djed', 'eurs', 'musd', 'near-usn', 'united-stables-u']) {
++  if (!mappedSlugs.has(requiredSlug)) failures.push(`newly audited logo mapping missing: ${requiredSlug}`);
++}
++
++const covered = [...recordsBySlug.values()].filter((record) => mappedSlugs.has(record.slug));
++const unsupported = [...recordsBySlug.values()].filter((record) => !mappedSlugs.has(record.slug));
++const report = {
++  schema_version: '1.0',
++  generated_at: new Date().toISOString(),
++  canonical_stablecoin_records: recordsBySlug.size,
++  mapped_canonical_records: covered.length,
++  coverage_percent: Number(((covered.length / Math.max(recordsBySlug.size, 1)) * 100).toFixed(2)),
++  local_svg_assets: localAssets.length,
