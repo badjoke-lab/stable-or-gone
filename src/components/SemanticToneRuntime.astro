@@ -24,17 +24,31 @@
 
     document.querySelectorAll<HTMLElement>([
       '.value-state',
+      '.chip',
+      '[class*="badge"]',
       '[class*="status-chip"]',
       '[class*="status-badge"]',
       '.home-status-label',
+      '.update-feed-category',
       '.ar-chip',
-      '.ar-lifecycle'
+      '.ar-lifecycle',
+      '.archive-note',
+      '.directory-number',
+      '.ticker-badge'
     ].join(', ')).forEach((element) => {
       element.dataset.uiMono = 'true';
     });
 
+    document.querySelectorAll<HTMLElement>('.home-facts dd, .directory-copy strong').forEach((element) => {
+      element.dataset.editorialNumber = 'true';
+    });
+
+    document.querySelectorAll<HTMLElement>('.home-facts dd').forEach((element) => {
+      element.style.lineHeight = '1.35';
+    });
+
     document.querySelectorAll<HTMLElement>('.support-cta, .footer-support, .context-support-callout').forEach((element) => {
-      element.dataset.tone = 'support';
+      delete element.dataset.tone;
     });
   };
 
