@@ -5,8 +5,8 @@
   "source_endpoint": "/data/update-feed.json",
   "route": "/updates/",
   "ordering": "publication_date_desc_then_update_id",
-  "initial_result_limit": 20,
-  "result_limit_increment": 20,
+  "initial_result_limit": 10,
+  "result_limit_increment": 10,
   "filters": [
     {"id":"category","label":"Category","query_param":"category"},
     {"id":"year","label":"Publication year","query_param":"year"},

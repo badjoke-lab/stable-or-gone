@@ -387,7 +387,15 @@ if (foundRoot instanceof HTMLElement) {
       const response = await fetch('/data/comparison.json', { headers: { accept: 'application/json' } });
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
       projection = await response.json() as CompareProjection;
-      if (projection.asset_count !== 110 || projection.dimension_count !== 19 || projection.cell_count !== 2090) throw new Error('projection contract mismatch');
+      const configuredDimensionCount = config.groups.reduce((sum, group) => sum + group.dimensions.length, 0);
+      const projectionSlugs = new Set(projection.assets.map((asset) => asset.slug));
+      if (
+        projection.asset_count !== projection.assets.length
+        || projection.asset_count !== knownSlugs.size
+        || projection.dimension_count !== configuredDimensionCount
+        || projection.cell_count !== projection.asset_count * projection.dimension_count
+        || projectionSlugs.size !== projection.asset_count
+      ) throw new Error('projection contract mismatch');
       render();
     } catch (error) {
       projectionError = error instanceof Error ? error.message : String(error);

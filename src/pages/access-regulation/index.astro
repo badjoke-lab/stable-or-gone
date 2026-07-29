@@ -33,9 +33,9 @@ const jsonLd = {
       <p class="ar-eyebrow">Interpretation boundary</p>
       <h2 id="ar-boundary-heading">Record presence is context, not a verdict</h2>
       <div class="ar-boundary-grid">
-        <p><strong>No Regulatory Note</strong><span>does not prove that no regulatory action or development exists.</span></p>
-        <p><strong>No Market Access Record</strong><span>does not mean unavailable in a jurisdiction or on a platform.</span></p>
-        <p><strong>Unclassified legal profile</strong><span>does not mean illegal, unregulated, banned, or unsafe.</span></p>
+        <p><strong>No Regulatory Note</strong><span> — does not prove that no regulatory action or development exists.</span></p>
+        <p><strong>No Market Access Record</strong><span> — does not mean unavailable in a jurisdiction or on a platform.</span></p>
+        <p><strong>Unclassified legal profile</strong><span> — does not mean illegal, unregulated, banned, or unsafe.</span></p>
       </div>
     </section>
 
@@ -44,7 +44,7 @@ const jsonLd = {
         <div>
           <p class="ar-eyebrow">Filter</p>
           <h2 id="ar-controls-heading">Narrow the canonical index</h2>
-          <p>Filters use asset-presence tokens from the deterministic index. Result order remains canonical asset ID order and is never rearranged into a risk ranking.</p>
+          <p>Search first, then open the advanced filters only when needed. Result order remains canonical asset ID order and is never rearranged into a risk ranking.</p>
         </div>
         <p class="ar-machine-link"><a href="/data/access-regulation-index.json">Machine-readable index</a> · canonical data only</p>
       </div>
@@ -59,25 +59,28 @@ const jsonLd = {
         <span data-ar-copy-status aria-live="polite"></span>
       </div>
 
-      <div class="ar-filter-groups" data-ar-filter-groups>
-        <fieldset class="ar-filter-group">
-          <legend>Record state</legend>
-          <div data-ar-filter-slot="record_state"></div>
-        </fieldset>
-        <fieldset class="ar-filter-group">
-          <legend>Legal profile</legend>
-          <div data-ar-filter-slot="legal"></div>
-        </fieldset>
-        <fieldset class="ar-filter-group">
-          <legend>Regulatory Notes</legend>
-          <div data-ar-filter-slot="regulatory"></div>
-        </fieldset>
-        <fieldset class="ar-filter-group">
-          <legend>Market Access</legend>
-          <div data-ar-filter-slot="market_access"></div>
-          <p class="ar-filter-help" data-ar-access-help>Canonical Market Access record coverage is currently determined by the index. Empty option axes remain empty rather than being filled from editorial research.</p>
-        </fieldset>
-      </div>
+      <details class="ar-filter-disclosure">
+        <summary>Advanced legal, regulatory, and market-access filters</summary>
+        <div class="ar-filter-groups" data-ar-filter-groups>
+          <fieldset class="ar-filter-group">
+            <legend>Record state</legend>
+            <div data-ar-filter-slot="record_state"></div>
+          </fieldset>
+          <fieldset class="ar-filter-group">
+            <legend>Legal profile</legend>
+            <div data-ar-filter-slot="legal"></div>
+          </fieldset>
+          <fieldset class="ar-filter-group">
+            <legend>Regulatory Notes</legend>
+            <div data-ar-filter-slot="regulatory"></div>
+          </fieldset>
+          <fieldset class="ar-filter-group">
+            <legend>Market Access</legend>
+            <div data-ar-filter-slot="market_access"></div>
+            <p class="ar-filter-help" data-ar-access-help>Canonical Market Access record coverage is currently determined by the index. Empty option axes remain empty rather than being filled from editorial research.</p>
+          </fieldset>
+        </div>
+      </details>
 
       <div class="ar-active-filters" data-ar-active-filters aria-live="polite"></div>
       <div class="ar-alert" data-ar-alert role="alert" aria-live="assertive"></div>
@@ -99,7 +102,7 @@ const jsonLd = {
       </div>
       <div class="ar-results" data-ar-results hidden></div>
       <div class="ar-show-more-row" data-ar-show-more-row hidden>
-        <button type="button" class="ui-button" data-ar-show-more>Show more results</button>
+        <button type="button" class="ui-button" data-ar-show-more>Show 12 more results</button>
       </div>
     </section>
 
@@ -117,5 +120,6 @@ const jsonLd = {
   <script id="ar-explorer-config" type="application/json" set:html={configJson}></script>
   <script>
     import '../../scripts/access-regulation-explorer';
+    import '../../scripts/access-regulation-responsive';
   </script>
 </BaseLayout>

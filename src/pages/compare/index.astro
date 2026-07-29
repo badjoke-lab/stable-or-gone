@@ -50,7 +50,7 @@ const presetJson = JSON.stringify(comparePresets).replace(/</g, '\u003c');
       <div class="compare-masthead__copy">
         <p class="compare-eyebrow">Register / Deterministic comparison</p>
         <h1>Compare stablecoin records</h1>
-        <p>Place two to four canonical records side by side. Values, readiness, freshness, and unresolved states remain separate; no score or ranking is generated.</p>
+        <p>Start with two canonical records. Add a third or fourth only when needed. Values, readiness, freshness, and unresolved states remain separate; no score or ranking is generated.</p>
       </div>
       <dl class="compare-contract-summary" aria-label="Comparison projection contract">
         <div><dt>Assets</dt><dd>{projection.asset_count}</dd></div>
@@ -63,18 +63,43 @@ const presetJson = JSON.stringify(comparePresets).replace(/</g, '\u003c');
       <div class="compare-section-heading">
         <div>
           <p class="compare-eyebrow">Selection</p>
-          <h2 id="compare-selection-heading">Choose records</h2>
-          <p>Select two to four assets manually or apply a bounded preset. Presets only choose assets and visible facet groups; they never change canonical values, readiness, freshness, or scoring policy.</p>
+          <h2 id="compare-selection-heading">Choose two records</h2>
+          <p>The initial comparison uses two assets. Additional assets, presets, and facet controls remain available below without crowding the first screen.</p>
         </div>
         <p class="compare-projection-note"><a href="/data/comparison.json">Machine-readable projection</a> · canonical data only</p>
       </div>
 
-      <section class="compare-preset-panel" aria-labelledby="compare-preset-heading">
+      <div class="compare-slot-grid compare-slot-grid--primary" aria-label="Primary stablecoin comparison selection">
+        {[0, 1].map((index) => (
+          <label class="compare-slot">
+            <span>Asset {index + 1}</span>
+            <select class="ui-field" data-compare-slot data-slot-index={index} aria-label={`Comparison asset ${index + 1}`}>
+              <option value="">Choose a stablecoin</option>
+              {assets.map((asset: CompareAssetOption) => <option value={asset.slug}>{asset.name}{asset.symbol ? ` (${asset.symbol})` : ''}</option>)}
+            </select>
+          </label>
+        ))}
+      </div>
+
+      <details class="compare-additional-assets">
+        <summary>Add a third or fourth record</summary>
+        <div class="compare-slot-grid" aria-label="Additional stablecoin comparison selection">
+          {[2, 3].map((index) => (
+            <label class="compare-slot">
+              <span>Asset {index + 1}</span>
+              <select class="ui-field" data-compare-slot data-slot-index={index} aria-label={`Comparison asset ${index + 1}`}>
+                <option value="">Choose a stablecoin</option>
+                {assets.map((asset: CompareAssetOption) => <option value={asset.slug}>{asset.name}{asset.symbol ? ` (${asset.symbol})` : ''}</option>)}
+              </select>
+            </label>
+          ))}
+        </div>
+      </details>
+
+      <details class="compare-preset-panel">
+        <summary>Quick comparison presets</summary>
         <div class="compare-preset-heading">
-          <div>
-            <p class="compare-eyebrow">Quick comparisons</p>
-            <h3 id="compare-preset-heading">Apply a preset</h3>
-          </div>
+          <div><p class="compare-eyebrow">Optional shortcut</p><h3>Apply a preset</h3></div>
           <p>Preset state is shareable in the URL and remains editable after application.</p>
         </div>
         <div class="compare-preset-grid" data-compare-preset-list>
@@ -86,34 +111,22 @@ const presetJson = JSON.stringify(comparePresets).replace(/</g, '\u003c');
             </button>
           ))}
         </div>
-      </section>
+      </details>
 
-      <div class="compare-slot-grid" aria-label="Stablecoin comparison selection">
-        {[0, 1, 2, 3].map((index) => (
-          <label class="compare-slot">
-            <span>Asset {index + 1}</span>
-            <select class="ui-field" data-compare-slot data-slot-index={index} aria-label={`Comparison asset ${index + 1}`}>
-              <option value="">Choose a stablecoin</option>
-              {assets.map((asset: CompareAssetOption) => <option value={asset.slug}>{asset.name}{asset.symbol ? ` (${asset.symbol})` : ''}</option>)}
-            </select>
-          </label>
-        ))}
-      </div>
-
-      <fieldset class="compare-group-filter" data-compare-group-filter>
-        <legend>Visible facet groups</legend>
-        <div class="compare-group-filter__grid">
-          {groups.map((group: CompareGroupOption) => (
-            <label class="compare-group-toggle">
-              <input type="checkbox" value={group.id} data-compare-group-toggle checked />
-              <span>
-                <strong>{group.label}</strong>
-                <small>{group.description}</small>
-              </span>
-            </label>
-          ))}
-        </div>
-      </fieldset>
+      <details class="compare-facet-disclosure">
+        <summary>Choose visible facet groups</summary>
+        <fieldset class="compare-group-filter" data-compare-group-filter>
+          <legend>Visible facet groups</legend>
+          <div class="compare-group-filter__grid">
+            {groups.map((group: CompareGroupOption) => (
+              <label class="compare-group-toggle">
+                <input type="checkbox" value={group.id} data-compare-group-toggle checked />
+                <span><strong>{group.label}</strong><small>{group.description}</small></span>
+              </label>
+            ))}
+          </div>
+        </fieldset>
+      </details>
 
       <div class="compare-actions">
         <button class="ui-button" type="button" data-compare-clear>Clear selection</button>
@@ -136,7 +149,7 @@ const presetJson = JSON.stringify(comparePresets).replace(/</g, '\u003c');
 
       <div class="compare-empty" data-compare-empty>
         <strong>No records selected</strong>
-        <p>Choose two to four stablecoins above. Unknown, undated, stale, and missing-record states remain explicit in the matrix.</p>
+        <p>Choose two stablecoins above. Unknown, undated, stale, and missing-record states remain explicit in the matrix.</p>
       </div>
 
       <div class="compare-output" data-compare-output hidden>

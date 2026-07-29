@@ -11,8 +11,8 @@ const { event, view } = Astro.props as { event: any; view: View };
 <section class="event-detail-section" id="subjects">
   <div class="event-detail-section-heading"><p>Connected records</p><h2>Affected records</h2><span>Assets and organizations connected to this event.</span></div>
   <div class="event-subject-list-r5">
-    {view.subjectStablecoins.map((item: Subject) => item.slug ? <a href={`/stablecoin/${item.slug}/`}><span>Stablecoin</span><strong>{item.name}</strong></a> : <div><span>Stablecoin</span><strong>{item.name}</strong></div>)}
-    {view.subjectOrganizations.map((item: Subject) => item.slug ? <a href={`/issuer/${item.slug}/`}><span>Organization</span><strong>{item.name}</strong></a> : <div><span>Organization</span><strong>{item.name}</strong></div>)}
+    {view.subjectStablecoins.map((item: Subject) => item.slug ? <a href={`/stablecoin/${item.slug}/`}><span>Stablecoin</span><span aria-hidden="true"> — </span><strong>{item.name}</strong></a> : <div><span>Stablecoin</span><span aria-hidden="true"> — </span><strong>{item.name}</strong></div>)}
+    {view.subjectOrganizations.map((item: Subject) => item.slug ? <a href={`/issuer/${item.slug}/`}><span>Organization</span><span aria-hidden="true"> — </span><strong>{item.name}</strong></a> : <div><span>Organization</span><span aria-hidden="true"> — </span><strong>{item.name}</strong></div>)}
     {view.subjectCount === 0 && <p class="event-detail-empty">No subject relationship is recorded.</p>}
   </div>
 </section>
@@ -24,7 +24,7 @@ const { event, view } = Astro.props as { event: any; view: View };
 
 <section class="event-detail-section event-record-metadata-section" id="record-details">
   <details class="event-record-details">
-    <summary><span>Record details</span><small>Classification, review, and event-specific data</small></summary>
+    <summary><strong>Record details</strong><br /><small>Classification, review, and event-specific data</small></summary>
     <dl class="event-detail-secondary-r5 event-record-details-grid">
       <div><dt>Record ID</dt><dd><code>{event.id}</code></dd></div>
       <div><dt>Severity</dt><dd><ValueStateText value={event.impact_level} displayValue={formatPublicLabel(event.impact_level)} /></dd></div>
@@ -42,4 +42,12 @@ const { event, view } = Astro.props as { event: any; view: View };
   </details>
 </section>
 
-<section class="event-detail-section event-detail-corrections-r5" id="corrections"><div class="event-detail-section-heading"><p>Maintenance</p><h2>Corrections and further reading</h2><span>Use the documented correction path and methodology.</span></div><div class="event-detail-actions"><a href="/contact/">Submit a correction</a><a href="/methodology/">Methodology</a><a href="/events/">Event register</a><a href="/data/manifest.json">Data manifest</a></div></section>
+<section class="event-detail-section event-detail-corrections-r5" id="corrections">
+  <div class="event-detail-section-heading"><p>Maintenance</p><h2>Corrections and further reading</h2><span>Use the documented correction path and methodology.</span></div>
+  <nav class="event-detail-actions" aria-label="Event maintenance links">
+    <a href="/contact/">Submit a correction</a><span aria-hidden="true"> · </span>
+    <a href="/methodology/">Methodology</a><span aria-hidden="true"> · </span>
+    <a href="/events/">Event register</a><span aria-hidden="true"> · </span>
+    <a href="/data/manifest.json">Data manifest</a>
+  </nav>
+</section>

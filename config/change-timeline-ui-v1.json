@@ -3,8 +3,8 @@
   "config_id": "sog_change_timeline_ui_pr349_v1",
   "source_endpoint": "/data/change-timeline.json",
   "route": "/timeline/",
-  "initial_result_limit": 40,
-  "result_limit_increment": 20,
+  "initial_result_limit": 12,
+  "result_limit_increment": 12,
   "filters": [
     {"id":"source_family","label":"Source family","query_param":"source","group":"provenance"},
     {"id":"date_kind","label":"Date kind","query_param":"date_kind","group":"date_semantics"},
