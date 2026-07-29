@@ -121,6 +121,11 @@ main :where(button,input,select,textarea,summary,label,a) { font-size: 15px; }
 .context-support-callout p { max-width: 760px; font-size: 17px; }
 
 .panel, .surface, .card, .stat, .fact, :where([class$="-card"],[class*="-card "]) { border: 1px solid var(--ui-line-strong); border-radius: 0; background: var(--ui-surface); box-shadow: none; }
+.stablecoin-mark { flex: 0 0 auto; width: 34px; height: 34px; object-fit: contain; border-radius: 50%; }
+.stablecoin-mark--small { width: 26px; height: 26px; }
+.stablecoin-mark--large { width: 48px; height: 48px; }
+.stablecoin-dossier-heading-identity { min-width: 0; display: flex; align-items: flex-start; gap: 14px; }
+.stablecoin-dossier-heading-identity > div { min-width: 0; }
 .bar, .kicker, .eyebrow, [class*="overline"], [class*="-label"], dt, th, .home-section-kicker { width: fit-content; max-width: 100%; color: var(--ui-muted); font: 700 13px/1.4 var(--ui-mono); letter-spacing: .04em; text-transform: uppercase; }
 section + section { margin-top: 42px; }
 input, select, textarea { width: 100%; min-height: 44px; padding: 0 10px; border: 1px solid var(--ui-line-strong); border-radius: 0; background: #f8f5ee; color: var(--ui-text); font-size: 15px; }
@@ -384,7 +389,9 @@ pre { max-width: 100%; overflow-x: auto; white-space: pre-wrap; }
   :where(.stablecoin-index-card,.event-index-card,.organization-index-card) { padding: 10px 0; display: grid; gap: 7px; border: 0; border-bottom: 1px solid var(--ui-text); }
   .stablecoin-index-card-heading { min-width: 0; display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
   .stablecoin-index-card-identity { min-width: 0; display: flex; align-items: flex-start; gap: 8px; }
-  .stablecoin-index-card .ticker-badge { display: none; }
+  .stablecoin-mark--large { width: 40px; height: 40px; }
+  .stablecoin-dossier-heading-identity { gap: 10px; }
+  .stablecoin-index-card :where(.stablecoin-mark,.ticker-badge) { margin-top: 1px; }
   .stablecoin-index-card-identity h2 { margin: 0; font-size: 1.05rem; line-height: 1.2; }
   .stablecoin-index-card-identity .record-symbol { display: block; margin-bottom: 2px; }
   .stablecoin-index-card-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
