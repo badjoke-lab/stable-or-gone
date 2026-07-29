@@ -1,6 +1,7 @@
 <script>
   const applyPaperRegistrySemantics = () => {
     document.documentElement.style.setProperty('--ui-quiet', '#66645d');
+    document.documentElement.style.setProperty('--ui-warning', '#8a6324');
 
     document.querySelectorAll<HTMLElement>('main small, footer small, header small').forEach((element) => {
       if (element.matches('[data-ui-mono]') || element.closest('[data-ui-mono]')) return;
