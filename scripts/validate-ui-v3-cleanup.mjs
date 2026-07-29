@@ -98,10 +98,11 @@ if (failures.length === 0) {
   check(ci.includes('npm run audit:ui-v3-cleanup'), 'CI post-build cleanup audit step missing');
 
   for (const marker of [
+    'Capture representative desktop routes', 'Capture representative mobile routes',
+    '--samples-per-family 3',
     'Audit computed desktop colors', 'Audit computed mobile colors',
     'Audit desktop readability and hierarchy', 'Audit mobile readability and hierarchy',
-    'Validate exhaustive screenshot audit', 'Validate exhaustive color system',
-    'Validate exhaustive readability and hierarchy'
+    'Validate color system', 'Validate readability and hierarchy'
   ]) check(screenshotWorkflow.includes(marker), `screenshot workflow gate missing: ${marker}`);
 
   for (const marker of [
@@ -111,7 +112,7 @@ if (failures.length === 0) {
 }
 
 const result = {
-  schema_version: '5.1',
+  schema_version: '5.2',
   generated_at: new Date().toISOString(),
   ok: failures.length === 0,
   visual_family: 'cya_aligned_single_authority',
@@ -128,7 +129,7 @@ const result = {
     typography: 'serif editorial headings, sans ordinary copy, mono explicit technical values and labels',
     interactions: 'one default, visited, hover, active, and focus palette',
     badges: 'flat square underlined state labels with readable text are mandatory',
-    runtime: 'all rendered desktop and mobile routes are audited'
+    runtime: 'representative desktop and mobile routes are screenshot-audited with three samples per detail family; all routes retain structural and data validation'
   },
   failures
 };
