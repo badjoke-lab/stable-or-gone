@@ -1,9 +1,7 @@
 name: Temporary branch source export
 
 on:
-  push:
-    branches:
-      - fix/representative-layout-regressions-and-logo-coverage
+  pull_request:
     paths:
       - '.github/workflows/temp-export-source.yml'
 
