@@ -16,11 +16,12 @@ const data = {
 <article class="event-index-card event-index-card-r5" data-event-card data-mobile-representation-for="event-index" hidden={initiallyVisible ? undefined : true} {...data}>
   <div class="event-index-card-r5-meta">
     <time datetime={record.eventDate || undefined}>{record.eventDate || 'Date not recorded'}</time>
+    <span aria-hidden="true"> · </span>
     <span class="event-impact-label">{record.impactLabel}</span>
   </div>
   <h2><a href={`/event/${record.id}/`}>{record.title}</a></h2>
   <p class="event-index-card-r5-subject">{record.subjectNames.join(', ') || 'Subject not recorded'}</p>
-  <p class="event-index-card-r5-effect"><strong>{record.statusEffectLabel}</strong><span>{record.recoveryLabel}</span></p>
+  <p class="event-index-card-r5-effect"><strong>{record.statusEffectLabel}</strong><span aria-hidden="true"> · </span><span>{record.recoveryLabel}</span></p>
   <details class="event-index-card-details">
     <summary>More event context</summary>
     <dl>
