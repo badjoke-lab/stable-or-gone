@@ -21,6 +21,8 @@ on:
       - 'config/public-routes.json'
       - 'scripts/capture-site-screenshots.mjs'
       - 'scripts/capture-stablecoin-mark-mix.mjs'
+      - 'scripts/audit-stablecoin-logo-coverage.mjs'
+      - 'scripts/audit-representative-layout-geometry.mjs'
       - 'scripts/collect-public-routes.mjs'
       - 'scripts/audit-ui-color-system.mjs'
       - 'scripts/validate-ui-color-system.mjs'
@@ -36,6 +38,8 @@ on:
       - 'config/public-routes.json'
       - 'scripts/capture-site-screenshots.mjs'
       - 'scripts/capture-stablecoin-mark-mix.mjs'
+      - 'scripts/audit-stablecoin-logo-coverage.mjs'
+      - 'scripts/audit-representative-layout-geometry.mjs'
       - 'scripts/collect-public-routes.mjs'
       - 'scripts/audit-ui-color-system.mjs'
       - 'scripts/validate-ui-color-system.mjs'
@@ -96,8 +100,14 @@ jobs:
       - name: Capture representative mobile routes
         run: node scripts/capture-site-screenshots.mjs --device mobile --mode "$CAPTURE_MODE" --samples-per-family 3 --base-url "$CAPTURE_BASE_URL"
 
+      - name: Audit canonical Stablecoin logo coverage
+        run: node scripts/audit-stablecoin-logo-coverage.mjs
+
       - name: Capture and validate mixed Stablecoin marks
         run: node scripts/capture-stablecoin-mark-mix.mjs
+
+      - name: Audit representative layout geometry
+        run: node scripts/audit-representative-layout-geometry.mjs
 
       - name: Audit computed desktop colors
         run: node scripts/audit-ui-color-system.mjs
@@ -130,6 +140,8 @@ jobs:
             artifacts/screenshots/manifest.desktop.json
             artifacts/screenshots/manifest.mobile.json
             artifacts/screenshots/stablecoin-mark-mix-audit.json
+            artifacts/screenshots/layout-geometry-audit.json
+            artifacts/stablecoin-logo-coverage.json
             artifacts/screenshots/color-audit.desktop.json
             artifacts/screenshots/color-audit.mobile.json
             artifacts/screenshots/color-system-validation.json
@@ -165,6 +177,8 @@ jobs:
           echo "- Mode: $CAPTURE_MODE" >> "$GITHUB_STEP_SUMMARY"
           echo "- Detail samples per family: 3" >> "$GITHUB_STEP_SUMMARY"
           echo "- Mixed Stablecoin marks: desktop and mobile" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Canonical Stablecoin logo coverage: 39 of 116 records" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Layout geometry: every representative desktop/mobile route" >> "$GITHUB_STEP_SUMMARY"
           for DEVICE in desktop mobile; do
             MANIFEST="artifacts/screenshots/manifest.$DEVICE.json"
             if [ -f "$MANIFEST" ]; then
