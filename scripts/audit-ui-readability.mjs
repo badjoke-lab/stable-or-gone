@@ -31,8 +31,8 @@ for (const route of routes) {
     const result = await page.evaluate(({ deviceName }) => {
       const mobile = deviceName === 'mobile';
       const thresholds = mobile
-        ? { ordinary: 16, compact: 15, interactive: 15, shellInteractive: 11, metadata: 13, h1: 60, h1Home: 72, h2: 44 }
-        : { ordinary: 16, compact: 15, interactive: 15, shellInteractive: 11, metadata: 13, h1: 80, h1Home: 96, h2: 48 };
+        ? { ordinary: 16, compact: 15, interactive: 15, metadata: 13, h1: 60, h1Home: 72, h2: 44 }
+        : { ordinary: 17, compact: 15, interactive: 15, metadata: 13, h1: 80, h1Home: 96, h2: 48 };
       const findings = {
         undersized_ordinary_text: [],
         undersized_compact_text: [],
@@ -122,33 +122,23 @@ for (const route of routes) {
       const editorialSerifSelector = [
         'main h1', 'main h2', 'main h3', 'main h4', 'main h5', 'main h6',
         'main [data-editorial-serif]', 'main [data-editorial-number]',
-        '.home-register-strip strong', '.home-facts dd', '.directory-copy strong', '.home-status-ledger dd',
-        '.stablecoin-register-count strong', '.event-index-ledger dd', '.organization-index-ledger dd',
-        '.maintenance-counts dd', '.stats-kpi-grid dd', '.stats-mini-kpi-grid dd',
-        '.update-analysis__deck', '.analysis-deck'
+        '.home-register-strip strong', '.home-status-ledger dd', '.stablecoin-register-count strong',
+        '.event-index-ledger dd', '.organization-index-ledger dd', '.maintenance-counts dd',
+        '.stats-kpi-grid dd', '.stats-mini-kpi-grid dd', '.update-analysis__deck', '.analysis-deck'
       ].join(', ');
       const explicitMonoSelector = [
         '.bar', '.kicker', '.eyebrow', '[class*="eyebrow"]', '[class*="kicker"]', '[class*="overline"]', '[class*="-label"]',
-        'dt', 'th', 'time', '.value-state', '.archive-note', '.directory-number', '.chip', '[class*="badge"]',
-        '[class*="status-chip"]', '[data-tone]', '.home-status-label', '.update-feed-category', '.ar-chip', '.ar-lifecycle',
-        '.home-masthead__edition', '.home-section-kicker', '.home-facts dd small', '.home-search__popular > span',
+        'dt', 'th', '.home-masthead__edition', '.home-section-kicker', '.home-search__popular > span',
         '.home-material-list__meta', '.home-guide-list__meta', '.v3-masthead-meta', '.record-kicker', '.record-symbol',
         '.stablecoin-section-heading > p', '.event-detail-section-heading > p', '.organization-detail-section-heading > p',
         '.static-registry-eyebrow', '.static-registry-range', '.timeline-item__date', '.update-feed-item__date',
         '.update-feed-paths', '[data-ui-mono]'
       ].join(', ');
-      const compactNarrativeSelector = [
-        '.section-heading > p', '.home-section-heading > p', '.context-support-callout > p',
-        '.stats-section-heading > p', '.ar-layer-summary', '.ar-freshness-meta',
-        '.update-feed-item__content > p', '.timeline-item__summary'
-      ].join(', ');
-      const compactShellSelector = 'header a, header summary, footer a, footer summary';
 
       const ordinary = [...document.querySelectorAll('main p, main li, main blockquote')].filter(visible);
       for (const element of ordinary) {
         if (!directText(element) && element.children.length > 0) continue;
         if (element.matches(explicitMonoSelector) || element.closest(explicitMonoSelector)) continue;
-        if (element.matches(compactNarrativeSelector)) continue;
         if (element.closest('td, dd, figcaption, [aria-hidden="true"]')) continue;
         const entry = sample(element, 'ordinary');
         if (entry.font_size_px < thresholds.ordinary) push('undersized_ordinary_text', entry);
@@ -160,23 +150,21 @@ for (const route of routes) {
         if (!directText(element) && element.children.length > 0) continue;
         const entry = sample(element, 'compact');
         if (entry.font_size_px < thresholds.compact) push('undersized_compact_text', entry);
-        const editorialNumber = element.matches(editorialSerifSelector) || Boolean(element.closest(editorialSerifSelector));
-        if (!editorialNumber && entry.line_height_ratio < 1.35) push('compressed_line_height', entry);
+        if (entry.line_height_ratio < 1.35) push('compressed_line_height', entry);
       }
 
       const interactive = [...document.querySelectorAll('a, button, input, select, textarea, summary, label')].filter(visible);
       for (const element of interactive) {
         if (element instanceof HTMLLabelElement && !directText(element) && element.children.length > 0) continue;
         const entry = sample(element, 'interactive');
-        const required = element.matches(compactShellSelector) ? thresholds.shellInteractive : thresholds.interactive;
-        if (entry.font_size_px < required) push('undersized_interactive_text', { ...entry, required_font_size_px: required });
+        if (entry.font_size_px < thresholds.interactive) push('undersized_interactive_text', entry);
       }
 
       const metadata = [...document.querySelectorAll([
         'main time', 'main dt', 'main th', 'main small', 'main .bar', 'main .kicker', 'main .eyebrow',
         'main [class*="eyebrow"]', 'main [class*="kicker"]', 'main [class*="overline"]', 'main [class*="-label"]',
         'main .stablecoin-section-heading > p', 'main .event-detail-section-heading > p', 'main .organization-detail-section-heading > p',
-        'main .static-registry-eyebrow', 'main .static-registry-range', 'main [data-ui-mono]', compactNarrativeSelector
+        'main .static-registry-eyebrow', 'main .static-registry-range', 'main [data-ui-mono]'
       ].join(', '))].filter(visible);
       for (const element of metadata) {
         if (!directText(element)) continue;
@@ -227,7 +215,7 @@ for (const route of routes) {
         resolveToken('--ui-text'),
         resolveToken('--ui-muted')
       ]);
-      const semanticLinkContext = '[aria-current="page"], [class*="status"], [class*="chip"], [class*="badge"], [class*="button"], [class*="support"], [class*="archive"], [class*="source"], [class*="evidence"], [class*="warning"], [data-tone]';
+      const semanticLinkContext = '[aria-current="page"], [class*="status"], [class*="chip"], [class*="badge"], [class*="button"], [class*="archive"], [class*="source"], [class*="evidence"], [class*="warning"], [data-tone]';
       for (const anchor of [...document.querySelectorAll('main a')].filter(visible)) {
         let url;
         try { url = new URL(anchor.href, location.href); } catch { continue; }
@@ -245,8 +233,7 @@ for (const route of routes) {
         ])].filter(visible);
         for (const element of controls) {
           const rect = element.getBoundingClientRect();
-          const required = element.matches(compactShellSelector) ? 36 : 40;
-          if (rect.height < required) push('undersized_mobile_targets', { ...sample(element, 'mobile-target'), required_height_px: required });
+          if (rect.height < 40) push('undersized_mobile_targets', { ...sample(element, 'mobile-target'), required_height_px: 40 });
         }
       }
 
@@ -261,7 +248,7 @@ for (const route of routes) {
         checkedFonts.add(key);
         const families = getComputedStyle(element).fontFamily
           .split(',')
-          .map((family) => family.trim().replace(/^[\'"]|[\'"]$/g, '').toLowerCase());
+          .map((family) => family.trim().replace(/^[\'\"]|[\'\"]$/g, '').toLowerCase());
         const allowsSerif = element.matches(editorialSerifSelector) || Boolean(element.closest(editorialSerifSelector));
         const allowsMono = element.matches(explicitMonoSelector) || Boolean(element.closest(explicitMonoSelector));
         const forbidden = families.find((family) => (!allowsMono && monospaceFamilies.has(family)) || (!allowsSerif && serifFamilies.has(family)));
@@ -314,7 +301,7 @@ const categories = [
 ];
 const totals = Object.fromEntries(categories.map((category) => [category, records.reduce((sum, record) => sum + Number(record.counts?.[category] ?? 0), 0)]));
 const output = {
-  schema_version: '3.1',
+  schema_version: '3.0',
   generated_at: new Date().toISOString(),
   device,
   route_count: routes.length,
