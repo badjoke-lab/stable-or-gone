@@ -63,8 +63,8 @@ h3 { font-size: 1.06rem; }
 code, pre, kbd, samp, .contract-address, .transaction-hash, [data-long-value], [data-technical-value] { font-family: var(--ui-mono); overflow-wrap: anywhere; word-break: break-word; }
 code { padding: 2px 5px; border: 1px solid var(--ui-line); background: var(--ui-bg-soft); color: var(--ui-text); font-size: .9em; }
 :where(a,button,input,select,textarea,summary,[tabindex]):focus-visible { outline: 2px solid var(--ui-focus); outline-offset: 3px; }
-main a { color: var(--ui-link); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .18em; }
-main a:hover { color: var(--ui-hover); }
+main a { color: var(--ui-link); text-decoration: none; }
+main a:hover { color: var(--ui-hover); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .18em; }
 main :where(dd,td,figcaption) { font-size: 15px; line-height: 1.5; }
 main :where(dt,th,time,small,.bar,.kicker,.eyebrow,[class*="eyebrow"],[class*="kicker"],[class*="overline"],[class*="-label"]) { font-family: var(--ui-mono); font-size: 13px; line-height: 1.4; letter-spacing: .04em; }
 main :where(button,input,select,textarea,summary,label,a) { font-size: 15px; }
@@ -379,8 +379,19 @@ pre { max-width: 100%; overflow-x: auto; white-space: pre-wrap; }
   .home-registry-table td::before { content: attr(data-label); color: var(--ui-muted); font: 700 13px/1.4 var(--ui-mono); letter-spacing: .03em; text-transform: uppercase; }
   :where(.stablecoin-index-table,.event-index-table,.organization-index-table) { display: none; }
   :where(.stablecoin-index-cards,.event-index-cards,.organization-index-cards) { display: grid; gap: 0; border-top: 1px solid var(--ui-text); }
-  :where(.stablecoin-index-card,.event-index-card,.organization-index-card) { padding: 15px 0; display: grid; gap: 12px; border: 0; border-bottom: 1px solid var(--ui-text); }
-  .stablecoin-index-card-grid, .index-card-primary-facts, .index-card-secondary-facts { grid-template-columns: 1fr; }
+  :where(.stablecoin-index-card,.event-index-card,.organization-index-card) { padding: 10px 0; display: grid; gap: 7px; border: 0; border-bottom: 1px solid var(--ui-text); }
+  .stablecoin-index-card-heading { min-width: 0; display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+  .stablecoin-index-card-identity { min-width: 0; display: flex; align-items: flex-start; gap: 8px; }
+  .stablecoin-index-card .ticker-badge { display: none; }
+  .stablecoin-index-card-identity h2 { margin: 0; font-size: 1.05rem; line-height: 1.2; }
+  .stablecoin-index-card-identity .record-symbol { display: block; margin-bottom: 2px; }
+  .stablecoin-index-card-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .index-card-primary-facts, .index-card-secondary-facts { grid-template-columns: 1fr; }
+  .stablecoin-index-card-grid > div { min-height: 0; padding: 8px; align-content: start; }
+  .stablecoin-index-card-grid dt { font-size: 11px; line-height: 1.25; }
+  .stablecoin-index-card-grid dd { margin: 3px 0 0; font-size: 14px; line-height: 1.35; }
+  :where(.event-index-card,.organization-index-card) h2 { margin-bottom: 2px; font-size: 1.05rem; line-height: 1.25; }
+  :where(.event-index-card,.organization-index-card) p { line-height: 1.4; }
   [data-mobile-representation-for] { display: grid; gap: 0; }
   table[data-mobile-table] { display: none; }
   .guide-article-content table[data-mobile-table="guide-records"] { display: none; }
