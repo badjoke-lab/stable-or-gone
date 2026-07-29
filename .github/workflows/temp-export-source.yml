@@ -53,14 +53,16 @@ jobs:
           cp "$ICONS/U.svg" public/stablecoin-logos/united-stables-u.svg
           rm -f public/stablecoin-logos/aeur.svg
 
-          rm -rf .github/temp
-          rm -f .github/workflows/temp-export-source.yml
+          # Workflow files are updated separately through the GitHub connector.
+          git checkout HEAD -- .github/workflows/capture-screenshots.yml
+          rm -rf .github/temp artifacts
           chmod +x scripts/audit-representative-layout-geometry.mjs scripts/audit-stablecoin-logo-coverage.mjs
 
           node --check scripts/audit-representative-layout-geometry.mjs
           node --check scripts/audit-stablecoin-logo-coverage.mjs
           node --check scripts/validate-ui-v3-stablecoin-index.mjs
           node scripts/audit-stablecoin-logo-coverage.mjs
+          rm -rf artifacts
           python3 - <<'PY'
           from pathlib import Path
           css = Path('src/styles/public-ui.css').read_text()
@@ -69,7 +71,7 @@ jobs:
           PY
           git diff --check
 
-      - name: Commit final PR changes
+      - name: Commit final code and assets
         shell: bash
         env:
           HEAD_BRANCH: ${{ github.head_ref }}
