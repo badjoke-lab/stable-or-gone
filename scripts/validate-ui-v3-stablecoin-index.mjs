@@ -8,6 +8,9 @@ const files = {
   card: 'src/components/StablecoinIndexCard.astro',
   mark: 'src/components/StablecoinMark.astro',
   logoResolver: 'src/utils/stablecoinLogo.ts',
+  logoReadme: 'public/stablecoin-logos/README.md',
+  logoLicense: 'public/stablecoin-logos/LICENSE-web3icons.txt',
+  capture: 'scripts/capture-site-screenshots.mjs',
   styles: 'src/styles/stablecoin-index.css',
   client: 'src/scripts/stablecoin-index.ts',
   interactionContract: 'config/index-interaction-contract.mjs',
@@ -21,6 +24,12 @@ for (const [key, file] of Object.entries(files)) {
   if (fs.existsSync(path.join(root, file))) source[key] = fs.readFileSync(path.join(root, file), 'utf8');
 }
 const contract = JSON.parse(source.implementationContract ?? '{}');
+const logoSlugs = [
+  'aeur', 'dai', 'dola', 'eurc', 'eurt', 'fdusd', 'fei', 'frax', 'gho', 'gusd',
+  'gyen', 'husd', 'iron', 'ist', 'lusd', 'mim', 'ousd', 'pax', 'paxg', 'pyusd',
+  'rai', 'sai', 'susd', 'tryb', 'tusd', 'usdc', 'usdd', 'usde', 'usdt', 'vai',
+  'xaut', 'xsgd'
+];
 
 for (const forbidden of ['PageHero', 'MetricCard', 'stablecoin-index-hero__visual', 'stablecoin-index-hero__coin', 'stablecoin-index-metrics', 'class="stablecoin-register-count"']) {
   check(!source.page?.includes(forbidden), `superseded Stablecoins composition remains: ${forbidden}`);
@@ -62,12 +71,22 @@ check(source.card?.includes('import StablecoinMark') && source.card?.includes('<
 for (const field of ['Issuance', 'Reference', 'Backing', 'Asset class', 'Primary organization', 'Relationships', 'Evidence', 'Known unknowns', 'Events', 'Last reviewed']) check(source.card?.includes(`<dt>${field}</dt>`), `compact field missing: ${field}`);
 check(source.card?.includes('data-mobile-representation-for="stablecoin-index"'), 'compact marker missing');
 
-check(source.mark?.includes("resolveStablecoinLogo") && source.mark?.includes('<img') && source.mark?.includes('<TickerBadge'), 'local-logo with ticker fallback contract missing');
+check(source.mark?.includes('resolveStablecoinLogo') && source.mark?.includes('<img') && source.mark?.includes('<svg'), 'logo and fallback mark paths are incomplete');
+check(source.mark?.includes('data-mark-kind="logo"') && source.mark?.includes('data-mark-kind="fallback"'), 'mixed mark kind contract missing');
+check(source.mark?.includes('stablecoin-mark--${size}') && source.mark?.includes('viewBox="0 0 100 100"'), 'logo and fallback do not share fixed geometry');
+check(!source.mark?.includes('TickerBadge'), 'legacy ticker badge fallback remains in StablecoinMark');
 check(!source.mark?.includes('http://') && !source.mark?.includes('https://'), 'stablecoin mark must not fetch remote images');
-for (const slug of ['aeur', 'dai', 'gusd', 'pax', 'paxg', 'tusd', 'usdc', 'usdt']) {
+check(source.logoResolver?.includes('LOGOS_BY_SLUG') && source.logoResolver?.includes('LOGOS_BY_AUDITED_UNIQUE_SYMBOL'), 'slug-first audited symbol resolver missing');
+for (const collision of ['USX', 'USDX', 'USDN']) check(source.logoResolver?.includes(collision), `ambiguous symbol guard missing: ${collision}`);
+for (const slug of logoSlugs) {
   check(source.logoResolver?.includes(`${slug}: '/stablecoin-logos/${slug}.svg'`), `local stablecoin logo mapping missing: ${slug}`);
   check(fs.existsSync(path.join(root, `public/stablecoin-logos/${slug}.svg`)), `local stablecoin logo asset missing: ${slug}`);
 }
+check(source.logoReadme?.includes('113249b982b3ec5e597feee1ad03d15961e6598b'), 'pinned Web3 Icons provenance missing');
+check(source.logoReadme?.includes('same circular mark geometry'), 'mixed logo/fallback rendering rule missing');
+check(source.logoReadme?.includes('Stablecoins index screenshot contains real marks and unsupported-record fallbacks together'), 'mixed index screenshot review rule missing');
+check(source.logoLicense?.startsWith('MIT License'), 'Web3 Icons MIT notice missing');
+check(source.capture?.includes('/stablecoin/usdt/') && source.capture?.includes('/stablecoin/usdc/') && source.capture?.includes('/stablecoin/dai/'), 'fixed logo representative routes missing');
 
 for (const marker of ['.stablecoin-register-header', '.stablecoin-index-controls', '.stablecoin-index-toolbar', '.stablecoin-index-filter-grid', '.stablecoin-index-summary', '.stablecoin-index-table', '.stablecoin-index-cards', '.stablecoin-index-pagination', '.stablecoin-index-comparison', '.comparison-grid', '@media (max-width: 719px)']) check(source.styles?.includes(marker), `style marker missing: ${marker}`);
 check(source.styles?.includes('.stablecoin-index-table {\n    display: none;') && source.styles?.includes('.stablecoin-index-cards {\n    padding: 0.8rem;\n    display: grid;'), 'mobile table-to-card transformation incomplete');
@@ -96,7 +115,7 @@ for (const prohibited of ['market capitalization', 'circulating supply', 'holder
 check(!combined.includes('fetch('), 'register must not depend on external runtime fetch');
 
 const result = {
-  schema_version: '3.1',
+  schema_version: '3.2',
   generated_at: new Date().toISOString(),
   ok: failures.length === 0,
   visual_family: 'modern_evidence_registry_pr413',
@@ -109,7 +128,8 @@ const result = {
   page_size: 20,
   initial_render_authorized_max: 50,
   bounded_rendering_threshold: 100,
-  local_logo_assets: 8,
+  local_logo_assets: logoSlugs.length,
+  mixed_mark_geometry: true,
   failures
 };
 const outputV3 = path.join(root, 'data/generated/ui-v3-stablecoin-index-validation.json');

@@ -17,8 +17,10 @@ on:
     paths:
       - 'src/**'
       - 'public/brand/**'
+      - 'public/stablecoin-logos/**'
       - 'config/public-routes.json'
       - 'scripts/capture-site-screenshots.mjs'
+      - 'scripts/capture-stablecoin-mark-mix.mjs'
       - 'scripts/collect-public-routes.mjs'
       - 'scripts/audit-ui-color-system.mjs'
       - 'scripts/validate-ui-color-system.mjs'
@@ -30,8 +32,10 @@ on:
     paths:
       - 'src/**'
       - 'public/brand/**'
+      - 'public/stablecoin-logos/**'
       - 'config/public-routes.json'
       - 'scripts/capture-site-screenshots.mjs'
+      - 'scripts/capture-stablecoin-mark-mix.mjs'
       - 'scripts/collect-public-routes.mjs'
       - 'scripts/audit-ui-color-system.mjs'
       - 'scripts/validate-ui-color-system.mjs'
@@ -92,6 +96,9 @@ jobs:
       - name: Capture representative mobile routes
         run: node scripts/capture-site-screenshots.mjs --device mobile --mode "$CAPTURE_MODE" --samples-per-family 3 --base-url "$CAPTURE_BASE_URL"
 
+      - name: Capture and validate mixed Stablecoin marks
+        run: node scripts/capture-stablecoin-mark-mix.mjs
+
       - name: Audit computed desktop colors
         run: node scripts/audit-ui-color-system.mjs
 
@@ -122,6 +129,7 @@ jobs:
             artifacts/screenshots/routes.json
             artifacts/screenshots/manifest.desktop.json
             artifacts/screenshots/manifest.mobile.json
+            artifacts/screenshots/stablecoin-mark-mix-audit.json
             artifacts/screenshots/color-audit.desktop.json
             artifacts/screenshots/color-audit.mobile.json
             artifacts/screenshots/color-system-validation.json
@@ -156,6 +164,7 @@ jobs:
           echo "## SOG representative screenshot capture" >> "$GITHUB_STEP_SUMMARY"
           echo "- Mode: $CAPTURE_MODE" >> "$GITHUB_STEP_SUMMARY"
           echo "- Detail samples per family: 3" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Mixed Stablecoin marks: desktop and mobile" >> "$GITHUB_STEP_SUMMARY"
           for DEVICE in desktop mobile; do
             MANIFEST="artifacts/screenshots/manifest.$DEVICE.json"
             if [ -f "$MANIFEST" ]; then

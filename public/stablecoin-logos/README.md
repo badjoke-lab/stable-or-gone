@@ -2,19 +2,71 @@
 
 These SVGs are vendored locally so public pages never depend on an external image host.
 
-Initial source: `spothq/cryptocurrency-icons` (`svg/color`), distributed under CC0-1.0.
+Current audited local set: **32 stablecoin marks**.
 
-Included in this batch:
+## Sources and licenses
 
-- `aeur.svg`
-- `dai.svg`
-- `gusd.svg`
-- `pax.svg`
-- `paxg.svg`
-- `tusd.svg`
-- `usdc.svg`
-- `usdt.svg`
+### Original CC0 set
 
-Only exact slug or symbol matches are rendered as logos. Records without an audited local asset fall back to the existing text ticker badge. No remote runtime fetching is used.
+Source: `spothq/cryptocurrency-icons` (`svg/color`), distributed under CC0-1.0.
 
-The three Stablecoin dossier screenshot slots are fixed to USDT, USDC, and DAI on desktop and mobile so logo rendering is checked directly without expanding the audit to extra detail pages.
+```text
+aeur.svg
+dai.svg
+gusd.svg
+husd.svg
+pax.svg
+paxg.svg
+sai.svg
+tusd.svg
+usdc.svg
+usdt.svg
+```
+
+### Expanded MIT set
+
+Source: `0xa3k5/web3icons`, token `background` variants, pinned to commit:
+
+```text
+113249b982b3ec5e597feee1ad03d15961e6598b
+```
+
+License notice: `LICENSE-web3icons.txt`.
+
+```text
+dola.svg
+eurt.svg
+eurc.svg
+fdusd.svg
+fei.svg
+frax.svg
+gho.svg
+gyen.svg
+iron.svg
+ist.svg
+lusd.svg
+mim.svg
+ousd.svg
+pyusd.svg
+rai.svg
+susd.svg
+tryb.svg
+usdd.svg
+usde.svg
+vai.svg
+xaut.svg
+xsgd.svg
+```
+
+Only SVG identifiers and formatting needed for safe local coexistence were normalized. The icon artwork is otherwise preserved.
+
+## Resolution rules
+
+1. Exact canonical SOG slug is checked first.
+2. Symbol lookup is used only for an explicit allow-list of symbols confirmed unique in the current corpus.
+3. Ambiguous symbols such as `USX`, `USDX`, and `USDN` never resolve by symbol alone.
+4. A record without an audited local SVG uses the same circular mark geometry with a short neutral monogram.
+5. The adjacent record name and full symbol remain authoritative; marks are decorative and hidden from assistive technology.
+6. No remote runtime fetching is used.
+
+The Stablecoins index screenshot contains real marks and unsupported-record fallbacks together, while the fixed dossier screenshots verify known local marks on desktop and mobile.
