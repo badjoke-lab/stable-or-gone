@@ -23,6 +23,9 @@ const REQUIRED_REPRESENTATIVE_ROUTES = [
   '/stablecoin/usdc/',
   '/stablecoin/dai/'
 ];
+const REQUIRED_REPRESENTATIVE_STATES = [
+  '/stablecoins/?q=usd'
+];
 
 function argValue(name, fallback) {
   const index = process.argv.indexOf(`--${name}`);
@@ -110,7 +113,7 @@ async function selectRoutes(routes, mode, samplesPerFamily) {
     selected.push(...chosen.map((entry) => entry.route));
     families.push({ name: family.name, discovered: familyRoutes.length, selected: chosen.length, routes: chosen.map((entry) => entry.route) });
   }
-  return { routes: [...new Set(selected)].sort(), families };
+  return { routes: [...new Set([...selected, ...REQUIRED_REPRESENTATIVE_STATES])].sort(), families };
 }
 
 async function measurePage(page) {
@@ -273,41 +276,37 @@ async function main() {
       const screenshotWidth = screenshot.readUInt32BE(16);
       const screenshotOverflowPx = Math.max(0, screenshotWidth - device.viewport.width);
       metrics.screenshotWidth = screenshotWidth;
-      metrics.horizontalOverflowPx = Math.max(metrics.horizontalOverflowPx, screenshotOverflowPx);
-      metrics.horizontalOverflow = metrics.horizontalOverflowPx > 2;
-      const screenshotBytes = (await stat(file)).size;
-      records.push({ url, path: route, device: deviceName, file, screenshot_bytes: screenshotBytes, metrics });
-      console.log(`[${deviceName}] captured ${route}`);
+      metrics.screenshotOverflowPx = screenshotOverflowPx;
+      if (screenshotOverflowPx > 2) metrics.horizontalOverflow = true;
+      records.push({ route, url, file, ...metrics });
+      if (metrics.h1Count !== 1 || metrics.mainCount !== 1 || metrics.horizontalOverflow || metrics.brokenImages.length || metrics.brandViolations.length || metrics.legacyVisualMarkers.length || metrics.legacyFontViolations.length || metrics.unexpectedEmptyStates.length) {
+        failures.push({ route, metrics });
+      }
     } catch (error) {
-      failures.push({ url, path: route, device: deviceName, error: error.message });
-      console.error(`[${deviceName}] failed ${route}: ${error.message}`);
+      failures.push({ route, error: error instanceof Error ? error.message : String(error) });
     }
   }
 
   await browser.close();
   const manifest = {
-    schema_version: '3.1',
+    schema_version: '4.0',
     generated_at: new Date().toISOString(),
+    base_url: baseUrl,
     device: deviceName,
-    viewport: device.viewport,
-    capture_mode: mode,
-    text_rasterization: 'grayscale_antialiasing',
-    chromium_args: ['--disable-lcd-text'],
+    mode,
     samples_per_family: samplesPerFamily,
-    discovered_route_count: routesManifest.routes.length,
-    selected_route_count: selection.routes.length,
-    family_selection: selection.families,
-    route_source_type: routesManifest.source_type,
-    route_source: routesManifest.source,
-    captured_count: records.length,
-    failed_count: failures.length,
+    discovered_routes: routesManifest.routes.length,
+    selected_routes: selection.routes.length,
+    families: selection.families,
     records,
     failures
   };
+  await mkdir(path.dirname(device.manifest), { recursive: true });
   await writeFile(device.manifest, `${JSON.stringify(manifest, null, 2)}\n`);
-  await zipDirectory(device.dir, device.zip);
-  console.log(JSON.stringify({ device: deviceName, mode, discovered: routesManifest.routes.length, selected: selection.routes.length, captured: records.length, failed: failures.length, text_rasterization: 'grayscale_antialiasing', zip: device.zip }, null, 2));
-  if (failures.length > 0) process.exitCode = 1;
+  if (failures.length) {
+    console.error(JSON.stringify(manifest, null, 2));
+    process.exit(1);
+  }
 }
 
 main().catch((error) => {
