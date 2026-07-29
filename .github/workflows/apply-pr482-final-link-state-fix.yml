@@ -1,0 +1,33 @@
+name: Apply PR 482 final link state fix
+
+on:
+  push:
+    branches:
+      - agent/fix-mobile-registry-density-and-link-underlines
+    paths:
+      - 'scripts/apply-pr482-final-link-state-fix.mjs'
+      - '.github/workflows/apply-pr482-final-link-state-fix.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repair branch
+        uses: actions/checkout@v4
+        with:
+          ref: agent/fix-mobile-registry-density-and-link-underlines
+          fetch-depth: 0
+
+      - name: Apply final link and disabled-state fix
+        run: node scripts/apply-pr482-final-link-state-fix.mjs
+
+      - name: Commit final link and disabled-state fix
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add src/styles/public-ui.css scripts/apply-pr482-final-link-state-fix.mjs .github/workflows/apply-pr482-final-link-state-fix.yml
+          git commit -m 'Remove remaining persistent link lines and dim disabled controls'
+          git push origin HEAD:agent/fix-mobile-registry-density-and-link-underlines
