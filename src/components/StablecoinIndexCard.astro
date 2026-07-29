@@ -1,5 +1,5 @@
 ---
-import TickerBadge from './TickerBadge.astro';
+import StablecoinMark from './StablecoinMark.astro';
 import { formatIssuanceLabel, formatLifecycleLabel, lifecycleChipClass } from '../utils/publicTaxonomy';
 const { record, initiallyVisible = true } = Astro.props;
 const data = {
@@ -19,7 +19,7 @@ const data = {
 <article class="stablecoin-index-card" data-registry-card data-mobile-representation-for="stablecoin-index" hidden={initiallyVisible ? undefined : true} {...data}>
   <div class="stablecoin-index-card-heading">
     <div class="stablecoin-index-card-identity">
-      <TickerBadge symbol={record.symbol || record.name} label={`${record.name} ticker badge`} />
+      <StablecoinMark slug={record.slug} symbol={record.symbol || record.name} name={record.name} />
       <div>
         <span class="record-symbol">{record.symbol || 'No symbol'}</span>
         <h2><a href={`/stablecoin/${record.slug}/`}>{record.name}</a></h2>
@@ -31,13 +31,13 @@ const data = {
   <dl class="stablecoin-index-card-grid">
     <div><dt>Reference</dt><dd>{record.referenceLabel}</dd></div>
     <div><dt>Backing</dt><dd>{record.backingLabel}</dd></div>
-    <div><dt>Primary organization</dt><dd>{record.primaryOrganizationName}</dd></div>
-    <div><dt>Last reviewed</dt><dd>{record.reviewedAt || 'Not recorded'}</dd></div>
   </dl>
 
   <details class="stablecoin-index-card-details">
-    <summary>More record context</summary>
+    <summary>Details and compare</summary>
     <dl>
+      <div><dt>Primary organization</dt><dd>{record.primaryOrganizationName}</dd></div>
+      <div><dt>Last reviewed</dt><dd>{record.reviewedAt || 'Not recorded'}</dd></div>
       <div><dt>Issuance</dt><dd>{formatIssuanceLabel(record.issuance)}</dd></div>
       <div><dt>Asset class</dt><dd>{record.assetClassLabel}</dd></div>
       <div><dt>Relationships</dt><dd>{record.relationshipCount} across {record.organizationCount} organizations</dd></div>
@@ -46,7 +46,6 @@ const data = {
       <div><dt>Known unknowns</dt><dd>{record.knownUnknownCount}</dd></div>
     </dl>
     {record.relationshipCount > 1 && <p>{record.organizationSummary}</p>}
+    <label class="comparison-choice comparison-choice-card"><input type="checkbox" data-compare-select value={record.slug} aria-label={`Compare ${record.name}`} /><span>Add to comparison</span></label>
   </details>
-
-  <label class="comparison-choice comparison-choice-card"><input type="checkbox" data-compare-select value={record.slug} aria-label={`Compare ${record.name}`} /><span>Add to comparison</span></label>
 </article>

@@ -18,6 +18,11 @@ const DETAIL_FAMILIES = [
   ['event-detail', '/event/'],
   ['guide-detail', '/guides/']
 ];
+const REQUIRED_REPRESENTATIVE_ROUTES = [
+  '/stablecoin/usdt/',
+  '/stablecoin/usdc/',
+  '/stablecoin/dai/'
+];
 
 function argValue(name, fallback) {
   const index = process.argv.indexOf(`--${name}`);
@@ -99,7 +104,9 @@ async function selectRoutes(routes, mode, samplesPerFamily) {
   for (const { family, routes: familyRoutes } of groups.values()) {
     const entries = await Promise.all(familyRoutes.map(async (route) => ({ route, size: await htmlSize(route) })));
     const shouldSample = family.forced || familyRoutes.length > 8;
-    const chosen = shouldSample ? quantileSample(entries, samplesPerFamily) : entries;
+    const chosen = family.name === 'stablecoin-detail'
+      ? entries.filter((entry) => REQUIRED_REPRESENTATIVE_ROUTES.includes(entry.route))
+      : shouldSample ? quantileSample(entries, samplesPerFamily) : entries;
     selected.push(...chosen.map((entry) => entry.route));
     families.push({ name: family.name, discovered: familyRoutes.length, selected: chosen.length, routes: chosen.map((entry) => entry.route) });
   }

@@ -1,0 +1,26 @@
+---
+import TickerBadge from './TickerBadge.astro';
+import { resolveStablecoinLogo } from '../utils/stablecoinLogo';
+
+interface Props {
+  slug?: string;
+  symbol: string;
+  name: string;
+  size?: 'small' | 'medium' | 'large';
+}
+
+const { slug = '', symbol, name, size = 'medium' } = Astro.props as Props;
+const logoSrc = resolveStablecoinLogo({ slug, symbol });
+---
+{logoSrc ? (
+  <img
+    class:list={['stablecoin-mark', `stablecoin-mark--${size}`]}
+    src={logoSrc}
+    alt=""
+    aria-hidden="true"
+    loading="lazy"
+    decoding="async"
+  />
+) : (
+  <TickerBadge symbol={symbol || name} label={`${name} symbol`} size={size} />
+)}

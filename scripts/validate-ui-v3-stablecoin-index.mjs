@@ -6,6 +6,8 @@ const files = {
   page: 'src/pages/stablecoins/index.astro',
   row: 'src/components/StablecoinIndexRow.astro',
   card: 'src/components/StablecoinIndexCard.astro',
+  mark: 'src/components/StablecoinMark.astro',
+  logoResolver: 'src/utils/stablecoinLogo.ts',
   styles: 'src/styles/stablecoin-index.css',
   client: 'src/scripts/stablecoin-index.ts',
   interactionContract: 'config/index-interaction-contract.mjs',
@@ -51,14 +53,21 @@ check(source.page?.includes('URL state is preserved'), 'URL-backed state disclos
 
 check(source.row?.includes('initiallyVisible = true'), 'desktop initial-page contract missing');
 check(source.row?.includes('hidden={initiallyVisible ? undefined : true}'), 'desktop rows are not initially bounded');
-check(source.row?.includes('<TickerBadge'), 'desktop ticker badge missing');
+check(source.row?.includes('import StablecoinMark') && source.row?.includes('<StablecoinMark'), 'desktop stablecoin mark missing');
 check(source.row?.includes('Issuance:') && source.row?.includes('open questions'), 'desktop context incomplete');
 check((source.row?.match(/<td>/g) ?? []).length === 7, 'desktop rows must have seven cells');
 check(source.card?.includes('initiallyVisible = true'), 'compact initial-page contract missing');
 check(source.card?.includes('hidden={initiallyVisible ? undefined : true}'), 'compact rows are not initially bounded');
-check(source.card?.includes('<TickerBadge'), 'compact ticker badge missing');
-for (const field of ['Issuance', 'Reference', 'Backing', 'Asset class', 'Organization', 'Relationships', 'Evidence', 'Known unknowns', 'Events', 'Last reviewed']) check(source.card?.includes(`<dt>${field}</dt>`), `compact field missing: ${field}`);
+check(source.card?.includes('import StablecoinMark') && source.card?.includes('<StablecoinMark'), 'compact stablecoin mark missing');
+for (const field of ['Issuance', 'Reference', 'Backing', 'Asset class', 'Primary organization', 'Relationships', 'Evidence', 'Known unknowns', 'Events', 'Last reviewed']) check(source.card?.includes(`<dt>${field}</dt>`), `compact field missing: ${field}`);
 check(source.card?.includes('data-mobile-representation-for="stablecoin-index"'), 'compact marker missing');
+
+check(source.mark?.includes("resolveStablecoinLogo") && source.mark?.includes('<img') && source.mark?.includes('<TickerBadge'), 'local-logo with ticker fallback contract missing');
+check(!source.mark?.includes('http://') && !source.mark?.includes('https://'), 'stablecoin mark must not fetch remote images');
+for (const slug of ['aeur', 'dai', 'gusd', 'pax', 'paxg', 'tusd', 'usdc', 'usdt']) {
+  check(source.logoResolver?.includes(`${slug}: '/stablecoin-logos/${slug}.svg'`), `local stablecoin logo mapping missing: ${slug}`);
+  check(fs.existsSync(path.join(root, `public/stablecoin-logos/${slug}.svg`)), `local stablecoin logo asset missing: ${slug}`);
+}
 
 for (const marker of ['.stablecoin-register-header', '.stablecoin-index-controls', '.stablecoin-index-toolbar', '.stablecoin-index-filter-grid', '.stablecoin-index-summary', '.stablecoin-index-table', '.stablecoin-index-cards', '.stablecoin-index-pagination', '.stablecoin-index-comparison', '.comparison-grid', '@media (max-width: 719px)']) check(source.styles?.includes(marker), `style marker missing: ${marker}`);
 check(source.styles?.includes('.stablecoin-index-table {\n    display: none;') && source.styles?.includes('.stablecoin-index-cards {\n    padding: 0.8rem;\n    display: grid;'), 'mobile table-to-card transformation incomplete');
@@ -87,7 +96,7 @@ for (const prohibited of ['market capitalization', 'circulating supply', 'holder
 check(!combined.includes('fetch('), 'register must not depend on external runtime fetch');
 
 const result = {
-  schema_version: '3.0',
+  schema_version: '3.1',
   generated_at: new Date().toISOString(),
   ok: failures.length === 0,
   visual_family: 'modern_evidence_registry_pr413',
@@ -100,6 +109,7 @@ const result = {
   page_size: 20,
   initial_render_authorized_max: 50,
   bounded_rendering_threshold: 100,
+  local_logo_assets: 8,
   failures
 };
 const outputV3 = path.join(root, 'data/generated/ui-v3-stablecoin-index-validation.json');

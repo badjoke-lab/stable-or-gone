@@ -63,8 +63,8 @@ h3 { font-size: 1.06rem; }
 code, pre, kbd, samp, .contract-address, .transaction-hash, [data-long-value], [data-technical-value] { font-family: var(--ui-mono); overflow-wrap: anywhere; word-break: break-word; }
 code { padding: 2px 5px; border: 1px solid var(--ui-line); background: var(--ui-bg-soft); color: var(--ui-text); font-size: .9em; }
 :where(a,button,input,select,textarea,summary,[tabindex]):focus-visible { outline: 2px solid var(--ui-focus); outline-offset: 3px; }
-main a { color: var(--ui-link); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .18em; }
-main a:hover { color: var(--ui-hover); }
+main a { color: var(--ui-link); text-decoration: none; }
+main a:hover { color: var(--ui-hover); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .18em; }
 main :where(dd,td,figcaption) { font-size: 15px; line-height: 1.5; }
 main :where(dt,th,time,small,.bar,.kicker,.eyebrow,[class*="eyebrow"],[class*="kicker"],[class*="overline"],[class*="-label"]) { font-family: var(--ui-mono); font-size: 13px; line-height: 1.4; letter-spacing: .04em; }
 main :where(button,input,select,textarea,summary,label,a) { font-size: 15px; }
@@ -86,7 +86,7 @@ main :where(button,input,select,textarea,summary,label,a) { font-size: 15px; }
 .masthead-actions { flex: 0 0 auto; display: flex; align-items: center; gap: 13px; }
 .support-cta { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; padding: 0 13px; border: 1px solid var(--ui-text); background: var(--ui-text); color: var(--ui-bg); font-size: 15px; font-weight: 800; white-space: nowrap; text-decoration: none; }
 .support-cta:hover, .support-cta[aria-current="page"] { background: transparent; color: var(--ui-text); text-decoration: none; }
-.correction-link { min-height: 44px; display: inline-flex; align-items: center; color: var(--ui-text); border-bottom: 1px solid var(--ui-text); font-size: 15px; font-weight: 700; white-space: nowrap; }
+.correction-link { min-height: 44px; display: inline-flex; align-items: center; color: var(--ui-text); border-bottom: 0; font-size: 15px; font-weight: 700; white-space: nowrap; }
 .nav-rule { border-top: 1px solid var(--ui-line); }
 .site-navigation-shell { min-width: 0; display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: stretch; }
 .site-nav, .site-primary-navigation { min-width: 0; display: flex; align-items: center; gap: 2px; overflow-x: auto; scrollbar-width: thin; }
@@ -113,7 +113,7 @@ main :where(button,input,select,textarea,summary,label,a) { font-size: 15px; }
 .footer-navigation { padding-block: 14px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px 18px; border-bottom: 1px solid var(--ui-line); }
 .footer-navigation-group { min-width: 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: 9px 12px; }
 .footer-navigation-group > strong { padding: 0; margin: 0 3px 0 0; border: 0; color: var(--ui-text); font: 700 13px/1.4 var(--ui-mono); letter-spacing: .07em; text-transform: uppercase; }
-.footer-navigation-group a { width: fit-content; min-height: 40px; display: inline-flex; align-items: center; color: var(--ui-muted); font-size: 15px; line-height: 1.4; border-bottom: 1px solid var(--ui-line-strong); }
+.footer-navigation-group a { width: fit-content; min-height: 40px; display: inline-flex; align-items: center; color: var(--ui-muted); font-size: 15px; line-height: 1.4; border-bottom: 0; }
 .footer-navigation-group a:hover { color: var(--ui-hover); }
 .footer-legal { padding-block: 13px; border-top: 0; }
 .footer-legal p { color: var(--ui-muted); font-size: 13px; }
@@ -121,6 +121,11 @@ main :where(button,input,select,textarea,summary,label,a) { font-size: 15px; }
 .context-support-callout p { max-width: 760px; font-size: 17px; }
 
 .panel, .surface, .card, .stat, .fact, :where([class$="-card"],[class*="-card "]) { border: 1px solid var(--ui-line-strong); border-radius: 0; background: var(--ui-surface); box-shadow: none; }
+.stablecoin-mark { flex: 0 0 auto; width: 34px; height: 34px; object-fit: contain; border-radius: 50%; }
+.stablecoin-mark--small { width: 26px; height: 26px; }
+.stablecoin-mark--large { width: 48px; height: 48px; }
+.stablecoin-dossier-heading-identity { min-width: 0; display: flex; align-items: flex-start; gap: 14px; }
+.stablecoin-dossier-heading-identity > div { min-width: 0; }
 .bar, .kicker, .eyebrow, [class*="overline"], [class*="-label"], dt, th, .home-section-kicker { width: fit-content; max-width: 100%; color: var(--ui-muted); font: 700 13px/1.4 var(--ui-mono); letter-spacing: .04em; text-transform: uppercase; }
 section + section { margin-top: 42px; }
 input, select, textarea { width: 100%; min-height: 44px; padding: 0 10px; border: 1px solid var(--ui-line-strong); border-radius: 0; background: #f8f5ee; color: var(--ui-text); font-size: 15px; }
@@ -128,6 +133,7 @@ input::placeholder, textarea::placeholder { color: var(--ui-quiet); opacity: 1; 
 input[type="checkbox"], input[type="radio"] { width: 1.2rem; min-height: 1.2rem; accent-color: var(--ui-link); }
 label:has(input[type="checkbox"],input[type="radio"]) { min-height: 44px; display: flex; align-items: center; gap: .55rem; }
 button, .ui-button, .ghost-button, .button { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; padding: 0 13px; border: 1px solid var(--ui-text); border-radius: 0; background: var(--ui-text); color: var(--ui-bg); font-size: 15px; font-weight: 700; }
+button:disabled { cursor: not-allowed; opacity: .42; }
 button:hover, .ui-button:hover, .ghost-button:hover, .button:hover { background: transparent; color: var(--ui-text); text-decoration: none; }
 .chip, [class*="badge"], [class*="status-chip"], [data-tone], .home-status-label, .update-feed-category, .ar-chip, .ar-lifecycle { width: fit-content; max-width: 100%; min-height: 0; padding: 3px 0; border: 0; border-bottom: 1px solid var(--ui-line-strong); border-radius: 0; background: transparent; color: var(--ui-muted); font: 700 13px/1.4 var(--ui-mono); letter-spacing: .03em; text-transform: uppercase; white-space: normal; }
 :where(.chip.active,.chip.positive,[data-tone="positive"],[class*="badge"][class*="active"],.home-status-label--active,[data-state="active"],[data-state="pass"],[data-state="success"]) { color: var(--ui-positive); border-color: var(--ui-positive); }
@@ -176,6 +182,7 @@ td small { display: block; margin-top: 3px; font-size: 13px; }
 .stablecoin-register-count { min-width: 0; display: grid; justify-items: end; }
 .stablecoin-register-count strong { font: 600 2.5rem var(--ui-serif); }
 :where(.event-index-overline,.organization-index-overline,.guide-article-overline,.event-detail-overline,.organization-detail-overline,.stablecoin-dossier-overline) { min-height: 44px; padding: 9px 0; display: flex; align-items: center; justify-content: space-between; gap: 1rem; border-bottom: 1px solid var(--ui-line-strong); color: var(--ui-muted); font: 700 13px/1.4 var(--ui-mono); text-transform: uppercase; }
+:where(.event-index-overline,.organization-index-overline) nav { display: flex; flex-wrap: wrap; gap: 8px 14px; }
 :where(.event-index-title,.organization-index-title,.event-detail-title,.organization-detail-title,.stablecoin-dossier-title-row) { padding: 20px 0 14px; display: grid; grid-template-columns: minmax(0,1.3fr) minmax(300px,.7fr); gap: 42px; align-items: end; }
 :where(.event-index-ledger,.organization-index-ledger,.event-detail-ledger,.organization-detail-ledger,.stablecoin-dossier-facts,.stats-kpi-grid,.stats-mini-kpi-grid,.maintenance-counts dl) { margin: 0; display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); border-top: 1px solid var(--ui-text); border-left: 1px solid var(--ui-text); overflow: hidden; }
 :where(.event-index-ledger,.organization-index-ledger,.event-detail-ledger,.organization-detail-ledger,.stablecoin-dossier-facts,.stats-kpi-grid,.stats-mini-kpi-grid,.maintenance-counts dl) > div { min-height: 100px; padding: 14px; display: grid; align-content: space-between; gap: 8px; border-right: 1px solid var(--ui-text); border-bottom: 1px solid var(--ui-text); }
@@ -379,9 +386,23 @@ pre { max-width: 100%; overflow-x: auto; white-space: pre-wrap; }
   .home-registry-table td::before { content: attr(data-label); color: var(--ui-muted); font: 700 13px/1.4 var(--ui-mono); letter-spacing: .03em; text-transform: uppercase; }
   :where(.stablecoin-index-table,.event-index-table,.organization-index-table) { display: none; }
   :where(.stablecoin-index-cards,.event-index-cards,.organization-index-cards) { display: grid; gap: 0; border-top: 1px solid var(--ui-text); }
-  :where(.stablecoin-index-card,.event-index-card,.organization-index-card) { padding: 15px 0; display: grid; gap: 12px; border: 0; border-bottom: 1px solid var(--ui-text); }
-  .stablecoin-index-card-grid, .index-card-primary-facts, .index-card-secondary-facts { grid-template-columns: 1fr; }
+  :where(.stablecoin-index-card,.event-index-card,.organization-index-card) { padding: 10px 0; display: grid; gap: 7px; border: 0; border-bottom: 1px solid var(--ui-text); }
+  .stablecoin-index-card-heading { min-width: 0; display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+  .stablecoin-index-card-identity { min-width: 0; display: flex; align-items: flex-start; gap: 8px; }
+  .stablecoin-mark--large { width: 40px; height: 40px; }
+  .stablecoin-dossier-heading-identity { gap: 10px; }
+  .stablecoin-index-card :where(.stablecoin-mark,.ticker-badge) { margin-top: 1px; }
+  .stablecoin-index-card-identity h2 { margin: 0; font-size: 1.05rem; line-height: 1.2; }
+  .stablecoin-index-card-identity .record-symbol { display: block; margin-bottom: 2px; }
+  .stablecoin-index-card-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .index-card-primary-facts, .index-card-secondary-facts { grid-template-columns: 1fr; }
+  .stablecoin-index-card-grid > div { min-height: 0; padding: 8px; align-content: start; }
+  .stablecoin-index-card-grid dt { font-size: 13px; line-height: 1.25; }
+  .stablecoin-index-card-grid dd { margin: 3px 0 0; font-size: 15px; line-height: 1.35; }
+  :where(.event-index-card,.organization-index-card) h2 { margin-bottom: 2px; font-size: 1.05rem; line-height: 1.25; }
+  :where(.event-index-card,.organization-index-card) p { line-height: 1.4; }
   [data-mobile-representation-for] { display: grid; gap: 0; }
+  [data-mobile-representation-for][hidden] { display: none; }
   table[data-mobile-table] { display: none; }
   .guide-article-content table[data-mobile-table="guide-records"] { display: none; }
   .guide-mobile-table-records { display: grid; }

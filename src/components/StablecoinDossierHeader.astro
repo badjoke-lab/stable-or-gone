@@ -1,4 +1,5 @@
 ---
+import StablecoinMark from './StablecoinMark.astro';
 import ValueStateText from './ValueStateText.astro';
 import { formatPublicLabel } from '../utils/displayLabels';
 import { formatIssuanceLabel, formatLifecycleLabel } from '../utils/publicTaxonomy';
@@ -25,12 +26,15 @@ const {
   </div>
 
   <div class="stablecoin-dossier-title-row">
-    <div>
-      <p class="stablecoin-record-id">Record <code>{coin.id}</code></p>
-      <h1><span>{coin.symbol ?? '—'}</span><i aria-hidden="true">/</i><wbr />{coin.name}</h1>
-      <p class="stablecoin-aliases">
-        {aliases.length > 0 ? <>Also recorded as {aliases.join(', ')}</> : 'No additional aliases are recorded.'}
-      </p>
+    <div class="stablecoin-dossier-heading-identity">
+      <StablecoinMark slug={coin.slug} symbol={coin.symbol ?? coin.name} name={coin.name} size="large" />
+      <div>
+        <p class="stablecoin-record-id">Record <code>{coin.id}</code></p>
+        <h1><span>{coin.symbol ?? '—'}</span><i aria-hidden="true">/</i><wbr />{coin.name}</h1>
+        <p class="stablecoin-aliases">
+          {aliases.length > 0 ? <>Also recorded as {aliases.join(', ')}</> : 'No additional aliases are recorded.'}
+        </p>
+      </div>
     </div>
     <span class={statusClass}>{formatLifecycleLabel(coin.lifecycle_status)}</span>
   </div>
