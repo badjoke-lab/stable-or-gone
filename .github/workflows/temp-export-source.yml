@@ -32,7 +32,13 @@ jobs:
         run: |
           set -euo pipefail
           cd sog
-          cat .github/temp/pr484-patch-*.diff > /tmp/pr484-final.patch
+          {
+            cat .github/temp/pr484-patch-00.diff
+            tail -n +3 .github/temp/pr484-patch-01.diff
+            cat .github/temp/pr484-patch-02.diff
+            cat .github/temp/pr484-patch-03.diff
+            cat .github/temp/pr484-patch-04.diff
+          } > /tmp/pr484-final.patch
           git apply --check /tmp/pr484-final.patch
           git apply /tmp/pr484-final.patch
 
