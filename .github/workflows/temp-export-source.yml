@@ -12,21 +12,44 @@ jobs:
   export-source:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/upload-artifact@v4
+      - name: Checkout SOG branch
+        uses: actions/checkout@v4
+        with:
+          path: sog
+
+      - name: Checkout pinned Web3 Icons source
+        uses: actions/checkout@v4
+        with:
+          repository: 0xa3k5/web3icons
+          ref: 113249b982b3ec5e597feee1ad03d15961e6598b
+          path: web3icons
+
+      - name: Checkout CC0 cryptocurrency icon source
+        uses: actions/checkout@v4
+        with:
+          repository: spothq/cryptocurrency-icons
+          path: cryptocurrency-icons
+
+      - name: Upload sources for bounded local audit
+        uses: actions/upload-artifact@v4
         with:
           name: sog-temporary-source-${{ github.run_id }}
           retention-days: 1
           compression-level: 9
           include-hidden-files: true
           path: |
-            .github
-            config
-            data
-            public
-            scripts
-            src
-            astro.config.mjs
-            package.json
-            package-lock.json
-            tsconfig.json
+            sog/.github
+            sog/config
+            sog/data
+            sog/public
+            sog/scripts
+            sog/src
+            sog/astro.config.mjs
+            sog/package.json
+            sog/package-lock.json
+            sog/tsconfig.json
+            web3icons/LICENSE
+            web3icons/LICENCE
+            web3icons/packages/core/src/svgs/tokens
+            cryptocurrency-icons/LICENSE.md
+            cryptocurrency-icons/svg/color
