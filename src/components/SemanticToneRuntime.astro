@@ -47,7 +47,14 @@
       element.style.lineHeight = '1.35';
     });
 
-    document.querySelectorAll<HTMLElement>('.support-cta, .footer-support, .context-support-callout').forEach((element) => {
+    document.querySelectorAll<HTMLElement>('.support-cta').forEach((element) => {
+      delete element.dataset.tone;
+      element.style.background = 'transparent';
+      element.style.color = 'var(--ui-text)';
+      element.style.borderColor = 'var(--ui-text)';
+    });
+
+    document.querySelectorAll<HTMLElement>('.footer-support, .context-support-callout').forEach((element) => {
       delete element.dataset.tone;
     });
   };
