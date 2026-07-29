@@ -26,8 +26,9 @@ for (const [key, file] of Object.entries(files)) {
 const contract = JSON.parse(source.implementationContract ?? '{}');
 const logoSlugs = [
   'aeur', 'dai', 'dola', 'eurc', 'eurt', 'fdusd', 'fei', 'frax', 'gho', 'gusd',
-  'gyen', 'iron', 'ist', 'lusd', 'mim', 'ousd', 'pax', 'paxg', 'pyusd', 'rai',
-  'susd', 'tryb', 'tusd', 'usdc', 'usdd', 'usde', 'usdt', 'vai', 'xaut', 'xsgd'
+  'gyen', 'husd', 'iron', 'ist', 'lusd', 'mim', 'ousd', 'pax', 'paxg', 'pyusd',
+  'rai', 'sai', 'susd', 'tryb', 'tusd', 'usdc', 'usdd', 'usde', 'usdt', 'vai',
+  'xaut', 'xsgd'
 ];
 
 for (const forbidden of ['PageHero', 'MetricCard', 'stablecoin-index-hero__visual', 'stablecoin-index-hero__coin', 'stablecoin-index-metrics', 'class="stablecoin-register-count"']) {
@@ -83,8 +84,9 @@ for (const slug of logoSlugs) {
 }
 check(source.logoReadme?.includes('113249b982b3ec5e597feee1ad03d15961e6598b'), 'pinned Web3 Icons provenance missing');
 check(source.logoReadme?.includes('same circular mark geometry'), 'mixed logo/fallback rendering rule missing');
+check(source.logoReadme?.includes('Stablecoins index screenshot contains real marks and unsupported-record fallbacks together'), 'mixed index screenshot review rule missing');
 check(source.logoLicense?.startsWith('MIT License'), 'Web3 Icons MIT notice missing');
-check(source.capture?.includes('/stablecoin/gho/') && source.capture?.includes('/stablecoin/rlusd/'), 'logo and fallback representative routes missing');
+check(source.capture?.includes('/stablecoin/usdt/') && source.capture?.includes('/stablecoin/usdc/') && source.capture?.includes('/stablecoin/dai/'), 'fixed logo representative routes missing');
 
 for (const marker of ['.stablecoin-register-header', '.stablecoin-index-controls', '.stablecoin-index-toolbar', '.stablecoin-index-filter-grid', '.stablecoin-index-summary', '.stablecoin-index-table', '.stablecoin-index-cards', '.stablecoin-index-pagination', '.stablecoin-index-comparison', '.comparison-grid', '@media (max-width: 719px)']) check(source.styles?.includes(marker), `style marker missing: ${marker}`);
 check(source.styles?.includes('.stablecoin-index-table {\n    display: none;') && source.styles?.includes('.stablecoin-index-cards {\n    padding: 0.8rem;\n    display: grid;'), 'mobile table-to-card transformation incomplete');
