@@ -394,6 +394,7 @@ pre { max-width: 100%; overflow-x: auto; white-space: pre-wrap; }
   :where(.event-index-card,.organization-index-card) h2 { margin-bottom: 2px; font-size: 1.05rem; line-height: 1.25; }
   :where(.event-index-card,.organization-index-card) p { line-height: 1.4; }
   [data-mobile-representation-for] { display: grid; gap: 0; }
+  [data-mobile-representation-for][hidden] { display: none; }
   table[data-mobile-table] { display: none; }
   .guide-article-content table[data-mobile-table="guide-records"] { display: none; }
   .guide-mobile-table-records { display: grid; }
