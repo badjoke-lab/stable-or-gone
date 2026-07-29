@@ -1,5 +1,5 @@
 ---
-import TickerBadge from './TickerBadge.astro';
+import StablecoinMark from './StablecoinMark.astro';
 import { formatIssuanceLabel, formatLifecycleLabel, lifecycleChipClass } from '../utils/publicTaxonomy';
 const { record, initiallyVisible = true } = Astro.props;
 const data = {
@@ -19,7 +19,7 @@ const data = {
 <tr data-registry-row hidden={initiallyVisible ? undefined : true} {...data}>
   <td>
     <div class="stablecoin-record-identity">
-      <TickerBadge symbol={record.symbol || record.name} label={`${record.name} ticker badge`} size="small" />
+      <StablecoinMark slug={record.slug} symbol={record.symbol || record.name} name={record.name} size="small" />
       <div><a class="record-name" href={`/stablecoin/${record.slug}/`}>{record.name}</a><small>{record.id}</small></div>
     </div>
     <label class="comparison-choice"><input type="checkbox" data-compare-select value={record.slug} aria-label={`Compare ${record.name}`} /><span>Compare</span></label>
