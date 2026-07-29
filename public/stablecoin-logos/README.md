@@ -2,6 +2,8 @@
 
 These SVGs are vendored locally so public pages never depend on an external image host.
 
+Current audited local set: **32 stablecoin marks**.
+
 ## Sources and licenses
 
 ### Original CC0 set
@@ -12,8 +14,10 @@ Source: `spothq/cryptocurrency-icons` (`svg/color`), distributed under CC0-1.0.
 aeur.svg
 dai.svg
 gusd.svg
+husd.svg
 pax.svg
 paxg.svg
+sai.svg
 tusd.svg
 usdc.svg
 usdt.svg
@@ -65,4 +69,4 @@ Only SVG identifiers and formatting needed for safe local coexistence were norma
 5. The adjacent record name and full symbol remain authoritative; marks are decorative and hidden from assistive technology.
 6. No remote runtime fetching is used.
 
-The Stablecoin screenshot audit includes records with real marks and an unsupported-record fallback so mixed rendering is reviewed directly on desktop and mobile.
+The Stablecoins index screenshot contains real marks and unsupported-record fallbacks together, while the fixed dossier screenshots verify known local marks on desktop and mobile.
