@@ -59,7 +59,7 @@ check((source.row?.match(/<td>/g) ?? []).length === 7, 'desktop rows must have s
 check(source.card?.includes('initiallyVisible = true'), 'compact initial-page contract missing');
 check(source.card?.includes('hidden={initiallyVisible ? undefined : true}'), 'compact rows are not initially bounded');
 check(source.card?.includes('import StablecoinMark') && source.card?.includes('<StablecoinMark'), 'compact stablecoin mark missing');
-for (const field of ['Issuance', 'Reference', 'Backing', 'Asset class', 'Organization', 'Relationships', 'Evidence', 'Known unknowns', 'Events', 'Last reviewed']) check(source.card?.includes(`<dt>${field}</dt>`), `compact field missing: ${field}`);
+for (const field of ['Issuance', 'Reference', 'Backing', 'Asset class', 'Primary organization', 'Relationships', 'Evidence', 'Known unknowns', 'Events', 'Last reviewed']) check(source.card?.includes(`<dt>${field}</dt>`), `compact field missing: ${field}`);
 check(source.card?.includes('data-mobile-representation-for="stablecoin-index"'), 'compact marker missing');
 
 check(source.mark?.includes("resolveStablecoinLogo") && source.mark?.includes('<img') && source.mark?.includes('<TickerBadge'), 'local-logo with ticker fallback contract missing');
