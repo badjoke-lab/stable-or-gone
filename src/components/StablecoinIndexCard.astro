@@ -36,7 +36,7 @@ const data = {
   </dl>
 
   <details class="stablecoin-index-card-details">
-    <summary>More record context</summary>
+    <summary>Details and compare</summary>
     <dl>
       <div><dt>Issuance</dt><dd>{formatIssuanceLabel(record.issuance)}</dd></div>
       <div><dt>Asset class</dt><dd>{record.assetClassLabel}</dd></div>
@@ -46,7 +46,6 @@ const data = {
       <div><dt>Known unknowns</dt><dd>{record.knownUnknownCount}</dd></div>
     </dl>
     {record.relationshipCount > 1 && <p>{record.organizationSummary}</p>}
+    <label class="comparison-choice comparison-choice-card"><input type="checkbox" data-compare-select value={record.slug} aria-label={`Compare ${record.name}`} /><span>Add to comparison</span></label>
   </details>
-
-  <label class="comparison-choice comparison-choice-card"><input type="checkbox" data-compare-select value={record.slug} aria-label={`Compare ${record.name}`} /><span>Add to comparison</span></label>
 </article>
