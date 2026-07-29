@@ -1,5 +1,4 @@
 ---
-import TickerBadge from './TickerBadge.astro';
 import { resolveStablecoinLogo } from '../utils/stablecoinLogo';
 
 interface Props {
@@ -11,10 +10,18 @@ interface Props {
 
 const { slug = '', symbol, name, size = 'medium' } = Astro.props as Props;
 const logoSrc = resolveStablecoinLogo({ slug, symbol });
+const normalizedSymbol = String(symbol || name || '?')
+  .normalize('NFKD')
+  .toUpperCase()
+  .replace(/[^A-Z0-9]/g, '');
+const fallbackSource = normalizedSymbol || '?';
+const monogram = fallbackSource.length <= 4 ? fallbackSource : fallbackSource.slice(0, 3);
+const fallbackFontSize = monogram.length >= 4 ? 25 : monogram.length === 3 ? 29 : 34;
 ---
 {logoSrc ? (
   <img
     class:list={['stablecoin-mark', `stablecoin-mark--${size}`]}
+    data-mark-kind="logo"
     src={logoSrc}
     alt=""
     aria-hidden="true"
@@ -22,5 +29,24 @@ const logoSrc = resolveStablecoinLogo({ slug, symbol });
     decoding="async"
   />
 ) : (
-  <TickerBadge symbol={symbol || name} label={`${name} symbol`} size={size} />
+  <svg
+    class:list={['stablecoin-mark', `stablecoin-mark--${size}`]}
+    data-mark-kind="fallback"
+    viewBox="0 0 100 100"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <circle cx="50" cy="50" r="47" fill="#ebe6db" stroke="#8d877b" stroke-width="3" />
+    <text
+      x="50"
+      y="52"
+      fill="#403f3a"
+      font-family="SFMono-Regular, Consolas, Liberation Mono, monospace"
+      font-size={fallbackFontSize}
+      font-weight="700"
+      letter-spacing="1"
+      text-anchor="middle"
+      dominant-baseline="middle"
+    >{monogram}</text>
+  </svg>
 )}
