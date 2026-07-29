@@ -10,6 +10,13 @@ on:
       - 'data/stablecoins.json'
       - 'data/deployments.json'
       - 'src/utils/stablecoinLogo.ts'
+  pull_request:
+    paths:
+      - 'scripts/audit-logo-source-expansion.mjs'
+      - '.github/workflows/audit-logo-source-expansion.yml'
+      - 'data/stablecoins.json'
+      - 'data/deployments.json'
+      - 'src/utils/stablecoinLogo.ts'
 
 permissions:
   contents: read
