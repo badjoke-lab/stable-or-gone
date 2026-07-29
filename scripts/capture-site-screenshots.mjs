@@ -18,6 +18,11 @@ const DETAIL_FAMILIES = [
   ['event-detail', '/event/'],
   ['guide-detail', '/guides/']
 ];
+const REQUIRED_REPRESENTATIVE_ROUTES = [
+  '/stablecoin/usdt/',
+  '/stablecoin/usdc/',
+  '/stablecoin/dai/'
+];
 
 function argValue(name, fallback) {
   const index = process.argv.indexOf(`--${name}`);
@@ -103,7 +108,8 @@ async function selectRoutes(routes, mode, samplesPerFamily) {
     selected.push(...chosen.map((entry) => entry.route));
     families.push({ name: family.name, discovered: familyRoutes.length, selected: chosen.length, routes: chosen.map((entry) => entry.route) });
   }
-  return { routes: [...new Set(selected)].sort(), families };
+  const requiredRoutes = REQUIRED_REPRESENTATIVE_ROUTES.filter((route) => routes.includes(route));
+  return { routes: [...new Set([...selected, ...requiredRoutes])].sort(), families };
 }
 
 async function measurePage(page) {
