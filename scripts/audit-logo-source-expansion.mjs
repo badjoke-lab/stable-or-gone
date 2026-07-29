@@ -83,7 +83,7 @@ const result = {
   direct_address_candidates: uniqueDirect,
   direct_address_candidate_count: uniqueDirect.length,
   projected_address_verified_coverage: mappedSlugs.size + uniqueDirect.length,
-  symbol_candidates,
+  symbol_candidates: symbolCandidates,
   symbol_candidate_record_count: new Set(symbolCandidates.map((item) => item.slug)).size,
   unresolved_after_direct_match: stablecoins.length - mappedSlugs.size - uniqueDirect.length
 };
