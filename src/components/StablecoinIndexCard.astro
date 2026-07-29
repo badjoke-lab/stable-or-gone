@@ -31,13 +31,13 @@ const data = {
   <dl class="stablecoin-index-card-grid">
     <div><dt>Reference</dt><dd>{record.referenceLabel}</dd></div>
     <div><dt>Backing</dt><dd>{record.backingLabel}</dd></div>
-    <div><dt>Primary organization</dt><dd>{record.primaryOrganizationName}</dd></div>
-    <div><dt>Last reviewed</dt><dd>{record.reviewedAt || 'Not recorded'}</dd></div>
   </dl>
 
   <details class="stablecoin-index-card-details">
     <summary>Record details and compare</summary>
     <dl>
+      <div><dt>Primary organization</dt><dd>{record.primaryOrganizationName}</dd></div>
+      <div><dt>Last reviewed</dt><dd>{record.reviewedAt || 'Not recorded'}</dd></div>
       <div><dt>Issuance</dt><dd>{formatIssuanceLabel(record.issuance)}</dd></div>
       <div><dt>Asset class</dt><dd>{record.assetClassLabel}</dd></div>
       <div><dt>Relationships</dt><dd>{record.relationshipCount} across {record.organizationCount} organizations</dd></div>
