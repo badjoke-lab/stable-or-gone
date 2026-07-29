@@ -1,4 +1,4 @@
-name: Temporary branch source export
+name: Temporary PR 484 patch applicator
 
 on:
   pull_request:
@@ -6,15 +6,18 @@ on:
       - '.github/workflows/temp-export-source.yml'
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
-  export-source:
+  apply-reviewed-patch:
+    if: github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout SOG branch
+      - name: Checkout PR head
         uses: actions/checkout@v4
         with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
           path: sog
 
       - name: Checkout pinned Web3 Icons source
@@ -24,32 +27,51 @@ jobs:
           ref: 113249b982b3ec5e597feee1ad03d15961e6598b
           path: web3icons
 
-      - name: Checkout CC0 cryptocurrency icon source
-        uses: actions/checkout@v4
-        with:
-          repository: spothq/cryptocurrency-icons
-          path: cryptocurrency-icons
+      - name: Apply reviewed layout and logo changes
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd sog
+          cat .github/temp/pr484-patch-*.diff > /tmp/pr484-final.patch
+          git apply --check /tmp/pr484-final.patch
+          git apply /tmp/pr484-final.patch
 
-      - name: Upload sources for bounded local audit
-        uses: actions/upload-artifact@v4
-        with:
-          name: sog-temporary-source-${{ github.run_id }}
-          retention-days: 1
-          compression-level: 9
-          include-hidden-files: true
-          path: |
-            sog/.github
-            sog/config
-            sog/data
-            sog/public
-            sog/scripts
-            sog/src
-            sog/astro.config.mjs
-            sog/package.json
-            sog/package-lock.json
-            sog/tsconfig.json
-            web3icons/LICENSE
-            web3icons/LICENCE
-            web3icons/packages/core/src/svgs/tokens
-            cryptocurrency-icons/LICENSE.md
-            cryptocurrency-icons/svg/color
+          ICONS=../web3icons/packages/core/src/svgs/tokens/background
+          cp "$ICONS/BEAN.svg" public/stablecoin-logos/beanstalk-bean.svg
+          cp "$ICONS/HONEY.svg" public/stablecoin-logos/berachain-honey.svg
+          cp "$ICONS/CRVUSD.svg" public/stablecoin-logos/crvusd.svg
+          cp "$ICONS/DJED.svg" public/stablecoin-logos/djed.svg
+          cp "$ICONS/EURS.svg" public/stablecoin-logos/eurs.svg
+          cp "$ICONS/MUSD.svg" public/stablecoin-logos/musd.svg
+          cp "$ICONS/USN.svg" public/stablecoin-logos/near-usn.svg
+          cp "$ICONS/U.svg" public/stablecoin-logos/united-stables-u.svg
+          rm -f public/stablecoin-logos/aeur.svg
+
+          rm -rf .github/temp
+          rm -f .github/workflows/temp-export-source.yml
+          chmod +x scripts/audit-representative-layout-geometry.mjs scripts/audit-stablecoin-logo-coverage.mjs
+
+          node --check scripts/audit-representative-layout-geometry.mjs
+          node --check scripts/audit-stablecoin-logo-coverage.mjs
+          node --check scripts/validate-ui-v3-stablecoin-index.mjs
+          node scripts/audit-stablecoin-logo-coverage.mjs
+          python3 - <<'PY'
+          from pathlib import Path
+          css = Path('src/styles/public-ui.css').read_text()
+          assert css.count('{') == css.count('}'), 'unbalanced CSS braces'
+          print({'css_lines': len(css.splitlines()), 'css_braces': css.count('{')})
+          PY
+          git diff --check
+
+      - name: Commit final PR changes
+        shell: bash
+        env:
+          HEAD_BRANCH: ${{ github.head_ref }}
+        run: |
+          set -euo pipefail
+          cd sog
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add -A
+          git commit -m "Fix representative layouts and extend logo coverage"
+          git push origin "HEAD:${HEAD_BRANCH}"
