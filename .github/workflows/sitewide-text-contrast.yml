@@ -51,7 +51,7 @@ jobs:
           cat /tmp/sog-text-contrast-server.log
           exit 1
 
-      - name: Audit representative text contrast
+      - name: Audit effective public text contrast
         run: node scripts/audit-representative-text-contrast.mjs
 
       - name: Upload contrast audit artifact
@@ -61,26 +61,26 @@ jobs:
           name: sog-sitewide-text-contrast-${{ github.run_id }}
           if-no-files-found: error
           retention-days: 14
-          path: artifacts/screenshots/representative-text-contrast-audit.json
+          path: artifacts/sitewide-text-contrast-audit.json
 
       - name: Write summary
         if: always()
         run: |
           echo '## SOG site-wide text contrast audit' >> "$GITHUB_STEP_SUMMARY"
-          if [ -f artifacts/screenshots/representative-text-contrast-audit.json ]; then
+          if [ -f artifacts/sitewide-text-contrast-audit.json ]; then
             node - <<'NODE' >> "$GITHUB_STEP_SUMMARY"
-          const audit = require('./artifacts/screenshots/representative-text-contrast-audit.json');
-          console.log(`- Result: ${audit.ok ? 'PASS' : 'FAIL'}`);
-          console.log(`- Routes: ${audit.routes.length}`);
-          console.log(`- Thresholds: body ${audit.thresholds.body}:1 / muted ${audit.thresholds.muted}:1 / quiet ${audit.thresholds.quiet}:1`);
-          for (const device of audit.devices) {
-            const counts = Object.entries(device.role_sample_counts).map(([role, count]) => `${role} ${count}`).join(', ');
-            console.log(`- ${device.device}: ${counts}`);
-          }
+          const audit = require('./artifacts/sitewide-text-contrast-audit.json');
+          console.log(`- Result: ${audit.failure_count === 0 ? 'PASS' : 'FAIL'}`);
+          console.log(`- Standard: ${audit.standard}`);
+          console.log(`- Token source: ${audit.token_source}`);
+          console.log(`- Checks: ${audit.checks.length}`);
+          console.log(`- Failures: ${audit.failure_count}`);
           if (audit.failures.length) {
             console.log('');
             console.log('### Failures');
-            for (const failure of audit.failures.slice(0, 20)) console.log(`- ${failure}`);
+            for (const failure of audit.failures.slice(0, 20)) {
+              console.log(`- ${failure.name}: ${failure.ratio}:1 < ${failure.required}:1`);
+            }
           }
           NODE
           else
