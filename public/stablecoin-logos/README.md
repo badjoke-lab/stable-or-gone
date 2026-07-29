@@ -16,3 +16,5 @@ Included in this batch:
 - `usdt.svg`
 
 Only exact slug or symbol matches are rendered as logos. Records without an audited local asset fall back to the existing text ticker badge. No remote runtime fetching is used.
+
+Representative screenshot capture always includes the USDT, USDC, and DAI dossiers on desktop and mobile so logo rendering is checked directly rather than inferred from CI.
