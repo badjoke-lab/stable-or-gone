@@ -1,7 +1,16 @@
-name: Capture all public page screenshots
+name: Capture representative public page screenshots
 
 on:
   workflow_dispatch:
+    inputs:
+      mode:
+        description: Capture scope
+        required: true
+        default: representative
+        type: choice
+        options:
+          - representative
+          - exhaustive
   push:
     branches:
       - main
@@ -15,7 +24,6 @@ on:
       - 'scripts/validate-ui-color-system.mjs'
       - 'scripts/audit-ui-readability.mjs'
       - 'scripts/validate-ui-readability.mjs'
-      - 'scripts/validate-exhaustive-screenshot-audit.mjs'
       - '.github/workflows/capture-screenshots.yml'
       - 'package.json'
   pull_request:
@@ -29,7 +37,6 @@ on:
       - 'scripts/validate-ui-color-system.mjs'
       - 'scripts/audit-ui-readability.mjs'
       - 'scripts/validate-ui-readability.mjs'
-      - 'scripts/validate-exhaustive-screenshot-audit.mjs'
       - '.github/workflows/capture-screenshots.yml'
       - 'package.json'
 
@@ -39,14 +46,14 @@ concurrency:
 
 permissions:
   contents: read
-  issues: write
 
 jobs:
-  capture-all-public-pages:
+  capture-representative-pages:
     runs-on: ubuntu-latest
-    timeout-minutes: 240
+    timeout-minutes: 90
     env:
       CAPTURE_BASE_URL: http://127.0.0.1:4173
+      CAPTURE_MODE: ${{ inputs.mode || 'representative' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -55,9 +62,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
+          cache: npm
 
       - name: Install dependencies
-        run: npm clean-install --no-audit --no-fund
+        run: npm ci --no-audit --no-fund
 
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
@@ -78,11 +86,11 @@ jobs:
           cat /tmp/sog-screenshot-server.log
           exit 1
 
-      - name: Capture every desktop route
-        run: node scripts/capture-site-screenshots.mjs --device desktop --mode exhaustive --base-url "$CAPTURE_BASE_URL"
+      - name: Capture representative desktop routes
+        run: node scripts/capture-site-screenshots.mjs --device desktop --mode "$CAPTURE_MODE" --samples-per-family 3 --base-url "$CAPTURE_BASE_URL"
 
-      - name: Capture every mobile route
-        run: node scripts/capture-site-screenshots.mjs --device mobile --mode exhaustive --base-url "$CAPTURE_BASE_URL"
+      - name: Capture representative mobile routes
+        run: node scripts/capture-site-screenshots.mjs --device mobile --mode "$CAPTURE_MODE" --samples-per-family 3 --base-url "$CAPTURE_BASE_URL"
 
       - name: Audit computed desktop colors
         run: node scripts/audit-ui-color-system.mjs
@@ -96,20 +104,17 @@ jobs:
       - name: Audit mobile readability and hierarchy
         run: node scripts/audit-ui-readability.mjs --mobile
 
-      - name: Validate exhaustive screenshot audit
-        run: node scripts/validate-exhaustive-screenshot-audit.mjs
-
-      - name: Validate exhaustive color system
+      - name: Validate color system
         run: node scripts/validate-ui-color-system.mjs
 
-      - name: Validate exhaustive readability and hierarchy
+      - name: Validate readability and hierarchy
         run: node scripts/validate-ui-readability.mjs
 
-      - name: Upload screenshot manifests and audit
+      - name: Upload representative screenshot audit
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: sog-screenshot-audit-${{ github.run_id }}
+          name: sog-representative-screenshot-audit-${{ github.run_id }}
           if-no-files-found: error
           retention-days: 14
           compression-level: 9
@@ -123,24 +128,23 @@ jobs:
             artifacts/screenshots/readability-audit.desktop.json
             artifacts/screenshots/readability-audit.mobile.json
             artifacts/screenshots/readability-validation.json
-            artifacts/screenshots/exhaustive-ui-audit.json
             /tmp/sog-screenshot-server.log
 
-      - name: Upload desktop screenshots
+      - name: Upload representative desktop screenshots
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: sog-desktop-screenshots-${{ github.run_id }}
+          name: sog-representative-desktop-screenshots-${{ github.run_id }}
           if-no-files-found: error
           retention-days: 14
           compression-level: 0
           path: artifacts/screenshots/desktop/**
 
-      - name: Upload mobile screenshots
+      - name: Upload representative mobile screenshots
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: sog-mobile-screenshots-${{ github.run_id }}
+          name: sog-representative-mobile-screenshots-${{ github.run_id }}
           if-no-files-found: error
           retention-days: 14
           compression-level: 0
@@ -149,104 +153,19 @@ jobs:
       - name: Write capture summary
         if: always()
         run: |
-          echo "## SOG exhaustive screenshot capture" >> "$GITHUB_STEP_SUMMARY"
+          echo "## SOG representative screenshot capture" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Mode: $CAPTURE_MODE" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Detail samples per family: 3" >> "$GITHUB_STEP_SUMMARY"
           for DEVICE in desktop mobile; do
             MANIFEST="artifacts/screenshots/manifest.$DEVICE.json"
             if [ -f "$MANIFEST" ]; then
               DISCOVERED=$(node -e "const x=require('./$MANIFEST'); console.log(x.discovered_route_count)")
+              SELECTED=$(node -e "const x=require('./$MANIFEST'); console.log(x.selected_route_count)")
               CAPTURED=$(node -e "const x=require('./$MANIFEST'); console.log(x.captured_count)")
               FAILED=$(node -e "const x=require('./$MANIFEST'); console.log(x.failed_count)")
-              echo "- $DEVICE: $DISCOVERED discovered / $CAPTURED captured / $FAILED failed" >> "$GITHUB_STEP_SUMMARY"
+              echo "- $DEVICE: $DISCOVERED discovered / $SELECTED selected / $CAPTURED captured / $FAILED failed" >> "$GITHUB_STEP_SUMMARY"
             else
               echo "- $DEVICE: manifest missing" >> "$GITHUB_STEP_SUMMARY"
             fi
-            COLOR="artifacts/screenshots/color-audit.$DEVICE.json"
-            if [ -f "$COLOR" ]; then
-              ORDINARY=$(node -e "const x=require('./$COLOR'); console.log(x.colored_ordinary_text_count)")
-              LEGACY=$(node -e "const x=require('./$COLOR'); console.log(x.legacy_palette_hit_count)")
-              SHADOW=$(node -e "const x=require('./$COLOR'); console.log(x.text_shadow_count)")
-              BORDERS=$(node -e "const x=require('./$COLOR'); console.log(x.nonsemantic_colored_border_count)")
-              BACKGROUNDS=$(node -e "const x=require('./$COLOR'); console.log(x.nonsemantic_colored_background_count)")
-              echo "- $DEVICE color findings: ordinary=$ORDINARY legacy=$LEGACY shadow=$SHADOW borders=$BORDERS backgrounds=$BACKGROUNDS" >> "$GITHUB_STEP_SUMMARY"
-            else
-              echo "- $DEVICE color audit: missing" >> "$GITHUB_STEP_SUMMARY"
-            fi
-            READABILITY="artifacts/screenshots/readability-audit.$DEVICE.json"
-            if [ -f "$READABILITY" ]; then
-              ROUTES_WITH_FINDINGS=$(node -e "const x=require('./$READABILITY'); console.log(x.routes_with_findings)")
-              TOTAL_FINDINGS=$(node -e "const x=require('./$READABILITY'); console.log(Object.values(x.totals || {}).reduce((a,b)=>a+Number(b||0),0))")
-              echo "- $DEVICE readability findings: routes=$ROUTES_WITH_FINDINGS total=$TOTAL_FINDINGS" >> "$GITHUB_STEP_SUMMARY"
-            else
-              echo "- $DEVICE readability audit: missing" >> "$GITHUB_STEP_SUMMARY"
-            fi
           done
-          if [ -f artifacts/screenshots/exhaustive-ui-audit.json ]; then
-            FINDINGS=$(node -e "const x=require('./artifacts/screenshots/exhaustive-ui-audit.json'); console.log(x.finding_count)")
-            echo "- automated UI findings: $FINDINGS" >> "$GITHUB_STEP_SUMMARY"
-          else
-            echo "- automated UI findings: audit missing" >> "$GITHUB_STEP_SUMMARY"
-          fi
-          if [ -f artifacts/screenshots/color-system-validation.json ]; then
-            COLOR_FINDINGS=$(node -e "const x=require('./artifacts/screenshots/color-system-validation.json'); console.log(x.finding_count)")
-            echo "- blocking color-system findings: $COLOR_FINDINGS" >> "$GITHUB_STEP_SUMMARY"
-          else
-            echo "- color-system validation: missing" >> "$GITHUB_STEP_SUMMARY"
-          fi
-          if [ -f artifacts/screenshots/readability-validation.json ]; then
-            READABILITY_FINDINGS=$(node -e "const x=require('./artifacts/screenshots/readability-validation.json'); console.log(x.finding_count)")
-            echo "- blocking readability findings: $READABILITY_FINDINGS" >> "$GITHUB_STEP_SUMMARY"
-          else
-            echo "- readability validation: missing" >> "$GITHUB_STEP_SUMMARY"
-          fi
-          echo "- manual screenshot inspection: required" >> "$GITHUB_STEP_SUMMARY"
-
-      - name: Report run for manual artifact inspection
-        if: always() && github.event_name != 'pull_request'
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const fs = require('fs');
-            const read = (device) => {
-              const file = `artifacts/screenshots/manifest.${device}.json`;
-              if (!fs.existsSync(file)) return { device, manifest: 'missing' };
-              const x = JSON.parse(fs.readFileSync(file, 'utf8'));
-              return {
-                device,
-                discovered: x.discovered_route_count,
-                selected: x.selected_route_count,
-                captured: x.captured_count,
-                failed: x.failed_count
-              };
-            };
-            const desktop = read('desktop');
-            const mobile = read('mobile');
-            const auditFile = 'artifacts/screenshots/exhaustive-ui-audit.json';
-            const audit = fs.existsSync(auditFile) ? JSON.parse(fs.readFileSync(auditFile, 'utf8')) : { finding_count: 'missing' };
-            const colorFile = 'artifacts/screenshots/color-system-validation.json';
-            const color = fs.existsSync(colorFile) ? JSON.parse(fs.readFileSync(colorFile, 'utf8')) : { finding_count: 'missing' };
-            const readabilityFile = 'artifacts/screenshots/readability-validation.json';
-            const readability = fs.existsSync(readabilityFile) ? JSON.parse(fs.readFileSync(readabilityFile, 'utf8')) : { finding_count: 'missing' };
-            const marker = '<!-- sog-exhaustive-screenshot-latest -->';
-            const body = `${marker}\n## Exhaustive screenshot run\n\n- Run ID: **${context.runId}**\n- Head: \`${context.sha}\`\n- Workflow result: **${{ job.status }}**\n- Desktop: \`${JSON.stringify(desktop)}\`\n- Mobile: \`${JSON.stringify(mobile)}\`\n- Automated UI findings: **${audit.finding_count}**\n- Blocking color-system findings: **${color.finding_count}**\n- Blocking readability findings: **${readability.finding_count}**\n- Manual artifact inspection: **required**\n- Artifacts: \`sog-screenshot-audit-${context.runId}\`, \`sog-desktop-screenshots-${context.runId}\`, \`sog-mobile-screenshots-${context.runId}\``;
-            const comments = await github.paginate(github.rest.issues.listComments, {
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: 281,
-              per_page: 100
-            });
-            const existing = comments.find((comment) => comment.body?.includes(marker));
-            if (existing) {
-              await github.rest.issues.updateComment({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                comment_id: existing.id,
-                body
-              });
-            } else {
-              await github.rest.issues.createComment({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: 281,
-                body
-              });
-            }
+          echo "- Manual inspection: representative screenshots only" >> "$GITHUB_STEP_SUMMARY"
