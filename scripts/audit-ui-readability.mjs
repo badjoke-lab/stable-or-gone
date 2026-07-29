@@ -248,7 +248,7 @@ for (const route of routes) {
         checkedFonts.add(key);
         const families = getComputedStyle(element).fontFamily
           .split(',')
-          .map((family) => family.trim().replace(/^[\'"]|[\'"]$/g, '').toLowerCase());
+          .map((family) => family.trim().replace(/^[\'\"]|[\'\"]$/g, '').toLowerCase());
         const allowsSerif = element.matches(editorialSerifSelector) || Boolean(element.closest(editorialSerifSelector));
         const allowsMono = element.matches(explicitMonoSelector) || Boolean(element.closest(explicitMonoSelector));
         const forbidden = families.find((family) => (!allowsMono && monospaceFamilies.has(family)) || (!allowsSerif && serifFamilies.has(family)));

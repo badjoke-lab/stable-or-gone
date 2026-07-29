@@ -43,6 +43,7 @@ const {
       <dt>Primary organization</dt>
       <dd>
         {primaryOrganization ? <a href={`/issuer/${primaryOrganization.slug}/`}>{primaryOrganization.name}</a> : 'Not recorded'}
+        <br />
         <small>{additionalRelationshipCount > 0 ? `${additionalRelationshipCount} additional relationship${additionalRelationshipCount === 1 ? '' : 's'}` : 'No additional recorded relationship'}</small>
       </dd>
     </div>

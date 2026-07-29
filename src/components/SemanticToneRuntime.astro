@@ -1,14 +1,65 @@
 <script>
-  const applySemanticTones = () => {
-    document.querySelectorAll<HTMLElement>('.context-support-callout').forEach((element) => {
-      element.dataset.tone = 'support';
+  const applyPaperRegistrySemantics = () => {
+    document.documentElement.style.setProperty('--ui-quiet', '#66645d');
+    document.documentElement.style.setProperty('--ui-warning', '#8a6324');
+
+    document.querySelectorAll<HTMLElement>('main small, footer small, header small').forEach((element) => {
+      if (element.matches('[data-ui-mono]') || element.closest('[data-ui-mono]')) return;
+      element.style.fontFamily = 'var(--ui-sans)';
     });
-    document.querySelectorAll<HTMLElement>('.timeline-item__date, .update-feed-item__date').forEach((element) => {
+
+    document.querySelectorAll<HTMLElement>([
+      'main time',
+      '.timeline-item__date',
+      '.update-feed-item__date',
+      '.home-material-list__date',
+      '.home-event-list__date',
+      '.update-feed-date',
+      '.event-index-card-r5-meta time',
+      '.event-index-row-r5 time'
+    ].join(', ')).forEach((element) => {
       element.dataset.tone = 'temporal';
+      element.dataset.uiMono = 'true';
+    });
+
+    document.querySelectorAll<HTMLElement>([
+      '.value-state',
+      '.chip',
+      '[class*="badge"]',
+      '[class*="status-chip"]',
+      '[class*="status-badge"]',
+      '.home-status-label',
+      '.update-feed-category',
+      '.ar-chip',
+      '.ar-lifecycle',
+      '.archive-note',
+      '.directory-number',
+      '.ticker-badge'
+    ].join(', ')).forEach((element) => {
+      element.dataset.uiMono = 'true';
+    });
+
+    document.querySelectorAll<HTMLElement>('.home-facts dd, .directory-copy strong').forEach((element) => {
+      element.dataset.editorialNumber = 'true';
+    });
+
+    document.querySelectorAll<HTMLElement>('.home-facts dd').forEach((element) => {
+      element.style.lineHeight = '1.35';
+    });
+
+    document.querySelectorAll<HTMLElement>('.support-cta').forEach((element) => {
+      delete element.dataset.tone;
+      element.style.background = 'transparent';
+      element.style.color = 'var(--ui-text)';
+      element.style.borderColor = 'var(--ui-text)';
+    });
+
+    document.querySelectorAll<HTMLElement>('.footer-support, .context-support-callout').forEach((element) => {
+      delete element.dataset.tone;
     });
   };
 
-  applySemanticTones();
-  const observer = new MutationObserver(applySemanticTones);
+  applyPaperRegistrySemantics();
+  const observer = new MutationObserver(applyPaperRegistrySemantics);
   observer.observe(document.body, { childList: true, subtree: true });
 </script>
