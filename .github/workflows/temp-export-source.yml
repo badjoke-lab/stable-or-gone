@@ -1,0 +1,34 @@
+name: Temporary branch source export
+
+on:
+  push:
+    branches:
+      - fix/representative-layout-regressions-and-logo-coverage
+    paths:
+      - '.github/workflows/temp-export-source.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  export-source:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sog-temporary-source-${{ github.run_id }}
+          retention-days: 1
+          compression-level: 9
+          include-hidden-files: true
+          path: |
+            .github
+            config
+            data
+            public
+            scripts
+            src
+            astro.config.mjs
+            package.json
+            package-lock.json
+            tsconfig.json
