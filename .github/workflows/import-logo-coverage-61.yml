@@ -1,3 +1,4 @@
+# One-time import: remove before merge.
 name: Import audited logo coverage 61
 
 on:
