@@ -1,8 +1,8 @@
 # Stablecoin logo assets
 
-These SVGs are vendored locally so public pages never depend on an external image host.
+These SVG and PNG assets are vendored locally so public pages never depend on an external image host.
 
-Current audited coverage: **39 of 116 canonical Stable or Gone stablecoin records**.
+Current audited coverage: **50 of 116 canonical Stable or Gone stablecoin records**.
 
 The count is record coverage, not merely the number of files in this directory. Every mapped slug is a canonical current SOG route. Obsolete or noncanonical resolver keys are not counted.
 
@@ -69,12 +69,36 @@ xsgd.svg
 
 Only SVG identifiers and formatting needed for safe local coexistence may be normalized. The icon artwork is otherwise preserved.
 
+### Address-verified Trust Wallet Assets set
+
+Source: `trustwallet/assets`, distributed under the MIT License and pinned to commit:
+
+```text
+34d808acb2a71e55c41505cd8f15c827db21b0fc
+```
+
+License notice: `LICENSE-trustwallet-assets.txt`. Each logo below was matched by an exact canonical deployment identifier recorded in SOG, not by symbol alone.
+
+```text
+agora-ausd.png
+basis-cash.png
+busd.png
+falcon-usdf.png
+lisusd.png
+mento-dollar.png
+qidao-mai.png
+sdai.png
+usd0.png
+usd1.png
+ust.png
+```
+
 ## Resolution rules
 
 1. Exact canonical SOG slug is checked first.
 2. Symbol lookup is used only for an explicit allow-list of symbols confirmed unique in the current corpus.
 3. Ambiguous symbols such as `USX`, `USDX`, and `USDN` never resolve by symbol alone.
-4. A record without an audited local SVG uses the same circular mark geometry with a short neutral monogram.
+4. A record without an audited local logo asset uses the same circular mark geometry with a short neutral monogram.
 5. The adjacent record name and full symbol remain authoritative; marks are decorative and hidden from assistive technology.
 6. No remote runtime fetching is used.
 7. A file is not added merely because its filename resembles a symbol. The icon must be attributable to the same asset represented by the canonical SOG record.
