@@ -31,10 +31,10 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
-      - name: Checkout SOG
+      - name: Checkout implementation branch
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.event_name == 'push' && 'audit/logo-coverage-batch-2' || github.ref }}
+          ref: audit/logo-coverage-batch-2
           fetch-depth: 0
 
       - name: Fetch licensed source trees
@@ -73,23 +73,19 @@ jobs:
         run: node scripts/audit-logo-source-expansion.mjs
 
       - name: Import exact-address assets
-        if: github.event_name == 'push'
         run: node scripts/import-trustwallet-logo-batch.mjs
 
       - name: Validate imported coverage
-        if: github.event_name == 'push'
         run: |
           node scripts/audit-stablecoin-logo-coverage.mjs
           node scripts/validate-ui-v3-stablecoin-index.mjs
 
       - name: Build imported site
-        if: github.event_name == 'push'
         run: |
           npm ci --no-audit --no-fund
           npm run build
 
       - name: Commit imported assets and coverage updates
-        if: github.event_name == 'push'
         run: |
           set -euo pipefail
           git config user.name 'github-actions[bot]'
