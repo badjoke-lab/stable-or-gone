@@ -58,6 +58,15 @@ check(first.failures.count === first.lifecycle.transitions.collapses, 'failure c
 
 check(first.deployments.total_deployments === first.totals.deployments, 'deployment total mismatch');
 check(first.deployments.assets_with_deployments === first.data_quality.coverage.deployment.count, 'deployment coverage mismatch');
+const deploymentChainLabels = Object.keys(first.deployments.by_chain ?? {});
+const normalizedDeploymentChainLabels = deploymentChainLabels.map((value) => value.trim().toLowerCase().replace(/[_-]+/g, ' ').replace(/\s+/g, ' '));
+check(new Set(normalizedDeploymentChainLabels).size === normalizedDeploymentChainLabels.length, 'deployment chain statistics must not contain case, spacing, or alias duplicates');
+for (const value of ['multi chain', 'multi chain or bridge context', 'multi chain or protocol context', 'source review needed', 'unknown']) {
+  check(!normalizedDeploymentChainLabels.includes(value), `non-chain deployment context leaked into by_chain: ${value}`);
+}
+const attributedDeploymentCount = Object.values(first.deployments.by_chain ?? {}).reduce((n, row) => n + Number(row.deployment_count ?? 0), 0);
+const unresolvedDeploymentCount = Number(first.deployments.unresolved_chain_contexts?.deployment_count ?? 0);
+check(attributedDeploymentCount + unresolvedDeploymentCount === first.deployments.total_deployments, 'attributed and unresolved deployment counts must reconcile to total deployments');
 check(first.organizations.total_organizations === first.totals.organizations, 'organization total mismatch');
 check(first.organizations.total_relationships === first.totals.relationships, 'relationship total mismatch');
 check(first.data_quality.coverage.classification.count === total, 'classification coverage must equal asset count');
