@@ -1,0 +1,14 @@
+SPDX-License-Identifier: GPL-3.0-only
+
+Source repository: money-on-chain/stable-protocol-interface
+Pinned source commit: 9398b8bfc70ee2c84528560ae0ec4f9055179439
+Vendored source path: src/assets/projects/moc/icons/icon-tp.svg
+Local file: dollar-on-chain.svg
+
+The SVG is preserved verbatim from the pinned source repository. The source
+repository declares the GNU General Public License, version 3. The complete
+license text is available at:
+
+https://www.gnu.org/licenses/gpl-3.0.txt
+
+The corresponding source remains the SVG file included next to this notice.

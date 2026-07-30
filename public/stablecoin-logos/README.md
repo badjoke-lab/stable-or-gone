@@ -2,7 +2,7 @@
 
 These SVG and PNG assets are vendored locally so public pages never depend on an external image host.
 
-Current audited coverage: **50 of 116 canonical Stable or Gone stablecoin records**.
+Current audited coverage: **60 of 116 canonical Stable or Gone stablecoin records**.
 
 The count is record coverage, not merely the number of files in this directory. Every mapped slug is a canonical current SOG route. Obsolete or noncanonical resolver keys are not counted.
 
@@ -93,6 +93,42 @@ usd1.png
 ust.png
 ```
 
+### BGD Labs MIT set
+
+Source: `bgd-labs/web3-icons`, distributed under the MIT License and pinned to commit:
+
+```text
+fd03ac0b5aaaeb9d0e6b85958e56eaaf9613db22
+```
+
+License notice: `LICENSE-bgd-web3-icons.txt`. Every accepted entry was manually checked against the canonical SOG asset name and unique symbol. The `EURm` file was rejected because it represents Monerium EUR Money rather than Mento Euro.
+
+```text
+alusd.svg             # Alchemix USD
+usdtb.svg             # Ethena USDtb
+mountain-usdm.svg     # Mountain Protocol USD
+susde.svg             # Staked USDe
+eura.svg              # Angle Euro
+monerium-eure.svg     # EURe
+rlusd.svg              # Ripple USD
+usdg.svg               # Global Dollar
+usds.svg               # USDS
+```
+
+### Official Money on Chain GPL-3.0 set
+
+Source: `money-on-chain/stable-protocol-interface`, pinned to commit:
+
+```text
+9398b8bfc70ee2c84528560ae0ec4f9055179439
+```
+
+License notice: `LICENSE-money-on-chain-gpl3.txt`. `dollar-on-chain.svg` is the official `icon-tp.svg`; the same source code maps the TP currency to `docBalance`, establishing its identity as Dollar on Chain.
+
+```text
+dollar-on-chain.svg
+```
+
 ## Resolution rules
 
 1. Exact canonical SOG slug is checked first.
@@ -103,4 +139,4 @@ ust.png
 6. No remote runtime fetching is used.
 7. A file is not added merely because its filename resembles a symbol. The icon must be attributable to the same asset represented by the canonical SOG record.
 
-The Stablecoins index screenshot contains real marks and unsupported-record fallbacks together. Fixed dossier screenshots and the mixed-mark geometry gate verify desktop and mobile rendering.
+The Stablecoins index and home-page preview contain real marks and unsupported-record fallbacks together. Fixed dossier screenshots and the mixed-mark geometry gate verify desktop and mobile rendering.

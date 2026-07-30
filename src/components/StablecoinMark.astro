@@ -6,9 +6,10 @@ interface Props {
   symbol: string;
   name: string;
   size?: 'small' | 'medium' | 'large';
+  loading?: 'lazy' | 'eager';
 }
 
-const { slug = '', symbol, name, size = 'medium' } = Astro.props as Props;
+const { slug = '', symbol, name, size = 'medium', loading = 'lazy' } = Astro.props as Props;
 const logoSrc = resolveStablecoinLogo({ slug, symbol });
 const normalizedSymbol = String(symbol || name || '?')
   .normalize('NFKD')
@@ -28,7 +29,7 @@ const fallbackFontSize = monogram.length === 1 ? 42 : 34;
     src={logoSrc}
     alt=""
     aria-hidden="true"
-    loading="lazy"
+    loading={loading}
     decoding="async"
   />
 ) : (
