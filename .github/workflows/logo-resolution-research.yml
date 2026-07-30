@@ -1,0 +1,43 @@
+name: Resolve all Stablecoin logos
+
+on:
+  push:
+    branches:
+      - audit/resolve-all-stablecoin-logos
+    paths:
+      - 'scripts/export-stablecoin-logo-research.mjs'
+      - '.github/workflows/logo-resolution-research.yml'
+      - 'data/**'
+      - 'src/utils/stablecoinLogo.ts'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  export-research-manifest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Export all Stablecoin logo research inputs
+        run: node scripts/export-stablecoin-logo-research.mjs
+      - name: Validate complete corpus inventory
+        run: |
+          node - <<'NODE'
+          const fs = require('fs');
+          const report = JSON.parse(fs.readFileSync('artifacts/stablecoin-logo-research.json', 'utf8'));
+          if (report.canonical_records !== 116) throw new Error(`expected 116 records, found ${report.canonical_records}`);
+          if (report.mapped_records !== 60) throw new Error(`expected 60 mapped records, found ${report.mapped_records}`);
+          if (report.unresolved_records !== 56) throw new Error(`expected 56 unresolved records, found ${report.unresolved_records}`);
+          if (report.unresolved.some((record) => !record.slug || !record.name)) throw new Error('incomplete unresolved record');
+          NODE
+      - uses: actions/upload-artifact@v4
+        with:
+          name: stablecoin-logo-research-${{ github.run_id }}
+          path: artifacts/stablecoin-logo-research.json
+          if-no-files-found: error
+          retention-days: 14
