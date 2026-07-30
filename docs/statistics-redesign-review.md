@@ -12,3 +12,5 @@ Acceptance criteria:
 - desktop and mobile full-page screenshots must be reviewed manually before merge;
 - the single public stylesheet contract remains intact and below its line-count ceiling;
 - the final implementation must remove all temporary CSS migration workflows.
+
+The compact final stylesheet replaces the obsolete Statistics rules instead of relaxing the cleanup contract.
