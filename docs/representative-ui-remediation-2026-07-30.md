@@ -15,3 +15,5 @@ This remediation follows a manual review of all 42 representative public routes 
 ## Regression gates
 
 The representative screenshot audit now checks descendant-level heading overlap, visible TOCs without links, duplicate list numbering, and bounded Home and Statistics heights. All desktop and mobile screenshots must also be inspected manually before merge.
+
+The final source contains no temporary remediation workflow and no forbidden `!important` declaration.
