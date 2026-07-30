@@ -1,0 +1,54 @@
+name: Audit logo coverage ceiling
+
+on:
+  pull_request:
+    paths:
+      - 'src/pages/index.astro'
+      - 'scripts/audit-logo-coverage-ceiling.mjs'
+      - '.github/workflows/audit-logo-coverage-ceiling.yml'
+      - 'src/utils/stablecoinLogo.ts'
+      - 'data/stablecoins*.json'
+      - 'data/deployments*.json'
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout SOG
+        uses: actions/checkout@v4
+
+      - name: Fetch permissively licensed address-keyed logo repositories
+        run: |
+          set -euo pipefail
+
+          git clone --filter=blob:none --no-checkout https://github.com/MetaMask/contract-metadata.git /tmp/metamask-contract-metadata
+          git -C /tmp/metamask-contract-metadata fetch --depth 1 origin d693f70b9c14db177562957b00a70cfcd922b266
+          git -C /tmp/metamask-contract-metadata checkout --detach FETCH_HEAD
+          test "$(git -C /tmp/metamask-contract-metadata rev-parse HEAD)" = "d693f70b9c14db177562957b00a70cfcd922b266"
+          git -C /tmp/metamask-contract-metadata ls-tree -r --name-only HEAD > /tmp/metamask-paths.txt
+
+          git clone --filter=blob:none --no-checkout https://github.com/yearn/yearn-assets.git /tmp/yearn-assets
+          git -C /tmp/yearn-assets fetch --depth 1 origin 192375774a16b2d5980fc130f208b9ccb4381443
+          git -C /tmp/yearn-assets checkout --detach FETCH_HEAD
+          test "$(git -C /tmp/yearn-assets rev-parse HEAD)" = "192375774a16b2d5980fc130f208b9ccb4381443"
+          git -C /tmp/yearn-assets ls-tree -r --name-only HEAD > /tmp/yearn-paths.txt
+
+      - name: Calculate audited ceiling
+        run: node scripts/audit-logo-coverage-ceiling.mjs
+
+      - name: Upload audit report
+        uses: actions/upload-artifact@v4
+        with:
+          name: sog-logo-coverage-ceiling-${{ github.run_id }}
+          retention-days: 14
+          if-no-files-found: error
+          path: |
+            artifacts/logo-coverage-ceiling.json
+            artifacts/logo-coverage-ceiling.md
+
+      - name: Write summary
+        run: cat artifacts/logo-coverage-ceiling.md >> "$GITHUB_STEP_SUMMARY"
