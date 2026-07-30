@@ -3,13 +3,15 @@ import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { loadStatsInput } from './stats/load-stats-input.mjs';
 import { buildStatsModel } from './stats/build-stats-model.mjs';
+import { normalizeDeploymentChainStats } from './stats/normalize-deployment-chains.mjs';
 
 export function generateStats(options = {}) {
   const root = options.root ?? process.cwd();
   const input = loadStatsInput(root);
   const generatedAt = options.generatedAt ?? process.env.SOG_STATS_GENERATED_AT ?? `${input.checkpoint.recorded_at}T00:00:00.000Z`;
   const registryVersion = options.registryVersion ?? process.env.SOG_STATS_REGISTRY_VERSION ?? input.checkpoint.source_commit;
-  return buildStatsModel(input, { generatedAt, registryVersion });
+  const stats = buildStatsModel(input, { generatedAt, registryVersion });
+  return normalizeDeploymentChainStats(stats, input.deployments);
 }
 
 export function writeStats(stats, options = {}) {
