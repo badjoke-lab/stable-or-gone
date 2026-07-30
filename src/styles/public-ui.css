@@ -312,6 +312,9 @@ main .contact-actions p { margin: 0; font-size: 17px; line-height: 1.5; }
 .copy-button { width: fit-content; min-height: 44px; }
 main :where(a,dd,li) { overflow-wrap: break-word; word-break: normal; }
 pre { max-width: 100%; overflow-x: auto; white-space: pre-wrap; }
+.static-registry-list{list-style:none;margin:0;padding:0;grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}.static-registry-list>.static-registry-card{display:grid;grid-template-columns:42px minmax(0,1fr);gap:12px}.static-registry-item-header{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}.static-registry-item-header h2{margin:2px 0 0;font:600 1.25rem/1.18 var(--ui-serif)}.static-registry-meta,.static-registry-item-description{margin:4px 0 0}
+.stats-disclosure{margin:0;border-bottom:1px solid var(--ui-text)}.stats-disclosure>summary{min-height:58px;display:grid;grid-template-columns:180px minmax(0,1fr);gap:16px;align-items:center;border-top:1px solid var(--ui-text);cursor:pointer}.stats-disclosure>summary span{color:var(--ui-muted);font:700 13px/1.4 var(--ui-mono);letter-spacing:.04em;text-transform:uppercase}.stats-disclosure>summary strong{font:600 1.35rem/1.2 var(--ui-serif)}.stats-disclosure[open]>summary{border-bottom:1px solid var(--ui-line)}
+.guide-article-toc[hidden],.longform-toc[hidden]{display:none!important}.guide-article-toc ol,.longform-toc ol{max-height:min(46vh,28rem);overflow:auto}.support-cta-label--compact{display:none}
 @media (max-width: 1120px) {
   .footer-navigation { gap: 12px; }
   .ar-card-layers { grid-template-columns: 1fr 1fr; }
@@ -332,10 +335,10 @@ pre { max-width: 100%; overflow-x: auto; white-space: pre-wrap; }
   .site-shell { width: min(calc(100% - 28px),var(--ui-shell)); }
   .masthead-row, .v3-masthead-row { align-items: center; gap: 10px; padding-block: 9px; }
   .brand-copy, .v3-brand-copy { display: none; }
-  .site-brand img { max-width: 126px; height: 32px; }
+  .site-brand img { max-width: 144px; height: 34px; }
   .masthead-actions { gap: 8px; }
   .masthead-actions .correction-link { display: none; }
-  .support-cta { min-height: 44px; padding-inline: 11px; font-size: 15px; }
+  .support-cta { min-height: 44px; padding-inline: 11px; font-size: 15px; } .support-cta-label--compact { display: none; }
   .site-navigation-shell { grid-template-columns: minmax(0,1fr) auto; } .site-nav, .site-primary-navigation { overflow: hidden; padding-inline: 0; } .site-primary-navigation a:nth-child(n+4) { display: none; }
   .site-nav a, .site-primary-navigation a { min-height: 44px; padding-inline: 5px; font-size: 15px; } .site-more-navigation > summary { min-height: 44px; padding-inline: 8px; font-size: 15px; }
   .site-more-navigation-panel a { min-height: 44px; font-size: 15px; }
@@ -352,9 +355,9 @@ pre { max-width: 100%; overflow-x: auto; white-space: pre-wrap; }
   .editorial-directory { grid-template-columns: repeat(2,minmax(0,1fr)); } .editorial-directory a { min-height: 82px; padding: 10px; grid-template-columns: 24px minmax(0,1fr) auto; gap: 7px; } .directory-copy { gap: 2px; }
   .directory-copy strong { font-size: 1rem; line-height: 1.15; } .directory-copy small { display: none; } .directory-section { margin-top: 28px; } .registry-section--priority { margin-top: 14px; }
   .section-heading, .home-section-heading, .footer-support, .context-support-callout { align-items: flex-start; flex-direction: column; }
-  .footer-navigation { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px 18px; padding-block: 10px; }
-  .footer-navigation-group { display: grid; align-content: start; gap: 1px; }
-  .footer-navigation-group a { width: fit-content; min-height: 40px; font-size: 15px; }
+  .support-cta--header .support-cta-label--full { display: none; } .support-cta--header .support-cta-label--compact { display: inline; }
+  .footer-navigation { display: grid; grid-template-columns: 1fr; gap: 0; padding-block: 8px; }
+  .footer-navigation-group { display: block; border-bottom: 1px solid var(--ui-line); } .footer-navigation-group > summary { min-height: 44px; display: flex; align-items: center; justify-content: space-between; font: 700 13px/1.4 var(--ui-mono); letter-spacing: .05em; text-transform: uppercase; cursor: pointer; } .footer-navigation-group > summary::after { content: "+"; } .footer-navigation-group[open] > summary::after { content: "−"; } .footer-navigation-group nav { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); padding-bottom: 8px; } .footer-navigation-group a { width: fit-content; min-height: 36px; font-size: 15px; }
   .footer-support .support-cta, .context-support-callout .support-cta { width: 100%; }
   .controls, :where(.stablecoin-index-toolbar,.event-index-toolbar,.organization-index-toolbar) { align-items: stretch; gap: 7px; padding: 9px 0; }
   .control-field, .search-field, :where(.stablecoin-index-toolbar,.event-index-toolbar,.organization-index-toolbar) label { min-width: 100%; flex-basis: 100%; }
@@ -393,8 +396,8 @@ pre { max-width: 100%; overflow-x: auto; white-space: pre-wrap; }
   .evidence-table-wrap { display: block; overflow: visible; }
   :where(.event-index-ledger,.organization-index-ledger,.event-detail-ledger,.organization-detail-ledger,.stablecoin-dossier-facts,.stats-kpi-grid,.stats-mini-kpi-grid,.maintenance-counts dl) { grid-template-columns: 1fr 1fr; }
   :where(.event-index-ledger,.organization-index-ledger,.event-detail-ledger,.organization-detail-ledger,.stablecoin-dossier-facts,.stats-kpi-grid,.stats-mini-kpi-grid,.maintenance-counts dl) > div { min-height: 76px; padding: 10px; gap: 5px; }
-  :where(.stablecoin-index-section-heading,.event-index-section-heading,.organization-index-section-heading,.event-detail-section-heading,.organization-detail-section-heading,.stablecoin-section-heading,.timeline-section-heading,.compare-section-heading,.ar-section-heading,.maintenance-section-heading,.update-feed-section-heading,.stats-section-heading,.timeline-results-heading,.ar-results-heading,.update-feed-results-heading) { grid-template-columns: 1fr; gap: 8px; }
-  :where(.stablecoin-index-section-heading,.event-index-section-heading,.organization-index-section-heading,.event-detail-section-heading,.organization-detail-section-heading,.stablecoin-section-heading,.timeline-section-heading,.compare-section-heading,.ar-section-heading,.maintenance-section-heading,.update-feed-section-heading,.stats-section-heading,.timeline-results-heading,.ar-results-heading,.update-feed-results-heading) > * { grid-column: 1; grid-row: auto; width: 100%; max-width: 100%; }
+  :where(.stablecoin-index-section-heading,.event-index-section-heading,.organization-index-section-heading,.event-detail-section-heading,.organization-detail-section-heading,.stablecoin-section-heading,.timeline-section-heading,.compare-section-heading,.ar-section-heading,.maintenance-section-heading,.update-feed-section-heading,.stats-section-heading,.timeline-results-heading,.ar-results-heading,.update-feed-results-heading) { grid-template-columns: 1fr; gap: 6px; }
+  :where(.event-index-section-heading,.organization-index-section-heading,.event-detail-section-heading,.organization-detail-section-heading,.stablecoin-section-heading) > p:first-child, :where(.event-index-section-heading,.organization-index-section-heading,.event-detail-section-heading,.organization-detail-section-heading,.stablecoin-section-heading) > h2, :where(.event-index-section-heading,.organization-index-section-heading,.event-detail-section-heading,.organization-detail-section-heading,.stablecoin-section-heading) > span, :where(.stablecoin-index-section-heading,.timeline-section-heading,.compare-section-heading,.ar-section-heading,.maintenance-section-heading,.update-feed-section-heading,.stats-section-heading,.timeline-results-heading,.ar-results-heading,.update-feed-results-heading) > * { grid-column: 1; grid-row: auto; align-self: auto; position: static; width: 100%; max-width: 100%; }
   :where(.event-detail-nav,.organization-detail-nav,.stablecoin-dossier-nav) { position: static; display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); overflow: visible; background: transparent; border-top: 1px solid var(--ui-line-strong); }
   :where(.event-detail-nav,.organization-detail-nav,.stablecoin-dossier-nav) a { min-width: 0; min-height: 44px; white-space: normal; border-right: 1px solid var(--ui-line); border-bottom: 1px solid var(--ui-line); }
   :where(.event-detail-secondary-r5,.organization-detail-secondary-r5,.stablecoin-mechanism-ledger,.stablecoin-identity-ledger) { grid-template-columns: 1fr; }
@@ -427,6 +430,7 @@ pre { max-width: 100%; overflow-x: auto; white-space: pre-wrap; }
   .utility-section table, .utility-section tbody, .utility-section tr, .utility-section th, .utility-section td { display: block; width: 100%; }
   .utility-section tr { padding: 11px 0; border-bottom: 1px solid var(--ui-text); }
   .utility-section th, .utility-section td { padding: 4px 0; border: 0; }
+  .static-registry-list { grid-template-columns: 1fr; } .static-registry-list > .static-registry-card { grid-template-columns: 32px minmax(0,1fr); padding: 11px 0; } .stats-disclosure > summary { grid-template-columns: 1fr; gap: 2px; padding: 8px 0; } .guide-article-toc ol, .longform-toc ol { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 2px 12px; }
   .report-actions { display: grid; grid-template-columns: 1fr; }
   .report-actions a { width: 100%; }
   .wallet-grid { grid-template-columns: 1fr; }

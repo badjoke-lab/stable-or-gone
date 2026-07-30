@@ -18,8 +18,11 @@ const categories = [
   'overlapping_section_heading_content',
   'ambiguous_internal_accent_links',
   'undersized_mobile_targets',
-  'unexpected_public_font',
-  'raw_public_enum'
+    'unexpected_public_font',
+  'raw_public_enum',
+  'empty_visible_toc',
+  'duplicate_visible_record_number',
+  'excessive_route_height'
 ];
 
 for (const file of files) {
@@ -55,7 +58,9 @@ const result = {
     metadata: '>=13px',
     line_height: '>=1.45 ordinary and >=1.35 compact',
     headings: 'bounded by device and route role',
-    section_heading_layout: 'direct heading children must not overlap',
+    section_heading_layout: 'visible heading text must not overlap at any descendant level',
+    navigation_integrity: 'visible tables of contents must contain links and static lists must not show duplicate numbering',
+    route_height: 'home mobile <=5000px and statistics desktop <=9000px in representative captures',
     internal_accent_links: 'forbidden outside approved semantic contexts',
     mobile_controls: '>=40px high, with the public UI contract targeting 44px',
     public_typography: 'sans-serif only outside explicit technical values',

@@ -45,7 +45,10 @@ for (const route of routes) {
         ambiguous_internal_accent_links: [],
         undersized_mobile_targets: [],
         unexpected_public_font: [],
-        raw_public_enum: []
+        raw_public_enum: [],
+        empty_visible_toc: [],
+        duplicate_visible_record_number: [],
+        excessive_route_height: []
       };
       const push = (category, value) => {
         if (findings[category].length < 250) findings[category].push(value);
@@ -208,6 +211,31 @@ for (const route of routes) {
         }
       }
 
+      for (const container of [...document.querySelectorAll(sectionHeadingSelector)].filter(visible)) {
+        const descendants = [...container.querySelectorAll('p,h2,h3,span')].filter(visible);
+        for (let leftIndex = 0; leftIndex < descendants.length; leftIndex += 1) {
+          for (let rightIndex = leftIndex + 1; rightIndex < descendants.length; rightIndex += 1) {
+            const left = descendants[leftIndex];
+            const right = descendants[rightIndex];
+            if (left.contains(right) || right.contains(left)) continue;
+            const intersection = overlap(left.getBoundingClientRect(), right.getBoundingClientRect());
+            if (intersection.width <= 2 || intersection.height <= 2 || intersection.area <= 16) continue;
+            push('overlapping_section_heading_content', { container: pathFor(container), first: sample(left, 'section-heading-descendant'), second: sample(right, 'section-heading-descendant'), overlap_area_px: Math.round(intersection.area) });
+          }
+        }
+      }
+      for (const toc of [...document.querySelectorAll('.guide-article-toc,.longform-toc')].filter(visible)) {
+        const list = toc.querySelector('ol');
+        if (!(list instanceof HTMLOListElement) || list.children.length === 0) push('empty_visible_toc', sample(toc, 'table-of-contents'));
+      }
+      for (const item of [...document.querySelectorAll('.static-registry-list > li')].filter(visible)) {
+        if (!item.querySelector('.static-registry-number')) continue;
+        const marker = getComputedStyle(item, '::marker');
+        if (marker.content && !['none', 'normal', '""'].includes(marker.content)) push('duplicate_visible_record_number', { ...sample(item, 'static-registry-item'), marker_content: marker.content });
+      }
+      const routeHeight = document.documentElement.scrollHeight;
+      if ((mobile && location.pathname === '/' && routeHeight > 5000) || (!mobile && location.pathname === '/stats/' && routeHeight > 9000)) push('excessive_route_height', { route: location.pathname, height_px: routeHeight });
+
       const allowedInternalLinkColors = new Set([
         resolveToken('--ui-link'),
         resolveToken('--ui-hover'),
@@ -297,7 +325,8 @@ const categories = [
   'undersized_metadata', 'compressed_line_height', 'oversized_headings',
   'excessive_heading_height', 'overlapping_section_heading_content',
   'ambiguous_internal_accent_links', 'undersized_mobile_targets',
-  'unexpected_public_font', 'raw_public_enum'
+    'unexpected_public_font', 'raw_public_enum', 'empty_visible_toc',
+    'duplicate_visible_record_number', 'excessive_route_height'
 ];
 const totals = Object.fromEntries(categories.map((category) => [category, records.reduce((sum, record) => sum + Number(record.counts?.[category] ?? 0), 0)]));
 const output = {
