@@ -4,63 +4,60 @@
     if (!page || page.dataset.responsiveSectionsInstalled === 'true') return;
     page.dataset.responsiveSectionsInstalled = 'true';
 
-    const sections = Array.from(page.querySelectorAll<HTMLElement>(':scope > .stats-section'));
-    const collapsible = sections.slice(2);
-    const stackedLayouts = Array.from(page.querySelectorAll<HTMLElement>('.stats-lifecycle-layout, .stats-analysis-grid'));
-    if (collapsible.length === 0 && stackedLayouts.length === 0) return;
+    const panelGrid = page.querySelector<HTMLElement>('.stats-v4-panel-grid');
+    if (!panelGrid) return;
 
-    const media = window.matchMedia('(max-width: 640px)');
-    const records = collapsible.map((section) => {
-      const placeholder = document.createComment('stats-section-placeholder');
-      const details = document.createElement('details');
-      details.className = 'panel registry stats-mobile-disclosure';
-      details.dataset.statsMobileDisclosure = 'true';
-      const summary = document.createElement('summary');
-      const heading = section.querySelector('h2, h3');
-      summary.textContent = heading?.textContent?.trim() || 'Additional statistics';
-      const content = document.createElement('div');
-      content.className = 'stats-mobile-disclosure__content';
-      details.append(summary, content);
-      return { section, placeholder, details, content };
-    });
+    const panels = Array.from(panelGrid.children)
+      .filter((item): item is HTMLElement => item instanceof HTMLElement && item.classList.contains('stats-v4-panel'));
+    if (panels.length < 2) return;
 
-    const setStackedLayouts = (stacked: boolean) => {
-      for (const layout of stackedLayouts) {
-        if (stacked) layout.style.setProperty('grid-template-columns', 'minmax(0, 1fr)');
-        else layout.style.removeProperty('grid-template-columns');
-      }
+    const desktop = window.matchMedia('(min-width: 981px)');
+    const tablet = window.matchMedia('(min-width: 701px) and (max-width: 980px)');
+    let activeColumnCount = 0;
+
+    const restoreSourceOrder = () => {
+      panelGrid.replaceChildren(...panels);
     };
 
-    const collapse = () => {
-      for (const record of records) {
-        if (record.details.isConnected) continue;
-        record.section.before(record.placeholder);
-        record.content.append(record.section);
-        record.placeholder.after(record.details);
-      }
-    };
+    const buildColumns = (columnCount: number) => {
+      restoreSourceOrder();
+      if (columnCount === 1) return;
 
-    const restore = () => {
-      for (const record of records) {
-        if (!record.details.isConnected) continue;
-        record.placeholder.after(record.section);
-        record.details.remove();
-        record.placeholder.remove();
-      }
+      const columns = Array.from({ length: columnCount }, (_, index) => {
+        const column = document.createElement('div');
+        column.className = 'stats-v4-bar-list';
+        column.dataset.statsCompositionColumn = String(index + 1);
+        return column;
+      });
+
+      const minimumSize = Math.floor(panels.length / columnCount);
+      const largerColumns = panels.length % columnCount;
+      let cursor = 0;
+
+      columns.forEach((column, index) => {
+        const size = minimumSize + (index < largerColumns ? 1 : 0);
+        for (let offset = 0; offset < size; offset += 1) {
+          const panel = panels[cursor++];
+          const slot = document.createElement('div');
+          slot.dataset.statsCompositionSlot = 'true';
+          slot.append(panel);
+          column.append(slot);
+        }
+      });
+
+      panelGrid.replaceChildren(...columns);
     };
 
     const sync = () => {
-      if (media.matches) {
-        setStackedLayouts(true);
-        collapse();
-      } else {
-        restore();
-        setStackedLayouts(false);
-      }
+      const nextColumnCount = desktop.matches ? 3 : tablet.matches ? 2 : 1;
+      if (nextColumnCount === activeColumnCount) return;
+      activeColumnCount = nextColumnCount;
+      buildColumns(nextColumnCount);
     };
 
     sync();
-    media.addEventListener?.('change', sync);
+    desktop.addEventListener?.('change', sync);
+    tablet.addEventListener?.('change', sync);
   };
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', installStatsResponsiveSections, { once: true });
