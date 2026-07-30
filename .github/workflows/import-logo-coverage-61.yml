@@ -1,0 +1,89 @@
+name: Import audited logo coverage 61
+
+on:
+  push:
+    branches:
+      - feat/home-logos-and-coverage-ceiling
+    paths:
+      - 'scripts/import-logo-coverage-to-61.mjs'
+      - '.github/workflows/import-logo-coverage-61.yml'
+      - 'src/utils/stablecoinLogo.ts'
+      - 'public/stablecoin-logos/**'
+      - 'scripts/audit-stablecoin-logo-coverage.mjs'
+
+permissions:
+  contents: write
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout implementation branch
+        uses: actions/checkout@v4
+        with:
+          ref: feat/home-logos-and-coverage-ceiling
+          fetch-depth: 0
+
+      - name: Fetch pinned BGD and MetaMask assets
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/bgd-web3-icons /tmp/metamask-contract-metadata
+
+          git clone --filter=blob:none --no-checkout https://github.com/bgd-labs/web3-icons.git /tmp/bgd-web3-icons
+          git -C /tmp/bgd-web3-icons fetch --depth 1 origin fd03ac0b5aaaeb9d0e6b85958e56eaaf9613db22
+          git -C /tmp/bgd-web3-icons sparse-checkout init --no-cone
+          cat > /tmp/bgd-web3-icons/.git/info/sparse-checkout <<'PATHS'
+          icons/full/alusd.svg
+          icons/full/usdtb.svg
+          icons/full/usdm.svg
+          icons/full/susde.svg
+          icons/full/eura.svg
+          icons/full/eurm.svg
+          icons/full/eure.svg
+          icons/full/rlusd.svg
+          icons/full/usdg.svg
+          icons/full/usds.svg
+          LICENSE
+          PATHS
+          git -C /tmp/bgd-web3-icons checkout --detach FETCH_HEAD
+          test "$(git -C /tmp/bgd-web3-icons rev-parse HEAD)" = "fd03ac0b5aaaeb9d0e6b85958e56eaaf9613db22"
+
+          git clone --filter=blob:none --no-checkout https://github.com/MetaMask/contract-metadata.git /tmp/metamask-contract-metadata
+          git -C /tmp/metamask-contract-metadata fetch --depth 1 origin d693f70b9c14db177562957b00a70cfcd922b266
+          git -C /tmp/metamask-contract-metadata sparse-checkout init --no-cone
+          cat > /tmp/metamask-contract-metadata/.git/info/sparse-checkout <<'PATHS'
+          icons/eip155:30/erc20:0xe700691dA7b9851F2F35f8b8182c69c53CcaD9Db.png
+          LICENSE
+          PATHS
+          git -C /tmp/metamask-contract-metadata checkout --detach FETCH_HEAD
+          test "$(git -C /tmp/metamask-contract-metadata rev-parse HEAD)" = "d693f70b9c14db177562957b00a70cfcd922b266"
+
+      - name: Import audited assets
+        run: node scripts/import-logo-coverage-to-61.mjs
+
+      - name: Validate permanent logo coverage
+        run: node scripts/audit-stablecoin-logo-coverage.mjs
+
+      - name: Build site
+        run: |
+          npm ci --no-audit --no-fund
+          npm run build
+
+      - name: Commit imported assets
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add \
+            public/stablecoin-logos \
+            src/utils/stablecoinLogo.ts \
+            scripts/audit-stablecoin-logo-coverage.mjs
+          if git diff --cached --quiet; then
+            echo 'No import changes remain.'
+            exit 0
+          fi
+          git diff --cached --check
+          git commit -m 'Expand audited stablecoin logo coverage to 61'
+          git pull --rebase origin feat/home-logos-and-coverage-ceiling
+          git push origin HEAD:feat/home-logos-and-coverage-ceiling
