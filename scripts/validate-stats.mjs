@@ -2,6 +2,8 @@ import crypto from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import { generateStats } from './build-stats.mjs';
+import { loadStatsInput } from './stats/load-stats-input.mjs';
+import { normalizeDeploymentChainStats } from './stats/normalize-deployment-chains.mjs';
 
 const root = process.cwd();
 const failures = [];
@@ -12,6 +14,7 @@ const sha256 = (value) => crypto.createHash('sha256').update(value).digest('hex'
 const first = generateStats({ root });
 const second = generateStats({ root });
 const firstJson = JSON.stringify(first);
+const publicStats = normalizeDeploymentChainStats(first, loadStatsInput(root).deployments);
 check(firstJson === JSON.stringify(second), 'same inputs must generate byte-equivalent statistics models');
 check(/^[a-f0-9]{64}$/.test(first.input_digest_sha256 ?? ''), 'input digest must be lowercase SHA-256');
 
@@ -58,15 +61,15 @@ check(first.failures.count === first.lifecycle.transitions.collapses, 'failure c
 
 check(first.deployments.total_deployments === first.totals.deployments, 'deployment total mismatch');
 check(first.deployments.assets_with_deployments === first.data_quality.coverage.deployment.count, 'deployment coverage mismatch');
-const deploymentChainLabels = Object.keys(first.deployments.by_chain ?? {});
+const deploymentChainLabels = Object.keys(publicStats.deployments.by_chain ?? {});
 const normalizedDeploymentChainLabels = deploymentChainLabels.map((value) => value.trim().toLowerCase().replace(/[_-]+/g, ' ').replace(/\s+/g, ' '));
-check(new Set(normalizedDeploymentChainLabels).size === normalizedDeploymentChainLabels.length, 'deployment chain statistics must not contain case, spacing, or alias duplicates');
+check(new Set(normalizedDeploymentChainLabels).size === normalizedDeploymentChainLabels.length, 'public deployment chain view must not contain case, spacing, or alias duplicates');
 for (const value of ['multi chain', 'multi chain or bridge context', 'multi chain or protocol context', 'source review needed', 'unknown']) {
-  check(!normalizedDeploymentChainLabels.includes(value), `non-chain deployment context leaked into by_chain: ${value}`);
+  check(!normalizedDeploymentChainLabels.includes(value), `non-chain deployment context leaked into public by_chain: ${value}`);
 }
-const attributedDeploymentCount = Object.values(first.deployments.by_chain ?? {}).reduce((n, row) => n + Number(row.deployment_count ?? 0), 0);
-const unresolvedDeploymentCount = Number(first.deployments.unresolved_chain_contexts?.deployment_count ?? 0);
-check(attributedDeploymentCount + unresolvedDeploymentCount === first.deployments.total_deployments, 'attributed and unresolved deployment counts must reconcile to total deployments');
+const attributedDeploymentCount = Object.values(publicStats.deployments.by_chain ?? {}).reduce((n, row) => n + Number(row.deployment_count ?? 0), 0);
+const unresolvedDeploymentCount = Number(publicStats.deployments.unresolved_chain_contexts?.deployment_count ?? 0);
+check(attributedDeploymentCount + unresolvedDeploymentCount === first.deployments.total_deployments, 'public attributed and unresolved deployment counts must reconcile to total deployments');
 check(first.organizations.total_organizations === first.totals.organizations, 'organization total mismatch');
 check(first.organizations.total_relationships === first.totals.relationships, 'relationship total mismatch');
 check(first.data_quality.coverage.classification.count === total, 'classification coverage must equal asset count');
@@ -103,5 +106,7 @@ console.log(JSON.stringify({
   totals: first.totals,
   lifecycle_groups: first.lifecycle.groups,
   lifecycle_transitions: first.lifecycle.transitions,
+  public_deployment_chain_count: deploymentChainLabels.length,
+  public_unresolved_deployment_count: unresolvedDeploymentCount,
   validated_output: requestedOutput ?? null
 }, null, 2));
