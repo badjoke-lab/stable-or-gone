@@ -1,0 +1,172 @@
+name: Apply white background and mobile density fix
+
+on:
+  push:
+    branches:
+      - fix/white-background-mobile-density
+    paths:
+      - '.github/workflows/apply-white-mobile-fix.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  apply-fix:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+        with:
+          ref: fix/white-background-mobile-density
+
+      - name: Apply bounded UI changes
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          def replace_once(path, old, new):
+              file = Path(path)
+              text = file.read_text()
+              count = text.count(old)
+              if count != 1:
+                  raise SystemExit(f'{path}: expected one match, found {count}: {old[:100]!r}')
+              file.write_text(text.replace(old, new, 1))
+
+          css = 'src/styles/public-ui.css'
+          for old, new in [
+              ('--ui-bg: #f4f1e9;', '--ui-bg: #ffffff;'),
+              ('--ui-bg-soft: #ebe6db;', '--ui-bg-soft: #f3f4f2;'),
+              ('--ui-surface: rgba(255,255,255,.34);', '--ui-surface: #ffffff;'),
+              ('--ui-surface-strong: rgba(255,255,255,.52);', '--ui-surface-strong: #ffffff;'),
+              ('--ui-line: #c8c2b5;', '--ui-line: #d7d9d5;'),
+              ('--ui-line-soft: #d8d2c6;', '--ui-line-soft: #e5e7e3;'),
+              ('--ui-line-strong: #8d877b;', '--ui-line-strong: #9da19a;'),
+              ('background: linear-gradient(180deg,#f7f4ed 0,#f2eee5 44%,#ece7dc 100%);', 'background: #ffffff;'),
+              ('background: rgba(244,241,233,.96);', 'background: rgba(255,255,255,.97);'),
+              ('background: rgba(244,241,233,.78);', 'background: #ffffff;'),
+              ('background: #f8f5ee;', 'background: #ffffff;'),
+              ('background: rgba(244,241,233,.97);', 'background: rgba(255,255,255,.97);')
+          ]:
+              replace_once(css, old, new)
+
+          replace_once(css,
+          '''.chip, [class*="badge"], [class*="status-chip"], [data-tone], .home-status-label, .update-feed-category, .ar-chip, .ar-lifecycle { width: fit-content; max-width: 100%; min-height: 0; padding: 3px 0; border: 0; border-bottom: 1px solid var(--ui-line-strong); border-radius: 0; background: transparent; color: var(--ui-muted); font: 700 13px/1.4 var(--ui-mono); letter-spacing: .03em; text-transform: uppercase; white-space: normal; }
+:where(.chip.active,.chip.positive,[data-tone="positive"],[class*="badge"][class*="active"],.home-status-label--active,[data-state="active"],[data-state="pass"],[data-state="success"]) { color: var(--ui-positive); border-color: var(--ui-positive); }
+:where(.chip.restricted,.chip.suspended,.chip.winding_down,.chip.warn,[data-tone="warning"],.home-status-label--restricted,.home-status-label--winding_down) { color: var(--ui-warning); border-color: var(--ui-warning); }
+:where(.chip.collapsed,.chip.failed,.chip.fail,[data-tone="danger"],[data-tone="critical"],.home-status-label--collapsed,[data-state="failed"],[data-state="error"]) { color: var(--ui-danger); border-color: var(--ui-danger); }''',
+          '''.chip, [class*="badge"], [class*="status-chip"], [data-tone], .home-status-label, .update-feed-category, .ar-chip, .ar-lifecycle { width: fit-content; max-width: 100%; min-height: 0; padding: 3px 7px; border: 1px solid #a8ada6; border-radius: 0; background: #f0f2ef; color: #4f544d; font: 700 13px/1.35 var(--ui-mono); letter-spacing: .03em; text-transform: uppercase; white-space: normal; }
+:where(.chip.active,.chip.open,.chip.recovered,.chip.current,.chip.positive,[data-tone="positive"],[class*="badge"][class*="active"],.home-status-label--active,[data-state="active"],[data-state="pass"],[data-state="success"]) { color: #245f3e; border-color: #86b497; background: #e6f3e9; }
+:where(.chip.restricted,.chip.suspended,.chip.winding_down,.chip.paused,.chip.impaired,.chip.limited,.chip.not_recovered,.chip.warn,[data-tone="warning"],.home-status-label--restricted,.home-status-label--winding_down) { color: #7a5409; border-color: #d2a34a; background: #fff2d7; }
+:where(.chip.collapsed,.chip.failed,.chip.fail,.chip.critical,[data-tone="danger"],[data-tone="critical"],.home-status-label--collapsed,[data-state="failed"],[data-state="error"]) { color: #8a332d; border-color: #cc8179; background: #fde9e6; }
+:where(.chip.inactive,.chip.terminated,.chip.migrated,.chip.rebranded,.chip.announced,.chip.protocol_based,.chip.discontinued,.chip.historical) { color: #39597a; border-color: #91a8c0; background: #eaf0f7; }''')
+
+          replace_once(css,
+          '''  .controls, :where(.stablecoin-index-toolbar,.event-index-toolbar,.organization-index-toolbar) { align-items: stretch; gap: 9px; }
+  .control-field, .search-field, :where(.stablecoin-index-toolbar,.event-index-toolbar,.organization-index-toolbar) label { min-width: 100%; flex-basis: 100%; }
+  .ghost-button, .ui-button { width: 100%; min-height: 44px; }''',
+          '''  .controls, :where(.stablecoin-index-toolbar,.event-index-toolbar,.organization-index-toolbar) { align-items: stretch; gap: 7px; padding: 9px 0; }
+  .control-field, .search-field, :where(.stablecoin-index-toolbar,.event-index-toolbar,.organization-index-toolbar) label { min-width: 100%; flex-basis: 100%; }
+  :where(.stablecoin-index-filter-grid,.event-index-filter-grid,.organization-index-filter-grid) { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 6px; padding: 8px 0; }
+  :where(.stablecoin-index-filter,.event-index-filter,.organization-index-filter) { min-width: 0; }
+  :where(.stablecoin-index-filter,.event-index-filter,.organization-index-filter) > summary { min-height: 40px; padding-inline: 8px; font-size: 13px; }
+  .ghost-button, .ui-button { width: 100%; min-height: 44px; }''')
+
+          replace_once(css,
+          '''  .home-registry-table-wrap { overflow: visible; }
+  .home-registry-table, .home-registry-table thead, .home-registry-table tbody, .home-registry-table tr, .home-registry-table th, .home-registry-table td { display: block; }
+  .home-registry-table thead { display: none; }
+  .home-registry-table tbody { display: grid; gap: 0; }
+  .home-registry-table tr { padding: 11px 0; border-bottom: 1px solid var(--ui-text); }
+  .home-registry-table td { display: grid; grid-template-columns: 105px minmax(0,1fr); gap: 12px; padding: 8px 0; border: 0; font-size: 15px; }
+  .home-registry-table td::before { content: attr(data-label); color: var(--ui-muted); font: 700 13px/1.4 var(--ui-mono); letter-spacing: .03em; text-transform: uppercase; }''',
+          '''  .home-registry-table-wrap { overflow: visible; }
+  .home-registry-table, .home-registry-table thead, .home-registry-table tbody, .home-registry-table tr, .home-registry-table th, .home-registry-table td { display: block; }
+  .home-registry-table thead { display: none; }
+  .home-registry-table tbody { display: grid; gap: 0; }
+  .home-registry-table tr { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); column-gap: 12px; padding: 7px 0; border-bottom: 1px solid var(--ui-text); }
+  .home-registry-table td { min-width: 0; padding: 3px 0; border: 0; font-size: 14px; line-height: 1.3; }
+  .home-registry-table td:first-child, .home-registry-table td:nth-child(4) { grid-column: 1 / -1; }
+  .home-registry-table td:first-child { padding-bottom: 5px; }
+  .home-registry-table td::before { content: attr(data-label); display: block; margin-bottom: 1px; color: var(--ui-muted); font: 700 11px/1.3 var(--ui-mono); letter-spacing: .03em; text-transform: uppercase; }
+  .home-registry-table td:first-child::before { display: none; }''')
+
+          replace_once(css,
+          '''  :where(.stablecoin-index-cards,.event-index-cards,.organization-index-cards) { display: grid; gap: 0; border-top: 1px solid var(--ui-text); }
+  :where(.stablecoin-index-card,.event-index-card,.organization-index-card) { padding: 10px 0; display: grid; gap: 7px; border: 0; border-bottom: 1px solid var(--ui-text); }
+  .stablecoin-index-card-heading { min-width: 0; display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+  .stablecoin-index-card-identity { min-width: 0; display: flex; align-items: flex-start; gap: 8px; }
+  .stablecoin-mark--large { width: 40px; height: 40px; }
+  .stablecoin-dossier-heading-identity { gap: 10px; }
+  .stablecoin-index-card :where(.stablecoin-mark,.ticker-badge) { margin-top: 1px; }
+  .stablecoin-index-card-identity h2 { margin: 0; font-size: 1.05rem; line-height: 1.2; }
+  .stablecoin-index-card-identity .record-symbol { display: block; margin-bottom: 2px; }
+  .stablecoin-index-card-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .index-card-primary-facts, .index-card-secondary-facts { grid-template-columns: 1fr; }
+  .stablecoin-index-card-grid > div { min-height: 0; padding: 8px; align-content: start; }
+  .stablecoin-index-card-grid dt { font-size: 13px; line-height: 1.25; }
+  .stablecoin-index-card-grid dd { margin: 3px 0 0; font-size: 15px; line-height: 1.35; }
+  :where(.event-index-card,.organization-index-card) h2 { margin-bottom: 2px; font-size: 1.05rem; line-height: 1.25; }
+  :where(.event-index-card,.organization-index-card) p { line-height: 1.4; }''',
+          '''  :where(.stablecoin-index-cards,.event-index-cards,.organization-index-cards) { display: grid; gap: 0; border-top: 1px solid var(--ui-text); }
+  :where(.stablecoin-index-card,.event-index-card,.organization-index-card) { padding: 7px 0; display: grid; gap: 4px; border: 0; border-bottom: 1px solid var(--ui-text); }
+  .stablecoin-index-card-heading { min-width: 0; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  .stablecoin-index-card-identity { min-width: 0; display: flex; align-items: center; gap: 7px; }
+  .stablecoin-mark--large { width: 32px; height: 32px; }
+  .stablecoin-dossier-heading-identity { gap: 10px; }
+  .stablecoin-index-card :where(.stablecoin-mark,.ticker-badge) { margin-top: 0; }
+  .stablecoin-index-card-identity h2 { margin: 0; font-size: 1rem; line-height: 1.16; }
+  .stablecoin-index-card-identity .record-symbol { display: block; margin-bottom: 1px; font-size: 11px; }
+  .stablecoin-index-card-grid { grid-template-columns: repeat(2,minmax(0,1fr)); border-top: 1px solid var(--ui-line); border-left: 0; }
+  .index-card-primary-facts, .index-card-secondary-facts { grid-template-columns: 1fr; }
+  .stablecoin-index-card-grid > div { min-height: 0; padding: 4px 0; align-content: start; border: 0; } .stablecoin-index-card-grid > div + div { padding-left: 10px; border-left: 1px solid var(--ui-line); }
+  .stablecoin-index-card-grid dt { font-size: 11px; line-height: 1.2; }
+  .stablecoin-index-card-grid dd { margin: 1px 0 0; font-size: 13px; line-height: 1.25; }
+  :where(.stablecoin-index-card-details,.organization-index-card-details,.event-index-card-details) > summary { min-height: 36px; font-size: 13px; } .stablecoin-index-card .chip { padding: 2px 5px; font-size: 11px; } :where(.event-index-card,.organization-index-card) h2 { margin: 0; font-size: 1rem; line-height: 1.2; } :where(.event-index-card,.organization-index-card) p { margin: 0; font-size: 14px; line-height: 1.3; } :where(.event-index-card-r5-meta,.organization-index-card-r5-heading) { font-size: 11px; line-height: 1.25; }''')
+
+          replace_once(css,
+          '''  .footer-navigation { display: grid; grid-template-columns: 1fr; gap: 12px; }
+  .footer-navigation-group { display: grid; gap: 4px; }
+  .footer-navigation-group a { width: fit-content; min-height: 44px; }''',
+          '''  .footer-navigation { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px 18px; padding-block: 10px; }
+  .footer-navigation-group { display: grid; align-content: start; gap: 1px; }
+  .footer-navigation-group a { width: fit-content; min-height: 34px; font-size: 14px; }''')
+
+          replace_once(css,
+              '  .site-main { padding-top: 20px; padding-bottom: 48px; }',
+              '  .site-main { padding-top: 14px; padding-bottom: 36px; } .stablecoin-index-page, .event-index-page, .organization-index-page, .stats-page, .timeline-page, .compare-page, .ar-explorer, .maintenance-page, .update-feed-page { gap: 22px; }')
+          replace_once(css,
+              '  :where(.event-index-ledger,.organization-index-ledger,.event-detail-ledger,.organization-detail-ledger,.stablecoin-dossier-facts,.stats-kpi-grid,.stats-mini-kpi-grid,.maintenance-counts dl) { grid-template-columns: 1fr 1fr; }',
+              '  :where(.event-index-ledger,.organization-index-ledger,.event-detail-ledger,.organization-detail-ledger,.stablecoin-dossier-facts,.stats-kpi-grid,.stats-mini-kpi-grid,.maintenance-counts dl) { grid-template-columns: 1fr 1fr; }\n  :where(.event-index-ledger,.organization-index-ledger,.event-detail-ledger,.organization-detail-ledger,.stablecoin-dossier-facts,.stats-kpi-grid,.stats-mini-kpi-grid,.maintenance-counts dl) > div { min-height: 76px; padding: 10px; gap: 5px; }')
+          replace_once(css,
+              '  .directory-section, .registry-section { margin-top: 34px; }',
+              '  .directory-section, .registry-section { margin-top: 28px; }')
+
+          replace_once('src/layouts/BaseLayout.astro', '<meta name="theme-color" content="#080b0d" />', '<meta name="theme-color" content="#ffffff" />')
+
+          replace_once('scripts/audit-public-typography-enums-direct.mjs',
+          '''            const borderBottomWidth = Number.parseFloat(style.borderBottomWidth) || 0;
+            const background = parseRgb(style.backgroundColor);
+            const transparent = !background || background[3] < .08;
+            if (rect.height < 14 || radius !== 0 || borderBottomWidth < 1 || !transparent) invalidBadges.push({ element: pathFor(element), text: displayText(element).slice(0, 100) });''',
+          '''            const borderBottomWidth = Number.parseFloat(style.borderBottomWidth) || 0;
+            const borderTopWidth = Number.parseFloat(style.borderTopWidth) || 0;
+            if (rect.height < 18 || radius !== 0 || borderBottomWidth < 1 || borderTopWidth < 1) invalidBadges.push({ element: pathFor(element), text: displayText(element).slice(0, 100) });''')
+
+          replace_once('scripts/validate-ui-v3-cleanup.mjs',
+              "badges: 'flat square underlined state labels with readable text are mandatory',",
+              "badges: 'square color-coded semantic state labels with readable text are mandatory',")
+
+          css_lines = Path(css).read_text().splitlines()
+          if len(css_lines) >= 553:
+              raise SystemExit(f'public-ui.css exceeded 552 lines: {len(css_lines)}')
+          print(f'public-ui.css lines: {len(css_lines)}')
+          PY
+
+      - name: Remove one-shot workflow and commit
+        run: |
+          rm .github/workflows/apply-white-mobile-fix.yml
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add src/styles/public-ui.css src/layouts/BaseLayout.astro scripts/audit-public-typography-enums-direct.mjs scripts/validate-ui-v3-cleanup.mjs .github/workflows/apply-white-mobile-fix.yml
+          git commit -m "Restore white UI and compact mobile registries"
+          git push origin HEAD:fix/white-background-mobile-density
