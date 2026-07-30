@@ -64,7 +64,7 @@ for (const route of routes) {
         '--ui-positive', '--ui-warning', '--ui-danger', '--ui-neutral'
       ].map((name) => [name, rootStyle.getPropertyValue(name).trim()]));
       const interactiveSelector = 'a, button, summary, [role="button"], [role="link"]';
-      const explicitSemantic = '[class*="status"], [class*="badge"], [class*="chip"], [class*="legend"], [class*="chart"], [class*="bar"], [class*="warning"], [class*="danger"], [class*="alert"], [class*="archive"], [class*="reliability"], [class*="severity"], [data-status], [data-tone], [aria-current="page"], [aria-selected="true"]';
+      const explicitSemantic = '[class*="status"], [class*="lifecycle"], [class*="badge"], [class*="chip"], [class*="legend"], [class*="chart"], [class*="bar"], [class*="warning"], [class*="danger"], [class*="alert"], [class*="archive"], [class*="reliability"], [class*="severity"], [data-status], [data-tone], [aria-current="page"], [aria-selected="true"]';
       const neutralBorderHexes = new Set([
         tokens['--ui-line'],
         tokens['--ui-line-soft']

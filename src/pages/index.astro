@@ -70,12 +70,12 @@ const jsonLd = {
 };
 ---
 <BaseLayout title={title} description={description} canonicalPath="/" jsonLd={jsonLd}>
-  <div class="home-ledger">
+  <div class="home-ledger" data-home-priority="recent-records-first">
     <section class="home-intro" aria-labelledby="home-title">
       <div class="home-intro-copy">
         <p class="kicker">Stablecoin history</p>
-        <h1 id="home-title">The historical record of stablecoins, issuers, market access, and failure.</h1>
-        <p class="lede">Stable or Gone documents how stable assets launched, changed, lost access, migrated, recovered, wound down, or collapsed. It connects asset identity, organizations, events, evidence, and known unknowns.</p>
+        <h1 id="home-title">A historical registry of stablecoins.</h1>
+        <p class="lede">Track {stablecoins.length} stablecoins, their organizations, material events, access changes, and supporting evidence.</p>
       </div>
       <dl class="home-facts" aria-label="Registry summary">
         <div><dt>Stablecoins</dt><dd>{stablecoins.length}<small> stable assets</small></dd></div>
@@ -85,9 +85,66 @@ const jsonLd = {
       </dl>
     </section>
 
+    <section class="registry-section registry-section--priority" aria-labelledby="registry-title">
+      <div class="section-heading home-registry-heading">
+        <div>
+          <p class="kicker">Recently reviewed</p>
+          <h2 id="registry-title">Latest registry entries</h2>
+        </div>
+        <a class="registry-heading-link" href="/stablecoins/">Browse all {stablecoins.length} records →</a>
+      </div>
+
+      <div class="registry-panel">
+        <div class="registry-count">
+          <span><strong>{previewRows.length}</strong> recently reviewed records</span>
+          <span>Last verified <strong>{latestVerified}</strong></span>
+        </div>
+        <div class="table-wrap home-registry-table-wrap">
+          <table class="home-registry-table">
+            <thead>
+              <tr>
+                <th>Stablecoin</th>
+                <th>Lifecycle</th>
+                <th>Reference</th>
+                <th>Organization</th>
+                <th>Reviewed</th>
+                <th>Evidence / events</th>
+              </tr>
+            </thead>
+            <tbody>
+              {previewRows.map(({ coin, organization, domain, lifecycle, reference, evidence: sourceCount, events: linkedEvents }) => (
+                <tr class="home-registry-row">
+                  <td data-label="Stablecoin">
+                    <div class="stablecoin-dossier-heading-identity">
+                      <StablecoinMark slug={coin.slug} symbol={coin.symbol || ''} name={coin.name} size="small" loading="eager" />
+                      <div>
+                        <a href={`/stablecoin/${coin.slug}/`}><strong>{coin.name}</strong></a>
+                        <small>{coin.symbol || 'No symbol'}{domain ? ` · ${domain}` : ''}</small>
+                      </div>
+                    </div>
+                  </td>
+                  <td data-label="Lifecycle"><span class={`chip chip--${lifecycle}`}>{formatLifecycleLabel(lifecycle)}</span></td>
+                  <td data-label="Reference">{reference}</td>
+                  <td data-label="Organization">
+                    {organization ? <a href={`/issuer/${organization.slug}/`}>{organization.name}</a> : 'Not recorded'}
+                  </td>
+                  <td data-label="Reviewed"><strong>{coin.last_verified_at || 'Not recorded'}</strong></td>
+                  <td data-label="Evidence / events" class="home-registry-evidence">
+                    <strong>{sourceCount} sources</strong><small> · {linkedEvents} {linkedEvents === 1 ? 'event' : 'events'}</small>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <div class="registry-count registry-count--footer">
+          <a class="support-cta" href="/stablecoins/">Open all stablecoin records</a>
+        </div>
+      </div>
+    </section>
+
     <section class="archive-note" aria-label="Registry scope note">
       <span>Evidence-based static registry</span>
-      <span>Last verified {latestVerified}</span>
       <span>Not a ranking or market dashboard</span>
     </section>
 
@@ -97,7 +154,7 @@ const jsonLd = {
           <p class="kicker">Archive directory</p>
           <h2 id="directory-title">Explore the record</h2>
         </div>
-        <p>Cross-record views separate lifecycle, organizations, events, access, evidence, and statistical context.</p>
+        <p>Cross-record views for lifecycle, organizations, events, access, evidence, and statistics.</p>
       </div>
       <div class="editorial-directory">
         {entryCards.map((card) => (
@@ -111,64 +168,8 @@ const jsonLd = {
     </section>
 
     <aside class="context-support-callout" aria-label="Support Stable or Gone">
-      <p><strong>Help preserve the public record.</strong> Support source verification, broken-link review, new records, and ongoing archive maintenance. Support does not affect listings or editorial decisions.</p>
+      <p><strong>Help preserve the public record.</strong> Support source verification, broken-link review, new records, and archive maintenance.</p>
       <a class="support-cta" href="/support/">View support wallets</a>
     </aside>
-
-    <section class="registry-section" aria-labelledby="registry-title">
-      <div class="section-heading">
-        <div>
-          <p class="kicker">Recently reviewed</p>
-          <h2 id="registry-title">Twenty current registry entries</h2>
-        </div>
-        <p>The complete searchable and filterable registry is kept on the dedicated Stablecoins page rather than duplicated in full here.</p>
-      </div>
-
-      <div class="registry-panel">
-        <div class="registry-count">
-          Showing <strong>{previewRows.length}</strong> recently reviewed records from <strong>{stablecoins.length}</strong> stablecoins
-          <a class="registry-full-link" href="/stablecoins/">Browse the full registry →</a>
-        </div>
-        <div class="table-wrap home-registry-table-wrap">
-          <table class="home-registry-table">
-            <thead>
-              <tr>
-                <th>Stablecoin</th>
-                <th>Lifecycle</th>
-                <th>Reference</th>
-                <th>Primary organization</th>
-                <th>Reviewed</th>
-                <th>Evidence / events</th>
-              </tr>
-            </thead>
-            <tbody>
-              {previewRows.map(({ coin, organization, domain, lifecycle, reference, evidence: sourceCount, events: linkedEvents }) => (
-                <tr>
-                  <td data-label="Stablecoin">
-                    <div class="stablecoin-dossier-heading-identity">
-                      <StablecoinMark slug={coin.slug} symbol={coin.symbol || ''} name={coin.name} size="small" loading="eager" />
-                      <div>
-                        <a href={`/stablecoin/${coin.slug}/`}><strong>{coin.name}</strong></a>
-                        <small>{coin.symbol || 'No symbol'}{domain ? ` · ${domain}` : ''}</small>
-                      </div>
-                    </div>
-                  </td>
-                  <td data-label="Lifecycle"><span class={`chip ${lifecycle}`}>{formatLifecycleLabel(lifecycle)}</span></td>
-                  <td data-label="Reference">{reference}</td>
-                  <td data-label="Primary organization">
-                    {organization ? <a href={`/issuer/${organization.slug}/`}>{organization.name}</a> : 'No primary organization recorded'}
-                  </td>
-                  <td data-label="Reviewed"><strong>{coin.last_verified_at || 'Not recorded'}</strong></td>
-                  <td data-label="Evidence / events"><strong>{sourceCount} sources</strong><small>{linkedEvents} events</small></td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <div class="registry-count registry-count--footer">
-          <a class="support-cta" href="/stablecoins/">Open all stablecoin records</a>
-        </div>
-      </div>
-    </section>
   </div>
 </BaseLayout>
