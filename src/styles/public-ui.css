@@ -337,15 +337,15 @@ pre { max-width: 100%; overflow-x: auto; white-space: pre-wrap; }
   .masthead-actions .correction-link { display: none; }
   .support-cta { min-height: 44px; padding-inline: 11px; font-size: 15px; }
   .site-navigation-shell { grid-template-columns: minmax(0,1fr) auto; } .site-nav, .site-primary-navigation { overflow: hidden; padding-inline: 0; } .site-primary-navigation a:nth-child(n+4) { display: none; }
-  .site-nav a, .site-primary-navigation a { min-height: 44px; padding-inline: 6px; font-size: 14px; } .site-more-navigation > summary { min-height: 44px; padding-inline: 9px; font-size: 14px; }
+  .site-nav a, .site-primary-navigation a { min-height: 44px; padding-inline: 5px; font-size: 15px; } .site-more-navigation > summary { min-height: 44px; padding-inline: 8px; font-size: 15px; }
   .site-more-navigation-panel a { min-height: 44px; font-size: 15px; }
   .site-main { padding-top: 14px; padding-bottom: 36px; } .stablecoin-index-page, .event-index-page, .organization-index-page, .stats-page, .timeline-page, .compare-page, .ar-explorer, .maintenance-page, .update-feed-page { gap: 22px; }
   h1 { font-size: clamp(2.35rem,11.5vw,3.15rem); }
   h2 { font-size: 1.7rem; }
   main p, main li, main blockquote { font-size: 16px; }
   main :where(button,input,select,textarea,summary,label,a) { font-size: 15px; }
-  .home-intro { gap: 13px; padding: 10px 0 13px; } .home-intro h1 { max-width: 11ch; margin-bottom: 7px; font-size: clamp(2.05rem,10vw,2.65rem); line-height: .98; } .home-intro .lede { max-width: 34rem; font-size: 15px; line-height: 1.42; }
-  .home-facts div { min-height: 68px; padding: 8px 10px; gap: 3px; } .home-facts dd { font-size: 1.55rem; line-height: 1; } .home-facts dd small { margin-top: 3px; font-size: 11px; line-height: 1.25; }
+  .home-intro { gap: 13px; padding: 10px 0 13px; } .home-intro h1 { max-width: 11ch; margin-bottom: 7px; font-size: clamp(2.05rem,10vw,2.65rem); line-height: .98; } .home-intro .lede { max-width: 34rem; font-size: 16px; line-height: 1.45; }
+  .home-facts div { min-height: 72px; padding: 8px 10px; gap: 3px; } .home-facts dd { font-size: 1.55rem; line-height: 1; } .home-facts dd small { margin-top: 3px; font-size: 13px; line-height: 1.35; }
   .archive-note { align-items: flex-start; flex-direction: column; padding-block: 7px; }
   .archive-note span { padding: 4px 0; }
   .archive-note span + span::before { content: none; }
@@ -362,13 +362,13 @@ pre { max-width: 100%; overflow-x: auto; white-space: pre-wrap; }
   :where(.stablecoin-index-filter,.event-index-filter,.organization-index-filter) { min-width: 0; }
   :where(.stablecoin-index-filter,.event-index-filter,.organization-index-filter) > summary { min-height: 40px; padding-inline: 8px; font-size: 13px; }
   .ghost-button, .ui-button { width: 100%; min-height: 44px; }
-  .home-registry-heading { display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: end; gap: 8px; padding-top: 8px; margin-bottom: 8px; } .home-registry-heading h2 { margin-bottom: 0; font-size: 1.45rem; } .registry-heading-link { min-height: 36px; font-size: 13px; } .registry-count { padding: 8px 10px; justify-content: space-between; gap: 4px 10px; font-size: 13px; }
+  .home-registry-heading { display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: end; gap: 8px; padding-top: 8px; margin-bottom: 8px; } .home-registry-heading h2 { margin-bottom: 0; font-size: 1.45rem; } .registry-heading-link { min-height: 44px; font-size: 15px; } .registry-count { padding: 8px 10px; justify-content: space-between; gap: 4px 10px; font-size: 13px; }
   .home-registry-table-wrap { overflow: visible; } .home-registry-table, .home-registry-table thead, .home-registry-table tbody, .home-registry-table tr, .home-registry-table th, .home-registry-table td { display: block; } .home-registry-table thead { display: none; } .home-registry-table tbody { display: grid; gap: 0; }
-  .home-registry-table tr { display: grid; grid-template-columns: minmax(0,1fr) minmax(104px,.68fr); grid-template-areas: "identity lifecycle" "organization reference" "reviewed evidence"; column-gap: 12px; row-gap: 5px; padding: 10px; border-bottom: 1px solid var(--ui-text); } .home-registry-table td { min-width: 0; padding: 0; border: 0; font-size: 14px; line-height: 1.32; }
+  .home-registry-table tr { display: grid; grid-template-columns: minmax(0,1fr) minmax(104px,.68fr); grid-template-areas: "identity lifecycle" "organization reference" "reviewed evidence"; column-gap: 12px; row-gap: 5px; padding: 10px; border-bottom: 1px solid var(--ui-text); } .home-registry-table td { min-width: 0; padding: 0; border: 0; font-size: 15px; line-height: 1.35; }
   .home-registry-table td:first-child { grid-area: identity; } .home-registry-table td:nth-child(2) { grid-area: lifecycle; align-self: start; justify-self: end; } .home-registry-table td:nth-child(3) { grid-area: reference; } .home-registry-table td:nth-child(4) { grid-area: organization; } .home-registry-table td:nth-child(5) { grid-area: reviewed; } .home-registry-table td:nth-child(6) { grid-area: evidence; }
   .home-registry-table td::before { content: attr(data-label); display: block; margin-bottom: 1px; color: var(--ui-muted); font: 700 10px/1.25 var(--ui-mono); letter-spacing: .03em; text-transform: uppercase; } .home-registry-table td:first-child::before, .home-registry-table td:nth-child(2)::before { display: none; }
-  .home-registry-table .stablecoin-dossier-heading-identity { align-items: center; gap: 8px; } .home-registry-table .stablecoin-mark--small { width: 30px; height: 30px; } .home-registry-table td:first-child a { font-size: 15px; line-height: 1.15; } .home-registry-table td:first-child small { margin-top: 1px; font-size: 12px; line-height: 1.2; } .home-registry-table .chip { padding: 2px 6px; font-size: 12px; white-space: nowrap; }
-  .home-registry-evidence strong, .home-registry-evidence small { display: inline; margin: 0; } .home-registry-evidence small { font-size: 12px; } .registry-count--footer { padding: 8px 10px; } .registry-count--footer .support-cta { width: 100%; min-height: 40px; }
+  .home-registry-table .stablecoin-dossier-heading-identity { align-items: center; gap: 8px; } .home-registry-table .stablecoin-mark--small { width: 30px; height: 30px; } .home-registry-table td:first-child a { font-size: 15px; line-height: 1.35; } .home-registry-table td:first-child small { margin-top: 1px; font-size: 13px; line-height: 1.35; } .home-registry-table .chip { padding: 2px 6px; font-size: 13px; white-space: nowrap; }
+  .home-registry-evidence strong, .home-registry-evidence small { display: inline; margin: 0; } .home-registry-evidence small { font-size: 13px; line-height: 1.35; } .registry-count--footer { padding: 8px 10px; } .registry-count--footer .support-cta { width: 100%; min-height: 40px; }
   :where(.stablecoin-index-table,.event-index-table,.organization-index-table) { display: none; }
   :where(.stablecoin-index-cards,.event-index-cards,.organization-index-cards) { display: grid; gap: 0; border-top: 1px solid var(--ui-text); }
   :where(.stablecoin-index-card,.event-index-card,.organization-index-card) { padding: 7px 0; display: grid; gap: 4px; border: 0; border-bottom: 1px solid var(--ui-text); }
