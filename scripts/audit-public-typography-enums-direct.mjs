@@ -232,9 +232,8 @@ for (const device of devices) {
             const rect = element.getBoundingClientRect();
             const radius = Number.parseFloat(style.borderTopLeftRadius) || 0;
             const borderBottomWidth = Number.parseFloat(style.borderBottomWidth) || 0;
-            const background = parseRgb(style.backgroundColor);
-            const transparent = !background || background[3] < .08;
-            if (rect.height < 14 || radius !== 0 || borderBottomWidth < 1 || !transparent) invalidBadges.push({ element: pathFor(element), text: displayText(element).slice(0, 100) });
+            const borderTopWidth = Number.parseFloat(style.borderTopWidth) || 0;
+            if (rect.height < 18 || radius !== 0 || borderBottomWidth < 1 || borderTopWidth < 1) invalidBadges.push({ element: pathFor(element), text: displayText(element).slice(0, 100) });
             if (invalidBadges.length >= 100) break;
           }
 
