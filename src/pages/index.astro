@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import StablecoinMark from '../components/StablecoinMark.astro';
 import { formatLifecycleLabel } from '../utils/publicTaxonomy';
 import { formatReferenceTargetLabel } from '../utils/referenceTarget';
 import { resolvePrimaryRelationshipForStablecoin } from '../utils/primaryDisplayRelationship';
@@ -144,8 +145,13 @@ const jsonLd = {
               {previewRows.map(({ coin, organization, domain, lifecycle, reference, evidence: sourceCount, events: linkedEvents }) => (
                 <tr>
                   <td data-label="Stablecoin">
-                    <a href={`/stablecoin/${coin.slug}/`}><strong>{coin.name}</strong></a>
-                    <small>{coin.symbol || 'No symbol'}{domain ? ` · ${domain}` : ''}</small>
+                    <div class="home-registry-identity">
+                      <StablecoinMark slug={coin.slug} symbol={coin.symbol || ''} name={coin.name} size="small" />
+                      <div>
+                        <a href={`/stablecoin/${coin.slug}/`}><strong>{coin.name}</strong></a>
+                        <small>{coin.symbol || 'No symbol'}{domain ? ` · ${domain}` : ''}</small>
+                      </div>
+                    </div>
                   </td>
                   <td data-label="Lifecycle"><span class={`chip ${lifecycle}`}>{formatLifecycleLabel(lifecycle)}</span></td>
                   <td data-label="Reference">{reference}</td>
