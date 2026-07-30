@@ -18,9 +18,13 @@ const { page } = Astro.props as { page: number };
 const records = getStablecoins().sort((left, right) => left.name.localeCompare(right.name));
 const totalPages = Math.ceil(records.length / PAGE_SIZE);
 const items = records.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE).map((record) => ({
-  title: `${record.name}${record.symbol ? ` (${record.symbol})` : ''}`,
+  title: record.name,
   href: `/stablecoin/${record.slug}/`,
-  meta: `Lifecycle: ${formatLifecycleLabel(record.lifecycle_status)} · Issuance: ${formatIssuanceLabel(record.issuance_status)}`
+  symbol: record.symbol || 'No symbol',
+  badge: formatLifecycleLabel(record.lifecycle_status),
+  badgeClass: `chip--${record.lifecycle_status || 'unknown'}`,
+  meta: `Issuance: ${formatIssuanceLabel(record.issuance_status)}`,
+  description: `Last reviewed ${record.last_verified_at || 'not recorded'}. Open the canonical record for organizations, evidence, events, deployments, and known unknowns.`
 }));
 const title = `Stablecoin Register — Page ${page}`;
 const description = `Browse canonical Stable or Gone stablecoin records, page ${page} of ${totalPages}, with ordinary HTML links to each record.`;
