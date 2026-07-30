@@ -6,33 +6,61 @@ on:
       - audit/logo-coverage-batch-2
     paths:
       - 'scripts/audit-logo-source-expansion.mjs'
+      - 'scripts/import-trustwallet-logo-batch.mjs'
       - '.github/workflows/audit-logo-source-expansion.yml'
-      - 'data/stablecoins.json'
-      - 'data/deployments.json'
+      - 'data/stablecoins*.json'
+      - 'data/deployments*.json'
       - 'src/utils/stablecoinLogo.ts'
   pull_request:
     paths:
       - 'scripts/audit-logo-source-expansion.mjs'
+      - 'scripts/import-trustwallet-logo-batch.mjs'
       - '.github/workflows/audit-logo-source-expansion.yml'
-      - 'data/stablecoins.json'
-      - 'data/deployments.json'
+      - 'data/stablecoins*.json'
+      - 'data/deployments*.json'
       - 'src/utils/stablecoinLogo.ts'
+      - 'public/stablecoin-logos/**'
+      - 'scripts/audit-stablecoin-logo-coverage.mjs'
+      - 'scripts/validate-ui-v3-stablecoin-index.mjs'
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   audit:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
     steps:
       - name: Checkout SOG
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'push' && 'audit/logo-coverage-batch-2' || github.ref }}
+          fetch-depth: 0
 
-      - name: Fetch licensed source trees without blobs
+      - name: Fetch licensed source trees
         run: |
           set -euo pipefail
-          git clone --depth 1 --filter=blob:none --no-checkout https://github.com/trustwallet/assets.git /tmp/trustwallet-assets
+
+          rm -rf /tmp/trustwallet-assets
+          git clone --filter=blob:none --no-checkout https://github.com/trustwallet/assets.git /tmp/trustwallet-assets
+          git -C /tmp/trustwallet-assets fetch --depth 1 origin 34d808acb2a71e55c41505cd8f15c827db21b0fc
+          git -C /tmp/trustwallet-assets sparse-checkout init --no-cone
+          cat > /tmp/trustwallet-assets/.git/info/sparse-checkout <<'PATHS'
+          blockchains/ethereum/assets/0x00000000eFE302BEAA2b3e6e1b18d08D69a9012a/logo.png
+          blockchains/ethereum/assets/0x3449FC1Cd036255BA1EB19d65fF4BA2b8903A69a/logo.png
+          blockchains/ethereum/assets/0x4Fabb145d64652a948d72533023f6E7A623C7C53/logo.png
+          blockchains/ethereum/assets/0xFa2B947eEc368f42195f24F36d2aF29f7c24CeC2/logo.png
+          blockchains/smartchain/assets/0x0782b6d8c4551B9760e74c0545a9bCD90bdc41E5/logo.png
+          blockchains/celo/assets/0x765DE816845861e75A25fCA122bb6898B8B1282a/logo.png
+          blockchains/polygon/assets/0xa3Fa99A148fA48D14Ed51d610c367C61876997F1/logo.png
+          blockchains/ethereum/assets/0x83F20F44975D03b1b09e64809B757c47f942BEeA/logo.png
+          blockchains/ethereum/assets/0x73A15FeD60Bf67631dC6cd7Bc5B6e8da8190aCF5/logo.png
+          blockchains/smartchain/assets/0x8d0D000Ee44948FC98c9B98A4FA4921476f08B0d/logo.png
+          blockchains/terra/assets/uusd/logo.png
+          LICENSE
+          PATHS
+          git -C /tmp/trustwallet-assets checkout --detach FETCH_HEAD
+          test "$(git -C /tmp/trustwallet-assets rev-parse HEAD)" = "34d808acb2a71e55c41505cd8f15c827db21b0fc"
           git -C /tmp/trustwallet-assets ls-tree -r --name-only HEAD > /tmp/trustwallet-paths.txt
 
           git clone --depth 1 --filter=blob:none --no-checkout https://github.com/bgd-labs/web3-icons.git /tmp/bgd-web3-icons
@@ -44,6 +72,41 @@ jobs:
       - name: Compare canonical records with licensed assets
         run: node scripts/audit-logo-source-expansion.mjs
 
+      - name: Import exact-address assets
+        if: github.event_name == 'push'
+        run: node scripts/import-trustwallet-logo-batch.mjs
+
+      - name: Validate imported coverage
+        if: github.event_name == 'push'
+        run: |
+          node scripts/audit-stablecoin-logo-coverage.mjs
+          node scripts/validate-ui-v3-stablecoin-index.mjs
+
+      - name: Build imported site
+        if: github.event_name == 'push'
+        run: |
+          npm ci --no-audit --no-fund
+          npm run build
+
+      - name: Commit imported assets and coverage updates
+        if: github.event_name == 'push'
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add \
+            public/stablecoin-logos \
+            src/utils/stablecoinLogo.ts \
+            scripts/audit-stablecoin-logo-coverage.mjs \
+            scripts/validate-ui-v3-stablecoin-index.mjs
+          if git diff --cached --quiet; then
+            echo 'No import changes remain.'
+            exit 0
+          fi
+          git diff --cached --check
+          git commit -m 'Add 11 address-verified Stablecoin logos'
+          git push origin HEAD:audit/logo-coverage-batch-2
+
       - name: Upload audit report
         uses: actions/upload-artifact@v4
         with:
@@ -53,6 +116,7 @@ jobs:
           path: |
             artifacts/logo-source-expansion.json
             artifacts/logo-source-expansion.md
+            artifacts/stablecoin-logo-coverage.json
 
       - name: Write summary
         run: cat artifacts/logo-source-expansion.md >> "$GITHUB_STEP_SUMMARY"
