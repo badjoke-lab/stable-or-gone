@@ -186,4 +186,22 @@ const description = 'Derived statistics for the Stable or Gone canonical registr
       <div class="stats-table-wrap"><table><thead><tr><th>Recorded at</th><th>Assets</th><th>Events</th><th>Evidence</th></tr></thead><tbody>{snapshots.map((snapshot: any) => <tr><th scope="row">{snapshot.recorded_at}</th><td>{snapshot.asset_count}</td><td>{snapshot.totals?.events ?? 0}</td><td>{snapshot.totals?.evidence ?? 0}</td></tr>)}</tbody></table></div>
     </section>
   </article>
+  <script>
+    const sections = [...document.querySelectorAll('.stats-page > .stats-section')];
+    sections.forEach((section, index) => {
+      if (!(section instanceof HTMLElement) || index < 2) return;
+      const heading = section.querySelector('h2');
+      const kicker = section.querySelector('.stats-kicker');
+      const details = document.createElement('details');
+      details.className = 'stats-disclosure';
+      const summary = document.createElement('summary');
+      const label = document.createElement('span');
+      const title = document.createElement('strong');
+      label.textContent = kicker?.textContent?.trim() || 'Statistics';
+      title.textContent = heading?.textContent?.trim() || 'Analysis section';
+      summary.append(label, title);
+      section.replaceWith(details);
+      details.append(summary, section);
+    });
+  </script>
 </BaseLayout>

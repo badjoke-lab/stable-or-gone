@@ -4,6 +4,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 interface Item {
   title: string;
   href: string;
+  symbol?: string;
+  badge?: string;
+  badgeClass?: string;
   meta?: string;
   description?: string;
 }
@@ -57,15 +60,21 @@ const jsonLd = {
       </div>
       <h1>{title}</h1>
       <p class="static-registry-description">{description}</p>
-      <p class="static-registry-note">Bounded page {page} of {totalPages}. Every record remains available through an ordinary HTML link.</p>
+      <p class="static-registry-note">Page {page} of {totalPages}. Every record remains available through an ordinary HTML link.</p>
     </header>
 
     <ol class="static-registry-list" start={rangeStart}>
       {items.map((item, index) => (
-        <li>
+        <li class="static-registry-card">
           <span class="static-registry-number" aria-hidden="true">{String(rangeStart + index).padStart(2, '0')}</span>
           <div class="static-registry-item-copy">
-            <a href={item.href}>{item.title}</a>
+            <div class="static-registry-item-header">
+              <div>
+                {item.symbol && <span class="record-symbol">{item.symbol}</span>}
+                <h2><a href={item.href}>{item.title}</a></h2>
+              </div>
+              {item.badge && <span class={`chip ${item.badgeClass ?? ''}`}>{item.badge}</span>}
+            </div>
             {item.meta && <p class="static-registry-meta">{item.meta}</p>}
             {item.description && <p class="static-registry-item-description">{item.description}</p>}
           </div>

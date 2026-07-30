@@ -121,7 +121,7 @@ const dataLinks = [
             </span>
           </div>
           <div class="masthead-actions" aria-label="Project actions">
-            <a class="support-cta" href="/support/" aria-current={isCurrent('/support/') ? 'page' : undefined}>Support this archive</a>
+            <a class="support-cta support-cta--header" href="/support/" aria-current={isCurrent('/support/') ? 'page' : undefined} aria-label="Support this archive"><span class="support-cta-label--full">Support this archive</span><span class="support-cta-label--compact" aria-hidden="true">Support</span></a>
             <a class="correction-link" href="/contact/">Submit correction</a>
           </div>
         </div>
@@ -197,15 +197,19 @@ const dataLinks = [
         </div>
         <div class="footer-navigation site-shell">
           {footerNavigationGroups.map((group) => (
-            <nav class="footer-navigation-group" aria-label={`${group.label} footer navigation`}>
-              <strong>{group.label}</strong>
-              {group.items.map((item) => <a href={item.href}>{item.label}</a>)}
-            </nav>
+            <details class="footer-navigation-group" data-footer-group data-disclosure open>
+              <summary>{group.label}</summary>
+              <nav aria-label={`${group.label} footer navigation`}>
+                {group.items.map((item) => <a href={item.href}>{item.label}</a>)}
+              </nav>
+            </details>
           ))}
-          <nav class="footer-navigation-group footer-data-links" aria-label="Public data links">
-            <strong>Public data</strong>
-            {dataLinks.map((item) => <a href={item.href}>{item.label}</a>)}
-          </nav>
+          <details class="footer-navigation-group footer-data-links" data-footer-group data-disclosure open>
+            <summary>Public data</summary>
+            <nav aria-label="Public data links">
+              {dataLinks.map((item) => <a href={item.href}>{item.label}</a>)}
+            </nav>
+          </details>
         </div>
         <div class="footer-legal site-shell">
           <p>Stable or Gone is a source-backed historical registry, not a ranking, recommendation, or real-time market dashboard.</p>
@@ -230,6 +234,11 @@ const dataLinks = [
       document.querySelectorAll('[data-disclosure]').forEach((item) => {
         if (item instanceof HTMLDetailsElement) initialiseDisclosure(item);
       });
+      if (window.matchMedia('(max-width: 640px)').matches) {
+        document.querySelectorAll('[data-footer-group]').forEach((item) => {
+          if (item instanceof HTMLDetailsElement) item.open = false;
+        });
+      }
 
       const buildContents = (articleSelector: string, tocSelector: string, listSelector: string, sectionSelector: string, headingSelector: string) => {
         const article = document.querySelector(articleSelector);
@@ -266,7 +275,7 @@ const dataLinks = [
           list.append(item);
         });
         if (list.children.length === 0) toc.hidden = true;
-        if (window.matchMedia('(max-width: 820px)').matches) toc.open = false;
+        else if (window.matchMedia('(max-width: 820px)').matches) toc.open = true;
       };
 
       buildContents(

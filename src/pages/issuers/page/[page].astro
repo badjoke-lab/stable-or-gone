@@ -20,8 +20,10 @@ const totalPages = Math.ceil(records.length / PAGE_SIZE);
 const items = records.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE).map((record) => ({
   title: record.name,
   href: `/issuer/${record.slug}/`,
-  meta: `${formatPublicLabel(record.categoryLabel)} · ${formatPublicLabel(record.regulatoryLabel)} · ${formatPublicLabel(record.jurisdictionLabel)}`,
-  description: `${record.assetCount} connected asset${record.assetCount === 1 ? '' : 's'}, ${record.relationshipCount} relationship${record.relationshipCount === 1 ? '' : 's'}, and ${record.sourceIdentityCount} source${record.sourceIdentityCount === 1 ? '' : 's'}.`
+  symbol: formatPublicLabel(record.jurisdictionLabel),
+  badge: formatPublicLabel(record.regulatoryLabel),
+  meta: `${formatPublicLabel(record.categoryLabel)} · ${record.assetCount} connected asset${record.assetCount === 1 ? '' : 's'}`,
+  description: `${record.relationshipCount} relationship${record.relationshipCount === 1 ? '' : 's'} and ${record.sourceIdentityCount} source identit${record.sourceIdentityCount === 1 ? 'y' : 'ies'}.`
 }));
 const title = `Stablecoin Organizations — Page ${page}`;
 const description = `Browse reviewed Stable or Gone organization records, page ${page} of ${totalPages}, with ordinary HTML links to each organization.`;
