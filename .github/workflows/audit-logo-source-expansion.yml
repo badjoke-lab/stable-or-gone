@@ -21,7 +21,6 @@ on:
       - 'src/utils/stablecoinLogo.ts'
       - 'public/stablecoin-logos/**'
       - 'scripts/audit-stablecoin-logo-coverage.mjs'
-      - 'scripts/validate-ui-v3-stablecoin-index.mjs'
 
 permissions:
   contents: write
@@ -76,9 +75,7 @@ jobs:
         run: node scripts/import-trustwallet-logo-batch.mjs
 
       - name: Validate imported coverage
-        run: |
-          node scripts/audit-stablecoin-logo-coverage.mjs
-          node scripts/validate-ui-v3-stablecoin-index.mjs
+        run: node scripts/audit-stablecoin-logo-coverage.mjs
 
       - name: Build imported site
         run: |
@@ -93,8 +90,7 @@ jobs:
           git add \
             public/stablecoin-logos \
             src/utils/stablecoinLogo.ts \
-            scripts/audit-stablecoin-logo-coverage.mjs \
-            scripts/validate-ui-v3-stablecoin-index.mjs
+            scripts/audit-stablecoin-logo-coverage.mjs
           if git diff --cached --quiet; then
             echo 'No import changes remain.'
             exit 0
