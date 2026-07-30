@@ -64,32 +64,6 @@ coverage = replaceRequired(
 coverage = coverage.replaceAll('local_svg_assets', 'local_logo_assets');
 fs.writeFileSync(coveragePath, coverage);
 
-const validatorPath = path.join(root, 'scripts/validate-ui-v3-stablecoin-index.mjs');
-let validator = fs.readFileSync(validatorPath, 'utf8');
-validator = replaceRequired(
-  validator,
-  "  logoLicense: 'public/stablecoin-logos/LICENSE-web3icons.txt',",
-  "  logoLicense: 'public/stablecoin-logos/LICENSE-web3icons.txt',\n  trustWalletLicense: 'public/stablecoin-logos/LICENSE-trustwallet-assets.txt',",
-  'validator license input'
-);
-const validatorEntries = batch.map(([slug, filename]) => `  '${slug}': '${filename}',`).join('\n');
-validator = replaceRequired(
-  validator,
-  "const logoMappings = {\n  'agoric-ist': 'ist.svg',",
-  `const logoMappings = {\n${validatorEntries}\n  'agoric-ist': 'ist.svg',`,
-  'validator mappings'
-);
-validator = validator.replaceAll("Object.keys(logoMappings).length === 39", "Object.keys(logoMappings).length === 50")
-  .replaceAll('coverage must be 39 records', 'coverage must be 50 records')
-  .replaceAll('effectiveLogoRecordCount === 39', 'effectiveLogoRecordCount === 50');
-validator = replaceRequired(
-  validator,
-  "check(source.logoReadme?.includes('113249b982b3ec5e597feee1ad03d15961e6598b'), 'pinned Web3 Icons provenance missing');",
-  "check(source.logoReadme?.includes('113249b982b3ec5e597feee1ad03d15961e6598b'), 'pinned Web3 Icons provenance missing');\ncheck(source.logoReadme?.includes('34d808acb2a71e55c41505cd8f15c827db21b0fc'), 'pinned Trust Wallet Assets provenance missing');\ncheck(source.trustWalletLicense?.startsWith('MIT License'), 'Trust Wallet Assets MIT notice missing');",
-  'validator Trust Wallet provenance'
-);
-fs.writeFileSync(validatorPath, validator);
-
 const readmePath = path.join(logoDir, 'README.md');
 let readme = fs.readFileSync(readmePath, 'utf8');
 readme = readme.replace('Current audited coverage: **39 of 116 canonical Stable or Gone stablecoin records**.', 'Current audited coverage: **50 of 116 canonical Stable or Gone stablecoin records**.');
