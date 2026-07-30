@@ -19,8 +19,10 @@ on:
       - 'public/brand/**'
       - 'public/stablecoin-logos/**'
       - 'config/public-routes.json'
+      - 'config/stablecoin-logo-decisions.json'
       - 'scripts/capture-site-screenshots.mjs'
       - 'scripts/capture-stablecoin-mark-mix.mjs'
+      - 'scripts/capture-stablecoin-logo-catalog.mjs'
       - 'scripts/audit-stablecoin-logo-coverage.mjs'
       - 'scripts/audit-representative-layout-geometry.mjs'
       - 'scripts/collect-public-routes.mjs'
@@ -36,8 +38,10 @@ on:
       - 'public/brand/**'
       - 'public/stablecoin-logos/**'
       - 'config/public-routes.json'
+      - 'config/stablecoin-logo-decisions.json'
       - 'scripts/capture-site-screenshots.mjs'
       - 'scripts/capture-stablecoin-mark-mix.mjs'
+      - 'scripts/capture-stablecoin-logo-catalog.mjs'
       - 'scripts/audit-stablecoin-logo-coverage.mjs'
       - 'scripts/audit-representative-layout-geometry.mjs'
       - 'scripts/collect-public-routes.mjs'
@@ -103,6 +107,9 @@ jobs:
       - name: Audit canonical Stablecoin logo coverage
         run: node scripts/audit-stablecoin-logo-coverage.mjs
 
+      - name: Capture all 116 Stablecoin marks
+        run: node scripts/capture-stablecoin-logo-catalog.mjs
+
       - name: Capture and validate mixed Stablecoin marks
         run: node scripts/capture-stablecoin-mark-mix.mjs
 
@@ -142,6 +149,7 @@ jobs:
             artifacts/screenshots/stablecoin-mark-mix-audit.json
             artifacts/screenshots/layout-geometry-audit.json
             artifacts/stablecoin-logo-coverage.json
+            artifacts/stablecoin-logo-catalog/stablecoin-logo-catalog.json
             artifacts/screenshots/color-audit.desktop.json
             artifacts/screenshots/color-audit.mobile.json
             artifacts/screenshots/color-system-validation.json
@@ -149,6 +157,19 @@ jobs:
             artifacts/screenshots/readability-audit.mobile.json
             artifacts/screenshots/readability-validation.json
             /tmp/sog-screenshot-server.log
+
+      - name: Upload all-record Stablecoin mark catalog
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sog-stablecoin-mark-catalog-${{ github.run_id }}
+          if-no-files-found: error
+          retention-days: 14
+          compression-level: 0
+          path: |
+            artifacts/stablecoin-logo-catalog/index.html
+            artifacts/stablecoin-logo-catalog/stablecoin-logo-catalog.png
+            artifacts/stablecoin-logo-catalog/stablecoin-logo-catalog.json
 
       - name: Upload representative desktop screenshots
         if: always()
@@ -176,8 +197,9 @@ jobs:
           echo "## SOG representative screenshot capture" >> "$GITHUB_STEP_SUMMARY"
           echo "- Mode: $CAPTURE_MODE" >> "$GITHUB_STEP_SUMMARY"
           echo "- Detail samples per family: 3" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Stablecoin mark decisions: 116 of 116" >> "$GITHUB_STEP_SUMMARY"
+          echo "- All-record Stablecoin mark catalog: 116 cards" >> "$GITHUB_STEP_SUMMARY"
           echo "- Mixed Stablecoin marks: desktop and mobile" >> "$GITHUB_STEP_SUMMARY"
-          echo "- Canonical Stablecoin logo coverage: 39 of 116 records" >> "$GITHUB_STEP_SUMMARY"
           echo "- Layout geometry: every representative desktop/mobile route" >> "$GITHUB_STEP_SUMMARY"
           for DEVICE in desktop mobile; do
             MANIFEST="artifacts/screenshots/manifest.$DEVICE.json"
@@ -191,4 +213,4 @@ jobs:
               echo "- $DEVICE: manifest missing" >> "$GITHUB_STEP_SUMMARY"
             fi
           done
-          echo "- Manual inspection: representative screenshots only" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Manual inspection: representative screenshots and all-record mark catalog" >> "$GITHUB_STEP_SUMMARY"
