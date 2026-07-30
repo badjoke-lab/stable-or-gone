@@ -1,0 +1,31 @@
+name: Apply full representative UI remediation
+
+on:
+  push:
+    branches:
+      - fix/full-representative-ui-remediation
+    paths:
+      - scripts/apply-full-ui-remediation.mjs
+      - .github/workflows/apply-full-ui-remediation.yml
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out remediation branch
+        uses: actions/checkout@v4
+        with:
+          ref: fix/full-representative-ui-remediation
+          fetch-depth: 0
+      - name: Apply bounded remediation
+        run: node scripts/apply-full-ui-remediation.mjs
+      - name: Commit remediated source
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Fix representative desktop and mobile UI regressions"
+          git push origin HEAD:fix/full-representative-ui-remediation
