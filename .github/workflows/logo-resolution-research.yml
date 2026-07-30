@@ -1,67 +1,76 @@
 name: Resolve all Stablecoin logos
 
 on:
-  push:
-    branches:
-      - audit/resolve-all-stablecoin-logos
-    paths:
-      - 'scripts/export-stablecoin-logo-research.mjs'
-      - 'scripts/crawl-stablecoin-logo-candidates.mjs'
-      - '.github/workflows/logo-resolution-research.yml'
-      - 'data/**'
-      - 'src/utils/stablecoinLogo.ts'
   pull_request:
+    types: [opened, reopened, synchronize]
     paths:
       - 'scripts/export-stablecoin-logo-research.mjs'
       - 'scripts/crawl-stablecoin-logo-candidates.mjs'
+      - 'scripts/import-final-stablecoin-logo-decisions.mjs'
       - '.github/workflows/logo-resolution-research.yml'
       - 'data/**'
       - 'src/utils/stablecoinLogo.ts'
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
-  export-research-manifest:
+  finalize-all-logo-decisions:
+    if: github.event_name == 'workflow_dispatch' || github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref || github.ref_name }}
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Export all Stablecoin logo research inputs
-        run: node scripts/export-stablecoin-logo-research.mjs
-      - name: Validate complete corpus inventory
+          cache: npm
+      - name: Install dependencies and image tooling
         run: |
-          node - <<'NODE'
-          const fs = require('fs');
-          const report = JSON.parse(fs.readFileSync('artifacts/stablecoin-logo-research.json', 'utf8'));
-          if (report.canonical_records !== 116) throw new Error(`expected 116 records, found ${report.canonical_records}`);
-          if (report.mapped_records !== 60) throw new Error(`expected 60 mapped records, found ${report.mapped_records}`);
-          if (report.unresolved_records !== 56) throw new Error(`expected 56 unresolved records, found ${report.unresolved_records}`);
-          if (report.unresolved.some((record) => !record.slug || !record.name)) throw new Error('incomplete unresolved record');
-          NODE
-      - name: Crawl official logo candidates
+          npm ci --no-audit --no-fund
+          sudo apt-get update
+          sudo apt-get install -y imagemagick
+      - name: Export complete Stablecoin research inventory
+        run: node scripts/export-stablecoin-logo-research.mjs
+      - name: Crawl attributable candidates
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: node scripts/crawl-stablecoin-logo-candidates.mjs
-      - name: Validate candidate inventory
+      - name: Import final decisions and local assets
+        run: node scripts/import-final-stablecoin-logo-decisions.mjs
+      - name: Validate 116-record closure
+        run: node scripts/audit-stablecoin-logo-coverage.mjs
+      - name: Build site
+        run: npm run build
+      - name: Commit final logo closure
+        env:
+          BRANCH: ${{ github.event.pull_request.head.ref || github.ref_name }}
         run: |
-          node - <<'NODE'
-          const fs = require('fs');
-          const report = JSON.parse(fs.readFileSync('artifacts/stablecoin-logo-candidates.json', 'utf8'));
-          if (report.unresolved_records !== 56) throw new Error(`expected 56 unresolved records, found ${report.unresolved_records}`);
-          if (!Array.isArray(report.records) || report.records.length !== 56) throw new Error('candidate report must contain all 56 records');
-          if (report.records.some((record) => !record.slug || !Array.isArray(record.candidates))) throw new Error('incomplete candidate record');
-          NODE
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add \
+            public/stablecoin-logos \
+            src/utils/stablecoinLogo.ts \
+            config/stablecoin-logo-decisions.json \
+            scripts/audit-stablecoin-logo-coverage.mjs
+          if git diff --cached --quiet; then
+            echo "No generated changes to commit."
+            exit 0
+          fi
+          git commit -m "Resolve logo decisions for all Stablecoin records"
+          git push origin "HEAD:$BRANCH"
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
-          name: stablecoin-logo-research-${{ github.run_id }}
+          name: stablecoin-logo-finalization-${{ github.run_id }}
           path: |
             artifacts/stablecoin-logo-research.json
             artifacts/stablecoin-logo-candidates.json
             artifacts/stablecoin-logo-candidates/**
-          if-no-files-found: error
+            artifacts/stablecoin-logo-coverage.json
+          if-no-files-found: warn
           retention-days: 14
