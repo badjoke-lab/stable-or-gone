@@ -13,6 +13,7 @@ This remediation follows a manual review of all 42 representative public routes 
 - Mobile header imbalance and fully expanded footer navigation.
 - Fragmented desktop record titles caused by narrow three-column paginated cards.
 - Disclosure headings and links below the audited mobile text and target-size floors.
+- Desktop footer links running together after the disclosure conversion; groups now use separate vertical navigation columns.
 
 ## Regression gates
 
