@@ -27,11 +27,11 @@ const mappingBlock = resolver.match(/const LOGOS_BY_SLUG:[\s\S]*?= \{([\s\S]*?)\
 const mappings = [...mappingBlock.matchAll(/^\s*'([^']+)':\s*'([^']+)'\s*,?$/gm)].map((match) => ({ slug: match[1], asset: match[2] }));
 const mappedSlugs = new Set(mappings.map((mapping) => mapping.slug));
 const mappedAssets = new Set(mappings.map((mapping) => path.basename(mapping.asset)));
-const localAssets = fs.readdirSync(logoDir).filter((name) => name.endsWith('.svg')).sort();
+const localAssets = fs.readdirSync(logoDir).filter((name) => /\.(?:svg|png)$/.test(name)).sort();
 const failures = [];
 
 if (recordsBySlug.size !== 116) failures.push(`expected 116 canonical stablecoin records, found ${recordsBySlug.size}`);
-if (mappings.length !== 39) failures.push(`expected 39 canonical logo mappings, found ${mappings.length}`);
+if (mappings.length !== 50) failures.push(`expected 50 canonical logo mappings, found ${mappings.length}`);
 for (const mapping of mappings) {
   if (!recordsBySlug.has(mapping.slug)) failures.push(`noncanonical or obsolete logo mapping: ${mapping.slug}`);
   if (!mapping.asset.startsWith('/stablecoin-logos/')) failures.push(`nonlocal logo asset path for ${mapping.slug}: ${mapping.asset}`);
@@ -43,7 +43,7 @@ for (const asset of localAssets) {
 for (const collision of ['USX', 'USDX', 'USDN']) {
   if (!resolver.includes(collision)) failures.push(`ambiguous symbol guard missing: ${collision}`);
 }
-for (const requiredSlug of ['beanstalk-bean', 'berachain-honey', 'crvusd', 'djed', 'eurs', 'musd', 'near-usn', 'united-stables-u']) {
+for (const requiredSlug of ['agora-ausd', 'basis-cash', 'busd', 'falcon-usdf', 'lisusd', 'mento-dollar', 'qidao-mai', 'sdai', 'usd0', 'usd1', 'ust', 'beanstalk-bean', 'berachain-honey', 'crvusd', 'djed', 'eurs', 'musd', 'near-usn', 'united-stables-u']) {
   if (!mappedSlugs.has(requiredSlug)) failures.push(`newly audited logo mapping missing: ${requiredSlug}`);
 }
 
@@ -55,7 +55,7 @@ const report = {
   canonical_stablecoin_records: recordsBySlug.size,
   mapped_canonical_records: covered.length,
   coverage_percent: Number(((covered.length / Math.max(recordsBySlug.size, 1)) * 100).toFixed(2)),
-  local_svg_assets: localAssets.length,
+  local_logo_assets: localAssets.length,
   orphan_assets: localAssets.filter((asset) => !mappedAssets.has(asset)),
   covered_records: covered.sort((a, b) => a.slug.localeCompare(b.slug)),
   unsupported_records: unsupported.sort((a, b) => a.slug.localeCompare(b.slug)),
@@ -72,6 +72,6 @@ console.log(JSON.stringify({
   canonical_stablecoin_records: report.canonical_stablecoin_records,
   mapped_canonical_records: report.mapped_canonical_records,
   coverage_percent: report.coverage_percent,
-  local_svg_assets: report.local_svg_assets,
+  local_logo_assets: report.local_logo_assets,
   failures: 0
 }, null, 2));
