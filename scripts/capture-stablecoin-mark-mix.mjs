@@ -81,10 +81,10 @@ for (const [device, config] of Object.entries(devices)) {
   const deviceFailures = [];
   if (metrics.query?.toLowerCase() !== 'usd') deviceFailures.push('query state was not applied');
   if (metrics.visibleMarks < 2) deviceFailures.push('fewer than two visible marks');
-  if (metrics.logos < 1) deviceFailures.push('no real logo is visible');
-  if (metrics.fallbacks < 1) deviceFailures.push('no fallback monogram is visible');
+  if (metrics.logos !== metrics.visibleMarks) deviceFailures.push(`not every visible mark is a local image: ${metrics.logos}/${metrics.visibleMarks}`);
+  if (metrics.fallbacks !== 0) deviceFailures.push(`unexpected fallback monograms remain: ${metrics.fallbacks}`);
   if (!metrics.square) deviceFailures.push('one or more marks are not square');
-  if (!metrics.uniform) deviceFailures.push('logo and fallback dimensions differ');
+  if (!metrics.uniform) deviceFailures.push('visible mark dimensions differ');
   if (metrics.brokenImages.length) deviceFailures.push(`broken images: ${metrics.brokenImages.join(', ')}`);
 
   records.push({ device, url, output: config.output, metrics, failures: deviceFailures });
@@ -94,9 +94,10 @@ for (const [device, config] of Object.entries(devices)) {
 
 await browser.close();
 const report = {
-  schema_version: '1.0',
+  schema_version: '2.0',
   generated_at: new Date().toISOString(),
   route,
+  expected_mark_policy: 'all_visible_records_use_local_images',
   records,
   failures
 };
