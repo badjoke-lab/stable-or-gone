@@ -19,7 +19,9 @@ const totalPages = Math.ceil(records.length / PAGE_SIZE);
 const items = records.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE).map((record) => ({
   title: record.title,
   href: `/event/${record.id}/`,
-  meta: `${record.eventDate || 'Date not recorded'} · ${record.categoryLabel} · ${record.subtypeLabel}`,
+  symbol: record.eventDate || 'Date not recorded',
+  badge: record.categoryLabel,
+  meta: `${record.subtypeLabel} · ${record.sourceIdentityCount} source identit${record.sourceIdentityCount === 1 ? 'y' : 'ies'}`,
   description: `Impact: ${record.impactLabel}. Lifecycle effect: ${record.statusEffectLabel}. Recovery: ${record.recoveryLabel}.`
 }));
 const title = `Stablecoin Events — Page ${page}`;
