@@ -5,6 +5,7 @@ import path from 'node:path';
 const root = process.cwd();
 const sourceRoot = process.env.TRUSTWALLET_ASSETS_DIR ?? '/tmp/trustwallet-assets';
 const pinnedCommit = '34d808acb2a71e55c41505cd8f15c827db21b0fc';
+// The importer is intentionally bounded to the address-verified audit result.
 const logoDir = path.join(root, 'public/stablecoin-logos');
 
 const batch = [
