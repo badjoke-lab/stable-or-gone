@@ -19,6 +19,9 @@ on:
       - 'public/brand/**'
       - 'public/stablecoin-logos/**'
       - 'config/public-routes.json'
+      - 'data/logo-research-trigger.json'
+      - 'scripts/export-stablecoin-logo-research.mjs'
+      - 'scripts/crawl-stablecoin-logo-candidates.mjs'
       - 'scripts/capture-site-screenshots.mjs'
       - 'scripts/capture-stablecoin-mark-mix.mjs'
       - 'scripts/audit-stablecoin-logo-coverage.mjs'
@@ -36,6 +39,9 @@ on:
       - 'public/brand/**'
       - 'public/stablecoin-logos/**'
       - 'config/public-routes.json'
+      - 'data/logo-research-trigger.json'
+      - 'scripts/export-stablecoin-logo-research.mjs'
+      - 'scripts/crawl-stablecoin-logo-candidates.mjs'
       - 'scripts/capture-site-screenshots.mjs'
       - 'scripts/capture-stablecoin-mark-mix.mjs'
       - 'scripts/audit-stablecoin-logo-coverage.mjs'
@@ -58,7 +64,7 @@ permissions:
 jobs:
   capture-representative-pages:
     runs-on: ubuntu-latest
-    timeout-minutes: 90
+    timeout-minutes: 120
     env:
       CAPTURE_BASE_URL: http://127.0.0.1:4173
       CAPTURE_MODE: ${{ inputs.mode || 'representative' }}
@@ -74,6 +80,36 @@ jobs:
 
       - name: Install dependencies
         run: npm ci --no-audit --no-fund
+
+      - name: Export complete Stablecoin logo research manifest
+        run: node scripts/export-stablecoin-logo-research.mjs
+
+      - name: Crawl official Stablecoin logo candidates
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/crawl-stablecoin-logo-candidates.mjs
+
+      - name: Validate complete logo candidate inventory
+        run: |
+          node - <<'NODE'
+          const fs = require('fs');
+          const research = JSON.parse(fs.readFileSync('artifacts/stablecoin-logo-research.json', 'utf8'));
+          const candidates = JSON.parse(fs.readFileSync('artifacts/stablecoin-logo-candidates.json', 'utf8'));
+          if (research.canonical_records !== 116 || research.mapped_records !== 60 || research.unresolved_records !== 56) throw new Error('logo research corpus counts changed');
+          if (candidates.unresolved_records !== 56 || candidates.records.length !== 56) throw new Error('candidate inventory does not cover all unresolved records');
+          NODE
+
+      - name: Upload Stablecoin logo research candidates
+        uses: actions/upload-artifact@v4
+        with:
+          name: stablecoin-logo-candidate-review-${{ github.run_id }}
+          if-no-files-found: error
+          retention-days: 14
+          compression-level: 9
+          path: |
+            artifacts/stablecoin-logo-research.json
+            artifacts/stablecoin-logo-candidates.json
+            artifacts/stablecoin-logo-candidates/**
 
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
@@ -177,7 +213,8 @@ jobs:
           echo "- Mode: $CAPTURE_MODE" >> "$GITHUB_STEP_SUMMARY"
           echo "- Detail samples per family: 3" >> "$GITHUB_STEP_SUMMARY"
           echo "- Mixed Stablecoin marks: desktop and mobile" >> "$GITHUB_STEP_SUMMARY"
-          echo "- Canonical Stablecoin logo coverage: 39 of 116 records" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Canonical Stablecoin logo coverage: 60 of 116 records" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Full logo disposition research: 116 records / 56 unresolved reviewed" >> "$GITHUB_STEP_SUMMARY"
           echo "- Layout geometry: every representative desktop/mobile route" >> "$GITHUB_STEP_SUMMARY"
           for DEVICE in desktop mobile; do
             MANIFEST="artifacts/screenshots/manifest.$DEVICE.json"
