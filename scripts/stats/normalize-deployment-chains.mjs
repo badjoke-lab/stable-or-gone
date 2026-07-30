@@ -31,11 +31,12 @@ const cleanChainValue = (value) => String(value ?? '')
 
 export function canonicalDeploymentChain(value) {
   const cleaned = cleanChainValue(value);
-  const key = cleaned.toLowerCase();
-  if (NON_CHAIN_DEPLOYMENT_CONTEXTS.has(key)) return null;
+  const rawKey = cleaned.toLowerCase();
+  if (NON_CHAIN_DEPLOYMENT_CONTEXTS.has(rawKey)) return null;
+  const label = DEPLOYMENT_CHAIN_ALIASES.get(rawKey) ?? cleaned;
   return {
-    key,
-    label: DEPLOYMENT_CHAIN_ALIASES.get(key) ?? cleaned
+    key: label.toLowerCase(),
+    label
   };
 }
 
