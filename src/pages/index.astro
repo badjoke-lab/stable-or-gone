@@ -146,7 +146,7 @@ const jsonLd = {
                 <tr>
                   <td data-label="Stablecoin">
                     <div class="stablecoin-dossier-heading-identity">
-                      <StablecoinMark slug={coin.slug} symbol={coin.symbol || ''} name={coin.name} size="small" />
+                      <StablecoinMark slug={coin.slug} symbol={coin.symbol || ''} name={coin.name} size="small" loading="eager" />
                       <div>
                         <a href={`/stablecoin/${coin.slug}/`}><strong>{coin.name}</strong></a>
                         <small>{coin.symbol || 'No symbol'}{domain ? ` · ${domain}` : ''}</small>
