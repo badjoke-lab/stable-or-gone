@@ -145,7 +145,7 @@ const jsonLd = {
               {previewRows.map(({ coin, organization, domain, lifecycle, reference, evidence: sourceCount, events: linkedEvents }) => (
                 <tr>
                   <td data-label="Stablecoin">
-                    <div class="home-registry-identity">
+                    <div class="stablecoin-dossier-heading-identity">
                       <StablecoinMark slug={coin.slug} symbol={coin.symbol || ''} name={coin.name} size="small" />
                       <div>
                         <a href={`/stablecoin/${coin.slug}/`}><strong>{coin.name}</strong></a>
