@@ -14,4 +14,4 @@ Acceptance criteria:
 - the final implementation must remove all temporary CSS migration workflows;
 - ordinary explanatory text and numerical displays must meet the audited type and line-height floors.
 
-The compact final stylesheet replaces the obsolete Statistics rules instead of relaxing the cleanup contract.
+The compact final stylesheet replaces the obsolete Statistics rules instead of relaxing the cleanup contract. Final approval must use screenshots generated from the exact merge candidate head.
