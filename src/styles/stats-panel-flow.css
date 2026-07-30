@@ -1,0 +1,25 @@
+.stats-v4-panel-grid {
+  display: block;
+  columns: 3;
+  column-gap: 14px;
+}
+
+.stats-v4-panel-grid > .stats-v4-panel {
+  display: inline-block;
+  width: 100%;
+  margin: 0 0 14px;
+  break-inside: avoid;
+  vertical-align: top;
+}
+
+@media (max-width: 980px) {
+  .stats-v4-panel-grid {
+    columns: 2;
+  }
+}
+
+@media (max-width: 700px) {
+  .stats-v4-panel-grid {
+    columns: 1;
+  }
+}
