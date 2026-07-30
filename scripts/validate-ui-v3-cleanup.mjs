@@ -128,7 +128,7 @@ const result = {
     cascade: 'exactly one CSS file, exactly one CSS import, zero Astro style blocks, zero inline style attributes, zero !important, and fewer than 553 lines',
     typography: 'serif editorial headings, sans ordinary copy, mono explicit technical values and labels',
     interactions: 'one default, visited, hover, active, and focus palette',
-    badges: 'flat square underlined state labels with readable text are mandatory',
+    badges: 'square color-coded semantic state labels with readable text are mandatory',
     runtime: 'representative desktop and mobile routes are screenshot-audited with three samples per detail family; all routes retain structural and data validation'
   },
   failures
