@@ -10,4 +10,5 @@ Acceptance criteria:
 - duplicate unchanged growth checkpoints removed from the public presentation;
 - complete records remain available through public machine-readable endpoints;
 - desktop and mobile full-page screenshots must be reviewed manually before merge;
-- the single public stylesheet contract remains intact and below its line-count ceiling.
+- the single public stylesheet contract remains intact and below its line-count ceiling;
+- the final implementation must remove all temporary CSS migration workflows.
