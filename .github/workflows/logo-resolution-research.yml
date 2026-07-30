@@ -40,6 +40,22 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: node scripts/crawl-stablecoin-logo-candidates.mjs
+      - name: Resolve retired DSD asset to the official project mark
+        run: |
+          node - <<'NODE'
+          const fs = require('fs');
+          const file = 'scripts/import-final-stablecoin-logo-decisions.mjs';
+          let source = fs.readFileSync(file, 'utf8');
+          source = source.replace(
+            "mark_type: 'token_logo',\n    asset_url: 'https://dsd.finance/logo.png'",
+            "mark_type: 'official_project_mark',\n    asset_url: 'https://avatars.githubusercontent.com/u/75574830?v=4'"
+          );
+          source = source.replace(
+            "Official README identifies Dynamic Set Dollar, symbol DSD, mainnet contract, and the logo URL.",
+            "Official README identifies Dynamic Set Dollar, symbol DSD, and the mainnet contract; the retired logo URL returned 404, so the official GitHub organization mark is used."
+          );
+          fs.writeFileSync(file, source);
+          NODE
       - name: Import final decisions and local assets
         run: node scripts/import-final-stablecoin-logo-decisions.mjs
       - name: Validate 116-record closure
