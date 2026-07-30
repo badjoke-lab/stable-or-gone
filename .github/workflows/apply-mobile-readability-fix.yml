@@ -1,0 +1,51 @@
+name: Apply compact mobile readability fix
+
+on:
+  push:
+    branches:
+      - fix/white-background-mobile-density
+    paths:
+      - '.github/workflows/apply-mobile-readability-fix.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  apply-fix:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+        with:
+          ref: fix/white-background-mobile-density
+
+      - name: Raise compact text to the audited floor
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          path = Path('src/styles/public-ui.css')
+          text = path.read_text()
+          changes = [
+            ('font-size: 14px; line-height: 1.3; }\n  .home-registry-table td:first-child', 'font-size: 15px; line-height: 1.4; }\n  .home-registry-table td:first-child'),
+            ('.stablecoin-index-card-grid dt { font-size: 11px; line-height: 1.2; }', '.stablecoin-index-card-grid dt { font-size: 13px; line-height: 1.4; }'),
+            ('.stablecoin-index-card-grid dd { margin: 1px 0 0; font-size: 13px; line-height: 1.25; }', '.stablecoin-index-card-grid dd { margin: 1px 0 0; font-size: 15px; line-height: 1.4; }'),
+            ('.stablecoin-index-card .chip { padding: 2px 5px; font-size: 11px; }', '.stablecoin-index-card .chip { padding: 2px 5px; font-size: 13px; }'),
+            ('.footer-navigation-group a { width: fit-content; min-height: 34px; font-size: 14px; }', '.footer-navigation-group a { width: fit-content; min-height: 40px; font-size: 15px; }')
+          ]
+          for old, new in changes:
+              if text.count(old) != 1:
+                  raise SystemExit(f'expected one CSS match: {old}')
+              text = text.replace(old, new, 1)
+          path.write_text(text)
+          PY
+
+      - name: Remove one-shot files and commit
+        run: |
+          rm .github/workflows/apply-mobile-readability-fix.yml
+          rm -f notes/ui-mobile-screenshot-review.md
+          rmdir notes 2>/dev/null || true
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add -A
+          git commit -m "Keep compact mobile rows readable"
+          git push origin HEAD:fix/white-background-mobile-density
