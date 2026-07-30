@@ -8,18 +8,42 @@ const history = getPublicStatsHistory() as any;
 const reviewDate = getStatsReviewDate(stats, history);
 const snapshots = Array.isArray(history.snapshots) ? history.snapshots : [];
 
-const distribution = (value: unknown) => Object.entries((value && typeof value === 'object' ? value : {}) as Record<string, any>)
+type DistributionRow = {
+  key: string;
+  label: string;
+  count: number;
+  percentage: number;
+};
+
+const distribution = (value: unknown): DistributionRow[] => Object.entries((value && typeof value === 'object' ? value : {}) as Record<string, any>)
   .map(([key, row]) => ({
     key,
     label: formatPublicLabel(key),
     count: Number(row?.count ?? row ?? 0),
     percentage: Number(row?.percentage ?? 0)
   }))
+  .filter((row) => row.count > 0)
   .sort((left, right) => right.count - left.count || left.label.localeCompare(right.label));
+
+const compactRows = (rows: DistributionRow[], limit = 5): DistributionRow[] => {
+  if (rows.length <= limit) return rows;
+  const visible = rows.slice(0, limit);
+  const remainder = rows.slice(limit);
+  return [
+    ...visible,
+    {
+      key: 'other-recorded-values',
+      label: 'Other recorded values',
+      count: remainder.reduce((sum, row) => sum + row.count, 0),
+      percentage: Number(remainder.reduce((sum, row) => sum + row.percentage, 0).toFixed(1))
+    }
+  ];
+};
 
 const lifecycleGroups = distribution(stats.lifecycle?.groups);
 const lifecycleStatuses = distribution(stats.lifecycle?.statuses);
-const classificationPanels = [
+
+const compositionPanels = [
   ['Asset class', stats.classification?.asset_class],
   ['Reference target', stats.classification?.reference_target],
   ['Stabilization mechanism', stats.classification?.stabilization_mechanism],
@@ -27,26 +51,22 @@ const classificationPanels = [
   ['Backing type', stats.classification?.backing_type],
   ['Fiat reference currency', stats.classification?.fiat_currency],
   ['Legal classification', stats.classification?.legal_classification]
-].map(([title, value]) => ({ title: String(title), rows: distribution(value) }));
+].map(([title, value]) => ({ title: String(title), rows: compactRows(distribution(value), 5) }));
 
 const eventYears = Object.entries((stats.events?.by_year ?? {}) as Record<string, any>)
   .map(([year, row]) => ({ year, total: Number(row?.total ?? 0) }))
+  .filter((row) => row.total > 0)
   .sort((left, right) => left.year.localeCompare(right.year));
-const maxEventYear = Math.max(1, ...eventYears.map((row) => row.total));
-const eventTypes = distribution(stats.events?.by_type);
-const eventDetailKinds = distribution(stats.events?.detail_kind);
-const depegOutcomes = distribution(stats.events?.depeg_outcomes);
-const transitions = Object.entries((stats.lifecycle?.transitions ?? {}) as Record<string, unknown>)
-  .map(([key, value]) => ({ label: formatPublicLabel(key), count: Number(value ?? 0) }))
-  .sort((left, right) => right.count - left.count || left.label.localeCompare(right.label));
+const recentEventYears = eventYears.slice(-12);
+const maxEventYear = Math.max(1, ...recentEventYears.map((row) => row.total));
+const eventTypes = compactRows(distribution(stats.events?.by_type), 7);
 
 const failurePanels = [
-  ['Stabilization mechanism', stats.failures?.by_stabilization_mechanism],
-  ['Backing type', stats.failures?.by_backing_type],
-  ['Governance model', stats.failures?.by_governance_model],
-  ['Launch year', stats.failures?.by_launch_year],
-  ['Collapse year', stats.failures?.by_collapse_year]
-].map(([title, value]) => ({ title: String(title), rows: distribution(value) }));
+  ['Leading stabilization mechanism', stats.failures?.by_stabilization_mechanism],
+  ['Leading backing type', stats.failures?.by_backing_type],
+  ['Leading governance model', stats.failures?.by_governance_model],
+  ['Most common collapse year', stats.failures?.by_collapse_year]
+].map(([label, value]) => ({ label: String(label), row: distribution(value)[0] })).filter((item) => item.row);
 
 const deploymentChains = Object.entries((stats.deployments?.by_chain ?? {}) as Record<string, any>)
   .map(([chain, row]) => ({
@@ -54,13 +74,10 @@ const deploymentChains = Object.entries((stats.deployments?.by_chain ?? {}) as R
     assets: Number(row?.asset_count ?? 0),
     deployments: Number(row?.deployment_count ?? 0)
   }))
+  .filter((row) => row.deployments > 0)
   .sort((left, right) => right.deployments - left.deployments || left.chain.localeCompare(right.chain));
-const maxDeployments = Math.max(1, ...deploymentChains.map((row) => row.deployments));
-const deploymentPanels = [
-  ['Canonicality', stats.deployments?.canonicality],
-  ['Deployment type', stats.deployments?.deployment_type],
-  ['Verification status', stats.deployments?.verification_status]
-].map(([title, value]) => ({ title: String(title), rows: distribution(value) }));
+const topDeploymentChains = deploymentChains.slice(0, 10);
+const maxDeployments = Math.max(1, ...topDeploymentChains.map((row) => row.deployments));
 
 const organizationRoles = Object.entries((stats.organizations?.by_role ?? {}) as Record<string, any>)
   .map(([role, row]) => ({
@@ -69,7 +86,9 @@ const organizationRoles = Object.entries((stats.organizations?.by_role ?? {}) as
     organizations: Number(row?.organization_count ?? 0),
     assets: Number(row?.asset_count ?? 0)
   }))
-  .sort((left, right) => right.relationships - left.relationships || left.role.localeCompare(right.role));
+  .filter((row) => row.relationships > 0)
+  .sort((left, right) => right.relationships - left.relationships || left.role.localeCompare(right.role))
+  .slice(0, 8);
 
 const coverageRows = Object.entries((stats.data_quality?.coverage ?? {}) as Record<string, any>)
   .map(([key, row]) => ({
@@ -83,125 +102,268 @@ const evidenceDepth = distribution(stats.data_quality?.evidence_per_asset?.distr
 const recency = distribution(stats.data_quality?.verification_recency);
 const typedEventCoverage = stats.data_quality?.typed_event_details ?? {};
 
+const snapshotSignature = (snapshot: any) => [
+  snapshot?.asset_count ?? 0,
+  snapshot?.totals?.events ?? 0,
+  snapshot?.totals?.evidence ?? 0
+].join(':');
+const distinctSnapshots = snapshots.filter((snapshot: any, index: number) => index === 0 || snapshotSignature(snapshot) !== snapshotSignature(snapshots[index - 1]));
+const recentSnapshots = distinctSnapshots.slice(-8);
+const firstSnapshot = distinctSnapshots[0] ?? {};
+const latestSnapshot = distinctSnapshots.at(-1) ?? {};
+const growth = {
+  assets: Number(latestSnapshot.asset_count ?? 0) - Number(firstSnapshot.asset_count ?? 0),
+  events: Number(latestSnapshot.totals?.events ?? 0) - Number(firstSnapshot.totals?.events ?? 0),
+  evidence: Number(latestSnapshot.totals?.evidence ?? 0) - Number(firstSnapshot.totals?.evidence ?? 0)
+};
+
 const kpis = [
   ['Stable assets', stats.totals?.assets, 'Canonical asset records'],
   ['Organizations', stats.totals?.organizations, 'Canonical organization records'],
   ['Events', stats.totals?.events, 'Material historical events'],
-  ['Evidence', stats.totals?.evidence, 'Evidence records'],
-  ['Operating', stats.lifecycle?.groups?.operating?.count, `${stats.lifecycle?.groups?.operating?.percentage ?? 0}% of assets`],
-  ['Constrained', stats.lifecycle?.groups?.constrained?.count, `${stats.lifecycle?.groups?.constrained?.percentage ?? 0}% of assets`],
-  ['Historical non-failure', stats.lifecycle?.groups?.historical_non_failure?.count, `${stats.lifecycle?.groups?.historical_non_failure?.percentage ?? 0}% of assets`],
-  ['Failed', stats.lifecycle?.groups?.failed?.count, `${stats.lifecycle?.groups?.failed?.percentage ?? 0}% of assets`]
+  ['Evidence', stats.totals?.evidence, 'Reviewed evidence records']
 ].map(([label, value, note]) => ({ label: String(label), value: Number(value ?? 0), note: String(note) }));
 
 const title = 'Registry Statistics — Stable or Gone';
-const description = 'Derived statistics for the Stable or Gone canonical registry, including lifecycle, classifications, historical events, deployments, organizations, and data-quality coverage.';
+const description = 'A concise analytical view of the Stable or Gone canonical registry: lifecycle, composition, historical activity, deployments, organizations, evidence quality, and record growth.';
 ---
 <BaseLayout title={title} description={description} canonicalPath="/stats/">
-  <article class="stats-page">
-    <header class="stats-header">
-      <div>
+  <article class="stats-page stats-v4">
+    <header class="stats-v4-hero">
+      <div class="stats-v4-hero-copy">
         <p class="stats-kicker">Registry analysis</p>
         <h1>Statistics</h1>
-        <p class="stats-lead">A derived view of registry composition, historical change, infrastructure coverage, and evidence quality. These figures describe reviewed records; they are not rankings, scores, or investment recommendations.</p>
+        <p>A readable analytical summary of the reviewed registry. This page prioritizes the patterns that explain the corpus; exhaustive machine-readable records remain available separately.</p>
       </div>
-      <dl class="stats-header-meta">
+      <dl class="stats-v4-meta">
         <div><dt>Reviewed checkpoint</dt><dd><time datetime={reviewDate}>{reviewDate}</time></dd></div>
-        <div><dt>Asset denominator</dt><dd>{stats.totals?.assets ?? 0}</dd></div>
-        <div><dt>History snapshots</dt><dd>{snapshots.length}</dd></div>
+        <div><dt>Canonical denominator</dt><dd>{stats.totals?.assets ?? 0} assets</dd></div>
+        <div><dt>Distinct growth checkpoints</dt><dd>{distinctSnapshots.length}</dd></div>
       </dl>
     </header>
 
-    <aside class="stats-methodology-notice">
-      <div><p class="stats-kicker">Reading boundary</p><h2>Counts come from reviewed canonical records</h2></div>
-      <p>Unknown states remain visible. Multi-select dimensions may exceed 100% in total. Market price, APY, yield ranking, safety scoring, transparency scoring, and risk scoring are excluded.</p>
-      <a href="/methodology/">Read methodology</a>
-    </aside>
+    <nav class="stats-v4-jump" aria-label="Statistics sections">
+      <a href="#overview">Overview</a>
+      <a href="#lifecycle">Lifecycle</a>
+      <a href="#composition">Composition</a>
+      <a href="#activity">Historical activity</a>
+      <a href="#network">Network</a>
+      <a href="#quality">Data quality</a>
+      <a href="#growth">Growth</a>
+    </nav>
 
-    <section class="stats-section">
-      <div class="stats-section-heading section-heading"><div><p class="stats-kicker">Current checkpoint</p><h2>Registry at a glance</h2></div><p>Exact counts from the audited canonical registry and supporting records.</p></div>
-      <dl class="stats-kpi-grid">
+    <section id="overview" class="stats-v4-section stats-v4-section--overview">
+      <div class="stats-v4-section-heading">
+        <div><p class="stats-kicker">Current checkpoint</p><h2>Registry at a glance</h2></div>
+        <p>Exact audited counts. These are inventory measures, not rankings, market-share estimates, or safety scores.</p>
+      </div>
+      <dl class="stats-v4-kpis">
         {kpis.map((item) => <div><dt>{item.label}</dt><dd>{item.value}</dd><p>{item.note}</p></div>)}
       </dl>
+      <aside class="stats-v4-boundary">
+        <div><strong>Reading boundary</strong><span>Unknown states remain visible and multi-select dimensions can exceed 100% in total.</span></div>
+        <a href="/methodology/">Methodology</a>
+      </aside>
     </section>
 
-    <section class="stats-section">
-      <div class="stats-section-heading section-heading"><div><p class="stats-kicker">Lifecycle</p><h2>Recorded lifecycle composition</h2></div><p>Operating, constrained, historical non-failure, and failed records remain separate.</p></div>
-      <div class="stats-lifecycle-layout">
-        <div class="stats-bar-list">
-          {lifecycleGroups.map((row) => <div class="stats-bar-row"><div class="stats-bar-row__label"><span>{row.label}</span><strong>{row.count}</strong></div><meter class="stats-bar-meter" min="0" max="100" value={Math.max(row.percentage, 1)} aria-label={`${row.label}: ${row.percentage}%`}></meter><p>{row.percentage}% of assets</p></div>)}
-        </div>
-        <div class="stats-table-wrap"><table><caption>Canonical lifecycle statuses</caption><thead><tr><th>Status</th><th>Count</th><th>Share</th></tr></thead><tbody>{lifecycleStatuses.map((row) => <tr><th scope="row">{row.label}</th><td>{row.count}</td><td>{row.percentage}%</td></tr>)}</tbody></table></div>
+    <section id="lifecycle" class="stats-v4-section">
+      <div class="stats-v4-section-heading">
+        <div><p class="stats-kicker">Lifecycle</p><h2>Where the registry stands now</h2></div>
+        <p>Operating, constrained, historical non-failure, and failed records remain separate so closure is not confused with collapse.</p>
+      </div>
+      <div class="stats-v4-lifecycle-grid">
+        {lifecycleGroups.map((row) => (
+          <article class="stats-v4-lifecycle-card">
+            <div><span>{row.label}</span><strong>{row.count}</strong></div>
+            <meter min="0" max="100" value={Math.min(100, Math.max(0, row.percentage))} aria-label={`${row.label}: ${row.percentage}%`}></meter>
+            <p>{row.percentage}% of canonical assets</p>
+          </article>
+        ))}
+      </div>
+      <div class="stats-v4-ledger" aria-label="Canonical lifecycle statuses">
+        {lifecycleStatuses.map((row) => (
+          <div class="stats-v4-ledger-row">
+            <strong>{row.label}</strong>
+            <span>{row.count} records</span>
+            <span>{row.percentage}%</span>
+          </div>
+        ))}
       </div>
     </section>
 
-    <section class="stats-section">
-      <div class="stats-section-heading section-heading"><div><p class="stats-kicker">Classification</p><h2>What the registry contains</h2></div><p>Economic class, reference target, mechanism, governance, backing, currency, and legal classification remain separate dimensions.</p></div>
-      <div class="stats-analysis-grid stats-analysis-grid--three">
-        {classificationPanels.map((panel) => <section class="stats-analysis-panel"><h3>{panel.title}</h3><div class="stats-compact-bars">{panel.rows.map((row) => <div class="stats-compact-bar"><div><span>{row.label}</span><strong>{row.count}</strong></div><meter class="stats-bar-meter" min="0" max="100" value={Math.min(100, Math.max(row.percentage, 1))} aria-label={`${row.label}: ${row.percentage}%`}></meter><small>{row.percentage}%</small></div>)}</div></section>)}
+    <section id="composition" class="stats-v4-section">
+      <div class="stats-v4-section-heading">
+        <div><p class="stats-kicker">Composition</p><h2>What kinds of assets are recorded</h2></div>
+        <p>Each panel is a separate classification dimension. Long tails are combined into “Other recorded values” instead of being dumped into an unreadable wall.</p>
+      </div>
+      <div class="stats-v4-panel-grid">
+        {compositionPanels.map((panel) => (
+          <section class="stats-v4-panel">
+            <h3>{panel.title}</h3>
+            <div class="stats-v4-bar-list">
+              {panel.rows.map((row) => (
+                <div class="stats-v4-bar-row">
+                  <div><span>{row.label}</span><strong>{row.count}</strong></div>
+                  <meter min="0" max="100" value={Math.min(100, Math.max(0, row.percentage))} aria-label={`${row.label}: ${row.percentage}%`}></meter>
+                  <small>{row.percentage}%</small>
+                </div>
+              ))}
+            </div>
+          </section>
+        ))}
       </div>
     </section>
 
-    <section class="stats-section">
-      <div class="stats-section-heading section-heading"><div><p class="stats-kicker">Historical analysis</p><h2>Events, transitions, and failures</h2></div><p>Incidents, migrations, regulatory actions, wind-downs, recoveries, and collapses are not collapsed into one category.</p></div>
-      <div class="stats-analysis-grid">
-        <section class="stats-analysis-panel"><h3>Events by year</h3><div class="stats-year-list">{eventYears.map((row) => <div class="stats-year-row"><span>{row.year}</span><meter class="stats-bar-meter" min="0" max="100" value={(row.total / maxEventYear) * 100} aria-label={`${row.year}: ${row.total} events`}></meter><strong>{row.total}</strong></div>)}</div></section>
-        <section class="stats-analysis-panel"><h3>Event types</h3><div class="stats-table-wrap"><table><thead><tr><th>Type</th><th>Count</th><th>Share</th></tr></thead><tbody>{eventTypes.map((row) => <tr><th scope="row">{row.label}</th><td>{row.count}</td><td>{row.percentage}%</td></tr>)}</tbody></table></div></section>
+    <section id="activity" class="stats-v4-section">
+      <div class="stats-v4-section-heading">
+        <div><p class="stats-kicker">Historical activity</p><h2>Events and failure patterns</h2></div>
+        <p>The page shows the recent historical shape and leading categories rather than hundreds of individual event rows.</p>
       </div>
-      <div class="stats-analysis-grid stats-analysis-grid--three">
-        <section class="stats-analysis-panel"><h3>Lifecycle transitions</h3><dl class="stats-metric-list">{transitions.map((row) => <div><dt>{row.label}</dt><dd>{row.count}</dd></div>)}</dl></section>
-        <section class="stats-analysis-panel"><h3>Typed event details</h3><dl class="stats-metric-list">{eventDetailKinds.map((row) => <div><dt>{row.label}</dt><dd>{row.count}</dd></div>)}</dl></section>
-        <section class="stats-analysis-panel"><h3>Depeg outcomes</h3><dl class="stats-metric-list">{depegOutcomes.map((row) => <div><dt>{row.label}</dt><dd>{row.count}</dd></div>)}</dl></section>
+      <div class="stats-v4-split">
+        <section class="stats-v4-panel">
+          <h3>Events by year</h3>
+          <div class="stats-v4-year-list">
+            {recentEventYears.map((row) => (
+              <div class="stats-v4-year-row">
+                <span>{row.year}</span>
+                <meter min="0" max="100" value={(row.total / maxEventYear) * 100} aria-label={`${row.year}: ${row.total} events`}></meter>
+                <strong>{row.total}</strong>
+              </div>
+            ))}
+          </div>
+        </section>
+        <section class="stats-v4-panel">
+          <h3>Leading event types</h3>
+          <div class="stats-v4-bar-list">
+            {eventTypes.map((row) => (
+              <div class="stats-v4-bar-row">
+                <div><span>{row.label}</span><strong>{row.count}</strong></div>
+                <meter min="0" max="100" value={Math.min(100, Math.max(0, row.percentage))} aria-label={`${row.label}: ${row.percentage}%`}></meter>
+                <small>{row.percentage}%</small>
+              </div>
+            ))}
+          </div>
+        </section>
       </div>
-      <div class="stats-failure-header"><div><p class="stats-kicker">Failure analysis</p><h3>{stats.failures?.count ?? 0} failed assets</h3></div><p>Breakdowns use the canonical failed lifecycle group. Backing type remains multi-select.</p></div>
-      <div class="stats-analysis-grid stats-analysis-grid--three">{failurePanels.map((panel) => <section class="stats-analysis-panel"><h3>{panel.title}</h3><div class="stats-table-wrap"><table><thead><tr><th>Category</th><th>Count</th><th>Share</th></tr></thead><tbody>{panel.rows.map((row) => <tr><th scope="row">{row.label}</th><td>{row.count}</td><td>{row.percentage}%</td></tr>)}</tbody></table></div></section>)}</div>
+      <div class="stats-v4-failure-summary">
+        <div class="stats-v4-failure-count"><span>Canonical failed assets</span><strong>{stats.failures?.count ?? 0}</strong></div>
+        {failurePanels.map((item) => (
+          <div><span>{item.label}</span><strong>{item.row.label}</strong><small>{item.row.count} records · {item.row.percentage}%</small></div>
+        ))}
+      </div>
     </section>
 
-    <section class="stats-section">
-      <div class="stats-section-heading section-heading"><div><p class="stats-kicker">Deployments</p><h2>Chain and deployment structure</h2></div><p>Deployment rows and distinct asset reach are shown separately.</p></div>
-      <dl class="stats-mini-kpi-grid"><div><dt>Total deployments</dt><dd>{stats.deployments?.total_deployments ?? 0}</dd></div><div><dt>Assets with deployments</dt><dd>{stats.deployments?.assets_with_deployments ?? 0}</dd></div><div><dt>Freeze capability known</dt><dd>{stats.deployments?.control_capability_knowledge?.freeze_capability_known ?? 0}</dd></div><div><dt>Blacklist capability known</dt><dd>{stats.deployments?.control_capability_knowledge?.blacklist_capability_known ?? 0}</dd></div></dl>
-      <div class="stats-analysis-grid">
-        <section class="stats-analysis-panel"><h3>Chain coverage</h3><div class="stats-chain-list">{deploymentChains.map((row) => <div class="stats-chain-row"><div><strong>{row.chain}</strong><span>{row.assets} assets</span></div><meter class="stats-bar-meter" min="0" max="100" value={(row.deployments / maxDeployments) * 100} aria-label={`${row.chain}: ${row.deployments} deployments`}></meter><strong>{row.deployments}</strong></div>)}</div></section>
-        <section class="stats-analysis-panel"><h3>Exact chain counts</h3><div class="stats-table-wrap"><table><thead><tr><th>Chain</th><th>Assets</th><th>Deployments</th></tr></thead><tbody>{deploymentChains.map((row) => <tr><th scope="row">{row.chain}</th><td>{row.assets}</td><td>{row.deployments}</td></tr>)}</tbody></table></div></section>
+    <section id="network" class="stats-v4-section">
+      <div class="stats-v4-section-heading">
+        <div><p class="stats-kicker">Network and institutions</p><h2>Where assets are deployed and who supports them</h2></div>
+        <p>Chain rows count deployments; organization rows count recorded relationships. Neither is a market-share measure.</p>
       </div>
-      <div class="stats-analysis-grid stats-analysis-grid--three">{deploymentPanels.map((panel) => <section class="stats-analysis-panel"><h3>{panel.title}</h3><dl class="stats-metric-list">{panel.rows.map((row) => <div><dt>{row.label}</dt><dd>{row.count}</dd></div>)}</dl></section>)}</div>
-    </section>
-
-    <section class="stats-section">
-      <div class="stats-section-heading section-heading"><div><p class="stats-kicker">Organizations</p><h2>Roles around stable assets</h2></div><p>An organization may hold multiple roles; role rows describe relationship structure.</p></div>
-      <div class="stats-table-wrap"><table class="stats-wide-table"><thead><tr><th>Role</th><th>Relationships</th><th>Organizations</th><th>Asset reach</th></tr></thead><tbody>{organizationRoles.map((row) => <tr><th scope="row">{row.role}</th><td>{row.relationships}</td><td>{row.organizations}</td><td>{row.assets}</td></tr>)}</tbody></table></div>
-    </section>
-
-    <section class="stats-section">
-      <div class="stats-section-heading section-heading"><div><p class="stats-kicker">Data quality</p><h2>Coverage, evidence depth, and freshness</h2></div><p>These metrics describe registry completeness and review coverage, not the safety of an asset.</p></div>
-      <div class="stats-analysis-grid">
-        <section class="stats-analysis-panel"><h3>Coverage</h3><div class="stats-table-wrap"><table><thead><tr><th>Metric</th><th>Coverage</th><th>Share</th></tr></thead><tbody>{coverageRows.map((row) => <tr><th scope="row">{row.label}</th><td>{row.count} / {row.denominator}</td><td>{row.percentage}%</td></tr>)}</tbody></table></div></section>
-        <section class="stats-analysis-panel"><h3>Evidence and typed events</h3><dl class="stats-metric-list"><div><dt>Average evidence per asset</dt><dd>{stats.data_quality?.evidence_per_asset?.average ?? 0}</dd></div><div><dt>Median evidence per asset</dt><dd>{stats.data_quality?.evidence_per_asset?.median ?? 0}</dd></div><div><dt>Known unknowns</dt><dd>{stats.data_quality?.known_unknowns?.total ?? 0}</dd></div><div><dt>Typed event coverage</dt><dd>{typedEventCoverage.count ?? 0} / {typedEventCoverage.denominator ?? 0}</dd></div></dl></section>
+      <dl class="stats-v4-mini-kpis">
+        <div><dt>Total deployments</dt><dd>{stats.deployments?.total_deployments ?? 0}</dd></div>
+        <div><dt>Assets with deployments</dt><dd>{stats.deployments?.assets_with_deployments ?? 0}</dd></div>
+        <div><dt>Freeze capability known</dt><dd>{stats.deployments?.control_capability_knowledge?.freeze_capability_known ?? 0}</dd></div>
+        <div><dt>Blacklist capability known</dt><dd>{stats.deployments?.control_capability_knowledge?.blacklist_capability_known ?? 0}</dd></div>
+      </dl>
+      <div class="stats-v4-split">
+        <section class="stats-v4-panel">
+          <h3>Top deployment chains</h3>
+          <div class="stats-v4-chain-list">
+            {topDeploymentChains.map((row) => (
+              <div class="stats-v4-chain-row">
+                <div><strong>{row.chain}</strong><span>{row.assets} assets</span></div>
+                <meter min="0" max="100" value={(row.deployments / maxDeployments) * 100} aria-label={`${row.chain}: ${row.deployments} deployments`}></meter>
+                <strong>{row.deployments}</strong>
+              </div>
+            ))}
+          </div>
+        </section>
+        <section class="stats-v4-panel">
+          <h3>Leading organization roles</h3>
+          <div class="stats-v4-role-list">
+            {organizationRoles.map((row) => (
+              <div class="stats-v4-role-row">
+                <strong>{row.role}</strong>
+                <span>{row.relationships} relationships</span>
+                <small>{row.organizations} organizations · {row.assets} assets</small>
+              </div>
+            ))}
+          </div>
+        </section>
       </div>
-      <div class="stats-analysis-grid"><section class="stats-analysis-panel"><h3>Evidence depth</h3><dl class="stats-metric-list">{evidenceDepth.map((row) => <div><dt>{row.label}</dt><dd>{row.count}</dd></div>)}</dl></section><section class="stats-analysis-panel"><h3>Verification recency</h3><dl class="stats-metric-list">{recency.map((row) => <div><dt>{row.label}</dt><dd>{row.count}</dd></div>)}</dl></section></div>
     </section>
 
-    <section class="stats-section">
-      <div class="stats-section-heading section-heading"><div><p class="stats-kicker">History</p><h2>Registry growth snapshots</h2></div><p>Append-only snapshots show changes in reviewed inventory, not market performance.</p></div>
-      <div class="stats-table-wrap"><table><thead><tr><th>Recorded at</th><th>Assets</th><th>Events</th><th>Evidence</th></tr></thead><tbody>{snapshots.map((snapshot: any) => <tr><th scope="row">{snapshot.recorded_at}</th><td>{snapshot.asset_count}</td><td>{snapshot.totals?.events ?? 0}</td><td>{snapshot.totals?.evidence ?? 0}</td></tr>)}</tbody></table></div>
+    <section id="quality" class="stats-v4-section">
+      <div class="stats-v4-section-heading">
+        <div><p class="stats-kicker">Data quality</p><h2>Coverage, evidence depth, and freshness</h2></div>
+        <p>These figures measure registry completeness and review recency. They do not rate the safety or transparency of an asset.</p>
+      </div>
+      <div class="stats-v4-quality-grid">
+        <section class="stats-v4-panel stats-v4-panel--wide">
+          <h3>Coverage</h3>
+          <div class="stats-v4-coverage-list">
+            {coverageRows.map((row) => (
+              <div class="stats-v4-coverage-row">
+                <div><strong>{row.label}</strong><span>{row.count} / {row.denominator}</span></div>
+                <meter min="0" max="100" value={Math.min(100, Math.max(0, row.percentage))} aria-label={`${row.label}: ${row.percentage}%`}></meter>
+                <span>{row.percentage}%</span>
+              </div>
+            ))}
+          </div>
+        </section>
+        <section class="stats-v4-panel">
+          <h3>Evidence profile</h3>
+          <dl class="stats-v4-metric-list">
+            <div><dt>Average evidence per asset</dt><dd>{stats.data_quality?.evidence_per_asset?.average ?? 0}</dd></div>
+            <div><dt>Median evidence per asset</dt><dd>{stats.data_quality?.evidence_per_asset?.median ?? 0}</dd></div>
+            <div><dt>Known unknowns</dt><dd>{stats.data_quality?.known_unknowns?.total ?? 0}</dd></div>
+            <div><dt>Typed event coverage</dt><dd>{typedEventCoverage.count ?? 0} / {typedEventCoverage.denominator ?? 0}</dd></div>
+          </dl>
+        </section>
+        <section class="stats-v4-panel">
+          <h3>Evidence depth</h3>
+          <dl class="stats-v4-metric-list">{evidenceDepth.map((row) => <div><dt>{row.label}</dt><dd>{row.count}</dd></div>)}</dl>
+        </section>
+        <section class="stats-v4-panel">
+          <h3>Verification recency</h3>
+          <dl class="stats-v4-metric-list">{recency.map((row) => <div><dt>{row.label}</dt><dd>{row.count}</dd></div>)}</dl>
+        </section>
+      </div>
     </section>
+
+    <section id="growth" class="stats-v4-section">
+      <div class="stats-v4-section-heading">
+        <div><p class="stats-kicker">Growth</p><h2>How the reviewed corpus changed</h2></div>
+        <p>Repeated checkpoints with identical totals are removed here. The remaining rows show material inventory changes, not market performance.</p>
+      </div>
+      <dl class="stats-v4-growth-kpis">
+        <div><dt>Assets added</dt><dd>+{growth.assets}</dd></div>
+        <div><dt>Events added</dt><dd>+{growth.events}</dd></div>
+        <div><dt>Evidence added</dt><dd>+{growth.evidence}</dd></div>
+      </dl>
+      <div class="stats-v4-growth-list">
+        {recentSnapshots.map((snapshot: any) => (
+          <article class="stats-v4-growth-row">
+            <time datetime={snapshot.recorded_at}>{String(snapshot.recorded_at ?? '').slice(0, 10)}</time>
+            <div><span>Assets</span><strong>{snapshot.asset_count ?? 0}</strong></div>
+            <div><span>Events</span><strong>{snapshot.totals?.events ?? 0}</strong></div>
+            <div><span>Evidence</span><strong>{snapshot.totals?.evidence ?? 0}</strong></div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <aside class="stats-v4-data-access">
+      <div>
+        <p class="stats-kicker">Full public data</p>
+        <h2>Use the registry, not a hidden wall of tables</h2>
+        <p>The complete reviewed record set remains public through the manifest and machine-readable endpoints. This page is the analytical view; it no longer pretends that an exhaustive dump is a usable interface.</p>
+      </div>
+      <nav aria-label="Statistics data access">
+        <a href="/data/manifest.json">Data manifest</a>
+        <a href="/version.json">Version JSON</a>
+        <a href="/llms.txt">LLM guide</a>
+        <a href="/methodology/">Methodology</a>
+      </nav>
+    </aside>
   </article>
-  <script>
-    const sections = [...document.querySelectorAll('.stats-page > .stats-section')];
-    sections.forEach((section, index) => {
-      if (!(section instanceof HTMLElement) || index < 2) return;
-      const heading = section.querySelector('h2');
-      const kicker = section.querySelector('.stats-kicker');
-      const details = document.createElement('details');
-      details.className = 'stats-disclosure';
-      const summary = document.createElement('summary');
-      const label = document.createElement('span');
-      const title = document.createElement('strong');
-      label.textContent = kicker?.textContent?.trim() || 'Statistics';
-      title.textContent = heading?.textContent?.trim() || 'Analysis section';
-      summary.append(label, title);
-      section.replaceWith(details);
-      details.append(summary, section);
-    });
-  </script>
 </BaseLayout>
