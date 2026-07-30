@@ -70,12 +70,12 @@ const jsonLd = {
 };
 ---
 <BaseLayout title={title} description={description} canonicalPath="/" jsonLd={jsonLd}>
-  <div class="home-ledger" data-home-priority="recent-records">
+  <div class="home-ledger" data-home-priority="recent-records-first">
     <section class="home-intro" aria-labelledby="home-title">
       <div class="home-intro-copy">
         <p class="kicker">Stablecoin history</p>
         <h1 id="home-title">A historical registry of stablecoins.</h1>
-        <p class="lede">Track 116 stablecoins, their organizations, material events, access changes, and supporting evidence.</p>
+        <p class="lede">Track {stablecoins.length} stablecoins, their organizations, material events, access changes, and supporting evidence.</p>
       </div>
       <dl class="home-facts" aria-label="Registry summary">
         <div><dt>Stablecoins</dt><dd>{stablecoins.length}<small> stable assets</small></dd></div>
