@@ -2,7 +2,7 @@
 
 These SVG and PNG assets are vendored locally so public pages never depend on an external image host.
 
-Current audited coverage: **60 of 116 canonical Stable or Gone stablecoin records**.
+Current audited coverage: **116 of 116 canonical records (100%)**.
 
 The count is record coverage, not merely the number of files in this directory. Every mapped slug is a canonical current SOG route. Obsolete or noncanonical resolver keys are not counted.
 
@@ -140,3 +140,11 @@ dollar-on-chain.svg
 7. A file is not added merely because its filename resembles a symbol. The icon must be attributable to the same asset represented by the canonical SOG record.
 
 The Stablecoins index and home-page preview contain real marks and unsupported-record fallbacks together. Fixed dossier screenshots and the mixed-mark geometry gate verify desktop and mobile rendering.
+
+## Corpus-wide logo disposition closure
+
+All 116 canonical Stablecoin records now have a final local image-mark decision. The adjacent canonical name and symbol remain authoritative. The decision ledger distinguishes token-specific logos from official product, project, issuer, and verified-directory marks; the interface does not imply that every image is a distinct token logo. No generated substitute brand artwork is used.
+
+Decision ledger: `config/stablecoin-logo-decisions.json`.
+
+Imported during the closure pass: 56 records. Current mark-type counts: `official_issuer_mark` 10, `official_product_mark` 8, `official_project_mark` 7, `previously_audited_mark` 60, `token_logo` 30, `verified_directory_mark` 1.
