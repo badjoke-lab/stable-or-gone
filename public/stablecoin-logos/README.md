@@ -1,6 +1,6 @@
 # Stablecoin logo assets
 
-These SVGs are vendored locally so public pages never depend on an external image host.
+These SVG and PNG assets are vendored locally so public pages never depend on an external image host.
 
 Current audited coverage: **50 of 116 canonical Stable or Gone stablecoin records**.
 
@@ -98,7 +98,7 @@ ust.png
 1. Exact canonical SOG slug is checked first.
 2. Symbol lookup is used only for an explicit allow-list of symbols confirmed unique in the current corpus.
 3. Ambiguous symbols such as `USX`, `USDX`, and `USDN` never resolve by symbol alone.
-4. A record without an audited local SVG uses the same circular mark geometry with a short neutral monogram.
+4. A record without an audited local logo asset uses the same circular mark geometry with a short neutral monogram.
 5. The adjacent record name and full symbol remain authoritative; marks are decorative and hidden from assistive technology.
 6. No remote runtime fetching is used.
 7. A file is not added merely because its filename resembles a symbol. The icon must be attributable to the same asset represented by the canonical SOG record.
