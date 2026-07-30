@@ -1,0 +1,44 @@
+name: Run statistics redesign style application
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches: [main]
+    paths: [.github/workflows/run-stats-v4-style-apply.yml]
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/rebuild-stats-information-architecture
+          fetch-depth: 0
+      - name: Apply embedded statistics styles
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          source_workflow = Path('.github/workflows/apply-stats-v4-styles.yml')
+          text = source_workflow.read_text()
+          match = re.search(r"source \+= r'''\n(.*?)\n'''", text, re.S)
+          if not match:
+              raise SystemExit('Embedded statistics CSS block was not found')
+          css_path = Path('src/styles/public-ui.css')
+          css = css_path.read_text()
+          marker = '/* Statistics v4 information architecture */'
+          if marker not in css:
+              css += '\n\n' + match.group(1).rstrip() + '\n'
+              css_path.write_text(css)
+          PY
+          git rm .github/workflows/apply-stats-v4-styles.yml .github/workflows/run-stats-v4-style-apply.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/styles/public-ui.css
+          git commit -m "Add readable statistics page layout"
+          git pull --rebase origin fix/rebuild-stats-information-architecture
+          git push origin HEAD:fix/rebuild-stats-information-architecture
