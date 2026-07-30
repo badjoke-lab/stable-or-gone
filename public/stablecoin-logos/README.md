@@ -2,9 +2,9 @@
 
 These SVG and PNG assets are vendored locally so public pages never depend on an external image host.
 
-Current audited coverage: **116 of 116 canonical records (100%)**.
+Public display coverage is fixed at **98 direct Stablecoin/product logos of 116 canonical records (84.48%)**. The remaining **18 records use the shared neutral monogram fallback**.
 
-The count is record coverage, not merely the number of files in this directory. Every mapped slug is a canonical current SOG route. Obsolete or noncanonical resolver keys are not counted.
+A project, issuer, or third-party directory mark is not displayed as though it were the Stablecoin's own logo. Those researched marks remain classified in the research ledger, while `config/stablecoin-logo-display-policy.json` is the rendering source of truth.
 
 ## Sources and licenses
 
@@ -134,17 +134,20 @@ dollar-on-chain.svg
 1. Exact canonical SOG slug is checked first.
 2. Symbol lookup is used only for an explicit allow-list of symbols confirmed unique in the current corpus.
 3. Ambiguous symbols such as `USX`, `USDX`, and `USDN` never resolve by symbol alone.
-4. A record without an audited local logo asset uses the same circular mark geometry with a short neutral monogram.
-5. The adjacent record name and full symbol remain authoritative; marks are decorative and hidden from assistive technology.
-6. No remote runtime fetching is used.
-7. A file is not added merely because its filename resembles a symbol. The icon must be attributable to the same asset represented by the canonical SOG record.
+4. Only token-specific or product-specific marks are displayed as logos.
+5. Records supported only by a project, issuer, or directory mark use the shared neutral monogram fallback.
+6. The adjacent record name and full symbol remain authoritative; marks are decorative and hidden from assistive technology.
+7. No remote runtime fetching is used.
+8. A file is not added merely because its filename resembles a symbol. The image must be attributable to the same asset represented by the canonical SOG record.
 
-The Stablecoins index and home-page preview contain real marks and unsupported-record fallbacks together. Fixed dossier screenshots and the mixed-mark geometry gate verify desktop and mobile rendering.
+The Stablecoins index, home preview, and dossiers therefore render **98 direct logos and 18 neutral fallbacks** with identical geometry. The mixed-mark and all-record catalog gates verify desktop and mobile rendering.
 
-## Corpus-wide logo disposition closure
+## Corpus-wide disposition closure
 
-All 116 canonical Stablecoin records now have a final local image-mark decision. The adjacent canonical name and symbol remain authoritative. The decision ledger distinguishes token-specific logos from official product, project, issuer, and verified-directory marks; the interface does not imply that every image is a distinct token logo. No generated substitute brand artwork is used.
+All 116 canonical Stablecoin records have a final display disposition:
 
-Decision ledger: `config/stablecoin-logo-decisions.json`.
+- 98 direct Stablecoin/product logos;
+- 18 neutral fallbacks where research found only project, issuer, or directory-level artwork.
 
-Imported during the closure pass: 56 records. Current mark-type counts: `official_issuer_mark` 10, `official_product_mark` 8, `official_project_mark` 7, `previously_audited_mark` 60, `token_logo` 30, `verified_directory_mark` 1.
+Research ledger: `config/stablecoin-logo-decisions.json`.
+Public display policy: `config/stablecoin-logo-display-policy.json`.
