@@ -1,0 +1,35 @@
+name: Apply home readability floor
+
+on:
+  pull_request:
+    types: [synchronize]
+    paths:
+      - 'scripts/apply-home-readability-floor.mjs'
+      - '.github/workflows/apply-home-readability-floor.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out correction branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+      - name: Apply audited mobile type floors
+        run: node scripts/apply-home-readability-floor.mjs
+      - name: Commit readable source
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No source changes were produced."
+            exit 1
+          fi
+          git commit -m "Raise compact home UI to audited type floors"
+          git push origin HEAD:${{ github.event.pull_request.head.ref }}
