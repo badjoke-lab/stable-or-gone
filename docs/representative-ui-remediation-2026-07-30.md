@@ -12,6 +12,7 @@ This remediation follows a manual review of all 42 representative public routes 
 - Excessive mobile Home height from a twenty-record preview.
 - Mobile header imbalance and fully expanded footer navigation.
 - Fragmented desktop record titles caused by narrow three-column paginated cards.
+- Disclosure headings and links below the audited mobile text and target-size floors.
 
 ## Regression gates
 
