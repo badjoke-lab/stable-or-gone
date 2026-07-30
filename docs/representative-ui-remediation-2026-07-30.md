@@ -11,6 +11,7 @@ This remediation follows a manual review of all 42 representative public routes 
 - Excessive desktop Statistics height from fully expanded lower analysis sections.
 - Excessive mobile Home height from a twenty-record preview.
 - Mobile header imbalance and fully expanded footer navigation.
+- Fragmented desktop record titles caused by narrow three-column paginated cards.
 
 ## Regression gates
 
