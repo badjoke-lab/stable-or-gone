@@ -79,8 +79,8 @@ main :where(button,input,select,textarea,summary,label,a) { font-size: 15px; }
 .footer-support strong { font: 600 1.35rem var(--ui-serif); }
 .footer-support p { max-width: 760px; color: var(--ui-muted); font-size: 15px; }
 .footer-navigation { padding-block: 14px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px 18px; border-bottom: 1px solid var(--ui-line); }
-.footer-navigation-group { min-width: 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: 9px 12px; }
-.footer-navigation-group > strong { padding: 0; margin: 0 3px 0 0; border: 0; color: var(--ui-text); font: 700 13px/1.4 var(--ui-mono); letter-spacing: .07em; text-transform: uppercase; }
+.footer-navigation-group { min-width: 180px; flex: 1 1 180px; display: grid; align-content: start; gap: 3px; }
+.footer-navigation-group > summary { min-height: 32px; display: flex; align-items: center; justify-content: space-between; padding: 0; border: 0; color: var(--ui-text); font: 700 15px/1.4 var(--ui-sans); letter-spacing: .03em; text-transform: uppercase; list-style: none; cursor: pointer; } .footer-navigation-group > summary::-webkit-details-marker { display: none; } .footer-navigation-group > summary::after { content: "−"; } .footer-navigation-group:not([open]) > summary::after { content: "+"; } .footer-navigation-group nav { display: grid; align-content: start; gap: 0; }
 .footer-navigation-group a { width: fit-content; min-height: 40px; display: inline-flex; align-items: center; color: var(--ui-muted); font-size: 15px; line-height: 1.4; border-bottom: 0; }
 .footer-navigation-group a:hover { color: var(--ui-hover); }
 .footer-legal { padding-block: 13px; border-top: 0; }
