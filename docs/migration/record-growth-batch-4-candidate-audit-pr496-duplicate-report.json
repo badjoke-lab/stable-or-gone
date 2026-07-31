@@ -1,0 +1,65 @@
+{
+  "schema_version": "1.0",
+  "status": "reviewed_complete",
+  "recorded_at": "2026-07-31",
+  "implementation_pr": 496,
+  "canonical_asset_count": 116,
+  "reviewed_candidate_count": 8,
+  "exact_duplicate_count": 0,
+  "distinct_candidate_count": 8,
+  "symbol_collision_count": 1,
+  "duplicates": [],
+  "symbol_collisions": [
+    {
+      "candidate_id": "sog_cand_pr496_usdf_consortium",
+      "candidate_name": "USDF Consortium USDF",
+      "candidate_symbol": "USDF",
+      "existing_canonical_id": "sog_st_usdf",
+      "existing_name": "Falcon USDf",
+      "existing_symbol": "USDf",
+      "decision": "distinct_identity_do_not_merge",
+      "reason": "The shared case-insensitive symbol does not establish identity. The consortium asset and Falcon USDf have different operators, histories, and product claims."
+    }
+  ],
+  "name_or_symbol_review": [
+    {
+      "candidate_id": "sog_cand_pr496_open_usd",
+      "decision": "distinct_but_future_symbol_disambiguation_required",
+      "notes": "Open USD states OUSD, while Origin Dollar is commonly represented as OUSD. Any future record must preserve explicit issuer and lineage identity."
+    },
+    {
+      "candidate_id": "sog_cand_pr496_fiusd",
+      "decision": "distinct"
+    },
+    {
+      "candidate_id": "sog_cand_pr496_roughrider",
+      "decision": "distinct_announced_identity"
+    },
+    {
+      "candidate_id": "sog_cand_pr496_mnee",
+      "decision": "distinct"
+    },
+    {
+      "candidate_id": "sog_cand_pr496_qivalis_eur",
+      "decision": "distinct_announced_identity"
+    },
+    {
+      "candidate_id": "sog_cand_pr496_anz_adc",
+      "decision": "distinct_historical_pilot_identity"
+    },
+    {
+      "candidate_id": "sog_cand_pr496_usdf_consortium",
+      "decision": "distinct_identity_with_symbol_collision"
+    },
+    {
+      "candidate_id": "sog_cand_pr496_ylds",
+      "decision": "distinct"
+    }
+  ],
+  "canonical_boundary": {
+    "candidate_rows_are_canonical": false,
+    "automatic_deduplication": false,
+    "automatic_promotion": false,
+    "canonical_changes": 0
+  }
+}
