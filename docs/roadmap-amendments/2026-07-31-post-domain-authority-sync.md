@@ -26,8 +26,10 @@ Market Access Records: 8
 Detail routes: 414
 Metadata-checked routes: 414
 Official origin: https://www.stableorgone.com
-Main and production commit: bd0e63ac36b1824bf705e8c80d1fb0a1cd79d221
+Official-domain migration production checkpoint: bd0e63ac36b1824bf705e8c80d1fb0a1cd79d221
 ```
+
+Current `main` and production equality is verified dynamically by the deployment workflow and Issue #479.
 
 This amendment supersedes stale current-position wording and obsolete active-workstream statements in earlier authority documents while preserving completed historical contracts and records.
 
@@ -159,7 +161,7 @@ PR #495 must prove:
 1. top-level authority documents report 116 stable assets;
 2. top-level authority documents report `https://www.stableorgone.com` as the official origin;
 3. PR #492 and PR #493 are recorded as completed acceptance points;
-4. the current main and production commit is recorded consistently;
+4. the official-domain migration production checkpoint is recorded consistently without claiming it is the immutable current `main`;
 5. the legacy redirect is recorded as externally blocked;
 6. no candidate or promotion is authorized;
 7. active-workstream validation imports the PR #467 canonical checkpoint validator;
