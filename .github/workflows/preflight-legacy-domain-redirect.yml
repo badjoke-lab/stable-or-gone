@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - agent/sog-legacy-redirect-preflight
+  pull_request:
+    branches:
+      - main
 
 permissions:
   contents: read
@@ -14,6 +17,7 @@ concurrency:
 
 jobs:
   preflight:
+    if: github.event_name != 'pull_request' || github.head_ref == 'agent/sog-legacy-redirect-preflight'
     runs-on: ubuntu-latest
     environment: production
     steps:
