@@ -1,7 +1,7 @@
 # Stable or Gone Roadmap
 
 Updated: 2026-07-31  
-Status: Record Growth Batch 4 candidate audit active; canonical promotion blocked at review gate
+Status: Record Growth Batch 4 review gate active; MNEE authorized as the sole next implementation
 
 ## Current reviewed position
 
@@ -36,9 +36,10 @@ PR #491 Statistics redesign: complete
 PR #492 Statistics panel flow and deployment-chain normalization: complete
 PR #493 official-domain migration: complete and production-verified
 PR #495 post-domain authority synchronization and obsolete issue reconciliation: complete
+PR #496 Record Growth Batch 4 candidate audit: complete and production-verified
 ```
 
-PR #467 remains the 116-asset canonical-data checkpoint. PR #492 remains the Statistics and responsive-layout acceptance point. PR #493 remains the completed official-domain migration. PR #495 remains the authority checkpoint that authorized only issue reconciliation, a bounded candidate audit, and a review gate.
+PR #467 remains the 116-asset canonical-data checkpoint. PR #492 remains the Statistics and responsive-layout acceptance point. PR #493 remains the completed official-domain migration. PR #495 remains the post-domain authority checkpoint. PR #496 remains the reviewed private candidate-audit checkpoint.
 
 ## Statistics contract
 
@@ -82,27 +83,7 @@ Issue #479 remains open for production history and this unresolved external depe
 
 After PR #495, issues #66, #450, #451, #475, and #477 were closed with completion or supersession evidence preserved. No open Statistics, mobile, homepage, logo, or duplicate production-log issue remains.
 
-## Active item
-
-```text
-PR #496 Record Growth Batch 4 candidate audit
-```
-
-Governing files:
-
-```text
-docs/roadmap-amendments/2026-07-31-record-growth-batch-4-candidate-audit.md
-docs/quality/record-growth-batch-4-candidate-audit-pr496-spec.md
-config/record-growth-batch-4-candidate-audit-pr496.json
-data/editorial-research/record-growth-batch-4-candidate-audit-pr496.json
-docs/migration/record-growth-batch-4-candidate-audit-pr496-source-coverage.json
-docs/migration/record-growth-batch-4-candidate-audit-pr496-duplicate-report.json
-docs/migration/record-growth-batch-4-candidate-audit-pr496-handoff.json
-```
-
-PR #496 reviews exactly eight private candidates and changes no canonical or public data.
-
-## Reviewed candidate result
+## PR #496 candidate-audit result
 
 ```text
 Ready for full-record review: MNEE and Figure YLDS
@@ -111,25 +92,81 @@ Insufficient current evidence: FIUSD, ANZ A$DC, USDF Consortium USDF
 Exact canonical duplicates: 0
 Canonical changes: 0
 Public changes: 0
-Next boundary: REVIEW GATE
 ```
 
-MNEE and Figure YLDS are not authorized for promotion. “Ready for full-record review” means only that current primary sources appear sufficient to attempt complete records while preserving unresolved facts.
+USDF Consortium USDF remains distinct from Falcon USDf despite symbol similarity. Open USD requires explicit OUSD issuer and lineage disambiguation from Origin Dollar.
 
-USDF Consortium USDF must remain distinct from Falcon USDf despite symbol similarity. Open USD must be explicitly disambiguated from Origin Dollar before any future record.
-
-## Review gate after PR #496
-
-Stop and review:
+## Active item
 
 ```text
-MNEE identity, contracts, reserve composition, redemption, and maintenance burden
-YLDS stable-value scope, security classification, income semantics, contracts, and maintenance burden
-value of new records versus existing dossier deepening
-whether to authorize zero, one, or at most two future canonical additions
+PR #497 Record Growth Batch 4 review gate
 ```
 
-No candidate and no later growth batch is pre-authorized by this roadmap.
+Governing files:
+
+```text
+docs/roadmap-amendments/2026-07-31-record-growth-batch-4-review-gate.md
+docs/quality/record-growth-batch-4-review-gate-pr497-spec.md
+config/record-growth-batch-4-review-gate-pr497.json
+docs/migration/record-growth-batch-4-review-gate-pr497.json
+```
+
+## Review-gate decision
+
+Authorize MNEE only:
+
+```text
+PR #498 — Record Growth Batch 4: MNEE
+Maximum new canonical assets: 1
+Replacement candidate: prohibited
+REVIEW GATE after PR #498
+```
+
+MNEE has current primary support for issuer identity, licence context, 1:1 reserve backing, direct verified-customer issuance and redemption, fees and minimums, monthly attestations, and official 1Sat Ordinals and Ethereum operation.
+
+This is authorization for a complete-record attempt, not automatic promotion. PR #498 must withhold MNEE if exact identity or complete-record support fails.
+
+## YLDS boundary
+
+Figure YLDS is deferred.
+
+Its issuer describes it as a registered fixed-income security rather than a stablecoin. Material differences include $0.01 face-amount certificate units, holder interest, issuer-credit and asset-portfolio risk, securities eligibility, transfer and redemption restrictions, and chain/wrapper distinctions.
+
+YLDS requires a separate reviewed scope amendment. No YLDS canonical implementation is authorized.
+
+## PR #498 entry gate
+
+Before canonical edits, PR #498 must perform fresh review of:
+
+```text
+canonical duplicate and lineage
+current primary sources
+exact contract or inscription identities
+first public issuance date
+reserve composition and custodian
+attestation report and archive series
+issuance and redemption terms, fees, and minimums
+MNEE Limited organization identity and relationships
+```
+
+Every applicable canonical record family must be complete. Unsupported values remain explicit known unknowns. No replacement candidate may be substituted.
+
+## Review gate after PR #498
+
+Stop and review the actual merged result:
+
+```text
+whether MNEE was added or withheld
+canonical count and relationship changes
+source and archive completeness
+reserve and redemption support
+deployment identity support
+known-unknown burden
+maintenance burden
+production parity
+```
+
+No work after PR #498 is pre-authorized by this roadmap.
 
 ## Active operating mode
 
