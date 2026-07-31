@@ -1,64 +1,10 @@
 # Stable or Gone Agent Instructions
 
-Current mandatory authorities:
+This file is the mandatory entry point for humans, AI agents, and automation working in this repository.
 
-1. Completed owner-directed full public UI contract — PR #470, governed by `docs/roadmap-amendments/2026-07-27-pr470-full-public-ui-contract.md` and `docs/quality/full-public-ui-contract-pr470-spec.md`.
-2. Completed UI V3 regression authority — PR #461 and PR #463 closure, archived in `docs/ui-v3-remediation-authority.md`.
-3. Canonical data baseline — PR #433 generated-output repair on top of PR #429.
-4. Reviewed data-growth authority — PR #466 authorizes only PR #467 PLNQ and GBPQ; PR #467 is at its mandatory review gate after PR #470 production verification.
+## Current authority
 
-## Mandatory references
-
-```text
-AGENTS.md
-docs/spec-governance.md
-docs/roadmap.md
-docs/deployment-policy.md
-docs/ui-v3-remediation-authority.md
-docs/roadmap-amendments/2026-07-27-pr470-full-public-ui-contract.md
-docs/quality/full-public-ui-contract-pr470-spec.md
-docs/post-351-data-growth-operating-spec.md
-docs/roadmap-amendments/2026-07-18-pr426-post-ui-v3-data-growth-reset.md
-docs/quality/record-growth-candidate-audit-v2-pr427-spec.md
-config/record-growth-candidate-audit-v2-pr427.json
-data/editorial-research/record-growth-candidate-audit-v2-pr427.json
-docs/migration/record-growth-candidate-audit-v2-pr427-handoff.json
-docs/migration/record-growth-candidate-audit-v2-pr427-validation.json
-docs/roadmap-amendments/2026-07-18-pr428-post-pr427-review-gate.md
-docs/quality/post-pr427-review-gate-pr428-spec.md
-config/post-pr427-review-gate-pr428.json
-docs/migration/post-pr427-review-gate-pr428.json
-docs/migration/post-pr427-review-gate-pr428-validation.json
-docs/quality/record-growth-batch-2-pr429-spec.md
-config/record-growth-batch-2-pr429.json
-data/candidate-promotions-batch-28.json
-docs/migration/record-growth-batch-2-pr429-handoff.json
-docs/roadmap-amendments/2026-07-25-pr466-post-ui-data-growth-review-gate.md
-docs/quality/post-ui-data-growth-review-gate-pr466-spec.md
-config/post-ui-data-growth-review-gate-pr466.json
-docs/migration/post-ui-data-growth-review-gate-pr466.json
-docs/quality/record-growth-batch-3-pr467-spec.md
-config/record-growth-batch-3-pr467.json
-docs/migration/record-growth-batch-3-pr467-handoff.json
-```
-
-## Mandatory UI working rule
-
-Before changing any public HTML, component, layout, CSS, client script, UI validation, screenshot workflow, or visual acceptance record, read `docs/ui-v3-remediation-authority.md` as the completed regression contract.
-
-Every material UI pull request must:
-
-- state `Authority: docs/ui-v3-remediation-authority.md`;
-- identify the exact preserved or changed regression requirements;
-- list changed routes and states;
-- include desktop and mobile screenshots for changed route families;
-- report visible errors, console errors, failed required requests, overflow, text clipping or overlap, keyboard behavior, and relevant page-height changes;
-- preserve or strengthen exhaustive color, readability, overlap, route-completeness, and responsive checks;
-- preserve canonical data, routes, metadata contracts, and machine-readable outputs unless a separate authority explicitly permits a change.
-
-A material UI pull request that omits these items is out of scope and must not merge. Automated success must never override a known visual defect.
-
-## Current workstreams
+The current reviewed repository state is:
 
 ```text
 Canonical stable assets: 116
@@ -67,58 +13,104 @@ Relationships: 128
 Events: 191
 Canonical Evidence: 571
 Evidence Relations: 571
-Archive recorded: 442
-Archive not recorded: 129
 Deployments: 182
 Market Access Records: 8
-
-PR #426 Post-UI v3 Data-Growth Reset: complete
-PR #427 Record Growth Candidate Audit v2: complete
-PR #428 Post-PR #427 Review Gate: complete
-PR #429 Record Growth Batch 2 — CHFAU and SEKAU: complete
-PR #433 Generated-output repair: complete
-PR #461 exhaustive UI V3 color-system repair: complete
-PR #463 exhaustive UI V3 readability and hierarchy closure: complete
-PR #464 UI authority and roadmap closure: complete
-PR #465 agent authority synchronization: complete on merge
-PR #466 Post-UI data-growth review gate: complete
-PR #470 Full Public UI Contract: complete and production-verified
-PR #467 Record Growth Batch 3 — PLNQ and GBPQ: reviewed complete; REVIEW GATE active
-Next boundary after PR #467: REVIEW GATE
-
-Issue #281 UI v3 rebuild: complete and closed
-Issue #457 CYA-dark redesign audit: complete and closed
-UI v3 regression baseline: preserved
-Full public UI contract remediation: complete and production-verified
+Detail routes: 414
+Official public origin: https://www.stableorgone.com
+Current main and production commit: bd0e63ac36b1824bf705e8c80d1fb0a1cd79d221
 ```
 
-## UI authority boundary
+Current authority chain:
 
-The current UI V3 implementation remains the accepted regression baseline after exhaustive route verification and direct artifact review.
+1. PR #467 is the reviewed 116-asset canonical-data checkpoint.
+2. PR #487 through PR #492 are the completed public UI, Statistics, responsive, logo, and deployment-chain normalization sequence.
+3. PR #493 made `https://www.stableorgone.com` the official origin and was production-verified.
+4. `docs/roadmap-amendments/2026-07-31-post-domain-authority-sync.md` defines the current bounded continuation.
+5. `docs/ui-v3-remediation-authority.md` remains the regression-protection contract for material public UI work.
 
-`docs/ui-v3-remediation-authority.md` remains mandatory for regression protection and is not reopened as an R1–R10 queue.
+## Mandatory reading order
 
-PR #470 completed the bounded 2026-07-27 material UI program and replaced the legacy cascade with the single public UI authority without changing canonical data or routes.
+Before changing code, canonical data, workflows, infrastructure, or documentation, read:
 
-## PR #467 canonical-growth boundary
+1. `AGENTS.md`
+2. `docs/spec-governance.md`
+3. `docs/roadmap.md`
+4. `docs/deployment-policy.md`
+5. `docs/roadmap-amendments/2026-07-31-post-domain-authority-sync.md`
+6. `docs/post-351-data-growth-operating-spec.md`
+7. the work-item-specific specification and every named baseline, queue, audit, handoff, and prior output
 
-PR #467 remains the only authorized canonical-growth PR after PR #470 production verification and has reached its mandatory review gate. It may add at most the exact reviewed candidates:
+Merged repository authority outranks chat memory, handoff prose, issue discussion, generated reports, and unmerged drafts.
+
+## Current workstream
 
 ```text
-Quantoz PLNQ — sog_cand_pr427_plnq
-Quantoz GBPQ — sog_cand_pr427_gbpq
+PR #487 stablecoin logo coverage: complete
+PR #488 white background, status badges, and mobile density: complete
+PR #489 homepage information architecture: complete
+PR #490 broad desktop/mobile remediation: complete
+PR #491 Statistics redesign: complete
+PR #492 Statistics panel flow and deployment-chain normalization: complete
+PR #493 official-domain migration: complete and production-verified
+PR #495 post-domain authority synchronization: active
 ```
 
-PR #467 performed the required duplicate, current-source, deployment-identity, reserve, and redemption review, reused the existing Quantoz organization, and preserved explicit unknowns where the sources did not support a fact.
+After PR #495:
 
-PR #467 must not change Market Access, monitoring publication, UI, public route families, score or ranking surfaces, or recommendation semantics. Automatic promotion remains prohibited.
+```text
+1. reconcile and close obsolete production/UI issues without deleting history;
+2. keep the legacy sog.badjoke-lab.com redirect blocked until the Cloudflare credential has Zone Read and Redirect Edit access;
+3. perform a bounded Record Growth Batch 4 candidate audit;
+4. stop at review before any canonical promotion.
+```
 
-## Data-growth boundary
+No candidate and no later growth batch is pre-authorized.
 
-No agent may automatically promote candidates, infer missing facts, create thin canonical records, authorize an indefinite PR sequence, introduce a score or ranking, or treat monitoring observations as canonical evidence.
+## Mandatory UI working rule
 
-Unknown values remain explicit. PR #467 exits only to its mandatory review gate based on its actual merged result.
+Before changing public HTML, components, layouts, CSS, client scripts, UI validators, screenshot workflows, or visual acceptance records, read `docs/ui-v3-remediation-authority.md` and the PR #492 Statistics contract.
 
-## Production boundary
+Every material UI pull request must:
 
-A merge to `main` is not itself proof of production parity. Production publication and deployed-commit verification follow `docs/deployment-policy.md`. Keep repository validation, production deployment, and production parity conclusions distinct.
+- identify the governing authority;
+- list changed route families and preserved contracts;
+- include desktop and mobile screenshots;
+- manually inspect generated images rather than relying on CI status alone;
+- inspect page top, middle, and bottom, long-page flow, card heights, whitespace, overlaps, duplicates, footer completion, and mobile source order;
+- preserve or strengthen exhaustive color, readability, overlap, route-completeness, and responsive checks;
+- preserve canonical data, routes, metadata, and machine-readable outputs unless separate authority permits a change.
+
+For `/stats/` specifically:
+
+- no data may be hidden in collapsibles;
+- desktop columns must pack independently without shared row heights;
+- mobile must preserve source order in one column;
+- bare `Arbitrum` is unresolved and must not be mapped to Arbitrum One;
+- Arbitrum One and Arbitrum Nova remain distinct;
+- canonical chain totals plus unresolved deployments must reconcile to total deployments.
+
+Automated success never overrides a known visual or semantic defect.
+
+## Canonical-data boundary
+
+- Unknown values remain unknown unless reviewed evidence supports replacement.
+- Partial dates must not be coerced into day-level dates.
+- Monitoring, candidates, discovery leads, editorial research, and private notes are not canonical data.
+- Canonical counts change only through explicit audited data PRs.
+- Rebrands, aliases, wrappers, migrations, and deployments do not become separate canonical assets without scope and lineage review.
+- Automatic promotion is prohibited.
+- A growth PR may add at most two canonical stable assets unless a separate reviewed amendment changes that limit.
+
+## Domain and deployment boundary
+
+The only official origin is:
+
+```text
+https://www.stableorgone.com
+```
+
+Canonical metadata, hreflang, OGP, JSON-LD, machine-readable files, robots, sitemap, production smoke tests, and deployment reporting must use that origin.
+
+The legacy host `sog.badjoke-lab.com` still resolves to the Pages project. Its 301 redirect is an external Cloudflare configuration task, not permission to reintroduce the old host into repository canonical output.
+
+A merge to `main` is not proof of production parity. Production publication and deployed-commit verification follow `docs/deployment-policy.md` and are recorded in Issue #479.
