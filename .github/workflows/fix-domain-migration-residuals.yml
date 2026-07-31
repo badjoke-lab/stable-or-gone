@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - agent/official-domain-migration
+  pull_request:
+    branches:
+      - main
 
 permissions:
   contents: write
@@ -14,6 +17,7 @@ concurrency:
 
 jobs:
   fix:
+    if: github.event_name != 'pull_request' || github.head_ref == 'agent/official-domain-migration'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout migration branch
