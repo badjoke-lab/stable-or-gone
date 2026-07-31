@@ -1,0 +1,69 @@
+name: Fix sitemap origin validator
+
+on:
+  push:
+    branches:
+      - agent/official-domain-migration
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sog-sitemap-origin-fix
+  cancel-in-progress: false
+
+jobs:
+  fix:
+    if: github.event_name != 'pull_request' || github.head_ref == 'agent/official-domain-migration'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout migration branch
+        uses: actions/checkout@v4
+        with:
+          ref: agent/official-domain-migration
+          fetch-depth: 0
+
+      - name: Replace escaped legacy sitemap host
+        shell: python
+        run: |
+          from pathlib import Path
+
+          path = Path('scripts/verify-public-consistency.mjs')
+          text = path.read_text()
+          old = r'sog\.badjoke-lab\.com'
+          new = r'www\.stableorgone\.com'
+          if old not in text:
+              raise SystemExit('escaped legacy sitemap host not found')
+          path.write_text(text.replace(old, new))
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Validate official origin
+        run: npm run validate:public-origin
+
+      - name: Build and verify public consistency
+        run: |
+          npm run build:site
+          npm run verify:consistency
+          npm run verify:deployment
+          npm run verify:public
+
+      - name: Commit sitemap validator fix
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- scripts/verify-public-consistency.mjs
+          git commit -m "Fix official-domain sitemap consistency checks"
+          git push origin HEAD:agent/official-domain-migration
