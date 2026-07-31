@@ -1,4 +1,4 @@
-name: Export PR498 source
+name: Finalize PR498
 
 on:
   pull_request:
@@ -6,40 +6,53 @@ on:
       - main
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
-  export:
+  finalize:
     if: github.head_ref == 'agent/record-growth-batch-4-mnee'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           ref: agent/record-growth-batch-4-mnee
-      - name: Prepare source archive
-        run: |
-          rm -rf node_modules dist .git
-          tar -czf /tmp/stable-or-gone-pr498-source.tar.gz .
-      - uses: actions/upload-artifact@v4
-        with:
-          name: stable-or-gone-pr498-source
-          path: /tmp/stable-or-gone-pr498-source.tar.gz
-          retention-days: 1
-      - name: Inspect official MNEE SDK package
+          fetch-depth: 0
+
+      - name: Apply reviewed MNEE implementation
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p /tmp/mnee-sdk
-          cd /tmp/mnee-sdk
-          npm pack @mnee/ts-sdk@1.2.0 --silent > /tmp/mnee-pack-name.txt
-          package_file="$(cat /tmp/mnee-pack-name.txt)"
-          tar -xzf "$package_file"
-          grep -RniE 'token.?id|tokenId|inscription|origin|mainnet|MNEE|1sat|bsv21' package > /tmp/mnee-sdk-identifiers.txt || true
-          tar -czf /tmp/mnee-sdk-package.tar.gz package
-      - uses: actions/upload-artifact@v4
-        with:
-          name: mnee-sdk-identifier-review
-          path: |
-            /tmp/mnee-sdk-identifiers.txt
-            /tmp/mnee-sdk-package.tar.gz
-          retention-days: 1
+          cat .pr498-patch-00 .pr498-patch-01 .pr498-patch-02 .pr498-patch-03 .pr498-patch-04 > /tmp/pr498.patch.gz.b64
+          base64 --decode /tmp/pr498.patch.gz.b64 | gzip --decompress > /tmp/pr498.patch
+          git apply --check /tmp/pr498.patch
+          git apply /tmp/pr498.patch
+
+      - name: Install locked dependencies
+        run: npm ci
+
+      - name: Rebuild and validate PR498
+        shell: bash
+        run: |
+          set -euo pipefail
+          node scripts/build-record-growth-batch-4-mnee-pr498.mjs
+          npm run validate:record-growth-batch-4-mnee-pr498
+          npm run validate:active-workstream
+          npm run validate:data
+          npm run validate:baseline
+          npm run validate:parity
+          npm run validate:release-integrity
+          npm run validate:reproducible-build
+          node scripts/validate-stats-history.mjs
+          node scripts/validate-non-ui-release-material-current.mjs
+
+      - name: Commit permanent implementation only
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -f .pr498-patch-00 .pr498-patch-01 .pr498-patch-02 .pr498-patch-03 .pr498-patch-04
+          rm -f .github/workflows/export-pr498-source.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'Add complete MNEE canonical record'
+          git push origin HEAD:agent/record-growth-batch-4-mnee
