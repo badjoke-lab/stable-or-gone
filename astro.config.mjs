@@ -1,6 +1,7 @@
 import { defineConfig } from 'astro/config';
+import { PUBLIC_ORIGIN } from './config/public-origin.mjs';
 
 export default defineConfig({
-  site: 'https://sog.badjoke-lab.com',
+  site: PUBLIC_ORIGIN,
   output: 'static'
 });

@@ -1,6 +1,7 @@
 import { isDeepStrictEqual } from 'node:util';
+import { PUBLIC_ORIGIN } from '../config/public-origin.mjs';
 
-const baseUrl = (process.env.SOG_BASE_URL || 'https://sog.badjoke-lab.com').replace(/\/$/, '');
+const baseUrl = (process.env.SOG_BASE_URL || PUBLIC_ORIGIN).replace(/\/$/, '');
 const expectedCommit = process.env.SOG_EXPECTED_COMMIT || process.env.GITHUB_SHA || null;
 const attempts = Number(process.env.SOG_SMOKE_ATTEMPTS || 5);
 const delayMs = Number(process.env.SOG_SMOKE_DELAY_MS || 10000);

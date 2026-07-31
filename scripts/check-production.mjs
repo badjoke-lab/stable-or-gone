@@ -1,4 +1,5 @@
-const DEFAULT_BASE_URL = 'https://sog.badjoke-lab.com';
+import { PUBLIC_ORIGIN } from '../config/public-origin.mjs';
+const DEFAULT_BASE_URL = PUBLIC_ORIGIN;
 const DEFAULT_ATTEMPTS = 20;
 const DEFAULT_DELAY_MS = 15000;
 
@@ -76,7 +77,7 @@ async function checkOnce() {
   assert(version.project_id === 'stable-or-gone', 'version project id mismatch');
   assert(version.registry_family === 'badjoke-lab-ledger-series', 'version registry family mismatch');
   assert(version.registry_type === 'stablecoin_issuer_registry', 'version registry type mismatch');
-  assert(version.canonical_origin === 'https://sog.badjoke-lab.com', 'version origin mismatch');
+  assert(version.canonical_origin === PUBLIC_ORIGIN, 'version origin mismatch');
   assert(version.build?.verification_marker === 'sog_machine_readable_layer_v1', 'verification marker mismatch');
   assert(version.build?.commit && typeof version.build.commit === 'string', 'build commit missing');
   assert(version.build?.branch && typeof version.build.branch === 'string', 'build branch missing');
@@ -155,9 +156,10 @@ async function checkOnce() {
 
   assert(robotsResponse.text.includes(`${baseUrl}/sitemap-index.xml`), 'robots sitemap URL missing');
   const sitemap = sitemapResponse.text;
-  const sitemapStablecoins = new Set([...sitemap.matchAll(/<loc>https:\/\/sog\.badjoke-lab\.com\/stablecoin\/([^<]+)\/<\/loc>/g)].map((match) => match[1]));
-  const sitemapOrganizations = new Set([...sitemap.matchAll(/<loc>https:\/\/sog\.badjoke-lab\.com\/issuer\/([^<]+)\/<\/loc>/g)].map((match) => match[1]));
-  const sitemapEvents = new Set([...sitemap.matchAll(/<loc>https:\/\/sog\.badjoke-lab\.com\/event\/([^<]+)\/<\/loc>/g)].map((match) => match[1]));
+  const escapedBaseUrl = baseUrl.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const sitemapStablecoins = new Set([...sitemap.matchAll(new RegExp(`<loc>${escapedBaseUrl}/stablecoin/([^<]+)/</loc>`, 'g'))].map((match) => match[1]));
+  const sitemapOrganizations = new Set([...sitemap.matchAll(new RegExp(`<loc>${escapedBaseUrl}/issuer/([^<]+)/</loc>`, 'g'))].map((match) => match[1]));
+  const sitemapEvents = new Set([...sitemap.matchAll(new RegExp(`<loc>${escapedBaseUrl}/event/([^<]+)/</loc>`, 'g'))].map((match) => match[1]));
   assert(sitemapStablecoins.size === counts.primary_records, `sitemap stablecoin URLs ${sitemapStablecoins.size}, expected ${counts.primary_records}`);
   assert(sitemapOrganizations.size === breakdown.organizations, `sitemap organization URLs ${sitemapOrganizations.size}, expected ${breakdown.organizations}`);
   assert(sitemapEvents.size === counts.events, `sitemap event URLs ${sitemapEvents.size}, expected ${counts.events}`);

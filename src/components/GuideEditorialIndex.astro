@@ -12,10 +12,10 @@ const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'CollectionPage',
   name: title,
-  url: 'https://sog.badjoke-lab.com/guides/',
+  url: 'https://www.stableorgone.com/guides/',
   description,
-  isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' },
-  hasPart: published.map((guide) => ({ '@type': 'Article', name: guide.title, url: `https://sog.badjoke-lab.com/guides/${guide.slug}/`, datePublished: guide.publishedAt }))
+  isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://www.stableorgone.com/' },
+  hasPart: published.map((guide) => ({ '@type': 'Article', name: guide.title, url: `https://www.stableorgone.com/guides/${guide.slug}/`, datePublished: guide.publishedAt }))
 };
 ---
 <BaseLayout title={title} description={description} canonicalPath="/guides/" jsonLd={jsonLd}>

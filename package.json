@@ -115,6 +115,7 @@
     "validate:finalization": "npm run validate:migration-v3 && node scripts/validate-batch-finalization.mjs",
     "validate:integrity": "node scripts/audit-registry-integrity-batch-o.mjs --check",
     "validate:guides": "node scripts/validate-guides.mjs",
+    "validate:public-origin": "node scripts/validate-public-origin.mjs",
     "audit:integrity": "node scripts/audit-registry-integrity-batch-o.mjs",
     "audit:ui-v3-cleanup": "node scripts/audit-ui-v3-cleanup-performance.mjs",
     "verify:provenance": "node scripts/verify-build-provenance.mjs",

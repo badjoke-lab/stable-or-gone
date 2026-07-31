@@ -5,7 +5,7 @@ import { loadRegistryV2Baseline } from './load-registry-v2-baseline.mjs';
 
 const root = process.cwd();
 const distDir = path.join(root, 'dist');
-const origin = 'https://sog.badjoke-lab.com';
+const origin = 'https://www.stableorgone.com';
 const failures = [];
 const check = (condition, message) => { if (!condition) failures.push(message); };
 
@@ -138,9 +138,9 @@ const routeInventory = {
 
 const sitemap = readHtml('sitemap-index.xml');
 const sitemapPaths = {
-  stablecoins: new Set([...sitemap.matchAll(/<loc>https:\/\/sog\.badjoke-lab\.com(\/stablecoin\/[^<]+\/)<\/loc>/g)].map((match) => match[1])),
-  organizations: new Set([...sitemap.matchAll(/<loc>https:\/\/sog\.badjoke-lab\.com(\/issuer\/[^<]+\/)<\/loc>/g)].map((match) => match[1])),
-  events: new Set([...sitemap.matchAll(/<loc>https:\/\/sog\.badjoke-lab\.com(\/event\/[^<]+\/)<\/loc>/g)].map((match) => match[1]))
+  stablecoins: new Set([...sitemap.matchAll(/<loc>https:\/\/www\.stableorgone\.com(\/stablecoin\/[^<]+\/)<\/loc>/g)].map((match) => match[1])),
+  organizations: new Set([...sitemap.matchAll(/<loc>https:\/\/www\.stableorgone\.com(\/issuer\/[^<]+\/)<\/loc>/g)].map((match) => match[1])),
+  events: new Set([...sitemap.matchAll(/<loc>https:\/\/www\.stableorgone\.com(\/event\/[^<]+\/)<\/loc>/g)].map((match) => match[1]))
 };
 compareSets(sitemapPaths.stablecoins, expectedPaths.stablecoins, 'sitemap stablecoin URLs');
 compareSets(sitemapPaths.organizations, expectedPaths.organizations, 'sitemap organization URLs');

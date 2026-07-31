@@ -29,6 +29,8 @@ jobs:
         run: node scripts/validate-registry-evidence-integrity-audit.mjs
       - name: Validate guides
         run: npm run validate:guides
+      - name: Validate official public origin
+        run: npm run validate:public-origin
       - name: Validate baseline
         run: npm run validate:baseline
       - name: Validate active workstream

@@ -215,13 +215,13 @@ const robotsPath = path.join(distDir, 'robots.txt');
 const sitemapPath = path.join(distDir, 'sitemap-index.xml');
 assert(fs.existsSync(robotsPath), 'robots.txt missing');
 assert(fs.existsSync(sitemapPath), 'sitemap-index.xml missing');
-if (fs.existsSync(robotsPath)) assert(fs.readFileSync(robotsPath, 'utf8').includes('https://sog.badjoke-lab.com/sitemap-index.xml'), 'robots.txt sitemap URL mismatch');
+if (fs.existsSync(robotsPath)) assert(fs.readFileSync(robotsPath, 'utf8').includes('https://www.stableorgone.com/sitemap-index.xml'), 'robots.txt sitemap URL mismatch');
 if (fs.existsSync(sitemapPath)) {
   const sitemap = fs.readFileSync(sitemapPath, 'utf8');
   const collect = (pattern) => new Set([...sitemap.matchAll(pattern)].map((match) => match[1]));
-  const listedStablecoins = collect(/<loc>https:\/\/sog\.badjoke-lab\.com\/stablecoin\/([^<]+)\/<\/loc>/g);
-  const listedOrganizations = collect(/<loc>https:\/\/sog\.badjoke-lab\.com\/issuer\/([^<]+)\/<\/loc>/g);
-  const listedEvents = collect(/<loc>https:\/\/sog\.badjoke-lab\.com\/event\/([^<]+)\/<\/loc>/g);
+  const listedStablecoins = collect(/<loc>https:\/\/www\.stableorgone\.com\/stablecoin\/([^<]+)\/<\/loc>/g);
+  const listedOrganizations = collect(/<loc>https:\/\/www\.stableorgone\.com\/issuer\/([^<]+)\/<\/loc>/g);
+  const listedEvents = collect(/<loc>https:\/\/www\.stableorgone\.com\/event\/([^<]+)\/<\/loc>/g);
   assert(listedStablecoins.size === counts.stablecoins, `sitemap stablecoin routes ${listedStablecoins.size}, expected ${counts.stablecoins}`);
   assert(listedOrganizations.size === counts.organizations, `sitemap organization routes ${listedOrganizations.size}, expected ${counts.organizations}`);
   assert(listedEvents.size === counts.events, `sitemap event routes ${listedEvents.size}, expected ${counts.events}`);

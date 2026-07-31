@@ -1,5 +1,6 @@
 ---
 import BrandLockup from '../components/BrandLockup.astro';
+import { PUBLIC_ORIGIN } from '../../config/public-origin.mjs';
 import { aboutNavigation, footerNavigationGroups, globalNavigationGroups } from '../../config/site-architecture.mjs';
 
 interface Props {
@@ -11,7 +12,7 @@ interface Props {
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 }
 
-const siteUrl = 'https://sog.badjoke-lab.com';
+const siteUrl = PUBLIC_ORIGIN;
 const gaMeasurementId = String(import.meta.env.PUBLIC_GA_MEASUREMENT_ID || '').trim();
 const {
   title = 'Stable or Gone — Stablecoin History Registry',

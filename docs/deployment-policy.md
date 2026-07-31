@@ -10,7 +10,7 @@ Stable or Gone publishes the current `main` branch automatically.
 Source of truth: main
 Production workflow: .github/workflows/deploy-production.yml
 Pages project: stable-or-gone
-Public origin: https://sog.badjoke-lab.com/
+Public origin: https://www.stableorgone.com/
 Automatic main publication: enabled
 Manual workflow dispatch: fallback only
 UI review gate: not a publication blocker
