@@ -1,0 +1,104 @@
+name: Apply official domain migration
+
+on:
+  push:
+    branches:
+      - agent/official-domain-migration
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sog-official-domain-migration
+  cancel-in-progress: false
+
+jobs:
+  migrate:
+    name: Rewrite, validate, and commit official origin
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout migration branch
+        uses: actions/checkout@v4
+        with:
+          ref: agent/official-domain-migration
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: npm
+
+      - name: Apply bounded origin migration
+        run: node scripts/apply-official-domain-migration.mjs
+
+      - name: Repair shell quoting in production guide probes
+        shell: python
+        run: |
+          from pathlib import Path
+
+          path = Path('.github/workflows/deploy-production.yml')
+          text = path.read_text()
+          text = text.replace(
+              'GUIDES_HTML="$(curl -fsS "$SOG_BASE_URL/guides/ || true)"',
+              'GUIDES_HTML="$(curl -fsS "$SOG_BASE_URL/guides/" || true)"',
+          )
+          text = text.replace(
+              'ARTICLE_HTML="$(curl -fsS "$SOG_BASE_URL/guides/uk-stablecoin-capital-rules-2026/ || true)"',
+              'ARTICLE_HTML="$(curl -fsS "$SOG_BASE_URL/guides/uk-stablecoin-capital-rules-2026/" || true)"',
+          )
+          path.write_text(text)
+
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Validate origin source contract
+        run: npm run validate:public-origin
+
+      - name: Validate JavaScript syntax
+        run: |
+          node --check scripts/check-production.mjs
+          node --check scripts/check-production-provenance.mjs
+          node --check scripts/check-production-output-parity.mjs
+          node --check scripts/validate-public-origin.mjs
+
+      - name: Astro check
+        run: npm run check
+
+      - name: Build site
+        env:
+          SOG_BUILD_COMMIT: ${{ github.sha }}
+          SOG_BUILD_BRANCH: agent/official-domain-migration
+          SOG_BUILD_TIMESTAMP: '2026-07-31T05:42:00Z'
+          SOURCE_DATE_EPOCH: '1785476520'
+        run: npm run build:site
+
+      - name: Verify generated public layer
+        run: npm run verify:public
+
+      - name: Verify built deployment output
+        run: npm run verify:deployment
+
+      - name: Confirm clean patch formatting
+        run: git diff --check
+
+      - name: Commit migrated source
+        shell: bash
+        run: |
+          set -euo pipefail
+          git restore data/generated/build-provenance.json data/generated/deployment-taxonomy-migration.json 2>/dev/null || true
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add \
+            astro.config.mjs \
+            config/public-origin.mjs \
+            src \
+            public \
+            scripts \
+            .github/workflows \
+            README.md \
+            docs/deployment-policy.md \
+            package.json
+          git status --short
+          git commit -m "Migrate SOG to official domain"
+          git push origin HEAD:agent/official-domain-migration
