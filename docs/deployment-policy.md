@@ -11,11 +11,13 @@ Source of truth: main
 Production workflow: .github/workflows/deploy-production.yml
 Pages project: stable-or-gone
 Official public origin: https://www.stableorgone.com/
-Current production commit: bd0e63ac36b1824bf705e8c80d1fb0a1cd79d221
+Official-domain migration production checkpoint: bd0e63ac36b1824bf705e8c80d1fb0a1cd79d221
 Automatic main publication: enabled
 Manual workflow dispatch: fallback only
 Deployment record: Issue #479
 ```
+
+The checkpoint records the completed PR #493 migration. Current `main` and production equality must be read from the deployment workflow and Issue #479 rather than inferred from this document.
 
 ## Core publication rule
 
