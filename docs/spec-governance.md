@@ -25,7 +25,7 @@ When documents disagree, use this order:
 Current active roadmap amendment:
 
 ```text
-docs/roadmap-amendments/2026-07-31-record-growth-batch-4-candidate-audit.md
+docs/roadmap-amendments/2026-07-31-record-growth-batch-4-review-gate.md
 ```
 
 Current operating specification:
@@ -37,7 +37,7 @@ docs/post-351-data-growth-operating-spec.md
 Current work-item specification:
 
 ```text
-docs/quality/record-growth-batch-4-candidate-audit-pr496-spec.md
+docs/quality/record-growth-batch-4-review-gate-pr497-spec.md
 ```
 
 Historical amendments and PR-specific specifications remain historical records. Their completed semantic contracts remain useful, but their old “current” wording and schedules do not override the current roadmap.
@@ -53,7 +53,8 @@ Before changing code, canonical data, workflows, infrastructure, or documentatio
 5. read the active roadmap amendment;
 6. read `docs/post-351-data-growth-operating-spec.md`;
 7. read the work-item-specific specification;
-8. read every named queue, validator, audit, fixture, baseline, handoff, release note, research checkpoint, and prior output required by the work item.
+8. read the PR #496 candidate-audit specification and handoff;
+9. read every named queue, validator, audit, fixture, baseline, release note, research checkpoint, and prior output required by the work item.
 
 A non-trivial PR is not ready for implementation until its exact roadmap item and governing specification are identified.
 
@@ -83,27 +84,26 @@ PR #467 reviewed 116-asset canonical-data checkpoint
 PR #492 Statistics panel flow and deployment-chain normalization
 PR #493 official-domain migration and production verification
 PR #495 post-domain authority synchronization and issue reconciliation
+PR #496 Record Growth Batch 4 candidate audit
 ```
 
 Current item:
 
 ```text
-PR #496 Record Growth Batch 4 candidate audit
+PR #497 Record Growth Batch 4 review gate
 ```
 
-Current reviewed private result:
+Reviewed decision:
 
 ```text
-ready_for_full_record_review: MNEE, Figure YLDS
-prelaunch_or_noncanonical: Open USD, Roughrider Coin, Qivalis euro stablecoin
-insufficient_current_evidence: FIUSD, ANZ A$DC, USDF Consortium USDF
-exact canonical duplicates: 0
-canonical changes: 0
-public changes: 0
-next boundary: REVIEW GATE
+PR #498 Record Growth Batch 4 — MNEE: authorized next
+maximum new canonical assets: 1
+replacement candidate: prohibited
+Figure YLDS: deferred pending separate scope amendment
+next boundary after PR #498: REVIEW GATE
 ```
 
-No candidate and no later growth batch is pre-authorized.
+No work after PR #498 is pre-authorized.
 
 ## 5. Change control
 
@@ -122,6 +122,7 @@ A change to any of the following requires a specification update in the same PR 
 - candidate-audit disposition semantics;
 - complete-record feasibility semantics;
 - duplicate, symbol-collision, or lineage decisions;
+- stable-value scope, security, face-amount, or yield-bearing product semantics;
 - Statistics semantics;
 - canonical Market Access Record semantics;
 - production publication gates;
@@ -181,43 +182,77 @@ source_review_needed
 
 Missing evidence, a candidate row, a monitoring signal, or a planning gap is not proof of a value.
 
-## 8. PR #496 candidate-audit governance
+## 8. PR #496 candidate-audit checkpoint
 
-PR #496 may:
+PR #496 reviewed exactly eight private candidates, recorded 21 primary source identities, found no exact canonical duplicates, and changed no canonical or public data.
 
-- review exactly eight private candidates;
-- record primary-source identities and bounded claim scopes;
-- record blocking unknowns;
-- classify complete-record feasibility;
-- record duplicate, symbol-collision, and lineage risk;
-- produce a private review-gate handoff.
+The reviewed complete-record-feasible candidates were MNEE and Figure YLDS. That disposition was not promotion authorization.
 
-PR #496 may not:
+USDF Consortium USDF remains distinct from Falcon USDf. Open USD requires explicit OUSD issuer and lineage disambiguation from Origin Dollar.
 
-- change canonical record families;
-- change public counts, routes, metadata, UI, CSS, machine-readable output, sitemap, or guides;
-- create candidate pages;
-- automatically promote a candidate;
+## 9. PR #497 review-gate governance
+
+PR #497 authorizes only PR #498 for a complete-record attempt for MNEE.
+
+PR #497 may:
+
+- record the reviewed selection decision;
+- define PR #498 entry-gate requirements;
+- defer YLDS to a separate scope amendment;
+- update active repository authority and blocking validation.
+
+PR #497 may not:
+
+- change canonical record families or counts;
+- change public routes, metadata, UI, CSS, guides, sitemap, or machine-readable output;
+- promote MNEE or YLDS;
+- authorize a replacement candidate;
+- authorize more than one future canonical addition;
 - create an automatic canonical PR;
 - score, rank, recommend, or imply safety;
-- authorize a later batch indefinitely.
+- authorize work after PR #498.
 
-“Ready for full-record review” means only that current primary sources appear sufficient to attempt a complete record while preserving unsupported values as explicit unknowns. It is not a promotion decision.
+## 10. PR #498 MNEE boundary
 
-## 9. Duplicate and lineage governance
+PR #498 is the only authorized next canonical-growth PR.
 
-Name or symbol similarity is not identity.
+Before canonical edits it must complete:
 
-- USDF Consortium USDF is distinct from canonical Falcon USDf and must not be merged automatically.
-- Open USD and Origin Dollar require explicit OUSD symbol and issuer disambiguation.
-- Consortium membership, platform integration, wrapper availability, or shared infrastructure does not create or merge canonical stable-asset identities.
-- Automatic deduplication and automatic lineage inference remain prohibited.
+```text
+fresh canonical duplicate and lineage review
+fresh current primary-source review
+exact contract or inscription identity confirmation
+first public issuance date review
+current reserve composition and custodian review
+current attestation and archive review
+current issuance and redemption terms, fees, and minimums
+MNEE Limited organization identity and relationship review
+```
 
-## 10. Canonical growth governance
+PR #498 may add at most one stable asset: MNEE.
+
+Every applicable record family must be complete. Unsupported details must remain explicit known unknowns. Thin records are prohibited. If complete support fails, MNEE must be withheld. No replacement candidate is allowed.
+
+PR #498 must not change Market Access, public UI, route families, machine-readable semantics, ranking, score, recommendation, or monitoring-publication boundaries.
+
+## 11. YLDS scope boundary
+
+YLDS is deferred and is not authorized for canonical implementation.
+
+The issuer describes YLDS as a registered fixed-income security rather than a stablecoin. Its material semantics include:
+
+- $0.01 face-amount certificate units;
+- holder interest and yield;
+- issuer-credit and asset-portfolio risk;
+- securities-law eligibility and transfer requirements;
+- registered-offering redemption terms;
+- chain and third-party wrapper distinctions.
+
+A future YLDS proposal requires a separate reviewed scope amendment. Ordinary stablecoin treatment is prohibited.
+
+## 12. Canonical growth governance
 
 Dossier deepening and new-asset growth are distinct operations.
-
-A growth PR may add at most two canonical stable assets unless a separate reviewed amendment changes the limit.
 
 Every canonical promotion requires:
 
@@ -237,7 +272,7 @@ reviewed repository PR
 
 Automatic promotion, thin records, inferred facts, indefinite batch sequences, and ranking or recommendation semantics are prohibited.
 
-## 11. Monitoring governance
+## 13. Monitoring governance
 
 Monitoring remains private, review-only, and read-only with respect to canonical data.
 
@@ -247,7 +282,7 @@ Monitoring may not write canonical data, self-accept baselines, edit guides auto
 
 A registered source is not an accepted baseline. Monitoring observations are not canonical Evidence or canonical Market Access Records.
 
-## 12. Product-surface governance
+## 14. Product-surface governance
 
 Existing public surfaces are sufficient for the current phase:
 
@@ -268,7 +303,7 @@ A new page, explorer, dashboard, ranking surface, or navigation family requires 
 
 Small correctness, accessibility, readability, broken-link, and maintenance fixes remain allowed.
 
-## 13. Material UI and Statistics governance
+## 15. Material UI and Statistics governance
 
 `docs/ui-v3-remediation-authority.md` remains the regression contract for material public UI work.
 
@@ -288,7 +323,7 @@ bare Arbitrum -> unresolved
 
 Total deployments must reconcile as canonical-chain counts plus unresolved deployments.
 
-## 14. Official-domain governance
+## 16. Official-domain governance
 
 The only official origin is:
 
@@ -304,7 +339,7 @@ The current deployment token has Pages publication access but no visible `badjok
 
 A Pages Function workaround is not authorized because it would change static-serving, request-accounting, and header behavior for the official site. Issue #479 remains open for this externally blocked redirect.
 
-## 15. Historical checkpoints
+## 17. Historical checkpoints
 
 Do not rewrite historical checkpoints merely because current counts, UI, domain, or workstream changed.
 
@@ -312,7 +347,7 @@ Historical material includes release-integrity and reproducible-build baselines,
 
 Forward-only checkpoints may be added when current canonical state advances.
 
-## 16. Deployment governance
+## 18. Deployment governance
 
 Normal merged changes publish from `main` under `docs/deployment-policy.md`.
 
@@ -320,23 +355,19 @@ Production parity requires independent verification after merge. Issue #479 is t
 
 Scheduled monitoring and candidate auditing remain artifact-only and do not authorize canonical writes, guide edits, automatic canonical pull requests, or deployment decisions outside the normal main workflow.
 
-## 17. Review gate
+## 19. Review gate
 
-After PR #496, stop and review:
+After PR #498, stop and review:
 
 ```text
-MNEE complete-record feasibility
-YLDS stable-value scope, security classification, and income representation
-source recency
-identity and lineage risk
-organization reuse
+whether MNEE was added or withheld
+canonical record completeness
+source and archive completeness
 reserve and redemption support
 deployment identity support
-Evidence and archive coverage
 known unknowns
 maintenance burden
-value of adding records versus deepening existing dossiers
-whether to authorize zero, one, or at most two later additions
+production parity
 ```
 
-Only a separate reviewed decision may authorize a canonical promotion PR.
+Only a separate reviewed decision may authorize later work.
