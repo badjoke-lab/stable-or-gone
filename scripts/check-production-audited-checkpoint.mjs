@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 
-const baseUrl = (process.env.SOG_BASE_URL || 'https://sog.badjoke-lab.com').replace(/\/$/, '');
+const baseUrl = (process.env.SOG_BASE_URL || 'https://www.stableorgone.com').replace(/\/$/, '');
 const attempts = Number(process.env.SOG_SMOKE_ATTEMPTS || 20);
 const delayMs = Number(process.env.SOG_SMOKE_DELAY_MS || 15000);
 const audited100 = JSON.parse(fs.readFileSync('docs/migration/audited-100-asset-canonical-checkpoint.json', 'utf8'));

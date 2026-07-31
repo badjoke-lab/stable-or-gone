@@ -5,7 +5,7 @@ import { spawn } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { chromium } from 'playwright';
 
-const DEFAULT_BASE_URL = 'https://sog.badjoke-lab.com';
+const DEFAULT_BASE_URL = 'https://www.stableorgone.com';
 const ROUTES_FILE = 'artifacts/screenshots/routes.json';
 const ROOT = process.cwd();
 const DEVICES = {

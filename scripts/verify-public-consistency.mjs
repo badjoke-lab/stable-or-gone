@@ -215,7 +215,7 @@ const robotsPath = path.join(distDir, 'robots.txt');
 const sitemapPath = path.join(distDir, 'sitemap-index.xml');
 assert(fs.existsSync(robotsPath), 'robots.txt missing');
 assert(fs.existsSync(sitemapPath), 'sitemap-index.xml missing');
-if (fs.existsSync(robotsPath)) assert(fs.readFileSync(robotsPath, 'utf8').includes('https://sog.badjoke-lab.com/sitemap-index.xml'), 'robots.txt sitemap URL mismatch');
+if (fs.existsSync(robotsPath)) assert(fs.readFileSync(robotsPath, 'utf8').includes('https://www.stableorgone.com/sitemap-index.xml'), 'robots.txt sitemap URL mismatch');
 if (fs.existsSync(sitemapPath)) {
   const sitemap = fs.readFileSync(sitemapPath, 'utf8');
   const collect = (pattern) => new Set([...sitemap.matchAll(pattern)].map((match) => match[1]));

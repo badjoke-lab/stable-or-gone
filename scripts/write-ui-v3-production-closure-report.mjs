@@ -4,7 +4,7 @@ import { isDeepStrictEqual } from 'node:util';
 
 const root = process.cwd();
 const artifactDir = path.join(root, 'artifacts');
-const baseUrl = (process.env.SOG_BASE_URL || 'https://sog.badjoke-lab.com').replace(/\/$/, '');
+const baseUrl = (process.env.SOG_BASE_URL || 'https://www.stableorgone.com').replace(/\/$/, '');
 const expectedCommit = process.env.SOG_EXPECTED_COMMIT;
 const expectedPrimaryRecordsRaw = process.env.SOG_EXPECTED_PRIMARY_RECORDS?.trim();
 const visualApprovalRef = process.env.SOG_VISUAL_APPROVAL_REF?.trim();

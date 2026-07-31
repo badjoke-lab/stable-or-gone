@@ -18,7 +18,7 @@ for (const marker of [
   'pull_request:',
   '- main',
   'github.event.pull_request.head.sha',
-  'https://sog.badjoke-lab.com',
+  'https://www.stableorgone.com',
   'node scripts/validate-ui-v3-production-closure.mjs',
   'npm run check:production',
   '--device desktop',

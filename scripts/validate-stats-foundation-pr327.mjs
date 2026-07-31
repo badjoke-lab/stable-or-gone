@@ -113,7 +113,7 @@ if (distRoot) {
     check(builtPage.includes('Recorded lifecycle composition'), 'built stats page missing lifecycle section');
   }
   if (fs.existsSync(path.join(distPath, 'sitemap-index.xml'))) {
-    check(fs.readFileSync(path.join(distPath, 'sitemap-index.xml'), 'utf8').includes('https://sog.badjoke-lab.com/stats/'), 'built sitemap missing stats URL');
+    check(fs.readFileSync(path.join(distPath, 'sitemap-index.xml'), 'utf8').includes('https://www.stableorgone.com/stats/'), 'built sitemap missing stats URL');
   }
 }
 

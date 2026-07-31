@@ -3,7 +3,7 @@ import { readdir, readFile, stat, writeFile, mkdir } from 'node:fs/promises';
 import path from 'node:path';
 
 const ROOT = process.cwd();
-const DEFAULT_SITE = 'https://sog.badjoke-lab.com';
+const DEFAULT_SITE = 'https://www.stableorgone.com';
 const DEFAULT_OUTPUT = 'artifacts/screenshots/routes.json';
 const MAINTAINED_ROUTE_LIST = 'config/public-routes.json';
 const EXCLUDED_EXTENSIONS = new Set(['.xml', '.json', '.txt', '.css', '.js', '.mjs', '.svg', '.png', '.jpg', '.jpeg', '.webp', '.gif', '.ico', '.pdf', '.map', '.woff', '.woff2', '.ttf']);

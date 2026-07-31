@@ -5,7 +5,7 @@ import { loadRegistryV2Baseline } from './load-registry-v2-baseline.mjs';
 
 const root = process.cwd();
 const distDir = path.join(root, 'dist');
-const origin = 'https://sog.badjoke-lab.com';
+const origin = 'https://www.stableorgone.com';
 const failures = [];
 const check = (condition, message) => { if (!condition) failures.push(message); };
 
