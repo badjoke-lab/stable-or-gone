@@ -67,8 +67,10 @@ Market Access Records: 8
 Detail routes: 414
 Metadata-checked detail routes: 414
 Official public origin: https://www.stableorgone.com
-Current main and production commit: bd0e63ac36b1824bf705e8c80d1fb0a1cd79d221
+Official-domain migration production checkpoint: bd0e63ac36b1824bf705e8c80d1fb0a1cd79d221
 ```
+
+Current `main` and production equality is verified dynamically by `.github/workflows/deploy-production.yml` and Issue #479.
 
 Completed acceptance points:
 
