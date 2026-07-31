@@ -1,9 +1,13 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { generateStats } from '../../scripts/build-stats.mjs';
+import { loadStatsInput } from '../../scripts/stats/load-stats-input.mjs';
+import { normalizeDeploymentChainStats } from '../../scripts/stats/normalize-deployment-chains.mjs';
 
 export function getPublicStats(root = process.cwd()) {
-  return generateStats({ root });
+  const stats = generateStats({ root });
+  const input = loadStatsInput(root);
+  return normalizeDeploymentChainStats(stats, input.deployments);
 }
 
 export function getPublicStatsHistory(root = process.cwd()) {
