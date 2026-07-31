@@ -4,6 +4,10 @@ on:
   push:
     branches:
       - agent/official-domain-migration
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -15,6 +19,7 @@ concurrency:
 jobs:
   migrate:
     name: Rewrite, validate, and commit official origin
+    if: github.event_name != 'pull_request' || github.head_ref == 'agent/official-domain-migration'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout migration branch
