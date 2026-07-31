@@ -1,0 +1,47 @@
+name: Finalize PR498 freshness checkpoint
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  finalize:
+    if: github.head_ref == 'agent/record-growth-batch-4-mnee'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/record-growth-batch-4-mnee
+          fetch-depth: 0
+
+      - name: Apply freshness checkpoint fix
+        run: |
+          set -euo pipefail
+          git apply --check .pr498-freshness.patch
+          git apply .pr498-freshness.patch
+
+      - name: Install locked dependencies
+        run: npm ci
+
+      - name: Rebuild and validate
+        run: |
+          set -euo pipefail
+          node scripts/build-record-growth-batch-4-mnee-pr498.mjs
+          npm run validate:record-growth-batch-4-mnee-pr498
+          npm run validate:active-workstream
+          npm run build:site
+
+      - name: Commit permanent freshness fix only
+        run: |
+          set -euo pipefail
+          rm -f .pr498-freshness.patch
+          rm -f .github/workflows/finalize-pr498-freshness.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'Advance PR498 facet freshness checkpoint'
+          git push origin HEAD:agent/record-growth-batch-4-mnee
