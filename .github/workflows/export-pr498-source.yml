@@ -22,7 +22,16 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          cat .pr498-patch-00 .pr498-patch-01 .pr498-patch-02 .pr498-patch-03 .pr498-patch-04 > /tmp/pr498.patch.gz.b64
+          wc -c .pr498-patch-00 .pr498-patch-01 .pr498-patch-02 .pr498-patch-03 .pr498-patch-04
+          sha256sum .pr498-patch-00 .pr498-patch-01 .pr498-patch-02 .pr498-patch-03 .pr498-patch-04
+          for file in .pr498-patch-00 .pr498-patch-01 .pr498-patch-02 .pr498-patch-03 .pr498-patch-04; do
+            if LC_ALL=C grep -n '[^A-Za-z0-9+/=[:space:]]' "$file"; then
+              echo "Non-base64 character found in $file" >&2
+              exit 1
+            fi
+          done
+          cat .pr498-patch-00 .pr498-patch-01 .pr498-patch-02 .pr498-patch-03 .pr498-patch-04 \
+            | tr -d '\r\n\t ' > /tmp/pr498.patch.gz.b64
           base64 --decode /tmp/pr498.patch.gz.b64 | gzip --decompress > /tmp/pr498.patch
           git apply --check /tmp/pr498.patch
           git apply /tmp/pr498.patch
