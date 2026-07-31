@@ -89,6 +89,18 @@ const expectedV3 = {
   income_profiles: 117, deployment_view: 184
 };
 
+const freshnessContract = read('data/quality/facet-freshness-contract-v1.json');
+write('data/quality/facet-freshness-contract-v1.json', {
+  ...freshnessContract,
+  as_of_date: '2026-07-31',
+  output_contract: {
+    ...freshnessContract.output_contract,
+    asset_count: 117,
+    dimension_count: 19,
+    cell_count: 2223
+  }
+});
+
 write('docs/migration/current-canonical-checkpoint.json', {
   schema_version: '1.0',
   status: 'reviewed_growth_checkpoint',

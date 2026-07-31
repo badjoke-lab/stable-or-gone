@@ -28,6 +28,7 @@ const v3Foundation = read('docs/migration/registry-v3-foundation.json');
 const incomeManifest = read('docs/migration/registry-v3-income-profiles.json');
 const deploymentManifest = read('docs/migration/registry-v3-view-67.json');
 const migrationAudit = read('docs/migration/registry-v3-migration-audit.json');
+const freshnessContract = read('data/quality/facet-freshness-contract-v1.json');
 const candidateMaster = read('docs/growth/candidate-master-70.json');
 const spec = text('docs/quality/record-growth-batch-4-mnee-pr498-spec.md');
 const amendment = text('docs/roadmap-amendments/2026-07-31-record-growth-batch-4-mnee.md');
@@ -138,6 +139,8 @@ check(checkpoint.growth_pr === 498 && checkpoint.counts.assets === 117 && checkp
 check(checkpoint.counts.archive_index_count === 450 && checkpoint.counts.archive_not_recorded_count === 129, 'archive checkpoint mismatch');
 check(parity.expected_v2_counts.stablecoins === 117 && parity.expected_v3_counts.legal_profiles === 117 && parity.expected_v3_counts.deployment_view === 184, 'parity baseline mismatch');
 check(release.expected_public_record_counts.primary_records === 117 && release.expected_route_counts.total_detail === 417, 'release baseline mismatch');
+check(freshnessContract.as_of_date === '2026-07-31', 'facet freshness as-of date mismatch');
+check(freshnessContract.output_contract?.asset_count === 117 && freshnessContract.output_contract?.dimension_count === 19 && freshnessContract.output_contract?.cell_count === 2223, 'facet freshness output contract mismatch');
 check(statsCheckpoint.asset_count === 117 && statsCheckpoint.source_checkpoint_id === 'sog_record_growth_batch_3_116_checkpoint_pr467_2026_07_25', 'stats checkpoint chain mismatch');
 const previousSnapshot = history.snapshots.find((row) => row.checkpoint_id === 'sog_record_growth_batch_3_116_checkpoint_pr467_2026_07_25');
 check(previousSnapshot?.snapshot_sha256 === '558c1e99fbd85203ea89fe374823efa2834167636580f976dfb714863e585ab7', 'immutable PR #467 stats snapshot changed');
