@@ -29,7 +29,7 @@ jobs:
           set -euo pipefail
 
           if [ -z "${CLOUDFLARE_API_TOKEN:-}" ] || [ -z "${CLOUDFLARE_ACCOUNT_ID:-}" ]; then
-            echo "Cloudflare repository secrets are unavailable outside the production environment."
+            echo "Cloudflare repository secrets are unavailable."
             exit 2
           fi
 
@@ -45,7 +45,7 @@ jobs:
           }
 
           zone_response="$(mktemp)"
-          zone_status="$(api_get "https://api.cloudflare.com/client/v4/zones?name=badjoke-lab.com&account.id=${CLOUDFLARE_ACCOUNT_ID}" "$zone_response")"
+          zone_status="$(api_get "https://api.cloudflare.com/client/v4/zones?name=badjoke-lab.com" "$zone_response")"
           if [ "$zone_status" != "200" ]; then
             echo "Zone lookup failed with HTTP ${zone_status}."
             jq '{success, errors, messages}' "$zone_response" || true
@@ -54,10 +54,12 @@ jobs:
 
           zone_id="$(jq -r '.result[0].id // empty' "$zone_response")"
           if [ -z "$zone_id" ]; then
-            echo "badjoke-lab.com was not returned for the configured account."
+            echo "badjoke-lab.com was not returned by the token without an account filter."
+            jq '{success, result_count: (.result | length), result_info}' "$zone_response"
             exit 1
           fi
           echo "Zone lookup: success"
+          jq '{zone_name: .result[0].name, account_name: .result[0].account.name, status: .result[0].status}' "$zone_response"
 
           ruleset_response="$(mktemp)"
           ruleset_status="$(api_get "https://api.cloudflare.com/client/v4/zones/${zone_id}/rulesets/phases/http_request_dynamic_redirect/entrypoint" "$ruleset_response")"
