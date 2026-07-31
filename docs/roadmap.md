@@ -19,8 +19,10 @@ Archive not recorded: 129
 Detail routes: 414
 Metadata-checked detail routes: 414
 Official public origin: https://www.stableorgone.com
-Current main and production commit: bd0e63ac36b1824bf705e8c80d1fb0a1cd79d221
+Official-domain migration production checkpoint: bd0e63ac36b1824bf705e8c80d1fb0a1cd79d221
 ```
+
+Current `main` and production equality is established dynamically by the deployment workflow and Issue #479.
 
 ## Completed canonical-data checkpoint
 
@@ -66,7 +68,7 @@ The UI sequence changed no canonical record counts.
 
 ```text
 PR #493 official-domain migration: complete
-Main and deployed commit: bd0e63ac36b1824bf705e8c80d1fb0a1cd79d221
+Migration merge and deployed checkpoint: bd0e63ac36b1824bf705e8c80d1fb0a1cd79d221
 Official origin: https://www.stableorgone.com
 Production verification: success
 Stablecoins: 116
@@ -91,7 +93,7 @@ sog.badjoke-lab.com/<path>?<query>
 
 The current GitHub Cloudflare token returned zero accessible zones, both with and without the configured account filter. It can publish the Pages project but cannot safely read or edit the `badjoke-lab.com` redirect ruleset.
 
-The redirect is therefore an external infrastructure blocker. No Pages Function workaround is authorized because it would place the entire static site behind Workers request accounting and change the current static-serving and header boundary.
+The redirect is therefore externally blocked. No Pages Function workaround is authorized because it would place the entire static site behind Workers request accounting and change the current static-serving and header boundary.
 
 The redirect may be completed only after a credential has:
 
