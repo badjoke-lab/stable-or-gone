@@ -1,0 +1,27 @@
+name: Export PR498 source
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  export:
+    if: github.head_ref == 'agent/record-growth-batch-4-mnee'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/record-growth-batch-4-mnee
+      - name: Prepare source archive
+        run: |
+          rm -rf node_modules dist .git
+          tar -czf /tmp/stable-or-gone-pr498-source.tar.gz .
+      - uses: actions/upload-artifact@v4
+        with:
+          name: stable-or-gone-pr498-source
+          path: /tmp/stable-or-gone-pr498-source.tar.gz
+          retention-days: 1
