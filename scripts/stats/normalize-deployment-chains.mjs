@@ -1,6 +1,6 @@
 const DEPLOYMENT_CHAIN_ALIASES = new Map([
-  ['arbitrum', 'Arbitrum One'],
   ['arbitrum one', 'Arbitrum One'],
+  ['arbitrum nova', 'Arbitrum Nova'],
   ['bnb chain', 'BNB Chain'],
   ['bnb smart chain', 'BNB Chain'],
   ['gnosis', 'Gnosis Chain'],
@@ -14,6 +14,7 @@ const DEPLOYMENT_CHAIN_ALIASES = new Map([
 
 const NON_CHAIN_DEPLOYMENT_CONTEXTS = new Set([
   '',
+  'arbitrum',
   'multi chain',
   'multi chain or bridge context',
   'multi chain or protocol context',
