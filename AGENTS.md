@@ -17,7 +17,7 @@ Deployments: 182
 Market Access Records: 8
 Detail routes: 414
 Official public origin: https://www.stableorgone.com
-Current main and production commit: bd0e63ac36b1824bf705e8c80d1fb0a1cd79d221
+Official-domain migration checkpoint: bd0e63ac36b1824bf705e8c80d1fb0a1cd79d221
 ```
 
 Current authority chain:
@@ -113,4 +113,4 @@ Canonical metadata, hreflang, OGP, JSON-LD, machine-readable files, robots, site
 
 The legacy host `sog.badjoke-lab.com` still resolves to the Pages project. Its 301 redirect is an external Cloudflare configuration task, not permission to reintroduce the old host into repository canonical output.
 
-A merge to `main` is not proof of production parity. Production publication and deployed-commit verification follow `docs/deployment-policy.md` and are recorded in Issue #479.
+A merge to `main` is not proof of production parity. Current main/production equality is established dynamically by `docs/deployment-policy.md`, the deployment workflow, and Issue #479.
