@@ -25,3 +25,21 @@ jobs:
           name: stable-or-gone-pr498-source
           path: /tmp/stable-or-gone-pr498-source.tar.gz
           retention-days: 1
+      - name: Inspect official MNEE SDK package
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/mnee-sdk
+          cd /tmp/mnee-sdk
+          npm pack @mnee/ts-sdk@1.2.0 --silent > /tmp/mnee-pack-name.txt
+          package_file="$(cat /tmp/mnee-pack-name.txt)"
+          tar -xzf "$package_file"
+          grep -RniE 'token.?id|tokenId|inscription|origin|mainnet|MNEE|1sat|bsv21' package > /tmp/mnee-sdk-identifiers.txt || true
+          tar -czf /tmp/mnee-sdk-package.tar.gz package
+      - uses: actions/upload-artifact@v4
+        with:
+          name: mnee-sdk-identifier-review
+          path: |
+            /tmp/mnee-sdk-identifiers.txt
+            /tmp/mnee-sdk-package.tar.gz
+          retention-days: 1
