@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 
-await import('./validate-record-growth-batch-4-candidate-audit-pr496.mjs');
+await import('./validate-record-growth-batch-3-pr467.mjs');
 
 const read = (file) => JSON.parse(fs.readFileSync(file, 'utf8'));
 const text = (file) => fs.readFileSync(file, 'utf8');
