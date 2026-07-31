@@ -83,10 +83,14 @@ jobs:
       - name: Astro check
         run: npm run check
 
+      - name: Export checked-out provenance
+        shell: bash
+        run: |
+          echo "SOG_BUILD_COMMIT=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
+          echo "SOG_BUILD_BRANCH=agent/official-domain-migration" >> "$GITHUB_ENV"
+
       - name: Build site
         env:
-          SOG_BUILD_COMMIT: ${{ github.sha }}
-          SOG_BUILD_BRANCH: agent/official-domain-migration
           SOG_BUILD_TIMESTAMP: '2026-07-31T05:42:00Z'
           SOURCE_DATE_EPOCH: '1785476520'
         run: npm run build:site
