@@ -23,11 +23,13 @@ Detail routes: 414
 Metadata-checked detail routes: 414
 ```
 
-Current main and production commit after the official-domain migration:
+Official-domain migration production checkpoint:
 
 ```text
 bd0e63ac36b1824bf705e8c80d1fb0a1cd79d221
 ```
+
+Current `main` and production equality is verified dynamically by `.github/workflows/deploy-production.yml` and Issue #479. The checkpoint above records the completed PR #493 migration and is not an immutable pointer to the latest `main`.
 
 All public counts are derived from canonical repository data and generated or validated projections. This README is not an independent count authority.
 
@@ -60,7 +62,7 @@ PR #492 Statistics panel flow and deployment-chain normalization
 PR #493 official-domain migration to www.stableorgone.com
 ```
 
-PR #493 was production-verified at the current main commit with 116 stablecoins, 107 organizations, 191 events, 414 detail routes, and 414 metadata-checked routes.
+PR #493 was production-verified at the migration checkpoint with 116 stablecoins, 107 organizations, 191 events, 414 detail routes, and 414 metadata-checked routes.
 
 The current bounded continuation is:
 
