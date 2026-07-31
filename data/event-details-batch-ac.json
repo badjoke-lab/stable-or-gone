@@ -1,0 +1,30 @@
+[
+  {
+    "id": "sog_ev_mnee_launch_pr498",
+    "title": "MNEE launches on the 1Sat Ordinals protocol",
+    "subject_stablecoin_ids": [
+      "sog_st_mnee"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_mnee_limited"
+    ],
+    "evidence_ids": [
+      "sog_src_mnee_launch_pr498",
+      "sog_src_mnee_terms_pr498",
+      "sog_src_mnee_docs_pr498",
+      "sog_src_mnee_sdk_pr498"
+    ],
+    "event_detail_kind": "launch",
+    "launch_detail": {
+      "summary": "Official launch of MNEE on 1Sat Ordinals with issuer reserve backing and restricted direct issuance and redemption.",
+      "status": "active",
+      "resolution_date": null,
+      "affected_deployment_ids": [
+        "sog_dep_mnee_1sat_pr498"
+      ],
+      "related_organization_ids": [
+        "sog_issuer_mnee_limited"
+      ]
+    }
+  }
+]

@@ -1,0 +1,41 @@
+[
+  {
+    "id": "sog_st_mnee",
+    "reserve_profile": {
+      "backing_types": [
+        "cash",
+        "government_securities"
+      ],
+      "summary": "Issuer materials describe 1:1 backing using U.S. cash and short-duration U.S. Treasury bills or equivalent fiat-denominated reserve assets.",
+      "disclosure_status": "monthly_attestation_index",
+      "as_of_date": null,
+      "latest_report_id": "sog_rr_mnee_attestation_program_pr498",
+      "confidence": "high",
+      "evidence_ids": [
+        "sog_src_mnee_terms_pr498",
+        "sog_src_mnee_transparency_pr498",
+        "sog_src_mnee_attestation_program_pr498"
+      ]
+    },
+    "redemption_profile": {
+      "status": "eligible_customers_only",
+      "settlement_asset": "USD fiat",
+      "eligible_parties": "Verified MNEE customers that satisfy current onboarding and compliance requirements.",
+      "retail_access": "No direct issuer redemption right without MNEE customer verification.",
+      "institutional_access": "Available subject to MNEE customer onboarding and current terms.",
+      "minimum_amount_text": "USD 100,000 equivalent for fiat redemption under the reviewed terms.",
+      "fee_text": "Greater of USD 5,000 or 0.5% of the redemption amount under the reviewed terms.",
+      "settlement_time_text": "not stated in the reviewed public source",
+      "jurisdiction_restrictions": [
+        "sanctions_and_prohibited_jurisdictions_apply",
+        "complete_current_inventory_not_recorded"
+      ],
+      "redemption_url": "https://www.mnee.io/terms",
+      "as_of_date": "2026-07-31",
+      "confidence": "high",
+      "evidence_ids": [
+        "sog_src_mnee_terms_pr498"
+      ]
+    }
+  }
+]

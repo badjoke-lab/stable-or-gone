@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.0",
+  "audit_id": "sog_counts_manifest_version_provenance_integrity_pr316",
+  "audit_date": "2026-07-06",
+  "baseline_id": "sog_release_integrity_pr498_2026_07_31",
+  "counts": {
+    "v2": {
+      "stablecoins": 117,
+      "organizations": 108,
+      "relationships": 129,
+      "classifications": 117,
+      "profiles": 117,
+      "events": 192,
+      "event_details": 192,
+      "evidence": 579,
+      "evidence_relations": 579,
+      "reserve_reports": 125,
+      "known_unknowns": 342,
+      "regulatory_notes": 9,
+      "deployments": 184
+    },
+    "v3": {
+      "legal_profiles": 117,
+      "stable_asset_relationships": 5,
+      "reserve_components": 151,
+      "income_profiles": 117,
+      "deployment_view": 184
+    },
+    "public": {
+      "primary_records": 117,
+      "events": 192,
+      "evidence": 579
+    }
+  },
+  "route_counts": {
+    "stablecoin_detail": 117,
+    "organization_detail": 108,
+    "event_detail": 192,
+    "total_detail": 417,
+    "declared_main_routes": 13
+  },
+  "provenance_template_mode": "sentinel_until_build",
+  "failures": [],
+  "ok": true
+}

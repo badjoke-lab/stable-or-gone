@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0",
+  "audit_id": "sog_reproducible_build_contract_pr317",
+  "baseline_id": "sog_reproducible_build_pr317_2026_07_06",
+  "lockfile_sha256": "e838b3ef0ca6293cc3ee707615e835ff01296c835c0fb7ec2853484dd1d2f0e1",
+  "node_version": "22.22.0",
+  "resolved_direct_versions": {
+    "astro": "7.0.6",
+    "@astrojs/check": "0.9.9",
+    "typescript": "6.0.3",
+    "@types/node": "26.1.0",
+    "playwright": "1.61.1"
+  },
+  "failures": [],
+  "ok": true
+}

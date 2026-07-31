@@ -1,0 +1,77 @@
+{
+  "schema_version": "1.0",
+  "handoff_id": "sog_record_growth_batch_4_mnee_pr498_handoff_2026_07_31",
+  "status": "reviewed_complete",
+  "recorded_at": "2026-07-31",
+  "source_pr": 498,
+  "authority_pr": 497,
+  "candidate_audit_pr": 496,
+  "promoted_assets": [
+    {
+      "candidate_id": "sog_cand_000117",
+      "source_candidate_id": "sog_cand_pr496_mnee",
+      "stablecoin_id": "sog_st_mnee",
+      "symbol": "MNEE",
+      "issuer_id": "sog_issuer_mnee_limited"
+    }
+  ],
+  "canonical_counts": {
+    "stable_assets": 117,
+    "organizations": 108,
+    "relationships": 129,
+    "events": 192,
+    "evidence": 579,
+    "evidence_relations": 579,
+    "reserve_reports": 125,
+    "known_unknowns": 342,
+    "deployments": 184,
+    "legal_profiles": 117,
+    "stable_asset_relationships": 5,
+    "reserve_components": 151,
+    "income_profiles": 117,
+    "market_access_records": 8,
+    "archive_recorded": 450,
+    "archive_not_recorded": 129,
+    "detail_routes": 417
+  },
+  "deployment_identities": {
+    "one_sat_ordinals": {
+      "deployment_id": "sog_dep_mnee_1sat_pr498",
+      "token_id": "ae59f3b898ec61acbdb6cc7a245fabeded0c094bf046f35206a3aec60ef88127_0",
+      "overlay_status": "identifier_recorded_unverified"
+    },
+    "ethereum": {
+      "deployment_id": "sog_dep_mnee_ethereum_pr498",
+      "contract": "0x8ccedbae4916b79da7f3f612efb2eb93a2bfd6cf",
+      "overlay_status": "identifier_recorded_unverified"
+    }
+  },
+  "preserved_unknowns": [
+    "sog_ku_mnee_latest_attestation_pr498",
+    "sog_ku_mnee_reserve_custodian_pr498",
+    "sog_ku_mnee_ethereum_launch_pr498",
+    "sog_ku_mnee_controls_pr498",
+    "sog_ku_mnee_access_pr498"
+  ],
+  "preserved_boundaries": {
+    "second_asset_added": false,
+    "ylds_promoted": false,
+    "replacement_candidate_used": false,
+    "market_access_change": false,
+    "public_route_family_change": false,
+    "ui_change": false,
+    "automatic_promotion": false,
+    "ranking": false,
+    "score": false,
+    "recommendation": false
+  },
+  "production_expected": {
+    "official_origin": "https://www.stableorgone.com",
+    "stablecoins": 117,
+    "organizations": 108,
+    "events": 192,
+    "total_detail_routes": 417,
+    "metadata_checked_routes": 417
+  },
+  "next_work_item": "REVIEW_GATE"
+}

@@ -1,0 +1,52 @@
+[
+  {
+    "id": "sog_ku_mnee_latest_attestation_pr498",
+    "stablecoin_id": "sog_st_mnee",
+    "issuer_id": "sog_issuer_mnee_limited",
+    "topic": "latest_attestation_report_body_and_archive",
+    "description": "The official transparency index lists monthly reports through May 2026, but the exact May 2026 report-body figures, signed report URL, snapshot dates, and archive capture were not independently preserved in this batch.",
+    "severity": "high",
+    "last_checked_at": "2026-07-31",
+    "notes": "Do not infer reserve amount, liabilities, excess, or report opinion from the index page."
+  },
+  {
+    "id": "sog_ku_mnee_reserve_custodian_pr498",
+    "stablecoin_id": "sog_st_mnee",
+    "issuer_id": "sog_issuer_mnee_limited",
+    "topic": "current_reserve_custodian_and_allocation",
+    "description": "Reviewed sources describe U.S. cash at a qualified custodian and U.S. Treasury bills of no more than 90 days, but do not establish the current custodian identity or exact category allocation for the latest reporting period.",
+    "severity": "medium",
+    "last_checked_at": "2026-07-31",
+    "notes": "Reserve components remain amount- and share-unknown."
+  },
+  {
+    "id": "sog_ku_mnee_ethereum_launch_pr498",
+    "stablecoin_id": "sog_st_mnee",
+    "issuer_id": "sog_issuer_mnee_limited",
+    "topic": "ethereum_first_public_issuance_date",
+    "description": "The verified Ethereum proxy contract existed by March 2024 and current official materials confirm ERC-20 issuance, but the first public Ethereum issuance or launch date was not established from the reviewed issuer sources.",
+    "severity": "medium",
+    "last_checked_at": "2026-07-31",
+    "notes": "The canonical stablecoin launch date remains the verified 1Sat launch date of 2025-03-03."
+  },
+  {
+    "id": "sog_ku_mnee_controls_pr498",
+    "stablecoin_id": "sog_st_mnee",
+    "issuer_id": "sog_issuer_mnee_limited",
+    "topic": "deployment_control_capabilities",
+    "description": "The reviewed sources do not fully establish current freeze, blacklist, pause, upgrade-admin, mint-authority, or recovery controls for both 1Sat and Ethereum deployments.",
+    "severity": "high",
+    "last_checked_at": "2026-07-31",
+    "notes": "Do not infer absence of controls from missing public documentation."
+  },
+  {
+    "id": "sog_ku_mnee_access_pr498",
+    "stablecoin_id": "sog_st_mnee",
+    "issuer_id": "sog_issuer_mnee_limited",
+    "topic": "current_direct_access_and_jurisdiction_inventory",
+    "description": "The reviewed terms establish verified-customer issuance and redemption and publish minimums and fees, but a complete current jurisdiction, customer-type, and operational access inventory was not established.",
+    "severity": "medium",
+    "last_checked_at": "2026-07-31",
+    "notes": "Public exchange or wallet availability is not equivalent to direct issuer access."
+  }
+]

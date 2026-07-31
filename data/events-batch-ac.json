@@ -1,0 +1,16 @@
+[
+  {
+    "id": "sog_ev_mnee_launch_pr498",
+    "stablecoin_id": "sog_st_mnee",
+    "issuer_id": "sog_issuer_mnee_limited",
+    "event_type": "launch",
+    "event_date": "2025-03-03",
+    "title": "MNEE launches on the 1Sat Ordinals protocol",
+    "description": "MNEE announced the official launch of its USD-backed stablecoin on 1Sat Ordinals, with instant settlement and fees under one cent.",
+    "impact_level": "high",
+    "confidence": "high",
+    "source_count": 4,
+    "event_status_effect": "active",
+    "notes": "The launch event records the verified 1Sat launch date. Ethereum availability and exact deployment identities are recorded separately without inferring an Ethereum launch date."
+  }
+]

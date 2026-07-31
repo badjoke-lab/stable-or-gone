@@ -1,0 +1,30 @@
+[
+  {
+    "id": "sog_st_mnee",
+    "slug": "mnee",
+    "name": "MNEE",
+    "symbol": "MNEE",
+    "aliases": [
+      "MNEE",
+      "MNEE USD Stablecoin"
+    ],
+    "status": "active",
+    "issuer_id": "sog_issuer_mnee_limited",
+    "peg_asset": "USD",
+    "collateral_model": "fiat_reserve_backed",
+    "reserve_disclosure_status": "monthly_attestation_index",
+    "redemption_status": "eligible_customers_only",
+    "who_can_redeem": "Verified MNEE customers may issue and redeem MNEE directly with MNEE Limited under the current terms. Holders who are not verified MNEE customers do not have a direct redemption right through the issuer channel.",
+    "retail_redemption": "not_available_without_mnee_customer_onboarding",
+    "institutional_redemption": "available_to_verified_mnee_customers_subject_to_terms",
+    "minimum_redemption": "100000 USD equivalent under the reviewed terms",
+    "redemption_region_notes": "Direct issuance and redemption are subject to MNEE customer verification, sanctions and jurisdiction controls, and current issuer terms.",
+    "redemption_notes": "The reviewed terms state a fiat-redemption minimum of USD 100,000 and a redemption fee equal to the greater of USD 5,000 or 0.5% of the redemption amount.",
+    "launch_date": "2025-03-03",
+    "discontinued_date": null,
+    "summary": "USD-referenced stablecoin issued by MNEE Limited, launched on 1Sat Ordinals in March 2025 and also issued as an ERC-20 token on Ethereum, with issuer terms for 1:1 reserve backing and verified-customer issuance and redemption.",
+    "confidence": "high",
+    "last_verified_at": "2026-07-31",
+    "notes": "PR #498 complete-record promotion. Exact 1Sat token ID and Ethereum contract are recorded. Current reserve allocations, custodian identity, latest attestation report-body figures, Ethereum first-issuance date, and issuer-control capabilities remain explicit known unknowns."
+  }
+]

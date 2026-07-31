@@ -1,0 +1,32 @@
+[
+  {
+    "id": "sog_st_mnee",
+    "classifications": [
+      {
+        "classification": "fiat_backed_stablecoin",
+        "jurisdiction": "Antigua and Barbuda",
+        "effective_from": null,
+        "effective_to": null,
+        "authority_or_basis": "MNEE Limited terms and disclosure document; issuer-stated Digital Asset Business licence DAB No. A00003, Class A",
+        "confidence": "high",
+        "evidence_ids": [
+          "sog_src_mnee_terms_pr498"
+        ]
+      }
+    ],
+    "holder_claim_type": "direct_claim_on_issuer",
+    "claim_against_organization_ids": [
+      "sog_issuer_mnee_limited"
+    ],
+    "reserve_ownership": "issuer_owned",
+    "reserve_segregation": "unclear",
+    "bankruptcy_remoteness": "not_established",
+    "licensed_or_regulated_as": [
+      "Antigua and Barbuda digital asset business — issuer-stated DAB No. A00003, Class A"
+    ],
+    "notes": "Verified MNEE customers have contractual issuance and redemption rights against MNEE Limited. Reviewed sources do not establish legal reserve segregation or bankruptcy remoteness for all holders.",
+    "evidence_ids": [
+      "sog_src_mnee_terms_pr498"
+    ]
+  }
+]

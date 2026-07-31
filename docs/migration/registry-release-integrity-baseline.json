@@ -1,52 +1,51 @@
 {
   "schema_version": "1.0",
   "status": "current",
-  "baseline_id": "sog_release_integrity_pr467_116_assets_2026_07_25",
-  "recorded_at": "2026-07-25",
-  "source_checkpoint_commit": "pr467-record-growth-batch-3",
+  "baseline_id": "sog_release_integrity_pr498_2026_07_31",
+  "recorded_at": "2026-07-31",
+  "source_checkpoint_commit": "pr498-record-growth-batch-4-mnee",
   "registry_parity_baseline": "docs/migration/registry-v3-parity-baseline.json",
   "expected_v2_counts": {
-    "stablecoins": 116,
-    "organizations": 107,
-    "relationships": 128,
-    "classifications": 116,
-    "profiles": 116,
-    "events": 191,
-    "event_details": 191,
-    "evidence": 571,
-    "evidence_relations": 571,
-    "reserve_reports": 124,
-    "known_unknowns": 337,
+    "stablecoins": 117,
+    "organizations": 108,
+    "relationships": 129,
+    "classifications": 117,
+    "profiles": 117,
+    "events": 192,
+    "event_details": 192,
+    "evidence": 579,
+    "evidence_relations": 579,
+    "reserve_reports": 125,
+    "known_unknowns": 342,
     "regulatory_notes": 9,
-    "deployments": 182
+    "deployments": 184
   },
   "expected_v3_counts": {
-    "legal_profiles": 116,
+    "legal_profiles": 117,
     "stable_asset_relationships": 5,
-    "reserve_components": 149,
-    "income_profiles": 116,
-    "deployment_view": 182
+    "reserve_components": 151,
+    "income_profiles": 117
   },
   "expected_public_record_counts": {
-    "primary_records": 116,
-    "events": 191,
-    "evidence": 571
+    "primary_records": 117,
+    "events": 192,
+    "evidence": 579
   },
   "expected_public_breakdown_counts": {
-    "stablecoins": 116,
-    "organizations": 107,
-    "relationships": 128,
-    "evidence_relations": 571,
-    "reserve_reports": 124,
-    "known_unknowns": 337,
+    "stablecoins": 117,
+    "organizations": 108,
+    "relationships": 129,
+    "evidence_relations": 579,
+    "reserve_reports": 125,
+    "known_unknowns": 342,
     "regulatory_notes": 9,
-    "deployments": 182
+    "deployments": 184
   },
   "expected_route_counts": {
-    "stablecoin_detail": 116,
-    "organization_detail": 107,
-    "event_detail": 191,
-    "total_detail": 414,
+    "stablecoin_detail": 117,
+    "organization_detail": 108,
+    "event_detail": 192,
+    "total_detail": 417,
     "declared_main_routes": 13
   },
   "machine_readable_contract": {
@@ -75,13 +74,15 @@
     "runtime_generation_required": true
   },
   "evidence_quality": {
-    "archive_index_count": 442,
+    "archive_index_count": 450,
     "archive_not_recorded_count": 129,
-    "selected_for_review": 6,
-    "canonical_change_assets": 2,
-    "reviewed_no_safe_change_assets": 0,
-    "new_evidence_records": 6
+    "archive_partition_complete": true
   },
   "validator": "scripts/validate-counts-manifest-version-provenance-integrity.mjs",
-  "audit_report": "docs/audits/counts-manifest-version-provenance-integrity-100-assets.md"
+  "audit_report": "docs/audits/counts-manifest-version-provenance-integrity-100-assets.md",
+  "source_pr": 498,
+  "source_commit": "pr498-record-growth-batch-4-mnee",
+  "captured_at": "2026-07-31",
+  "expected_market_access_records": 8,
+  "expected_detail_routes": 417
 }
