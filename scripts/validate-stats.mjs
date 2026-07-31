@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { generateStats } from './build-stats.mjs';
 import { loadStatsInput } from './stats/load-stats-input.mjs';
-import { normalizeDeploymentChainStats } from './stats/normalize-deployment-chains.mjs';
+import { canonicalDeploymentChain, normalizeDeploymentChainStats } from './stats/normalize-deployment-chains.mjs';
 
 const root = process.cwd();
 const failures = [];
@@ -61,11 +61,17 @@ check(first.failures.count === first.lifecycle.transitions.collapses, 'failure c
 
 check(first.deployments.total_deployments === first.totals.deployments, 'deployment total mismatch');
 check(first.deployments.assets_with_deployments === first.data_quality.coverage.deployment.count, 'deployment coverage mismatch');
+check(canonicalDeploymentChain('Arbitrum') === null, 'ambiguous Arbitrum platform label must remain unresolved');
+check(canonicalDeploymentChain('arbitrum') === null, 'lowercase ambiguous Arbitrum platform label must remain unresolved');
+check(canonicalDeploymentChain('Arbitrum One')?.label === 'Arbitrum One', 'Arbitrum One must remain a distinct canonical chain');
+check(canonicalDeploymentChain('arbitrum one')?.label === 'Arbitrum One', 'lowercase Arbitrum One must canonicalize to Arbitrum One');
+check(canonicalDeploymentChain('Arbitrum Nova')?.label === 'Arbitrum Nova', 'Arbitrum Nova must remain a distinct canonical chain');
+check(canonicalDeploymentChain('arbitrum nova')?.label === 'Arbitrum Nova', 'lowercase Arbitrum Nova must canonicalize to Arbitrum Nova');
 const deploymentChainLabels = Object.keys(publicStats.deployments.by_chain ?? {});
 const normalizedDeploymentChainLabels = deploymentChainLabels.map((value) => value.trim().toLowerCase().replace(/[_-]+/g, ' ').replace(/\s+/g, ' '));
 check(new Set(normalizedDeploymentChainLabels).size === normalizedDeploymentChainLabels.length, 'public deployment chain view must not contain case, spacing, or alias duplicates');
-for (const value of ['multi chain', 'multi chain or bridge context', 'multi chain or protocol context', 'source review needed', 'unknown']) {
-  check(!normalizedDeploymentChainLabels.includes(value), `non-chain deployment context leaked into public by_chain: ${value}`);
+for (const value of ['arbitrum', 'multi chain', 'multi chain or bridge context', 'multi chain or protocol context', 'source review needed', 'unknown']) {
+  check(!normalizedDeploymentChainLabels.includes(value), `non-chain or ambiguous deployment context leaked into public by_chain: ${value}`);
 }
 const attributedDeploymentCount = Object.values(publicStats.deployments.by_chain ?? {}).reduce((n, row) => n + Number(row.deployment_count ?? 0), 0);
 const unresolvedDeploymentCount = Number(publicStats.deployments.unresolved_chain_contexts?.deployment_count ?? 0);
