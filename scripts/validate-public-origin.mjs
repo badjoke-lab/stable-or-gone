@@ -6,6 +6,7 @@ const root = process.cwd();
 const expectedOrigin = 'https://www.stableorgone.com';
 const expectedHostname = 'www.stableorgone.com';
 const legacyHostname = ['sog', 'badjoke-lab', 'com'].join('.');
+const legacyEscapedHostname = legacyHostname.replaceAll('.', '\\.');
 const failures = [];
 const assert = (condition, message) => { if (!condition) failures.push(message); };
 const read = (file) => fs.readFileSync(path.join(root, file), 'utf8');
@@ -58,6 +59,7 @@ for (const file of activeFiles) {
   if (!fs.existsSync(target) || !fs.statSync(target).isFile()) continue;
   const content = read(file);
   assert(!content.includes(legacyHostname), `${file}: legacy hostname remains`);
+  assert(!content.includes(legacyEscapedHostname), `${file}: escaped legacy hostname remains`);
 }
 
 if (failures.length) {
@@ -70,5 +72,6 @@ console.log(JSON.stringify({
   public_origin: PUBLIC_ORIGIN,
   public_hostname: PUBLIC_HOSTNAME,
   legacy_hostname_findings: 0,
+  escaped_legacy_hostname_findings: 0,
   active_files_checked: activeFiles.length
 }, null, 2));
