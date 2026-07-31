@@ -86,7 +86,7 @@ for (const row of audit.candidates) {
     ok(Array.isArray(source.claim_scopes) && source.claim_scopes.length > 0, `source claim scopes missing: ${source.source_id}`);
   }
 }
-ok(sourceCount === 20, 'primary source count mismatch');
+ok(sourceCount === 21, 'primary source count mismatch');
 for (const [name, expected] of Object.entries(expectedCounts)) {
   ok(counts[name] === expected, `${name} count mismatch`);
   ok(config.disposition_counts[name] === expected, `config ${name} count mismatch`);
@@ -115,7 +115,7 @@ ok(coverage.summary.reviewed_candidates === 8, 'coverage reviewed count mismatch
 ok(coverage.summary.full_record_feasible === 2, 'coverage feasible count mismatch');
 ok(coverage.summary.prelaunch_or_noncanonical === 3, 'coverage prelaunch count mismatch');
 ok(coverage.summary.insufficient_current_evidence === 3, 'coverage insufficient count mismatch');
-ok(coverage.summary.primary_source_identities === 20, 'coverage source count mismatch');
+ok(coverage.summary.primary_source_identities === 21, 'coverage source count mismatch');
 ok(coverage.summary.canonical_changes === 0 && coverage.summary.public_changes === 0, 'coverage boundary changed');
 ok(sorted(coverage.rows.filter((row) => row.full_record_feasible).map((row) => row.candidate_id)) === sorted(ready), 'coverage feasible set mismatch');
 
@@ -156,6 +156,7 @@ console.log(JSON.stringify({
   ok: true,
   validation_id: 'sog_pr496_record_growth_batch_4_candidate_audit',
   reviewed_candidates: 8,
+  primary_source_identities: 21,
   ready_for_full_record_review: ready,
   prelaunch_or_noncanonical: prelaunch,
   insufficient_current_evidence: insufficient,
