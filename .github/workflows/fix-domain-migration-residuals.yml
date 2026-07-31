@@ -31,7 +31,7 @@ jobs:
         run: |
           from pathlib import Path
 
-          old = 'https://sog.badjoke-lab.com'
+          old = 'https://' + '.'.join(['sog', 'badjoke-lab', 'com'])
           new = 'https://www.stableorgone.com'
           files = [
               'scripts/capture-site-screenshots.mjs',
