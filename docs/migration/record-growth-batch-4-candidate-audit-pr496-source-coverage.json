@@ -1,0 +1,114 @@
+{
+  "schema_version": "1.0",
+  "status": "reviewed_complete",
+  "recorded_at": "2026-07-31",
+  "implementation_pr": 496,
+  "summary": {
+    "reviewed_candidates": 8,
+    "full_record_feasible": 2,
+    "prelaunch_or_noncanonical": 3,
+    "insufficient_current_evidence": 3,
+    "duplicates_not_reassessed_as_new_records": 0,
+    "primary_source_identities": 20,
+    "canonical_changes": 0,
+    "public_changes": 0
+  },
+  "rows": [
+    {
+      "candidate_id": "sog_cand_pr496_open_usd",
+      "primary_source_count": 3,
+      "current_source_present": true,
+      "identity_supported": true,
+      "legal_issuer_supported": false,
+      "launch_supported": false,
+      "backing_supported": "announced_only",
+      "redemption_supported": "intended_only",
+      "deployment_identity_supported": false,
+      "full_record_feasible": false
+    },
+    {
+      "candidate_id": "sog_cand_pr496_fiusd",
+      "primary_source_count": 3,
+      "current_source_present": true,
+      "identity_supported": true,
+      "legal_issuer_supported": false,
+      "launch_supported": "product_present_but_first_circulation_unverified",
+      "backing_supported": "issuer_claim_only",
+      "redemption_supported": "issuer_claim_only",
+      "deployment_identity_supported": false,
+      "full_record_feasible": false
+    },
+    {
+      "candidate_id": "sog_cand_pr496_roughrider",
+      "primary_source_count": 2,
+      "current_source_present": true,
+      "identity_supported": true,
+      "legal_issuer_supported": false,
+      "launch_supported": false,
+      "backing_supported": "announced_only",
+      "redemption_supported": false,
+      "deployment_identity_supported": false,
+      "full_record_feasible": false
+    },
+    {
+      "candidate_id": "sog_cand_pr496_mnee",
+      "primary_source_count": 4,
+      "current_source_present": true,
+      "identity_supported": true,
+      "legal_issuer_supported": true,
+      "launch_supported": true,
+      "backing_supported": true,
+      "redemption_supported": true,
+      "deployment_identity_supported": "network_families_supported_contract_ids_pending",
+      "full_record_feasible": true
+    },
+    {
+      "candidate_id": "sog_cand_pr496_qivalis_eur",
+      "primary_source_count": 2,
+      "current_source_present": true,
+      "identity_supported": true,
+      "legal_issuer_supported": "company_exists_authorization_pending",
+      "launch_supported": false,
+      "backing_supported": "planned_only",
+      "redemption_supported": false,
+      "deployment_identity_supported": false,
+      "full_record_feasible": false
+    },
+    {
+      "candidate_id": "sog_cand_pr496_anz_adc",
+      "primary_source_count": 3,
+      "current_source_present": false,
+      "identity_supported": true,
+      "legal_issuer_supported": "historic_only",
+      "launch_supported": "historic_pilot_only",
+      "backing_supported": "historic_only",
+      "redemption_supported": false,
+      "deployment_identity_supported": "historic_only",
+      "full_record_feasible": false
+    },
+    {
+      "candidate_id": "sog_cand_pr496_usdf_consortium",
+      "primary_source_count": 1,
+      "current_source_present": true,
+      "identity_supported": "organization_domain_only",
+      "legal_issuer_supported": false,
+      "launch_supported": false,
+      "backing_supported": false,
+      "redemption_supported": false,
+      "deployment_identity_supported": false,
+      "full_record_feasible": false
+    },
+    {
+      "candidate_id": "sog_cand_pr496_ylds",
+      "primary_source_count": 3,
+      "current_source_present": true,
+      "identity_supported": true,
+      "legal_issuer_supported": true,
+      "launch_supported": true,
+      "backing_supported": true,
+      "redemption_supported": true,
+      "deployment_identity_supported": "network_families_supported_contract_ids_pending",
+      "full_record_feasible": true
+    }
+  ]
+}
