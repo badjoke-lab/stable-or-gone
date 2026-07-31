@@ -1,0 +1,63 @@
+{
+  "schema_version": "3.0",
+  "generated_at": "2026-07-31T17:00:30.063Z",
+  "canonical_stablecoin_records": 117,
+  "direct_logo_records": 98,
+  "neutral_fallback_records": 19,
+  "direct_logo_coverage_percent": 83.76,
+  "research_decisions": 117,
+  "display_logo_mark_types": [
+    "token_logo",
+    "official_product_mark",
+    "previously_audited_mark"
+  ],
+  "neutral_fallback_mark_types": [
+    "official_project_mark",
+    "official_issuer_mark",
+    "verified_directory_mark"
+  ],
+  "neutral_fallback_slugs": [
+    "acala-ausd",
+    "avalon-usda",
+    "brz",
+    "chfau",
+    "coins-phpc",
+    "dynamic-set-dollar",
+    "eurau",
+    "gbpq",
+    "mnee",
+    "plnq",
+    "poundtoken",
+    "sekau",
+    "sofiusd",
+    "usdgo",
+    "usdh",
+    "usdy",
+    "usk",
+    "usr",
+    "vchf"
+  ],
+  "local_logo_assets": 116,
+  "research_only_assets": [
+    "acala-ausd.png",
+    "avalon-usda.png",
+    "brz.png",
+    "chfau.png",
+    "coins-phpc.png",
+    "dynamic-set-dollar.png",
+    "eurau.png",
+    "gbpq.png",
+    "plnq.png",
+    "poundtoken.png",
+    "sekau.png",
+    "sofiusd.svg",
+    "usdgo.png",
+    "usdh.png",
+    "usdy.svg",
+    "usk.svg",
+    "usr.svg",
+    "vchf.png"
+  ],
+  "orphan_assets": [],
+  "failures": []
+}

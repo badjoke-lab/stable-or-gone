@@ -30,11 +30,14 @@ const fallbackTypes = new Set(displayPolicy.neutral_fallback_mark_types ?? []);
 const fallbackSlugs = new Set(displayPolicy.neutral_fallback_slugs ?? []);
 const researchOnlyAssets = new Set((decisions.records ?? []).filter((record) => fallbackSlugs.has(record.slug) && record.asset_path).map((record) => path.basename(record.asset_path)));
 
-if (recordsBySlug.size !== 116) failures.push(`expected 116 canonical records, found ${recordsBySlug.size}`);
-if (mappings.length !== 98) failures.push(`expected 98 direct Stablecoin/product logo mappings, found ${mappings.length}`);
-if (fallbackSlugs.size !== 18) failures.push(`expected 18 neutral fallback records, found ${fallbackSlugs.size}`);
-if (!Array.isArray(decisions.records) || decisions.records.length !== 116) failures.push('research decision ledger must contain 116 records');
-if (decisionBySlug.size !== 116) failures.push('research decision ledger contains duplicate slugs');
+const expectedCanonicalRecords = Number(displayPolicy.canonical_records);
+const expectedDirectLogoRecords = Number(displayPolicy.direct_logo_records);
+const expectedFallbackRecords = Number(displayPolicy.neutral_fallback_records);
+if (recordsBySlug.size !== expectedCanonicalRecords) failures.push(`expected ${expectedCanonicalRecords} canonical records, found ${recordsBySlug.size}`);
+if (mappings.length !== expectedDirectLogoRecords) failures.push(`expected ${expectedDirectLogoRecords} direct Stablecoin/product logo mappings, found ${mappings.length}`);
+if (fallbackSlugs.size !== expectedFallbackRecords) failures.push(`expected ${expectedFallbackRecords} neutral fallback records, found ${fallbackSlugs.size}`);
+if (!Array.isArray(decisions.records) || decisions.records.length !== expectedCanonicalRecords) failures.push(`research decision ledger must contain ${expectedCanonicalRecords} records`);
+if (decisionBySlug.size !== expectedCanonicalRecords) failures.push('research decision ledger contains duplicate slugs');
 
 for (const [slug] of recordsBySlug) {
   const mapping = mappings.find((item) => item.slug === slug);
