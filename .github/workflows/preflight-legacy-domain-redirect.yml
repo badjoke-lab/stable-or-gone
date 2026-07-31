@@ -1,0 +1,65 @@
+name: Preflight legacy domain redirect
+
+on:
+  push:
+    branches:
+      - agent/sog-legacy-redirect-preflight
+
+permissions:
+  contents: read
+
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Check Cloudflare zone and redirect ruleset access
+        shell: bash
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          set -euo pipefail
+
+          api_get() {
+            local url="$1"
+            local output="$2"
+            curl -sS \
+              -H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" \
+              -H "Content-Type: application/json" \
+              -o "$output" \
+              -w '%{http_code}' \
+              "$url"
+          }
+
+          zone_response="$(mktemp)"
+          zone_status="$(api_get "https://api.cloudflare.com/client/v4/zones?name=badjoke-lab.com&account.id=${CLOUDFLARE_ACCOUNT_ID}" "$zone_response")"
+          if [ "$zone_status" != "200" ]; then
+            echo "Zone lookup failed with HTTP ${zone_status}."
+            jq '{success, errors, messages}' "$zone_response" || true
+            exit 1
+          fi
+
+          zone_id="$(jq -r '.result[0].id // empty' "$zone_response")"
+          if [ -z "$zone_id" ]; then
+            echo "badjoke-lab.com was not returned for the configured account."
+            exit 1
+          fi
+          echo "Zone lookup: success"
+
+          ruleset_response="$(mktemp)"
+          ruleset_status="$(api_get "https://api.cloudflare.com/client/v4/zones/${zone_id}/rulesets/phases/http_request_dynamic_redirect/entrypoint" "$ruleset_response")"
+          case "$ruleset_status" in
+            200)
+              echo "Dynamic redirect ruleset: accessible"
+              jq '{ruleset_id: .result.id, phase: .result.phase, rule_count: (.result.rules | length)}' "$ruleset_response"
+              ;;
+            404)
+              echo "Dynamic redirect ruleset: absent but zone access is available"
+              ;;
+            *)
+              echo "Dynamic redirect ruleset lookup failed with HTTP ${ruleset_status}."
+              jq '{success, errors, messages}' "$ruleset_response" || true
+              exit 1
+              ;;
+          esac
