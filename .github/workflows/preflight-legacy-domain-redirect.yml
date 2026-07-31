@@ -19,7 +19,6 @@ jobs:
   preflight:
     if: github.event_name != 'pull_request' || github.head_ref == 'agent/sog-legacy-redirect-preflight'
     runs-on: ubuntu-latest
-    environment: production
     steps:
       - name: Check Cloudflare zone and redirect ruleset access
         shell: bash
@@ -28,6 +27,11 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
           set -euo pipefail
+
+          if [ -z "${CLOUDFLARE_API_TOKEN:-}" ] || [ -z "${CLOUDFLARE_ACCOUNT_ID:-}" ]; then
+            echo "Cloudflare repository secrets are unavailable outside the production environment."
+            exit 2
+          fi
 
           api_get() {
             local url="$1"
