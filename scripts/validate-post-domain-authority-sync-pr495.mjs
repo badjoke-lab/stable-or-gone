@@ -52,7 +52,13 @@ for (const name of ['agents', 'readme', 'roadmap', 'governance', 'deployment', '
 check(docs.roadmap.includes('externally blocked'), 'roadmap: external redirect blocker missing');
 check(docs.amendment.includes('No candidate and no canonical promotion PR is authorized'), 'amendment: promotion prohibition missing');
 check(docs.governance.includes('No candidate and no later growth batch is pre-authorized'), 'governance: bounded continuation missing');
-check(read('scripts/validate-active-workstream.mjs').trim() === "import './validate-post-domain-authority-sync-pr495.mjs';", 'active-workstream validator is not wired to PR #495 authority validation');
+
+const activeValidator = read('scripts/validate-active-workstream.mjs').trim();
+const allowedActiveValidators = new Set([
+  "import './validate-post-domain-authority-sync-pr495.mjs';",
+  "import './validate-record-growth-batch-4-candidate-audit-pr496.mjs';"
+]);
+check(allowedActiveValidators.has(activeValidator), 'active-workstream validator is not wired to PR #495 or its explicit PR #496 successor');
 
 if (failures.length) {
   console.error('PR #495 post-domain authority synchronization validation failed:');
@@ -68,5 +74,6 @@ console.log(JSON.stringify({
   migration_checkpoint: checkpoint,
   completed_acceptance_points: [467, 492, 493],
   legacy_redirect: 'externally_blocked',
+  active_validator: activeValidator,
   next_work_item: 'ISSUE_RECONCILIATION_THEN_RECORD_GROWTH_BATCH_4_CANDIDATE_AUDIT_REVIEW_GATE'
 }, null, 2));

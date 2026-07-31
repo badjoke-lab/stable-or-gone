@@ -1,0 +1,97 @@
+{
+  "schema_version": "1.0",
+  "status": "reviewed_handoff",
+  "recorded_at": "2026-07-31",
+  "source_authority_pr": 495,
+  "source_pr": 496,
+  "canonical_state": {
+    "stable_assets": 116,
+    "organizations": 107,
+    "relationships": 128,
+    "events": 191,
+    "evidence": 571,
+    "evidence_relations": 571,
+    "deployments": 182,
+    "market_access_records": 8,
+    "detail_routes": 414,
+    "changed_by_pr496": false
+  },
+  "audit_result": {
+    "reviewed_candidates": 8,
+    "ready_for_full_record_review": 2,
+    "prelaunch_or_noncanonical": 3,
+    "insufficient_current_evidence": 3,
+    "duplicate_existing": 0,
+    "symbol_collisions": 1
+  },
+  "ready_candidates": [
+    {
+      "candidate_id": "sog_cand_pr496_mnee",
+      "name": "MNEE",
+      "review_boundary": "complete_record_feasibility_only",
+      "remaining_requirements": [
+        "verify exact network identifiers",
+        "verify first public issuance date",
+        "capture current reserve composition and custodian",
+        "capture current issuance and redemption fee boundary",
+        "preserve unsupported values as known unknowns"
+      ]
+    },
+    {
+      "candidate_id": "sog_cand_pr496_ylds",
+      "name": "Figure YLDS",
+      "review_boundary": "complete_record_feasibility_only",
+      "remaining_requirements": [
+        "preserve security and income semantics",
+        "verify exact network identifiers",
+        "verify current chain availability",
+        "capture current outstanding and access boundary",
+        "preserve unsupported values as known unknowns"
+      ]
+    }
+  ],
+  "blocked_candidates": [
+    {
+      "candidate_id": "sog_cand_pr496_open_usd",
+      "disposition": "prelaunch_or_noncanonical"
+    },
+    {
+      "candidate_id": "sog_cand_pr496_fiusd",
+      "disposition": "insufficient_current_evidence"
+    },
+    {
+      "candidate_id": "sog_cand_pr496_roughrider",
+      "disposition": "prelaunch_or_noncanonical"
+    },
+    {
+      "candidate_id": "sog_cand_pr496_qivalis_eur",
+      "disposition": "prelaunch_or_noncanonical"
+    },
+    {
+      "candidate_id": "sog_cand_pr496_anz_adc",
+      "disposition": "insufficient_current_evidence"
+    },
+    {
+      "candidate_id": "sog_cand_pr496_usdf_consortium",
+      "disposition": "insufficient_current_evidence"
+    }
+  ],
+  "decision_boundary": {
+    "next_work_item": "REVIEW_GATE",
+    "record_growth_batch_4_promotion_authorized": false,
+    "maximum_future_canonical_additions": 2,
+    "canonical_changes_allowed_in_pr496": false,
+    "public_changes_allowed_in_pr496": false,
+    "automatic_promotion": false,
+    "automatic_canonical_pr_creation": false,
+    "ranking": false,
+    "score": false,
+    "recommendation": false,
+    "required_review_questions": [
+      "Does MNEE support a complete canonical record without inferred contract, reserve, or launch facts?",
+      "Does YLDS fit the stable-value scope when its registered security and income semantics are represented explicitly?",
+      "Should the next work item add at most two assets or deepen existing dossiers instead?",
+      "Does maintenance burden remain acceptable for each proposed record?"
+    ]
+  }
+}

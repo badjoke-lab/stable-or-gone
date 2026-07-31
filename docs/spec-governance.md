@@ -7,9 +7,7 @@ Updated: 2026-07-31
 
 This document defines repository authority, conflict resolution, change control, PR traceability, canonical-data preservation, monitoring safety, public-surface control, deployment governance, and bounded continuation rules.
 
-Merged repository specifications are the source of truth.
-
-Chat memory, handoff prose, issue discussion, generated reports, stale roadmap text, and unmerged drafts do not override merged repository authority.
+Merged repository specifications are the source of truth. Chat memory, handoff prose, issue discussion, generated reports, stale roadmap text, and unmerged drafts do not override merged repository authority.
 
 ## 2. Authority order
 
@@ -27,13 +25,19 @@ When documents disagree, use this order:
 Current active roadmap amendment:
 
 ```text
-docs/roadmap-amendments/2026-07-31-post-domain-authority-sync.md
+docs/roadmap-amendments/2026-07-31-record-growth-batch-4-candidate-audit.md
 ```
 
 Current operating specification:
 
 ```text
 docs/post-351-data-growth-operating-spec.md
+```
+
+Current work-item specification:
+
+```text
+docs/quality/record-growth-batch-4-candidate-audit-pr496-spec.md
 ```
 
 Historical amendments and PR-specific specifications remain historical records. Their completed semantic contracts remain useful, but their old “current” wording and schedules do not override the current roadmap.
@@ -78,20 +82,25 @@ Completed acceptance points:
 PR #467 reviewed 116-asset canonical-data checkpoint
 PR #492 Statistics panel flow and deployment-chain normalization
 PR #493 official-domain migration and production verification
+PR #495 post-domain authority synchronization and issue reconciliation
 ```
 
 Current item:
 
 ```text
-PR #495 post-domain authority synchronization
+PR #496 Record Growth Batch 4 candidate audit
 ```
 
-Bounded continuation after PR #495:
+Current reviewed private result:
 
 ```text
-issue and checkpoint reconciliation
-Record Growth Batch 4 candidate audit
-REVIEW GATE before canonical promotion
+ready_for_full_record_review: MNEE, Figure YLDS
+prelaunch_or_noncanonical: Open USD, Roughrider Coin, Qivalis euro stablecoin
+insufficient_current_evidence: FIUSD, ANZ A$DC, USDF Consortium USDF
+exact canonical duplicates: 0
+canonical changes: 0
+public changes: 0
+next boundary: REVIEW GATE
 ```
 
 No candidate and no later growth batch is pre-authorized.
@@ -110,11 +119,11 @@ A change to any of the following requires a specification update in the same PR 
 - audited checkpoint source or digest boundaries;
 - dependency-lock or reproducible-build semantics;
 - monitoring source, baseline, schedule, permission, or retention semantics;
+- candidate-audit disposition semantics;
+- complete-record feasibility semantics;
+- duplicate, symbol-collision, or lineage decisions;
 - Statistics semantics;
-- Comparison Readiness or Facet Freshness semantics;
-- Record Depth planning semantics;
 - canonical Market Access Record semantics;
-- Timeline, Update Feed, or Maintenance Log semantics;
 - production publication gates;
 - official public origin;
 - legacy-host redirect behavior;
@@ -156,6 +165,8 @@ includes_private_notes = false
 
 Candidate, monitoring, discovery, editorial-research, and private material remains outside canonical public surfaces unless separately reviewed and promoted.
 
+A candidate source lead is not canonical Evidence. A current product page does not by itself prove launch, circulation, contract identity, reserve custody, assurance, or redemption eligibility.
+
 Unknown values remain unknown until reviewed evidence supports replacement.
 
 Protected unresolved states include:
@@ -170,7 +181,39 @@ source_review_needed
 
 Missing evidence, a candidate row, a monitoring signal, or a planning gap is not proof of a value.
 
-## 8. Canonical growth governance
+## 8. PR #496 candidate-audit governance
+
+PR #496 may:
+
+- review exactly eight private candidates;
+- record primary-source identities and bounded claim scopes;
+- record blocking unknowns;
+- classify complete-record feasibility;
+- record duplicate, symbol-collision, and lineage risk;
+- produce a private review-gate handoff.
+
+PR #496 may not:
+
+- change canonical record families;
+- change public counts, routes, metadata, UI, CSS, machine-readable output, sitemap, or guides;
+- create candidate pages;
+- automatically promote a candidate;
+- create an automatic canonical PR;
+- score, rank, recommend, or imply safety;
+- authorize a later batch indefinitely.
+
+“Ready for full-record review” means only that current primary sources appear sufficient to attempt a complete record while preserving unsupported values as explicit unknowns. It is not a promotion decision.
+
+## 9. Duplicate and lineage governance
+
+Name or symbol similarity is not identity.
+
+- USDF Consortium USDF is distinct from canonical Falcon USDf and must not be merged automatically.
+- Open USD and Origin Dollar require explicit OUSD symbol and issuer disambiguation.
+- Consortium membership, platform integration, wrapper availability, or shared infrastructure does not create or merge canonical stable-asset identities.
+- Automatic deduplication and automatic lineage inference remain prohibited.
+
+## 10. Canonical growth governance
 
 Dossier deepening and new-asset growth are distinct operations.
 
@@ -186,7 +229,7 @@ organization reuse review
 lifecycle review
 reserve and redemption review
 deployment identity review
-evidence and archive review
+Evidence and archive review
 known-unknown preservation
 manual canonical review
 reviewed repository PR
@@ -194,48 +237,17 @@ reviewed repository PR
 
 Automatic promotion, thin records, inferred facts, indefinite batch sequences, and ranking or recommendation semantics are prohibited.
 
-The next candidate audit may evaluate candidates but does not authorize promotion.
-
-## 9. Monitoring governance
+## 11. Monitoring governance
 
 Monitoring remains private, review-only, and read-only with respect to canonical data.
 
 Monitoring may observe, compare, classify, identify stale review state, prepare private review material, and discover bounded leads.
 
-Monitoring may not:
-
-```text
-write canonical data
-self-accept baselines
-edit guides automatically
-create canonical pull requests automatically
-publish candidates or discovery leads
-deploy
-```
+Monitoring may not write canonical data, self-accept baselines, edit guides automatically, create canonical pull requests automatically, publish candidates, or deploy.
 
 A registered source is not an accepted baseline. Monitoring observations are not canonical Evidence or canonical Market Access Records.
 
-## 10. Market Access governance
-
-Market Access remains separate from asset lifecycle, legal status, regulatory action, platform authorization, monitoring observation, and editorial research.
-
-Canonical promotion flow:
-
-```text
-research or monitoring signal
--> duplicate and scope review
--> source confirmation
--> Evidence relation
--> bounded claim drafting
--> manual canonical review
--> reviewed repository PR
--> merge
--> public canonical output
-```
-
-A platform licence is not proof that a specific asset/function combination is available. Access must not be reduced to a universal allowed/banned boolean.
-
-## 11. Product-surface governance
+## 12. Product-surface governance
 
 Existing public surfaces are sufficient for the current phase:
 
@@ -252,17 +264,11 @@ Guides
 machine-readable projections and manifest discovery
 ```
 
-A new page, explorer, dashboard, ranking surface, or navigation family requires:
-
-1. an identified research or user need;
-2. evidence that current surfaces cannot answer it;
-3. a reviewed roadmap amendment;
-4. a canonical specification;
-5. route, metadata, machine-output, and deployment analysis.
+A new page, explorer, dashboard, ranking surface, or navigation family requires an identified need, evidence that current surfaces cannot answer it, a reviewed roadmap amendment, a canonical specification, and route, metadata, machine-output, and deployment analysis.
 
 Small correctness, accessibility, readability, broken-link, and maintenance fixes remain allowed.
 
-## 12. Material UI governance
+## 13. Material UI and Statistics governance
 
 `docs/ui-v3-remediation-authority.md` remains the regression contract for material public UI work.
 
@@ -270,11 +276,7 @@ PR #492 is the current Statistics acceptance point. Its semantic and responsive 
 
 Material UI work requires desktop and mobile screenshots and direct human inspection of generated artifacts. CI success cannot override visible defects.
 
-## 13. Deployment-chain governance
-
-Canonical deployment-chain projections must preserve identity rather than guessing from ambiguous labels.
-
-Binding examples:
+Binding deployment-chain examples:
 
 ```text
 BNB Chain / BNB Smart Chain -> BNB Chain
@@ -300,22 +302,13 @@ The legacy host redirect is external Cloudflare zone configuration. It must pres
 
 The current deployment token has Pages publication access but no visible `badjoke-lab.com` zone. No zone write may be attempted until suitable Zone Read and Redirect Edit permission exists.
 
-A Pages Function workaround is not authorized because it would change static-serving, request-accounting, and header behavior for the official site.
+A Pages Function workaround is not authorized because it would change static-serving, request-accounting, and header behavior for the official site. Issue #479 remains open for this externally blocked redirect.
 
 ## 15. Historical checkpoints
 
-Do not rewrite historical checkpoints merely because current counts, UI, or domain changed.
+Do not rewrite historical checkpoints merely because current counts, UI, domain, or workstream changed.
 
-Historical material includes:
-
-- release-integrity and reproducible-build baselines;
-- audited asset checkpoints;
-- monitoring snapshots;
-- Statistics history;
-- Record Depth and Tier A planning outputs;
-- completed PR-specific handoffs;
-- closed Maintenance Log periods;
-- completed UI and domain acceptance records.
+Historical material includes release-integrity and reproducible-build baselines, audited asset checkpoints, monitoring snapshots, Statistics history, completed PR-specific handoffs, closed Maintenance Log periods, and completed UI and domain acceptance records.
 
 Forward-only checkpoints may be added when current canonical state advances.
 
@@ -325,14 +318,15 @@ Normal merged changes publish from `main` under `docs/deployment-policy.md`.
 
 Production parity requires independent verification after merge. Issue #479 is the current deployment record.
 
-Scheduled monitoring remains artifact-only and does not authorize canonical writes, guide edits, automatic canonical pull requests, or deployment.
+Scheduled monitoring and candidate auditing remain artifact-only and do not authorize canonical writes, guide edits, automatic canonical pull requests, or deployment decisions outside the normal main workflow.
 
 ## 17. Review gate
 
-After the bounded candidate audit, stop and review:
+After PR #496, stop and review:
 
 ```text
-candidate completeness
+MNEE complete-record feasibility
+YLDS stable-value scope, security classification, and income representation
 source recency
 identity and lineage risk
 organization reuse
@@ -342,6 +336,7 @@ Evidence and archive coverage
 known unknowns
 maintenance burden
 value of adding records versus deepening existing dossiers
+whether to authorize zero, one, or at most two later additions
 ```
 
-Only a separate reviewed decision may authorize a canonical promotion batch.
+Only a separate reviewed decision may authorize a canonical promotion PR.

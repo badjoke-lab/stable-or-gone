@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.0",
+  "work_item": "record_growth_batch_4_candidate_audit_pr496",
+  "status": "reviewed_candidate_audit_complete",
+  "recorded_at": "2026-07-31",
+  "authority_pr": 495,
+  "implementation_pr": 496,
+  "candidate_limit": 12,
+  "reviewed_candidates": 8,
+  "canonical_baseline": {
+    "stable_assets": 116,
+    "organizations": 107,
+    "relationships": 128,
+    "events": 191,
+    "evidence": 571,
+    "evidence_relations": 571,
+    "deployments": 182,
+    "market_access_records": 8,
+    "archive_recorded": 442,
+    "archive_not_recorded": 129,
+    "detail_routes": 414
+  },
+  "disposition_counts": {
+    "ready_for_full_record_review": 2,
+    "prelaunch_or_noncanonical": 3,
+    "insufficient_current_evidence": 3,
+    "duplicate_existing": 0,
+    "out_of_scope": 0
+  },
+  "ready_candidate_ids": [
+    "sog_cand_pr496_mnee",
+    "sog_cand_pr496_ylds"
+  ],
+  "prelaunch_candidate_ids": [
+    "sog_cand_pr496_open_usd",
+    "sog_cand_pr496_roughrider",
+    "sog_cand_pr496_qivalis_eur"
+  ],
+  "insufficient_candidate_ids": [
+    "sog_cand_pr496_fiusd",
+    "sog_cand_pr496_anz_adc",
+    "sog_cand_pr496_usdf_consortium"
+  ],
+  "next_boundary": "REVIEW_GATE",
+  "maximum_future_canonical_additions": 2,
+  "canonical_changes_allowed": false,
+  "public_changes_allowed": false,
+  "automatic_promotion": false,
+  "automatic_canonical_pr_creation": false,
+  "ranking": false,
+  "score": false,
+  "recommendation": false
+}
