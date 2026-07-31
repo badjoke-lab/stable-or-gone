@@ -2,7 +2,7 @@
 
 Stable or Gone (SOG) is a public historical registry for stablecoins and closely related stable-value assets. It records how assets are issued, backed, stabilized, redeemed, governed, migrated, restricted, wound down, or collapsed, together with the organizations, deployments, events, evidence, legal context, access context, and unresolved questions behind each claim.
 
-Public site: https://sog.badjoke-lab.com/
+Public site: https://www.stableorgone.com/
 
 SOG is not a live price dashboard, trading terminal, safety ranking, market-cap ranking, yield leaderboard, or source of investment advice.
 
@@ -345,7 +345,7 @@ Manual deployment is fallback-only for infrastructure interruption or reserved e
 
 Use the contact page for normal contact, non-public reports, missing records, broken links, and source suggestions:
 
-https://sog.badjoke-lab.com/contact/
+https://www.stableorgone.com/contact/
 
 Use GitHub Issues only for public, source-backed corrections that can be discussed openly:
 
@@ -357,7 +357,7 @@ Do not submit private keys, seed phrases, passwords, wallet credentials, exchang
 
 Support helps cover research, source checks, broken-link review, new records, and ongoing site maintenance. It does not affect listings, wording, methodology, corrections, or status labels.
 
-https://sog.badjoke-lab.com/support/
+https://www.stableorgone.com/support/
 
 ## License
 

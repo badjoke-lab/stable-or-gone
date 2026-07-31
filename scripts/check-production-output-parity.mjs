@@ -1,10 +1,11 @@
 import { isDeepStrictEqual } from 'node:util';
+import { PUBLIC_ORIGIN } from '../config/public-origin.mjs';
 import { loadRegistryV2Baseline } from './load-registry-v2-baseline.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 
 const root = process.cwd();
-const origin = (process.env.SOG_BASE_URL || 'https://sog.badjoke-lab.com').replace(/\/$/, '');
+const origin = (process.env.SOG_BASE_URL || PUBLIC_ORIGIN).replace(/\/$/, '');
 const concurrency = Number(process.env.SOG_PARITY_CONCURRENCY || 12);
 const expectedCommit = process.env.SOG_EXPECTED_COMMIT || process.env.GITHUB_SHA || null;
 const attempts = Number(process.env.SOG_SMOKE_ATTEMPTS || 5);
@@ -146,10 +147,11 @@ assertSameSet(extractLinks(stablecoinIndex, '/stablecoin/'), expected.stablecoin
 assertSameSet(extractLinks(organizationIndex, '/issuer/'), expected.organizations, 'production organization index links');
 assertSameSet(extractLinks(eventIndex, '/event/'), expected.events, 'production event index links');
 
+const escapedOrigin = origin.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 const sitemapSets = {
-  stablecoins: new Set([...sitemap.matchAll(/<loc>https:\/\/sog\.badjoke-lab\.com(\/stablecoin\/[^<]+\/)<\/loc>/g)].map((match) => match[1])),
-  organizations: new Set([...sitemap.matchAll(/<loc>https:\/\/sog\.badjoke-lab\.com(\/issuer\/[^<]+\/)<\/loc>/g)].map((match) => match[1])),
-  events: new Set([...sitemap.matchAll(/<loc>https:\/\/sog\.badjoke-lab\.com(\/event\/[^<]+\/)<\/loc>/g)].map((match) => match[1]))
+  stablecoins: new Set([...sitemap.matchAll(new RegExp(`<loc>${escapedOrigin}(/stablecoin/[^<]+/)</loc>`, 'g'))].map((match) => match[1])),
+  organizations: new Set([...sitemap.matchAll(new RegExp(`<loc>${escapedOrigin}(/issuer/[^<]+/)</loc>`, 'g'))].map((match) => match[1])),
+  events: new Set([...sitemap.matchAll(new RegExp(`<loc>${escapedOrigin}(/event/[^<]+/)</loc>`, 'g'))].map((match) => match[1]))
 };
 assertSameSet(sitemapSets.stablecoins, expected.stablecoins, 'production sitemap stablecoins');
 assertSameSet(sitemapSets.organizations, expected.organizations, 'production sitemap organizations');

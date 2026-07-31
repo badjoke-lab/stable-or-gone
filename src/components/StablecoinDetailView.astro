@@ -61,11 +61,11 @@ const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Dataset',
   name: `${coin.name} stablecoin history`,
-  url: `https://sog.badjoke-lab.com/stablecoin/${coin.slug}/`,
+  url: `https://www.stableorgone.com/stablecoin/${coin.slug}/`,
   description,
-  isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' },
+  isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://www.stableorgone.com/' },
   keywords: [coin.name, coin.symbol, coin.lifecycle_status, coin.issuance_status, reference.public_label, model.public_label].filter(Boolean),
-  ...(relatedGuides.length > 0 ? { subjectOf: relatedGuides.map((guide) => ({ '@type': 'Article', name: guide.title, url: `https://sog.badjoke-lab.com${guide.href}` })) } : {})
+  ...(relatedGuides.length > 0 ? { subjectOf: relatedGuides.map((guide) => ({ '@type': 'Article', name: guide.title, url: `https://www.stableorgone.com${guide.href}` })) } : {})
 };
 const coverageRows = [
   ['Organizations', relationships.length], ['Sources', evidence.length], ['Reserve reports', reserveReports.length],

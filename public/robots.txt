@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://sog.badjoke-lab.com/sitemap-index.xml
+Sitemap: https://www.stableorgone.com/sitemap-index.xml

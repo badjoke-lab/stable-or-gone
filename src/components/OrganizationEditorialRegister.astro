@@ -7,7 +7,7 @@ import { buildOrganizationIndexView } from '../lib/views/organizationIndexView';
 const { records, filters, relationshipCount, connectedAssetCount, sourceIdentityCount } = buildOrganizationIndexView();
 const title = 'Organizations — Stable or Gone';
 const description = 'Browse organizations connected to stablecoin records, including category, jurisdiction, functional roles, relationship states, connected assets, and evidence.';
-const jsonLd = { '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'Stablecoin Organizations', url: 'https://sog.badjoke-lab.com/issuers/', description, isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' } };
+const jsonLd = { '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'Stablecoin Organizations', url: 'https://www.stableorgone.com/issuers/', description, isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://www.stableorgone.com/' } };
 ---
 <BaseLayout title={title} description={description} canonicalPath="/issuers/" jsonLd={jsonLd}>
   <div class="organization-index-page" data-organization-index data-ui-v3-organizations>

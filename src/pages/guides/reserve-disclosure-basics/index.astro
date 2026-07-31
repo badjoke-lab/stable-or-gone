@@ -9,8 +9,8 @@ const description = 'How to compare issuer statements, attestations, audits, pro
 const canonicalPath = '/guides/reserve-disclosure-basics/';
 const jsonLd = {
   '@context': 'https://schema.org', '@type': 'Article', headline: title, description,
-  url: `https://sog.badjoke-lab.com${canonicalPath}`,
-  isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' },
+  url: `https://www.stableorgone.com${canonicalPath}`,
+  isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://www.stableorgone.com/' },
   about: ['stablecoin reserves', 'reserve disclosure', 'stablecoin attestations', 'protocol collateral'],
   ...(guide.publishedAt ? { datePublished: guide.publishedAt } : {}), ...(guide.updatedAt ? { dateModified: guide.updatedAt } : {})
 };

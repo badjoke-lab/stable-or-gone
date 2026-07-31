@@ -8,7 +8,7 @@ const { organization } = Astro.props;
 const view = buildOrganizationDetailView(organization);
 const title = `${organization.name} — Stablecoin Organization History | Stable or Gone`;
 const description = `${organization.name} organization category, legal-form state, regulatory character, jurisdiction, functional roles, stablecoin relationships, major events, and sources.`;
-const jsonLd = { '@context': 'https://schema.org', '@type': 'Organization', name: organization.name, url: `https://sog.badjoke-lab.com/issuer/${organization.slug}/`, description, isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' }, sameAs: organization.official_url ? [organization.official_url] : undefined };
+const jsonLd = { '@context': 'https://schema.org', '@type': 'Organization', name: organization.name, url: `https://www.stableorgone.com/issuer/${organization.slug}/`, description, isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://www.stableorgone.com/' }, sameAs: organization.official_url ? [organization.official_url] : undefined };
 ---
 <BaseLayout title={title} description={description} canonicalPath={`/issuer/${organization.slug}/`} jsonLd={jsonLd}>
   <article class="organization-detail-page" data-ui-v3-organization-detail>

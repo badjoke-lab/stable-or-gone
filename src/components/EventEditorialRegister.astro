@@ -7,7 +7,7 @@ import { buildEventIndexView } from '../lib/views/eventIndexView';
 const { records, filters, stablecoinSubjectCount, organizationSubjectCount, sourceIdentityCount } = buildEventIndexView();
 const title = 'Events — Stable or Gone';
 const description = 'Browse stablecoin lifecycle events by public category, precise subtype, status effect, recovery state, year, subjects, and evidence.';
-const jsonLd = { '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'Stablecoin Events', url: 'https://sog.badjoke-lab.com/events/', description, isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://sog.badjoke-lab.com/' } };
+const jsonLd = { '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'Stablecoin Events', url: 'https://www.stableorgone.com/events/', description, isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://www.stableorgone.com/' } };
 ---
 <BaseLayout title={title} description={description} canonicalPath="/events/" jsonLd={jsonLd}>
   <div class="event-index-page" data-event-index data-ui-v3-events>

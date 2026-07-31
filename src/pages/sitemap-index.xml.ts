@@ -1,8 +1,9 @@
 import type { APIRoute } from 'astro';
+import { PUBLIC_ORIGIN } from '../../config/public-origin.mjs';
 import { guides } from '../data/guideCatalog';
 import { getStablecoins, getOrganizations, getEvents } from '../lib/data/registry';
 
-const SITE = 'https://sog.badjoke-lab.com';
+const SITE = PUBLIC_ORIGIN;
 const PAGE_SIZE = 20;
 
 function url(path: string) {

@@ -1,4 +1,5 @@
 import buildProvenanceData from '../../data/generated/build-provenance.json';
+import { PUBLIC_ORIGIN } from '../../config/public-origin.mjs';
 
 import {
   getEvidence,
@@ -42,7 +43,7 @@ export const PROJECT = {
   description: 'Source-backed historical registry of stablecoins, organizations, lifecycle events, reserve disclosures, redemption access, and unresolved public-information gaps.',
   registryFamily: 'badjoke-lab-ledger-series',
   registryType: 'stablecoin_issuer_registry',
-  canonicalOrigin: 'https://sog.badjoke-lab.com',
+  canonicalOrigin: PUBLIC_ORIGIN,
   releaseChannel: 'production',
   verificationMarker: 'sog_machine_readable_layer_v1',
   designGeneration: 'registry_v2',
