@@ -51,7 +51,9 @@ Archive recorded / not recorded: 450 / 129
 
 ## Validation boundary
 
-The final review head must pass the dedicated PR #498 validator and the normal locked-dependency CI, Astro check, site build, registry audits, deterministic statistics, reproducibility, public consistency, and deployment-output checks before merge.
+The PR #498 facet-freshness checkpoint is advanced to `2026-07-31` for 117 assets and 2,223 asset-dimension cells. The dedicated PR #498 validator and the locked-dependency site build pass with this checkpoint.
+
+The final review head must pass the normal CI, Astro check, registry audits, deterministic statistics, reproducibility, public consistency, UI contract, screenshots, and deployment-output checks before merge.
 
 ## Next boundary
 
