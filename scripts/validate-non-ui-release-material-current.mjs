@@ -74,7 +74,7 @@ check(latest?.data_quality?.coverage?.archive_evidence?.count === archiveRecorde
 check(historyCheckpoint.canonical_checkpoint_id === current.checkpoint_id, 'history/current binding');
 
 markers(roadmap, [`Canonical stable assets: ${c.assets}`, `Organizations: ${c.organizations}`, `Relationships: ${c.relationships}`, `Events: ${c.events}`, `Evidence: ${c.evidence}`, `Evidence Relations: ${c.evidence}`, `Deployments: ${c.deployments}`, `Market Access Records: ${c.market_access_records}`, `Archive recorded: ${archiveRecorded}`, `Archive not recorded: ${archiveNotRecorded}`], 'current roadmap');
-markers(agents, [`Canonical stable assets: ${c.assets}`, `Organizations: ${c.organizations}`, `Relationships: ${c.relationships}`, `Events: ${c.events}`, `Canonical Evidence: ${c.evidence}`, `Evidence Relations: ${c.evidence}`, `Deployments: ${c.deployments}`, `Market Access Records: ${c.market_access_records}`, `Archive recorded: ${archiveRecorded}`, `Archive not recorded: ${archiveNotRecorded}`, 'Current mandatory authorities:'], 'AGENTS.md');
+markers(agents, [`Canonical stable assets: ${c.assets}`, `Organizations: ${c.organizations}`, `Relationships: ${c.relationships}`, `Events: ${c.events}`, `Canonical Evidence: ${c.evidence}`, `Evidence Relations: ${c.evidence}`, `Deployments: ${c.deployments}`, `Market Access Records: ${c.market_access_records}`, `Archive recorded: ${archiveRecorded}`, `Archive not recorded: ${archiveNotRecorded}`, '## Current authority', 'Official public origin: https://www.stableorgone.com', 'PR #492', 'PR #493'], 'AGENTS.md');
 
 if (failures.length) {
   console.error('Non-UI release material validation failed:');
@@ -95,5 +95,6 @@ console.log(JSON.stringify({
   current_deployments: c.deployments,
   current_market_access_records: c.market_access_records,
   current_release_integrity_baseline_id: releaseBaseline.baseline_id,
+  authority_acceptance_points: [492, 493],
   validation_mode: 'workstream_independent_current_checkpoint'
 }, null, 2));

@@ -1,9 +1,9 @@
 # Stable or Gone Roadmap
 
-Updated: 2026-07-27  
-Status: Full public UI contract complete and production-verified; Record Growth Batch 3 REVIEW GATE
+Updated: 2026-07-31  
+Status: Official-domain migration complete; post-domain authority synchronization active
 
-## Current position
+## Current reviewed position
 
 ```text
 Canonical stable assets: 116
@@ -16,75 +16,139 @@ Deployments: 182
 Market Access Records: 8
 Archive recorded: 442
 Archive not recorded: 129
-
-Issue #281 UI v3 rebuild: complete and closed
-Issue #457 CYA-dark redesign audit: complete and closed
-UI completion: true
-Current public UI merge: PR #470
-Current public UI main commit: 3e3edf4dd4d6af8e6ab5f9336271f0cca5cd6723
-Current exhaustive screenshot run: 30272641707
+Detail routes: 414
+Metadata-checked detail routes: 414
+Official public origin: https://www.stableorgone.com
+Official-domain migration production checkpoint: bd0e63ac36b1824bf705e8c80d1fb0a1cd79d221
 ```
 
-PR #470 changed no canonical record, route-semantic, or machine-readable contract. PR #467 extends the reviewed canonical checkpoint after the public UI production verification completed.
+Current `main` and production equality is established dynamically by the deployment workflow and Issue #479.
 
-## UI V3 regression closure
-
-The earlier representative-only completion decision was withdrawn because it did not establish acceptable readability, density, hierarchy, mobile behavior, or full-route coverage. The replacement closure sequence completed:
+## Completed canonical-data checkpoint
 
 ```text
-PR #461  exhaustive V3 color-system repair
-PR #463  exhaustive readability and hierarchy repair
-PR #464  roadmap and archived authority closure
-PR #465  top-level agent authority synchronization
+PR #426 Post-UI v3 Data-Growth Reset: complete
+PR #427 Record Growth Candidate Audit v2: complete
+PR #428 Post-PR #427 Review Gate: complete
+PR #429 Record Growth Batch 2 — CHFAU and SEKAU: complete
+PR #433 Generated-output repair: complete
+PR #466 Post-UI data-growth review gate: complete
+PR #467 Record Growth Batch 3 — PLNQ and GBPQ: reviewed complete
 ```
 
-The archived regression authority remains in `docs/ui-v3-remediation-authority.md`.
+PR #467 is the current 116-asset canonical-data checkpoint. It remains the active data-preservation baseline until a later reviewed canonical-data PR explicitly advances it.
 
-## Full public UI contract closure
-
-Owner review later found that the accepted UI V3 implementation still depended on 78 stylesheets, 649,819 source bytes, and 4,905 `!important` declarations after PR #472. The route audit protected rendering but did not establish one maintainable page-family contract.
-
-The owner-directed amendment `docs/roadmap-amendments/2026-07-27-pr470-full-public-ui-contract.md` authorized PR #470. It completed:
-
-- one physical public stylesheet and one import;
-- removal of the accumulated legacy cascade;
-- shared shell, typography, interaction, badge, table, disclosure, and responsive contracts;
-- complete desktop/mobile information preservation;
-- exhaustive rendered UI, screenshot, color, readability, hierarchy, and overflow validation;
-- production verification on the public deployment.
+## Completed public UI sequence
 
 ```text
-PR #470 Full Public UI Contract — complete
-PRODUCTION VISUAL VERIFICATION — complete
-Merge commit — 3e3edf4dd4d6af8e6ab5f9336271f0cca5cd6723
+PR #470 Full Public UI Contract: complete and production-verified
+PR #487 stablecoin logo coverage: complete
+PR #488 white background, status badges, and mobile density: complete
+PR #489 homepage information architecture: complete
+PR #490 broad desktop/mobile remediation: complete
+PR #491 Statistics redesign: complete
+PR #492 Statistics panel flow and deployment-chain normalization: complete
 ```
 
-## Canonical data baseline
+PR #492 is the current Statistics and responsive-layout acceptance point.
+
+Its binding rules include:
+
+- no Statistics section hidden in a collapsible disclosure;
+- independent desktop column packing without shared row heights;
+- single-column mobile source order;
+- canonical BNB Chain and Gnosis Chain labels;
+- distinct Arbitrum One and Arbitrum Nova values;
+- bare `Arbitrum` retained as unresolved;
+- total deployments reconciled from canonical-chain and unresolved counts.
+
+The UI sequence changed no canonical record counts.
+
+## Completed official-domain migration
 
 ```text
-PR #426  Post-UI v3 Data-Growth Reset: complete
-PR #427  Record Growth Candidate Audit v2: complete
-PR #428  Post-PR #427 Review Gate: complete
-PR #429  Record Growth Batch 2 — CHFAU and SEKAU: complete
-PR #432  Generated-output repair workflow: complete
-PR #433  Generated and persisted PR #429 outputs: complete
-PR #466  Post-UI data-growth review gate: complete
-PR #467  Record Growth Batch 3 — PLNQ and GBPQ: reviewed complete
+PR #493 official-domain migration: complete
+Migration merge and deployed checkpoint: bd0e63ac36b1824bf705e8c80d1fb0a1cd79d221
+Official origin: https://www.stableorgone.com
+Production verification: success
+Stablecoins: 116
+Organizations: 107
+Events: 191
+Detail routes: 414
+Metadata routes: 414
 ```
 
-PR #433 established the generated and built 114-asset baseline. PR #467 extends the reviewed checkpoint to 116 stable assets, 107 organizations, 128 relationships, 191 events, 571 Evidence records, and 182 deployments.
+The official origin now governs Astro configuration, canonical and hreflang links, OGP, JSON-LD, robots, sitemap, machine-readable outputs, production checkers, deployment reporting, and repository documentation.
 
-PR #427 retained PLNQ and GBPQ as review-ready candidates. PR #428 deferred them by sequencing rather than rejecting them. PR #429 promoted CHFAU and SEKAU. PR #466 later authorized exactly PLNQ and GBPQ, and PR #467 completed both records with the existing Quantoz organization and verified Ethereum deployments.
+## Legacy-host redirect boundary
+
+The old host `sog.badjoke-lab.com` still resolves to the Pages project and serves output whose canonical origin is `www.stableorgone.com`.
+
+A path- and query-preserving 301 remains required:
+
+```text
+sog.badjoke-lab.com/<path>?<query>
+-> www.stableorgone.com/<path>?<query>
+```
+
+The current GitHub Cloudflare token returned zero accessible zones, both with and without the configured account filter. It can publish the Pages project but cannot safely read or edit the `badjoke-lab.com` redirect ruleset.
+
+The redirect is therefore externally blocked. No Pages Function workaround is authorized because it would place the entire static site behind Workers request accounting and change the current static-serving and header boundary.
+
+The redirect may be completed only after a credential has:
+
+```text
+Zone Read for badjoke-lab.com
+Single Redirect / Rulesets Edit for badjoke-lab.com
+```
+
+Required rule:
+
+```text
+match hostname: sog.badjoke-lab.com
+status: 301
+destination: concat("https://www.stableorgone.com", http.request.uri.path)
+preserve query string: true
+```
+
+## Active item
+
+```text
+PR #495 post-domain authority synchronization
+```
+
+PR #495 updates top-level repository authority only. It must:
+
+- align `AGENTS.md`, `README.md`, `docs/spec-governance.md`, `docs/roadmap.md`, and `docs/deployment-policy.md`;
+- record PR #492 and PR #493 as completed acceptance points;
+- preserve the PR #467 canonical-data checkpoint;
+- make `www.stableorgone.com` the only repository official origin;
+- record the legacy redirect as externally blocked rather than falsely complete;
+- update active-workstream validation;
+- change no canonical data, public route, UI output, or machine-readable schema.
+
+## Bounded continuation after PR #495
+
+```text
+1. reconcile obsolete production, deployment, and UI issues;
+2. leave Issue #479 open while the legacy redirect remains externally blocked;
+3. perform a bounded Record Growth Batch 4 candidate audit;
+4. stop at a review gate before any canonical promotion.
+```
+
+The candidate audit may identify and evaluate candidates but may not promote them.
+
+No candidate, new canonical asset, or later growth batch is pre-authorized by this roadmap.
 
 ## Active operating mode
 
-The governing operating specification is `docs/post-351-data-growth-operating-spec.md`.
+The governing operating specification remains `docs/post-351-data-growth-operating-spec.md`.
 
-Normal work proceeds through these lanes:
+Allowed default lanes:
 
 ```text
-reviewed data depth and record growth
-canonical Market Access promotion
+reviewed data depth and bounded record growth
+canonical Market Access promotion through explicit review
 read-only monitoring review
 corrections and Evidence maintenance
 monthly maintenance
@@ -93,42 +157,33 @@ small correctness, accessibility, readability, and broken-link fixes
 
 New public pages, dashboards, rankings, explorer families, or major navigation changes remain frozen unless a separate reviewed roadmap amendment and canonical specification authorize them.
 
-## Record Growth Batch 3 result
-
-PR #467 is bounded to the exact reviewed pair:
-
-```text
-Quantoz PLNQ — sog_cand_pr427_plnq
-Quantoz GBPQ — sog_cand_pr427_gbpq
-```
-
-The implementation:
-
-- reuses the existing Quantoz Payments organization;
-- adds no duplicate organization;
-- adds no Market Access record;
-- records only verified Ethereum deployments;
-- leaves future Polygon, Stellar, XRPL, Algorand, and Xahau deployments as explicit known unknowns;
-- preserves unsupported reserve-allocation and operational-redemption details as unknown;
-- changes no public UI or route family.
-
-## Active bounded sequence
-
-```text
-PR #466 Post-UI data-growth review gate: complete
-PR #470 Full Public UI Contract: complete and production-verified
-PR #467 Record Growth Batch 3 — PLNQ and GBPQ: reviewed complete
-REVIEW GATE: active after PR #467
-```
-
-No later record-growth batch is pre-authorized. The next action after PR #467 is a separate review decision based on its actual merged and deployed result.
-
 ## Production publication boundary
 
-`main` remains the source of truth. Production publication follows `docs/deployment-policy.md` through `.github/workflows/deploy-production.yml` and must verify the deployed commit against the intended main commit.
+`main` is the repository source of truth. Production publication follows `docs/deployment-policy.md` through `.github/workflows/deploy-production.yml`.
 
-A repository merge is not itself evidence that production parity has completed. Production parity remains a separately verified deployment result, and Issue #66 remains the long-lived checkpoint record for production consistency.
+A merge is not proof of production parity. Deployment conclusions require:
+
+- exact deployed-commit verification;
+- canonical-data hash and provenance parity;
+- reviewed count parity;
+- route and metadata parity;
+- public-origin consistency;
+- Issue #479 deployment reporting.
 
 ## Mandatory operating rule
 
-Every non-trivial PR must identify its governing specification, exact bounded scope, preserved public and canonical boundaries, validation evidence, and next review gate. Old handoffs, stale UI phases, and superseded PR numbers must not be treated as current authority.
+Every non-trivial PR must identify:
+
+```text
+governing specification
+roadmap item
+exact bounded scope
+explicit non-goals
+named inputs and prior outputs
+preserved canonical and public boundaries
+validation evidence
+deployment classification
+next review gate
+```
+
+Old handoffs, stale PR numbers, historical amendments, and issue discussion must not be treated as current authority when they conflict with this roadmap.

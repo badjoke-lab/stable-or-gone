@@ -21,6 +21,7 @@ const walk = (relativePath) => {
     return entry.isDirectory() ? walk(child) : [child];
   });
 };
+const countOccurrences = (content, value) => content.split(value).length - 1;
 
 assert(PUBLIC_ORIGIN === expectedOrigin, `PUBLIC_ORIGIN must be ${expectedOrigin}`);
 assert(PUBLIC_HOSTNAME === expectedHostname, `PUBLIC_HOSTNAME must be ${expectedHostname}`);
@@ -43,6 +44,11 @@ for (const [file, snippets] of Object.entries(requiredSnippets)) {
   for (const snippet of snippets) assert(content.includes(snippet), `${file}: missing ${snippet}`);
 }
 
+const legacyRedirectDocumentation = new Set([
+  'README.md',
+  'docs/deployment-policy.md'
+]);
+
 const activeFiles = [
   'astro.config.mjs',
   ...walk('src'),
@@ -54,12 +60,27 @@ const activeFiles = [
 ].filter((file, index, files) => files.indexOf(file) === index)
   .filter((file) => file !== 'scripts/validate-public-origin.mjs');
 
+let approvedLegacyDocumentationFindings = 0;
 for (const file of activeFiles) {
   const target = path.join(root, file);
   if (!fs.existsSync(target) || !fs.statSync(target).isFile()) continue;
   const content = read(file);
-  assert(!content.includes(legacyHostname), `${file}: legacy hostname remains`);
-  assert(!content.includes(legacyEscapedHostname), `${file}: escaped legacy hostname remains`);
+  const literalCount = countOccurrences(content, legacyHostname);
+  const escapedCount = countOccurrences(content, legacyEscapedHostname);
+
+  if (legacyRedirectDocumentation.has(file)) {
+    assert(content.includes(expectedOrigin), `${file}: official origin missing from legacy redirect documentation`);
+    assert(/legacy/i.test(content), `${file}: legacy redirect documentation must identify the old host as legacy`);
+    assert(/301/.test(content), `${file}: legacy redirect documentation must state the permanent redirect boundary`);
+    assert(!content.includes(`Public site: https://${legacyHostname}`), `${file}: legacy hostname used as public site`);
+    assert(!content.includes(`Official public origin: https://${legacyHostname}`), `${file}: legacy hostname used as official origin`);
+    assert(escapedCount === 0, `${file}: escaped legacy hostname remains`);
+    approvedLegacyDocumentationFindings += literalCount;
+    continue;
+  }
+
+  assert(literalCount === 0, `${file}: legacy hostname remains`);
+  assert(escapedCount === 0, `${file}: escaped legacy hostname remains`);
 }
 
 if (failures.length) {
@@ -73,5 +94,6 @@ console.log(JSON.stringify({
   public_hostname: PUBLIC_HOSTNAME,
   legacy_hostname_findings: 0,
   escaped_legacy_hostname_findings: 0,
+  approved_legacy_redirect_documentation_findings: approvedLegacyDocumentationFindings,
   active_files_checked: activeFiles.length
 }, null, 2));
