@@ -19,6 +19,9 @@ concurrency:
   group: sog-production-deployment
   cancel-in-progress: true
 
+env:
+  SOG_BASE_URL: https://www.stableorgone.com
+
 jobs:
   deploy:
     name: Build, deploy, and verify production
@@ -65,7 +68,7 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: 479,
-              body: `Production deployment started.\n\n- Source commit: \`${process.env.SOURCE_SHA}\`\n- Trigger: \`${process.env.EVENT_NAME}\`\n- Run: ${runUrl}`
+              body: `Production deployment started.\n\n- Source commit: \`${process.env.SOURCE_SHA}\`\n- Trigger: \`${process.env.EVENT_NAME}\`\n- Public origin: \`${process.env.SOG_BASE_URL || 'https://www.stableorgone.com'}\`\n- Run: ${runUrl}`
             });
 
       - name: Setup Node
@@ -79,6 +82,9 @@ jobs:
 
       - name: Validate guide publication metadata
         run: npm run validate:guides
+
+      - name: Validate official public origin
+        run: npm run validate:public-origin
 
       - name: Build publishable site
         env:
@@ -113,8 +119,8 @@ jobs:
       - name: Verify UK guide publication
         run: |
           for attempt in $(seq 1 5); do
-            GUIDES_HTML="$(curl -fsS https://sog.badjoke-lab.com/guides/ || true)"
-            ARTICLE_HTML="$(curl -fsS https://sog.badjoke-lab.com/guides/uk-stablecoin-capital-rules-2026/ || true)"
+            GUIDES_HTML="$(curl -fsS "$SOG_BASE_URL/guides/" || true)"
+            ARTICLE_HTML="$(curl -fsS "$SOG_BASE_URL/guides/uk-stablecoin-capital-rules-2026/" || true)"
             if printf '%s' "$GUIDES_HTML" | grep -q 'uk-stablecoin-capital-rules-2026' \
               && printf '%s' "$ARTICLE_HTML" | grep -q 'Capital Does Not Mean 1% Backing'; then
               echo "UK guide publication verified."
@@ -134,7 +140,7 @@ jobs:
           echo "- Trigger: $EVENT_NAME" >> "$GITHUB_STEP_SUMMARY"
           echo "- Source commit: $SOURCE_SHA" >> "$GITHUB_STEP_SUMMARY"
           echo "- Pages project: stable-or-gone" >> "$GITHUB_STEP_SUMMARY"
-          echo "- Public origin: https://sog.badjoke-lab.com/" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Public origin: $SOG_BASE_URL/" >> "$GITHUB_STEP_SUMMARY"
           echo "- UK guide publication: passed" >> "$GITHUB_STEP_SUMMARY"
 
       - name: Report deployment result
@@ -158,5 +164,5 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: 479,
-              body: `Production deployment finished.\n\n- Result: **${process.env.JOB_STATUS}**\n- Source commit: \`${process.env.SOURCE_SHA}\`\n- Trigger: \`${process.env.EVENT_NAME}\`\n- Run: ${runUrl}${diagnosticBlock}`
+              body: `Production deployment finished.\n\n- Result: **${process.env.JOB_STATUS}**\n- Source commit: \`${process.env.SOURCE_SHA}\`\n- Trigger: \`${process.env.EVENT_NAME}\`\n- Public origin: \`${process.env.SOG_BASE_URL || 'https://www.stableorgone.com'}\`\n- Run: ${runUrl}${diagnosticBlock}`
             });
