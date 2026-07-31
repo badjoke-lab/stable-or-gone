@@ -26,18 +26,26 @@ jobs:
           ref: agent/official-domain-migration
           fetch-depth: 0
 
-      - name: Replace escaped legacy sitemap host
+      - name: Replace escaped legacy sitemap hosts
         shell: python
         run: |
           from pathlib import Path
 
-          path = Path('scripts/verify-public-consistency.mjs')
-          text = path.read_text()
-          old = r'sog\.badjoke-lab\.com'
-          new = r'www\.stableorgone\.com'
-          if old not in text:
-              raise SystemExit('escaped legacy sitemap host not found')
-          path.write_text(text.replace(old, new))
+          old = ''.join(['sog', r'\.', 'badjoke-lab', r'\.', 'com'])
+          new = ''.join(['www', r'\.', 'stableorgone', r'\.', 'com'])
+          files = [
+              Path('scripts/verify-public-consistency.mjs'),
+              Path('scripts/verify-full-output-parity.mjs'),
+          ]
+          changed = 0
+          for path in files:
+              text = path.read_text()
+              updated = text.replace(old, new)
+              if updated != text:
+                  path.write_text(updated)
+                  changed += 1
+          if changed != len(files):
+              raise SystemExit(f'expected to update {len(files)} files, updated {changed}')
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -55,15 +63,18 @@ jobs:
         run: |
           npm run build:site
           npm run verify:consistency
+          npm run verify:full-parity
           npm run verify:deployment
           npm run verify:public
 
-      - name: Commit sitemap validator fix
+      - name: Commit sitemap validator fixes
         shell: bash
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -- scripts/verify-public-consistency.mjs
+          git add -- \
+            scripts/verify-public-consistency.mjs \
+            scripts/verify-full-output-parity.mjs
           git commit -m "Fix official-domain sitemap consistency checks"
           git push origin HEAD:agent/official-domain-migration
