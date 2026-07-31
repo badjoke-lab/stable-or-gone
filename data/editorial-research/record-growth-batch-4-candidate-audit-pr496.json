@@ -1,0 +1,457 @@
+{
+  "schema_version": "1.0",
+  "status": "reviewed_internal_complete",
+  "recorded_at": "2026-07-31",
+  "authority_pr": 495,
+  "implementation_pr": 496,
+  "canonical_baseline": {
+    "stable_assets": 116,
+    "organizations": 107,
+    "relationships": 128,
+    "events": 191,
+    "evidence": 571,
+    "evidence_relations": 571,
+    "deployments": 182,
+    "market_access_records": 8,
+    "detail_routes": 414
+  },
+  "canonical_boundary": {
+    "included_in_public_counts": false,
+    "canonical_changes_allowed": false,
+    "public_changes_allowed": false,
+    "automatic_promotion": false,
+    "automatic_canonical_pr_creation": false,
+    "ranking": false,
+    "score": false,
+    "recommendation": false
+  },
+  "candidates": [
+    {
+      "candidate_id": "sog_cand_pr496_open_usd",
+      "name": "Open USD",
+      "symbol": "OUSD",
+      "proposed_slug": "open-usd",
+      "issuer_or_operator": "Open Standard",
+      "official_domain": "joinopenstandard.com",
+      "reviewed_disposition": "prelaunch_or_noncanonical",
+      "scope_note": "Announced open-infrastructure dollar stablecoin. The reviewed official checkpoint still states that launch will occur later in 2026; Visa platform access and partner announcements do not prove a fully launched public token, canonical contract set, or current circulating supply.",
+      "duplicate_review": {
+        "decision": "distinct_name_but_not_launched",
+        "existing_canonical_id": null,
+        "symbol_collision": false,
+        "notes": "No exact Open USD identity exists in the 116-asset registry. Origin Dollar also uses OUSD in parts of the market, so future promotion requires explicit symbol and lineage disambiguation."
+      },
+      "source_leads": [
+        {
+          "source_id": "sog_src_pr496_open_standard_site",
+          "publisher": "Open Standard",
+          "url": "https://joinopenstandard.com/",
+          "source_type": "official_product_site",
+          "primary": true,
+          "reviewed_at": "2026-07-31",
+          "claim_scopes": ["planned_launch_timing", "governance_model", "reserve_revenue_model", "intended_mint_redeem_model"]
+        },
+        {
+          "source_id": "sog_src_pr496_open_usd_onepay",
+          "publisher": "OnePay",
+          "url": "https://www.onepay.com/newsroom/introducing-open-usd",
+          "source_type": "official_announcement",
+          "primary": true,
+          "reviewed_at": "2026-07-31",
+          "claim_scopes": ["announcement_date", "intended_business_model", "intended_partner_economics"]
+        },
+        {
+          "source_id": "sog_src_pr496_open_usd_visa",
+          "publisher": "Visa",
+          "url": "https://investor.visa.com/news/news-details/2026/Visa-Introduces-Platform-for-Stablecoin-Minting-Movement-and-Management/default.aspx",
+          "source_type": "official_partner_announcement",
+          "primary": true,
+          "reviewed_at": "2026-07-31",
+          "claim_scopes": ["platform_integration", "intended_mint_burn_connectivity", "enterprise_access_context"]
+        }
+      ],
+      "blocking_unknowns": [
+        "verified public launch and first circulation date",
+        "final legal issuer and regulated issuance entity",
+        "canonical contract identifiers and supported native chains",
+        "current reserve custody and assurance series",
+        "current direct mint and redemption eligibility"
+      ],
+      "complete_record_feasibility": {
+        "complete_record_possible_now": false,
+        "reason": "The official source chain remains prelaunch and does not support a complete current-state canonical record."
+      }
+    },
+    {
+      "candidate_id": "sog_cand_pr496_fiusd",
+      "name": "FIUSD",
+      "symbol": "FIUSD",
+      "proposed_slug": "fiusd",
+      "issuer_or_operator": "Fiserv",
+      "official_domain": "fiserv.com",
+      "reviewed_disposition": "insufficient_current_evidence",
+      "scope_note": "Fiserv now presents FIUSD as a fully reserved USD-backed product, but the reviewed sources do not establish the exact legal issuer, canonical contract identities, current public issuance boundary, reserve-report series, or first verified circulation event.",
+      "duplicate_review": {
+        "decision": "distinct_identity_not_in_registry",
+        "existing_canonical_id": null,
+        "symbol_collision": false,
+        "notes": "No exact FIUSD identity exists in the 116-asset registry."
+      },
+      "source_leads": [
+        {
+          "source_id": "sog_src_pr496_fiusd_product",
+          "publisher": "Fiserv",
+          "url": "https://www.fiserv.com/en/solutions/embedded-finance/fiusd-stablecoin.html",
+          "source_type": "official_product_site",
+          "primary": true,
+          "reviewed_at": "2026-07-31",
+          "claim_scopes": ["current_product_representation", "usd_backing_claim", "redeemability_claim", "institutional_use_context"]
+        },
+        {
+          "source_id": "sog_src_pr496_fiusd_launch_announcement",
+          "publisher": "Fiserv",
+          "url": "https://investors.fiserv.com/news-releases/news-release-details/fiserv-launches-new-fiusd-stablecoin-financial-institutions",
+          "source_type": "official_announcement",
+          "primary": true,
+          "reviewed_at": "2026-07-31",
+          "claim_scopes": ["announcement_date", "planned_launch_window", "Paxos_and_Circle_infrastructure_context", "Solana_intent"]
+        },
+        {
+          "source_id": "sog_src_pr496_fiusd_stonecastle",
+          "publisher": "Fiserv",
+          "url": "https://investors.fiserv.com/news-releases/news-release-details/fiserv-completes-stonecastle-acquisition-extending-insured",
+          "source_type": "official_corporate_announcement",
+          "primary": true,
+          "reviewed_at": "2026-07-31",
+          "claim_scopes": ["reserve_funding_context", "institutional_issuance_context"]
+        }
+      ],
+      "blocking_unknowns": [
+        "exact legal issuer and holder claim",
+        "verified launch and first circulating issuance",
+        "canonical contract identifiers",
+        "current native chain set",
+        "reserve custodian and assurance cadence",
+        "direct mint and redemption terms"
+      ],
+      "complete_record_feasibility": {
+        "complete_record_possible_now": false,
+        "reason": "Current product marketing exists, but a complete legal, technical, reserve, and circulation record is not yet supported."
+      }
+    },
+    {
+      "candidate_id": "sog_cand_pr496_roughrider",
+      "name": "Roughrider Coin",
+      "symbol": null,
+      "proposed_slug": "roughrider-coin",
+      "issuer_or_operator": "Bank of North Dakota and Fiserv",
+      "official_domain": "bnd.nd.gov",
+      "reviewed_disposition": "prelaunch_or_noncanonical",
+      "scope_note": "The current official Bank of North Dakota page describes an initial beta test between financial institutions. The announcement targets availability to North Dakota banks and credit unions in 2026, but does not establish a completed production launch or canonical token identity.",
+      "duplicate_review": {
+        "decision": "distinct_announced_identity_not_launched",
+        "existing_canonical_id": null,
+        "symbol_collision": false,
+        "notes": "No Roughrider Coin identity exists in the canonical registry."
+      },
+      "source_leads": [
+        {
+          "source_id": "sog_src_pr496_roughrider_bnd",
+          "publisher": "Bank of North Dakota",
+          "url": "https://bnd.nd.gov/roughrider/",
+          "source_type": "official_project_page",
+          "primary": true,
+          "reviewed_at": "2026-07-31",
+          "claim_scopes": ["beta_status", "institutional_scope", "development_partnership"]
+        },
+        {
+          "source_id": "sog_src_pr496_roughrider_fiserv",
+          "publisher": "Fiserv",
+          "url": "https://investors.fiserv.com/news-releases/news-release-details/bank-north-dakota-and-fiserv-partner-launch-roughrider-coin",
+          "source_type": "official_announcement",
+          "primary": true,
+          "reviewed_at": "2026-07-31",
+          "claim_scopes": ["announcement_date", "planned_2026_availability", "usd_backing_intent", "FIUSD_platform_dependency"]
+        }
+      ],
+      "blocking_unknowns": [
+        "confirmed production launch",
+        "token symbol and canonical identifier",
+        "legal issuer and holder claim",
+        "reserve custody and assurance",
+        "mint and redemption terms",
+        "supported chain and contract identifiers"
+      ],
+      "complete_record_feasibility": {
+        "complete_record_possible_now": false,
+        "reason": "The reviewed official state is a beta or development program rather than a complete launched stable-asset identity."
+      }
+    },
+    {
+      "candidate_id": "sog_cand_pr496_mnee",
+      "name": "MNEE",
+      "symbol": "MNEE",
+      "proposed_slug": "mnee",
+      "issuer_or_operator": "MNEE Limited",
+      "official_domain": "mnee.io",
+      "reviewed_disposition": "ready_for_full_record_review",
+      "scope_note": "Current official terms identify MNEE Limited, direct verified-customer issuance and redemption, 1:1 fiat or fiat-denominated reserve backing, and an Antigua and Barbuda digital-asset licence. Current transparency pages expose monthly attestations through May 2026, and official documentation identifies 1Sat Ordinals and Ethereum operation.",
+      "duplicate_review": {
+        "decision": "distinct_identity_not_in_registry",
+        "existing_canonical_id": null,
+        "symbol_collision": false,
+        "notes": "No MNEE canonical identity or exact symbol exists in the 116-asset registry."
+      },
+      "source_leads": [
+        {
+          "source_id": "sog_src_pr496_mnee_terms",
+          "publisher": "MNEE Limited",
+          "url": "https://www.mnee.io/terms",
+          "source_type": "official_terms",
+          "primary": true,
+          "reviewed_at": "2026-07-31",
+          "claim_scopes": ["legal_issuer", "licence_context", "holder_terms", "reserve_model", "issuance", "redemption"]
+        },
+        {
+          "source_id": "sog_src_pr496_mnee_transparency",
+          "publisher": "MNEE Limited",
+          "url": "https://www.mnee.io/transparency",
+          "source_type": "official_transparency_page",
+          "primary": true,
+          "reviewed_at": "2026-07-31",
+          "claim_scopes": ["monthly_attestation_series", "current_assurance_recency"]
+        },
+        {
+          "source_id": "sog_src_pr496_mnee_docs",
+          "publisher": "MNEE Limited",
+          "url": "https://docs.mnee.io/getting-started/introduction",
+          "source_type": "official_technical_documentation",
+          "primary": true,
+          "reviewed_at": "2026-07-31",
+          "claim_scopes": ["product_identity", "backing_description", "1Sat_operation", "Ethereum_operation"]
+        },
+        {
+          "source_id": "sog_src_pr496_mnee_faq",
+          "publisher": "MNEE Limited",
+          "url": "https://www.mnee.io/faq",
+          "source_type": "official_faq",
+          "primary": true,
+          "reviewed_at": "2026-07-31",
+          "claim_scopes": ["usd_reference", "multi_chain_statement", "regulatory_statement", "current_product_access_context"]
+        }
+      ],
+      "blocking_unknowns": [
+        "exact canonical contract or inscription identifiers for every supported network",
+        "first verified public issuance date",
+        "precise reserve composition by category and custodian",
+        "fee and minimum schedule for direct issuance and redemption",
+        "current exchange and partner distribution boundary"
+      ],
+      "complete_record_feasibility": {
+        "complete_record_possible_now": true,
+        "reason": "Current primary sources support identity, issuer, legal context, backing, redemption, assurance, and deployment-family review; remaining unknowns can be retained explicitly in a full record."
+      }
+    },
+    {
+      "candidate_id": "sog_cand_pr496_qivalis_eur",
+      "name": "Qivalis euro stablecoin",
+      "symbol": null,
+      "proposed_slug": "qivalis-euro-stablecoin",
+      "issuer_or_operator": "Qivalis B.V.",
+      "official_domain": "qivalis.eu",
+      "reviewed_disposition": "prelaunch_or_noncanonical",
+      "scope_note": "Qivalis states that it is applying for Dutch central-bank supervision and plans to launch a 1:1-backed euro stablecoin in the second half of 2026. The reviewed source chain remains preparatory and does not identify a launched token or final symbol and contracts.",
+      "duplicate_review": {
+        "decision": "distinct_announced_identity_not_launched",
+        "existing_canonical_id": null,
+        "symbol_collision": false,
+        "notes": "No exact Qivalis-issued identity exists in the current registry. Consortium member participation does not create separate token identities."
+      },
+      "source_leads": [
+        {
+          "source_id": "sog_src_pr496_qivalis_about",
+          "publisher": "Qivalis",
+          "url": "https://qivalis.eu/about-us",
+          "source_type": "official_project_page",
+          "primary": true,
+          "reviewed_at": "2026-07-31",
+          "claim_scopes": ["planned_launch_window", "planned_backing_model", "regulatory_application", "institutional_scope"]
+        },
+        {
+          "source_id": "sog_src_pr496_qivalis_announcement",
+          "publisher": "Qivalis",
+          "url": "https://qivalis.eu/press/news/qivalis-joint-venture-of-a-european-banking-consortium-to-launch-euro-stablecoin-in-the-second-half-of-2026",
+          "source_type": "official_announcement",
+          "primary": true,
+          "reviewed_at": "2026-07-31",
+          "claim_scopes": ["company_identity", "consortium_context", "planned_launch_window", "regulatory_status"]
+        }
+      ],
+      "blocking_unknowns": [
+        "regulatory authorization completion",
+        "final token name and symbol",
+        "production launch date",
+        "canonical chain and contract identifiers",
+        "reserve custody and assurance framework",
+        "mint and redemption eligibility"
+      ],
+      "complete_record_feasibility": {
+        "complete_record_possible_now": false,
+        "reason": "The project remains prelaunch and under regulatory preparation."
+      }
+    },
+    {
+      "candidate_id": "sog_cand_pr496_anz_adc",
+      "name": "ANZ A$DC",
+      "symbol": "A$DC",
+      "proposed_slug": "anz-adc",
+      "issuer_or_operator": "Australia and New Zealand Banking Group Limited",
+      "official_domain": "anz.com",
+      "reviewed_disposition": "insufficient_current_evidence",
+      "scope_note": "ANZ primary sources establish historic A$DC pilot transactions and tokenized-asset settlement use cases. They do not establish a current generally available issuance product, current redemption terms, complete active contract set, or continuing circulation as of the audit date.",
+      "duplicate_review": {
+        "decision": "distinct_historical_pilot_identity",
+        "existing_canonical_id": null,
+        "symbol_collision": false,
+        "notes": "No ANZ A$DC canonical identity exists in the 116-asset registry."
+      },
+      "source_leads": [
+        {
+          "source_id": "sog_src_pr496_anz_adc_2022",
+          "publisher": "ANZ",
+          "url": "https://www.anz.com.au/newsroom/media/2022/03/anz-completes-landmark-stablecoin-payment/",
+          "source_type": "official_announcement",
+          "primary": true,
+          "reviewed_at": "2026-07-31",
+          "claim_scopes": ["historic_transaction", "historic_issuance_context", "australian_dollar_reference"]
+        },
+        {
+          "source_id": "sog_src_pr496_anz_adc_2023_analysis",
+          "publisher": "ANZ",
+          "url": "https://www.anz.com/institutional/insights/articles/2023-03/the-next-step-for-digital-currencies-and-anz/",
+          "source_type": "official_institutional_article",
+          "primary": true,
+          "reviewed_at": "2026-07-31",
+          "claim_scopes": ["historic_pilot_context", "institutional_use_case", "development_state"]
+        },
+        {
+          "source_id": "sog_src_pr496_anz_adc_carbon",
+          "publisher": "ANZ",
+          "url": "https://www.anz.com.au/newsroom/media/2023/april-/anz-and-grollo-partner-to-trade-tokenised--australian-carbon-cre/",
+          "source_type": "official_transaction_announcement",
+          "primary": true,
+          "reviewed_at": "2026-07-31",
+          "claim_scopes": ["historic_settlement_use", "tokenized_asset_transaction"]
+        }
+      ],
+      "blocking_unknowns": [
+        "current operational lifecycle status",
+        "current legal issuance terms and holder claim",
+        "current direct mint and redemption eligibility",
+        "active canonical contracts and chains",
+        "current reserve custody and assurance",
+        "current circulating supply or ongoing user access"
+      ],
+      "complete_record_feasibility": {
+        "complete_record_possible_now": false,
+        "reason": "Historic pilots are well supported, but the current operational stable-asset state is not."
+      }
+    },
+    {
+      "candidate_id": "sog_cand_pr496_usdf_consortium",
+      "name": "USDF Consortium USDF",
+      "symbol": "USDF",
+      "proposed_slug": "usdf-consortium-usdf",
+      "issuer_or_operator": "USDF Consortium",
+      "official_domain": "usdfconsortium.com",
+      "reviewed_disposition": "insufficient_current_evidence",
+      "scope_note": "The consortium identity is historically distinct from Falcon USDf, but the current official domain is in maintenance mode and the audit did not recover sufficient current primary evidence for active issuer identity, circulation, reserves, redemption, or technical deployments.",
+      "duplicate_review": {
+        "decision": "distinct_identity_with_symbol_collision",
+        "existing_canonical_id": "sog_st_usdf",
+        "symbol_collision": true,
+        "notes": "The current canonical `sog_st_usdf` record is Falcon USDf. USDF Consortium USDF must never be merged into or inferred from that record solely by symbol."
+      },
+      "source_leads": [
+        {
+          "source_id": "sog_src_pr496_usdf_consortium_site",
+          "publisher": "USDF Consortium",
+          "url": "https://usdfconsortium.com/usdf-statement-for-stablecoin-hearing/",
+          "source_type": "official_domain_maintenance_state",
+          "primary": true,
+          "reviewed_at": "2026-07-31",
+          "claim_scopes": ["current_domain_state", "organization_identity_only"]
+        }
+      ],
+      "blocking_unknowns": [
+        "current operating organization and member banks",
+        "current legal issuer or issuers",
+        "current circulating token existence",
+        "reserve and assurance framework",
+        "mint and redemption terms",
+        "canonical contracts and chain set",
+        "current lifecycle status"
+      ],
+      "complete_record_feasibility": {
+        "complete_record_possible_now": false,
+        "reason": "The exact identity collision is understood, but current primary-source support is insufficient for a complete record."
+      }
+    },
+    {
+      "candidate_id": "sog_cand_pr496_ylds",
+      "name": "Figure YLDS",
+      "symbol": "YLDS",
+      "proposed_slug": "figure-ylds",
+      "issuer_or_operator": "Figure Certificate Company",
+      "official_domain": "ylds.com",
+      "reviewed_disposition": "ready_for_full_record_review",
+      "scope_note": "Current SEC-filed prospectuses establish YLDS as a transferable Figure Certificate: an unsecured interest-bearing security issued by Figure Certificate Company, not a bank deposit or money-market fund. SEC-filed materials also support current issuance, redemption or surrender terms, Provenance operation, and expansion to additional chains. Any later SOG record must preserve its security and yield-bearing nature rather than treating it as a conventional non-yield payment stablecoin.",
+      "duplicate_review": {
+        "decision": "distinct_identity_not_in_registry",
+        "existing_canonical_id": null,
+        "symbol_collision": false,
+        "notes": "No YLDS identity exists in the 116-asset registry. It remains within SOG's closely related stable-value scope only if the security and income semantics are explicit."
+      },
+      "source_leads": [
+        {
+          "source_id": "sog_src_pr496_ylds_2026_prospectus",
+          "publisher": "Figure Certificate Company / SEC EDGAR",
+          "url": "https://www.sec.gov/Archives/edgar/data/1974395/000149315226018903/form497.htm",
+          "source_type": "official_regulatory_filing",
+          "primary": true,
+          "reviewed_at": "2026-07-31",
+          "claim_scopes": ["legal_issuer", "security_classification", "holder_claim", "surrender_and_redemption_terms", "risk_boundary"]
+        },
+        {
+          "source_id": "sog_src_pr496_ylds_sui",
+          "publisher": "Figure Certificate Company / SEC EDGAR",
+          "url": "https://www.sec.gov/Archives/edgar/data/1974395/000149315225018198/form497.htm",
+          "source_type": "official_regulatory_filing",
+          "primary": true,
+          "reviewed_at": "2026-07-31",
+          "claim_scopes": ["Sui_deployment_plan", "yield_model", "backing_description", "security_classification"]
+        },
+        {
+          "source_id": "sog_src_pr496_ylds_vesta",
+          "publisher": "Figure Certificate Company / SEC EDGAR",
+          "url": "https://www.sec.gov/Archives/edgar/data/1974395/000149315226002953/form497ad.htm",
+          "source_type": "official_regulatory_advertisement",
+          "primary": true,
+          "reviewed_at": "2026-07-31",
+          "claim_scopes": ["current_transaction_use", "Provenance_operation", "yield_bearing_stablecoin_description"]
+        }
+      ],
+      "blocking_unknowns": [
+        "exact current native contract identifiers on each chain",
+        "complete current chain availability set",
+        "current issuance and redemption access by jurisdiction and customer type",
+        "current outstanding supply and transfer venue boundary",
+        "precise reserve or issuer-asset composition at the record review date"
+      ],
+      "complete_record_feasibility": {
+        "complete_record_possible_now": true,
+        "reason": "Primary regulatory filings support identity, issuer, legal classification, holder claim, income model, redemption boundary, and active transaction context; unresolved technical details can remain explicit."
+      }
+    }
+  ]
+}
