@@ -1,0 +1,111 @@
+{
+  "schema_version": "1.0",
+  "report_id": "sog_record_growth_batch_4_review_gate_pr497_2026_07_31",
+  "status": "reviewed_decision",
+  "recorded_at": "2026-07-31",
+  "source_pr": 496,
+  "canonical_state": {
+    "stable_assets": 116,
+    "organizations": 107,
+    "relationships": 128,
+    "events": 191,
+    "evidence": 571,
+    "evidence_relations": 571,
+    "deployments": 182,
+    "market_access_records": 8,
+    "archive_recorded": 442,
+    "archive_not_recorded": 129,
+    "detail_routes": 414,
+    "changed_by_pr497": false
+  },
+  "reviewed_findings": {
+    "pr496_reviewed_candidates": 8,
+    "pr496_ready_for_full_record_review": 2,
+    "selected_for_next_complete_record_pr": 1,
+    "deferred_for_separate_scope_review": 1,
+    "canonical_changes_in_pr496": 0,
+    "public_changes_in_pr496": 0
+  },
+  "selected_candidate": {
+    "candidate_id": "sog_cand_pr496_mnee",
+    "name": "MNEE",
+    "symbol": "MNEE",
+    "issuer_or_operator": "MNEE Limited",
+    "reviewed_disposition": "authorized_for_complete_record_implementation",
+    "selection_basis": [
+      "official_terms_identify_legal_issuer_and_license_context",
+      "official_terms_define_one_to_one_fiat_or_fiat_denominated_reserve_backing",
+      "official_terms_define_verified_customer_issuance_and_redemption",
+      "official_terms_publish_fees_and_minimums",
+      "official_transparency_page_exposes_current_monthly_attestations",
+      "official_documentation_identifies_1sat_ordinals_and_ethereum_operation",
+      "unsupported_details_can_remain_explicit_known_unknowns",
+      "ordinary_stablecoin_scope_and_maintenance_burden_are_acceptable"
+    ],
+    "source_ids": [
+      "sog_src_pr496_mnee_terms",
+      "sog_src_pr496_mnee_transparency",
+      "sog_src_pr496_mnee_docs",
+      "sog_src_pr496_mnee_faq"
+    ],
+    "fresh_checks_required": [
+      "canonical_duplicate_recheck",
+      "exact_contract_or_inscription_identity_confirmation",
+      "current_official_source_review",
+      "first_public_issuance_date_review",
+      "reserve_composition_and_custodian_review",
+      "attestation_report_archive_review",
+      "issuance_redemption_fee_and_minimum_review",
+      "organization_identity_and_relationship_review"
+    ]
+  },
+  "deferred_candidate": {
+    "candidate_id": "sog_cand_pr496_ylds",
+    "name": "Figure YLDS",
+    "symbol": "YLDS",
+    "issuer_or_operator": "Figure Certificate Company",
+    "reviewed_disposition": "deferred_scope_boundary",
+    "source_ids": [
+      "sog_src_pr496_ylds_2026_prospectus",
+      "sog_src_pr496_ylds_sui",
+      "sog_src_pr496_ylds_vesta"
+    ],
+    "decision_basis": [
+      "issuer_explicitly_states_ylds_is_a_registered_fixed_income_security_not_a_stablecoin",
+      "each_certificate_has_point_zero_one_usd_face_amount",
+      "holder_interest_accrues_and_is_paid_under_securities_terms",
+      "issuer_credit_and_asset_portfolio_risk_are_material",
+      "eligibility_transfer_redemption_and_regulatory_maintenance_differ_from_ordinary_stablecoins",
+      "separate_scope_amendment_is_required_before_canonical_work"
+    ],
+    "canonical_promotion_authorized": false,
+    "full_record_pr_authorized": false,
+    "ordinary_stablecoin_treatment_forbidden": true
+  },
+  "decision": {
+    "authorize_next_pr": 498,
+    "authorize_work_item": "Record Growth Batch 4 — MNEE",
+    "selected_candidate_ids": ["sog_cand_pr496_mnee"],
+    "maximum_new_canonical_assets": 1,
+    "replacement_candidate_allowed": false,
+    "review_gate_after_pr498": true,
+    "automatic_promotion": false,
+    "automatic_canonical_pr_creation": false,
+    "ranking": false,
+    "score": false,
+    "recommendation": false
+  },
+  "protected_boundaries": [
+    "current_116_asset_canonical_baseline",
+    "public_routes",
+    "public_metadata",
+    "public_machine_readable_semantics",
+    "statistics_contract",
+    "market_access_records",
+    "monitoring_private_boundary",
+    "ylds_scope_boundary",
+    "rankings",
+    "scores",
+    "recommendations"
+  ]
+}

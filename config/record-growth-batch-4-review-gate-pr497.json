@@ -1,0 +1,113 @@
+{
+  "schema_version": "1.0",
+  "work_item": "record_growth_batch_4_review_gate_pr497",
+  "status": "reviewed_decision",
+  "recorded_at": "2026-07-31",
+  "source_prs": [467, 492, 493, 495, 496],
+  "canonical_baseline": {
+    "stable_assets": 116,
+    "organizations": 107,
+    "relationships": 128,
+    "events": 191,
+    "evidence": 571,
+    "evidence_relations": 571,
+    "deployments": 182,
+    "market_access_records": 8,
+    "archive_recorded": 442,
+    "archive_not_recorded": 129,
+    "detail_routes": 414
+  },
+  "reviewed_candidates": {
+    "authorized": [
+      {
+        "candidate_id": "sog_cand_pr496_mnee",
+        "name": "MNEE",
+        "symbol": "MNEE",
+        "authorization": "complete_record_implementation_only"
+      }
+    ],
+    "deferred": [
+      {
+        "candidate_id": "sog_cand_pr496_ylds",
+        "name": "Figure YLDS",
+        "symbol": "YLDS",
+        "reason": "issuer_explicitly_classifies_product_as_registered_fixed_income_security_not_stablecoin_and_scope_maintenance_requires_separate_amendment"
+      }
+    ]
+  },
+  "decision": {
+    "authorize_next_pr": 498,
+    "authorize_work_item": "Record Growth Batch 4 — MNEE",
+    "selected_candidate_ids": ["sog_cand_pr496_mnee"],
+    "maximum_new_canonical_assets": 1,
+    "replacement_candidate_allowed": false,
+    "review_gate_after_pr498": true,
+    "canonical_changes_in_pr497": 0,
+    "public_changes_in_pr497": 0,
+    "ranking": false,
+    "score": false,
+    "recommendation": false,
+    "automatic_promotion": false,
+    "automatic_canonical_pr_creation": false
+  },
+  "selection_basis": [
+    "distinct_identity_not_in_116_asset_registry",
+    "official_legal_issuer_terms",
+    "explicit_one_to_one_reserve_backing_terms",
+    "direct_verified_customer_issuance_and_redemption_terms",
+    "published_fee_and_minimum_terms",
+    "current_monthly_attestation_series",
+    "official_multichain_technical_documentation",
+    "complete_record_feasible_with_explicit_known_unknowns",
+    "lower_scope_and_maintenance_risk_than_ylds"
+  ],
+  "pr498_entry_gate": {
+    "complete_record_only": true,
+    "thin_record_forbidden": true,
+    "fresh_duplicate_recheck_required": true,
+    "fresh_manual_primary_source_review_required": true,
+    "exact_contract_or_inscription_identity_confirmation_required": true,
+    "first_public_issuance_date_review_required": true,
+    "current_reserve_composition_and_custodian_review_required": true,
+    "attestation_series_archive_review_required": true,
+    "current_issuance_redemption_fee_and_minimum_review_required": true,
+    "unsupported_values_must_remain_known_unknowns": true,
+    "unconfirmed_candidate_must_be_withheld": true,
+    "replacement_candidate_allowed": false,
+    "required_record_families": [
+      "stablecoins",
+      "organizations",
+      "relationships",
+      "classifications",
+      "stablecoin_profiles",
+      "events",
+      "event_details",
+      "evidence",
+      "evidence_relations",
+      "reserve_reports",
+      "known_unknowns",
+      "deployments",
+      "legal_profiles",
+      "reserve_components",
+      "income_profiles"
+    ],
+    "public_surface_change": false,
+    "market_access_change": false,
+    "ui_change": false
+  },
+  "ylds_boundary": {
+    "canonical_promotion_authorized": false,
+    "full_record_pr_authorized": false,
+    "ordinary_stablecoin_treatment_forbidden": true,
+    "separate_scope_amendment_required": true,
+    "required_future_review": [
+      "registered_security_scope",
+      "face_amount_certificate_unit_semantics",
+      "yield_and_interest_semantics",
+      "issuer_credit_and_asset_backing_risk",
+      "securities_eligibility_and_transfer_restrictions",
+      "chain_and_wrapper_identity",
+      "maintenance_burden"
+    ]
+  }
+}
