@@ -49,6 +49,10 @@ Detail routes: 417
 Archive recorded / not recorded: 450 / 129
 ```
 
+## Validation boundary
+
+The final review head must pass the dedicated PR #498 validator and the normal locked-dependency CI, Astro check, site build, registry audits, deterministic statistics, reproducibility, public consistency, and deployment-output checks before merge.
+
 ## Next boundary
 
 `REVIEW GATE`
