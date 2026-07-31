@@ -34,6 +34,19 @@ jobs:
           node-version: 22.22.0
           cache: npm
 
+      - name: Harden replacement semantics
+        shell: python
+        run: |
+          from pathlib import Path
+
+          path = Path('scripts/apply-official-domain-migration.mjs')
+          text = path.read_text()
+          old = '  return content.replace(search, replacement);'
+          new = '  return content.replace(search, () => replacement);'
+          if old not in text:
+              raise SystemExit('replacement helper anchor missing')
+          path.write_text(text.replace(old, new, 1))
+
       - name: Apply bounded origin migration
         run: node scripts/apply-official-domain-migration.mjs
 
