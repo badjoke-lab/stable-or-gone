@@ -13,6 +13,8 @@ Relationships: 128
 Events: 191
 Canonical Evidence: 571
 Evidence Relations: 571
+Archive recorded: 442
+Archive not recorded: 129
 Deployments: 182
 Market Access Records: 8
 Detail routes: 414
