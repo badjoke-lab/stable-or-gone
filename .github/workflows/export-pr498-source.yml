@@ -24,14 +24,33 @@ jobs:
           set -euo pipefail
           wc -c .pr498-patch-00 .pr498-patch-01 .pr498-patch-02 .pr498-patch-03 .pr498-patch-04
           sha256sum .pr498-patch-00 .pr498-patch-01 .pr498-patch-02 .pr498-patch-03 .pr498-patch-04
-          for file in .pr498-patch-00 .pr498-patch-01 .pr498-patch-02 .pr498-patch-03 .pr498-patch-04; do
-            if LC_ALL=C grep -n '[^A-Za-z0-9+/=[:space:]]' "$file"; then
-              echo "Non-base64 character found in $file" >&2
-              exit 1
-            fi
-          done
-          cat .pr498-patch-00 .pr498-patch-01 .pr498-patch-02 .pr498-patch-03 .pr498-patch-04 \
-            | tr -d '\r\n\t ' > /tmp/pr498.patch.gz.b64
+
+          python - <<'PY'
+          from hashlib import sha256
+          from pathlib import Path
+
+          source = Path('.pr498-patch-00').read_text().strip()
+          expected = '007cd7ac0ac08f4792ab993a7d88c959d3933b89e370da29c8cc2f55c33cab59'
+          alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/='
+          for index in range(len(source) + 1):
+              prefix, suffix = source[:index], source[index:]
+              for char in alphabet:
+                  candidate = prefix + char + suffix
+                  if sha256(candidate.encode()).hexdigest() == expected:
+                      Path('/tmp/pr498-patch-00.corrected').write_text(candidate)
+                      print(f'restored missing base64 character at offset {index}: {char!r}')
+                      raise SystemExit(0)
+          raise SystemExit('unable to restore chunk 00 against reviewed digest')
+          PY
+
+          test "$(wc -c < /tmp/pr498-patch-00.corrected)" -eq 16000
+          test "$(sha256sum /tmp/pr498-patch-00.corrected | cut -d' ' -f1)" = '007cd7ac0ac08f4792ab993a7d88c959d3933b89e370da29c8cc2f55c33cab59'
+          test "$(sha256sum .pr498-patch-01 | cut -d' ' -f1)" = '9c9b7d923eaec7c2037bd2aa13a859595252d5be5dc040bd78938146120cf448'
+          test "$(sha256sum .pr498-patch-02 | cut -d' ' -f1)" = '461524e8a6cb6f906a53308ae77a089128b15b43c011ab0b5ca77b688e690b8d'
+          test "$(sha256sum .pr498-patch-03 | cut -d' ' -f1)" = 'e1d80cf0e7e8c6511370870cf0a6cd338c7e502ede56c1eaf1870dfde2fda271'
+          test "$(sha256sum .pr498-patch-04 | cut -d' ' -f1)" = '8966b7c387a360174864aa5fb9d496ec1e6c7f3708270b8a12552b8999e2412f'
+
+          cat /tmp/pr498-patch-00.corrected .pr498-patch-01 .pr498-patch-02 .pr498-patch-03 .pr498-patch-04 > /tmp/pr498.patch.gz.b64
           base64 --decode /tmp/pr498.patch.gz.b64 | gzip --decompress > /tmp/pr498.patch
           git apply --check /tmp/pr498.patch
           git apply /tmp/pr498.patch
