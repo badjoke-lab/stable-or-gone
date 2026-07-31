@@ -1,0 +1,243 @@
+[
+  {
+    "id": "sog_src_mnee_launch_pr498",
+    "stablecoin_id": "sog_st_mnee",
+    "issuer_id": "sog_issuer_mnee_limited",
+    "event_id": "sog_ev_mnee_launch_pr498",
+    "source_type": "official_announcement",
+    "title": "MNEE Stablecoin Launches on 1Sat Ordinals Protocol",
+    "url": "https://www.mnee.io/news/mnee-stablecoin-launches-on-1sat-ordinals-protocol-with-instant-transactions-no-gas-token-and-1-10th-cent-transaction-fees",
+    "publisher": "MNEE Limited",
+    "published_at": "2025-03-03",
+    "archived_url": "https://web.archive.org/web/*/https://www.mnee.io/news/mnee-stablecoin-launches-on-1sat-ordinals-protocol-with-instant-transactions-no-gas-token-and-1-10th-cent-transaction-fees",
+    "accessed_at": "2026-07-31",
+    "reliability": "high",
+    "claim_scope": "mnee_launch_identity_and_1sat_operation",
+    "stablecoin_ids": [
+      "sog_st_mnee"
+    ],
+    "organization_ids": [
+      "sog_issuer_mnee_limited"
+    ],
+    "claim_scopes": [
+      "identity",
+      "issuer",
+      "launch",
+      "deployment",
+      "event"
+    ],
+    "event_ids": [
+      "sog_ev_mnee_launch_pr498"
+    ],
+    "is_primary": true
+  },
+  {
+    "id": "sog_src_mnee_terms_pr498",
+    "stablecoin_id": "sog_st_mnee",
+    "issuer_id": "sog_issuer_mnee_limited",
+    "event_id": null,
+    "source_type": "official_legal_documentation",
+    "title": "MNEE Terms and Disclosure Document",
+    "url": "https://www.mnee.io/terms",
+    "publisher": "MNEE Limited",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://www.mnee.io/terms",
+    "accessed_at": "2026-07-31",
+    "reliability": "high",
+    "claim_scope": "mnee_issuer_license_reserve_issuance_redemption_and_risk_terms",
+    "stablecoin_ids": [
+      "sog_st_mnee"
+    ],
+    "organization_ids": [
+      "sog_issuer_mnee_limited"
+    ],
+    "claim_scopes": [
+      "identity",
+      "issuer",
+      "legal",
+      "regulatory_context",
+      "reserve",
+      "redemption",
+      "access",
+      "fees",
+      "risk"
+    ],
+    "event_ids": [],
+    "is_primary": true
+  },
+  {
+    "id": "sog_src_mnee_transparency_pr498",
+    "stablecoin_id": "sog_st_mnee",
+    "issuer_id": "sog_issuer_mnee_limited",
+    "event_id": null,
+    "source_type": "reserve_transparency_page",
+    "title": "MNEE Monthly Attestations",
+    "url": "https://www.mnee.io/transparency",
+    "publisher": "MNEE Limited",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://www.mnee.io/transparency",
+    "accessed_at": "2026-07-31",
+    "reliability": "high",
+    "claim_scope": "mnee_monthly_attestation_index_through_may_2026",
+    "stablecoin_ids": [
+      "sog_st_mnee"
+    ],
+    "organization_ids": [
+      "sog_issuer_mnee_limited"
+    ],
+    "claim_scopes": [
+      "reserve",
+      "attestation",
+      "documentation"
+    ],
+    "event_ids": [],
+    "is_primary": true
+  },
+  {
+    "id": "sog_src_mnee_docs_pr498",
+    "stablecoin_id": "sog_st_mnee",
+    "issuer_id": "sog_issuer_mnee_limited",
+    "event_id": "sog_ev_mnee_launch_pr498",
+    "source_type": "official_developer_documentation",
+    "title": "MNEE Documentation \u2014 Introduction",
+    "url": "https://docs.mnee.io/getting-started/introduction",
+    "publisher": "MNEE Limited",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://docs.mnee.io/getting-started/introduction",
+    "accessed_at": "2026-07-31",
+    "reliability": "high",
+    "claim_scope": "mnee_backing_1sat_and_ethereum_technical_context",
+    "stablecoin_ids": [
+      "sog_st_mnee"
+    ],
+    "organization_ids": [
+      "sog_issuer_mnee_limited"
+    ],
+    "claim_scopes": [
+      "identity",
+      "reserve",
+      "deployment",
+      "documentation"
+    ],
+    "event_ids": [
+      "sog_ev_mnee_launch_pr498"
+    ],
+    "is_primary": true
+  },
+  {
+    "id": "sog_src_mnee_faq_pr498",
+    "stablecoin_id": "sog_st_mnee",
+    "issuer_id": "sog_issuer_mnee_limited",
+    "event_id": null,
+    "source_type": "official_documentation",
+    "title": "MNEE Frequently Asked Questions",
+    "url": "https://www.mnee.io/faq",
+    "publisher": "MNEE Limited",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://www.mnee.io/faq",
+    "accessed_at": "2026-07-31",
+    "reliability": "high",
+    "claim_scope": "mnee_usd_backing_and_multichain_issuance_context",
+    "stablecoin_ids": [
+      "sog_st_mnee"
+    ],
+    "organization_ids": [
+      "sog_issuer_mnee_limited"
+    ],
+    "claim_scopes": [
+      "identity",
+      "reserve",
+      "deployment",
+      "access"
+    ],
+    "event_ids": [],
+    "is_primary": true
+  },
+  {
+    "id": "sog_src_mnee_attestation_program_pr498",
+    "stablecoin_id": "sog_st_mnee",
+    "issuer_id": "sog_issuer_mnee_limited",
+    "event_id": null,
+    "source_type": "official_announcement",
+    "title": "MNEE Expands Transparency with Monthly Third-Party Reserve Attestations",
+    "url": "https://www.mnee.io/news/mnee-expands-transparency-with-monthly-third-party-reserve-attestations-audited-by-wolf-company-p-c",
+    "publisher": "MNEE Limited",
+    "published_at": "2025-05-09",
+    "archived_url": "https://web.archive.org/web/*/https://www.mnee.io/news/mnee-expands-transparency-with-monthly-third-party-reserve-attestations-audited-by-wolf-company-p-c",
+    "accessed_at": "2026-07-31",
+    "reliability": "high",
+    "claim_scope": "mnee_attestation_firm_reserve_categories_and_monthly_program",
+    "stablecoin_ids": [
+      "sog_st_mnee"
+    ],
+    "organization_ids": [
+      "sog_issuer_mnee_limited"
+    ],
+    "claim_scopes": [
+      "reserve",
+      "attestation",
+      "custody_context",
+      "documentation"
+    ],
+    "event_ids": [],
+    "is_primary": true
+  },
+  {
+    "id": "sog_src_mnee_sdk_pr498",
+    "stablecoin_id": "sog_st_mnee",
+    "issuer_id": "sog_issuer_mnee_limited",
+    "event_id": "sog_ev_mnee_launch_pr498",
+    "source_type": "official_repository",
+    "title": "@mnee/ts-sdk 1.2.0",
+    "url": "https://www.npmjs.com/package/@mnee/ts-sdk/v/1.2.0",
+    "publisher": "MNEE Limited",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://www.npmjs.com/package/@mnee/ts-sdk/v/1.2.0",
+    "accessed_at": "2026-07-31",
+    "reliability": "high",
+    "claim_scope": "mnee_1sat_mainnet_token_identifier",
+    "stablecoin_ids": [
+      "sog_st_mnee"
+    ],
+    "organization_ids": [
+      "sog_issuer_mnee_limited"
+    ],
+    "claim_scopes": [
+      "deployment",
+      "contract_identity",
+      "technical_documentation"
+    ],
+    "event_ids": [
+      "sog_ev_mnee_launch_pr498"
+    ],
+    "is_primary": true
+  },
+  {
+    "id": "sog_src_mnee_ethereum_pr498",
+    "stablecoin_id": "sog_st_mnee",
+    "issuer_id": "sog_issuer_mnee_limited",
+    "event_id": null,
+    "source_type": "blockchain_explorer",
+    "title": "MNEE USD Stablecoin ERC-20 Token Contract",
+    "url": "https://etherscan.io/token/0x8ccedbae4916b79da7f3f612efb2eb93a2bfd6cf",
+    "publisher": "Etherscan",
+    "published_at": "2024-03-21",
+    "archived_url": "https://web.archive.org/web/*/https://etherscan.io/token/0x8ccedbae4916b79da7f3f612efb2eb93a2bfd6cf",
+    "accessed_at": "2026-07-31",
+    "reliability": "medium",
+    "claim_scope": "mnee_ethereum_contract_identity_and_proxy_context",
+    "stablecoin_ids": [
+      "sog_st_mnee"
+    ],
+    "organization_ids": [
+      "sog_issuer_mnee_limited"
+    ],
+    "claim_scopes": [
+      "deployment",
+      "contract_identity",
+      "onchain_identity"
+    ],
+    "event_ids": [],
+    "is_primary": true
+  }
+]

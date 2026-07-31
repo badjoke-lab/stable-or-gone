@@ -1,0 +1,48 @@
+[
+  {
+    "id": "sog_dep_mnee_1sat_pr498",
+    "stablecoin_id": "sog_st_mnee",
+    "chain": "1Sat Ordinals",
+    "deployment_type": "issuer_native_token",
+    "token_standard": "1Sat Ordinals / BSV-21",
+    "contract_address": "ae59f3b898ec61acbdb6cc7a245fabeded0c094bf046f35206a3aec60ef88127_0",
+    "status": "active",
+    "control_event_ids": [
+      "sog_ev_mnee_launch_pr498"
+    ],
+    "notes": "Issuer-native 1Sat Ordinals deployment. Exact mainnet token ID is published in the official @mnee/ts-sdk 1.2.0 package. Current control capabilities remain unresolved.",
+    "evidence_ids": [
+      "sog_src_mnee_launch_pr498",
+      "sog_src_mnee_docs_pr498",
+      "sog_src_mnee_sdk_pr498"
+    ],
+    "canonicality": "issuer_native",
+    "origin_deployment_id": null,
+    "bridge_operator_organization_id": null,
+    "mint_authority_type": "issuer_controlled_source_review_needed",
+    "contract_version": "MNEE 1Sat mainnet token ID",
+    "is_primary": true
+  },
+  {
+    "id": "sog_dep_mnee_ethereum_pr498",
+    "stablecoin_id": "sog_st_mnee",
+    "chain": "Ethereum",
+    "deployment_type": "erc20",
+    "token_standard": "ERC-20",
+    "contract_address": "0x8ccedbae4916b79da7f3f612efb2eb93a2bfd6cf",
+    "status": "active",
+    "control_event_ids": [],
+    "notes": "Issuer-supported ERC-20 proxy deployment verified through the token explorer and current issuer materials. First public Ethereum issuance date and current admin-control details remain unresolved.",
+    "evidence_ids": [
+      "sog_src_mnee_docs_pr498",
+      "sog_src_mnee_faq_pr498",
+      "sog_src_mnee_ethereum_pr498"
+    ],
+    "canonicality": "issuer_native",
+    "origin_deployment_id": null,
+    "bridge_operator_organization_id": null,
+    "mint_authority_type": "issuer_controlled_source_review_needed",
+    "contract_version": "TransparentUpgradeableProxy; implementation source-review context on explorer",
+    "is_primary": false
+  }
+]

@@ -1,0 +1,16 @@
+[
+  {
+    "id": "sog_rel_mnee_mnee_limited_pr498",
+    "stablecoin_id": "sog_st_mnee",
+    "organization_id": "sog_issuer_mnee_limited",
+    "role": "legal_issuer",
+    "start_date": "2025-03-03",
+    "end_date": null,
+    "status": "active",
+    "evidence_ids": [
+      "sog_src_mnee_launch_pr498",
+      "sog_src_mnee_terms_pr498"
+    ],
+    "notes": "MNEE Limited is recorded as the legal issuer and direct issuance/redemption counterparty under the reviewed terms."
+  }
+]

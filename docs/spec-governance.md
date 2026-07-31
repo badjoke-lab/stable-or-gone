@@ -25,7 +25,7 @@ When documents disagree, use this order:
 Current active roadmap amendment:
 
 ```text
-docs/roadmap-amendments/2026-07-31-record-growth-batch-4-review-gate.md
+docs/roadmap-amendments/2026-07-31-record-growth-batch-4-mnee.md
 ```
 
 Current operating specification:
@@ -37,7 +37,7 @@ docs/post-351-data-growth-operating-spec.md
 Current work-item specification:
 
 ```text
-docs/quality/record-growth-batch-4-review-gate-pr497-spec.md
+docs/quality/record-growth-batch-4-mnee-pr498-spec.md
 ```
 
 Historical amendments and PR-specific specifications remain historical records. Their completed semantic contracts remain useful, but their old “current” wording and schedules do not override the current roadmap.
@@ -61,15 +61,15 @@ A non-trivial PR is not ready for implementation until its exact roadmap item an
 ## 4. Current execution state
 
 ```text
-Canonical stable assets: 116
-Organizations: 107
-Relationships: 128
-Events: 191
-Evidence: 571
-Evidence Relations: 571
-Deployments: 182
+Canonical stable assets: 117
+Organizations: 108
+Relationships: 129
+Events: 192
+Evidence: 579
+Evidence Relations: 579
+Deployments: 184
 Market Access Records: 8
-Detail routes: 414
+Detail routes: 417
 Metadata-checked detail routes: 414
 Official public origin: https://www.stableorgone.com
 Official-domain migration production checkpoint: bd0e63ac36b1824bf705e8c80d1fb0a1cd79d221
@@ -190,50 +190,31 @@ The reviewed complete-record-feasible candidates were MNEE and Figure YLDS. That
 
 USDF Consortium USDF remains distinct from Falcon USDf. Open USD requires explicit OUSD issuer and lineage disambiguation from Origin Dollar.
 
-## 9. PR #497 review-gate governance
+## 9. PR #497 review-gate checkpoint
 
-PR #497 authorizes only PR #498 for a complete-record attempt for MNEE.
+PR #497 authorized exactly one complete-record implementation for MNEE and prohibited replacement candidates, YLDS promotion, and continuation after PR #498. That decision is complete.
 
-PR #497 may:
+## 10. PR #498 Record Growth Batch 4 — MNEE
 
-- record the reviewed selection decision;
-- define PR #498 entry-gate requirements;
-- defer YLDS to a separate scope amendment;
-- update active repository authority and blocking validation.
+PR #498 is the current reviewed canonical-growth checkpoint. It added exactly one stable asset, one issuer organization, one legal-issuer relationship, one launch event, eight canonical Evidence records, one reserve-report context, five explicit known unknowns, two deployment identifiers, one legal profile, two reserve components, and one income profile.
 
-PR #497 may not:
-
-- change canonical record families or counts;
-- change public routes, metadata, UI, CSS, guides, sitemap, or machine-readable output;
-- promote MNEE or YLDS;
-- authorize a replacement candidate;
-- authorize more than one future canonical addition;
-- create an automatic canonical PR;
-- score, rank, recommend, or imply safety;
-- authorize work after PR #498.
-
-## 10. PR #498 MNEE boundary
-
-PR #498 is the only authorized next canonical-growth PR.
-
-Before canonical edits it must complete:
+Binding identity checkpoint:
 
 ```text
-fresh canonical duplicate and lineage review
-fresh current primary-source review
-exact contract or inscription identity confirmation
-first public issuance date review
-current reserve composition and custodian review
-current attestation and archive review
-current issuance and redemption terms, fees, and minimums
-MNEE Limited organization identity and relationship review
+MNEE stablecoin ID: sog_st_mnee
+MNEE Limited issuer ID: sog_issuer_mnee_limited
+1Sat Ordinals production token ID: ae59f3b898ec61acbdb6cc7a245fabeded0c094bf046f35206a3aec60ef88127_0
+Ethereum contract: 0x8ccedbae4916b79da7f3f612efb2eb93a2bfd6cf
+launch date: 2025-03-03
 ```
 
-PR #498 may add at most one stable asset: MNEE.
+The official `@mnee/ts-sdk` package version 1.2.0 is the source for the production 1Sat token ID. Both new deployment records remain classified as `identifier_recorded_unverified`; identifier recording does not prove current control configuration, independent runtime operation, or safety.
 
-Every applicable record family must be complete. Unsupported details must remain explicit known unknowns. Thin records are prohibited. If complete support fails, MNEE must be withheld. No replacement candidate is allowed.
+PR #498 preserves explicit unknowns for the latest listed attestation report body and archive, current reserve custodian and allocation, first public Ethereum issuance date, deployment controls, and complete direct-access and jurisdiction inventory. It does not infer unsupported values.
 
-PR #498 must not change Market Access, public UI, route families, machine-readable semantics, ranking, score, recommendation, or monitoring-publication boundaries.
+PR #498 changed no Market Access record, public route family, material UI/CSS contract, ranking, score, recommendation, or monitoring-publication boundary. The three additional detail routes are data-driven dossier routes for the new asset, issuer, and launch event.
+
+PR #498 exits only to `REVIEW GATE`. No later work is authorized automatically.
 
 ## 11. YLDS scope boundary
 
@@ -357,7 +338,7 @@ Scheduled monitoring and candidate auditing remain artifact-only and do not auth
 
 ## 19. Review gate
 
-After PR #498, stop and review:
+PR #498 is complete. Stop and review:
 
 ```text
 whether MNEE was added or withheld

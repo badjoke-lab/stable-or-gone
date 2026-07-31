@@ -1,0 +1,32 @@
+[
+  {
+    "id": "sog_st_mnee",
+    "lifecycle_status": "active",
+    "issuance_status": "restricted",
+    "peg_reference": {
+      "kind": "fiat",
+      "asset": "USD",
+      "target_value": 1,
+      "notes": "MNEE targets one U.S. dollar through issuer reserve backing and verified-customer redemption."
+    },
+    "backing_types": [
+      "cash",
+      "government_securities"
+    ],
+    "stabilization_mechanism": "issuer_redemption",
+    "governance_model": "centralized",
+    "asset_class": "stablecoin",
+    "reference_target": "fiat",
+    "redemption_or_exit_model": "issuer_redemption",
+    "yield_or_rebase_profile": {
+      "mode": "none",
+      "accrual_target": "none",
+      "yield_source": "none",
+      "accrual_mechanism": "none",
+      "rate_type": "none",
+      "rate_source": null,
+      "notes": "MNEE terms state that the token is not designed to create returns for holders."
+    },
+    "classification_notes": "Fiat-backed, centrally issued USD stablecoin with restricted direct issuance and redemption and no issuer-native holder yield."
+  }
+]

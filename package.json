@@ -74,6 +74,7 @@
     "prepare:visual-system-mocks": "npm run generate:visual-system-mocks && npm run validate:visual-system-mocks",
     "validate:active-workstream": "node scripts/validate-active-workstream.mjs",
     "validate:record-growth-batch-3-pr467": "node scripts/validate-record-growth-batch-3-pr467.mjs",
+    "validate:record-growth-batch-4-mnee-pr498": "node scripts/validate-record-growth-batch-4-mnee-pr498.mjs",
     "validate:baseline": "node scripts/validate-registry-v2-baseline.mjs",
     "validate:v3-baseline": "node scripts/validate-registry-v3-baseline.mjs",
     "validate:ui-repair-baseline": "node scripts/validate-ui-repair-baseline.mjs",

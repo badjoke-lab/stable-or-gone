@@ -1,41 +1,41 @@
 {
   "schema_version": "3.0-parity-baseline",
   "status": "current",
-  "baseline_id": "sog_registry_v3_parity_pr467_116_assets_2026_07_25",
-  "recorded_at": "2026-07-25",
-  "data_checkpoint_commit": "pr467-record-growth-batch-3",
+  "baseline_id": "sog_registry_v3_parity_pr498_117_assets_2026_07_31",
+  "recorded_at": "2026-07-31",
+  "data_checkpoint_commit": "pr498-record-growth-batch-4-mnee",
   "source_baseline_id": "sog_registry_v3_parity_pr467_116_assets_2026_07_25",
-  "canonical_checkpoint_id": "sog_record_growth_batch_3_canonical_116_checkpoint_pr467_2026_07_25",
+  "canonical_checkpoint_id": "sog_pr498_record_growth_batch_4_mnee_117_2026_07_31",
   "v2_composed_baseline": "docs/migration/registry-v2-baseline.json",
   "v3_foundation": "docs/migration/registry-v3-foundation.json",
   "v3_income_profiles": "docs/migration/registry-v3-income-profiles.json",
   "expected_v2_counts": {
-    "stablecoins": 116,
-    "organizations": 107,
-    "relationships": 128,
-    "classifications": 116,
-    "profiles": 116,
-    "events": 191,
-    "event_details": 191,
-    "evidence": 571,
-    "evidence_relations": 571,
-    "reserve_reports": 124,
-    "known_unknowns": 337,
+    "stablecoins": 117,
+    "organizations": 108,
+    "relationships": 129,
+    "classifications": 117,
+    "profiles": 117,
+    "events": 192,
+    "event_details": 192,
+    "evidence": 579,
+    "evidence_relations": 579,
+    "reserve_reports": 125,
+    "known_unknowns": 342,
     "regulatory_notes": 9,
-    "deployments": 182
+    "deployments": 184
   },
   "expected_v3_counts": {
-    "legal_profiles": 116,
+    "legal_profiles": 117,
     "stable_asset_relationships": 5,
-    "reserve_components": 149,
-    "income_profiles": 116,
-    "deployment_view": 182
+    "reserve_components": 151,
+    "income_profiles": 117,
+    "deployment_view": 184
   },
   "expected_v3_coverage": {
-    "legal_profiles": 116,
-    "income_profiles": 116,
-    "reserve_component_assets": 116,
-    "deployment_view_assets": 116
+    "legal_profiles": 117,
+    "income_profiles": 117,
+    "reserve_component_assets": 117,
+    "deployment_view_assets": 117
   },
   "machine_readable_contract": {
     "schema_version": "1.0.0",
@@ -55,5 +55,5 @@
   },
   "audit_report": "docs/audits/registry-v2-v3-machine-readable-parity-100-assets.md",
   "validator": "scripts/validate-registry-v2-v3-machine-readable-parity.mjs",
-  "notes": "Current parity baseline binds PR #467 controlled growth from 114 to 116 assets. PLNQ and GBPQ receive complete v2/v3 records while Market Access and public-surface semantics remain unchanged."
+  "notes": "Current parity baseline binds PR #498 controlled growth from 116 to 117 assets. MNEE receives complete v2/v3 record layers while Market Access and public product semantics remain unchanged."
 }

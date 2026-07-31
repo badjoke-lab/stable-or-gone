@@ -1,0 +1,42 @@
+[
+  {
+    "id": "sog_rc_mnee_cash_pr498",
+    "stablecoin_id": "sog_st_mnee",
+    "reserve_report_id": "sog_rr_mnee_attestation_program_pr498",
+    "asset_category": "cash",
+    "asset_label": "U.S. cash held at a qualified custodian, as described by the issuer",
+    "share_percent": null,
+    "amount_text": null,
+    "currency": "USD",
+    "liquidity_class": "high",
+    "maturity_bucket": "on_demand",
+    "custodian_organization_id": null,
+    "as_of_date": null,
+    "confidence": "medium_high",
+    "evidence_ids": [
+      "sog_src_mnee_attestation_program_pr498",
+      "sog_src_mnee_terms_pr498"
+    ],
+    "notes": "Current custodian identity and exact allocation were not established."
+  },
+  {
+    "id": "sog_rc_mnee_treasuries_pr498",
+    "stablecoin_id": "sog_st_mnee",
+    "reserve_report_id": "sog_rr_mnee_attestation_program_pr498",
+    "asset_category": "government_securities",
+    "asset_label": "U.S. Treasury bills with stated duration no longer than 90 days",
+    "share_percent": null,
+    "amount_text": null,
+    "currency": "USD",
+    "liquidity_class": "high",
+    "maturity_bucket": "under_90_days",
+    "custodian_organization_id": null,
+    "as_of_date": null,
+    "confidence": "medium_high",
+    "evidence_ids": [
+      "sog_src_mnee_attestation_program_pr498",
+      "sog_src_mnee_docs_pr498"
+    ],
+    "notes": "Exact maturity distribution, custodian, amount, and share remain unresolved."
+  }
+]

@@ -1,0 +1,228 @@
+{
+  "schema_version": "1.0",
+  "review_id": "sog_record_growth_batch_4_mnee_pr498_source_review_2026_07_31",
+  "status": "reviewed_entry_gate_pass",
+  "reviewed_at": "2026-07-31",
+  "authority_pr": 497,
+  "candidate_audit_pr": 496,
+  "implementation_pr": 498,
+  "canonical_baseline": {
+    "stable_assets": 116,
+    "organizations": 107,
+    "relationships": 128,
+    "events": 191,
+    "evidence": 571,
+    "deployments": 182
+  },
+  "candidate": {
+    "candidate_id": "sog_cand_pr496_mnee",
+    "canonical_id": "sog_st_mnee",
+    "slug": "mnee",
+    "name": "MNEE",
+    "symbol": "MNEE",
+    "reference_asset": "USD",
+    "status_hypothesis": "active",
+    "launch_date": "2025-03-03",
+    "issuer": {
+      "canonical_organization_id": "sog_issuer_mnee_limited",
+      "legal_name": "MNEE Limited",
+      "new_organization_required": true,
+      "jurisdiction": "Antigua and Barbuda",
+      "issuer_stated_license": "DAB No. A00003, Class A"
+    },
+    "deployment_identities": {
+      "one_sat_ordinals": {
+        "deployment_id": "sog_dep_mnee_1sat_pr498",
+        "identifier": "ae59f3b898ec61acbdb6cc7a245fabeded0c094bf046f35206a3aec60ef88127_0",
+        "source": "official @mnee/ts-sdk 1.2.0 package",
+        "verification_class": "identifier_recorded_unverified"
+      },
+      "ethereum": {
+        "deployment_id": "sog_dep_mnee_ethereum_pr498",
+        "identifier": "0x8ccedbae4916b79da7f3f612efb2eb93a2bfd6cf",
+        "source": "issuer documentation and Etherscan token page",
+        "verification_class": "identifier_recorded_unverified"
+      }
+    },
+    "duplicate_review": {
+      "canonical_id_match": false,
+      "slug_match": false,
+      "symbol_match": false,
+      "name_match": false,
+      "deployment_identifier_match": false,
+      "decision": "distinct_asset_new_issuer"
+    },
+    "entry_gate": {
+      "fresh_duplicate_recheck_passed": true,
+      "current_primary_source_review_passed": true,
+      "exact_deployment_identifiers_confirmed": true,
+      "verified_launch_date_confirmed": true,
+      "reserve_and_redemption_basis_confirmed": true,
+      "monthly_attestation_index_confirmed": true,
+      "complete_record_review_allowed": true
+    },
+    "canonical_candidate_id": "sog_cand_000117"
+  },
+  "reviewed_sources": [
+    {
+      "id": "sog_src_mnee_launch_pr498",
+      "publisher": "MNEE Limited",
+      "url": "https://www.mnee.io/news/mnee-stablecoin-launches-on-1sat-ordinals-protocol-with-instant-transactions-no-gas-token-and-1-10th-cent-transaction-fees",
+      "source_type": "official_announcement",
+      "published_at": "2025-03-03",
+      "archived_url": "https://web.archive.org/web/*/https://www.mnee.io/news/mnee-stablecoin-launches-on-1sat-ordinals-protocol-with-instant-transactions-no-gas-token-and-1-10th-cent-transaction-fees",
+      "claim_scopes": [
+        "identity",
+        "issuer",
+        "launch",
+        "deployment",
+        "event"
+      ],
+      "primary": true,
+      "accessed_at": "2026-07-31"
+    },
+    {
+      "id": "sog_src_mnee_terms_pr498",
+      "publisher": "MNEE Limited",
+      "url": "https://www.mnee.io/terms",
+      "source_type": "official_legal_documentation",
+      "published_at": null,
+      "archived_url": "https://web.archive.org/web/*/https://www.mnee.io/terms",
+      "claim_scopes": [
+        "identity",
+        "issuer",
+        "legal",
+        "regulatory_context",
+        "reserve",
+        "redemption",
+        "access",
+        "fees",
+        "risk"
+      ],
+      "primary": true,
+      "accessed_at": "2026-07-31"
+    },
+    {
+      "id": "sog_src_mnee_transparency_pr498",
+      "publisher": "MNEE Limited",
+      "url": "https://www.mnee.io/transparency",
+      "source_type": "reserve_transparency_page",
+      "published_at": null,
+      "archived_url": "https://web.archive.org/web/*/https://www.mnee.io/transparency",
+      "claim_scopes": [
+        "reserve",
+        "attestation",
+        "documentation"
+      ],
+      "primary": true,
+      "accessed_at": "2026-07-31"
+    },
+    {
+      "id": "sog_src_mnee_docs_pr498",
+      "publisher": "MNEE Limited",
+      "url": "https://docs.mnee.io/getting-started/introduction",
+      "source_type": "official_developer_documentation",
+      "published_at": null,
+      "archived_url": "https://web.archive.org/web/*/https://docs.mnee.io/getting-started/introduction",
+      "claim_scopes": [
+        "identity",
+        "reserve",
+        "deployment",
+        "documentation"
+      ],
+      "primary": true,
+      "accessed_at": "2026-07-31"
+    },
+    {
+      "id": "sog_src_mnee_faq_pr498",
+      "publisher": "MNEE Limited",
+      "url": "https://www.mnee.io/faq",
+      "source_type": "official_documentation",
+      "published_at": null,
+      "archived_url": "https://web.archive.org/web/*/https://www.mnee.io/faq",
+      "claim_scopes": [
+        "identity",
+        "reserve",
+        "deployment",
+        "access"
+      ],
+      "primary": true,
+      "accessed_at": "2026-07-31"
+    },
+    {
+      "id": "sog_src_mnee_attestation_program_pr498",
+      "publisher": "MNEE Limited",
+      "url": "https://www.mnee.io/news/mnee-expands-transparency-with-monthly-third-party-reserve-attestations-audited-by-wolf-company-p-c",
+      "source_type": "official_announcement",
+      "published_at": "2025-05-09",
+      "archived_url": "https://web.archive.org/web/*/https://www.mnee.io/news/mnee-expands-transparency-with-monthly-third-party-reserve-attestations-audited-by-wolf-company-p-c",
+      "claim_scopes": [
+        "reserve",
+        "attestation",
+        "custody_context",
+        "documentation"
+      ],
+      "primary": true,
+      "accessed_at": "2026-07-31"
+    },
+    {
+      "id": "sog_src_mnee_sdk_pr498",
+      "publisher": "MNEE Limited",
+      "url": "https://www.npmjs.com/package/@mnee/ts-sdk/v/1.2.0",
+      "source_type": "official_repository",
+      "published_at": null,
+      "archived_url": "https://web.archive.org/web/*/https://www.npmjs.com/package/@mnee/ts-sdk/v/1.2.0",
+      "claim_scopes": [
+        "deployment",
+        "contract_identity",
+        "technical_documentation"
+      ],
+      "primary": true,
+      "accessed_at": "2026-07-31"
+    },
+    {
+      "id": "sog_src_mnee_ethereum_pr498",
+      "publisher": "Etherscan",
+      "url": "https://etherscan.io/token/0x8ccedbae4916b79da7f3f612efb2eb93a2bfd6cf",
+      "source_type": "blockchain_explorer",
+      "published_at": "2024-03-21",
+      "archived_url": "https://web.archive.org/web/*/https://etherscan.io/token/0x8ccedbae4916b79da7f3f612efb2eb93a2bfd6cf",
+      "claim_scopes": [
+        "deployment",
+        "contract_identity",
+        "onchain_identity"
+      ],
+      "primary": true,
+      "accessed_at": "2026-07-31"
+    }
+  ],
+  "reviewed_terms": {
+    "reserve_model": "issuer states 1:1 backing using U.S. cash and U.S. Treasury bills with duration no longer than 90 days",
+    "direct_issuance_and_redemption": "verified MNEE customers only, subject to current terms and jurisdiction controls",
+    "fiat_redemption_minimum": "USD 100,000 equivalent",
+    "fiat_redemption_fee": "greater of USD 5,000 or 0.5% of redemption amount",
+    "holder_yield": "none asserted; terms state token is not designed to create returns for holders",
+    "attestation_index": "official transparency page lists monthly attestations through May 2026",
+    "attestation_report_body_boundary": "exact latest report figures and signed report archive were not independently preserved and are not inferred"
+  },
+  "remaining_unknowns": [
+    "latest_attestation_report_body_figures_signed_url_and_archive_capture",
+    "current_reserve_custodian_identity_and_exact_category_allocation",
+    "ethereum_first_public_issuance_date",
+    "current_freeze_blacklist_pause_upgrade_mint_and_recovery_controls",
+    "complete_current_direct_access_customer_type_and_jurisdiction_inventory"
+  ],
+  "decision": {
+    "entry_gate_passed": true,
+    "maximum_canonical_additions": 1,
+    "complete_record_only": true,
+    "thin_records_forbidden": true,
+    "replacement_candidate_allowed": false,
+    "ylds_promotion": false,
+    "automatic_promotion": false,
+    "public_surface_change": false,
+    "market_access_change": false,
+    "ui_change": false,
+    "next_step": "REVIEW_GATE_AFTER_COMPLETE_MNEE_RECORD"
+  }
+}

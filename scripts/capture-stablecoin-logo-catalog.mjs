@@ -15,8 +15,9 @@ const reportPath = path.join(outputDir, 'stablecoin-logo-catalog.json');
 const ledger = JSON.parse(fs.readFileSync(decisionsPath, 'utf8'));
 const displayPolicy = JSON.parse(fs.readFileSync(displayPolicyPath, 'utf8'));
 const fallbackSlugs = new Set(displayPolicy.neutral_fallback_slugs ?? []);
-if (!Array.isArray(ledger.records) || ledger.records.length !== 116) {
-  throw new Error(`expected 116 decision records, found ${ledger.records?.length ?? 0}`);
+const expectedCanonicalRecords = Number(displayPolicy.canonical_records);
+if (!Array.isArray(ledger.records) || ledger.records.length !== expectedCanonicalRecords) {
+  throw new Error(`expected ${expectedCanonicalRecords} decision records, found ${ledger.records?.length ?? 0}`);
 }
 
 fs.rmSync(outputDir, { recursive: true, force: true });
@@ -54,7 +55,7 @@ const html = `<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><title>SOG Stablecoin mark catalog</title>
 <style>
 *{box-sizing:border-box}html{background:#f4f1e9;color:#171714;font-family:Arial,sans-serif}body{margin:0;padding:24px}header{padding:0 0 18px;border-bottom:2px solid #171714}h1{margin:0;font:700 34px Georgia,serif}header p{margin:7px 0 0;color:#55534c}.catalog{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));border-top:1px solid #77746b;border-left:1px solid #77746b;margin-top:20px}.mark-card{min-width:0;min-height:210px;padding:13px;display:grid;grid-template-rows:104px auto auto auto auto;align-content:start;gap:5px;border-right:1px solid #77746b;border-bottom:1px solid #77746b;background:#f4f1e9}.mark-frame{width:96px;height:96px;display:grid;place-items:center;border:1px solid #aaa69b;background:#fff;overflow:hidden}.mark-frame img{display:block;width:82px;height:82px;object-fit:contain}.neutral-fallback{width:82px;height:82px;border:1px solid #77746b;border-radius:50%;display:grid;place-items:center;background:#ece8de;color:#55534c;font-size:24px;font-weight:700;letter-spacing:.04em}.mark-card strong{font-size:14px;line-height:1.25;overflow-wrap:anywhere}.mark-card>span:not(.neutral-fallback){font-size:13px;font-weight:700;color:#075c78}.mark-card code{font-size:11px;line-height:1.25;overflow-wrap:anywhere}.mark-card small{font-size:10px;color:#68665f;overflow-wrap:anywhere}@media(max-width:900px){.catalog{grid-template-columns:repeat(4,minmax(0,1fr))}}
-</style></head><body><header><h1>Stable or Gone — 98 direct logos, 18 neutral fallbacks</h1><p>Only Stablecoin- or product-specific marks render as logos. Issuer, project, and directory-only marks remain research evidence.</p></header><main class="catalog">${cards}</main></body></html>`;
+</style></head><body><header><h1>Stable or Gone — ${displayPolicy.direct_logo_records} direct logos, ${displayPolicy.neutral_fallback_records} neutral fallbacks</h1><p>Only Stablecoin- or product-specific marks render as logos. Issuer, project, and directory-only marks remain research evidence.</p></header><main class="catalog">${cards}</main></body></html>`;
 fs.writeFileSync(htmlPath, html);
 
 const browser = await chromium.launch({ args: ['--disable-lcd-text'] });
@@ -81,10 +82,13 @@ await page.screenshot({ path: screenshotPath, fullPage: true });
 await browser.close();
 
 const failures = [];
-if (metrics.cards !== 116) failures.push(`expected 116 cards, found ${metrics.cards}`);
-if (metrics.logos !== 98) failures.push(`expected 98 direct logos, found ${metrics.logos}`);
-if (metrics.fallbacks !== 18) failures.push(`expected 18 neutral fallbacks, found ${metrics.fallbacks}`);
-if (metrics.images !== 98) failures.push(`expected 98 images, found ${metrics.images}`);
+const expectedCards = Number(displayPolicy.canonical_records);
+const expectedLogos = Number(displayPolicy.direct_logo_records);
+const expectedFallbacks = Number(displayPolicy.neutral_fallback_records);
+if (metrics.cards !== expectedCards) failures.push(`expected ${expectedCards} cards, found ${metrics.cards}`);
+if (metrics.logos !== expectedLogos) failures.push(`expected ${expectedLogos} direct logos, found ${metrics.logos}`);
+if (metrics.fallbacks !== expectedFallbacks) failures.push(`expected ${expectedFallbacks} neutral fallbacks, found ${metrics.fallbacks}`);
+if (metrics.images !== expectedLogos) failures.push(`expected ${expectedLogos} images, found ${metrics.images}`);
 if (metrics.broken_images.length) failures.push(`broken images: ${metrics.broken_images.join(', ')}`);
 if (metrics.empty_frames.length) failures.push(`empty frames: ${metrics.empty_frames.join(', ')}`);
 const report = {

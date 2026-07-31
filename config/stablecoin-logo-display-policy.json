@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0",
-  "canonical_records": 116,
+  "canonical_records": 117,
   "direct_logo_records": 98,
-  "neutral_fallback_records": 18,
+  "neutral_fallback_records": 19,
   "display_logo_mark_types": [
     "token_logo",
     "official_product_mark",
@@ -17,21 +17,22 @@
     "acala-ausd",
     "avalon-usda",
     "brz",
-    "dynamic-set-dollar",
-    "usdy",
-    "usk",
-    "usr",
     "chfau",
     "coins-phpc",
+    "dynamic-set-dollar",
     "eurau",
     "gbpq",
+    "mnee",
     "plnq",
+    "poundtoken",
     "sekau",
     "sofiusd",
     "usdgo",
     "usdh",
-    "vchf",
-    "poundtoken"
+    "usdy",
+    "usk",
+    "usr",
+    "vchf"
   ],
   "rule": "Only a mark attributable to the Stablecoin or its specific product is displayed as a logo. Issuer, project, and directory marks remain research evidence and render as the neutral monogram fallback."
 }

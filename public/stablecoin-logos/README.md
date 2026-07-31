@@ -2,7 +2,7 @@
 
 These SVG and PNG assets are vendored locally so public pages never depend on an external image host.
 
-Public display coverage is fixed at **98 direct Stablecoin/product logos of 116 canonical records (84.48%)**. The remaining **18 records use the shared neutral monogram fallback**.
+Public display coverage is fixed at **98 direct Stablecoin/product logos of 117 canonical records (83.76%)**. The remaining **19 records use the shared neutral monogram fallback**.
 
 A project, issuer, or third-party directory mark is not displayed as though it were the Stablecoin's own logo. Those researched marks remain classified in the research ledger, while `config/stablecoin-logo-display-policy.json` is the rendering source of truth.
 
@@ -140,14 +140,14 @@ dollar-on-chain.svg
 7. No remote runtime fetching is used.
 8. A file is not added merely because its filename resembles a symbol. The image must be attributable to the same asset represented by the canonical SOG record.
 
-The Stablecoins index, home preview, and dossiers therefore render **98 direct logos and 18 neutral fallbacks** with identical geometry. The mixed-mark and all-record catalog gates verify desktop and mobile rendering.
+The Stablecoins index, home preview, and dossiers therefore render **98 direct logos and 19 neutral fallbacks** with identical geometry. The mixed-mark and all-record catalog gates verify desktop and mobile rendering.
 
 ## Corpus-wide disposition closure
 
-All 116 canonical Stablecoin records have a final display disposition:
+All 117 canonical Stablecoin records have a final display disposition:
 
 - 98 direct Stablecoin/product logos;
-- 18 neutral fallbacks where research found only project, issuer, or directory-level artwork.
+- 19 neutral fallbacks where research found only project, issuer, or directory-level artwork, including MNEE pending a separately reviewed product-specific mark.
 
 Research ledger: `config/stablecoin-logo-decisions.json`.
 Public display policy: `config/stablecoin-logo-display-policy.json`.

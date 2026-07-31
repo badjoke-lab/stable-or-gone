@@ -1,0 +1,17 @@
+[
+  {
+    "id": "sog_issuer_mnee_limited",
+    "slug": "mnee-limited",
+    "name": "MNEE Limited",
+    "issuer_type": "company",
+    "jurisdiction": "Antigua and Barbuda",
+    "related_stablecoins": [
+      "mnee"
+    ],
+    "official_url": "https://www.mnee.io/",
+    "summary": "Antigua and Barbuda company that issues and redeems MNEE for verified customers.",
+    "confidence": "high",
+    "last_verified_at": "2026-07-31",
+    "notes": "PR #498 legacy issuer compatibility row. The canonical organization record preserves the reviewed licence and operating context."
+  }
+]

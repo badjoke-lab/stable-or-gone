@@ -1,0 +1,15 @@
+[
+  {
+    "id": "sog_issuer_mnee_limited",
+    "slug": "mnee-limited",
+    "name": "MNEE Limited",
+    "organization_type": "regulated_digital_asset_business",
+    "legacy_issuer_type": "company",
+    "jurisdiction": "Antigua and Barbuda",
+    "official_url": "https://www.mnee.io/",
+    "summary": "Antigua and Barbuda company that issues and redeems MNEE for verified customers and states that it operates under Digital Asset Business licence DAB No. A00003, Class A.",
+    "confidence": "high",
+    "last_verified_at": "2026-07-31",
+    "notes": "PR #498 organization record. Legal entity, licence representation, issuance, redemption, and reserve obligations are sourced to current issuer terms; independent regulator-record details and licence-effective date remain reviewable."
+  }
+]

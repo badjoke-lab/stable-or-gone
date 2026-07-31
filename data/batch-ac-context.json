@@ -1,0 +1,19 @@
+[
+  {
+    "id": "sog_rr_mnee_attestation_program_pr498",
+    "stablecoin_id": "sog_st_mnee",
+    "issuer_id": "sog_issuer_mnee_limited",
+    "report_date": "2025-05-09",
+    "period_covered": "Monthly reserve-attestation program announced in May 2025; current transparency index reviewed through May 2026",
+    "publisher": "MNEE Limited and Wolf & Company, P.C.",
+    "report_type": "issuer_attestation_program_and_current_report_index",
+    "asset_categories": [
+      "cash",
+      "government_securities"
+    ],
+    "url": "https://www.mnee.io/news/mnee-expands-transparency-with-monthly-third-party-reserve-attestations-audited-by-wolf-company-p-c",
+    "archived_url": "https://web.archive.org/web/*/https://www.mnee.io/news/mnee-expands-transparency-with-monthly-third-party-reserve-attestations-audited-by-wolf-company-p-c",
+    "confidence": "high",
+    "notes": "The issuer announcement states that Wolf & Company performs monthly examinations using month-end and random intra-month snapshot dates and that reserves use U.S. Treasury bills of no more than 90 days and U.S. cash at a qualified custodian. Exact May 2026 report-body figures and PDF archive were not copied into this record and remain explicit known unknowns."
+  }
+]

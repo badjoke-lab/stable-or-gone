@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-07-30T08:38:44.036Z",
+  "generated_at": "2026-07-31T16:58:00.000Z",
   "policy": {
-    "canonical_records": 116,
+    "canonical_records": 117,
     "undecided_records_allowed": 0,
     "neutral_fallback_records": 0,
     "mark_is_decorative": true,
@@ -22,7 +22,7 @@
     "official_product_mark": 8,
     "previously_audited_mark": 60,
     "token_logo": 30,
-    "official_issuer_mark": 10,
+    "official_issuer_mark": 11,
     "verified_directory_mark": 1
   },
   "records": [
@@ -695,7 +695,7 @@
       "source_asset_url": "https://www.sbivc.co.jp/assets/images/icon_circle_jpysc.svg",
       "source_class": "official_site_image",
       "identity_basis": "canonical slug, stablecoin name, symbol, issuer, and attributable same-asset source",
-      "evidence": "ジェイピーワイエスシー（JPYSC）/チャート・価格（レート）",
+      "evidence": "\u30b8\u30a7\u30a4\u30d4\u30fc\u30ef\u30a4\u30a8\u30b9\u30b7\u30fc\uff08JPYSC\uff09/\u30c1\u30e3\u30fc\u30c8\u30fb\u4fa1\u683c\uff08\u30ec\u30fc\u30c8\uff09",
       "transformation": "vendored without artwork changes"
     },
     {
@@ -737,7 +737,7 @@
       "source_asset_url": "https://loon.finance/images/cadc-in-february-banner.jpg?__frsh_c=a49d15e8ebd185023b10d62c5c02b31edfeab1a6",
       "source_class": "official_site_image",
       "identity_basis": "canonical slug, stablecoin name, symbol, issuer, and attributable same-asset source",
-      "evidence": "CADC in February — cover image  lc-thumb-img",
+      "evidence": "CADC in February \u2014 cover image  lc-thumb-img",
       "transformation": "cropped official artwork (512x512+512+0) and centered on a 256px transparent canvas"
     },
     {
@@ -823,6 +823,20 @@
       "identity_basis": "previous audited slug mapping and pinned provenance recorded in the local asset README",
       "evidence": "Accepted before the corpus-wide closure pass; retained after canonical slug and asset existence revalidation.",
       "transformation": "as documented by the prior pinned-source import"
+    },
+    {
+      "slug": "mnee",
+      "name": "MNEE",
+      "symbol": "MNEE",
+      "decision": "neutral_fallback",
+      "mark_type": "official_issuer_mark",
+      "asset_path": null,
+      "source_page": "https://www.mnee.io/",
+      "source_asset_url": null,
+      "source_class": "official_site_review",
+      "identity_basis": "Official MNEE materials identify the asset and MNEE Limited, but PR #498 did not add a separately audited Stablecoin-specific product mark.",
+      "evidence": "Use the shared neutral MNEE monogram until a product-specific mark is reviewed and vendored under the logo provenance contract.",
+      "transformation": "none"
     },
     {
       "slug": "monerium-eure",
@@ -1288,7 +1302,7 @@
     },
     {
       "slug": "usat",
-      "name": "USA₮",
+      "name": "USA\u20ae",
       "symbol": "USAT",
       "decision": "accepted_local_mark",
       "mark_type": "token_logo",

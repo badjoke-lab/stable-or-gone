@@ -48,7 +48,8 @@
       "data/y-legal.json",
       "data/z-legal.json",
       "data/aa-legal.json",
-      "data/ab-legal.json"
+      "data/ab-legal.json",
+      "data/ac-legal.json"
     ],
     "stable_asset_relationships": [
       "data/stable-asset-relationships-v3.json",
@@ -79,13 +80,14 @@
       "data/batch-y-components.json",
       "data/batch-z-components.json",
       "data/batch-aa-components.json",
-      "data/batch-ab-components.json"
+      "data/batch-ab-components.json",
+      "data/batch-ac-components.json"
     ]
   },
   "minimum_counts": {
-    "legal_profiles": 116,
+    "legal_profiles": 117,
     "stable_asset_relationships": 5,
-    "reserve_components": 149
+    "reserve_components": 151
   },
   "loader": "src/lib/data/registryV3.ts",
   "validator": "scripts/validate-registry-v3-foundation.mjs"

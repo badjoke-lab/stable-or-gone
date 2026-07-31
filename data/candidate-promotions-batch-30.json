@@ -1,0 +1,22 @@
+[
+  {
+    "candidate_id": "sog_cand_000117",
+    "stablecoin_id": "sog_st_mnee",
+    "symbol": "MNEE",
+    "reviewed_disposition": "promoted_complete_record",
+    "source_pr": 496,
+    "authority_pr": 497,
+    "implementation_pr": 498,
+    "recorded_at": "2026-07-31",
+    "complete_record": true,
+    "replacement_candidate_used": false,
+    "canonical_asset_increment": 1,
+    "public_surface_change": false,
+    "market_access_change": false,
+    "notes": "Sole candidate authorized by PR #497. Fresh PR #498 entry-gate review verified the 1Sat token ID, Ethereum contract, issuer terms, launch date, reserve-attestation program, redemption minimums and fees, and explicit unknowns.",
+    "status": "promoted",
+    "promotion_pr": 498,
+    "promoted_record_id": "sog_st_mnee",
+    "source_candidate_id": "sog_cand_pr496_mnee"
+  }
+]

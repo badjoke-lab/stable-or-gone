@@ -1,0 +1,14 @@
+[
+  {
+    "id": "sog_st_mnee",
+    "availability": "none",
+    "source": "none",
+    "accrual": "none",
+    "rate": "none",
+    "related_asset_ids": [],
+    "evidence_ids": [
+      "sog_src_mnee_terms_pr498"
+    ],
+    "notes": "MNEE terms state that the token is not designed to create returns for holders; reserve income is not recorded as a holder income right."
+  }
+]
