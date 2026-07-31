@@ -8,6 +8,10 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: sog-legacy-domain-redirect-preflight
+  cancel-in-progress: true
+
 jobs:
   preflight:
     runs-on: ubuntu-latest
