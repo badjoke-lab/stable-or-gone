@@ -15,8 +15,9 @@ const reportPath = path.join(outputDir, 'stablecoin-logo-catalog.json');
 const ledger = JSON.parse(fs.readFileSync(decisionsPath, 'utf8'));
 const displayPolicy = JSON.parse(fs.readFileSync(displayPolicyPath, 'utf8'));
 const fallbackSlugs = new Set(displayPolicy.neutral_fallback_slugs ?? []);
-if (!Array.isArray(ledger.records) || ledger.records.length !== 116) {
-  throw new Error(`expected 116 decision records, found ${ledger.records?.length ?? 0}`);
+const expectedCanonicalRecords = Number(displayPolicy.canonical_records);
+if (!Array.isArray(ledger.records) || ledger.records.length !== expectedCanonicalRecords) {
+  throw new Error(`expected ${expectedCanonicalRecords} decision records, found ${ledger.records?.length ?? 0}`);
 }
 
 fs.rmSync(outputDir, { recursive: true, force: true });
