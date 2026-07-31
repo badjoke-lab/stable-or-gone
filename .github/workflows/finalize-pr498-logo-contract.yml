@@ -1,0 +1,131 @@
+name: Finalize PR498 logo contract
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  finalize:
+    if: github.head_ref == 'agent/record-growth-batch-4-mnee'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/record-growth-batch-4-mnee
+          fetch-depth: 0
+
+      - name: Advance logo coverage contract to 117 records
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          decisions_path = Path('config/stablecoin-logo-decisions.json')
+          decisions = json.loads(decisions_path.read_text())
+          decisions['generated_at'] = '2026-07-31T16:58:00.000Z'
+          decisions['policy']['canonical_records'] = 117
+          if not any(row.get('slug') == 'mnee' for row in decisions['records']):
+              decisions['records'].append({
+                  'slug': 'mnee',
+                  'name': 'MNEE',
+                  'symbol': 'MNEE',
+                  'decision': 'neutral_fallback',
+                  'mark_type': 'official_issuer_mark',
+                  'asset_path': None,
+                  'source_page': 'https://www.mnee.io/',
+                  'source_asset_url': None,
+                  'source_class': 'official_site_review',
+                  'identity_basis': 'Official MNEE materials identify the asset and MNEE Limited, but PR #498 did not add a separately audited Stablecoin-specific product mark.',
+                  'evidence': 'Use the shared neutral MNEE monogram until a product-specific mark is reviewed and vendored under the logo provenance contract.',
+                  'transformation': 'none'
+              })
+          decisions['records'] = sorted(decisions['records'], key=lambda row: row['slug'])
+          decisions['counts']['official_issuer_mark'] = sum(row.get('mark_type') == 'official_issuer_mark' for row in decisions['records'])
+          decisions_path.write_text(json.dumps(decisions, indent=2) + '\n')
+
+          policy_path = Path('config/stablecoin-logo-display-policy.json')
+          policy = json.loads(policy_path.read_text())
+          policy['canonical_records'] = 117
+          policy['direct_logo_records'] = 98
+          policy['neutral_fallback_records'] = 19
+          policy['neutral_fallback_slugs'] = sorted(set(policy['neutral_fallback_slugs']) | {'mnee'})
+          policy_path.write_text(json.dumps(policy, indent=2) + '\n')
+
+          audit_path = Path('scripts/audit-stablecoin-logo-coverage.mjs')
+          audit = audit_path.read_text()
+          old = """if (recordsBySlug.size !== 116) failures.push(`expected 116 canonical records, found ${recordsBySlug.size}`);
+          if (mappings.length !== 98) failures.push(`expected 98 direct Stablecoin/product logo mappings, found ${mappings.length}`);
+          if (fallbackSlugs.size !== 18) failures.push(`expected 18 neutral fallback records, found ${fallbackSlugs.size}`);
+          if (!Array.isArray(decisions.records) || decisions.records.length !== 116) failures.push('research decision ledger must contain 116 records');
+          if (decisionBySlug.size !== 116) failures.push('research decision ledger contains duplicate slugs');"""
+          new = """const expectedCanonicalRecords = Number(displayPolicy.canonical_records);
+          const expectedDirectLogoRecords = Number(displayPolicy.direct_logo_records);
+          const expectedFallbackRecords = Number(displayPolicy.neutral_fallback_records);
+          if (recordsBySlug.size !== expectedCanonicalRecords) failures.push(`expected ${expectedCanonicalRecords} canonical records, found ${recordsBySlug.size}`);
+          if (mappings.length !== expectedDirectLogoRecords) failures.push(`expected ${expectedDirectLogoRecords} direct Stablecoin/product logo mappings, found ${mappings.length}`);
+          if (fallbackSlugs.size !== expectedFallbackRecords) failures.push(`expected ${expectedFallbackRecords} neutral fallback records, found ${fallbackSlugs.size}`);
+          if (!Array.isArray(decisions.records) || decisions.records.length !== expectedCanonicalRecords) failures.push(`research decision ledger must contain ${expectedCanonicalRecords} records`);
+          if (decisionBySlug.size !== expectedCanonicalRecords) failures.push('research decision ledger contains duplicate slugs');"""
+          if old not in audit:
+              raise SystemExit('logo audit count anchor missing')
+          audit_path.write_text(audit.replace(old, new, 1))
+
+          catalog_path = Path('scripts/capture-stablecoin-logo-catalog.mjs')
+          catalog = catalog_path.read_text()
+          catalog = catalog.replace(
+              'Stable or Gone — 98 direct logos, 18 neutral fallbacks',
+              'Stable or Gone — ${displayPolicy.direct_logo_records} direct logos, ${displayPolicy.neutral_fallback_records} neutral fallbacks'
+          )
+          old = """if (metrics.cards !== 116) failures.push(`expected 116 cards, found ${metrics.cards}`);
+          if (metrics.logos !== 98) failures.push(`expected 98 direct logos, found ${metrics.logos}`);
+          if (metrics.fallbacks !== 18) failures.push(`expected 18 neutral fallbacks, found ${metrics.fallbacks}`);
+          if (metrics.images !== 98) failures.push(`expected 98 images, found ${metrics.images}`);"""
+          new = """const expectedCards = Number(displayPolicy.canonical_records);
+          const expectedLogos = Number(displayPolicy.direct_logo_records);
+          const expectedFallbacks = Number(displayPolicy.neutral_fallback_records);
+          if (metrics.cards !== expectedCards) failures.push(`expected ${expectedCards} cards, found ${metrics.cards}`);
+          if (metrics.logos !== expectedLogos) failures.push(`expected ${expectedLogos} direct logos, found ${metrics.logos}`);
+          if (metrics.fallbacks !== expectedFallbacks) failures.push(`expected ${expectedFallbacks} neutral fallbacks, found ${metrics.fallbacks}`);
+          if (metrics.images !== expectedLogos) failures.push(`expected ${expectedLogos} images, found ${metrics.images}`);"""
+          if old not in catalog:
+              raise SystemExit('logo catalog count anchor missing')
+          catalog_path.write_text(catalog.replace(old, new, 1))
+
+          workflow_path = Path('.github/workflows/capture-screenshots.yml')
+          workflow = workflow_path.read_text()
+          workflow = workflow.replace('Capture all 116 Stablecoin marks', 'Capture all 117 Stablecoin marks')
+          workflow = workflow.replace('Stablecoin mark decisions: 116 of 116', 'Stablecoin mark decisions: 117 of 117')
+          workflow = workflow.replace('All-record Stablecoin mark catalog: 116 cards', 'All-record Stablecoin mark catalog: 117 cards')
+          workflow_path.write_text(workflow)
+
+          readme_path = Path('public/stablecoin-logos/README.md')
+          readme = readme_path.read_text()
+          readme = readme.replace('98 direct Stablecoin/product logos of 116 canonical records (84.48%)', '98 direct Stablecoin/product logos of 117 canonical records (83.76%)')
+          readme = readme.replace('remaining **18 records use the shared neutral monogram fallback**', 'remaining **19 records use the shared neutral monogram fallback**')
+          readme = readme.replace('**98 direct logos and 18 neutral fallbacks**', '**98 direct logos and 19 neutral fallbacks**')
+          readme = readme.replace('All 116 canonical Stablecoin records', 'All 117 canonical Stablecoin records')
+          readme = readme.replace('- 18 neutral fallbacks where research found only project, issuer, or directory-level artwork.', '- 19 neutral fallbacks where research found only project, issuer, or directory-level artwork, including MNEE pending a separately reviewed product-specific mark.')
+          readme_path.write_text(readme)
+          PY
+
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Validate logo contract
+        run: node scripts/audit-stablecoin-logo-coverage.mjs
+
+      - name: Commit permanent logo contract only
+        run: |
+          set -euo pipefail
+          rm -f .github/workflows/finalize-pr498-logo-contract.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'Advance MNEE logo fallback contract'
+          git push origin HEAD:agent/record-growth-batch-4-mnee
