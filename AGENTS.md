@@ -21,7 +21,8 @@ Detail routes: 417
 Metadata-checked detail routes: 417
 Official public origin: https://www.stableorgone.com
 Official-domain migration checkpoint: bd0e63ac36b1824bf705e8c80d1fb0a1cd79d221
-Last production-verified canonical-data checkpoint: a0c86896764a43020e2faa7442d8e7303785295e
+Current production checkpoint: 9d583845d73e4d758ab245812d165f25dd59ada8
+Current production canonical hash: sha256:c6fa6b7494fc3e36f599d88edaa3d2af94a0e8c2f0ee6e4c3ee7d8a9121a4372
 ```
 
 Current authority chain:
@@ -34,8 +35,9 @@ Current authority chain:
 6. PR #497 authorized exactly one complete-record implementation for MNEE.
 7. PR #498 added and production-verified the complete MNEE record.
 8. PR #499 closed the post-PR #498 review gate and authorized one bounded MNEE evidence-maintenance item.
-9. PR #500 implements that maintenance item and must exit to REVIEW GATE after merge and production verification.
-10. `docs/ui-v3-remediation-authority.md` remains the regression-protection contract for material public UI work.
+9. PR #500 completed and production-verified that maintenance item.
+10. The repository is at REVIEW GATE. No later data, candidate, Market Access, YLDS, or material UI work is authorized automatically.
+11. `docs/ui-v3-remediation-authority.md` remains the regression-protection contract for material public UI work.
 
 ## Mandatory reading order
 
@@ -50,10 +52,10 @@ Before changing code, canonical data, workflows, infrastructure, or documentatio
 7. `docs/quality/mnee-evidence-archive-maintenance-spec.md`
 8. `config/mnee-evidence-archive-maintenance.json`
 9. `data/editorial-research/mnee-evidence-archive-maintenance-batch-1-source-review.json`
-10. `docs/roadmap-amendments/2026-07-31-record-growth-batch-4-mnee.md`
-11. `docs/quality/record-growth-batch-4-mnee-pr498-spec.md`
-12. `data/editorial-research/record-growth-batch-4-mnee-pr498-source-review.json`
-13. every named baseline, queue, audit, handoff, source-coverage report, and prior output required by the work item
+10. `docs/migration/current-canonical-checkpoint.json`
+11. `docs/migration/current-review-checkpoint.json`
+12. `docs/migration/current-stats-history-checkpoint.json`
+13. every named baseline, queue, audit, handoff, source-coverage report, and prior output required by a separately authorized work item
 
 Merged repository authority outranks chat memory, handoff prose, issue discussion, generated reports, and unmerged drafts.
 
@@ -72,8 +74,8 @@ PR #496 Record Growth Batch 4 candidate audit: complete and production-verified
 PR #497 Record Growth Batch 4 review gate: complete
 PR #498 Record Growth Batch 4 — MNEE: reviewed complete and production-verified
 PR #499 post-PR #498 review gate and MNEE maintenance authorization: complete
-PR #500 MNEE Evidence and Archive Maintenance — Batch 1: implementation under review
-Required exit after PR #500 merge and production verification: REVIEW GATE
+PR #500 MNEE Evidence and Archive Maintenance — Batch 1: complete and production-verified
+Current state: REVIEW GATE
 ```
 
 ## PR #500 maintenance result
@@ -101,6 +103,15 @@ reserve reports: 125
 known unknowns: 342
 deployments: 184
 detail routes: 417
+metadata-checked detail routes: 417
+```
+
+Production verification:
+
+```text
+source commit: 9d583845d73e4d758ab245812d165f25dd59ada8
+canonical hash: sha256:c6fa6b7494fc3e36f599d88edaa3d2af94a0e8c2f0ee6e4c3ee7d8a9121a4372
+convergence attempt: 1
 ```
 
 No later record-growth batch, YLDS work, Market Access change, public route family, or material UI work is authorized automatically.
@@ -158,7 +169,7 @@ Automated success never overrides a known visual or semantic defect.
 - Open USD must be disambiguated from Origin Dollar before any future record.
 - YLDS must not be treated as an ordinary stablecoin without a separate reviewed scope amendment.
 - Automatic promotion is prohibited.
-- No later canonical asset addition is authorized by PR #500.
+- No later canonical asset addition is currently authorized.
 
 ## Domain and deployment boundary
 
@@ -172,6 +183,6 @@ Canonical metadata, hreflang, OGP, JSON-LD, machine-readable files, robots, site
 
 The legacy host `sog.badjoke-lab.com` still resolves to the Pages project. Its 301 redirect is an external Cloudflare configuration task, not permission to reintroduce the old host into repository canonical output.
 
-Issue #479 remains open for deployment history and the externally blocked redirect.
+Issue #479 remains open only for deployment history and the externally blocked redirect.
 
 A merge to `main` is not proof of production parity. Current main/production equality is established dynamically by `docs/deployment-policy.md`, the deployment workflow, and Issue #479.
