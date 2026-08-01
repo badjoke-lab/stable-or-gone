@@ -23,6 +23,8 @@ function prefixFailures(previousSnapshots, currentSnapshots) {
   return issues;
 }
 
+const NON_GROWTH_CHECKPOINT_KINDS = new Set(['non_growth_normalization_checkpoint', 'non_growth_maintenance_checkpoint']);
+
 function orderingFailures(rows) {
   const issues = [];
   let previousAssetCount = -1;
@@ -35,11 +37,11 @@ function orderingFailures(rows) {
     if (snapshot.recorded_at < previousRecordedAt) issues.push(`${label}: recorded_at order must be non-decreasing`);
 
     if (snapshot.asset_count === previousAssetCount) {
-      if (snapshot.checkpoint_kind !== 'non_growth_normalization_checkpoint') issues.push(`${label}: repeated asset_count requires non_growth_normalization_checkpoint kind`);
+      if (!NON_GROWTH_CHECKPOINT_KINDS.has(snapshot.checkpoint_kind)) issues.push(`${label}: repeated asset_count requires a reviewed non-growth checkpoint kind`);
       if (snapshot.source_checkpoint_id !== previousCheckpointId) issues.push(`${label}: same-count checkpoint must source the immediately preceding history checkpoint`);
     }
 
-    if (snapshot.asset_count > previousAssetCount && snapshot.checkpoint_kind === 'non_growth_normalization_checkpoint') {
+    if (snapshot.asset_count > previousAssetCount && NON_GROWTH_CHECKPOINT_KINDS.has(snapshot.checkpoint_kind)) {
       issues.push(`${label}: non-growth checkpoint may not increase asset_count`);
     }
     if (previousAssetCount >= 0 && snapshot.asset_count > previousAssetCount && snapshot.checkpoint_kind != null && snapshot.checkpoint_kind !== 'controlled_growth_checkpoint') {
@@ -90,7 +92,7 @@ for (const [index, snapshot] of snapshots.entries()) {
   check(Number.isInteger(snapshot.asset_count) && snapshot.asset_count > 0, `${label}: asset_count must be a positive integer`);
   check(/^\d{4}-\d{2}-\d{2}$/.test(snapshot.recorded_at ?? ''), `${label}: recorded_at must be YYYY-MM-DD`);
   if (snapshot.checkpoint_kind != null) {
-    check(['controlled_growth_checkpoint', 'non_growth_normalization_checkpoint'].includes(snapshot.checkpoint_kind), `${label}: invalid checkpoint_kind`);
+    check(['controlled_growth_checkpoint', 'non_growth_normalization_checkpoint', 'non_growth_maintenance_checkpoint'].includes(snapshot.checkpoint_kind), `${label}: invalid checkpoint_kind`);
   }
 
   check(isSha256(snapshot.input_digest_sha256), `${label}: input_digest_sha256 invalid`);
@@ -151,7 +153,8 @@ if (currentIndex >= 0) check(isDeepStrictEqual(snapshots[currentIndex], currentS
 if (historyCheckpoint) {
   const checkpointContracts = {
     reviewed_growth_checkpoint: 'controlled_growth_checkpoint',
-    reviewed_non_growth_checkpoint: 'non_growth_normalization_checkpoint'
+    reviewed_non_growth_checkpoint: 'non_growth_normalization_checkpoint',
+    reviewed_non_growth_maintenance_checkpoint: 'non_growth_maintenance_checkpoint'
   };
   const expectedKind = checkpointContracts[historyCheckpoint.status];
   check(Boolean(expectedKind), 'current stats-history checkpoint status mismatch');
