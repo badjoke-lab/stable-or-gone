@@ -25,7 +25,7 @@ When documents disagree, use this order:
 Current active roadmap amendment:
 
 ```text
-docs/roadmap-amendments/2026-08-01-launch-date-boundary-review-batch-1.md
+docs/roadmap-amendments/2026-08-01-evidence-archive-payload-verification-batch-1.md
 ```
 
 Current operating specification:
@@ -37,7 +37,7 @@ docs/post-351-data-growth-operating-spec.md
 Current work-item specification:
 
 ```text
-docs/quality/launch-date-boundary-review-batch-1-spec.md
+docs/quality/evidence-archive-payload-verification-batch-1-spec.md
 ```
 
 Historical amendments and PR-specific specifications remain historical records. Their completed semantic contracts remain useful, but their old “current” wording and schedules do not override the current roadmap.
@@ -90,21 +90,22 @@ PR #496 Record Growth Batch 4 candidate audit
 Current item:
 
 ```text
-PR #504 post-PR #503 authority synchronization
+PR #505 Evidence Archive Payload Verification — Batch 1 authorization; PR #506 implementation reserved
 ```
 
 Reviewed decision:
 
 ```text
-PR #503 launch-date boundary review: complete and production-verified
-exact targets: sog_st_msusd, sog_st_stablesusdx, sog_st_susde, sog_st_usd1, sog_st_usdm, sog_st_usdh
-exact day resolved: 0
-canonical null preserved: 6
-new canonical Evidence identities: 0
-new canonical assets: 0
-production commit: a89832072b6f4fe07cf43b76ae77d2a5a1aac0f0
-production canonical hash: sha256:c6fa6b7494fc3e36f599d88edaa3d2af94a0e8c2f0ee6e4c3ee7d8a9121a4372
-current boundary: REVIEW GATE
+PR #505 Evidence Archive Payload Verification — Batch 1 authorization
+implementation PR: #506
+exact target count: 10
+source checkpoint: PR #405 reviewed-no-safe-change identities
+allowed outcomes: dated_exact_archive_added or reviewed_no_safe_change
+maximum archive additions: 10
+source replacement: prohibited
+replacement targets: prohibited
+new Evidence identities or Relations: prohibited
+next boundary after PR #506: REVIEW GATE
 ```
 
 No later work is pre-authorized.
@@ -230,6 +231,16 @@ A canonical date requires exact day-level primary evidence matching the same ide
 
 PR #503 reviewed every named target. All six remain null because the reviewed primary sources establish only operating-product, month/range, deployment, testing, terms-effective, underlying-asset, rebrand, or later-availability boundaries. The queue records the reviewed range, reason, date, and source list for each target. No canonical Evidence identity or Evidence Relation was added. It may not add assets, organizations, relationships, deployments, Market Access records, route families, rankings, recommendations, or material UI changes. It exits to REVIEW GATE.
 
+## 10B. PR #505 Evidence Archive Payload Verification — Batch 1
+
+PR #505 closes the current review gate only for one ten-identity archived-payload verification pass. PR #506 is the only authorized implementation.
+
+The target set is fixed by `config/evidence-archive-payload-verification-batch-1.json` and consists of the ten PR #405 identities that had exact-source CDX metadata but no independently reviewed archive payload.
+
+An archive may be accepted only when the exact canonical URL returns an HTTP-200 dated Wayback snapshot and the fetched archived body visibly preserves the existing canonical claim scope. CDX metadata, redirect status, root-domain capture, or automated keyword matching without manual payload review cannot authorize a canonical `archived_url`.
+
+PR #506 may change only accepted target `archived_url` fields and forward archive-quality checkpoints. It may not replace source URLs, add Evidence identities or Relations, change non-Evidence canonical records, alter public routes, or modify material UI. It exits to REVIEW GATE. No work beyond PR #506 is pre-authorized.
+
 ## 11. YLDS scope boundary
 
 YLDS is deferred and is not authorized for canonical implementation.
@@ -352,16 +363,16 @@ Scheduled monitoring and candidate auditing remain artifact-only and do not auth
 
 ## 19. Review gate
 
-PR #503 is complete and production-verified. The required review confirms:
+PR #505 is the current reviewed decision. Execute only PR #506 and then stop to review:
 
 ```text
-all six target dispositions recorded
-exact-day evidence threshold preserved
-identity and lineage boundaries preserved
-canonical Evidence additions: 0
-canonical null dates preserved: 6
-canonical counts and route parity preserved
-production parity verified
+all ten payload-review dispositions
+exact Wayback timestamps and canonical URL identity
+archived payload claim-scope preservation
+accepted archive additions, if any
+archive coverage transition
+canonical count and route parity
+production parity
 ```
 
-The repository is at REVIEW GATE. Only a later separate reviewed decision may authorize another work item.
+Only a later separate reviewed decision may authorize another work item.
