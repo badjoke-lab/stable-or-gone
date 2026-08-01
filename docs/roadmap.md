@@ -1,7 +1,7 @@
 # Stable or Gone Roadmap
 
 Updated: 2026-08-01  
-Status: PR #506 Evidence Archive Payload Verification — Batch 1 under review; exit boundary REVIEW GATE
+Status: PR #506 complete and production-verified; REVIEW GATE
 
 ## Current reviewed position
 
@@ -20,11 +20,11 @@ Detail routes: 417
 Metadata-checked detail routes: 417
 Official public origin: https://www.stableorgone.com
 Official-domain migration production checkpoint: bd0e63ac36b1824bf705e8c80d1fb0a1cd79d221
-Current production checkpoint: 58db65bf6c888d48ea53b0d3e4350e3b2a0fc176
-Current production canonical hash: sha256:c6fa6b7494fc3e36f599d88edaa3d2af94a0e8c2f0ee6e4c3ee7d8a9121a4372
+Current production checkpoint: 2a6bfac25538388dd7ea6dc12de96c2c2dc2dad0
+Current production canonical hash: sha256:083860b341f6deebc1109b6b5b044dee584ba5e487e2e9b1722213772256b5bb
 ```
 
-Current `main` and production equality is established dynamically by the deployment workflow and Issue #479. PR #503 production converged with exact count, route, metadata, provenance, and canonical-hash parity.
+Current `main` and production equality is established dynamically by the deployment workflow and Issue #479. PR #506 production converged with exact count, route, metadata, provenance, archive-partition, and canonical-hash parity.
 
 ## Completed acceptance points
 
@@ -43,7 +43,8 @@ PR #502 Launch Date Boundary Review — Batch 1 authorization: complete
 PR #503 Launch Date Boundary Review — Batch 1: complete and production-verified
 PR #504 post-PR #503 authority synchronization: complete and production-verified
 PR #505 Evidence Archive Payload Verification — Batch 1 authorization: complete and production-verified
-PR #506 Evidence Archive Payload Verification — Batch 1: implementation under review
+PR #506 Evidence Archive Payload Verification — Batch 1: complete and production-verified
+PR #507 post-PR #506 authority synchronization: active
 ```
 
 PR #498 remains the current canonical-asset addition checkpoint. PR #500 is the current canonical maintenance and statistics-history checkpoint. PR #492 remains the Statistics and responsive-layout acceptance point. PR #493 remains the official-domain migration acceptance point.
@@ -62,7 +63,24 @@ Archive coverage: 457 / 579
 
 Every accepted archive is an exact canonical-source HTTP-200 Wayback body with a timestamped URL, payload digest, and manual claim-scope review. The RLUSD product page, SPOT mint-guide placeholder, and ampleforth.org root remain without a canonical archive because the reviewed bodies did not preserve their current claim scopes.
 
-PR #506 changes no Evidence identity or Relation, source URL, asset, organization, relationship, event, deployment, Market Access record, route family, or material UI. After merge and production verification, return to REVIEW GATE.
+PR #506 changes no Evidence identity or Relation, source URL, asset, organization, relationship, event, deployment, Market Access record, route family, or material UI.
+
+Production result:
+
+```text
+source commit: 2a6bfac25538388dd7ea6dc12de96c2c2dc2dad0
+canonical hash: sha256:083860b341f6deebc1109b6b5b044dee584ba5e487e2e9b1722213772256b5bb
+convergence attempt: 2
+stable assets: 117
+organizations: 108
+events: 192
+detail routes: 417
+metadata-checked detail routes: 417
+archive recorded: 457
+archive not recorded: 122
+```
+
+The repository is at REVIEW GATE.
 
 ## PR #500 completed item
 
@@ -165,21 +183,20 @@ detail routes: 417
 metadata-checked detail routes: 417
 ```
 
-## Authorized current item
+## Completed current item
 
 ```text
 Evidence Archive Payload Verification — Batch 1
 Authority PR: #505
 Implementation PR: #506
-Targets: ten PR #405 reviewed-no-safe-change Evidence identities
+Authority synchronization PR: #507
+Result: complete and production-verified
 ```
-
-PR #506 must fetch and inspect archived payload bodies. It may add zero to ten exact dated Wayback URLs only when the payload preserves the existing canonical claim scope. CDX metadata alone is insufficient. Source replacement, replacement identities, Evidence identity changes, public output, and non-Evidence canonical changes are prohibited.
 
 ## Current boundary
 
 ```text
-PR #506 implementation, then REVIEW GATE
+REVIEW GATE
 ```
 
 No later archive batch, launch-date batch, dossier batch, record-growth batch, Figure YLDS amendment, Market Access change, public route family, or material public-surface program is authorized automatically.
