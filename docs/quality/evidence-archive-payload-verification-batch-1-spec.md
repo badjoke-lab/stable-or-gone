@@ -1,6 +1,6 @@
 # Evidence Archive Payload Verification — Batch 1
 
-Status: authorized bounded private maintenance  
+Status: implementation reviewed; pending merge and production verification  
 Authority PR: #505  
 Implementation PR: #506  
 Public output: false
@@ -41,6 +41,27 @@ A dated archive may be accepted only when all of the following are true:
 
 CDX metadata, redirects, domain-level captures, URL existence, or keyword matches without payload review are insufficient.
 
+## Reviewed PR #506 result
+
+```text
+Targets reviewed: 10
+Dated exact archives added: 7
+Reviewed no safe change: 3
+Archive recorded: 450 -> 457
+Archive not recorded: 129 -> 122
+Source replacements: 0
+New Evidence identities: 0
+Evidence Relation changes: 0
+```
+
+Accepted payloads preserve the canonical claim scope for three RAI sources, two RLUSD sources, About SPOT, and the SPOT v2 rollout proposal.
+
+The following remain without a canonical archive:
+
+- the broad RLUSD product page, because the reviewed body predates launch and does not preserve the later current scope;
+- the SPOT mint guide, because the reviewed body is only a stay-tuned placeholder; and
+- the ampleforth.org root, because the reviewed bodies are unrelated or pre-SPOT pages.
+
 ## Allowed outcomes
 
 - `dated_exact_archive_added`
@@ -63,6 +84,8 @@ Detail routes: 417
 Metadata-checked routes: 417
 Archive recorded before: 450
 Archive not recorded before: 129
+Archive recorded after: 457
+Archive not recorded after: 122
 ```
 
 Only `archived_url` fields for accepted target identities and the forward archive-quality checkpoints may change. No public route, UI, schema, Evidence identity, Evidence Relation, source URL, or non-Evidence canonical record may change.
