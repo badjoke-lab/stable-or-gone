@@ -21,7 +21,22 @@ jobs:
   retry:
     if: github.event_name != 'pull_request' || github.head_ref == 'agent/evidence-archive-payload-verification-batch-1-implementation'
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 12
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        evidence_id:
+          - sog_src_rai_ungovernance_batch_b
+          - sog_src_rlusd_docs
+          - sog_src_rlusd_launch_2024
+          - sog_src_rlusd_ripple_page
+          - sog_src_spot_about_batch_b
+          - sog_src_spot_mint_batch_b
+          - sog_src_spot_site_batch_b
+          - sog_src_spot_v2_rollout_batch_b
+    env:
+      PR506_TARGET: ${{ matrix.evidence_id }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -33,34 +48,55 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Retry unresolved exact-source payloads
+      - name: Bound retry to matrix target
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          path = Path('scripts/retry-pr506-wayback-gaps.py')
+          text = path.read_text()
+          text = text.replace('import json\n', 'import json\nimport os\n', 1)
+          text = text.replace(
+              "OUTPUT = ROOT / 'data/editorial-research/evidence-archive-payload-verification-batch-1-pr506-gap-retry.json'",
+              "OUTPUT = ROOT / f'data/editorial-research/evidence-archive-payload-verification-batch-1-pr506-gap-retry-{os.environ.get(\"PR506_TARGET\", \"all\")}.json'"
+          )
+          text = text.replace(
+              "def main() -> None:\n    PAYLOADS.mkdir(parents=True, exist_ok=True)\n    results = []\n    for index, (evidence_id, item) in enumerate(TARGETS.items(), start=1):",
+              "def main() -> None:\n    PAYLOADS.mkdir(parents=True, exist_ok=True)\n    selected_id = os.environ.get('PR506_TARGET')\n    if selected_id not in TARGETS:\n        raise SystemExit(f'Unknown PR506_TARGET: {selected_id}')\n    targets = {selected_id: TARGETS[selected_id]}\n    results = []\n    for index, (evidence_id, item) in enumerate(targets.items(), start=1):"
+          )
+          text = text.replace("len(TARGETS)", "len(targets)")
+          path.write_text(text)
+          PY
+
+      - name: Retry unresolved exact-source payload
         run: python scripts/retry-pr506-wayback-gaps.py
 
       - name: Summarize retry
         if: always()
         run: |
           python - <<'PY' >> "$GITHUB_STEP_SUMMARY"
-          import json
+          import json, os
           from pathlib import Path
-          path = Path('data/editorial-research/evidence-archive-payload-verification-batch-1-pr506-gap-retry.json')
-          print('## PR #506 targeted Wayback retry')
+          target = os.environ['PR506_TARGET']
+          path = Path(f'data/editorial-research/evidence-archive-payload-verification-batch-1-pr506-gap-retry-{target}.json')
+          print(f'## PR #506 targeted Wayback retry — `{target}`')
           if not path.exists():
               print('\nRetry output was not generated.')
               raise SystemExit(0)
-          data = json.loads(path.read_text())
-          for row in data['results']:
-              fetched = sum(1 for capture in row['capture_reviews'] if capture['fetch_status'] == 200 and capture['payload_bytes'] > 0)
-              hitful = sum(1 for capture in row['capture_reviews'] if capture['keyword_hits'])
-              print(f"- `{row['evidence_id']}`: CDX {row['cdx_status']}/{row['cdx_capture_count']}, fetched {fetched}, keyword-bearing {hitful}")
+          row = json.loads(path.read_text())['results'][0]
+          fetched = sum(1 for capture in row['capture_reviews'] if capture['fetch_status'] == 200 and capture['payload_bytes'] > 0)
+          hitful = sum(1 for capture in row['capture_reviews'] if capture['keyword_hits'])
+          print(f"\n- CDX: {row['cdx_status']}/{row['cdx_capture_count']}")
+          print(f'- Fetched payloads: {fetched}')
+          print(f'- Keyword-bearing payloads: {hitful}')
           PY
 
       - name: Upload retry artifact
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: pr506-wayback-gap-retry
+          name: pr506-wayback-gap-retry-${{ matrix.evidence_id }}
           path: |
-            data/editorial-research/evidence-archive-payload-verification-batch-1-pr506-gap-retry.json
-            .tmp/pr506-wayback-gap-retry
+            data/editorial-research/evidence-archive-payload-verification-batch-1-pr506-gap-retry-${{ matrix.evidence_id }}.json
+            .tmp/pr506-wayback-gap-retry/${{ matrix.evidence_id }}
           if-no-files-found: warn
           retention-days: 14
