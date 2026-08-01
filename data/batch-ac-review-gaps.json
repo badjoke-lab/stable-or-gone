@@ -4,49 +4,49 @@
     "stablecoin_id": "sog_st_mnee",
     "issuer_id": "sog_issuer_mnee_limited",
     "topic": "latest_attestation_report_body_and_archive",
-    "description": "The official transparency index lists monthly reports through May 2026, but the exact May 2026 report-body figures, signed report URL, snapshot dates, and archive capture were not independently preserved in this batch.",
+    "description": "The official transparency index still lists monthly reports through May 2026, but the exact May 2026 report-body figures, signed report-specific URL, snapshot dates, and a preserved report-specific archive were not independently retrievable in the 2026-08-01 maintenance review.",
     "severity": "high",
-    "last_checked_at": "2026-07-31",
-    "notes": "Do not infer reserve amount, liabilities, excess, or report opinion from the index page."
+    "last_checked_at": "2026-08-01",
+    "notes": "The index entry is verified. Do not infer reserve amount, liabilities, excess, snapshot dates, or report opinion from the index page."
   },
   {
     "id": "sog_ku_mnee_reserve_custodian_pr498",
     "stablecoin_id": "sog_st_mnee",
     "issuer_id": "sog_issuer_mnee_limited",
     "topic": "current_reserve_custodian_and_allocation",
-    "description": "Reviewed sources describe U.S. cash at a qualified custodian and U.S. Treasury bills of no more than 90 days, but do not establish the current custodian identity or exact category allocation for the latest reporting period.",
+    "description": "Reviewed issuer sources state that reserves include U.S. cash held by a qualified custodian and U.S. Treasury bills with duration no longer than 90 days, while the terms place reserve composition at MNEE's discretion. The current custodian identity and latest category amounts or shares remain unreported in the reviewed public sources.",
     "severity": "medium",
-    "last_checked_at": "2026-07-31",
-    "notes": "Reserve components remain amount- and share-unknown."
+    "last_checked_at": "2026-08-01",
+    "notes": "Reserve components remain amount-, share-, custodian-, and latest-period-unknown."
   },
   {
     "id": "sog_ku_mnee_ethereum_launch_pr498",
     "stablecoin_id": "sog_st_mnee",
     "issuer_id": "sog_issuer_mnee_limited",
     "topic": "ethereum_first_public_issuance_date",
-    "description": "The verified Ethereum proxy contract existed by March 2024 and current official materials confirm ERC-20 issuance, but the first public Ethereum issuance or launch date was not established from the reviewed issuer sources.",
+    "description": "The Ethereum proxy deployment and initial implementation upgrade are recorded on 2024-03-21, and current issuer materials confirm ERC-20 issuance. Contract deployment is not proof of first public token issuance or availability, which remains unestablished from reviewed issuer sources.",
     "severity": "medium",
-    "last_checked_at": "2026-07-31",
-    "notes": "The canonical stablecoin launch date remains the verified 1Sat launch date of 2025-03-03."
+    "last_checked_at": "2026-08-01",
+    "notes": "Do not substitute the proxy deployment date for an issuer-confirmed public issuance date. The canonical stablecoin launch date remains the verified 1Sat launch date of 2025-03-03."
   },
   {
     "id": "sog_ku_mnee_controls_pr498",
     "stablecoin_id": "sog_st_mnee",
     "issuer_id": "sog_issuer_mnee_limited",
     "topic": "deployment_control_capabilities",
-    "description": "The reviewed sources do not fully establish current freeze, blacklist, pause, upgrade-admin, mint-authority, or recovery controls for both 1Sat and Ethereum deployments.",
+    "description": "The Ethereum deployment is a transparent upgradeable proxy, the implementation changed on 2025-09-15, the active verified source includes PausableUpgradeable, and issuer terms contemplate legally supported address-freeze requests. Current Ethereum role-holder addresses, operational pause or freeze state, post-upgrade mint/burn/redeem/rescue permissions, and all current 1Sat control capabilities remain unestablished.",
     "severity": "high",
-    "last_checked_at": "2026-07-31",
-    "notes": "Do not infer absence of controls from missing public documentation."
+    "last_checked_at": "2026-08-01",
+    "notes": "Historical implementation controls do not prove unchanged current behavior. Do not infer current role assignments or absence of controls from public silence."
   },
   {
     "id": "sog_ku_mnee_access_pr498",
     "stablecoin_id": "sog_st_mnee",
     "issuer_id": "sog_issuer_mnee_limited",
     "topic": "current_direct_access_and_jurisdiction_inventory",
-    "description": "The reviewed terms establish verified-customer issuance and redemption and publish minimums and fees, but a complete current jurisdiction, customer-type, and operational access inventory was not established.",
+    "description": "The reviewed terms require a verified MNEE customer account for direct issuance and redemption and describe company-document, director, beneficial-owner, sanctions, PEP, watchlist, prohibited-jurisdiction, and higher-risk screening. They do not publish a complete current eligible or prohibited jurisdiction list, complete customer-type policy, or country-by-country onboarding availability.",
     "severity": "medium",
-    "last_checked_at": "2026-07-31",
-    "notes": "Public exchange or wallet availability is not equivalent to direct issuer access."
+    "last_checked_at": "2026-08-01",
+    "notes": "Public exchange, wallet, developer, or partner availability is not equivalent to direct issuer access."
   }
 ]
