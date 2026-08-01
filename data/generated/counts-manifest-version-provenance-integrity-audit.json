@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "audit_id": "sog_counts_manifest_version_provenance_integrity_pr316",
   "audit_date": "2026-07-06",
-  "baseline_id": "sog_release_integrity_pr498_2026_07_31",
+  "baseline_id": "sog_release_integrity_pr506_117_assets_2026_08_01",
   "counts": {
     "v2": {
       "stablecoins": 117,

@@ -1,17 +1,17 @@
 {
   "schema_version": "1.0",
-  "status": "reviewed_non_growth_maintenance_checkpoint",
-  "checkpoint_id": "sog_stats_pr500_mnee_evidence_archive_maintenance_2026_08_01",
-  "checkpoint_kind": "non_growth_maintenance_checkpoint",
+  "status": "reviewed_non_growth_checkpoint",
+  "checkpoint_id": "sog_stats_pr506_evidence_archive_payload_verification_2026_08_01",
+  "checkpoint_kind": "non_growth_evidence_archive_checkpoint",
   "recorded_at": "2026-08-01",
-  "registry_version": "pr500-mnee-evidence-archive-maintenance",
+  "registry_version": "pr506-evidence-archive-payload-verification-batch-1",
   "asset_count": 117,
-  "source_checkpoint_id": "sog_stats_pr498_record_growth_batch_4_mnee_2026_07_31",
-  "canonical_checkpoint_id": "sog_pr500_mnee_evidence_archive_maintenance_117_2026_08_01",
-  "previous_history_checkpoint_id": "sog_stats_pr498_record_growth_batch_4_mnee_2026_07_31",
-  "maintenance_pr": 500,
+  "source_checkpoint_id": "sog_stats_pr500_mnee_evidence_archive_maintenance_2026_08_01",
+  "canonical_checkpoint_id": "sog_pr506_evidence_archive_payload_verification_117_2026_08_01",
+  "previous_history_checkpoint_id": "sog_stats_pr500_mnee_evidence_archive_maintenance_2026_08_01",
+  "maintenance_pr": 506,
   "source_pr": 500,
-  "authority_pr": 499,
+  "authority_pr": 505,
   "source_commit": "pr500-mnee-evidence-archive-maintenance",
   "captured_at": "2026-08-01",
   "expected_totals": {
@@ -24,5 +24,5 @@
     "market_access_records": 8,
     "detail_routes": 417
   },
-  "notes": "Current immutable stats checkpoint after the reviewed non-growth MNEE Evidence and Archive Maintenance — Batch 1."
+  "notes": "Reviewed forward same-count statistics checkpoint for PR #506. It records archive coverage 457 of 579 while preserving every canonical record count and public-surface boundary."
 }

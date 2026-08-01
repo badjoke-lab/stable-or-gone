@@ -42,7 +42,8 @@
     "publisher": "Ripple",
     "claim_scope": "RLUSD developer and integration documentation entry point",
     "reliability": "high",
-    "notes": "PR-028A developer docs entry point. Use for deeper contract / integration review later."
+    "notes": "PR-028A developer docs entry point. Use for deeper contract / integration review later.",
+    "archived_url": "https://web.archive.org/web/20251204205157/https://docs.ripple.com/products/stablecoin"
   },
   {
     "id": "sog_src_rlusd_implementation_repo",
@@ -266,7 +267,8 @@
     "publisher": "Ripple",
     "claim_scope": "RLUSD global launch and exchange availability beginning December 17, 2024",
     "reliability": "high",
-    "notes": "Ripple announced on December 16, 2024 that RLUSD would become available on global exchanges starting December 17, 2024."
+    "notes": "Ripple announced on December 16, 2024 that RLUSD would become available on global exchanges starting December 17, 2024.",
+    "archived_url": "https://web.archive.org/web/20241216170952/https://ripple.com/ripple-press/raising-the-standard-for-stablecoins-ripple-usd-launches-globally/"
   },
   {
     "id": "sog_src_eurc_launch_2022",

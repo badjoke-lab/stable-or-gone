@@ -1,17 +1,17 @@
 {
   "schema_version": "1.0",
-  "status": "reviewed_non_growth_maintenance_checkpoint",
-  "checkpoint_id": "sog_pr500_mnee_evidence_archive_maintenance_117_2026_08_01",
-  "checkpoint_kind": "non_growth_maintenance_checkpoint",
+  "status": "reviewed_non_growth_checkpoint",
+  "checkpoint_id": "sog_pr506_evidence_archive_payload_verification_117_2026_08_01",
+  "checkpoint_kind": "non_growth_evidence_archive_checkpoint",
   "recorded_at": "2026-08-01",
   "captured_at": "2026-08-01",
-  "source_commit": "pr500-mnee-evidence-archive-maintenance",
+  "source_commit": "pr506-evidence-archive-payload-verification-batch-1",
   "asset_count": 117,
-  "source_checkpoint_id": "sog_pr498_record_growth_batch_4_mnee_117_2026_07_31",
-  "previous_checkpoint_id": "sog_pr498_record_growth_batch_4_mnee_117_2026_07_31",
-  "maintenance_pr": 500,
+  "source_checkpoint_id": "sog_pr500_mnee_evidence_archive_maintenance_117_2026_08_01",
+  "previous_checkpoint_id": "sog_pr500_mnee_evidence_archive_maintenance_117_2026_08_01",
+  "maintenance_pr": 506,
   "source_pr": 500,
-  "authority_pr": 499,
+  "authority_pr": 505,
   "expected_counts": {
     "assets": 117,
     "organizations": 108,
@@ -47,14 +47,20 @@
     "classifications": 117,
     "profiles": 117,
     "event_details": 192,
-    "archive_index_count": 450,
-    "archive_not_recorded_count": 129
+    "archive_index_count": 457,
+    "archive_not_recorded_count": 122
   },
   "evidence_quality": {
-    "archive_index_count": 450,
-    "archive_not_recorded_count": 129,
+    "archive_index_count": 457,
+    "archive_not_recorded_count": 122,
     "evidence_relations": 579,
-    "archive_partition_complete": true
+    "archive_partition_complete": true,
+    "selected_for_review": 10,
+    "canonical_changes": 7,
+    "dated_exact_archive_added": 7,
+    "reviewed_no_safe_change": 3,
+    "new_evidence_records": 0,
+    "source_replacements": 0
   },
   "audit": {
     "source_pr": 500,
@@ -63,7 +69,9 @@
     "source_pr_head": "agent/mnee-evidence-archive-maintenance",
     "completed_at": "2026-08-01",
     "selected_context": "mnee_evidence_archive_maintenance_batch_1",
-    "reviewed_assets": ["sog_st_mnee"],
+    "reviewed_assets": [
+      "sog_st_mnee"
+    ],
     "reviewed_known_unknowns": 5,
     "added_assets": 0,
     "added_organizations": 0,
@@ -79,10 +87,12 @@
     "ylds_promoted": false,
     "review_gate_after_pr500": true
   },
-  "notes": "Reviewed non-growth maintenance checkpoint after PR #500. Five MNEE evidence and archive unknowns were re-reviewed, narrowed, or reaffirmed without changing canonical counts or forcing unsupported resolutions.",
+  "notes": "Current deterministic canonical checkpoint after PR #506 Evidence Archive Payload Verification Batch 1. Seven exact dated archived payloads were accepted after body-level claim-scope review and three targets remained without a safe archive. Archive coverage is 457 of 579. Canonical identities, Evidence Relations, all non-Evidence record counts, routes, and public-surface boundaries remain unchanged.",
   "scope": {
     "description": "Bounded MNEE Evidence and Archive Maintenance — Batch 1 authorized by PR #499.",
-    "reviewed_assets": ["MNEE"],
+    "reviewed_assets": [
+      "MNEE"
+    ],
     "canonical_assets_added": 0,
     "canonical_organizations_added": 0,
     "canonical_events_added": 0,
@@ -99,5 +109,31 @@
   "canonical_only": true,
   "includes_unreviewed_candidates": false,
   "includes_internal_monitoring": false,
-  "includes_private_notes": false
+  "includes_private_notes": false,
+  "maintenance_outcome": {
+    "changed_evidence_ids": [
+      "sog_src_rai_integrations_batch_b",
+      "sog_src_rai_oracle_relayer_batch_b",
+      "sog_src_rai_ungovernance_batch_b",
+      "sog_src_rlusd_docs",
+      "sog_src_rlusd_launch_2024",
+      "sog_src_spot_about_batch_b",
+      "sog_src_spot_v2_rollout_batch_b"
+    ],
+    "dated_archive_added_evidence_ids": [
+      "sog_src_rai_integrations_batch_b",
+      "sog_src_rai_oracle_relayer_batch_b",
+      "sog_src_rai_ungovernance_batch_b",
+      "sog_src_rlusd_docs",
+      "sog_src_rlusd_launch_2024",
+      "sog_src_spot_about_batch_b",
+      "sog_src_spot_v2_rollout_batch_b"
+    ],
+    "reviewed_no_safe_change_evidence_ids": [
+      "sog_src_rlusd_ripple_page",
+      "sog_src_spot_mint_batch_b",
+      "sog_src_spot_site_batch_b"
+    ],
+    "source_replacement_evidence_ids": []
+  }
 }
