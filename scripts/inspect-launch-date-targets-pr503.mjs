@@ -37,4 +37,7 @@ for (const file of files.sort()) {
   });
 }
 
-console.log(JSON.stringify({ targets: [...targets], match_count: matches.length, matches }, null, 2));
+const output = { generated_at: '2026-08-01', targets: [...targets], match_count: matches.length, matches };
+fs.mkdirSync('docs/migration', { recursive: true });
+fs.writeFileSync('docs/migration/launch-date-target-inspection-pr503.json', `${JSON.stringify(output, null, 2)}\n`);
+console.log(JSON.stringify({ ok: true, match_count: matches.length, output: 'docs/migration/launch-date-target-inspection-pr503.json' }, null, 2));
