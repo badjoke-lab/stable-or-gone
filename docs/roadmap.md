@@ -1,7 +1,7 @@
 # Stable or Gone Roadmap
 
-Updated: 2026-07-31  
-Status: PR #498 Record Growth Batch 4 complete; REVIEW GATE active
+Updated: 2026-08-01  
+Status: post-PR #498 review gate complete; MNEE Evidence and Archive Maintenance — Batch 1 active
 
 ## Current reviewed position
 
@@ -20,6 +20,7 @@ Detail routes: 417
 Metadata-checked detail routes: 417
 Official public origin: https://www.stableorgone.com
 Official-domain migration production checkpoint: bd0e63ac36b1824bf705e8c80d1fb0a1cd79d221
+Current production checkpoint: a0c86896764a43020e2faa7442d8e7303785295e
 ```
 
 Current `main` and production equality is established dynamically by the deployment workflow and Issue #479. A merge is not proof of production parity.
@@ -33,63 +34,74 @@ PR #493 official-domain migration: complete and production-verified
 PR #495 post-domain authority synchronization and obsolete issue reconciliation: complete
 PR #496 Record Growth Batch 4 candidate audit: complete and production-verified
 PR #497 Record Growth Batch 4 review gate: complete
-PR #498 Record Growth Batch 4 — MNEE: reviewed complete
+PR #498 Record Growth Batch 4 — MNEE: reviewed complete and production-verified
+Post-PR #498 review gate: complete
 ```
 
 PR #498 is the current canonical-data checkpoint. PR #492 remains the Statistics and responsive-layout acceptance point. PR #493 remains the official-domain migration acceptance point.
 
-## PR #498 result
+## Post-PR #498 review decision
 
-PR #498 added exactly one complete canonical asset: MNEE.
+The MNEE record is structurally complete and production-verified, but five explicit evidence and archive unknowns remain. The next item prioritizes those gaps over another record-growth batch.
+
+The decision preserves:
 
 ```text
-Stablecoin: sog_st_mnee
-Issuer: sog_issuer_mnee_limited
-Launch date: 2025-03-03
-1Sat Ordinals production token ID: ae59f3b898ec61acbdb6cc7a245fabeded0c094bf046f35206a3aec60ef88127_0
-Ethereum contract: 0x8ccedbae4916b79da7f3f612efb2eb93a2bfd6cf
-Evidence added: 8
-Known unknowns added: 5
-Deployment identifiers added: 2
+new canonical assets: 0
+Figure YLDS: deferred
+Market Access changes: 0
+new public route families: 0
+material UI work: 0
 ```
-
-The official `@mnee/ts-sdk` package version 1.2.0 supplies the production 1Sat token ID. Both deployment records remain `identifier_recorded_unverified` in the review overlay; current control capabilities and independent runtime verification are not inferred.
-
-The record preserves unknowns for the latest attestation report body and archive, current reserve custodian and allocation, first public Ethereum issuance date, deployment controls, and the complete direct-access and jurisdiction inventory.
-
-## YLDS boundary
-
-Figure YLDS remains deferred. Its issuer describes it as a registered fixed-income security rather than a stablecoin. Its face-amount units, holder yield, issuer-credit exposure, securities eligibility, transfer and redemption restrictions, and chain or wrapper semantics require a separate reviewed scope amendment. No YLDS canonical work is authorized.
 
 ## Current item
 
 ```text
-REVIEW GATE after PR #498
+MNEE Evidence and Archive Maintenance — Batch 1
 ```
 
 Governing files:
 
 ```text
-docs/roadmap-amendments/2026-07-31-record-growth-batch-4-mnee.md
+docs/roadmap-amendments/2026-08-01-post-pr498-review-gate.md
+docs/quality/mnee-evidence-archive-maintenance-spec.md
+config/mnee-evidence-archive-maintenance.json
 docs/quality/record-growth-batch-4-mnee-pr498-spec.md
-config/record-growth-batch-4-mnee-pr498.json
 data/editorial-research/record-growth-batch-4-mnee-pr498-source-review.json
-docs/migration/record-growth-batch-4-mnee-pr498-handoff.json
 ```
 
-Stop and review the actual merged and production-verified result:
+Authorized targets:
 
 ```text
-canonical record completeness
-source and archive completeness
-reserve and redemption support
-deployment identity and control unknowns
-known-unknown and maintenance burden
-production commit, count, route, and metadata parity
-value of later dossier deepening versus another bounded growth item
+latest listed attestation report body and archive
+current reserve custodian and allocation
+first public Ethereum issuance date
+current deployment control configuration
+complete direct-access and jurisdiction inventory
 ```
 
-No later record-growth batch, YLDS scope amendment, Market Access change, new public page, major navigation change, ranking, score, recommendation, or material UI program is pre-authorized.
+A target may remain unknown when primary evidence is insufficient. The work must not force a resolution.
+
+Hard limits:
+
+```text
+maximum new canonical stable assets: 0
+maximum new organizations: 0
+maximum new lifecycle events: 0
+maximum new Market Access Records: 0
+maximum new canonical Evidence records: 8
+maximum new reserve reports: 1
+maximum new deployments: 0
+material UI or CSS changes: prohibited
+new public route families: prohibited
+Figure YLDS work: prohibited
+```
+
+After the maintenance item, stop at REVIEW GATE.
+
+## YLDS boundary
+
+Figure YLDS remains deferred. Its issuer describes it as a registered fixed-income security rather than a stablecoin. Its face-amount units, holder yield, issuer-credit exposure, securities eligibility, transfer and redemption restrictions, and chain or wrapper semantics require a separate reviewed scope amendment. No YLDS canonical work is authorized.
 
 ## Statistics contract
 
