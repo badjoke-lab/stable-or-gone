@@ -2923,7 +2923,7 @@
     },
     {
       "checkpoint_id": "sog_stats_pr506_evidence_archive_payload_verification_2026_08_01",
-      "checkpoint_kind": "non_growth_evidence_archive_checkpoint",
+      "checkpoint_kind": "non_growth_maintenance_checkpoint",
       "source_checkpoint_id": "sog_stats_pr500_mnee_evidence_archive_maintenance_2026_08_01",
       "canonical_checkpoint_id": "sog_pr506_evidence_archive_payload_verification_117_2026_08_01",
       "recorded_at": "2026-08-01",
@@ -3037,7 +3037,7 @@
           "percentage": 100
         }
       },
-      "snapshot_sha256": "33ab6e43a15c8dc8f0a22b3ce223e3e8686a4d632d3d85c59df6f062e8b5d517"
+      "snapshot_sha256": "b09eed819ed064748202fa5f2cabf79abbd6669038c67d310c6cfa16be8dc074"
     }
   ]
 }
