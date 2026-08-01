@@ -12,6 +12,7 @@
   "source_growth_checkpoint_id": "sog_pr498_record_growth_batch_4_mnee_117_2026_07_31",
   "stats_checkpoint_id": "sog_stats_pr500_mnee_evidence_archive_maintenance_2026_08_01",
   "stats_snapshot_sha256": "f3d8b10c38ee34dbe95a285a2cd2734e8c19c259392a960733d0aff15bbdb71a",
+  "stats_history_taxonomy": "non_growth_maintenance_checkpoint",
   "preserved_growth_stats_checkpoint_id": "sog_stats_pr498_record_growth_batch_4_mnee_2026_07_31",
   "preserved_growth_stats_snapshot_sha256": "379d2dee89c6b6a334a5edef5d7c6693b3b35dcbd265dd705f045aa99ecf54b3",
   "canonical_counts_unchanged": true,
