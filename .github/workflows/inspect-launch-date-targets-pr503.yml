@@ -1,0 +1,25 @@
+name: Inspect launch-date targets PR503
+
+on:
+  push:
+    branches:
+      - agent/launch-date-boundary-review-batch-1-implementation
+    paths:
+      - scripts/inspect-launch-date-targets-pr503.mjs
+      - .github/workflows/inspect-launch-date-targets-pr503.yml
+
+permissions:
+  contents: read
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/launch-date-boundary-review-batch-1-implementation
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+      - name: Inspect canonical target records
+        run: node scripts/inspect-launch-date-targets-pr503.mjs
