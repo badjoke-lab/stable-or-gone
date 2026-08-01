@@ -21,7 +21,7 @@ Detail routes: 417
 Metadata-checked detail routes: 417
 Official public origin: https://www.stableorgone.com
 Official-domain migration checkpoint: bd0e63ac36b1824bf705e8c80d1fb0a1cd79d221
-Current production checkpoint: 9d583845d73e4d758ab245812d165f25dd59ada8
+Current production checkpoint: 9136f44bff06d20b8611d66ed28156c9147765a5
 Current production canonical hash: sha256:c6fa6b7494fc3e36f599d88edaa3d2af94a0e8c2f0ee6e4c3ee7d8a9121a4372
 ```
 
@@ -36,8 +36,9 @@ Current authority chain:
 7. PR #498 added and production-verified the complete MNEE record.
 8. PR #499 closed the post-PR #498 review gate and authorized one bounded MNEE evidence-maintenance item.
 9. PR #500 completed and production-verified that maintenance item.
-10. The repository is at REVIEW GATE. No later data, candidate, Market Access, YLDS, or material UI work is authorized automatically.
-11. `docs/ui-v3-remediation-authority.md` remains the regression-protection contract for material public UI work.
+10. PR #502 closes the post-PR #500 review gate and authorizes one bounded launch-date boundary review for six named records.
+11. PR #502 itself changes no canonical data; implementation is reserved for PR #503.
+12. `docs/ui-v3-remediation-authority.md` remains the regression-protection contract for material public UI work.
 
 ## Mandatory reading order
 
@@ -47,15 +48,18 @@ Before changing code, canonical data, workflows, infrastructure, or documentatio
 2. `docs/spec-governance.md`
 3. `docs/roadmap.md`
 4. `docs/deployment-policy.md`
-5. `docs/roadmap-amendments/2026-08-01-post-pr498-review-gate.md`
-6. `docs/post-351-data-growth-operating-spec.md`
-7. `docs/quality/mnee-evidence-archive-maintenance-spec.md`
-8. `config/mnee-evidence-archive-maintenance.json`
-9. `data/editorial-research/mnee-evidence-archive-maintenance-batch-1-source-review.json`
-10. `docs/migration/current-canonical-checkpoint.json`
-11. `docs/migration/current-review-checkpoint.json`
-12. `docs/migration/current-stats-history-checkpoint.json`
-13. every named baseline, queue, audit, handoff, source-coverage report, and prior output required by a separately authorized work item
+5. `docs/roadmap-amendments/2026-08-01-launch-date-boundary-review-batch-1.md`
+6. `docs/quality/launch-date-boundary-review-batch-1-spec.md`
+7. `config/launch-date-boundary-review-batch-1.json`
+8. `docs/roadmap-amendments/2026-08-01-post-pr498-review-gate.md`
+9. `docs/post-351-data-growth-operating-spec.md`
+10. `docs/quality/mnee-evidence-archive-maintenance-spec.md`
+11. `config/mnee-evidence-archive-maintenance.json`
+12. `data/editorial-research/mnee-evidence-archive-maintenance-batch-1-source-review.json`
+13. `docs/migration/current-canonical-checkpoint.json`
+14. `docs/migration/current-review-checkpoint.json`
+15. `docs/migration/current-stats-history-checkpoint.json`
+16. every named baseline, queue, audit, handoff, source-coverage report, and prior output required by a separately authorized work item
 
 Merged repository authority outranks chat memory, handoff prose, issue discussion, generated reports, and unmerged drafts.
 
@@ -76,8 +80,26 @@ PR #498 Record Growth Batch 4 — MNEE: reviewed complete and production-verifie
 PR #499 post-PR #498 review gate and MNEE maintenance authorization: complete
 PR #500 MNEE Evidence and Archive Maintenance — Batch 1: complete and production-verified
 Required exit after PR #500 merge and production verification: REVIEW GATE — satisfied
-Current state: REVIEW GATE
+PR #501 post-PR #500 authority synchronization: complete and production-verified
+PR #502 Launch Date Boundary Review — Batch 1 authorization: active
+Authorized implementation: PR #503 review-only evidence and boundary audit
+Required exit after PR #503: REVIEW GATE
 ```
+
+## PR #502 authorized review
+
+The next bounded item reviews exactly six unresolved launch-date records that currently lack both a formal review date and reviewed-source list:
+
+```text
+sog_st_msusd
+sog_st_stablesusdx
+sog_st_susde
+sog_st_usd1
+sog_st_usdm
+sog_st_usdh
+```
+
+PR #502 changes authority only. PR #503 may set a launch date only from exact day-level primary evidence matching the launch boundary. Otherwise the date remains null and the reviewed range, sources, and reason must be recorded. No seventh or replacement target is allowed.
 
 ## PR #500 maintenance result
 

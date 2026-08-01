@@ -1,0 +1,61 @@
+{
+  "schema_version": "1.0",
+  "work_item": "launch_date_boundary_review_batch_1",
+  "status": "authorized_review_only",
+  "authority_pr": 502,
+  "implementation_pr": 503,
+  "authorized_at": "2026-08-01",
+  "source_queue": "data/quality/launch-date-unresolved.json",
+  "canonical_baseline": {
+    "stable_assets": 117,
+    "organizations": 108,
+    "relationships": 129,
+    "events": 192,
+    "evidence": 579,
+    "evidence_relations": 579,
+    "deployments": 184,
+    "detail_routes": 417,
+    "metadata_checked_detail_routes": 417
+  },
+  "target_stablecoin_ids": [
+    "sog_st_msusd",
+    "sog_st_stablesusdx",
+    "sog_st_susde",
+    "sog_st_usd1",
+    "sog_st_usdm",
+    "sog_st_usdh"
+  ],
+  "selection_rule": "launch_date_null_and_missing_reviewed_sources_or_last_reviewed_in_current_queue",
+  "review_requirements": {
+    "primary_sources_required": true,
+    "day_level_evidence_required_for_canonical_launch_date": true,
+    "announcement_not_launch_by_default": true,
+    "contract_deployment_not_launch_by_default": true,
+    "first_mint_not_public_availability_by_default": true,
+    "exchange_listing_not_launch_by_default": true,
+    "rebrand_or_migration_not_original_launch_by_default": true,
+    "unsupported_date_coercion_prohibited": true,
+    "unresolved_outcomes_must_remain_null": true
+  },
+  "authorization_boundary": {
+    "authority_pr_canonical_changes_allowed": false,
+    "implementation_pr_may_update_only_named_launch_boundaries": true,
+    "implementation_pr_may_add_evidence_only_for_named_launch_claims": true,
+    "asset_additions": 0,
+    "organization_additions": 0,
+    "relationship_additions": 0,
+    "event_additions_without_separate_review": 0,
+    "deployment_changes": 0,
+    "market_access_changes": 0,
+    "public_route_family_changes": 0,
+    "material_ui_changes": 0,
+    "automatic_promotion": false,
+    "replacement_targets": false
+  },
+  "required_outcome_per_target": [
+    "resolved_exact_day_with_primary_evidence",
+    "bounded_range_reconfirmed_and_null_preserved",
+    "identity_or_lineage_conflict_requires_separate_scope"
+  ],
+  "exit_boundary_after_implementation": "REVIEW_GATE"
+}

@@ -1,7 +1,7 @@
 # Stable or Gone Roadmap
 
 Updated: 2026-08-01  
-Status: PR #500 complete and production-verified; REVIEW GATE
+Status: PR #502 Launch Date Boundary Review — Batch 1 authorized; PR #503 implementation next
 
 ## Current reviewed position
 
@@ -20,7 +20,7 @@ Detail routes: 417
 Metadata-checked detail routes: 417
 Official public origin: https://www.stableorgone.com
 Official-domain migration production checkpoint: bd0e63ac36b1824bf705e8c80d1fb0a1cd79d221
-Current production checkpoint: 9d583845d73e4d758ab245812d165f25dd59ada8
+Current production checkpoint: 9136f44bff06d20b8611d66ed28156c9147765a5
 Current production canonical hash: sha256:c6fa6b7494fc3e36f599d88edaa3d2af94a0e8c2f0ee6e4c3ee7d8a9121a4372
 ```
 
@@ -38,6 +38,8 @@ PR #497 Record Growth Batch 4 review gate: complete
 PR #498 Record Growth Batch 4 — MNEE: reviewed complete and production-verified
 PR #499 post-PR #498 review gate and MNEE maintenance authorization: complete
 PR #500 MNEE Evidence and Archive Maintenance — Batch 1: complete and production-verified
+PR #501 post-PR #500 authority synchronization: complete and production-verified
+PR #502 Launch Date Boundary Review — Batch 1 authorization: active
 ```
 
 PR #498 remains the current canonical-asset addition checkpoint. PR #500 is the current canonical maintenance and statistics-history checkpoint. PR #492 remains the Statistics and responsive-layout acceptance point. PR #493 remains the official-domain migration acceptance point.
@@ -109,15 +111,20 @@ canonical hash: sha256:c6fa6b7494fc3e36f599d88edaa3d2af94a0e8c2f0ee6e4c3ee7d8a91
 convergence attempt: 1
 ```
 
-## Current boundary
+## Authorized current item
 
 ```text
-REVIEW GATE
+Launch Date Boundary Review — Batch 1
+Authority PR: #502
+Implementation PR: #503
+Targets: sog_st_msusd, sog_st_stablesusdx, sog_st_susde, sog_st_usd1, sog_st_usdm, sog_st_usdh
 ```
 
-No later dossier batch, record-growth batch, Figure YLDS amendment, Market Access change, public route family, or material public-surface program is authorized automatically.
+PR #503 must review all six named targets using primary sources. Exact day-level launch dates may be written only when the source matches the canonical identity and the launch boundary. Otherwise the date remains null and the queue receives a reviewed range, specific reason, review date, and source list.
 
-The PR #496 candidate audit remains the latest complete candidate review. Its non-MNEE candidates were not supported for complete-record promotion at that checkpoint. A later candidate refresh requires a separate reviewed decision; it must not reuse the MNEE authorization.
+The item adds no new asset and authorizes no replacement target, YLDS work, Market Access change, route family, ranking, recommendation, or material UI change. After PR #503 merge and production verification, stop at REVIEW GATE.
+
+The PR #496 candidate audit remains the latest complete candidate review. Its non-MNEE candidates were not supported for complete-record promotion at that checkpoint.
 
 ## YLDS boundary
 

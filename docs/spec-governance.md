@@ -25,7 +25,7 @@ When documents disagree, use this order:
 Current active roadmap amendment:
 
 ```text
-docs/roadmap-amendments/2026-07-31-record-growth-batch-4-mnee.md
+docs/roadmap-amendments/2026-08-01-launch-date-boundary-review-batch-1.md
 ```
 
 Current operating specification:
@@ -37,7 +37,7 @@ docs/post-351-data-growth-operating-spec.md
 Current work-item specification:
 
 ```text
-docs/quality/record-growth-batch-4-mnee-pr498-spec.md
+docs/quality/launch-date-boundary-review-batch-1-spec.md
 ```
 
 Historical amendments and PR-specific specifications remain historical records. Their completed semantic contracts remain useful, but their old “current” wording and schedules do not override the current roadmap.
@@ -70,7 +70,7 @@ Evidence Relations: 579
 Deployments: 184
 Market Access Records: 8
 Detail routes: 417
-Metadata-checked detail routes: 414
+Metadata-checked detail routes: 417
 Official public origin: https://www.stableorgone.com
 Official-domain migration production checkpoint: bd0e63ac36b1824bf705e8c80d1fb0a1cd79d221
 ```
@@ -90,20 +90,22 @@ PR #496 Record Growth Batch 4 candidate audit
 Current item:
 
 ```text
-PR #497 Record Growth Batch 4 review gate
+PR #502 Launch Date Boundary Review — Batch 1 authorization
 ```
 
 Reviewed decision:
 
 ```text
-PR #498 Record Growth Batch 4 — MNEE: authorized next
-maximum new canonical assets: 1
-replacement candidate: prohibited
-Figure YLDS: deferred pending separate scope amendment
-next boundary after PR #498: REVIEW GATE
+PR #503 launch-date boundary review: authorized next
+exact targets: sog_st_msusd, sog_st_stablesusdx, sog_st_susde, sog_st_usd1, sog_st_usdm, sog_st_usdh
+new canonical assets: 0
+replacement targets: prohibited
+canonical day required: true
+unsupported date coercion: prohibited
+next boundary after PR #503: REVIEW GATE
 ```
 
-No work after PR #498 is pre-authorized.
+No work beyond the six-target PR #503 review is pre-authorized.
 
 ## 5. Change control
 
@@ -215,6 +217,16 @@ PR #498 preserves explicit unknowns for the latest listed attestation report bod
 PR #498 changed no Market Access record, public route family, material UI/CSS contract, ranking, score, recommendation, or monitoring-publication boundary. The three additional detail routes are data-driven dossier routes for the new asset, issuer, and launch event.
 
 PR #498 exits only to `REVIEW GATE`. No later work is authorized automatically.
+
+## 10A. PR #502 Launch Date Boundary Review — Batch 1
+
+PR #502 closes the post-PR #500 review gate only for a six-target launch-date evidence review. It changes no canonical data itself.
+
+The target set is fixed to `sog_st_msusd`, `sog_st_stablesusdx`, `sog_st_susde`, `sog_st_usd1`, `sog_st_usdm`, and `sog_st_usdh`. PR #503 must review every target and may not substitute another record.
+
+A canonical date requires exact day-level primary evidence matching the same identity and launch boundary. Announcement, contract deployment, first mint, exchange listing, network activation, migration, and rebrand dates remain distinct unless primary evidence explicitly establishes equivalence. Unresolved outcomes remain null.
+
+PR #503 may add canonical Evidence only for direct named launch claims and may update only the named launch boundaries and queue records. It may not add assets, organizations, relationships, deployments, Market Access records, route families, rankings, recommendations, or material UI changes. It exits to REVIEW GATE.
 
 ## 11. YLDS scope boundary
 
@@ -338,17 +350,16 @@ Scheduled monitoring and candidate auditing remain artifact-only and do not auth
 
 ## 19. Review gate
 
-PR #498 is complete. Stop and review:
+PR #502 is the current reviewed decision. Execute only PR #503 and then stop to review:
 
 ```text
-whether MNEE was added or withheld
-canonical record completeness
-source and archive completeness
-reserve and redemption support
-deployment identity support
-known unknowns
-maintenance burden
+all six target dispositions
+exact-day evidence quality
+identity and lineage boundaries
+Evidence additions, if any
+null-date preservation
+canonical counts and route parity
 production parity
 ```
 
-Only a separate reviewed decision may authorize later work.
+Only a later separate reviewed decision may authorize another work item.
