@@ -1,5 +1,5 @@
-name: PR506 Wayback gap retry
-run-name: PR506 gap retry · ${{ github.event_name }} · ${{ github.sha }}
+name: Finalize PR506 archive payload implementation
+run-name: Finalize PR506 · ${{ github.event_name }} · ${{ github.sha }}
 
 on:
   push:
@@ -11,92 +11,55 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
-  group: pr506-wayback-gap-retry-${{ github.ref }}
-  cancel-in-progress: true
+  group: finalize-pr506-archive-payload
+  cancel-in-progress: false
 
 jobs:
-  retry:
+  finalize:
     if: github.event_name != 'pull_request' || github.head_ref == 'agent/evidence-archive-payload-verification-batch-1-implementation'
     runs-on: ubuntu-latest
-    timeout-minutes: 12
-    strategy:
-      fail-fast: false
-      max-parallel: 4
-      matrix:
-        evidence_id:
-          - sog_src_rai_ungovernance_batch_b
-          - sog_src_rlusd_docs
-          - sog_src_rlusd_launch_2024
-          - sog_src_rlusd_ripple_page
-          - sog_src_spot_about_batch_b
-          - sog_src_spot_mint_batch_b
-          - sog_src_spot_site_batch_b
-          - sog_src_spot_v2_rollout_batch_b
-    env:
-      PR506_TARGET: ${{ matrix.evidence_id }}
+    timeout-minutes: 45
     steps:
-      - name: Checkout
+      - name: Checkout implementation branch
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+          ref: agent/evidence-archive-payload-verification-batch-1-implementation
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
-          python-version: '3.12'
+          node-version: 22.22.0
+          cache: npm
 
-      - name: Bound retry to matrix target
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Build reviewed PR506 outputs
+        run: node scripts/finalize-pr506-evidence-archive-payload.mjs
+
+      - name: Remove temporary probe and finalizer files
         run: |
-          python - <<'PY'
-          from pathlib import Path
-          path = Path('scripts/retry-pr506-wayback-gaps.py')
-          text = path.read_text()
-          text = text.replace('import json\n', 'import json\nimport os\n', 1)
-          text = text.replace(
-              "OUTPUT = ROOT / 'data/editorial-research/evidence-archive-payload-verification-batch-1-pr506-gap-retry.json'",
-              "OUTPUT = ROOT / f'data/editorial-research/evidence-archive-payload-verification-batch-1-pr506-gap-retry-{os.environ.get(\"PR506_TARGET\", \"all\")}.json'"
-          )
-          text = text.replace(
-              "def main() -> None:\n    PAYLOADS.mkdir(parents=True, exist_ok=True)\n    results = []\n    for index, (evidence_id, item) in enumerate(TARGETS.items(), start=1):",
-              "def main() -> None:\n    PAYLOADS.mkdir(parents=True, exist_ok=True)\n    selected_id = os.environ.get('PR506_TARGET')\n    if selected_id not in TARGETS:\n        raise SystemExit(f'Unknown PR506_TARGET: {selected_id}')\n    targets = {selected_id: TARGETS[selected_id]}\n    results = []\n    for index, (evidence_id, item) in enumerate(targets.items(), start=1):"
-          )
-          text = text.replace("len(TARGETS)", "len(targets)")
-          path.write_text(text)
-          PY
+          rm .github/workflows/pr506-wayback-payload-probe.yml
+          rm scripts/probe-evidence-archive-payloads-pr506.py
+          rm scripts/retry-pr506-wayback-gaps.py
+          rm scripts/finalize-pr506-evidence-archive-payload.mjs
 
-      - name: Retry unresolved exact-source payload
-        run: python scripts/retry-pr506-wayback-gaps.py
-
-      - name: Summarize retry
-        if: always()
+      - name: Validate reviewed PR506 state
         run: |
-          python - <<'PY' >> "$GITHUB_STEP_SUMMARY"
-          import json, os
-          from pathlib import Path
-          target = os.environ['PR506_TARGET']
-          path = Path(f'data/editorial-research/evidence-archive-payload-verification-batch-1-pr506-gap-retry-{target}.json')
-          print(f'## PR #506 targeted Wayback retry — `{target}`')
-          if not path.exists():
-              print('\nRetry output was not generated.')
-              raise SystemExit(0)
-          row = json.loads(path.read_text())['results'][0]
-          fetched = sum(1 for capture in row['capture_reviews'] if capture['fetch_status'] == 200 and capture['payload_bytes'] > 0)
-          hitful = sum(1 for capture in row['capture_reviews'] if capture['keyword_hits'])
-          print(f"\n- CDX: {row['cdx_status']}/{row['cdx_capture_count']}")
-          print(f'- Fetched payloads: {fetched}')
-          print(f'- Keyword-bearing payloads: {hitful}')
-          PY
+          node scripts/validate-evidence-archive-payload-verification-pr506.mjs
+          npm run validate:data
+          npm run validate:compat
+          npm run validate:final
+          npm run validate:release-integrity
 
-      - name: Upload retry artifact
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: pr506-wayback-gap-retry-${{ matrix.evidence_id }}
-          path: |
-            data/editorial-research/evidence-archive-payload-verification-batch-1-pr506-gap-retry-${{ matrix.evidence_id }}.json
-            .tmp/pr506-wayback-gap-retry/${{ matrix.evidence_id }}
-          if-no-files-found: warn
-          retention-days: 14
+      - name: Commit reviewed implementation
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'Add seven reviewed Evidence archive payloads'
+          git push origin HEAD:agent/evidence-archive-payload-verification-batch-1-implementation
