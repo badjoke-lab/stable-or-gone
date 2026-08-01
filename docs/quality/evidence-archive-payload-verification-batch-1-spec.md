@@ -9,6 +9,8 @@ Public output: false
 
 Re-review exactly ten Evidence identities that PR #405 left unchanged because exact-source Wayback CDX metadata existed but the archived payload itself was not independently inspected. PR #506 may add an exact dated Wayback URL only when the archived payload is fetched and manually reviewed as preserving the canonical claim scope.
 
+The private outcome artifact must record enough payload-level review detail to distinguish a genuine preserved source body from a redirect shell, error page, generic site frame, or unrelated capture.
+
 ## Fixed target set
 
 ```text
