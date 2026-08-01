@@ -21,7 +21,7 @@ Detail routes: 417
 Metadata-checked detail routes: 417
 Official public origin: https://www.stableorgone.com
 Official-domain migration checkpoint: bd0e63ac36b1824bf705e8c80d1fb0a1cd79d221
-Current production checkpoint: 2a6bfac25538388dd7ea6dc12de96c2c2dc2dad0
+Current production checkpoint: a4f9c924b2966b1281429a13991ba6219df721d8
 Current production canonical hash: sha256:083860b341f6deebc1109b6b5b044dee584ba5e487e2e9b1722213772256b5bb
 ```
 
@@ -41,8 +41,9 @@ Current authority chain:
 12. PR #504 synchronized the completed checkpoint, was production-verified, and returned the repository to REVIEW GATE.
 13. PR #505 authorized one bounded archived-payload verification pass over ten PR #405 Evidence identities.
 14. PR #506 reviewed all ten archived payload boundaries, accepted seven exact dated archives, preserved three gaps, and was production-verified.
-15. PR #507 synchronizes the completed PR #506 checkpoint and returns repository authority to REVIEW GATE.
-16. `docs/ui-v3-remediation-authority.md` remains the regression-protection contract for material public UI work.
+15. PR #507 synchronized the completed PR #506 checkpoint, was production-verified, and returned repository authority to REVIEW GATE.
+16. PR #508 authorizes one bounded terminal-date boundary review for FEI, NEAR USN, and ESD; implementation is reserved for PR #509.
+17. `docs/ui-v3-remediation-authority.md` remains the regression-protection contract for material public UI work.
 
 ## Mandatory reading order
 
@@ -52,21 +53,25 @@ Before changing code, canonical data, workflows, infrastructure, or documentatio
 2. `docs/spec-governance.md`
 3. `docs/roadmap.md`
 4. `docs/deployment-policy.md`
-5. `docs/roadmap-amendments/2026-08-01-evidence-archive-payload-verification-batch-1.md`
-6. `docs/quality/evidence-archive-payload-verification-batch-1-spec.md`
-7. `config/evidence-archive-payload-verification-batch-1.json`
-8. `docs/roadmap-amendments/2026-08-01-launch-date-boundary-review-batch-1.md`
-9. `docs/quality/launch-date-boundary-review-batch-1-spec.md`
-10. `config/launch-date-boundary-review-batch-1.json`
-11. `docs/roadmap-amendments/2026-08-01-post-pr498-review-gate.md`
-12. `docs/post-351-data-growth-operating-spec.md`
-13. `docs/quality/mnee-evidence-archive-maintenance-spec.md`
-14. `config/mnee-evidence-archive-maintenance.json`
-15. `data/editorial-research/mnee-evidence-archive-maintenance-batch-1-source-review.json`
-16. `docs/migration/current-canonical-checkpoint.json`
-17. `docs/migration/current-review-checkpoint.json`
-18. `docs/migration/current-stats-history-checkpoint.json`
-19. every named baseline, queue, audit, handoff, source-coverage report, and prior output required by a separately authorized work item
+5. `docs/roadmap-amendments/2026-08-01-terminal-date-boundary-review-batch-1.md`
+6. `docs/quality/terminal-date-boundary-review-batch-1-spec.md`
+7. `config/terminal-date-boundary-review-batch-1.json`
+8. `data/quality/terminal-date-unresolved.json`
+9. `docs/roadmap-amendments/2026-08-01-evidence-archive-payload-verification-batch-1.md`
+10. `docs/quality/evidence-archive-payload-verification-batch-1-spec.md`
+11. `config/evidence-archive-payload-verification-batch-1.json`
+12. `docs/roadmap-amendments/2026-08-01-launch-date-boundary-review-batch-1.md`
+13. `docs/quality/launch-date-boundary-review-batch-1-spec.md`
+14. `config/launch-date-boundary-review-batch-1.json`
+15. `docs/roadmap-amendments/2026-08-01-post-pr498-review-gate.md`
+16. `docs/post-351-data-growth-operating-spec.md`
+17. `docs/quality/mnee-evidence-archive-maintenance-spec.md`
+18. `config/mnee-evidence-archive-maintenance.json`
+19. `data/editorial-research/mnee-evidence-archive-maintenance-batch-1-source-review.json`
+20. `docs/migration/current-canonical-checkpoint.json`
+21. `docs/migration/current-review-checkpoint.json`
+22. `docs/migration/current-stats-history-checkpoint.json`
+23. every named baseline, queue, audit, handoff, source-coverage report, and prior output required by a separately authorized work item
 
 Merged repository authority outranks chat memory, handoff prose, issue discussion, generated reports, and unmerged drafts.
 
@@ -95,9 +100,27 @@ PR #504 post-PR #503 authority synchronization: complete and production-verified
 PR #505 Evidence Archive Payload Verification — Batch 1 authorization: complete and production-verified
 PR #506 Evidence Archive Payload Verification — Batch 1: complete and production-verified
 Required exit after PR #506 merge and production verification: REVIEW GATE — satisfied
-PR #507 post-PR #506 authority synchronization: active
-Current repository authority: REVIEW GATE
+PR #507 post-PR #506 authority synchronization: complete and production-verified
+PR #508 Terminal Date Boundary Review — Batch 1 authorization: active
+PR #509 Terminal Date Boundary Review — Batch 1: reserved implementation
+Required exit after PR #509 merge and production verification: REVIEW GATE
 ```
+
+## PR #508 authorized terminal-date review
+
+PR #509 must review exactly three unresolved terminal-date records:
+
+```text
+sog_st_fei
+sog_st_nearusn
+sog_st_esd
+```
+
+A canonical terminal date requires exact day-level primary evidence of the final effective end for the same canonical identity. Governance votes, wind-down starts, mint stops with settlement still open, migration openings, depegs, market inactivity, and last-activity dates are not final terminal dates by default.
+
+PR #509 must either resolve the exact final day or preserve null with a reviewed range, reason code, review date, primary-source list, and rejected shortcuts. No replacement target or automatic Evidence promotion is allowed.
+
+After PR #509 merge and production verification, stop at REVIEW GATE. No second terminal-date batch is authorized automatically.
 
 ## PR #506 reviewed archive-payload result
 

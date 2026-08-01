@@ -1,7 +1,7 @@
 # Stable or Gone Roadmap
 
 Updated: 2026-08-01  
-Status: PR #506 complete and production-verified; REVIEW GATE
+Status: PR #508 Terminal Date Boundary Review — Batch 1 authorized; PR #509 reserved
 
 ## Current reviewed position
 
@@ -20,7 +20,7 @@ Detail routes: 417
 Metadata-checked detail routes: 417
 Official public origin: https://www.stableorgone.com
 Official-domain migration production checkpoint: bd0e63ac36b1824bf705e8c80d1fb0a1cd79d221
-Current production checkpoint: 2a6bfac25538388dd7ea6dc12de96c2c2dc2dad0
+Current production checkpoint: a4f9c924b2966b1281429a13991ba6219df721d8
 Current production canonical hash: sha256:083860b341f6deebc1109b6b5b044dee584ba5e487e2e9b1722213772256b5bb
 ```
 
@@ -44,10 +44,23 @@ PR #503 Launch Date Boundary Review — Batch 1: complete and production-verifie
 PR #504 post-PR #503 authority synchronization: complete and production-verified
 PR #505 Evidence Archive Payload Verification — Batch 1 authorization: complete and production-verified
 PR #506 Evidence Archive Payload Verification — Batch 1: complete and production-verified
-PR #507 post-PR #506 authority synchronization: active
+PR #507 post-PR #506 authority synchronization: complete and production-verified
+PR #508 Terminal Date Boundary Review — Batch 1 authorization: active
+PR #509 Terminal Date Boundary Review — Batch 1: reserved implementation
 ```
 
 PR #498 remains the current canonical-asset addition checkpoint. PR #500 is the current canonical maintenance and statistics-history checkpoint. PR #492 remains the Statistics and responsive-layout acceptance point. PR #493 remains the official-domain migration acceptance point.
+
+## Authorized current item
+
+```text
+Terminal Date Boundary Review — Batch 1
+Authority PR: #508
+Implementation PR: #509
+Targets: FEI, NEAR USN, ESD
+```
+
+PR #509 may resolve an exact terminal day only from day-level primary evidence of final effective cessation. If final redemption, settlement, residual distribution, migration, claim, or contract termination remains unresolved, null must be preserved. No replacement target is allowed.
 
 ## PR #506 reviewed item
 
@@ -196,7 +209,7 @@ Result: complete and production-verified
 ## Current boundary
 
 ```text
-REVIEW GATE
+PR #509 implementation, then REVIEW GATE
 ```
 
 No later archive batch, launch-date batch, dossier batch, record-growth batch, Figure YLDS amendment, Market Access change, public route family, or material public-surface program is authorized automatically.

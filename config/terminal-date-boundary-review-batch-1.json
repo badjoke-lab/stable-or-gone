@@ -1,0 +1,75 @@
+{
+  "schema_version": "1.0",
+  "authority_id": "sog_terminal_date_boundary_review_batch_1_pr508_2026_08_01",
+  "status": "approved_bounded_review",
+  "public_output": false,
+  "authority_pr": 508,
+  "implementation_pr": 509,
+  "reviewed_at": "2026-08-01",
+  "source_queue": "data/quality/terminal-date-unresolved.json",
+  "source_queue_expected_total": 6,
+  "target_count": 3,
+  "target_stablecoin_ids": [
+    "sog_st_fei",
+    "sog_st_nearusn",
+    "sog_st_esd"
+  ],
+  "target_boundaries": {
+    "sog_st_fei": [
+      "executed final redemption completion",
+      "residual distribution completion",
+      "final redemption route shutdown"
+    ],
+    "sog_st_nearusn": [
+      "Protection Programme close",
+      "payout completion",
+      "residual obligation settlement",
+      "final token end state"
+    ],
+    "sog_st_esd": [
+      "V1 end block",
+      "contract disablement",
+      "final migration deadline",
+      "final claim termination"
+    ]
+  },
+  "allowed_outcomes": [
+    "exact_terminal_day_resolved",
+    "reviewed_null_preserved"
+  ],
+  "acceptance_requirements": {
+    "exact_day_level_primary_evidence": true,
+    "same_canonical_identity": true,
+    "final_effective_terminal_boundary": true,
+    "announcement_or_vote_alone_insufficient": true,
+    "wind_down_start_or_migration_opening_alone_insufficient": true,
+    "market_inactivity_or_depeg_insufficient": true
+  },
+  "prohibited": [
+    "replacement_target",
+    "terminal_date_inference_from_depeg",
+    "terminal_date_inference_from_last_commit",
+    "terminal_date_inference_from_market_inactivity",
+    "new_asset",
+    "new_evidence_identity_without_separate_review",
+    "market_access_change",
+    "public_route_change",
+    "material_ui_change",
+    "automatic_continuation_after_pr509"
+  ],
+  "canonical_counts_must_remain": {
+    "assets": 117,
+    "organizations": 108,
+    "relationships": 129,
+    "events": 192,
+    "evidence": 579,
+    "evidence_relations": 579,
+    "deployments": 184,
+    "market_access_records": 8,
+    "detail_routes": 417,
+    "metadata_checked_routes": 417,
+    "archive_recorded": 457,
+    "archive_not_recorded": 122
+  },
+  "next_boundary": "REVIEW_GATE"
+}
