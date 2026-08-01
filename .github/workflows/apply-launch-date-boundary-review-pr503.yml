@@ -1,0 +1,36 @@
+name: Apply launch-date boundary review PR503
+
+on:
+  push:
+    branches:
+      - agent/launch-date-boundary-review-batch-1-implementation
+    paths:
+      - scripts/apply-launch-date-boundary-review-pr503.mjs
+      - .github/workflows/apply-launch-date-boundary-review-pr503.yml
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/launch-date-boundary-review-batch-1-implementation
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+      - name: Apply reviewed launch-date dispositions
+        run: node scripts/apply-launch-date-boundary-review-pr503.mjs
+      - name: Validate reviewed result
+        run: node scripts/validate-launch-date-boundary-review-pr503.mjs
+      - name: Commit final implementation state
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --cached --quiet && exit 0
+          git commit -m "Review six unresolved launch-date boundaries"
+          git push origin HEAD:agent/launch-date-boundary-review-batch-1-implementation
