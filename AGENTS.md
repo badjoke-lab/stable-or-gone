@@ -13,15 +13,15 @@ Relationships: 129
 Events: 192
 Canonical Evidence: 579
 Evidence Relations: 579
-Archive recorded: 450
-Archive not recorded: 129
+Archive recorded: 457
+Archive not recorded: 122
 Deployments: 184
 Market Access Records: 8
 Detail routes: 417
 Metadata-checked detail routes: 417
 Official public origin: https://www.stableorgone.com
 Official-domain migration checkpoint: bd0e63ac36b1824bf705e8c80d1fb0a1cd79d221
-Current production checkpoint: 4ac32bc2476e04bb28142ef75cf421149c441542
+Current production checkpoint: 58db65bf6c888d48ea53b0d3e4350e3b2a0fc176
 Current production canonical hash: sha256:c6fa6b7494fc3e36f599d88edaa3d2af94a0e8c2f0ee6e4c3ee7d8a9121a4372
 ```
 
@@ -39,8 +39,9 @@ Current authority chain:
 10. PR #502 closed the post-PR #500 review gate and authorized one bounded launch-date boundary review for six named records.
 11. PR #503 completed that review, preserved all six exact launch dates as null, and was production-verified.
 12. PR #504 synchronized the completed checkpoint, was production-verified, and returned the repository to REVIEW GATE.
-13. PR #505 authorizes one bounded archived-payload verification pass over ten PR #405 Evidence identities; implementation is reserved for PR #506.
-14. `docs/ui-v3-remediation-authority.md` remains the regression-protection contract for material public UI work.
+13. PR #505 authorized one bounded archived-payload verification pass over ten PR #405 Evidence identities.
+14. PR #506 reviewed all ten archived payload boundaries, accepted seven exact dated archives, preserved three gaps, and is under review.
+15. `docs/ui-v3-remediation-authority.md` remains the regression-protection contract for material public UI work.
 
 ## Mandatory reading order
 
@@ -90,10 +91,27 @@ PR #502 Launch Date Boundary Review — Batch 1 authorization: complete
 PR #503 Launch Date Boundary Review — Batch 1: complete and production-verified
 Required exit after PR #503 merge and production verification: REVIEW GATE — satisfied
 PR #504 post-PR #503 authority synchronization: complete and production-verified
-PR #505 Evidence Archive Payload Verification — Batch 1 authorization: active
-PR #506 Evidence Archive Payload Verification — Batch 1: reserved implementation
+PR #505 Evidence Archive Payload Verification — Batch 1 authorization: complete and production-verified
+PR #506 Evidence Archive Payload Verification — Batch 1: implementation under review
 Required exit after PR #506 merge and production verification: REVIEW GATE
 ```
+
+## PR #506 reviewed archive-payload result
+
+PR #506 reviewed all ten fixed identities. Seven exact dated Wayback payloads preserve the canonical claim scope and are added as canonical `archived_url` values. Three targets remain without a safe archive.
+
+```text
+dated exact archives added: 7
+reviewed no safe change: 3
+Evidence identities: 579
+Evidence Relations: 579
+Archive recorded: 457
+Archive not recorded: 122
+```
+
+The three preserved gaps are the broad RLUSD product page, the SPOT mint-guide placeholder, and the ampleforth.org root whose sampled historical bodies are unrelated or pre-SPOT. Source URLs, Evidence identities, Evidence Relations, non-Evidence canonical records, routes, and UI remain unchanged.
+
+After PR #506 merge and production verification, stop at REVIEW GATE. No later archive batch is authorized automatically.
 
 ## PR #505 authorized archive-payload review
 

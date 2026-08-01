@@ -1,0 +1,145 @@
+{
+  "schema_version": "1.0",
+  "outcome_id": "sog_evidence_archive_payload_verification_batch_1_pr506_outcomes_2026_08_01",
+  "status": "reviewed_bounded_maintenance",
+  "public_output": false,
+  "authority_pr": 505,
+  "implementation_pr": 506,
+  "selected_count": 10,
+  "changed_count": 7,
+  "dated_archive_added_count": 7,
+  "reviewed_no_safe_change_count": 3,
+  "canonical_evidence_count_after": 579,
+  "evidence_relation_count_after": 579,
+  "archive_index_count_before": 450,
+  "archive_index_count_after": 457,
+  "archive_not_recorded_count_before": 129,
+  "archive_not_recorded_count_after": 122,
+  "changed_files": [
+    "data/evidence-batch-b.json",
+    "data/evidence-extra.json"
+  ],
+  "outcomes": [
+    {
+      "evidence_id": "sog_src_rai_integrations_batch_b",
+      "source_file": "data/evidence-batch-b.json",
+      "decision": "dated_exact_archive_added",
+      "canonical_url": "https://docs.reflexer.finance/rai/rai-integrations-and-partners",
+      "archived_url": "https://web.archive.org/web/20210927102451/https://docs.reflexer.finance/rai/rai-integrations-and-partners",
+      "capture_timestamp": "20210927102451",
+      "payload_sha256": "a711a35ab436bd5b4d48c0853b603c5f00e582a5fd1d2e2fe70619d594f34d0e",
+      "reason": "The exact archived body preserves the integrations list and the RAI Ethereum token identity used by the canonical claim scope.",
+      "remaining_uncertainty": null
+    },
+    {
+      "evidence_id": "sog_src_rai_oracle_relayer_batch_b",
+      "source_file": "data/evidence-batch-b.json",
+      "decision": "dated_exact_archive_added",
+      "canonical_url": "https://docs.reflexer.finance/system-contracts/oracle-module/oracle-relayer",
+      "archived_url": "https://web.archive.org/web/20210301194148/https://docs.reflexer.finance/system-contracts/oracle-module/oracle-relayer",
+      "capture_timestamp": "20210301194148",
+      "payload_sha256": "9cdc11ce1ea1e128fca3a63f3ab4c92f12f4ded235b265eac27c4b6429587a70",
+      "reason": "The exact archived body directly preserves the redemption-price and redemption-rate contract mechanics.",
+      "remaining_uncertainty": null
+    },
+    {
+      "evidence_id": "sog_src_rai_ungovernance_batch_b",
+      "source_file": "data/evidence-batch-b.json",
+      "decision": "dated_exact_archive_added",
+      "canonical_url": "https://docs.reflexer.finance/ungovernance/governance-minimization-guide",
+      "archived_url": "https://web.archive.org/web/20210120151645/https://docs.reflexer.finance/ungovernance/governance-minimization-guide",
+      "capture_timestamp": "20210120151645",
+      "payload_sha256": "3ae8cf14d26a8af6dce979d55d70568fe3f090d5d037fa14ac3ccd000ae70263",
+      "reason": "The exact archived body preserves the staged governance-minimization guidance represented by the Evidence identity.",
+      "remaining_uncertainty": null
+    },
+    {
+      "evidence_id": "sog_src_rlusd_docs",
+      "source_file": "data/evidence-extra.json",
+      "decision": "dated_exact_archive_added",
+      "canonical_url": "https://docs.ripple.com/products/stablecoin",
+      "archived_url": "https://web.archive.org/web/20251204205157/https://docs.ripple.com/products/stablecoin",
+      "capture_timestamp": "20251204205157",
+      "payload_sha256": "c359bae1f38ae85e9fd2c41a3f37f759e94ae965ae70c70998ef04e81db20849",
+      "reason": "The exact archived documentation body preserves the RLUSD developer and integration documentation entry point.",
+      "remaining_uncertainty": null
+    },
+    {
+      "evidence_id": "sog_src_rlusd_launch_2024",
+      "source_file": "data/evidence-extra.json",
+      "decision": "dated_exact_archive_added",
+      "canonical_url": "https://ripple.com/ripple-press/raising-the-standard-for-stablecoins-ripple-usd-launches-globally/",
+      "archived_url": "https://web.archive.org/web/20241216170952/https://ripple.com/ripple-press/raising-the-standard-for-stablecoins-ripple-usd-launches-globally/",
+      "capture_timestamp": "20241216170952",
+      "payload_sha256": "d7d0300395c10a31b0dd1357dd21bf91e9b54a64b8ef9266371182ea4ec4ac74",
+      "reason": "The exact archived press-release body preserves the December 17, 2024 global-launch and initial availability claim.",
+      "remaining_uncertainty": null
+    },
+    {
+      "evidence_id": "sog_src_rlusd_ripple_page",
+      "source_file": "data/evidence-extra.json",
+      "decision": "reviewed_no_safe_change",
+      "canonical_url": "https://ripple.com/solutions/stablecoin/",
+      "archived_url": null,
+      "capture_timestamp": "20240805145401",
+      "payload_sha256": "dfcfb5502ca1dcdf2b2b558829ef7bf2e3463e63bac52ffcd94a642f44849764",
+      "reason": "The fetched snapshot predates launch and describes RLUSD in future and regulatory-approval-dependent terms. It does not preserve the current Evidence identity's later availability, regulatory, custody, chain, and transparency scope.",
+      "remaining_uncertainty": "A later exact snapshot could preserve the complete current claim scope, but the later sampled capture could not be fetched."
+    },
+    {
+      "evidence_id": "sog_src_spot_about_batch_b",
+      "source_file": "data/evidence-batch-b.json",
+      "decision": "dated_exact_archive_added",
+      "canonical_url": "https://docs.ampleforth.org/learn/about-spot",
+      "archived_url": "https://web.archive.org/web/20220927214739/https://docs.ampleforth.org/learn/about-spot",
+      "capture_timestamp": "20220927214739",
+      "payload_sha256": "63fedf1bf3e905d90a3cabfa485b21dfee0e6e7a5a00cd3f28e141c9cbd04ed8",
+      "reason": "The exact archived body preserves SPOT's perpetual-note structure, AMPL-derived collateral, and stated use cases.",
+      "remaining_uncertainty": null
+    },
+    {
+      "evidence_id": "sog_src_spot_mint_batch_b",
+      "source_file": "data/evidence-batch-b.json",
+      "decision": "reviewed_no_safe_change",
+      "canonical_url": "https://docs.ampleforth.org/how-to-guides/how-to-mint-spot",
+      "archived_url": null,
+      "capture_timestamp": "20220630100140",
+      "payload_sha256": "ebd6a1eb991df76a416a2c9d709ecaea1b8ca3132c58d9adc54624fea1f14b65",
+      "reason": "The exact archived page is only a stay-tuned placeholder and does not preserve a SPOT mint-and-redeem interface or procedure.",
+      "remaining_uncertainty": "No sampled exact snapshot contained the canonical interface claim."
+    },
+    {
+      "evidence_id": "sog_src_spot_site_batch_b",
+      "source_file": "data/evidence-batch-b.json",
+      "decision": "reviewed_no_safe_change",
+      "canonical_url": "https://www.ampleforth.org/",
+      "archived_url": null,
+      "capture_timestamp": null,
+      "payload_sha256": null,
+      "reason": "The oldest exact snapshot is an unrelated Colorado-band site and the later sampled snapshot is an AMPL protocol page from before SPOT. Neither preserves current SPOT protocol presence.",
+      "remaining_uncertainty": "A post-SPOT root-page capture may exist outside the sampled exact bodies, but no reviewed payload supported the claim."
+    },
+    {
+      "evidence_id": "sog_src_spot_v2_rollout_batch_b",
+      "source_file": "data/evidence-batch-b.json",
+      "decision": "dated_exact_archive_added",
+      "canonical_url": "https://forum.ampleforth.org/t/proposal-initiate-rollout-of-spot-v2/738",
+      "archived_url": "https://web.archive.org/web/20240510042029/https://forum.ampleforth.org/t/proposal-initiate-rollout-of-spot-v2/738",
+      "capture_timestamp": "20240510042029",
+      "payload_sha256": "cf337169192b4dba2156c9c22a40bd3c65329397cf4b4e579a7039784c498de8",
+      "reason": "The exact archived discussion body preserves the proposal, passed signal vote, in-place upgrade, holder continuity, and ButtonTranche continuity claims.",
+      "remaining_uncertainty": null
+    }
+  ],
+  "constraints": {
+    "source_replacements": 0,
+    "new_evidence_identities": 0,
+    "evidence_relation_changes": 0,
+    "non_evidence_canonical_changes": 0,
+    "market_access_changes": 0,
+    "public_route_changes": 0,
+    "material_ui_changes": 0,
+    "automatic_continuation": false
+  },
+  "next_boundary": "REVIEW_GATE"
+}

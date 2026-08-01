@@ -1,0 +1,65 @@
+{
+  "schema_version": "1.0",
+  "handoff_id": "sog_evidence_archive_payload_verification_batch_1_pr506_handoff_2026_08_01",
+  "status": "reviewed_complete_pending_merge_and_production",
+  "authority_pr": 505,
+  "implementation_pr": 506,
+  "canonical_checkpoint_id": "sog_pr506_evidence_archive_payload_verification_117_2026_08_01",
+  "stats_checkpoint_id": "sog_stats_pr506_evidence_archive_payload_verification_2026_08_01",
+  "outcome_id": "sog_evidence_archive_payload_verification_batch_1_pr506_outcomes_2026_08_01",
+  "source_review_id": "sog_evidence_archive_payload_verification_batch_1_pr506_source_review_2026_08_01",
+  "canonical_counts": {
+    "assets": 117,
+    "organizations": 108,
+    "relationships": 129,
+    "events": 192,
+    "evidence": 579,
+    "evidence_relations": 579,
+    "reserve_reports": 125,
+    "known_unknowns": 342,
+    "regulatory_notes": 9,
+    "deployments": 184,
+    "market_access_records": 8,
+    "detail_routes": 417,
+    "metadata_checked_routes": 417,
+    "archive_index_count": 457,
+    "archive_not_recorded_count": 122
+  },
+  "evidence_quality": {
+    "archive_recorded": 457,
+    "archive_not_recorded": 122,
+    "selected": 10,
+    "changed": 7,
+    "dated_archive_added": 7,
+    "reviewed_no_safe_change": 3
+  },
+  "changed_evidence_ids": [
+    "sog_src_rai_integrations_batch_b",
+    "sog_src_rai_oracle_relayer_batch_b",
+    "sog_src_rai_ungovernance_batch_b",
+    "sog_src_rlusd_docs",
+    "sog_src_rlusd_launch_2024",
+    "sog_src_spot_about_batch_b",
+    "sog_src_spot_v2_rollout_batch_b"
+  ],
+  "reviewed_no_safe_change_evidence_ids": [
+    "sog_src_rlusd_ripple_page",
+    "sog_src_spot_mint_batch_b",
+    "sog_src_spot_site_batch_b"
+  ],
+  "stats_input_digest_sha256": "f0b965871b6c3fec67a9f8fa04986bebd47092524a571a3cf02df103d1d9d07b",
+  "stats_model_sha256": "b5f544184927c813c344bfdedb5ea7a7f85d65519075f372f22fa84ded3d53ec",
+  "stats_snapshot_sha256": "33ab6e43a15c8dc8f0a22b3ce223e3e8686a4d632d3d85c59df6f062e8b5d517",
+  "boundaries": {
+    "new_or_removed_evidence_identity": false,
+    "evidence_relation_change": false,
+    "source_replacement": false,
+    "non_evidence_canonical_change": false,
+    "market_access_change": false,
+    "public_route_change": false,
+    "material_ui_change": false,
+    "automatic_continuation": false
+  },
+  "next_work_item": "REVIEW_GATE",
+  "handoff_sha256": "e4aa3683e7d6e28168aefcb033cd1d628f56982efb7dced1c599cdf09a94474f"
+}

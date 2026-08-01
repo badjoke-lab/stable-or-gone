@@ -90,21 +90,20 @@ PR #496 Record Growth Batch 4 candidate audit
 Current item:
 
 ```text
-PR #505 Evidence Archive Payload Verification — Batch 1 authorization; PR #506 implementation reserved
+PR #506 Evidence Archive Payload Verification — Batch 1 implementation under review
 ```
 
 Reviewed decision:
 
 ```text
-PR #505 Evidence Archive Payload Verification — Batch 1 authorization
-implementation PR: #506
+PR #506 Evidence Archive Payload Verification — Batch 1 implementation under review
 exact target count: 10
-source checkpoint: PR #405 reviewed-no-safe-change identities
-allowed outcomes: dated_exact_archive_added or reviewed_no_safe_change
-maximum archive additions: 10
-source replacement: prohibited
-replacement targets: prohibited
-new Evidence identities or Relations: prohibited
+dated exact archives added: 7
+reviewed no safe change: 3
+archive coverage after: 457 of 579
+source replacement: 0
+new Evidence identities or Relations: 0
+non-Evidence canonical changes: 0
 next boundary after PR #506: REVIEW GATE
 ```
 
@@ -363,16 +362,16 @@ Scheduled monitoring and candidate auditing remain artifact-only and do not auth
 
 ## 19. Review gate
 
-PR #505 is the current reviewed decision. Execute only PR #506 and then stop to review:
+PR #506 is the current implementation under review. Before merge and production acceptance, review:
 
 ```text
-all ten payload-review dispositions
-exact Wayback timestamps and canonical URL identity
-archived payload claim-scope preservation
-accepted archive additions, if any
-archive coverage transition
+all ten payload dispositions
+seven accepted exact timestamps and payload digests
+three preserved no-safe-change gaps
+archive transition 450/129 -> 457/122
+Evidence identity and Relation preservation
 canonical count and route parity
 production parity
 ```
 
-Only a later separate reviewed decision may authorize another work item.
+After PR #506 merge and production verification, the repository returns to REVIEW GATE. Only a later separate reviewed decision may authorize another work item.
