@@ -10,7 +10,7 @@
     "control_event_ids": [
       "sog_ev_mnee_launch_pr498"
     ],
-    "notes": "Issuer-native 1Sat Ordinals deployment. Exact mainnet token ID is published in the official @mnee/ts-sdk 1.2.0 package. Current control capabilities remain unresolved.",
+    "notes": "Issuer-native 1Sat Ordinals deployment. The exact mainnet token ID is published in the official @mnee/ts-sdk 1.2.0 package. The 2026-08-01 maintenance review did not establish current mint, freeze, blacklist, pause, recovery, or authority configuration for this deployment.",
     "evidence_ids": [
       "sog_src_mnee_launch_pr498",
       "sog_src_mnee_docs_pr498",
@@ -20,7 +20,7 @@
     "origin_deployment_id": null,
     "bridge_operator_organization_id": null,
     "mint_authority_type": "issuer_controlled_source_review_needed",
-    "contract_version": "MNEE 1Sat mainnet token ID",
+    "contract_version": "MNEE 1Sat mainnet token ID; current control configuration not recorded",
     "is_primary": true
   },
   {
@@ -32,17 +32,18 @@
     "contract_address": "0x8ccedbae4916b79da7f3f612efb2eb93a2bfd6cf",
     "status": "active",
     "control_event_ids": [],
-    "notes": "Issuer-supported ERC-20 proxy deployment verified through the token explorer and current issuer materials. First public Ethereum issuance date and current admin-control details remain unresolved.",
+    "notes": "Issuer-supported ERC-20 deployment behind a TransparentUpgradeableProxy. Explorer records show the initial implementation upgrade on 2024-03-21 and a later upgrade on 2025-09-15; the active verified source is labelled MNEEv2 and includes PausableUpgradeable. This records upgradeability and a pause-capable code surface only. Current admin and role-holder addresses, operational pause or freeze state, post-upgrade mint, burn, redeem, or rescue permissions, and first public Ethereum issuance date remain unresolved.",
     "evidence_ids": [
       "sog_src_mnee_docs_pr498",
       "sog_src_mnee_faq_pr498",
+      "sog_src_mnee_terms_pr498",
       "sog_src_mnee_ethereum_pr498"
     ],
     "canonicality": "issuer_native",
     "origin_deployment_id": null,
     "bridge_operator_organization_id": null,
-    "mint_authority_type": "issuer_controlled_source_review_needed",
-    "contract_version": "TransparentUpgradeableProxy; implementation source-review context on explorer",
+    "mint_authority_type": "issuer_controlled_current_roles_unverified",
+    "contract_version": "TransparentUpgradeableProxy; active MNEEv2 implementation after 2025-09-15 upgrade",
     "is_primary": false
   }
 ]
