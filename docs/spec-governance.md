@@ -90,24 +90,24 @@ PR #496 Record Growth Batch 4 candidate audit
 Current item:
 
 ```text
-PR #503 Launch Date Boundary Review — Batch 1 implementation
+PR #504 post-PR #503 authority synchronization
 ```
 
 Reviewed decision:
 
 ```text
-PR #503 launch-date boundary review: implementation under review
+PR #503 launch-date boundary review: complete and production-verified
 exact targets: sog_st_msusd, sog_st_stablesusdx, sog_st_susde, sog_st_usd1, sog_st_usdm, sog_st_usdh
 exact day resolved: 0
 canonical null preserved: 6
 new canonical Evidence identities: 0
 new canonical assets: 0
-replacement targets: prohibited
-unsupported date coercion: prohibited
-next boundary after PR #503: REVIEW GATE
+production commit: a89832072b6f4fe07cf43b76ae77d2a5a1aac0f0
+production canonical hash: sha256:c6fa6b7494fc3e36f599d88edaa3d2af94a0e8c2f0ee6e4c3ee7d8a9121a4372
+current boundary: REVIEW GATE
 ```
 
-No work beyond the six-target PR #503 review is pre-authorized.
+No later work is pre-authorized.
 
 ## 5. Change control
 
@@ -352,16 +352,16 @@ Scheduled monitoring and candidate auditing remain artifact-only and do not auth
 
 ## 19. Review gate
 
-PR #502 is the current reviewed decision. Execute only PR #503 and then stop to review:
+PR #503 is complete and production-verified. The required review confirms:
 
 ```text
-all six target dispositions
-exact-day evidence quality
-identity and lineage boundaries
-Evidence additions, if any
-null-date preservation
-canonical counts and route parity
-production parity
+all six target dispositions recorded
+exact-day evidence threshold preserved
+identity and lineage boundaries preserved
+canonical Evidence additions: 0
+canonical null dates preserved: 6
+canonical counts and route parity preserved
+production parity verified
 ```
 
-Only a later separate reviewed decision may authorize another work item.
+The repository is at REVIEW GATE. Only a later separate reviewed decision may authorize another work item.

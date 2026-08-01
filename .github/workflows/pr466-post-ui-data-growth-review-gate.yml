@@ -1,42 +1,78 @@
-name: Finalize PR504 authority closeout
+name: PR 466 Post-UI Data-Growth Review Gate
+run-name: PR 466 review gate · ${{ github.event_name }} · ${{ github.sha }}
 
 on:
+  push:
+    branches:
+      - pr466-post-ui-data-growth-review-gate
   pull_request:
     branches:
+      - chore/post-ui-v3-agent-authority-reset
       - main
+  workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
-  group: finalize-pr504-${{ github.event.pull_request.number }}
+  group: pr466-post-ui-data-growth-review-gate-${{ github.event_name }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  finalize:
-    if: github.head_ref == 'agent/post-pr503-authority-sync'
+  validate:
+    if: github.event_name != 'pull_request' || github.head_ref == 'pr466-post-ui-data-growth-review-gate'
     runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      BASE_BRANCH: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.ref || 'chore/post-ui-v3-agent-authority-reset' }}
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
-          ref: agent/post-pr503-authority-sync
           fetch-depth: 0
-      - uses: actions/setup-node@v4
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
           node-version: 22.22.0
-      - name: Generate authority closeout files
-        run: node scripts/apply-post-pr503-authority-sync-pr504.mjs
-      - name: Validate authority closeout
-        run: node scripts/validate-post-pr503-authority-sync-pr504.mjs
-      - name: Restore permanent workflow and create normalizable marker
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Validate PR 466 review-gate decision
+        run: node scripts/validate-post-ui-data-growth-review-gate-pr466.mjs
+
+      - name: Validate active workstream
+        run: npm run validate:active-workstream
+
+      - name: Validate canonical and release contracts
         run: |
-          git show origin/main:.github/workflows/pr466-post-ui-data-growth-review-gate.yml > .github/workflows/pr466-post-ui-data-growth-review-gate.yml
-          printf 'temporary PR504 finalizer marker\n' > .github/pr504-finalizer-marker.txt
-      - name: Commit authority closeout
+          npm run validate:data
+          npm run validate:compat
+          npm run validate:final
+          npm run validate:release-integrity
+
+      - name: Verify governance-only boundary
+        run: git diff --exit-code "origin/${BASE_BRANCH}...HEAD" -- data/ src/ public/
+
+      - name: Astro check and build
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A
-          git diff --cached --quiet && exit 0
-          git commit -m "Close the post-PR503 authority checkpoint"
-          git push origin HEAD:agent/post-pr503-authority-sync
+          npm run check
+          npm run build
+
+      - name: Write review-gate summary
+        if: always()
+        run: |
+          {
+            echo '## PR #466 Post-UI Data-Growth Review Gate'
+            echo
+            echo '- Source canonical assets: 114'
+            echo '- Authorized next PR: #467'
+            echo '- Selected assets: PLNQ, GBPQ'
+            echo '- Maximum new canonical assets: 2'
+            echo '- Canonical changes in PR #466: 0'
+            echo '- Public changes in PR #466: 0'
+            echo '- Next boundary after PR #467: REVIEW GATE'
+          } >> "$GITHUB_STEP_SUMMARY"

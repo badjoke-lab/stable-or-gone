@@ -1,7 +1,7 @@
 # Stable or Gone Roadmap
 
 Updated: 2026-08-01  
-Status: PR #503 Launch Date Boundary Review — Batch 1 under review; exit boundary REVIEW GATE
+Status: PR #503 complete and production-verified; REVIEW GATE
 
 ## Current reviewed position
 
@@ -20,11 +20,11 @@ Detail routes: 417
 Metadata-checked detail routes: 417
 Official public origin: https://www.stableorgone.com
 Official-domain migration production checkpoint: bd0e63ac36b1824bf705e8c80d1fb0a1cd79d221
-Current production checkpoint: 9136f44bff06d20b8611d66ed28156c9147765a5
+Current production checkpoint: a89832072b6f4fe07cf43b76ae77d2a5a1aac0f0
 Current production canonical hash: sha256:c6fa6b7494fc3e36f599d88edaa3d2af94a0e8c2f0ee6e4c3ee7d8a9121a4372
 ```
 
-Current `main` and production equality is established dynamically by the deployment workflow and Issue #479. PR #500 production converged on the first verification attempt with exact count, route, metadata, provenance, and canonical-hash parity.
+Current `main` and production equality is established dynamically by the deployment workflow and Issue #479. PR #503 production converged with exact count, route, metadata, provenance, and canonical-hash parity.
 
 ## Completed acceptance points
 
@@ -40,7 +40,8 @@ PR #499 post-PR #498 review gate and MNEE maintenance authorization: complete
 PR #500 MNEE Evidence and Archive Maintenance — Batch 1: complete and production-verified
 PR #501 post-PR #500 authority synchronization: complete and production-verified
 PR #502 Launch Date Boundary Review — Batch 1 authorization: complete
-PR #503 Launch Date Boundary Review — Batch 1: implementation under review
+PR #503 Launch Date Boundary Review — Batch 1: complete and production-verified
+PR #504 post-PR #503 authority synchronization: active
 ```
 
 PR #498 remains the current canonical-asset addition checkpoint. PR #500 is the current canonical maintenance and statistics-history checkpoint. PR #492 remains the Statistics and responsive-layout acceptance point. PR #493 remains the official-domain migration acceptance point.
@@ -112,7 +113,7 @@ canonical hash: sha256:c6fa6b7494fc3e36f599d88edaa3d2af94a0e8c2f0ee6e4c3ee7d8a91
 convergence attempt: 1
 ```
 
-## Authorized current item
+## PR #503 completed item
 
 ```text
 Launch Date Boundary Review — Batch 1
@@ -131,7 +132,28 @@ new Evidence identities: 0
 new Evidence Relations: 0
 ```
 
-Announcement, deployment, first mint, testing, terms-effective, rebrand, underlying-asset launch, and later availability boundaries were not coerced into original launch dates. The item adds no new asset and authorizes no replacement target, YLDS work, Market Access change, route family, ranking, recommendation, or material UI change. After PR #503 merge and production verification, stop at REVIEW GATE.
+Announcement, deployment, first mint, testing, terms-effective, rebrand, underlying-asset launch, and later availability boundaries were not coerced into original launch dates. The item added no new asset and authorized no replacement target, YLDS work, Market Access change, route family, ranking, recommendation, or material UI change.
+
+Production result:
+
+```text
+source commit: a89832072b6f4fe07cf43b76ae77d2a5a1aac0f0
+canonical hash: sha256:c6fa6b7494fc3e36f599d88edaa3d2af94a0e8c2f0ee6e4c3ee7d8a9121a4372
+convergence attempt: 2
+stable assets: 117
+organizations: 108
+events: 192
+detail routes: 417
+metadata-checked detail routes: 417
+```
+
+## Current boundary
+
+```text
+REVIEW GATE
+```
+
+No later launch-date batch, dossier batch, record-growth batch, Figure YLDS amendment, Market Access change, public route family, or material public-surface program is authorized automatically.
 
 The PR #496 candidate audit remains the latest complete candidate review. Its non-MNEE candidates were not supported for complete-record promotion at that checkpoint.
 

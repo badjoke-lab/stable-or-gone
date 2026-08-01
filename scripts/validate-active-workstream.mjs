@@ -1,1 +1,1 @@
-import './validate-launch-date-boundary-review-pr503.mjs';
+import './validate-post-pr503-authority-sync-pr504.mjs';
