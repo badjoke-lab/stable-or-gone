@@ -25,7 +25,8 @@ check(historical.reproducible_build_baseline_id === reproducible.baseline_id, 'h
 const c = current.expected_counts;
 const archiveRecorded = current.evidence_quality?.archive_index_count;
 const archiveNotRecorded = current.evidence_quality?.archive_not_recorded_count;
-check(current.status === 'reviewed_growth_checkpoint', 'current checkpoint status');
+const acceptedCurrentStatuses = new Set(['reviewed_growth_checkpoint', 'reviewed_non_growth_maintenance_checkpoint']);
+check(acceptedCurrentStatuses.has(current.status), 'current checkpoint status');
 check(current.asset_count === 117 && c.assets === 117, 'current asset count');
 check(c.organizations === 108, 'current organization count');
 check(c.relationships === 129, 'current relationship count');
@@ -74,7 +75,7 @@ check(latest?.data_quality?.coverage?.archive_evidence?.count === archiveRecorde
 check(historyCheckpoint.canonical_checkpoint_id === current.checkpoint_id, 'history/current binding');
 
 markers(roadmap, [`Canonical stable assets: ${c.assets}`, `Organizations: ${c.organizations}`, `Relationships: ${c.relationships}`, `Events: ${c.events}`, `Evidence: ${c.evidence}`, `Evidence Relations: ${c.evidence}`, `Deployments: ${c.deployments}`, `Market Access Records: ${c.market_access_records}`, `Archive recorded: ${archiveRecorded}`, `Archive not recorded: ${archiveNotRecorded}`], 'current roadmap');
-markers(agents, [`Canonical stable assets: ${c.assets}`, `Organizations: ${c.organizations}`, `Relationships: ${c.relationships}`, `Events: ${c.events}`, `Canonical Evidence: ${c.evidence}`, `Evidence Relations: ${c.evidence}`, `Deployments: ${c.deployments}`, `Market Access Records: ${c.market_access_records}`, `Archive recorded: ${archiveRecorded}`, `Archive not recorded: ${archiveNotRecorded}`, '## Current authority', 'Official public origin: https://www.stableorgone.com', 'PR #492', 'PR #493'], 'AGENTS.md');
+markers(agents, [`Canonical stable assets: ${c.assets}`, `Organizations: ${c.organizations}`, `Relationships: ${c.relationships}`, `Events: ${c.events}`, `Canonical Evidence: ${c.evidence}`, `Evidence Relations: ${c.evidence}`, `Deployments: ${c.deployments}`, `Market Access Records: ${c.market_access_records}`, `Archive recorded: ${archiveRecorded}`, `Archive not recorded: ${archiveNotRecorded}`, '## Current authority', 'Official public origin: https://www.stableorgone.com', 'PR #492', 'PR #493', 'PR #500'], 'AGENTS.md');
 
 if (failures.length) {
   console.error('Non-UI release material validation failed:');
@@ -86,6 +87,7 @@ console.log(JSON.stringify({
   ok: true,
   historical_checkpoint_id: historical.checkpoint_id,
   current_checkpoint_id: current.checkpoint_id,
+  current_checkpoint_status: current.status,
   current_history_checkpoint_id: historyCheckpoint.checkpoint_id,
   current_stable_assets: c.assets,
   current_evidence: c.evidence,
@@ -95,6 +97,6 @@ console.log(JSON.stringify({
   current_deployments: c.deployments,
   current_market_access_records: c.market_access_records,
   current_release_integrity_baseline_id: releaseBaseline.baseline_id,
-  authority_acceptance_points: [492, 493],
+  authority_acceptance_points: [492, 493, 500],
   validation_mode: 'workstream_independent_current_checkpoint'
 }, null, 2));
