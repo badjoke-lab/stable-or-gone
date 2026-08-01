@@ -17,7 +17,7 @@
       "sog_src_mnee_attestation_program_pr498",
       "sog_src_mnee_terms_pr498"
     ],
-    "notes": "Current custodian identity and exact allocation were not established."
+    "notes": "The 2026-08-01 maintenance review did not establish the current custodian identity, latest amount, or latest reserve share. The terms state reserve composition is controlled at MNEE's discretion."
   },
   {
     "id": "sog_rc_mnee_treasuries_pr498",
@@ -37,6 +37,6 @@
       "sog_src_mnee_attestation_program_pr498",
       "sog_src_mnee_docs_pr498"
     ],
-    "notes": "Exact maturity distribution, custodian, amount, and share remain unresolved."
+    "notes": "The 2026-08-01 maintenance review did not establish the latest maturity distribution, custodian, amount, or reserve share."
   }
 ]
