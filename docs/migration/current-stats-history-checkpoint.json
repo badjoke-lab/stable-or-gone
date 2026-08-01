@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0",
-  "status": "reviewed_non_growth_checkpoint",
+  "status": "reviewed_non_growth_maintenance_checkpoint",
   "checkpoint_id": "sog_stats_pr506_evidence_archive_payload_verification_2026_08_01",
-  "checkpoint_kind": "non_growth_evidence_archive_checkpoint",
+  "checkpoint_kind": "non_growth_maintenance_checkpoint",
   "recorded_at": "2026-08-01",
   "registry_version": "pr506-evidence-archive-payload-verification-batch-1",
   "asset_count": 117,
@@ -24,5 +24,5 @@
     "market_access_records": 8,
     "detail_routes": 417
   },
-  "notes": "Reviewed forward same-count statistics checkpoint for PR #506. It records archive coverage 457 of 579 while preserving every canonical record count and public-surface boundary."
+  "notes": "Reviewed forward same-count maintenance checkpoint for PR #506. It records archive coverage 457 of 579 while preserving every canonical record count and public-surface boundary."
 }
