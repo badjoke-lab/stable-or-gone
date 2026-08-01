@@ -1,0 +1,67 @@
+name: PR506 Wayback payload probe
+run-name: PR506 payload probe · ${{ github.event_name }} · ${{ github.sha }}
+
+on:
+  push:
+    branches:
+      - agent/evidence-archive-payload-verification-batch-1-implementation
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pr506-wayback-payload-probe-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  probe:
+    if: github.event_name != 'pull_request' || github.head_ref == 'agent/evidence-archive-payload-verification-batch-1-implementation'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Probe exact-source Wayback payloads
+        run: python scripts/probe-evidence-archive-payloads-pr506.py
+
+      - name: Summarize probe
+        if: always()
+        run: |
+          python - <<'PY' >> "$GITHUB_STEP_SUMMARY"
+          import json
+          from pathlib import Path
+          path = Path('data/editorial-research/evidence-archive-payload-verification-batch-1-pr506-probe.json')
+          print('## PR #506 Wayback payload probe')
+          if not path.exists():
+              print('\nProbe output was not generated.')
+              raise SystemExit(0)
+          data = json.loads(path.read_text())
+          print(f"\n- Targets: {data['target_count']}")
+          for row in data['results']:
+              successful = sum(1 for capture in row['capture_reviews'] if capture['fetch_status'] == 200 and capture['payload_bytes'] > 0)
+              hitful = sum(1 for capture in row['capture_reviews'] if capture['keyword_hits'])
+              print(f"- `{row['evidence_id']}`: CDX {row['cdx_exact_200_html_capture_count']}, fetched {successful}, keyword-bearing {hitful}")
+          PY
+
+      - name: Upload payload review artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr506-wayback-payload-review
+          path: |
+            data/editorial-research/evidence-archive-payload-verification-batch-1-pr506-probe.json
+            .tmp/pr506-wayback-payloads
+          if-no-files-found: warn
+          retention-days: 14
