@@ -1,7 +1,7 @@
 # Stable or Gone Roadmap
 
 Updated: 2026-08-01  
-Status: PR #500 MNEE Evidence and Archive Maintenance — Batch 1 under review; exit boundary REVIEW GATE
+Status: PR #500 complete and production-verified; REVIEW GATE
 
 ## Current reviewed position
 
@@ -20,10 +20,11 @@ Detail routes: 417
 Metadata-checked detail routes: 417
 Official public origin: https://www.stableorgone.com
 Official-domain migration production checkpoint: bd0e63ac36b1824bf705e8c80d1fb0a1cd79d221
-Last production-verified canonical-data checkpoint: a0c86896764a43020e2faa7442d8e7303785295e
+Current production checkpoint: 9d583845d73e4d758ab245812d165f25dd59ada8
+Current production canonical hash: sha256:c6fa6b7494fc3e36f599d88edaa3d2af94a0e8c2f0ee6e4c3ee7d8a9121a4372
 ```
 
-Current `main` and production equality is established dynamically by the deployment workflow and Issue #479. A merge is not proof of production parity.
+Current `main` and production equality is established dynamically by the deployment workflow and Issue #479. PR #500 production converged on the first verification attempt with exact count, route, metadata, provenance, and canonical-hash parity.
 
 ## Completed acceptance points
 
@@ -36,11 +37,12 @@ PR #496 Record Growth Batch 4 candidate audit: complete and production-verified
 PR #497 Record Growth Batch 4 review gate: complete
 PR #498 Record Growth Batch 4 — MNEE: reviewed complete and production-verified
 PR #499 post-PR #498 review gate and MNEE maintenance authorization: complete
+PR #500 MNEE Evidence and Archive Maintenance — Batch 1: complete and production-verified
 ```
 
-PR #498 remains the current canonical-asset checkpoint. PR #492 remains the Statistics and responsive-layout acceptance point. PR #493 remains the official-domain migration acceptance point.
+PR #498 remains the current canonical-asset addition checkpoint. PR #500 is the current canonical maintenance and statistics-history checkpoint. PR #492 remains the Statistics and responsive-layout acceptance point. PR #493 remains the official-domain migration acceptance point.
 
-## PR #500 current item
+## PR #500 completed item
 
 ```text
 MNEE Evidence and Archive Maintenance — Batch 1
@@ -53,7 +55,10 @@ docs/roadmap-amendments/2026-08-01-post-pr498-review-gate.md
 docs/quality/mnee-evidence-archive-maintenance-spec.md
 config/mnee-evidence-archive-maintenance.json
 data/editorial-research/mnee-evidence-archive-maintenance-batch-1-source-review.json
-scripts/validate-mnee-evidence-archive-maintenance.mjs
+scripts/validate-mnee-evidence-archive-maintenance-pr500.mjs
+docs/migration/current-canonical-checkpoint.json
+docs/migration/current-review-checkpoint.json
+docs/migration/current-stats-history-checkpoint.json
 ```
 
 Result by target:
@@ -80,7 +85,7 @@ direct access and jurisdiction inventory:
   complete current jurisdiction, customer-type, and country availability inventory remains unknown
 ```
 
-The implementation adds no new canonical Evidence ID and deletes no known unknown. Both MNEE deployment verification states remain `identifier_recorded_unverified`.
+The implementation added no canonical Evidence ID, deleted no known unknown, and promoted no deployment verification state. Both MNEE deployments remain `identifier_recorded_unverified`.
 
 Preserved counts:
 
@@ -93,17 +98,26 @@ reserve reports: 125
 known unknowns: 342
 deployments: 184
 detail routes: 417
+metadata-checked detail routes: 417
 ```
 
-## Next boundary
+Production result:
 
-After PR #500 merge and exact production verification, stop at:
+```text
+source commit: 9d583845d73e4d758ab245812d165f25dd59ada8
+canonical hash: sha256:c6fa6b7494fc3e36f599d88edaa3d2af94a0e8c2f0ee6e4c3ee7d8a9121a4372
+convergence attempt: 1
+```
+
+## Current boundary
 
 ```text
 REVIEW GATE
 ```
 
-No later dossier batch, record-growth batch, Figure YLDS amendment, Market Access change, or material public-surface program is authorized automatically.
+No later dossier batch, record-growth batch, Figure YLDS amendment, Market Access change, public route family, or material public-surface program is authorized automatically.
+
+The PR #496 candidate audit remains the latest complete candidate review. Its non-MNEE candidates were not supported for complete-record promotion at that checkpoint. A later candidate refresh requires a separate reviewed decision; it must not reuse the MNEE authorization.
 
 ## YLDS boundary
 
@@ -121,7 +135,7 @@ Figure YLDS remains deferred. Its issuer describes it as a registered fixed-inco
 
 ## Legacy-host redirect boundary
 
-The old host `sog.badjoke-lab.com` still resolves to the Pages project. A path- and query-preserving 301 to `www.stableorgone.com` remains an external Cloudflare configuration task. The current token has Pages publication access but no visible `badjoke-lab.com` zone, so no Pages Function workaround or unverified zone write is authorized. Issue #479 remains open for production history and this external dependency.
+The old host `sog.badjoke-lab.com` still resolves to the Pages project. A path- and query-preserving 301 to `www.stableorgone.com` remains an external Cloudflare configuration task. The current token has Pages publication access but no visible `badjoke-lab.com` zone, so no Pages Function workaround or unverified zone write is authorized. Issue #479 remains open only for production history and this external dependency.
 
 ## Active operating mode
 
