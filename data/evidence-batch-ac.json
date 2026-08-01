@@ -42,9 +42,9 @@
     "publisher": "MNEE Limited",
     "published_at": null,
     "archived_url": "https://web.archive.org/web/*/https://www.mnee.io/terms",
-    "accessed_at": "2026-07-31",
+    "accessed_at": "2026-08-01",
     "reliability": "high",
-    "claim_scope": "mnee_issuer_license_reserve_issuance_redemption_and_risk_terms",
+    "claim_scope": "mnee_issuer_license_reserve_issuance_redemption_access_compliance_and_address_freeze_policy",
     "stablecoin_ids": [
       "sog_st_mnee"
     ],
@@ -60,7 +60,9 @@
       "redemption",
       "access",
       "fees",
-      "risk"
+      "risk",
+      "compliance",
+      "control_policy"
     ],
     "event_ids": [],
     "is_primary": true
@@ -76,9 +78,9 @@
     "publisher": "MNEE Limited",
     "published_at": null,
     "archived_url": "https://web.archive.org/web/*/https://www.mnee.io/transparency",
-    "accessed_at": "2026-07-31",
+    "accessed_at": "2026-08-01",
     "reliability": "high",
-    "claim_scope": "mnee_monthly_attestation_index_through_may_2026",
+    "claim_scope": "mnee_monthly_attestation_index_through_may_2026_report_body_not_preserved",
     "stablecoin_ids": [
       "sog_st_mnee"
     ],
@@ -88,7 +90,8 @@
     "claim_scopes": [
       "reserve",
       "attestation",
-      "documentation"
+      "documentation",
+      "archive_boundary"
     ],
     "event_ids": [],
     "is_primary": true
@@ -99,7 +102,7 @@
     "issuer_id": "sog_issuer_mnee_limited",
     "event_id": "sog_ev_mnee_launch_pr498",
     "source_type": "official_developer_documentation",
-    "title": "MNEE Documentation \u2014 Introduction",
+    "title": "MNEE Documentation — Introduction",
     "url": "https://docs.mnee.io/getting-started/introduction",
     "publisher": "MNEE Limited",
     "published_at": null,
@@ -164,9 +167,9 @@
     "publisher": "MNEE Limited",
     "published_at": "2025-05-09",
     "archived_url": "https://web.archive.org/web/*/https://www.mnee.io/news/mnee-expands-transparency-with-monthly-third-party-reserve-attestations-audited-by-wolf-company-p-c",
-    "accessed_at": "2026-07-31",
+    "accessed_at": "2026-08-01",
     "reliability": "high",
-    "claim_scope": "mnee_attestation_firm_reserve_categories_and_monthly_program",
+    "claim_scope": "mnee_attestation_firm_reserve_categories_qualified_custodian_boundary_and_monthly_program",
     "stablecoin_ids": [
       "sog_st_mnee"
     ],
@@ -177,7 +180,8 @@
       "reserve",
       "attestation",
       "custody_context",
-      "documentation"
+      "documentation",
+      "allocation_boundary"
     ],
     "event_ids": [],
     "is_primary": true
@@ -218,14 +222,14 @@
     "issuer_id": "sog_issuer_mnee_limited",
     "event_id": null,
     "source_type": "blockchain_explorer",
-    "title": "MNEE USD Stablecoin ERC-20 Token Contract",
+    "title": "MNEE ERC-20 Proxy, Verified Implementation, and Upgrade History",
     "url": "https://etherscan.io/token/0x8ccedbae4916b79da7f3f612efb2eb93a2bfd6cf",
     "publisher": "Etherscan",
     "published_at": "2024-03-21",
     "archived_url": "https://web.archive.org/web/*/https://etherscan.io/token/0x8ccedbae4916b79da7f3f612efb2eb93a2bfd6cf",
-    "accessed_at": "2026-07-31",
+    "accessed_at": "2026-08-01",
     "reliability": "medium",
-    "claim_scope": "mnee_ethereum_contract_identity_and_proxy_context",
+    "claim_scope": "mnee_ethereum_contract_identity_proxy_deployment_upgrade_history_and_pause_capable_source_boundary",
     "stablecoin_ids": [
       "sog_st_mnee"
     ],
@@ -235,7 +239,9 @@
     "claim_scopes": [
       "deployment",
       "contract_identity",
-      "onchain_identity"
+      "onchain_identity",
+      "upgradeability",
+      "control_capability_boundary"
     ],
     "event_ids": [],
     "is_primary": true
