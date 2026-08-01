@@ -18,8 +18,10 @@ Archive not recorded: 129
 Deployments: 184
 Market Access Records: 8
 Detail routes: 417
+Metadata-checked detail routes: 417
 Official public origin: https://www.stableorgone.com
 Official-domain migration checkpoint: bd0e63ac36b1824bf705e8c80d1fb0a1cd79d221
+Current production checkpoint: a0c86896764a43020e2faa7442d8e7303785295e
 ```
 
 Current authority chain:
@@ -30,8 +32,10 @@ Current authority chain:
 4. PR #495 synchronized post-domain repository authority and completed obsolete issue reconciliation.
 5. PR #496 completed the private Record Growth Batch 4 candidate audit.
 6. PR #497 authorized exactly one complete-record implementation for MNEE.
-7. `docs/roadmap-amendments/2026-07-31-record-growth-batch-4-mnee.md` defines the active reviewed PR #498 result.
-8. `docs/ui-v3-remediation-authority.md` remains the regression-protection contract for material public UI work.
+7. PR #498 added and production-verified the complete MNEE record.
+8. `docs/roadmap-amendments/2026-08-01-post-pr498-review-gate.md` closes the required review gate and authorizes one bounded MNEE evidence-maintenance item.
+9. `docs/quality/mnee-evidence-archive-maintenance-spec.md` and `config/mnee-evidence-archive-maintenance.json` define the active work item.
+10. `docs/ui-v3-remediation-authority.md` remains the regression-protection contract for material public UI work.
 
 ## Mandatory reading order
 
@@ -41,13 +45,14 @@ Before changing code, canonical data, workflows, infrastructure, or documentatio
 2. `docs/spec-governance.md`
 3. `docs/roadmap.md`
 4. `docs/deployment-policy.md`
-5. `docs/roadmap-amendments/2026-07-31-record-growth-batch-4-mnee.md`
+5. `docs/roadmap-amendments/2026-08-01-post-pr498-review-gate.md`
 6. `docs/post-351-data-growth-operating-spec.md`
-7. `docs/quality/record-growth-batch-4-mnee-pr498-spec.md`
-8. `data/editorial-research/record-growth-batch-4-mnee-pr498-source-review.json`
-9. `docs/quality/record-growth-batch-4-review-gate-pr497-spec.md`
-10. `docs/quality/record-growth-batch-4-candidate-audit-pr496-spec.md`
-11. every named baseline, queue, audit, handoff, source-coverage report, and prior output required by the work item
+7. `docs/quality/mnee-evidence-archive-maintenance-spec.md`
+8. `config/mnee-evidence-archive-maintenance.json`
+9. `docs/roadmap-amendments/2026-07-31-record-growth-batch-4-mnee.md`
+10. `docs/quality/record-growth-batch-4-mnee-pr498-spec.md`
+11. `data/editorial-research/record-growth-batch-4-mnee-pr498-source-review.json`
+12. every named baseline, queue, audit, handoff, source-coverage report, and prior output required by the work item
 
 Merged repository authority outranks chat memory, handoff prose, issue discussion, generated reports, and unmerged drafts.
 
@@ -64,9 +69,39 @@ PR #493 official-domain migration: complete and production-verified
 PR #495 post-domain authority synchronization and issue reconciliation: complete
 PR #496 Record Growth Batch 4 candidate audit: complete and production-verified
 PR #497 Record Growth Batch 4 review gate: complete
-PR #498 Record Growth Batch 4 — MNEE: reviewed complete
-Current boundary: REVIEW GATE
+PR #498 Record Growth Batch 4 — MNEE: reviewed complete and production-verified
+Post-PR #498 review gate: decision recorded
+Current item: MNEE Evidence and Archive Maintenance — Batch 1
 ```
+
+## Active maintenance boundary
+
+The active item reviews only these five existing MNEE unknown areas:
+
+```text
+latest listed attestation report body and archive
+current reserve custodian and allocation
+first public Ethereum issuance date
+current deployment control configuration
+complete direct-access and jurisdiction inventory
+```
+
+Hard limits:
+
+```text
+new stable assets: 0
+new organizations: 0
+new lifecycle events: 0
+new Market Access Records: 0
+new Evidence records: at most 8
+new reserve reports: at most 1
+new deployments: 0
+material UI or CSS changes: prohibited
+new public route families: prohibited
+Figure YLDS work: prohibited
+```
+
+A target may remain unknown. Missing evidence is not a reason to infer a value or close the unknown.
 
 ## PR #498 reviewed result
 
@@ -81,23 +116,7 @@ Ethereum contract: 0x8ccedbae4916b79da7f3f612efb2eb93a2bfd6cf
 
 The official `@mnee/ts-sdk` package version 1.2.0 is the source for the production 1Sat token ID. The deployment overlay records both identifiers as `identifier_recorded_unverified`; no independent runtime or control verification is implied.
 
-The complete record includes one issuer, one legal-issuer relationship, one launch event, eight canonical Evidence records, one reserve-report context, five explicit known unknowns, two deployment identities, a legal profile, two reserve components, and an income profile.
-
-Figure YLDS remains deferred. It must not be treated as an ordinary stablecoin without a separate reviewed scope amendment. No replacement candidate or second asset was added.
-
-## Current review gate
-
-```text
-Stable assets: 117
-Organizations: 108
-Events: 192
-Evidence: 579
-Deployments: 184
-Detail routes: 417
-Next work item: REVIEW GATE
-```
-
-No later growth batch, YLDS scope amendment, Market Access change, or material public UI program is pre-authorized.
+Figure YLDS remains deferred. It must not be treated as an ordinary stablecoin without a separate reviewed scope amendment.
 
 ## Mandatory UI working rule
 
@@ -137,7 +156,7 @@ Automated success never overrides a known visual or semantic defect.
 - Open USD must be disambiguated from Origin Dollar before any future record.
 - YLDS must not be treated as an ordinary stablecoin without a separate reviewed scope amendment.
 - Automatic promotion is prohibited.
-- PR #498 added exactly one canonical stable asset: MNEE; no later addition is authorized.
+- No later canonical asset addition is authorized by the current maintenance item.
 
 ## Domain and deployment boundary
 
