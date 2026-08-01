@@ -59,6 +59,8 @@ expect(outcomes.changed_count === 7 && outcomes.archive_index_count_after === 45
 expect(handoff.status === 'reviewed_complete_pending_merge_and_production', 'handoff status changed');
 expect(handoff.evidence_quality.archive_recorded === 457 && handoff.evidence_quality.archive_not_recorded === 122, 'handoff partition changed');
 expect(checkpoint.checkpoint_id === 'sog_pr506_evidence_archive_payload_verification_117_2026_08_01', 'canonical checkpoint ID changed');
+expect(checkpoint.status === 'reviewed_non_growth_maintenance_checkpoint', 'canonical checkpoint status changed');
+expect(checkpoint.checkpoint_kind === 'non_growth_maintenance_checkpoint', 'canonical checkpoint kind changed');
 expect(checkpoint.counts.assets === 117 && checkpoint.counts.organizations === 108 && checkpoint.counts.relationships === 129, 'identity counts changed');
 expect(checkpoint.counts.events === 192 && checkpoint.counts.evidence === 579 && checkpoint.counts.evidence_relations === 579, 'event or Evidence counts changed');
 expect(checkpoint.counts.deployments === 184 && checkpoint.counts.market_access_records === 8, 'deployment or Market Access counts changed');
@@ -107,6 +109,7 @@ console.log(JSON.stringify({
   evidence_relations: 579,
   archive_recorded: 457,
   archive_not_recorded: 122,
+  canonical_checkpoint_kind: checkpoint.checkpoint_kind,
   stats_checkpoint_kind: statsCheckpoint.checkpoint_kind,
   stats_snapshot_sha256: currentSnapshot?.snapshot_sha256,
   next_boundary: 'REVIEW_GATE'
