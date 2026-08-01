@@ -70,7 +70,7 @@ PR #495 post-domain authority synchronization and issue reconciliation: complete
 PR #496 Record Growth Batch 4 candidate audit: complete and production-verified
 PR #497 Record Growth Batch 4 review gate: complete
 PR #498 Record Growth Batch 4 — MNEE: reviewed complete and production-verified
-Post-PR #498 review gate: decision recorded
+Previous boundary: REVIEW GATE — closed by the post-PR #498 reviewed decision
 Current item: MNEE Evidence and Archive Maintenance — Batch 1
 ```
 
