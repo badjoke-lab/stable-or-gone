@@ -81,9 +81,9 @@ PR #499 post-PR #498 review gate and MNEE maintenance authorization: complete
 PR #500 MNEE Evidence and Archive Maintenance — Batch 1: complete and production-verified
 Required exit after PR #500 merge and production verification: REVIEW GATE — satisfied
 PR #501 post-PR #500 authority synchronization: complete and production-verified
-PR #502 Launch Date Boundary Review — Batch 1 authorization: active
-Authorized implementation: PR #503 review-only evidence and boundary audit
-Required exit after PR #503: REVIEW GATE
+PR #502 Launch Date Boundary Review — Batch 1 authorization: complete
+PR #503 Launch Date Boundary Review — Batch 1: implementation under review
+Required exit after PR #503 merge and production verification: REVIEW GATE
 ```
 
 ## PR #502 authorized review
@@ -99,7 +99,7 @@ sog_st_usdm
 sog_st_usdh
 ```
 
-PR #502 changes authority only. PR #503 may set a launch date only from exact day-level primary evidence matching the launch boundary. Otherwise the date remains null and the reviewed range, sources, and reason must be recorded. No seventh or replacement target is allowed.
+PR #502 changed authority only. PR #503 reviewed all six named records. No exact day-level primary evidence was found that safely equates announcement, deployment, first mint, testing, terms, rebrand, or later availability with one original public launch day. All six canonical launch dates remain null. The unresolved queue now records a reviewed range, specific reason, review date, and primary-source list for every target. No seventh or replacement target was used.
 
 ## PR #500 maintenance result
 

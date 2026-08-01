@@ -1,0 +1,141 @@
+{
+  "schema_version": "1.0",
+  "review_id": "sog_launch_date_boundary_review_batch_1_pr503_2026_08_01",
+  "status": "reviewed_bounded_no_canonical_change",
+  "public_output": false,
+  "authority_pr": 502,
+  "implementation_pr": 503,
+  "reviewed_at": "2026-08-01",
+  "source_queue": "data/quality/launch-date-unresolved.json",
+  "prior_review_source": "data/quality/launch-date-pr220-review.json",
+  "target_count": 6,
+  "exact_day_resolved_count": 0,
+  "null_preserved_count": 6,
+  "canonical_evidence_added_count": 0,
+  "canonical_evidence_relation_added_count": 0,
+  "dispositions": [
+    {
+      "stablecoin_id": "sog_st_msusd",
+      "decision": "bounded_range_reconfirmed_and_null_preserved",
+      "canonical_launch_date_before": null,
+      "canonical_launch_date_after": null,
+      "best_known_range": "live product and onchain supply before June 2026 incident; original launch day unresolved",
+      "reason_code": "product_operation_without_original_launch_boundary",
+      "review_note": "MainStreet materials establish msUSD as an operating synthetic rebasing product. The original announcement, first contract deployment, first mint, and first permissionless public-access day were not recovered from durable first-party material.",
+      "reviewed_at": "2026-08-01",
+      "reviewed_sources": [
+        "https://docs.mainstreet.finance/welcome-to-mainstreet",
+        "https://docs.mainstreet.finance/mainstreet-products/msusd/redemption-process",
+        "https://docs.mainstreet.finance/resources-and-security/key-addresses",
+        "https://mainstreet.finance/"
+      ],
+      "evidence_identity_changes": 0,
+      "evidence_relation_changes": 0
+    },
+    {
+      "stablecoin_id": "sog_st_stablesusdx",
+      "decision": "bounded_range_reconfirmed_and_null_preserved",
+      "canonical_launch_date_before": null,
+      "canonical_launch_date_after": null,
+      "best_known_range": "contracts and live mint/redeem product documented by 2025; original launch day unresolved",
+      "reason_code": "deployed_product_without_original_launch_statement",
+      "review_note": "usdx.money documents the USDX, sales, redemption, and staking contracts and current product behavior. The original launch announcement, contract-creation boundary, first mint, and first public dApp availability day were not recovered.",
+      "reviewed_at": "2026-08-01",
+      "reviewed_sources": [
+        "https://docs.usdx.money/a-synthetic-usd/usdx-basics",
+        "https://docs.usdx.money/a-synthetic-usd/delta-neutral-stability",
+        "https://docs.usdx.money/guides/how-to-redeem",
+        "https://docs.usdx.money/informaiton/contracts"
+      ],
+      "evidence_identity_changes": 0,
+      "evidence_relation_changes": 0
+    },
+    {
+      "stablecoin_id": "sog_st_susde",
+      "decision": "bounded_range_reconfirmed_and_null_preserved",
+      "canonical_launch_date_before": null,
+      "canonical_launch_date_after": null,
+      "best_known_range": "2024-02-19 Ethena public mainnet boundary; separate sUSDe activation day unresolved",
+      "reason_code": "underlying_launch_not_derivative_activation",
+      "review_note": "Ethena documentation establishes sUSDe as the staking receipt and reward-accruing derivative of USDe. A distinct first sUSDe deposit, first mint, or separately announced staking-activation day was not recovered, so the underlying USDe launch is not copied into the derivative record.",
+      "reviewed_at": "2026-08-01",
+      "reviewed_sources": [
+        "https://docs.ethena.fi/solution-design/staking-usde",
+        "https://docs.ethena.fi/solution-overview/usde-overview",
+        "https://etherscan.io/token/0x9d39a5de30e57443bff2a8307a4256c8797a3497"
+      ],
+      "evidence_identity_changes": 0,
+      "evidence_relation_changes": 0
+    },
+    {
+      "stablecoin_id": "sog_st_usd1",
+      "decision": "bounded_range_reconfirmed_and_null_preserved",
+      "canonical_launch_date_before": null,
+      "canonical_launch_date_after": null,
+      "best_known_range": "2025-04 at month level; production test preceded broader market access",
+      "reason_code": "testing_to_market_access_boundary",
+      "review_note": "USD1 contracts, introduction, production airdrop testing, first issuance, and broad market access are separate boundaries. Official material supports April 2025 only at month level for the launch history.",
+      "reviewed_at": "2026-08-01",
+      "reviewed_sources": [
+        "https://governance.worldlibertyfinancial.com/t/proposal-test-airdrop-functionality-by-distributing-usd1-to-all-wlfi-token-holders/4794",
+        "https://static.worldlibertyfinancial.com/docs/mica-whitepaper.pdf",
+        "https://www.worldlibertyfinancial.com/usd1"
+      ],
+      "evidence_identity_changes": 0,
+      "evidence_relation_changes": 0
+    },
+    {
+      "stablecoin_id": "sog_st_usdm",
+      "decision": "bounded_range_reconfirmed_and_null_preserved",
+      "canonical_launch_date_before": null,
+      "canonical_launch_date_after": null,
+      "best_known_range": "cUSD activation in June 2020; 2025-12-17 USDm rebrand is not a new launch",
+      "reason_code": "original_cusd_activation_and_rebrand_lineage",
+      "review_note": "Mento states that cUSD and USDm are one continuing asset and that the 2025 rebrand required no contract, peg, or user action. Celo sources bound cUSD activation to June 2020, but the final executed first-public-transfer day was not jointly recovered.",
+      "reviewed_at": "2026-08-01",
+      "reviewed_sources": [
+        "https://www.mento.org/blog/a-new-chapter-in-multichain-fx-the-evolution-of-mento-stablecoins",
+        "https://forum.celo.org/t/governance-proposal-to-activate-celo-stability-protocol-and-enable-cusd-transfers/547",
+        "https://forum.celo.org/t/approach-to-stablecoins-on-celo/897"
+      ],
+      "evidence_identity_changes": 0,
+      "evidence_relation_changes": 0
+    },
+    {
+      "stablecoin_id": "sog_st_usdh",
+      "decision": "bounded_range_reconfirmed_and_null_preserved",
+      "canonical_launch_date_before": null,
+      "canonical_launch_date_after": null,
+      "best_known_range": "Native Markets terms effective 2025-09-21; first mint and Hyperliquid activation unresolved",
+      "reason_code": "terms_effective_date_not_first_issuance",
+      "review_note": "Native Markets terms identify USDH as a Bridge-issued token native to Hyperliquid, and Bridge later describes USDH as issued through its infrastructure. Product announcement, first mint, HyperCore activation, HyperEVM linking, and migration remain separate boundaries.",
+      "reviewed_at": "2026-08-01",
+      "reviewed_sources": [
+        "https://nativemarkets.com/policies/terms",
+        "https://www.bridge.xyz/news/introducing-open-issuance",
+        "https://www.bridge.xyz/product/issuance"
+      ],
+      "evidence_identity_changes": 0,
+      "evidence_relation_changes": 0
+    }
+  ],
+  "decision": {
+    "all_targets_disposed": true,
+    "exact_day_evidence_found": false,
+    "unsupported_date_coercion": false,
+    "canonical_counts_preserved": true,
+    "launch_queue_total_preserved": 29,
+    "next_boundary": "REVIEW_GATE"
+  },
+  "constraints": {
+    "asset_changes": 0,
+    "organization_changes": 0,
+    "relationship_changes": 0,
+    "event_changes": 0,
+    "deployment_changes": 0,
+    "market_access_changes": 0,
+    "route_family_changes": 0,
+    "material_ui_changes": 0,
+    "automatic_continuation": false
+  }
+}

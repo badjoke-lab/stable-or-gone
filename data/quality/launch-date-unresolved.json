@@ -1,39 +1,391 @@
 {
-  "schema_version":"1.0",
-  "frozen_at":"2026-07-13",
-  "source_review":"docs/quality/launch-date-historical-boundary-review-2026-06-28.md",
-  "policy":{"canonical_day_required":true,"keep_null_without_day_level_primary_evidence":true,"forbid_month_or_year_coercion":true,"forbid_exchange_listing_as_default_launch":true,"forbid_rebrand_or_migration_as_default_launch":true},
-  "expected_total":29,
-  "category_counts":{"B":3,"C":26,"D":0},
-  "records":[
-    {"stablecoin_id":"sog_st_agoraausd","category":"C","best_known_range":"2024-07-07 contract deployment; public launch unresolved","reason_code":"contract_deployment_not_public_launch","review_note":"The Ethereum production contract was deployed on 2024-07-07 and current Agora materials establish live minting, redemption, and multichain operation. The first production mint, first approved-customer access, and broad public-availability day remain unresolved.","last_reviewed":"2026-06-28","reviewed_sources":["https://www.agora.finance/product/ausd","https://docs.agora.finance/","https://docs.agora.finance/developer/contract-deployments"]},
-    {"stablecoin_id":"sog_st_brz","category":"B","best_known_range":"2019; live by 2019-07-25","reason_code":"partial_date_only","review_note":"Transfero states that BRZ launched in 2019, and a dated Transfero-owned publication linked the BRZ launch article by 2019-07-25. The original public issuance day and first deployment boundary remain unverified.","last_reviewed":"2026-06-28","reviewed_sources":["https://transfero.com/brz","https://panoramacrypto.transfero.com/mesa-de-operacoes-transfero/"]},
-    {"stablecoin_id":"sog_st_dsd","category":"C","best_known_range":"2020-11-26 protocol start to 2020-11-28 public announcement","reason_code":"protocol_start_to_public_announcement_boundary","review_note":"An official retrospective states that DSD started on 2020-11-26, while the official introduction and launch articles are dated 2020-11-28. The exact first epoch, first distribution, and public interface boundary are not shown to be the same day.","last_reviewed":"2026-06-28","reviewed_sources":["https://dynamicsetdollar.medium.com/announcing-dynamic-set-dollar-e3ca13928265","https://dynamicsetdollar.medium.com/dip-16-improving-advance-incentives-4bcd3f84c9c4"]},
-    {"stablecoin_id":"sog_st_esd","category":"C","best_known_range":"launched before 2020-10-19","reason_code":"original_launch_post_not_recovered","review_note":"A contemporaneous project publication described ESD as recently launched on 2020-10-19, while the repository and later V2 materials confirm the protocol lineage. The original launch post, exact deployment, first epoch, and first public distribution day were not recovered.","last_reviewed":"2026-06-28","reviewed_sources":["https://medium.com/@lewi_/empty-set-dollar-esd-a0abbfc5ecdb","https://github.com/emptysetsquad/emptyset"]},
-    {"stablecoin_id":"sog_st_eurt","category":"C","best_known_range":"2017 at year level","reason_code":"year_only_and_issuance_boundary","review_note":"Tether's historical material establishes EURT product identity and a 2017 origin at year level, while supported-protocol records establish later deployments. The original announcement, first issuance, and first redeemable public-service day remain unresolved.","last_reviewed":"2026-06-28","reviewed_sources":["https://tether.to/en/euro-tether-eurt-and-tether-gold-xaut-to-be-listed-on-digifinex/","https://tether.to/en/supported-protocols/"]},
-    {"stablecoin_id":"sog_st_honey","category":"C","best_known_range":"2025-02-06 mainnet boundary","reason_code":"network_launch_not_asset_first_use","review_note":"Berachain fixed its mainnet launch to 2025-02-06 and official HONEY documentation identifies the mainnet contracts. No HONEY-specific first mint, first redemption, or first public minting transaction was recovered, so the network launch is not coerced into the asset launch date.","last_reviewed":"2026-06-28","reviewed_sources":["https://x.com/berachain/status/1886777450480259265","https://docs.berachain.com/developers/contracts/honey-token","https://docs.berachain.com/learn/pol/tokens/honey"]},
-    {"stablecoin_id":"sog_st_husd","category":"C","best_known_range":"2019-07-17 to 2019-10-18","reason_code":"announcement_to_operational_boundary","review_note":"Stable Universal announced on 2019-07-17 that it would launch HUSD. By 2019-10-18, HUSD-PAX conversion was operational on Huobi. Contract deployment, first issuance, and first public redemption within that interval remain unresolved.","last_reviewed":"2026-06-28","reviewed_sources":["https://www.prnewswire.com/news-releases/stable-universal-partners-with-paxos-and-huobi-to-launch-new-stablecoin-husd-300886646.html","https://www.prnewswire.com/news-releases/stable-universal-and-paxos-global-jointly-launch-industry-first-11-conversion-between-stablecoins-husd-and-pax-on-huobi-300941057.html","https://etherscan.io/address/0xdf574c24545e5ffecb9a659c229253d4111d87e1"]},
-    {"stablecoin_id":"sog_st_mim","category":"C","best_known_range":"2021-05 to 2021-06","reason_code":"launch_boundary_conflict","review_note":"The existing research fixes a May 5 introduction, May 25 deployment, June 5 liquidity incentives, and live operation by June 11. Current official documentation confirms MIM identity and minting mechanics, but the original first Cauldron, first issuance, and public interface day remain unresolved.","last_reviewed":"2026-06-28","reviewed_sources":["https://abracadabra.money/","https://dev.abracadabra.money/token-related/mim","https://docs.abracadabra.money/learn"]},
-    {"stablecoin_id":"sog_st_msusd","category":"C","best_known_range":null,"reason_code":"launch_boundary_conflict","review_note":"Announcement, issuance, deployment, and availability differ."},
-    {"stablecoin_id":"sog_st_musd","category":"C","best_known_range":"2020-05-28 to 2020-06-05","reason_code":"deployment_to_public_availability_boundary","review_note":"The official Ethereum contract source was submitted for verification on 2020-05-28, a contemporaneous record identifies 2020-05-29 as the strongest mainnet-live candidate, and first-party security documentation covers production functionality from 2020-06-05. The creation transaction, first permissionless mint, and original first-party launch statement remain unresolved.","last_reviewed":"2026-06-28","reviewed_sources":["https://etherscan.io/address/0xe2f2a5C287993345a840Db3B0845fbC70f5935a5","https://docs.mstable.org/assets/musd","https://developers.mstable.org/security/bug-bounty"]},
-    {"stablecoin_id":"sog_st_stablesusdx","category":"C","best_known_range":null,"reason_code":"launch_boundary_conflict","review_note":"Announcement, issuance, deployment, and approved access differ."},
-    {"stablecoin_id":"sog_st_susde","category":"C","best_known_range":null,"reason_code":"product_activation_conflict","review_note":"USDe launch and staking activation differ."},
-    {"stablecoin_id":"sog_st_tryb","category":"B","best_known_range":"2019","reason_code":"partial_date_only","review_note":"BiLira's official help center states that TRYB was initially released on Ethereum in 2019. The original announcement, contract deployment, first issuance, and first public redemption day remain unrecovered.","last_reviewed":"2026-06-28","reviewed_sources":["https://cs.bilira.co/hc/bilira-kripto-yardim-merkezi/articles/1746700110-what-is-tryb-where-can-tryb-be-used","https://www.bilira.co/en/company"]},
-    {"stablecoin_id":"sog_st_usd1","category":"C","best_known_range":"2025-04","reason_code":"launch_boundary_conflict","review_note":"January 28 deployments, March 25 introduction, and April 7 testing are fixed; a first-party retrospective establishes April 2025 only at month level, while first issuance and broader public availability remain unresolved."},
-    {"stablecoin_id":"sog_st_usdm","category":"C","best_known_range":null,"reason_code":"lineage_conflict","review_note":"Mento Dollar and earlier Celo-dollar history differ."},
-    {"stablecoin_id":"sog_st_usdz","category":"B","best_known_range":"2024-06","reason_code":"partial_date_only","review_note":"Anzen's official retrospective establishes that USDz launched in June 2024. Current documentation confirms permissionless pool access and approved direct minting, but no day-level launch statement or reviewed first-public-availability transaction was recovered.","last_reviewed":"2026-06-28","reviewed_sources":["https://anzen.finance/everything-you-need-to-know-about-anz","https://docs.anzen.finance/usdz-101/overview"]},
-    {"stablecoin_id":"sog_st_usyc","category":"C","best_known_range":"2023-05-01 fund inception; token launch unresolved","reason_code":"fund_inception_not_token_launch","review_note":"Circle publishes 2023-05-01 as the fund inception date, while Hashnote documents the onchain USYC token structure and subscription process. Fund inception is not treated as proof of the first token mint or first public token availability.","last_reviewed":"2026-06-28","reviewed_sources":["https://www.circle.com/usyc","https://usyc.docs.hashnote.com/","https://usyc.docs.hashnote.com/overview/smart-contracts"]},
-    {"stablecoin_id":"sog_st_usdh","category":"C","best_known_range":null,"reason_code":"launch_boundary_conflict","review_note":"Product announcement, first mint, HyperCore activation, HyperEVM linking, and migration boundaries remain unresolved."},
-    {"stablecoin_id":"sog_st_aecoin","category":"C","best_known_range":"after 2025-01-17; live by 2025-05","reason_code":"license_to_public_availability_boundary","review_note":"AE Coin had final regulatory approval by December 2024, but its 2025-01-17 whitepaper still describes issuance in future and introductory-phase terms. Mbank now provides live buy, transfer, receive, hold, and sell access, and public payment acceptance was reported by May 2025. The first issuance and first customer availability day remain unresolved.","last_reviewed":"2026-06-28","reviewed_sources":["https://aecoin.com/downloads/whitepaper-en.pdf","https://www.mbank.ae/aec-wallet/","https://www.centralbank.ae/en/our-operations/fintech-and-digital-transformation/payment-token-services-regulation/"]},
-    {"stablecoin_id":"sog_st_eure","category":"C","best_known_range":"current regulated availability verified by 2026-07-08; original launch day unresolved","reason_code":"current_availability_not_original_launch_day","review_note":"Current Monerium product and regulator sources verify active EURe issuance, redemption, reserve backing, and exact current contracts, but the reviewed sources do not establish the original first public issuance or redemption day.","last_reviewed":"2026-07-08","reviewed_sources":["https://monerium.com/eure/","https://cb.is/financial-supervision/regulated-activities/supervised-entities/","https://monerium.dev/docs/tokens"]},
-    {"stablecoin_id":"sog_st_1gbp","category":"C","best_known_range":"historical 2022 product documentation and verified Ethereum token identity; exact launch day unresolved","reason_code":"historical_product_identity_without_day_level_launch_boundary","review_note":"The Ethereum token identity is verified as poundtoken with symbol 1GBP and historical product documentation exists, but contract persistence and historical documentation do not establish the exact first public issuance or redemption day.","last_reviewed":"2026-07-08","reviewed_sources":["https://etherscan.io/token/0x86b4dbe5d203e634a12364c0e428fa242a3fba98","https://resources.poundtoken.io/wp-content/uploads/2022/04/Blackfridge-Whitepaper-March-2022_updated.pdf"]},
-    {"stablecoin_id":"sog_st_eurr","category":"C","best_known_range":"current regulated product and May-June 2026 incident history verified; original launch day unresolved","reason_code":"current_product_and_incident_history_without_original_launch_boundary","review_note":"Current StablR product, regulatory, deployment, reserve, and incident-recovery sources establish EURR identity and current restricted service state, but do not establish the exact first public issuance or redemption day.","last_reviewed":"2026-07-09","reviewed_sources":["https://stablr.com/eurr","https://docs.stablr.com/docs/smart-contract","https://stablr.com/insights/stablr-discloses-cybersecurity-incident-affecting-usdr-and-eurr-token-operations"]},
-    {"stablecoin_id":"sog_st_stablrusdr","category":"C","best_known_range":"current regulated product and May-June 2026 incident history verified; original launch day unresolved","reason_code":"current_product_and_incident_history_without_original_launch_boundary","review_note":"Current StablR product, regulatory, deployment, reserve, and incident-recovery sources establish USDR identity and current restricted service state, but do not establish the exact first public issuance or redemption day.","last_reviewed":"2026-07-09","reviewed_sources":["https://stablr.com/usdr","https://docs.stablr.com/docs/smart-contract","https://stablr.com/insights/stablr-discloses-cybersecurity-incident-affecting-usdr-and-eurr-token-operations"]},
-    {"stablecoin_id":"sog_st_phpc","category":"C","best_known_range":"2024-05-13 sandbox testing; 2024-07-08 Ronin network launch; original first public issuance day unresolved","reason_code":"sandbox_and_network_launch_do_not_establish_original_asset_launch_day","review_note":"PHPC sandbox testing and the dated Ronin network launch are verified, but neither establishes the original first public issuance, first mint, or first redeemable-service day for PHPC as an asset.","last_reviewed":"2026-07-09","reviewed_sources":["https://www.coins.ph/en-ph/phpc-whitepaper","https://roninchain.com/blog/posts/phpc-is-live-on-ronin","https://cointelegraph.com/news/philippines-central-bank-peso-stablecoin"]},
-    {"stablecoin_id":"sog_st_cadc","category":"C","best_known_range":"2021 at year level; 2025-10-27 Loon issuer transition; exact original launch day unresolved","reason_code":"launch_year_and_issuer_transition_do_not_establish_original_day","review_note":"Loon states that CADC was originally launched by PayTrie in 2021 and records a dated 2025 issuer transition, but neither establishes the exact first public issuance, first mint, or first redeemable-service day for CADC.","last_reviewed":"2026-07-09","reviewed_sources":["https://loon.finance/","https://loon.finance/blog/meet-cadc/","https://www.prnewswire.com/news-releases/loon-raises-3-million-to-build-canadas-regulated-digital-dollar-acquires-cadc-stablecoin-302594051.html"]},
-    {"stablecoin_id":"sog_st_zarp","category":"C","best_known_range":"current active product verified; 2025-07-11 Solana migration; original asset launch day unresolved","reason_code":"current_availability_and_later_migration_do_not_establish_original_launch_day","review_note":"Current ZARP product, reserve, redemption, and deployment documentation and the dated 2025 Solana migration are verified, but the reviewed sources do not establish the exact original first public issuance or redemption day for ZARP.","last_reviewed":"2026-07-09","reviewed_sources":["https://www.zarpstablecoin.com/","https://docs.zarpstablecoin.com/zarp-stablecoin/blockchains","https://www.zarpstablecoin.com/news/"]},
-    {"stablecoin_id":"sog_st_audd","category":"C","best_known_range":"historical AUDD product identity verified; exact original launch day unresolved","reason_code":"historical_product_identity_without_day_level_launch_boundary","review_note":"AUDD is preserved as an Australian-dollar stablecoin identity, but the reviewed source set does not establish the exact first public issuance, first mint, or first redeemable-service day.","last_reviewed":"2026-07-09","reviewed_sources":["https://audd.digital/","https://audd.digital/transparency","https://audd.digital/terms"]},
-    {"stablecoin_id":"sog_st_nzds","category":"C","best_known_range":"historical NZDS and Techemynt product lineage verified; exact original launch day unresolved","reason_code":"historical_product_identity_without_day_level_launch_boundary","review_note":"NZDS historical identity and Techemynt association are preserved, but the reviewed source set does not establish the exact first public issuance, first mint, or first redeemable-service day.","last_reviewed":"2026-07-09","reviewed_sources":["https://nzds.com/","https://techemynt.com/","https://nzds.com/transparency"]},
-    {"stablecoin_id":"sog_st_xusd","category":"C","best_known_range":"official current product and contract availability verified by 2026-07-13; original first public issuance day unresolved","reason_code":"current_product_and_deployments_do_not_establish_original_launch_day","review_note":"Current StraitsX materials verify XUSD identity, issuer-mediated 1:1 redemption, reserve attestations, and Ethereum, BNB Smart Chain, and Solana identifiers. The reviewed sources do not establish the exact first public issuance, first mint, or first redeemable-service day.","last_reviewed":"2026-07-13","reviewed_sources":["https://www.straitsx.com/xusd","https://www.straitsx.com/sg"]}
+  "schema_version": "1.0",
+  "frozen_at": "2026-07-13",
+  "source_review": "docs/quality/launch-date-historical-boundary-review-2026-06-28.md",
+  "policy": {
+    "canonical_day_required": true,
+    "keep_null_without_day_level_primary_evidence": true,
+    "forbid_month_or_year_coercion": true,
+    "forbid_exchange_listing_as_default_launch": true,
+    "forbid_rebrand_or_migration_as_default_launch": true
+  },
+  "expected_total": 29,
+  "category_counts": {
+    "B": 3,
+    "C": 26,
+    "D": 0
+  },
+  "records": [
+    {
+      "stablecoin_id": "sog_st_agoraausd",
+      "category": "C",
+      "best_known_range": "2024-07-07 contract deployment; public launch unresolved",
+      "reason_code": "contract_deployment_not_public_launch",
+      "review_note": "The Ethereum production contract was deployed on 2024-07-07 and current Agora materials establish live minting, redemption, and multichain operation. The first production mint, first approved-customer access, and broad public-availability day remain unresolved.",
+      "last_reviewed": "2026-06-28",
+      "reviewed_sources": [
+        "https://www.agora.finance/product/ausd",
+        "https://docs.agora.finance/",
+        "https://docs.agora.finance/developer/contract-deployments"
+      ]
+    },
+    {
+      "stablecoin_id": "sog_st_brz",
+      "category": "B",
+      "best_known_range": "2019; live by 2019-07-25",
+      "reason_code": "partial_date_only",
+      "review_note": "Transfero states that BRZ launched in 2019, and a dated Transfero-owned publication linked the BRZ launch article by 2019-07-25. The original public issuance day and first deployment boundary remain unverified.",
+      "last_reviewed": "2026-06-28",
+      "reviewed_sources": [
+        "https://transfero.com/brz",
+        "https://panoramacrypto.transfero.com/mesa-de-operacoes-transfero/"
+      ]
+    },
+    {
+      "stablecoin_id": "sog_st_dsd",
+      "category": "C",
+      "best_known_range": "2020-11-26 protocol start to 2020-11-28 public announcement",
+      "reason_code": "protocol_start_to_public_announcement_boundary",
+      "review_note": "An official retrospective states that DSD started on 2020-11-26, while the official introduction and launch articles are dated 2020-11-28. The exact first epoch, first distribution, and public interface boundary are not shown to be the same day.",
+      "last_reviewed": "2026-06-28",
+      "reviewed_sources": [
+        "https://dynamicsetdollar.medium.com/announcing-dynamic-set-dollar-e3ca13928265",
+        "https://dynamicsetdollar.medium.com/dip-16-improving-advance-incentives-4bcd3f84c9c4"
+      ]
+    },
+    {
+      "stablecoin_id": "sog_st_esd",
+      "category": "C",
+      "best_known_range": "launched before 2020-10-19",
+      "reason_code": "original_launch_post_not_recovered",
+      "review_note": "A contemporaneous project publication described ESD as recently launched on 2020-10-19, while the repository and later V2 materials confirm the protocol lineage. The original launch post, exact deployment, first epoch, and first public distribution day were not recovered.",
+      "last_reviewed": "2026-06-28",
+      "reviewed_sources": [
+        "https://medium.com/@lewi_/empty-set-dollar-esd-a0abbfc5ecdb",
+        "https://github.com/emptysetsquad/emptyset"
+      ]
+    },
+    {
+      "stablecoin_id": "sog_st_eurt",
+      "category": "C",
+      "best_known_range": "2017 at year level",
+      "reason_code": "year_only_and_issuance_boundary",
+      "review_note": "Tether's historical material establishes EURT product identity and a 2017 origin at year level, while supported-protocol records establish later deployments. The original announcement, first issuance, and first redeemable public-service day remain unresolved.",
+      "last_reviewed": "2026-06-28",
+      "reviewed_sources": [
+        "https://tether.to/en/euro-tether-eurt-and-tether-gold-xaut-to-be-listed-on-digifinex/",
+        "https://tether.to/en/supported-protocols/"
+      ]
+    },
+    {
+      "stablecoin_id": "sog_st_honey",
+      "category": "C",
+      "best_known_range": "2025-02-06 mainnet boundary",
+      "reason_code": "network_launch_not_asset_first_use",
+      "review_note": "Berachain fixed its mainnet launch to 2025-02-06 and official HONEY documentation identifies the mainnet contracts. No HONEY-specific first mint, first redemption, or first public minting transaction was recovered, so the network launch is not coerced into the asset launch date.",
+      "last_reviewed": "2026-06-28",
+      "reviewed_sources": [
+        "https://x.com/berachain/status/1886777450480259265",
+        "https://docs.berachain.com/developers/contracts/honey-token",
+        "https://docs.berachain.com/learn/pol/tokens/honey"
+      ]
+    },
+    {
+      "stablecoin_id": "sog_st_husd",
+      "category": "C",
+      "best_known_range": "2019-07-17 to 2019-10-18",
+      "reason_code": "announcement_to_operational_boundary",
+      "review_note": "Stable Universal announced on 2019-07-17 that it would launch HUSD. By 2019-10-18, HUSD-PAX conversion was operational on Huobi. Contract deployment, first issuance, and first public redemption within that interval remain unresolved.",
+      "last_reviewed": "2026-06-28",
+      "reviewed_sources": [
+        "https://www.prnewswire.com/news-releases/stable-universal-partners-with-paxos-and-huobi-to-launch-new-stablecoin-husd-300886646.html",
+        "https://www.prnewswire.com/news-releases/stable-universal-and-paxos-global-jointly-launch-industry-first-11-conversion-between-stablecoins-husd-and-pax-on-huobi-300941057.html",
+        "https://etherscan.io/address/0xdf574c24545e5ffecb9a659c229253d4111d87e1"
+      ]
+    },
+    {
+      "stablecoin_id": "sog_st_mim",
+      "category": "C",
+      "best_known_range": "2021-05 to 2021-06",
+      "reason_code": "launch_boundary_conflict",
+      "review_note": "The existing research fixes a May 5 introduction, May 25 deployment, June 5 liquidity incentives, and live operation by June 11. Current official documentation confirms MIM identity and minting mechanics, but the original first Cauldron, first issuance, and public interface day remain unresolved.",
+      "last_reviewed": "2026-06-28",
+      "reviewed_sources": [
+        "https://abracadabra.money/",
+        "https://dev.abracadabra.money/token-related/mim",
+        "https://docs.abracadabra.money/learn"
+      ]
+    },
+    {
+      "stablecoin_id": "sog_st_msusd",
+      "category": "C",
+      "best_known_range": "live product and onchain supply before June 2026 incident; original launch day unresolved",
+      "reason_code": "product_operation_without_original_launch_boundary",
+      "review_note": "MainStreet materials establish msUSD as an operating synthetic rebasing product. The original announcement, first contract deployment, first mint, and first permissionless public-access day were not recovered from durable first-party material.",
+      "last_reviewed": "2026-08-01",
+      "reviewed_sources": [
+        "https://docs.mainstreet.finance/welcome-to-mainstreet",
+        "https://docs.mainstreet.finance/mainstreet-products/msusd/redemption-process",
+        "https://docs.mainstreet.finance/resources-and-security/key-addresses",
+        "https://mainstreet.finance/"
+      ]
+    },
+    {
+      "stablecoin_id": "sog_st_musd",
+      "category": "C",
+      "best_known_range": "2020-05-28 to 2020-06-05",
+      "reason_code": "deployment_to_public_availability_boundary",
+      "review_note": "The official Ethereum contract source was submitted for verification on 2020-05-28, a contemporaneous record identifies 2020-05-29 as the strongest mainnet-live candidate, and first-party security documentation covers production functionality from 2020-06-05. The creation transaction, first permissionless mint, and original first-party launch statement remain unresolved.",
+      "last_reviewed": "2026-06-28",
+      "reviewed_sources": [
+        "https://etherscan.io/address/0xe2f2a5C287993345a840Db3B0845fbC70f5935a5",
+        "https://docs.mstable.org/assets/musd",
+        "https://developers.mstable.org/security/bug-bounty"
+      ]
+    },
+    {
+      "stablecoin_id": "sog_st_stablesusdx",
+      "category": "C",
+      "best_known_range": "contracts and live mint/redeem product documented by 2025; original launch day unresolved",
+      "reason_code": "deployed_product_without_original_launch_statement",
+      "review_note": "usdx.money documents the USDX, sales, redemption, and staking contracts and current product behavior. The original launch announcement, contract-creation boundary, first mint, and first public dApp availability day were not recovered.",
+      "last_reviewed": "2026-08-01",
+      "reviewed_sources": [
+        "https://docs.usdx.money/a-synthetic-usd/usdx-basics",
+        "https://docs.usdx.money/a-synthetic-usd/delta-neutral-stability",
+        "https://docs.usdx.money/guides/how-to-redeem",
+        "https://docs.usdx.money/informaiton/contracts"
+      ]
+    },
+    {
+      "stablecoin_id": "sog_st_susde",
+      "category": "C",
+      "best_known_range": "2024-02-19 Ethena public mainnet boundary; separate sUSDe activation day unresolved",
+      "reason_code": "underlying_launch_not_derivative_activation",
+      "review_note": "Ethena documentation establishes sUSDe as the staking receipt and reward-accruing derivative of USDe. A distinct first sUSDe deposit, first mint, or separately announced staking-activation day was not recovered, so the underlying USDe launch is not copied into the derivative record.",
+      "last_reviewed": "2026-08-01",
+      "reviewed_sources": [
+        "https://docs.ethena.fi/solution-design/staking-usde",
+        "https://docs.ethena.fi/solution-overview/usde-overview",
+        "https://etherscan.io/token/0x9d39a5de30e57443bff2a8307a4256c8797a3497"
+      ]
+    },
+    {
+      "stablecoin_id": "sog_st_tryb",
+      "category": "B",
+      "best_known_range": "2019",
+      "reason_code": "partial_date_only",
+      "review_note": "BiLira's official help center states that TRYB was initially released on Ethereum in 2019. The original announcement, contract deployment, first issuance, and first public redemption day remain unrecovered.",
+      "last_reviewed": "2026-06-28",
+      "reviewed_sources": [
+        "https://cs.bilira.co/hc/bilira-kripto-yardim-merkezi/articles/1746700110-what-is-tryb-where-can-tryb-be-used",
+        "https://www.bilira.co/en/company"
+      ]
+    },
+    {
+      "stablecoin_id": "sog_st_usd1",
+      "category": "C",
+      "best_known_range": "2025-04 at month level; production test preceded broader market access",
+      "reason_code": "testing_to_market_access_boundary",
+      "review_note": "USD1 contracts, introduction, production airdrop testing, first issuance, and broad market access are separate boundaries. Official material supports April 2025 only at month level for the launch history.",
+      "last_reviewed": "2026-08-01",
+      "reviewed_sources": [
+        "https://governance.worldlibertyfinancial.com/t/proposal-test-airdrop-functionality-by-distributing-usd1-to-all-wlfi-token-holders/4794",
+        "https://static.worldlibertyfinancial.com/docs/mica-whitepaper.pdf",
+        "https://www.worldlibertyfinancial.com/usd1"
+      ]
+    },
+    {
+      "stablecoin_id": "sog_st_usdm",
+      "category": "C",
+      "best_known_range": "cUSD activation in June 2020; 2025-12-17 USDm rebrand is not a new launch",
+      "reason_code": "original_cusd_activation_and_rebrand_lineage",
+      "review_note": "Mento states that cUSD and USDm are one continuing asset and that the 2025 rebrand required no contract, peg, or user action. Celo sources bound cUSD activation to June 2020, but the final executed first-public-transfer day was not jointly recovered.",
+      "last_reviewed": "2026-08-01",
+      "reviewed_sources": [
+        "https://www.mento.org/blog/a-new-chapter-in-multichain-fx-the-evolution-of-mento-stablecoins",
+        "https://forum.celo.org/t/governance-proposal-to-activate-celo-stability-protocol-and-enable-cusd-transfers/547",
+        "https://forum.celo.org/t/approach-to-stablecoins-on-celo/897"
+      ]
+    },
+    {
+      "stablecoin_id": "sog_st_usdz",
+      "category": "B",
+      "best_known_range": "2024-06",
+      "reason_code": "partial_date_only",
+      "review_note": "Anzen's official retrospective establishes that USDz launched in June 2024. Current documentation confirms permissionless pool access and approved direct minting, but no day-level launch statement or reviewed first-public-availability transaction was recovered.",
+      "last_reviewed": "2026-06-28",
+      "reviewed_sources": [
+        "https://anzen.finance/everything-you-need-to-know-about-anz",
+        "https://docs.anzen.finance/usdz-101/overview"
+      ]
+    },
+    {
+      "stablecoin_id": "sog_st_usyc",
+      "category": "C",
+      "best_known_range": "2023-05-01 fund inception; token launch unresolved",
+      "reason_code": "fund_inception_not_token_launch",
+      "review_note": "Circle publishes 2023-05-01 as the fund inception date, while Hashnote documents the onchain USYC token structure and subscription process. Fund inception is not treated as proof of the first token mint or first public token availability.",
+      "last_reviewed": "2026-06-28",
+      "reviewed_sources": [
+        "https://www.circle.com/usyc",
+        "https://usyc.docs.hashnote.com/",
+        "https://usyc.docs.hashnote.com/overview/smart-contracts"
+      ]
+    },
+    {
+      "stablecoin_id": "sog_st_usdh",
+      "category": "C",
+      "best_known_range": "Native Markets terms effective 2025-09-21; first mint and Hyperliquid activation unresolved",
+      "reason_code": "terms_effective_date_not_first_issuance",
+      "review_note": "Native Markets terms identify USDH as a Bridge-issued token native to Hyperliquid, and Bridge later describes USDH as issued through its infrastructure. Product announcement, first mint, HyperCore activation, HyperEVM linking, and migration remain separate boundaries.",
+      "last_reviewed": "2026-08-01",
+      "reviewed_sources": [
+        "https://nativemarkets.com/policies/terms",
+        "https://www.bridge.xyz/news/introducing-open-issuance",
+        "https://www.bridge.xyz/product/issuance"
+      ]
+    },
+    {
+      "stablecoin_id": "sog_st_aecoin",
+      "category": "C",
+      "best_known_range": "after 2025-01-17; live by 2025-05",
+      "reason_code": "license_to_public_availability_boundary",
+      "review_note": "AE Coin had final regulatory approval by December 2024, but its 2025-01-17 whitepaper still describes issuance in future and introductory-phase terms. Mbank now provides live buy, transfer, receive, hold, and sell access, and public payment acceptance was reported by May 2025. The first issuance and first customer availability day remain unresolved.",
+      "last_reviewed": "2026-06-28",
+      "reviewed_sources": [
+        "https://aecoin.com/downloads/whitepaper-en.pdf",
+        "https://www.mbank.ae/aec-wallet/",
+        "https://www.centralbank.ae/en/our-operations/fintech-and-digital-transformation/payment-token-services-regulation/"
+      ]
+    },
+    {
+      "stablecoin_id": "sog_st_eure",
+      "category": "C",
+      "best_known_range": "current regulated availability verified by 2026-07-08; original launch day unresolved",
+      "reason_code": "current_availability_not_original_launch_day",
+      "review_note": "Current Monerium product and regulator sources verify active EURe issuance, redemption, reserve backing, and exact current contracts, but the reviewed sources do not establish the original first public issuance or redemption day.",
+      "last_reviewed": "2026-07-08",
+      "reviewed_sources": [
+        "https://monerium.com/eure/",
+        "https://cb.is/financial-supervision/regulated-activities/supervised-entities/",
+        "https://monerium.dev/docs/tokens"
+      ]
+    },
+    {
+      "stablecoin_id": "sog_st_1gbp",
+      "category": "C",
+      "best_known_range": "historical 2022 product documentation and verified Ethereum token identity; exact launch day unresolved",
+      "reason_code": "historical_product_identity_without_day_level_launch_boundary",
+      "review_note": "The Ethereum token identity is verified as poundtoken with symbol 1GBP and historical product documentation exists, but contract persistence and historical documentation do not establish the exact first public issuance or redemption day.",
+      "last_reviewed": "2026-07-08",
+      "reviewed_sources": [
+        "https://etherscan.io/token/0x86b4dbe5d203e634a12364c0e428fa242a3fba98",
+        "https://resources.poundtoken.io/wp-content/uploads/2022/04/Blackfridge-Whitepaper-March-2022_updated.pdf"
+      ]
+    },
+    {
+      "stablecoin_id": "sog_st_eurr",
+      "category": "C",
+      "best_known_range": "current regulated product and May-June 2026 incident history verified; original launch day unresolved",
+      "reason_code": "current_product_and_incident_history_without_original_launch_boundary",
+      "review_note": "Current StablR product, regulatory, deployment, reserve, and incident-recovery sources establish EURR identity and current restricted service state, but do not establish the exact first public issuance or redemption day.",
+      "last_reviewed": "2026-07-09",
+      "reviewed_sources": [
+        "https://stablr.com/eurr",
+        "https://docs.stablr.com/docs/smart-contract",
+        "https://stablr.com/insights/stablr-discloses-cybersecurity-incident-affecting-usdr-and-eurr-token-operations"
+      ]
+    },
+    {
+      "stablecoin_id": "sog_st_stablrusdr",
+      "category": "C",
+      "best_known_range": "current regulated product and May-June 2026 incident history verified; original launch day unresolved",
+      "reason_code": "current_product_and_incident_history_without_original_launch_boundary",
+      "review_note": "Current StablR product, regulatory, deployment, reserve, and incident-recovery sources establish USDR identity and current restricted service state, but do not establish the exact first public issuance or redemption day.",
+      "last_reviewed": "2026-07-09",
+      "reviewed_sources": [
+        "https://stablr.com/usdr",
+        "https://docs.stablr.com/docs/smart-contract",
+        "https://stablr.com/insights/stablr-discloses-cybersecurity-incident-affecting-usdr-and-eurr-token-operations"
+      ]
+    },
+    {
+      "stablecoin_id": "sog_st_phpc",
+      "category": "C",
+      "best_known_range": "2024-05-13 sandbox testing; 2024-07-08 Ronin network launch; original first public issuance day unresolved",
+      "reason_code": "sandbox_and_network_launch_do_not_establish_original_asset_launch_day",
+      "review_note": "PHPC sandbox testing and the dated Ronin network launch are verified, but neither establishes the original first public issuance, first mint, or first redeemable-service day for PHPC as an asset.",
+      "last_reviewed": "2026-07-09",
+      "reviewed_sources": [
+        "https://www.coins.ph/en-ph/phpc-whitepaper",
+        "https://roninchain.com/blog/posts/phpc-is-live-on-ronin",
+        "https://cointelegraph.com/news/philippines-central-bank-peso-stablecoin"
+      ]
+    },
+    {
+      "stablecoin_id": "sog_st_cadc",
+      "category": "C",
+      "best_known_range": "2021 at year level; 2025-10-27 Loon issuer transition; exact original launch day unresolved",
+      "reason_code": "launch_year_and_issuer_transition_do_not_establish_original_day",
+      "review_note": "Loon states that CADC was originally launched by PayTrie in 2021 and records a dated 2025 issuer transition, but neither establishes the exact first public issuance, first mint, or first redeemable-service day for CADC.",
+      "last_reviewed": "2026-07-09",
+      "reviewed_sources": [
+        "https://loon.finance/",
+        "https://loon.finance/blog/meet-cadc/",
+        "https://www.prnewswire.com/news-releases/loon-raises-3-million-to-build-canadas-regulated-digital-dollar-acquires-cadc-stablecoin-302594051.html"
+      ]
+    },
+    {
+      "stablecoin_id": "sog_st_zarp",
+      "category": "C",
+      "best_known_range": "current active product verified; 2025-07-11 Solana migration; original asset launch day unresolved",
+      "reason_code": "current_availability_and_later_migration_do_not_establish_original_launch_day",
+      "review_note": "Current ZARP product, reserve, redemption, and deployment documentation and the dated 2025 Solana migration are verified, but the reviewed sources do not establish the exact original first public issuance or redemption day for ZARP.",
+      "last_reviewed": "2026-07-09",
+      "reviewed_sources": [
+        "https://www.zarpstablecoin.com/",
+        "https://docs.zarpstablecoin.com/zarp-stablecoin/blockchains",
+        "https://www.zarpstablecoin.com/news/"
+      ]
+    },
+    {
+      "stablecoin_id": "sog_st_audd",
+      "category": "C",
+      "best_known_range": "historical AUDD product identity verified; exact original launch day unresolved",
+      "reason_code": "historical_product_identity_without_day_level_launch_boundary",
+      "review_note": "AUDD is preserved as an Australian-dollar stablecoin identity, but the reviewed source set does not establish the exact first public issuance, first mint, or first redeemable-service day.",
+      "last_reviewed": "2026-07-09",
+      "reviewed_sources": [
+        "https://audd.digital/",
+        "https://audd.digital/transparency",
+        "https://audd.digital/terms"
+      ]
+    },
+    {
+      "stablecoin_id": "sog_st_nzds",
+      "category": "C",
+      "best_known_range": "historical NZDS and Techemynt product lineage verified; exact original launch day unresolved",
+      "reason_code": "historical_product_identity_without_day_level_launch_boundary",
+      "review_note": "NZDS historical identity and Techemynt association are preserved, but the reviewed source set does not establish the exact first public issuance, first mint, or first redeemable-service day.",
+      "last_reviewed": "2026-07-09",
+      "reviewed_sources": [
+        "https://nzds.com/",
+        "https://techemynt.com/",
+        "https://nzds.com/transparency"
+      ]
+    },
+    {
+      "stablecoin_id": "sog_st_xusd",
+      "category": "C",
+      "best_known_range": "official current product and contract availability verified by 2026-07-13; original first public issuance day unresolved",
+      "reason_code": "current_product_and_deployments_do_not_establish_original_launch_day",
+      "review_note": "Current StraitsX materials verify XUSD identity, issuer-mediated 1:1 redemption, reserve attestations, and Ethereum, BNB Smart Chain, and Solana identifiers. The reviewed sources do not establish the exact first public issuance, first mint, or first redeemable-service day.",
+      "last_reviewed": "2026-07-13",
+      "reviewed_sources": [
+        "https://www.straitsx.com/xusd",
+        "https://www.straitsx.com/sg"
+      ]
+    }
   ]
 }

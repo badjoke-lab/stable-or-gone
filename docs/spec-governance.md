@@ -90,17 +90,19 @@ PR #496 Record Growth Batch 4 candidate audit
 Current item:
 
 ```text
-PR #502 Launch Date Boundary Review — Batch 1 authorization
+PR #503 Launch Date Boundary Review — Batch 1 implementation
 ```
 
 Reviewed decision:
 
 ```text
-PR #503 launch-date boundary review: authorized next
+PR #503 launch-date boundary review: implementation under review
 exact targets: sog_st_msusd, sog_st_stablesusdx, sog_st_susde, sog_st_usd1, sog_st_usdm, sog_st_usdh
+exact day resolved: 0
+canonical null preserved: 6
+new canonical Evidence identities: 0
 new canonical assets: 0
 replacement targets: prohibited
-canonical day required: true
 unsupported date coercion: prohibited
 next boundary after PR #503: REVIEW GATE
 ```
@@ -226,7 +228,7 @@ The target set is fixed to `sog_st_msusd`, `sog_st_stablesusdx`, `sog_st_susde`,
 
 A canonical date requires exact day-level primary evidence matching the same identity and launch boundary. Announcement, contract deployment, first mint, exchange listing, network activation, migration, and rebrand dates remain distinct unless primary evidence explicitly establishes equivalence. Unresolved outcomes remain null.
 
-PR #503 may add canonical Evidence only for direct named launch claims and may update only the named launch boundaries and queue records. It may not add assets, organizations, relationships, deployments, Market Access records, route families, rankings, recommendations, or material UI changes. It exits to REVIEW GATE.
+PR #503 reviewed every named target. All six remain null because the reviewed primary sources establish only operating-product, month/range, deployment, testing, terms-effective, underlying-asset, rebrand, or later-availability boundaries. The queue records the reviewed range, reason, date, and source list for each target. No canonical Evidence identity or Evidence Relation was added. It may not add assets, organizations, relationships, deployments, Market Access records, route families, rankings, recommendations, or material UI changes. It exits to REVIEW GATE.
 
 ## 11. YLDS scope boundary
 
