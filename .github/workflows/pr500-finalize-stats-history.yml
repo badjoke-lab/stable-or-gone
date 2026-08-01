@@ -1,0 +1,50 @@
+name: PR500 finalize stats history
+
+on:
+  push:
+    branches:
+      - agent/mnee-evidence-archive-maintenance
+    paths:
+      - .github/workflows/pr500-finalize-stats-history.yml
+      - scripts/finalize-pr500-stats-history.mjs
+      - docs/migration/current-canonical-checkpoint.json
+      - docs/migration/current-stats-history-checkpoint.json
+      - data/stats-history.json
+
+permissions:
+  contents: write
+
+jobs:
+  finalize:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+        with:
+          ref: agent/mnee-evidence-archive-maintenance
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Append deterministic PR500 snapshot
+        run: node scripts/finalize-pr500-stats-history.mjs
+
+      - name: Commit final history and remove one-shot files
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --cached --check
+          if git diff --cached --quiet; then
+            echo "No finalization changes required."
+            exit 0
+          fi
+          git commit -m "Finalize PR500 maintenance checkpoint history"
+          git push origin HEAD:agent/mnee-evidence-archive-maintenance
