@@ -21,7 +21,7 @@ Detail routes: 417
 Metadata-checked detail routes: 417
 Official public origin: https://www.stableorgone.com
 Official-domain migration checkpoint: bd0e63ac36b1824bf705e8c80d1fb0a1cd79d221
-Current production checkpoint: 9136f44bff06d20b8611d66ed28156c9147765a5
+Current production checkpoint: a89832072b6f4fe07cf43b76ae77d2a5a1aac0f0
 Current production canonical hash: sha256:c6fa6b7494fc3e36f599d88edaa3d2af94a0e8c2f0ee6e4c3ee7d8a9121a4372
 ```
 
@@ -36,9 +36,10 @@ Current authority chain:
 7. PR #498 added and production-verified the complete MNEE record.
 8. PR #499 closed the post-PR #498 review gate and authorized one bounded MNEE evidence-maintenance item.
 9. PR #500 completed and production-verified that maintenance item.
-10. PR #502 closes the post-PR #500 review gate and authorizes one bounded launch-date boundary review for six named records.
-11. PR #502 itself changes no canonical data; implementation is reserved for PR #503.
-12. `docs/ui-v3-remediation-authority.md` remains the regression-protection contract for material public UI work.
+10. PR #502 closed the post-PR #500 review gate and authorized one bounded launch-date boundary review for six named records.
+11. PR #503 completed that review, preserved all six exact launch dates as null, and was production-verified.
+12. PR #504 synchronizes the completed checkpoint and returns the repository to REVIEW GATE.
+13. `docs/ui-v3-remediation-authority.md` remains the regression-protection contract for material public UI work.
 
 ## Mandatory reading order
 
@@ -82,8 +83,10 @@ PR #500 MNEE Evidence and Archive Maintenance — Batch 1: complete and producti
 Required exit after PR #500 merge and production verification: REVIEW GATE — satisfied
 PR #501 post-PR #500 authority synchronization: complete and production-verified
 PR #502 Launch Date Boundary Review — Batch 1 authorization: complete
-PR #503 Launch Date Boundary Review — Batch 1: implementation under review
-Required exit after PR #503 merge and production verification: REVIEW GATE
+PR #503 Launch Date Boundary Review — Batch 1: complete and production-verified
+Required exit after PR #503 merge and production verification: REVIEW GATE — satisfied
+PR #504 post-PR #503 authority synchronization: active
+Current state after PR #504: REVIEW GATE
 ```
 
 ## PR #502 authorized review
@@ -100,6 +103,21 @@ sog_st_usdh
 ```
 
 PR #502 changed authority only. PR #503 reviewed all six named records. No exact day-level primary evidence was found that safely equates announcement, deployment, first mint, testing, terms, rebrand, or later availability with one original public launch day. All six canonical launch dates remain null. The unresolved queue now records a reviewed range, specific reason, review date, and primary-source list for every target. No seventh or replacement target was used.
+
+Production verification:
+
+```text
+source commit: a89832072b6f4fe07cf43b76ae77d2a5a1aac0f0
+canonical hash: sha256:c6fa6b7494fc3e36f599d88edaa3d2af94a0e8c2f0ee6e4c3ee7d8a9121a4372
+convergence attempt: 2
+stable assets: 117
+organizations: 108
+events: 192
+detail routes: 417
+metadata-checked detail routes: 417
+```
+
+No later launch-date batch, record-growth batch, YLDS work, Market Access change, route family, or material UI work is authorized automatically.
 
 ## PR #500 maintenance result
 
