@@ -1,0 +1,42 @@
+{
+  "schema_version": "1.0",
+  "work_item": "mnee_evidence_archive_maintenance_batch_1",
+  "updated": "2026-08-01",
+  "stablecoin_id": "sog_st_mnee",
+  "issuer_id": "sog_issuer_mnee_limited",
+  "authorized_targets": [
+    "latest_attestation_body_and_archive",
+    "current_reserve_custodian_and_allocation",
+    "first_public_ethereum_issuance_date",
+    "current_deployment_control_configuration",
+    "complete_direct_access_and_jurisdiction_inventory"
+  ],
+  "limits": {
+    "new_stable_assets": 0,
+    "new_organizations": 0,
+    "new_events": 0,
+    "new_market_access_records": 0,
+    "new_evidence_max": 8,
+    "new_reserve_reports_max": 1,
+    "new_deployments": 0,
+    "material_ui_changes": false,
+    "new_public_route_families": false
+  },
+  "preserved_counts": {
+    "stable_assets": 117,
+    "organizations": 108,
+    "events": 192,
+    "deployments": 184,
+    "detail_routes": 417,
+    "metadata_checked_detail_routes": 417
+  },
+  "prohibited": [
+    "figure_ylds_work",
+    "replacement_candidate",
+    "automatic_promotion",
+    "ranking_or_scoring",
+    "market_access_changes",
+    "material_ui_or_css_changes"
+  ],
+  "exit_boundary": "review_gate"
+}
