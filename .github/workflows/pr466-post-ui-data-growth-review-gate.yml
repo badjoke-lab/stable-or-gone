@@ -1,89 +1,78 @@
-name: Finalize PR505 archive payload authority
-run-name: Finalize PR505 authority · ${{ github.event_name }} · ${{ github.sha }}
+name: PR 466 Post-UI Data-Growth Review Gate
+run-name: PR 466 review gate · ${{ github.event_name }} · ${{ github.sha }}
 
 on:
   push:
     branches:
-      - agent/evidence-archive-payload-verification-batch-1-authority
+      - pr466-post-ui-data-growth-review-gate
   pull_request:
     branches:
+      - chore/post-ui-v3-agent-authority-reset
       - main
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
-  group: finalize-pr505-authority
-  cancel-in-progress: false
+  group: pr466-post-ui-data-growth-review-gate-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  finalize:
-    if: github.event_name != 'pull_request' || github.head_ref == 'agent/evidence-archive-payload-verification-batch-1-authority'
+  validate:
+    if: github.event_name != 'pull_request' || github.head_ref == 'pr466-post-ui-data-growth-review-gate'
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 60
+    env:
+      BASE_BRANCH: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.ref || 'chore/post-ui-v3-agent-authority-reset' }}
     steps:
-      - name: Checkout branch
+      - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          ref: agent/evidence-archive-payload-verification-batch-1-authority
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
 
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 22.22.0
+          cache: npm
 
-      - name: Patch finalizer for current governance checkpoint
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Validate PR 466 review-gate decision
+        run: node scripts/validate-post-ui-data-growth-review-gate-pr466.mjs
+
+      - name: Validate active workstream
+        run: npm run validate:active-workstream
+
+      - name: Validate canonical and release contracts
         run: |
-          python - <<'PY'
-          from pathlib import Path
-          import re
+          npm run validate:data
+          npm run validate:compat
+          npm run validate:final
+          npm run validate:release-integrity
 
-          path = Path('scripts/finalize-pr505-authority.mjs')
-          text = path.read_text()
-          text = text.replace(
-              "governance = replaceOnce(governance, 'PR #503 Launch Date Boundary Review — Batch 1 implementation', 'PR #505 Evidence Archive Payload Verification — Batch 1 authorization; PR #506 implementation reserved', 'governance current item');",
-              "governance = replaceOnce(governance, 'PR #504 post-PR #503 authority synchronization', 'PR #505 Evidence Archive Payload Verification — Batch 1 authorization; PR #506 implementation reserved', 'governance current item');"
-          )
-          current_decision = """const oldDecision = `PR #503 launch-date boundary review: complete and production-verified
-          exact targets: sog_st_msusd, sog_st_stablesusdx, sog_st_susde, sog_st_usd1, sog_st_usdm, sog_st_usdh
-          exact day resolved: 0
-          canonical null preserved: 6
-          new canonical Evidence identities: 0
-          new canonical assets: 0
-          production commit: a89832072b6f4fe07cf43b76ae77d2a5a1aac0f0
-          production canonical hash: sha256:c6fa6b7494fc3e36f599d88edaa3d2af94a0e8c2f0ee6e4c3ee7d8a9121a4372
-          current boundary: REVIEW GATE`;
-          const newDecision ="""
-          text, count = re.subn(
-              r"const oldDecision = `[\s\S]*?`;\nconst newDecision =",
-              current_decision,
-              text,
-              count=1,
-          )
-          if count != 1:
-              raise SystemExit('could not patch governance decision block')
-          path.write_text(text)
-          PY
+      - name: Verify governance-only boundary
+        run: git diff --exit-code "origin/${BASE_BRANCH}...HEAD" -- data/ src/ public/
 
-      - name: Generate authority files
-        run: node scripts/finalize-pr505-authority.mjs
-
-      - name: Validate authority
-        run: node scripts/validate-evidence-archive-payload-verification-pr505.mjs
-
-      - name: Restore permanent workflow and remove finalizer
+      - name: Astro check and build
         run: |
-          git fetch origin main
-          git checkout origin/main -- .github/workflows/pr466-post-ui-data-growth-review-gate.yml
-          rm scripts/finalize-pr505-authority.mjs
-          rm -f .github/pr505-finalizer-trigger.txt
+          npm run check
+          npm run build
 
-      - name: Commit authority
+      - name: Write review-gate summary
+        if: always()
         run: |
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add -A
-          git commit -m 'Authorize archive payload verification batch 1'
-          git push origin HEAD:agent/evidence-archive-payload-verification-batch-1-authority
+          {
+            echo '## PR #466 Post-UI Data-Growth Review Gate'
+            echo
+            echo '- Source canonical assets: 114'
+            echo '- Authorized next PR: #467'
+            echo '- Selected assets: PLNQ, GBPQ'
+            echo '- Maximum new canonical assets: 2'
+            echo '- Canonical changes in PR #466: 0'
+            echo '- Public changes in PR #466: 0'
+            echo '- Next boundary after PR #467: REVIEW GATE'
+          } >> "$GITHUB_STEP_SUMMARY"

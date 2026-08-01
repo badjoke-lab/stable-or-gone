@@ -1,0 +1,55 @@
+{
+  "schema_version": "1.0",
+  "authority_id": "sog_evidence_archive_payload_verification_batch_1_pr505_2026_08_01",
+  "status": "approved_bounded_review",
+  "public_output": false,
+  "authority_pr": 505,
+  "implementation_pr": 506,
+  "reviewed_at": "2026-08-01",
+  "source_review_pr": 405,
+  "source_outcomes": "docs/migration/evidence-archive-maintenance-outcomes-pr405.json",
+  "source_queue": "docs/migration/evidence-archive-maintenance-queue-v7-pr403.json",
+  "current_evidence_count": 579,
+  "current_evidence_relation_count": 579,
+  "archive_recorded_before": 450,
+  "archive_not_recorded_before": 129,
+  "target_count": 10,
+  "target_evidence_ids": [
+    "sog_src_rai_integrations_batch_b",
+    "sog_src_rai_oracle_relayer_batch_b",
+    "sog_src_rai_ungovernance_batch_b",
+    "sog_src_rlusd_docs",
+    "sog_src_rlusd_launch_2024",
+    "sog_src_rlusd_ripple_page",
+    "sog_src_spot_about_batch_b",
+    "sog_src_spot_mint_batch_b",
+    "sog_src_spot_site_batch_b",
+    "sog_src_spot_v2_rollout_batch_b"
+  ],
+  "allowed_outcomes": [
+    "dated_exact_archive_added",
+    "reviewed_no_safe_change"
+  ],
+  "acceptance_requirements": {
+    "exact_canonical_source_url": true,
+    "wayback_http_status_200": true,
+    "dated_snapshot_url": true,
+    "archived_payload_independently_fetched": true,
+    "claim_scope_preserved_in_payload": true,
+    "redirect_only_or_cdx_metadata_only_insufficient": true
+  },
+  "maximum_archive_additions": 10,
+  "prohibited": [
+    "source_url_replacement",
+    "new_evidence_identity",
+    "evidence_relation_change",
+    "canonical_asset_change",
+    "market_access_change",
+    "public_route_change",
+    "material_ui_change",
+    "automatic_archive_promotion",
+    "replacement_target",
+    "automatic_continuation_after_pr506"
+  ],
+  "next_boundary": "REVIEW_GATE"
+}

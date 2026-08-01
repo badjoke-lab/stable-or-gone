@@ -1,7 +1,7 @@
 # Stable or Gone Roadmap
 
 Updated: 2026-08-01  
-Status: PR #503 complete and production-verified; REVIEW GATE
+Status: PR #505 Evidence Archive Payload Verification — Batch 1 authorized; PR #506 reserved
 
 ## Current reviewed position
 
@@ -20,7 +20,7 @@ Detail routes: 417
 Metadata-checked detail routes: 417
 Official public origin: https://www.stableorgone.com
 Official-domain migration production checkpoint: bd0e63ac36b1824bf705e8c80d1fb0a1cd79d221
-Current production checkpoint: a89832072b6f4fe07cf43b76ae77d2a5a1aac0f0
+Current production checkpoint: 4ac32bc2476e04bb28142ef75cf421149c441542
 Current production canonical hash: sha256:c6fa6b7494fc3e36f599d88edaa3d2af94a0e8c2f0ee6e4c3ee7d8a9121a4372
 ```
 
@@ -41,7 +41,9 @@ PR #500 MNEE Evidence and Archive Maintenance — Batch 1: complete and producti
 PR #501 post-PR #500 authority synchronization: complete and production-verified
 PR #502 Launch Date Boundary Review — Batch 1 authorization: complete
 PR #503 Launch Date Boundary Review — Batch 1: complete and production-verified
-PR #504 post-PR #503 authority synchronization: active
+PR #504 post-PR #503 authority synchronization: complete and production-verified
+PR #505 Evidence Archive Payload Verification — Batch 1 authorization: active
+PR #506 Evidence Archive Payload Verification — Batch 1: reserved implementation
 ```
 
 PR #498 remains the current canonical-asset addition checkpoint. PR #500 is the current canonical maintenance and statistics-history checkpoint. PR #492 remains the Statistics and responsive-layout acceptance point. PR #493 remains the official-domain migration acceptance point.
@@ -147,13 +149,24 @@ detail routes: 417
 metadata-checked detail routes: 417
 ```
 
+## Authorized current item
+
+```text
+Evidence Archive Payload Verification — Batch 1
+Authority PR: #505
+Implementation PR: #506
+Targets: ten PR #405 reviewed-no-safe-change Evidence identities
+```
+
+PR #506 must fetch and inspect archived payload bodies. It may add zero to ten exact dated Wayback URLs only when the payload preserves the existing canonical claim scope. CDX metadata alone is insufficient. Source replacement, replacement identities, Evidence identity changes, public output, and non-Evidence canonical changes are prohibited.
+
 ## Current boundary
 
 ```text
-REVIEW GATE
+PR #506 implementation, then REVIEW GATE
 ```
 
-No later launch-date batch, dossier batch, record-growth batch, Figure YLDS amendment, Market Access change, public route family, or material public-surface program is authorized automatically.
+No later archive batch, launch-date batch, dossier batch, record-growth batch, Figure YLDS amendment, Market Access change, public route family, or material public-surface program is authorized automatically.
 
 The PR #496 candidate audit remains the latest complete candidate review. Its non-MNEE candidates were not supported for complete-record promotion at that checkpoint.
 

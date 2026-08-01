@@ -1,1 +1,0 @@
-trigger PR505 authority finalizer

@@ -1,1 +1,1 @@
-import './validate-post-pr503-authority-sync-pr504.mjs';
+import './validate-evidence-archive-payload-verification-pr505.mjs';
