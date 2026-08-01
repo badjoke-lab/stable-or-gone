@@ -8,7 +8,8 @@
   "authority_pr": 499,
   "source_work_item": "mnee_evidence_archive_maintenance_batch_1",
   "source_review": "data/editorial-research/mnee-evidence-archive-maintenance-batch-1-source-review.json",
-  "source_canonical_checkpoint_id": "sog_pr498_record_growth_batch_4_mnee_117_2026_07_31",
+  "source_canonical_checkpoint_id": "sog_pr500_mnee_evidence_archive_maintenance_117_2026_08_01",
+  "source_growth_checkpoint_id": "sog_pr498_record_growth_batch_4_mnee_117_2026_07_31",
   "canonical_counts_unchanged": true,
   "counts": {
     "assets": 117,
