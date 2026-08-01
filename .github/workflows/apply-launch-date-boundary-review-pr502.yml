@@ -1,0 +1,36 @@
+name: Apply launch-date boundary review authority
+
+on:
+  push:
+    branches:
+      - agent/launch-date-boundary-review-batch-1
+    paths:
+      - scripts/apply-launch-date-boundary-review-pr502.mjs
+      - .github/workflows/apply-launch-date-boundary-review-pr502.yml
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/launch-date-boundary-review-batch-1
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+      - name: Apply reviewed authority
+        run: node scripts/apply-launch-date-boundary-review-pr502.mjs
+      - name: Validate authority
+        run: node scripts/validate-launch-date-boundary-review-pr502.mjs
+      - name: Commit final authority state
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --cached --quiet && exit 0
+          git commit -m "Authorize launch-date boundary review batch 1"
+          git push origin HEAD:agent/launch-date-boundary-review-batch-1
