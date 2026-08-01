@@ -90,13 +90,16 @@ PR #496 Record Growth Batch 4 candidate audit
 Current item:
 
 ```text
-PR #506 Evidence Archive Payload Verification — Batch 1 implementation under review
+REVIEW GATE — PR #506 complete and production-verified
 ```
 
 Reviewed decision:
 
 ```text
-PR #506 Evidence Archive Payload Verification — Batch 1 implementation under review
+PR #506 Evidence Archive Payload Verification — Batch 1 complete and production-verified
+production commit: 2a6bfac25538388dd7ea6dc12de96c2c2dc2dad0
+production canonical hash: sha256:083860b341f6deebc1109b6b5b044dee584ba5e487e2e9b1722213772256b5bb
+convergence attempt: 2
 exact target count: 10
 dated exact archives added: 7
 reviewed no safe change: 3
@@ -104,7 +107,7 @@ archive coverage after: 457 of 579
 source replacement: 0
 new Evidence identities or Relations: 0
 non-Evidence canonical changes: 0
-next boundary after PR #506: REVIEW GATE
+current boundary: REVIEW GATE
 ```
 
 No later work is pre-authorized.
@@ -238,7 +241,7 @@ The target set is fixed by `config/evidence-archive-payload-verification-batch-1
 
 An archive may be accepted only when the exact canonical URL returns an HTTP-200 dated Wayback snapshot and the fetched archived body visibly preserves the existing canonical claim scope. CDX metadata, redirect status, root-domain capture, or automated keyword matching without manual payload review cannot authorize a canonical `archived_url`.
 
-PR #506 may change only accepted target `archived_url` fields and forward archive-quality checkpoints. It may not replace source URLs, add Evidence identities or Relations, change non-Evidence canonical records, alter public routes, or modify material UI. It exits to REVIEW GATE. No work beyond PR #506 is pre-authorized.
+PR #506 changed only seven accepted target `archived_url` fields and forward archive-quality checkpoints. It replaced no source URL, added no Evidence identity or Relation, changed no non-Evidence canonical record, public route, or material UI. Production commit `2a6bfac25538388dd7ea6dc12de96c2c2dc2dad0` verified canonical hash `sha256:083860b341f6deebc1109b6b5b044dee584ba5e487e2e9b1722213772256b5bb`, the 117/108/129/192/579/579/184/8 canonical counts, 417 detail routes, 417 metadata-checked routes, and archive partition 457/122. The repository is at REVIEW GATE. No work beyond this checkpoint is pre-authorized.
 
 ## 11. YLDS scope boundary
 
@@ -362,16 +365,10 @@ Scheduled monitoring and candidate auditing remain artifact-only and do not auth
 
 ## 19. Review gate
 
-PR #506 is the current implementation under review. Before merge and production acceptance, review:
+PR #506 is complete and production-verified. The repository is at:
 
 ```text
-all ten payload dispositions
-seven accepted exact timestamps and payload digests
-three preserved no-safe-change gaps
-archive transition 450/129 -> 457/122
-Evidence identity and Relation preservation
-canonical count and route parity
-production parity
+REVIEW GATE
 ```
 
-After PR #506 merge and production verification, the repository returns to REVIEW GATE. Only a later separate reviewed decision may authorize another work item.
+No later archive batch, launch-date batch, record-growth batch, Figure YLDS amendment, Market Access change, public route family, or material UI work is authorized automatically. Only a later separate reviewed decision may authorize another work item.
