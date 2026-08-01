@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0",
+  "status": "reviewed_non_growth_maintenance_checkpoint",
+  "checkpoint_id": "sog_pr500_mnee_evidence_archive_maintenance_2026_08_01",
+  "checkpoint_kind": "non_growth_review_checkpoint",
+  "recorded_at": "2026-08-01",
+  "source_pr": 500,
+  "authority_pr": 499,
+  "source_work_item": "mnee_evidence_archive_maintenance_batch_1",
+  "source_review": "data/editorial-research/mnee-evidence-archive-maintenance-batch-1-source-review.json",
+  "source_canonical_checkpoint_id": "sog_pr498_record_growth_batch_4_mnee_117_2026_07_31",
+  "canonical_counts_unchanged": true,
+  "counts": {
+    "assets": 117,
+    "organizations": 108,
+    "events": 192,
+    "evidence": 579,
+    "reserve_reports": 125,
+    "known_unknowns": 342,
+    "deployments": 184,
+    "detail_routes": 417
+  },
+  "reviewed_stablecoin_ids": [
+    "sog_st_mnee"
+  ],
+  "reviewed_known_unknown_ids": [
+    "sog_ku_mnee_latest_attestation_pr498",
+    "sog_ku_mnee_reserve_custodian_pr498",
+    "sog_ku_mnee_ethereum_launch_pr498",
+    "sog_ku_mnee_controls_pr498",
+    "sog_ku_mnee_access_pr498"
+  ],
+  "new_canonical_records": 0,
+  "deleted_known_unknowns": 0,
+  "forced_resolutions": 0,
+  "exit_boundary": "REVIEW_GATE"
+}
