@@ -1,7 +1,7 @@
 # Stable or Gone Roadmap
 
 Updated: 2026-08-01  
-Status: PR #502 Launch Date Boundary Review — Batch 1 authorized; PR #503 implementation next
+Status: PR #503 Launch Date Boundary Review — Batch 1 under review; exit boundary REVIEW GATE
 
 ## Current reviewed position
 
@@ -39,7 +39,8 @@ PR #498 Record Growth Batch 4 — MNEE: reviewed complete and production-verifie
 PR #499 post-PR #498 review gate and MNEE maintenance authorization: complete
 PR #500 MNEE Evidence and Archive Maintenance — Batch 1: complete and production-verified
 PR #501 post-PR #500 authority synchronization: complete and production-verified
-PR #502 Launch Date Boundary Review — Batch 1 authorization: active
+PR #502 Launch Date Boundary Review — Batch 1 authorization: complete
+PR #503 Launch Date Boundary Review — Batch 1: implementation under review
 ```
 
 PR #498 remains the current canonical-asset addition checkpoint. PR #500 is the current canonical maintenance and statistics-history checkpoint. PR #492 remains the Statistics and responsive-layout acceptance point. PR #493 remains the official-domain migration acceptance point.
@@ -120,9 +121,17 @@ Implementation PR: #503
 Targets: sog_st_msusd, sog_st_stablesusdx, sog_st_susde, sog_st_usd1, sog_st_usdm, sog_st_usdh
 ```
 
-PR #503 must review all six named targets using primary sources. Exact day-level launch dates may be written only when the source matches the canonical identity and the launch boundary. Otherwise the date remains null and the queue receives a reviewed range, specific reason, review date, and source list.
+PR #503 reviewed all six named targets using primary sources and the prior PR #220 source checkpoint. Result:
 
-The item adds no new asset and authorizes no replacement target, YLDS work, Market Access change, route family, ranking, recommendation, or material UI change. After PR #503 merge and production verification, stop at REVIEW GATE.
+```text
+exact day resolved: 0
+canonical null preserved: 6
+queue rows completed with reviewed range, reason, date, and sources: 6
+new Evidence identities: 0
+new Evidence Relations: 0
+```
+
+Announcement, deployment, first mint, testing, terms-effective, rebrand, underlying-asset launch, and later availability boundaries were not coerced into original launch dates. The item adds no new asset and authorizes no replacement target, YLDS work, Market Access change, route family, ranking, recommendation, or material UI change. After PR #503 merge and production verification, stop at REVIEW GATE.
 
 The PR #496 candidate audit remains the latest complete candidate review. Its non-MNEE candidates were not supported for complete-record promotion at that checkpoint.
 
