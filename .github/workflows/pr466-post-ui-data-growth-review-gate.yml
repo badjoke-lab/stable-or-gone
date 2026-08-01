@@ -1,10 +1,13 @@
 name: Finalize PR505 archive payload authority
-run-name: Finalize PR505 authority · ${{ github.sha }}
+run-name: Finalize PR505 authority · ${{ github.event_name }} · ${{ github.sha }}
 
 on:
   push:
     branches:
       - agent/evidence-archive-payload-verification-batch-1-authority
+  pull_request:
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:
@@ -16,6 +19,7 @@ concurrency:
 
 jobs:
   finalize:
+    if: github.event_name != 'pull_request' || github.head_ref == 'agent/evidence-archive-payload-verification-batch-1-authority'
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
@@ -41,18 +45,12 @@ jobs:
           git fetch origin main
           git checkout origin/main -- .github/workflows/pr466-post-ui-data-growth-review-gate.yml
           rm scripts/finalize-pr505-authority.mjs
+          rm -f .github/pr505-finalizer-trigger.txt
 
       - name: Commit authority
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add AGENTS.md docs/roadmap.md docs/spec-governance.md \
-            config/evidence-archive-payload-verification-batch-1.json \
-            docs/quality/evidence-archive-payload-verification-batch-1-spec.md \
-            docs/roadmap-amendments/2026-08-01-evidence-archive-payload-verification-batch-1.md \
-            scripts/validate-evidence-archive-payload-verification-pr505.mjs \
-            scripts/validate-active-workstream.mjs \
-            .github/workflows/pr466-post-ui-data-growth-review-gate.yml \
-            scripts/finalize-pr505-authority.mjs
+          git add -A
           git commit -m 'Authorize archive payload verification batch 1'
           git push origin HEAD:agent/evidence-archive-payload-verification-batch-1-authority
