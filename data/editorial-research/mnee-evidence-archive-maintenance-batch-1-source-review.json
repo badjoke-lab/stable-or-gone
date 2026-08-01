@@ -1,0 +1,175 @@
+{
+  "schema_version": "1.0",
+  "review_id": "sog_mnee_evidence_archive_maintenance_batch_1_2026_08_01",
+  "status": "reviewed_bounded_maintenance",
+  "reviewed_at": "2026-08-01",
+  "authority_pr": 499,
+  "stablecoin_id": "sog_st_mnee",
+  "issuer_id": "sog_issuer_mnee_limited",
+  "baseline": {
+    "stable_assets": 117,
+    "organizations": 108,
+    "events": 192,
+    "evidence": 579,
+    "reserve_reports": 125,
+    "known_unknowns": 342,
+    "deployments": 184,
+    "detail_routes": 417
+  },
+  "reviewed_sources": [
+    {
+      "source_id": "sog_src_mnee_transparency_pr498",
+      "url": "https://www.mnee.io/transparency",
+      "publisher": "MNEE Limited",
+      "source_type": "reserve_transparency_page",
+      "accessed_at": "2026-08-01",
+      "finding": "The current index lists monthly attestation reports through May 2026. The latest report body, signed report URL, report figures, snapshot dates, and a preserved report-specific archive were not independently retrievable in this maintenance pass."
+    },
+    {
+      "source_id": "sog_src_mnee_terms_pr498",
+      "url": "https://www.mnee.io/terms",
+      "publisher": "MNEE Limited",
+      "source_type": "official_legal_documentation",
+      "accessed_at": "2026-08-01",
+      "finding": "Direct issuance and redemption require a verified MNEE customer account. The terms describe sanctions, prohibited-jurisdiction, PEP, watchlist, company-document, director, and beneficial-owner screening, but do not publish a complete current jurisdiction or customer-type inventory. The terms state reserve composition is controlled at MNEE's discretion and contemplate legally supported requests to freeze MNEE addresses."
+    },
+    {
+      "source_id": "sog_src_mnee_attestation_program_pr498",
+      "url": "https://www.mnee.io/news/mnee-expands-transparency-with-monthly-third-party-reserve-attestations-audited-by-wolf-company-p-c",
+      "publisher": "MNEE Limited",
+      "source_type": "official_announcement",
+      "published_at": "2025-05-09",
+      "accessed_at": "2026-08-01",
+      "finding": "The issuer describes reserves as U.S. Treasury bills with duration no longer than 90 days and U.S. cash held by a qualified custodian. It does not name the current custodian or provide the latest category allocation."
+    },
+    {
+      "source_id": "sog_src_mnee_ethereum_pr498",
+      "url": "https://etherscan.io/token/0x8ccedbae4916b79da7f3f612efb2eb93a2bfd6cf",
+      "publisher": "Etherscan",
+      "source_type": "blockchain_explorer_and_verified_contract_source",
+      "accessed_at": "2026-08-01",
+      "finding": "The Ethereum address is a TransparentUpgradeableProxy. The initial implementation upgrade is recorded at block 19482225 on 2024-03-21, and a later upgrade is recorded at block 23369448 on 2025-09-15. The active verified implementation source is labelled MNEEv2 and includes PausableUpgradeable. These facts establish proxy upgradeability and a pause-capable code surface, not the current role holders, current paused state, first public issuance date, or complete control configuration."
+    },
+    {
+      "source_id": null,
+      "url": "https://repo.sourcify.dev/1/0x89360Ce7DA79a5ACd3FEDc43778e4d6d28f09275",
+      "publisher": "Sourcify",
+      "source_type": "verified_historical_contract_source",
+      "accessed_at": "2026-08-01",
+      "finding": "The initial Ethereum implementation source and storage layout include admin, redeemer, rescuer, blacklisted, frozen, minter, burner, pauser, and blacklister/freezer state. This is historical implementation evidence and must not be represented as proof of current role assignments or unchanged current behavior after the 2025 upgrade."
+    }
+  ],
+  "target_dispositions": [
+    {
+      "target": "latest_attestation_body_and_archive",
+      "known_unknown_id": "sog_ku_mnee_latest_attestation_pr498",
+      "disposition": "unsupported_reaffirmed",
+      "supported": [
+        "the official transparency index lists May 2026 as the latest visible monthly attestation"
+      ],
+      "not_supported": [
+        "May 2026 report-body figures",
+        "signed report-specific URL",
+        "snapshot dates",
+        "report-specific archive capture"
+      ],
+      "canonical_action": "retain and update the known unknown; refresh source access date",
+      "remaining_unknown": "latest report body, signed URL, figures, snapshot dates, and preserved archive"
+    },
+    {
+      "target": "current_reserve_custodian_and_allocation",
+      "known_unknown_id": "sog_ku_mnee_reserve_custodian_pr498",
+      "disposition": "partially_supported_reaffirmed",
+      "supported": [
+        "U.S. cash held by a qualified custodian",
+        "U.S. Treasury bills with stated duration no longer than 90 days",
+        "reserve composition remains at issuer discretion under the terms"
+      ],
+      "not_supported": [
+        "current custodian identity",
+        "latest cash amount or share",
+        "latest Treasury amount or share",
+        "latest maturity distribution"
+      ],
+      "canonical_action": "retain the known unknown and tighten reserve notes against allocation inference",
+      "remaining_unknown": "current custodian identity and current category amounts or shares"
+    },
+    {
+      "target": "first_public_ethereum_issuance_date",
+      "known_unknown_id": "sog_ku_mnee_ethereum_launch_pr498",
+      "disposition": "partially_supported_narrowed",
+      "supported": [
+        "the Ethereum proxy deployment and initial implementation upgrade existed on 2024-03-21"
+      ],
+      "not_supported": [
+        "first public Ethereum token issuance date",
+        "first public Ethereum availability date",
+        "first mint date attributable to issuer launch"
+      ],
+      "canonical_action": "narrow the known unknown so contract deployment is not conflated with public issuance",
+      "remaining_unknown": "first public Ethereum issuance or availability date"
+    },
+    {
+      "target": "current_deployment_control_configuration",
+      "known_unknown_id": "sog_ku_mnee_controls_pr498",
+      "disposition": "partially_supported_narrowed",
+      "supported": [
+        "the Ethereum deployment is upgradeable through a transparent proxy",
+        "the proxy implementation changed on 2025-09-15",
+        "the active verified implementation source includes PausableUpgradeable",
+        "the terms contemplate legally supported address-freeze requests",
+        "the initial historical implementation exposed admin, mint, burn, pause, blacklist, freeze, redeem, and rescue-related state"
+      ],
+      "not_supported": [
+        "current Ethereum admin or role-holder addresses",
+        "current Ethereum paused state",
+        "current blacklist or freeze role assignments",
+        "current mint, burn, redeem, or rescue role assignments",
+        "whether all historical controls remain unchanged after the 2025 upgrade",
+        "current 1Sat mint, freeze, blacklist, pause, recovery, or authority configuration"
+      ],
+      "canonical_action": "record upgradeable and pause-capable Ethereum context; narrow the known unknown to current role state and 1Sat controls",
+      "remaining_unknown": "current Ethereum role assignments and operational state, plus current 1Sat control configuration"
+    },
+    {
+      "target": "complete_direct_access_and_jurisdiction_inventory",
+      "known_unknown_id": "sog_ku_mnee_access_pr498",
+      "disposition": "partially_supported_reaffirmed",
+      "supported": [
+        "direct issuance and redemption require a verified MNEE customer account",
+        "onboarding includes company formation documents, directors, beneficial owners, sanctions, PEP, watchlist, and prohibited-jurisdiction screening",
+        "enhanced due diligence applies to specified higher-risk circumstances"
+      ],
+      "not_supported": [
+        "complete current eligible-jurisdiction list",
+        "complete current prohibited-jurisdiction list",
+        "complete natural-person versus legal-entity access policy",
+        "current operational onboarding availability by country"
+      ],
+      "canonical_action": "retain the known unknown while recording the verified-account and compliance-screening boundary",
+      "remaining_unknown": "complete current customer-type and jurisdiction inventory"
+    }
+  ],
+  "canonical_change_plan": {
+    "new_stable_assets": 0,
+    "new_organizations": 0,
+    "new_events": 0,
+    "new_evidence": 0,
+    "new_reserve_reports": 0,
+    "new_deployments": 0,
+    "known_unknown_count_change": 0,
+    "public_route_change": 0,
+    "actions": [
+      "refresh existing MNEE Evidence access dates and claim scopes",
+      "narrow existing MNEE known-unknown descriptions without deleting them",
+      "tighten reserve and redemption notes",
+      "record Ethereum proxy upgrade and pause-capable source context without claiming current role verification"
+    ]
+  },
+  "decision": {
+    "all_five_targets_disposed": true,
+    "forced_resolution": false,
+    "counts_preserved": true,
+    "exit_boundary": "REVIEW_GATE"
+  }
+}

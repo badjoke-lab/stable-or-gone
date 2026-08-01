@@ -1,7 +1,7 @@
 # Stable or Gone Roadmap
 
 Updated: 2026-08-01  
-Status: post-PR #498 review gate complete; MNEE Evidence and Archive Maintenance — Batch 1 active
+Status: PR #500 MNEE Evidence and Archive Maintenance — Batch 1 under review; exit boundary REVIEW GATE
 
 ## Current reviewed position
 
@@ -20,7 +20,7 @@ Detail routes: 417
 Metadata-checked detail routes: 417
 Official public origin: https://www.stableorgone.com
 Official-domain migration production checkpoint: bd0e63ac36b1824bf705e8c80d1fb0a1cd79d221
-Current production checkpoint: a0c86896764a43020e2faa7442d8e7303785295e
+Last production-verified canonical-data checkpoint: a0c86896764a43020e2faa7442d8e7303785295e
 ```
 
 Current `main` and production equality is established dynamically by the deployment workflow and Issue #479. A merge is not proof of production parity.
@@ -35,26 +35,12 @@ PR #495 post-domain authority synchronization and obsolete issue reconciliation:
 PR #496 Record Growth Batch 4 candidate audit: complete and production-verified
 PR #497 Record Growth Batch 4 review gate: complete
 PR #498 Record Growth Batch 4 — MNEE: reviewed complete and production-verified
-Post-PR #498 review gate: complete
+PR #499 post-PR #498 review gate and MNEE maintenance authorization: complete
 ```
 
-PR #498 is the current canonical-data checkpoint. PR #492 remains the Statistics and responsive-layout acceptance point. PR #493 remains the official-domain migration acceptance point.
+PR #498 remains the current canonical-asset checkpoint. PR #492 remains the Statistics and responsive-layout acceptance point. PR #493 remains the official-domain migration acceptance point.
 
-## Post-PR #498 review decision
-
-The MNEE record is structurally complete and production-verified, but five explicit evidence and archive unknowns remain. The next item prioritizes those gaps over another record-growth batch.
-
-The decision preserves:
-
-```text
-new canonical assets: 0
-Figure YLDS: deferred
-Market Access changes: 0
-new public route families: 0
-material UI work: 0
-```
-
-## Current item
+## PR #500 current item
 
 ```text
 MNEE Evidence and Archive Maintenance — Batch 1
@@ -66,38 +52,58 @@ Governing files:
 docs/roadmap-amendments/2026-08-01-post-pr498-review-gate.md
 docs/quality/mnee-evidence-archive-maintenance-spec.md
 config/mnee-evidence-archive-maintenance.json
-docs/quality/record-growth-batch-4-mnee-pr498-spec.md
-data/editorial-research/record-growth-batch-4-mnee-pr498-source-review.json
+data/editorial-research/mnee-evidence-archive-maintenance-batch-1-source-review.json
+scripts/validate-mnee-evidence-archive-maintenance.mjs
 ```
 
-Authorized targets:
+Result by target:
 
 ```text
-latest listed attestation report body and archive
-current reserve custodian and allocation
-first public Ethereum issuance date
-current deployment control configuration
-complete direct-access and jurisdiction inventory
+latest attestation body and archive:
+  May 2026 index entry reconfirmed
+  report body, signed report-specific URL, figures, snapshot dates, and report-specific archive remain unknown
+
+current reserve custodian and allocation:
+  U.S. cash at a qualified custodian and U.S. Treasury bills <=90 days reconfirmed
+  current custodian identity and latest category amounts or shares remain unknown
+
+first public Ethereum issuance date:
+  proxy deployment and initial implementation upgrade on 2024-03-21 recorded
+  contract deployment is not treated as proof of first public issuance or availability
+
+current deployment control configuration:
+  TransparentUpgradeableProxy, 2025-09-15 implementation upgrade, and active PausableUpgradeable source recorded
+  current Ethereum role holders and operational state, post-upgrade permissions, and current 1Sat controls remain unknown
+
+direct access and jurisdiction inventory:
+  verified-account, company-document, beneficial-owner, sanctions, PEP, watchlist, prohibited-jurisdiction, and higher-risk screening boundaries recorded
+  complete current jurisdiction, customer-type, and country availability inventory remains unknown
 ```
 
-A target may remain unknown when primary evidence is insufficient. The work must not force a resolution.
+The implementation adds no new canonical Evidence ID and deletes no known unknown. Both MNEE deployment verification states remain `identifier_recorded_unverified`.
 
-Hard limits:
+Preserved counts:
 
 ```text
-maximum new canonical stable assets: 0
-maximum new organizations: 0
-maximum new lifecycle events: 0
-maximum new Market Access Records: 0
-maximum new canonical Evidence records: 8
-maximum new reserve reports: 1
-maximum new deployments: 0
-material UI or CSS changes: prohibited
-new public route families: prohibited
-Figure YLDS work: prohibited
+stable assets: 117
+organizations: 108
+events: 192
+Evidence: 579
+reserve reports: 125
+known unknowns: 342
+deployments: 184
+detail routes: 417
 ```
 
-After the maintenance item, stop at REVIEW GATE.
+## Next boundary
+
+After PR #500 merge and exact production verification, stop at:
+
+```text
+REVIEW GATE
+```
+
+No later dossier batch, record-growth batch, Figure YLDS amendment, Market Access change, or material public-surface program is authorized automatically.
 
 ## YLDS boundary
 

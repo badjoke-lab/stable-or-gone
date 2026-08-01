@@ -1,18 +1,19 @@
 {
   "schema_version": "1.0",
-  "status": "reviewed_growth_checkpoint",
-  "checkpoint_id": "sog_stats_pr498_record_growth_batch_4_mnee_2026_07_31",
-  "checkpoint_kind": "controlled_growth_checkpoint",
-  "recorded_at": "2026-07-31",
-  "registry_version": "pr498-record-growth-batch-4-mnee",
+  "status": "reviewed_non_growth_maintenance_checkpoint",
+  "checkpoint_id": "sog_stats_pr500_mnee_evidence_archive_maintenance_2026_08_01",
+  "checkpoint_kind": "non_growth_maintenance_checkpoint",
+  "recorded_at": "2026-08-01",
+  "registry_version": "pr500-mnee-evidence-archive-maintenance",
   "asset_count": 117,
-  "source_checkpoint_id": "sog_record_growth_batch_3_116_checkpoint_pr467_2026_07_25",
-  "canonical_checkpoint_id": "sog_pr498_record_growth_batch_4_mnee_117_2026_07_31",
-  "previous_history_checkpoint_id": "sog_record_growth_batch_3_116_checkpoint_pr467_2026_07_25",
-  "growth_pr": 498,
-  "source_pr": 498,
-  "source_commit": "pr498-record-growth-batch-4-mnee",
-  "captured_at": "2026-07-31",
+  "source_checkpoint_id": "sog_stats_pr498_record_growth_batch_4_mnee_2026_07_31",
+  "canonical_checkpoint_id": "sog_pr500_mnee_evidence_archive_maintenance_117_2026_08_01",
+  "previous_history_checkpoint_id": "sog_stats_pr498_record_growth_batch_4_mnee_2026_07_31",
+  "maintenance_pr": 500,
+  "source_pr": 500,
+  "authority_pr": 499,
+  "source_commit": "pr500-mnee-evidence-archive-maintenance",
+  "captured_at": "2026-08-01",
   "expected_totals": {
     "assets": 117,
     "organizations": 108,
@@ -23,5 +24,5 @@
     "market_access_records": 8,
     "detail_routes": 417
   },
-  "notes": "Current immutable stats checkpoint after the reviewed MNEE Record Growth Batch 4 implementation."
+  "notes": "Current immutable stats checkpoint after the reviewed non-growth MNEE Evidence and Archive Maintenance — Batch 1."
 }
