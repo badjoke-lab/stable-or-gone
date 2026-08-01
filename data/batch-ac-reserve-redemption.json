@@ -6,8 +6,8 @@
         "cash",
         "government_securities"
       ],
-      "summary": "Issuer materials describe 1:1 backing using U.S. cash and short-duration U.S. Treasury bills or equivalent fiat-denominated reserve assets.",
-      "disclosure_status": "monthly_attestation_index",
+      "summary": "Issuer materials describe 1:1 backing using U.S. cash held by a qualified custodian and U.S. Treasury bills with stated duration no longer than 90 days. Current custodian identity and latest category amounts or shares are not published in the reviewed sources, and the terms place reserve composition at MNEE's discretion.",
+      "disclosure_status": "monthly_attestation_index_report_body_not_preserved",
       "as_of_date": null,
       "latest_report_id": "sog_rr_mnee_attestation_program_pr498",
       "confidence": "high",
@@ -20,18 +20,21 @@
     "redemption_profile": {
       "status": "eligible_customers_only",
       "settlement_asset": "USD fiat",
-      "eligible_parties": "Verified MNEE customers that satisfy current onboarding and compliance requirements.",
-      "retail_access": "No direct issuer redemption right without MNEE customer verification.",
-      "institutional_access": "Available subject to MNEE customer onboarding and current terms.",
+      "eligible_parties": "Verified MNEE customers that maintain an account and satisfy current onboarding and compliance requirements.",
+      "retail_access": "No direct issuer redemption right without MNEE customer verification and an account with MNEE.",
+      "institutional_access": "Available subject to MNEE customer onboarding, company and beneficial-owner review where applicable, compliance screening, and current terms.",
       "minimum_amount_text": "USD 100,000 equivalent for fiat redemption under the reviewed terms.",
       "fee_text": "Greater of USD 5,000 or 0.5% of the redemption amount under the reviewed terms.",
       "settlement_time_text": "not stated in the reviewed public source",
       "jurisdiction_restrictions": [
-        "sanctions_and_prohibited_jurisdictions_apply",
+        "sanctions_screening_applies",
+        "pep_and_watchlist_screening_applies",
+        "prohibited_jurisdiction_screening_applies",
+        "enhanced_due_diligence_for_higher_risk_cases",
         "complete_current_inventory_not_recorded"
       ],
       "redemption_url": "https://www.mnee.io/terms",
-      "as_of_date": "2026-07-31",
+      "as_of_date": "2026-08-01",
       "confidence": "high",
       "evidence_ids": [
         "sog_src_mnee_terms_pr498"
