@@ -34,6 +34,39 @@ jobs:
         with:
           node-version: 22.22.0
 
+      - name: Patch finalizer for current governance checkpoint
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          path = Path('scripts/finalize-pr505-authority.mjs')
+          text = path.read_text()
+          text = text.replace(
+              "governance = replaceOnce(governance, 'PR #503 Launch Date Boundary Review — Batch 1 implementation', 'PR #505 Evidence Archive Payload Verification — Batch 1 authorization; PR #506 implementation reserved', 'governance current item');",
+              "governance = replaceOnce(governance, 'PR #504 post-PR #503 authority synchronization', 'PR #505 Evidence Archive Payload Verification — Batch 1 authorization; PR #506 implementation reserved', 'governance current item');"
+          )
+          current_decision = """const oldDecision = `PR #503 launch-date boundary review: complete and production-verified
+          exact targets: sog_st_msusd, sog_st_stablesusdx, sog_st_susde, sog_st_usd1, sog_st_usdm, sog_st_usdh
+          exact day resolved: 0
+          canonical null preserved: 6
+          new canonical Evidence identities: 0
+          new canonical assets: 0
+          production commit: a89832072b6f4fe07cf43b76ae77d2a5a1aac0f0
+          production canonical hash: sha256:c6fa6b7494fc3e36f599d88edaa3d2af94a0e8c2f0ee6e4c3ee7d8a9121a4372
+          current boundary: REVIEW GATE`;
+          const newDecision ="""
+          text, count = re.subn(
+              r"const oldDecision = `[\s\S]*?`;\nconst newDecision =",
+              current_decision,
+              text,
+              count=1,
+          )
+          if count != 1:
+              raise SystemExit('could not patch governance decision block')
+          path.write_text(text)
+          PY
+
       - name: Generate authority files
         run: node scripts/finalize-pr505-authority.mjs
 
