@@ -13,6 +13,7 @@ const review = readJson('data/editorial-research/evidence-archive-payload-verifi
 const outcomes = readJson('docs/migration/evidence-archive-payload-verification-batch-1-pr506-outcomes.json');
 const handoff = readJson('docs/migration/evidence-archive-payload-verification-batch-1-pr506-handoff.json');
 const checkpoint = readJson('docs/migration/current-canonical-checkpoint.json');
+const reviewCheckpoint = readJson('docs/migration/current-review-checkpoint.json');
 const statsCheckpoint = readJson('docs/migration/current-stats-history-checkpoint.json');
 const release = readJson('docs/migration/registry-release-integrity-baseline.json');
 const history = readJson('data/stats-history.json');
@@ -31,6 +32,7 @@ const accepted = decisions.decisions.filter((row) => row.outcome === 'dated_exac
 const noSafe = decisions.decisions.filter((row) => row.outcome === 'reviewed_no_safe_change');
 const archived = evidenceRows.filter((row) => String(row.archived_url ?? '').trim()).length;
 const missing = evidenceRows.length - archived;
+const currentSnapshot = history.snapshots?.find((row) => row.checkpoint_id === statsCheckpoint.checkpoint_id);
 
 expect(authority.authority_pr === 505 && authority.implementation_pr === 506, 'authority PR sequence changed');
 expect(decisions.status === 'reviewed_complete' && decisions.target_count === 10, 'decision status or target count changed');
@@ -62,10 +64,20 @@ expect(checkpoint.counts.events === 192 && checkpoint.counts.evidence === 579 &&
 expect(checkpoint.counts.deployments === 184 && checkpoint.counts.market_access_records === 8, 'deployment or Market Access counts changed');
 expect(checkpoint.counts.archive_index_count === 457 && checkpoint.counts.archive_not_recorded_count === 122, 'checkpoint count partition changed');
 expect(checkpoint.evidence_quality.archive_index_count === 457 && checkpoint.evidence_quality.archive_not_recorded_count === 122, 'checkpoint quality partition changed');
+expect(reviewCheckpoint.source_canonical_checkpoint_id === checkpoint.checkpoint_id, 'review checkpoint canonical lineage changed');
+expect(reviewCheckpoint.canonical_counts_unchanged === true, 'review checkpoint no longer preserves canonical counts');
 expect(statsCheckpoint.checkpoint_id === 'sog_stats_pr506_evidence_archive_payload_verification_2026_08_01', 'stats checkpoint ID changed');
+expect(statsCheckpoint.status === 'reviewed_non_growth_maintenance_checkpoint', 'stats checkpoint status changed');
+expect(statsCheckpoint.checkpoint_kind === 'non_growth_maintenance_checkpoint', 'stats checkpoint kind changed');
+expect(statsCheckpoint.canonical_checkpoint_id === checkpoint.checkpoint_id, 'stats checkpoint canonical lineage changed');
+expect(Boolean(currentSnapshot), 'immutable statistics snapshot missing');
+if (currentSnapshot) {
+  expect(currentSnapshot.checkpoint_kind === 'non_growth_maintenance_checkpoint', 'immutable snapshot checkpoint kind changed');
+  expect(currentSnapshot.source_checkpoint_id === statsCheckpoint.source_checkpoint_id, 'immutable snapshot source lineage changed');
+  expect(/^[a-f0-9]{64}$/.test(currentSnapshot.snapshot_sha256 ?? ''), 'immutable snapshot digest invalid');
+}
 expect(release.baseline_id === 'sog_release_integrity_pr506_117_assets_2026_08_01', 'release baseline ID changed');
 expect(release.evidence_quality.archive_index_count === 457 && release.evidence_quality.archive_not_recorded_count === 122, 'release partition changed');
-expect(history.snapshots?.some((row) => row.checkpoint_id === statsCheckpoint.checkpoint_id), 'immutable statistics snapshot missing');
 expect(agents.includes('Archive recorded: 457') && agents.includes('Archive not recorded: 122'), 'AGENTS current archive counts missing');
 expect(agents.includes('PR #506 Evidence Archive Payload Verification — Batch 1: implementation under review'), 'AGENTS workstream missing');
 expect(roadmap.includes('Status: PR #506 Evidence Archive Payload Verification — Batch 1 under review; exit boundary REVIEW GATE'), 'roadmap status missing');
@@ -73,6 +85,7 @@ expect(governance.includes('PR #506 Evidence Archive Payload Verification — Ba
 expect(active === "import './validate-evidence-archive-payload-verification-pr506.mjs';", 'active workstream is not wired to PR #506');
 for (const temp of [
   '.github/workflows/pr506-wayback-payload-probe.yml',
+  '.github/workflows/pr506-stats-history-repair.yml',
   'scripts/probe-evidence-archive-payloads-pr506.py',
   'scripts/retry-pr506-wayback-gaps.py',
   'scripts/finalize-pr506-evidence-archive-payload.mjs'
@@ -94,5 +107,7 @@ console.log(JSON.stringify({
   evidence_relations: 579,
   archive_recorded: 457,
   archive_not_recorded: 122,
+  stats_checkpoint_kind: statsCheckpoint.checkpoint_kind,
+  stats_snapshot_sha256: currentSnapshot?.snapshot_sha256,
   next_boundary: 'REVIEW_GATE'
 }, null, 2));
