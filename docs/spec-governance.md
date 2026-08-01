@@ -25,7 +25,7 @@ When documents disagree, use this order:
 Current active roadmap amendment:
 
 ```text
-docs/roadmap-amendments/2026-08-01-evidence-archive-payload-verification-batch-1.md
+docs/roadmap-amendments/2026-08-01-terminal-date-boundary-review-batch-1.md
 ```
 
 Current operating specification:
@@ -37,7 +37,7 @@ docs/post-351-data-growth-operating-spec.md
 Current work-item specification:
 
 ```text
-docs/quality/evidence-archive-payload-verification-batch-1-spec.md
+docs/quality/terminal-date-boundary-review-batch-1-spec.md
 ```
 
 Historical amendments and PR-specific specifications remain historical records. Their completed semantic contracts remain useful, but their old “current” wording and schedules do not override the current roadmap.
@@ -90,24 +90,21 @@ PR #496 Record Growth Batch 4 candidate audit
 Current item:
 
 ```text
-REVIEW GATE — PR #506 complete and production-verified
+PR #508 Terminal Date Boundary Review — Batch 1 authorization; PR #509 implementation reserved
 ```
 
 Reviewed decision:
 
 ```text
-PR #506 Evidence Archive Payload Verification — Batch 1 complete and production-verified
-production commit: 2a6bfac25538388dd7ea6dc12de96c2c2dc2dad0
-production canonical hash: sha256:083860b341f6deebc1109b6b5b044dee584ba5e487e2e9b1722213772256b5bb
-convergence attempt: 2
-exact target count: 10
-dated exact archives added: 7
-reviewed no safe change: 3
-archive coverage after: 457 of 579
-source replacement: 0
-new Evidence identities or Relations: 0
-non-Evidence canonical changes: 0
-current boundary: REVIEW GATE
+PR #508 Terminal Date Boundary Review — Batch 1 authorization
+implementation PR: #509
+exact targets: sog_st_fei, sog_st_nearusn, sog_st_esd
+source queue total: 6
+allowed outcomes: exact_terminal_day_resolved or reviewed_null_preserved
+replacement targets: prohibited
+unsupported terminal-date inference: prohibited
+canonical and public counts: preserved
+next boundary after PR #509: REVIEW GATE
 ```
 
 No later work is pre-authorized.
@@ -243,6 +240,14 @@ An archive may be accepted only when the exact canonical URL returns an HTTP-200
 
 PR #506 changed only seven accepted target `archived_url` fields and forward archive-quality checkpoints. It replaced no source URL, added no Evidence identity or Relation, changed no non-Evidence canonical record, public route, or material UI. Production commit `2a6bfac25538388dd7ea6dc12de96c2c2dc2dad0` verified canonical hash `sha256:083860b341f6deebc1109b6b5b044dee584ba5e487e2e9b1722213772256b5bb`, the 117/108/129/192/579/579/184/8 canonical counts, 417 detail routes, 417 metadata-checked routes, and archive partition 457/122. The repository is at REVIEW GATE. No work beyond this checkpoint is pre-authorized.
 
+## 10C. PR #508 Terminal Date Boundary Review — Batch 1
+
+PR #508 closes the current review gate only for a three-target terminal-date evidence review. PR #509 is the only authorized implementation.
+
+The target set is fixed to `sog_st_fei`, `sog_st_nearusn`, and `sog_st_esd`. A canonical terminal day requires exact day-level primary evidence of a final effective end for the same canonical identity. Governance approval, wind-down start, permanent mint stop, migration availability, depeg, market inactivity, repository inactivity, and retrospective publication dates are not terminal dates by default.
+
+PR #509 must record a reviewed outcome for every target and may not substitute another record. It may resolve an exact terminal day or preserve null. It may not add an asset, alter Market Access, add a route family, change material UI, or automatically promote candidate source material to canonical Evidence. It exits to REVIEW GATE. No work beyond PR #509 is pre-authorized.
+
 ## 11. YLDS scope boundary
 
 YLDS is deferred and is not authorized for canonical implementation.
@@ -365,10 +370,16 @@ Scheduled monitoring and candidate auditing remain artifact-only and do not auth
 
 ## 19. Review gate
 
-PR #506 is complete and production-verified. The repository is at:
+PR #508 is the current reviewed decision. Execute only PR #509 and then stop to review:
 
 ```text
-REVIEW GATE
+all three terminal-date dispositions
+exact-day primary evidence quality
+final-effective-end semantics
+null-date preservation
+Evidence additions, if any
+canonical counts and route parity
+production parity
 ```
 
-No later archive batch, launch-date batch, record-growth batch, Figure YLDS amendment, Market Access change, public route family, or material UI work is authorized automatically. Only a later separate reviewed decision may authorize another work item.
+Only a later separate reviewed decision may authorize another work item.

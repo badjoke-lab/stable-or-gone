@@ -1,56 +1,78 @@
-name: Finalize PR508 terminal-date authority
-run-name: Finalize PR508 authority · ${{ github.event_name }} · ${{ github.sha }}
+name: PR 466 Post-UI Data-Growth Review Gate
+run-name: PR 466 review gate · ${{ github.event_name }} · ${{ github.sha }}
 
 on:
   push:
     branches:
-      - agent/terminal-date-boundary-review-batch-1-authority
+      - pr466-post-ui-data-growth-review-gate
   pull_request:
     branches:
+      - chore/post-ui-v3-agent-authority-reset
       - main
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
-  group: finalize-pr508-terminal-date-authority
-  cancel-in-progress: false
+  group: pr466-post-ui-data-growth-review-gate-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  finalize:
-    if: github.event_name != 'pull_request' || github.head_ref == 'agent/terminal-date-boundary-review-batch-1-authority'
+  validate:
+    if: github.event_name != 'pull_request' || github.head_ref == 'pr466-post-ui-data-growth-review-gate'
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 60
+    env:
+      BASE_BRANCH: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.ref || 'chore/post-ui-v3-agent-authority-reset' }}
     steps:
-      - name: Checkout branch
+      - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          ref: agent/terminal-date-boundary-review-batch-1-authority
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
 
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 22.22.0
+          cache: npm
 
-      - name: Generate authority files
-        run: node scripts/finalize-pr508-terminal-date-authority.mjs
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
 
-      - name: Validate authority
-        run: node scripts/validate-terminal-date-boundary-review-pr508.mjs
+      - name: Validate PR 466 review-gate decision
+        run: node scripts/validate-post-ui-data-growth-review-gate-pr466.mjs
 
-      - name: Restore permanent workflow and remove finalizer
+      - name: Validate active workstream
+        run: npm run validate:active-workstream
+
+      - name: Validate canonical and release contracts
         run: |
-          git fetch origin main
-          git checkout origin/main -- .github/workflows/pr466-post-ui-data-growth-review-gate.yml
-          rm scripts/finalize-pr508-terminal-date-authority.mjs
-          rm -f .github/pr508-finalizer-trigger.txt
+          npm run validate:data
+          npm run validate:compat
+          npm run validate:final
+          npm run validate:release-integrity
 
-      - name: Commit authority
+      - name: Verify governance-only boundary
+        run: git diff --exit-code "origin/${BASE_BRANCH}...HEAD" -- data/ src/ public/
+
+      - name: Astro check and build
         run: |
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add -A
-          git commit -m 'Authorize terminal date boundary review batch 1'
-          git push origin HEAD:agent/terminal-date-boundary-review-batch-1-authority
+          npm run check
+          npm run build
+
+      - name: Write review-gate summary
+        if: always()
+        run: |
+          {
+            echo '## PR #466 Post-UI Data-Growth Review Gate'
+            echo
+            echo '- Source canonical assets: 114'
+            echo '- Authorized next PR: #467'
+            echo '- Selected assets: PLNQ, GBPQ'
+            echo '- Maximum new canonical assets: 2'
+            echo '- Canonical changes in PR #466: 0'
+            echo '- Public changes in PR #466: 0'
+            echo '- Next boundary after PR #467: REVIEW GATE'
+          } >> "$GITHUB_STEP_SUMMARY"
