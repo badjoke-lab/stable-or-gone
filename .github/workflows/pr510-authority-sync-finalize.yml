@@ -7,6 +7,12 @@ on:
     paths:
       - scripts/finalize-post-pr509-authority-sync.py
       - .github/workflows/pr510-authority-sync-finalize.yml
+  pull_request:
+    branches:
+      - main
+    types:
+      - opened
+      - synchronize
   workflow_dispatch:
 
 permissions:
@@ -45,5 +51,3 @@ jobs:
           fi
           git commit -m "Close the post-PR509 authority checkpoint"
           git push origin HEAD:agent/post-pr509-authority-sync
-
-# retrigger after workflow registration
