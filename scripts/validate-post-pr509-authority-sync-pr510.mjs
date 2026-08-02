@@ -27,8 +27,10 @@ expect(checkpoint.counts.archive_index_count === 457 && checkpoint.counts.archiv
 expect(agents.includes('Current production checkpoint: ' + productionCommit), 'AGENTS production commit missing');
 expect(agents.includes('Current production canonical hash: ' + productionHash), 'AGENTS production hash missing');
 expect(agents.includes('PR #509 Terminal Date Boundary Review — Batch 1: complete and production-verified'), 'AGENTS completion missing');
+expect(agents.includes('PR #510 post-PR #509 authority synchronization: active'), 'AGENTS PR #510 synchronization state missing');
 expect(agents.includes('Current repository authority: REVIEW GATE'), 'AGENTS review gate missing');
 expect(roadmap.includes('Status: PR #509 complete and production-verified; REVIEW GATE'), 'roadmap status missing');
+expect(roadmap.includes('PR #510 post-PR #509 authority synchronization: active'), 'roadmap PR #510 synchronization state missing');
 expect(roadmap.includes('Current production checkpoint: ' + productionCommit), 'roadmap production commit missing');
 expect(roadmap.includes('Current production canonical hash: ' + productionHash), 'roadmap production hash missing');
 expect(governance.includes('REVIEW GATE — PR #509 complete and production-verified'), 'governance current item missing');
