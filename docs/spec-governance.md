@@ -90,26 +90,24 @@ PR #496 Record Growth Batch 4 candidate audit
 Current item:
 
 ```text
-REVIEW GATE — PR #509 complete and production-verified
+PR #511 Terminal Date Boundary Review — Batch 2 authority active
+PR #512 reserved implementation
 ```
 
 Reviewed decision:
 
 ```text
-PR #509 Terminal Date Boundary Review — Batch 1 complete and production-verified
-production commit: 96ae5edd42e9a9e8a652bb27acc2d6a6eb02dfd6
+PR #510 post-PR #509 authority synchronization complete and production-verified
+production commit: 8344504f41df8debd2da90b1b60a61da6fba9a58
 production canonical hash: sha256:083860b341f6deebc1109b6b5b044dee584ba5e487e2e9b1722213772256b5bb
-convergence attempt: 1
-exact targets: sog_st_fei, sog_st_nearusn, sog_st_esd
-exact terminal days resolved: 0
-reviewed null preserved: 3
-new Evidence identities or Relations: 0
-canonical and public count changes: 0
-legacy redirect changes: 0
-current boundary: REVIEW GATE
+convergence attempt: 2
+PR #511 fixed targets: sog_st_bac, sog_st_dsd
+explicitly deferred: sog_st_gyen until after 2026-11-11
+implementation PR: #512
+next boundary after PR #512: REVIEW GATE
 ```
 
-No later work is pre-authorized.
+Only PR #512 is authorized by this decision.
 
 ## 5. Change control
 
@@ -250,6 +248,24 @@ The target set is fixed to `sog_st_fei`, `sog_st_nearusn`, and `sog_st_esd`. A c
 
 PR #509 recorded a reviewed-null-preserved outcome for all three fixed targets. The reviewed primary sources establish governance, wind-down, programme, and migration boundaries but not final effective termination of the same canonical identity. PR #509 added no asset or Evidence identity, altered no Market Access record, route family, material UI, or legacy redirect. Production commit `96ae5edd42e9a9e8a652bb27acc2d6a6eb02dfd6` verified canonical hash `sha256:083860b341f6deebc1109b6b5b044dee584ba5e487e2e9b1722213772256b5bb`, the 117/108/129/192/579/579/184/8 canonical counts, 417 detail routes, 417 metadata-checked routes, and archive partition 457/122. The repository is at REVIEW GATE. No work beyond this checkpoint is pre-authorized.
 
+## 10A. Terminal Date Boundary Review — Batch 2 authority
+
+PR #511 closes the current review gate only for a two-target terminal-date evidence review. Implementation is reserved for PR #512.
+
+The exact target set is `sog_st_bac` and `sog_st_dsd`.
+
+- BAC requires day-level primary evidence of an official shutdown, final mint stop, governance disablement, or contract-level terminal end state.
+- DSD requires day-level primary evidence of an executed migration, formal shutdown, final mint stop, governance revocation, or contract-level terminal end state.
+- GYEN is not a target. Its official initial redemption period remains open through 2026-11-11, so no final terminal day may be inferred from the wind-down start, purchase disablement, or notice date.
+
+Allowed outcomes are `exact_terminal_day_resolved` and `reviewed_null_preserved`. Every target must receive a reviewed range, reason code, review date, primary-source list, and rejected-shortcut record.
+
+The implementation may not add a replacement target, infer a date from depeg, price lows, negligible liquidity, last repository activity, design publication, migration planning, successor discussion, or market inactivity, or automatically promote a new Evidence identity.
+
+The authority checkpoint is production commit `8344504f41df8debd2da90b1b60a61da6fba9a58`, canonical hash `sha256:083860b341f6deebc1109b6b5b044dee584ba5e487e2e9b1722213772256b5bb`, convergence attempt 2, canonical counts 117/108/129/192/579/579/184/8, 417 detail routes, 417 metadata-checked routes, and archive partition 457/122. No legacy redirect change is authorized.
+
+PR #512 must return to REVIEW GATE. No third terminal-date batch is authorized automatically.
+
 ## 11. YLDS scope boundary
 
 YLDS is deferred and is not authorized for canonical implementation.
@@ -372,10 +388,18 @@ Scheduled monitoring and candidate auditing remain artifact-only and do not auth
 
 ## 19. Review gate
 
-PR #509 is complete and production-verified. The repository is at:
+PR #511 is the active authority item. Before PR #512 may merge, review:
 
 ```text
-REVIEW GATE
+exact target set: sog_st_bac, sog_st_dsd
+GYEN exclusion through the 2026-11-11 redemption boundary
+day-level primary evidence quality
+final-effective-end semantics
+null-date preservation when unresolved
+Evidence identity and Relation changes: 0 unless separately authorized
+canonical count and route parity
+legacy redirect changes: 0
+production parity after PR #512
 ```
 
-No later terminal-date batch, archive batch, launch-date batch, record-growth batch, Figure YLDS amendment, Market Access change, public route family, or material UI work is authorized automatically. Only a later separate reviewed decision may authorize another work item.
+After PR #512 merge and production verification, return to REVIEW GATE. No later terminal-date batch, archive batch, launch-date batch, record-growth batch, Figure YLDS amendment, Market Access change, public route family, or material UI work is authorized automatically.
