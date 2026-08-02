@@ -1,0 +1,46 @@
+name: Finalize PR513 authority synchronization
+
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - synchronize
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  finalize:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: macos-14
+    steps:
+      - name: Checkout authority branch
+        uses: actions/checkout@v4
+        with:
+          ref: agent/post-pr512-authority-sync
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Generate post-PR512 authority synchronization
+        run: python scripts/finalize-post-pr512-authority-sync.py
+
+      - name: Validate synchronized authority
+        run: node scripts/validate-active-workstream.mjs
+
+      - name: Commit finalized authority synchronization
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No finalized changes to commit"
+            exit 0
+          fi
+          git commit -m "Close the post-PR512 authority checkpoint"
+          git push origin HEAD:agent/post-pr512-authority-sync
