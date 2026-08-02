@@ -90,14 +90,14 @@ PR #496 Record Growth Batch 4 candidate audit
 Current item:
 
 ```text
-PR #512 Terminal Date Boundary Review — Batch 2 implementation under review
+REVIEW GATE — PR #512 complete and production-verified
 ```
 
 Reviewed decision:
 
 ```text
-PR #511 Terminal Date Boundary Review — Batch 2 authority complete and production-verified
-production commit: d33eda34830905e0fc7301dd55e1efd167f47efa
+PR #512 Terminal Date Boundary Review — Batch 2 complete and production-verified
+production commit: 23804561ab544aa54426d595df5bbb4283e791dd
 production canonical hash: sha256:083860b341f6deebc1109b6b5b044dee584ba5e487e2e9b1722213772256b5bb
 convergence attempt: 1
 PR #512 exact targets: sog_st_bac, sog_st_dsd
@@ -107,10 +107,10 @@ new Evidence identities or Relations: 0
 canonical and public count changes: 0
 legacy redirect changes: 0
 explicitly deferred and unchanged: sog_st_gyen until after 2026-11-11
-next boundary after PR #512: REVIEW GATE
+current boundary: REVIEW GATE
 ```
 
-PR #512 is the only authorized implementation and is now under review.
+No work beyond this checkpoint is pre-authorized.
 
 ## 5. Change control
 
@@ -269,7 +269,7 @@ The authority checkpoint is production commit `8344504f41df8debd2da90b1b60a61da6
 
 PR #512 must return to REVIEW GATE. No third terminal-date batch is authorized automatically.
 
-PR #512 reviewed both fixed targets and preserved both canonical terminal dates as null. BAC V2 launch, migration activity, and the 2021-06-01 roadmap update do not establish official shutdown, final mint stop, governance disablement, contract disablement, or final token end. DSD DIP-10 execution, CDSD mechanics, and Sushiswap migration do not establish formal shutdown, final mint stop, governance revocation, contract disablement, or final token end. PR #512 adds no Evidence identity or Relation, alters no Market Access record, route family, material UI, or legacy redirect, and must exit to REVIEW GATE after production verification.
+PR #512 reviewed both fixed targets and preserved both canonical terminal dates as null. BAC V2 launch, migration activity, and the 2021-06-01 roadmap update do not establish official shutdown, final mint stop, governance disablement, contract disablement, or final token end. DSD DIP-10 execution, CDSD mechanics, and Sushiswap migration do not establish formal shutdown, final mint stop, governance revocation, contract disablement, or final token end. PR #512 added no Evidence identity or Relation, altered no Market Access record, route family, material UI, or legacy redirect. Production commit `23804561ab544aa54426d595df5bbb4283e791dd` verified canonical hash `sha256:083860b341f6deebc1109b6b5b044dee584ba5e487e2e9b1722213772256b5bb`, canonical counts 117/108/129/192/579/579/184/8, 417 detail routes, 417 metadata-checked routes, and archive partition 457/122. The repository is at REVIEW GATE. No work beyond this checkpoint is pre-authorized.
 
 ## 11. YLDS scope boundary
 
@@ -393,18 +393,10 @@ Scheduled monitoring and candidate auditing remain artifact-only and do not auth
 
 ## 19. Review gate
 
-PR #512 is the current implementation under review. Before merge and production acceptance, review:
+PR #512 is complete and production-verified. The repository is at:
 
 ```text
-exact target set: sog_st_bac, sog_st_dsd
-GYEN exclusion through the 2026-11-11 redemption boundary
-day-level primary evidence quality
-final-effective-end semantics
-null-date preservation when unresolved
-Evidence identity and Relation changes: 0 unless separately authorized
-canonical count and route parity
-legacy redirect changes: 0
-production parity after PR #512
+REVIEW GATE
 ```
 
-After PR #512 merge and production verification, return to REVIEW GATE. No later terminal-date batch, archive batch, launch-date batch, record-growth batch, Figure YLDS amendment, Market Access change, public route family, or material UI work is authorized automatically.
+No later terminal-date batch, archive batch, launch-date batch, record-growth batch, Figure YLDS amendment, Market Access change, public route family, or material UI work is authorized automatically. Only a later separate reviewed decision may authorize another work item.
