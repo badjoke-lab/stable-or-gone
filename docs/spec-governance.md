@@ -90,20 +90,19 @@ PR #496 Record Growth Batch 4 candidate audit
 Current item:
 
 ```text
-PR #508 Terminal Date Boundary Review — Batch 1 authorization; PR #509 implementation reserved
+PR #509 Terminal Date Boundary Review — Batch 1 implementation under review
 ```
 
 Reviewed decision:
 
 ```text
-PR #508 Terminal Date Boundary Review — Batch 1 authorization
-implementation PR: #509
+PR #509 Terminal Date Boundary Review — Batch 1
 exact targets: sog_st_fei, sog_st_nearusn, sog_st_esd
-source queue total: 6
-allowed outcomes: exact_terminal_day_resolved or reviewed_null_preserved
-replacement targets: prohibited
-unsupported terminal-date inference: prohibited
-canonical and public counts: preserved
+exact terminal days resolved: 0
+reviewed null preserved: 3
+new Evidence identities or Relations: 0
+canonical and public count changes: 0
+legacy redirect changes: 0
 next boundary after PR #509: REVIEW GATE
 ```
 
@@ -246,7 +245,7 @@ PR #508 closes the current review gate only for a three-target terminal-date evi
 
 The target set is fixed to `sog_st_fei`, `sog_st_nearusn`, and `sog_st_esd`. A canonical terminal day requires exact day-level primary evidence of a final effective end for the same canonical identity. Governance approval, wind-down start, permanent mint stop, migration availability, depeg, market inactivity, repository inactivity, and retrospective publication dates are not terminal dates by default.
 
-PR #509 must record a reviewed outcome for every target and may not substitute another record. It may resolve an exact terminal day or preserve null. It may not add an asset, alter Market Access, add a route family, change material UI, or automatically promote candidate source material to canonical Evidence. It exits to REVIEW GATE. No work beyond PR #509 is pre-authorized.
+PR #509 records a reviewed-null-preserved outcome for all three fixed targets. The reviewed primary sources establish governance, wind-down, programme, and migration boundaries but not final effective termination of the same canonical identity. PR #509 adds no asset or Evidence identity, alters no Market Access record, route family, material UI, or legacy redirect, and exits to REVIEW GATE. No work beyond PR #509 is pre-authorized.
 
 ## 11. YLDS scope boundary
 
@@ -370,7 +369,7 @@ Scheduled monitoring and candidate auditing remain artifact-only and do not auth
 
 ## 19. Review gate
 
-PR #508 is the current reviewed decision. Execute only PR #509 and then stop to review:
+PR #509 is the current implementation under review. Before merge and production acceptance, review:
 
 ```text
 all three terminal-date dispositions

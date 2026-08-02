@@ -1,6 +1,6 @@
 # Terminal Date Boundary Review — Batch 1
 
-Status: authorized bounded private review  
+Status: implementation reviewed; pending merge and production verification  
 Authority PR: #508  
 Implementation PR: #509  
 Public output: false
@@ -38,6 +38,20 @@ The following are insufficient by themselves:
 - `reviewed_null_preserved`
 
 Every target must receive a reviewed range, reason code, review date, reviewed primary-source list, and explicit rejected-shortcut record.
+
+## Reviewed PR #509 result
+
+```text
+Targets reviewed: 3
+Exact terminal days resolved: 0
+Reviewed null preserved: 3
+New Evidence identities: 0
+Evidence Relation changes: 0
+Canonical and public count changes: 0
+Legacy redirect changes: 0
+```
+
+FEI retains a null terminal date because final-redemption governance and continuing redemption mechanics do not establish final route shutdown or residual-distribution completion. NEAR USN retains null because the Protection Programme deadline does not establish the end of all redemption paths, residual settlement, or the token contract. ESD retains null because V2 migration availability does not establish a V1 end block, disablement, or final migration deadline.
 
 ## Preserved boundaries
 

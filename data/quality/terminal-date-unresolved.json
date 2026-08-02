@@ -22,7 +22,13 @@
       "formal_shutdown_announcement": "not_recovered",
       "reason_code": "shutdown_source_absent",
       "review_note": "No new first-party shutdown, final mint stop, governance termination, redemption termination, or contract-level end state was recovered in the 2026-06-25 recheck. Continued transferability does not restore active protocol status or establish a terminal day.",
-      "rejected_shortcuts": ["first_depeg_date","price_low_date","last_repository_commit","last_website_capture","negligible_liquidity_date"],
+      "rejected_shortcuts": [
+        "first_depeg_date",
+        "price_low_date",
+        "last_repository_commit",
+        "last_website_capture",
+        "negligible_liquidity_date"
+      ],
       "future_review_target": "official_shutdown_notice_final_mint_or_governance_disable_record_or_contract_level_end_state"
     },
     {
@@ -35,21 +41,42 @@
       "formal_shutdown_announcement": "not_recovered",
       "reason_code": "development_activity_without_terminal_effect",
       "review_note": "The 2026-06-25 recheck recovered no executed migration, formal shutdown, final mint stop, governance revocation, or contract-level terminal day. April 2021 V2 design activity remains non-terminal evidence.",
-      "rejected_shortcuts": ["v2_spec_publication_date","first_depeg_date","worst_depeg_date","version_vote_date","last_medium_post"],
+      "rejected_shortcuts": [
+        "v2_spec_publication_date",
+        "first_depeg_date",
+        "worst_depeg_date",
+        "version_vote_date",
+        "last_medium_post"
+      ],
       "future_review_target": "official_migration_execution_shutdown_or_governance_termination_record"
     },
     {
       "stablecoin_id": "sog_st_esd",
       "canonical_status": "failed",
-      "strongest_known_boundary": "2021-08-02",
-      "boundary_type": "successor_migration_availability",
+      "strongest_known_boundary": "2021-08-02 Empty Set V2 live and ESD/ESDS migration opened",
+      "boundary_type": "reviewed_non_terminal_boundary",
       "last_confirmed_activity": "2021-08-02",
       "first_confirmed_successor_or_inactive": "2021-08-02 successor protocol live and migration available",
       "formal_shutdown_announcement": "not_recovered",
-      "reason_code": "migration_opening_not_final_cessation",
-      "review_note": "The 2026-06-25 recheck recovered no V1 end block, final migration deadline, contract disablement, or final claim termination. The 2021-08-02 successor migration opening remains a non-terminal availability boundary.",
-      "rejected_shortcuts": ["v2_audit_date","migration_opening_as_final_end","first_sustained_depeg","successor_token_launch_as_immediate_end"],
-      "future_review_target": "official_v1_end_block_contract_disable_or_final_migration_deadline"
+      "reason_code": "migration_opening_without_v1_disablement_or_final_deadline",
+      "review_note": "The official Empty Set publication establishes that V2 went live and the Treasury multisig initiated ESD and Bonded ESD migration on 2021-08-02. The reviewed primary material does not provide a V1 end block, contract disablement, final migration deadline, or final claim termination. Migration availability is therefore not treated as the final effective end of ESD.",
+      "rejected_shortcuts": [
+        "v2_launch_as_v1_final_end",
+        "migration_opening_as_migration_deadline",
+        "successor_token_launch_as_contract_disablement",
+        "last_repository_commit_as_terminal_date",
+        "market_inactivity_as_terminal_date"
+      ],
+      "future_review_target": "v1_end_block_or_v1_contract_disablement_or_final_migration_deadline_or_final_claim_termination",
+      "last_reviewed": "2026-08-02",
+      "reviewed_primary_sources": [
+        "https://medium.com/emptysetdollar/empty-set-v2-live-migrate-now-2a6fceb55d08",
+        "https://medium.com/emptysetdollar/introducing-empty-sets-new-tokens-dsu-ess-9d43944123fe",
+        "https://github.com/emptysetsquad/emptyset"
+      ],
+      "review_outcome": "reviewed_null_preserved",
+      "canonical_terminal_date_before": null,
+      "canonical_terminal_date_after": null
     },
     {
       "stablecoin_id": "sog_st_gyen",
@@ -61,34 +88,67 @@
       "formal_shutdown_announcement": "wind_down_notice_recovered_final_termination_not_reached",
       "reason_code": "redemption_period_still_open",
       "review_note": "GMO Trust's official notice confirms that the initial redemption period remains open until 2026-11-11. The wind-down start, purchase disablement, and notice date are not final token termination boundaries.",
-      "rejected_shortcuts": ["wind_down_start_as_final_end","purchase_disable_date_as_redemption_end","notice_publication_as_token_termination"],
+      "rejected_shortcuts": [
+        "wind_down_start_as_final_end",
+        "purchase_disable_date_as_redemption_end",
+        "notice_publication_as_token_termination"
+      ],
       "future_review_target": "official_final_redemption_deadline_or_termination_notice"
     },
     {
       "stablecoin_id": "sog_st_fei",
       "canonical_status": "discontinued",
-      "strongest_known_boundary": "2022-09-22",
-      "boundary_type": "final_redemption_governance_boundary",
+      "strongest_known_boundary": "2022-09-22 final-redemption governance approval",
+      "boundary_type": "reviewed_non_terminal_boundary",
       "last_confirmed_activity": "2022-09-22 final-redemption governance package; exact final execution and residual distribution completion unresolved",
       "first_confirmed_successor_or_inactive": null,
       "formal_shutdown_announcement": "final_redemption_governance_recovered_final_effective_end_unresolved",
-      "reason_code": "governance_boundary_not_final_effective_end",
-      "review_note": "The 2022-09-22 governance boundary is recorded, but the exact final execution timestamp, residual distribution completion, and current route availability remain unresolved. The governance date is not coerced into a final effective end day.",
-      "rejected_shortcuts": ["governance_vote_date_as_final_end","redemption_design_approval_as_route_disablement","historical_interface_state_as_final_route_end"],
-      "future_review_target": "executed_final_redemption_completion_residual_distribution_end_or_final_route_shutdown"
+      "reason_code": "redemption_governance_without_final_route_or_distribution_end",
+      "review_note": "TIP-121c established the final-redemption governance boundary and FEI-to-DAI redemption state. The reviewed primary material does not establish an executed final redemption completion day, residual distribution completion day, or final redemption-route shutdown. The vote end and redemption start are therefore not coerced into a terminal date.",
+      "rejected_shortcuts": [
+        "governance_vote_end_as_final_effective_end",
+        "redemption_start_as_redemption_completion",
+        "dao_terminal_state_as_route_shutdown",
+        "market_inactivity_as_terminal_date"
+      ],
+      "future_review_target": "executed_final_redemption_completion_or_residual_distribution_completion_or_final_fei_redemption_route_shutdown",
+      "last_reviewed": "2026-08-02",
+      "reviewed_primary_sources": [
+        "https://tribe.fei.money/t/tip-121-proposal-for-the-future-of-the-tribe-dao/4475/73",
+        "https://www.tally.xyz/governance/eip155:1:0x0BEF27FEB58e857046d630B2c03dFb7bae567494/proposal/64863446409291443125870692229577565231046239594774676712611109555958259692263",
+        "https://fei-protocol.github.io/user/user/"
+      ],
+      "review_outcome": "reviewed_null_preserved",
+      "canonical_terminal_date_before": null,
+      "canonical_terminal_date_after": null
     },
     {
       "stablecoin_id": "sog_st_nearusn",
       "canonical_status": "discontinued",
-      "strongest_known_boundary": "2022-10-24",
-      "boundary_type": "controlled_wind_down_start",
+      "strongest_known_boundary": "2022-10-24 controlled wind-down start",
+      "boundary_type": "reviewed_non_terminal_boundary",
       "last_confirmed_activity": "2022-10-24 permanent minting cessation and Protection Programme wind-down start; final programme close and residual settlement unresolved",
       "first_confirmed_successor_or_inactive": "2022-10-24 controlled wind-down and Protection Programme start",
       "formal_shutdown_announcement": "controlled_wind_down_recovered_final_settlement_unresolved",
-      "reason_code": "protection_program_terminal_date_unresolved",
-      "review_note": "The 2022-10-24 boundary establishes permanent minting cessation and the start of the controlled wind-down and Protection Programme. Existing known-unknown records state that the final programme close date, payout completion, residual obligations, final supply, and later market state remain unresolved, so the wind-down start is not treated as the final terminal day.",
-      "rejected_shortcuts": ["wind_down_start_as_final_end","permanent_mint_stop_as_final_settlement","protection_program_launch_as_completion","market_liquidity_decline_as_terminal_date"],
-      "future_review_target": "official_protection_program_close_payout_completion_residual_obligation_settlement_or_final_token_end_state"
+      "reason_code": "programme_deadline_without_final_token_or_residual_settlement_end",
+      "review_note": "Decentral Bank permanently stopped minting and began the controlled wind-down on 2022-10-24. NEAR Foundation described a one-year Protection Programme ending 2023-10-24, while the wind-down material also directed holders to separate redemption routes and did not establish final payout completion, residual-obligation settlement, contract disablement, or the final token end state. The programme deadline is not coerced into the canonical terminal date.",
+      "rejected_shortcuts": [
+        "wind_down_start_as_final_end",
+        "permanent_mint_stop_as_final_settlement",
+        "protection_programme_deadline_as_final_token_end",
+        "protection_programme_launch_as_completion",
+        "market_liquidity_decline_as_terminal_date"
+      ],
+      "future_review_target": "protection_programme_final_payout_completion_or_residual_obligation_settlement_or_final_supply_and_contract_end_state_or_final_closure_of_all_redemption_routes",
+      "last_reviewed": "2026-08-02",
+      "reviewed_primary_sources": [
+        "https://www.near.org/blog/near-launches-usn-protection-programme-aurora",
+        "https://www.near.org/blog/statement-in-full-near-foundation-to-fund-usn-protection-programme",
+        "https://medium.com/@dcntrlbank/usn-wind-down-message-to-all-usn-holders-and-community-98b82dcdcc2c"
+      ],
+      "review_outcome": "reviewed_null_preserved",
+      "canonical_terminal_date_before": null,
+      "canonical_terminal_date_after": null
     }
   ]
 }

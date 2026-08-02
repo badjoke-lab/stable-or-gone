@@ -1,0 +1,125 @@
+{
+  "schema_version": "1.0",
+  "review_id": "sog_terminal_date_boundary_review_batch_1_pr509_2026_08_02",
+  "status": "reviewed_bounded_no_canonical_date_change",
+  "public_output": false,
+  "authority_pr": 508,
+  "implementation_pr": 509,
+  "reviewed_at": "2026-08-02",
+  "source_queue": "data/quality/terminal-date-unresolved.json",
+  "target_count": 3,
+  "exact_terminal_day_resolved_count": 0,
+  "reviewed_null_preserved_count": 3,
+  "canonical_evidence_added_count": 0,
+  "canonical_evidence_relation_added_count": 0,
+  "method": "Primary-source review of governance, redemption, protection-programme, migration, and contract-continuity boundaries. Day-level dates were accepted only if they proved the final effective end of the same canonical stable-asset identity.",
+  "dispositions": [
+    {
+      "stablecoin_id": "sog_st_fei",
+      "decision": "reviewed_null_preserved",
+      "canonical_terminal_date_before": null,
+      "canonical_terminal_date_after": null,
+      "best_known_range": "2022-09-22 final-redemption governance approval; redemption route closure and residual distribution completion unresolved",
+      "reason_code": "redemption_governance_without_final_route_or_distribution_end",
+      "review_note": "TIP-121c established the final-redemption governance boundary and FEI-to-DAI redemption state. The reviewed primary material does not establish an executed final redemption completion day, residual distribution completion day, or final redemption-route shutdown. The vote end and redemption start are therefore not coerced into a terminal date.",
+      "reviewed_primary_sources": [
+        "https://tribe.fei.money/t/tip-121-proposal-for-the-future-of-the-tribe-dao/4475/73",
+        "https://www.tally.xyz/governance/eip155:1:0x0BEF27FEB58e857046d630B2c03dFb7bae567494/proposal/64863446409291443125870692229577565231046239594774676712611109555958259692263",
+        "https://fei-protocol.github.io/user/user/"
+      ],
+      "rejected_shortcuts": [
+        "governance_vote_end_as_final_effective_end",
+        "redemption_start_as_redemption_completion",
+        "dao_terminal_state_as_route_shutdown",
+        "market_inactivity_as_terminal_date"
+      ],
+      "remaining_unknowns": [
+        "executed final redemption completion",
+        "residual distribution completion",
+        "final FEI redemption route shutdown"
+      ],
+      "evidence_identity_changes": 0,
+      "evidence_relation_changes": 0
+    },
+    {
+      "stablecoin_id": "sog_st_nearusn",
+      "decision": "reviewed_null_preserved",
+      "canonical_terminal_date_before": null,
+      "canonical_terminal_date_after": null,
+      "best_known_range": "2022-10-24 controlled wind-down start; Protection Programme stated through 2023-10-24; final token and residual settlement end unresolved",
+      "reason_code": "programme_deadline_without_final_token_or_residual_settlement_end",
+      "review_note": "Decentral Bank permanently stopped minting and began the controlled wind-down on 2022-10-24. NEAR Foundation described a one-year Protection Programme ending 2023-10-24, while the wind-down material also directed holders to separate redemption routes and did not establish final payout completion, residual-obligation settlement, contract disablement, or the final token end state. The programme deadline is not coerced into the canonical terminal date.",
+      "reviewed_primary_sources": [
+        "https://www.near.org/blog/near-launches-usn-protection-programme-aurora",
+        "https://www.near.org/blog/statement-in-full-near-foundation-to-fund-usn-protection-programme",
+        "https://medium.com/@dcntrlbank/usn-wind-down-message-to-all-usn-holders-and-community-98b82dcdcc2c"
+      ],
+      "rejected_shortcuts": [
+        "wind_down_start_as_final_end",
+        "permanent_mint_stop_as_final_settlement",
+        "protection_programme_deadline_as_final_token_end",
+        "protection_programme_launch_as_completion",
+        "market_liquidity_decline_as_terminal_date"
+      ],
+      "remaining_unknowns": [
+        "Protection Programme final payout completion",
+        "residual obligation settlement",
+        "final supply and contract end state",
+        "final closure of all redemption routes"
+      ],
+      "evidence_identity_changes": 0,
+      "evidence_relation_changes": 0
+    },
+    {
+      "stablecoin_id": "sog_st_esd",
+      "decision": "reviewed_null_preserved",
+      "canonical_terminal_date_before": null,
+      "canonical_terminal_date_after": null,
+      "best_known_range": "2021-08-02 Empty Set V2 live and ESD/ESDS migration opened; V1 disablement and migration close unresolved",
+      "reason_code": "migration_opening_without_v1_disablement_or_final_deadline",
+      "review_note": "The official Empty Set publication establishes that V2 went live and the Treasury multisig initiated ESD and Bonded ESD migration on 2021-08-02. The reviewed primary material does not provide a V1 end block, contract disablement, final migration deadline, or final claim termination. Migration availability is therefore not treated as the final effective end of ESD.",
+      "reviewed_primary_sources": [
+        "https://medium.com/emptysetdollar/empty-set-v2-live-migrate-now-2a6fceb55d08",
+        "https://medium.com/emptysetdollar/introducing-empty-sets-new-tokens-dsu-ess-9d43944123fe",
+        "https://github.com/emptysetsquad/emptyset"
+      ],
+      "rejected_shortcuts": [
+        "v2_launch_as_v1_final_end",
+        "migration_opening_as_migration_deadline",
+        "successor_token_launch_as_contract_disablement",
+        "last_repository_commit_as_terminal_date",
+        "market_inactivity_as_terminal_date"
+      ],
+      "remaining_unknowns": [
+        "V1 end block",
+        "V1 contract disablement",
+        "final migration deadline",
+        "final claim termination"
+      ],
+      "evidence_identity_changes": 0,
+      "evidence_relation_changes": 0
+    }
+  ],
+  "decision": {
+    "all_targets_disposed": true,
+    "exact_terminal_day_evidence_found": false,
+    "unsupported_date_coercion": false,
+    "canonical_counts_preserved": true,
+    "terminal_queue_total_preserved": 6,
+    "next_boundary": "REVIEW_GATE"
+  },
+  "constraints": {
+    "asset_changes": 0,
+    "organization_changes": 0,
+    "relationship_changes": 0,
+    "event_changes": 0,
+    "evidence_identity_changes": 0,
+    "evidence_relation_changes": 0,
+    "deployment_changes": 0,
+    "market_access_changes": 0,
+    "route_family_changes": 0,
+    "material_ui_changes": 0,
+    "legacy_redirect_changes": 0,
+    "automatic_continuation": false
+  }
+}
