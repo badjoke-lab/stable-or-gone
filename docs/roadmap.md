@@ -1,7 +1,7 @@
 # Stable or Gone Roadmap
 
 Updated: 2026-08-02  
-Status: PR #512 Terminal Date Boundary Review — Batch 2 under review; exit boundary REVIEW GATE
+Status: PR #512 complete and production-verified; REVIEW GATE
 
 ## Current reviewed position
 
@@ -20,11 +20,11 @@ Detail routes: 417
 Metadata-checked detail routes: 417
 Official public origin: https://www.stableorgone.com
 Official-domain migration production checkpoint: bd0e63ac36b1824bf705e8c80d1fb0a1cd79d221
-Current production checkpoint: d33eda34830905e0fc7301dd55e1efd167f47efa
+Current production checkpoint: 23804561ab544aa54426d595df5bbb4283e791dd
 Current production canonical hash: sha256:083860b341f6deebc1109b6b5b044dee584ba5e487e2e9b1722213772256b5bb
 ```
 
-Current `main` and production equality is established dynamically by the deployment workflow and Issue #479. PR #511 production converged with exact count, route, metadata, provenance, archive-partition, and canonical-hash parity.
+Current `main` and production equality is established dynamically by the deployment workflow and Issue #479. PR #512 production converged with exact count, route, metadata, provenance, archive-partition, and canonical-hash parity.
 
 ## Completed acceptance points
 
@@ -49,7 +49,8 @@ PR #508 Terminal Date Boundary Review — Batch 1 authorization: complete
 PR #509 Terminal Date Boundary Review — Batch 1: complete and production-verified
 PR #510 post-PR #509 authority synchronization: complete and production-verified
 PR #511 Terminal Date Boundary Review — Batch 2 authorization: complete and production-verified
-PR #512 Terminal Date Boundary Review — Batch 2: implementation under review
+PR #512 Terminal Date Boundary Review — Batch 2: complete and production-verified
+PR #513 post-PR #512 authority synchronization: active
 ```
 
 PR #498 remains the current canonical-asset addition checkpoint. PR #500 is the current canonical maintenance and statistics-history checkpoint. PR #492 remains the Statistics and responsive-layout acceptance point. PR #493 remains the official-domain migration acceptance point.
@@ -70,7 +71,22 @@ BAC official V2 launch, migration, and roadmap sources establish continued proto
 
 No canonical stable-asset, organization, relationship, event, Evidence, deployment, Market Access, route, UI, or legacy redirect changed.
 
-After merge and production verification, return to REVIEW GATE.
+Production result:
+
+```text
+source commit: 23804561ab544aa54426d595df5bbb4283e791dd
+canonical hash: sha256:083860b341f6deebc1109b6b5b044dee584ba5e487e2e9b1722213772256b5bb
+convergence attempt: 1
+stable assets: 117
+organizations: 108
+events: 192
+detail routes: 417
+metadata-checked detail routes: 417
+archive recorded: 457
+archive not recorded: 122
+```
+
+The repository is at REVIEW GATE.
 
 ## Authorized current item
 
@@ -277,17 +293,17 @@ metadata-checked detail routes: 417
 ## Completed current item
 
 ```text
-Terminal Date Boundary Review — Batch 1
-Authority PR: #508
-Implementation PR: #509
-Authority synchronization PR: #510
+Terminal Date Boundary Review — Batch 2
+Authority PR: #511
+Implementation PR: #512
+Authority synchronization PR: #513
 Result: complete and production-verified
 ```
 
 ## Current boundary
 
 ```text
-PR #512 implementation under review, then REVIEW GATE
+REVIEW GATE
 ```
 
 No later archive batch, launch-date batch, dossier batch, record-growth batch, Figure YLDS amendment, Market Access change, public route family, or material public-surface program is authorized automatically.
