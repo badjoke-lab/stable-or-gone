@@ -1,0 +1,47 @@
+name: Finalize PR510 authority synchronization
+
+on:
+  push:
+    branches:
+      - agent/post-pr509-authority-sync
+    paths:
+      - scripts/finalize-post-pr509-authority-sync.py
+      - .github/workflows/pr510-authority-sync-finalize.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  finalize:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout authority branch
+        uses: actions/checkout@v4
+        with:
+          ref: agent/post-pr509-authority-sync
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Generate post-PR509 authority synchronization
+        run: python scripts/finalize-post-pr509-authority-sync.py
+
+      - name: Validate synchronized authority
+        run: node scripts/validate-active-workstream.mjs
+
+      - name: Commit finalized authority synchronization
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No finalized changes to commit"
+            exit 0
+          fi
+          git commit -m "Close the post-PR509 authority checkpoint"
+          git push origin HEAD:agent/post-pr509-authority-sync
