@@ -1,7 +1,7 @@
 # Stable or Gone Roadmap
 
 Updated: 2026-08-01  
-Status: PR #508 Terminal Date Boundary Review — Batch 1 authorized; PR #509 reserved
+Status: PR #509 Terminal Date Boundary Review — Batch 1 under review; exit boundary REVIEW GATE
 
 ## Current reviewed position
 
@@ -45,22 +45,26 @@ PR #504 post-PR #503 authority synchronization: complete and production-verified
 PR #505 Evidence Archive Payload Verification — Batch 1 authorization: complete and production-verified
 PR #506 Evidence Archive Payload Verification — Batch 1: complete and production-verified
 PR #507 post-PR #506 authority synchronization: complete and production-verified
-PR #508 Terminal Date Boundary Review — Batch 1 authorization: active
-PR #509 Terminal Date Boundary Review — Batch 1: reserved implementation
+PR #508 Terminal Date Boundary Review — Batch 1 authorization: complete
+PR #509 Terminal Date Boundary Review — Batch 1: implementation under review
 ```
 
 PR #498 remains the current canonical-asset addition checkpoint. PR #500 is the current canonical maintenance and statistics-history checkpoint. PR #492 remains the Statistics and responsive-layout acceptance point. PR #493 remains the official-domain migration acceptance point.
 
-## Authorized current item
+## PR #509 reviewed item
 
 ```text
 Terminal Date Boundary Review — Batch 1
 Authority PR: #508
 Implementation PR: #509
-Targets: FEI, NEAR USN, ESD
+Targets reviewed: FEI, NEAR USN, ESD
+Exact terminal days resolved: 0
+Reviewed null preserved: 3
 ```
 
-PR #509 may resolve an exact terminal day only from day-level primary evidence of final effective cessation. If final redemption, settlement, residual distribution, migration, claim, or contract termination remains unresolved, null must be preserved. No replacement target is allowed.
+FEI final-redemption governance did not establish redemption-route shutdown or residual-distribution completion. The USN Protection Programme deadline did not establish the end of all redemption paths, residual settlement, or the token contract. Empty Set V2 migration availability did not establish a V1 end block, disablement, or final migration deadline.
+
+No canonical stable-asset, organization, relationship, event, Evidence, deployment, Market Access, route, UI, or legacy redirect changed. After merge and production verification, return to REVIEW GATE.
 
 ## PR #506 reviewed item
 
@@ -209,7 +213,7 @@ Result: complete and production-verified
 ## Current boundary
 
 ```text
-PR #509 implementation, then REVIEW GATE
+PR #509 implementation under review, then REVIEW GATE
 ```
 
 No later archive batch, launch-date batch, dossier batch, record-growth batch, Figure YLDS amendment, Market Access change, public route family, or material public-surface program is authorized automatically.

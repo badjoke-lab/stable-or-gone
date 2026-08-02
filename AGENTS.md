@@ -42,8 +42,9 @@ Current authority chain:
 13. PR #505 authorized one bounded archived-payload verification pass over ten PR #405 Evidence identities.
 14. PR #506 reviewed all ten archived payload boundaries, accepted seven exact dated archives, preserved three gaps, and was production-verified.
 15. PR #507 synchronized the completed PR #506 checkpoint, was production-verified, and returned repository authority to REVIEW GATE.
-16. PR #508 authorizes one bounded terminal-date boundary review for FEI, NEAR USN, and ESD; implementation is reserved for PR #509.
-17. `docs/ui-v3-remediation-authority.md` remains the regression-protection contract for material public UI work.
+16. PR #508 authorized one bounded terminal-date boundary review for FEI, NEAR USN, and ESD.
+17. PR #509 reviewed all three terminal-date boundaries, preserved all three canonical dates as null, and is under review.
+18. `docs/ui-v3-remediation-authority.md` remains the regression-protection contract for material public UI work.
 
 ## Mandatory reading order
 
@@ -101,8 +102,8 @@ PR #505 Evidence Archive Payload Verification — Batch 1 authorization: complet
 PR #506 Evidence Archive Payload Verification — Batch 1: complete and production-verified
 Required exit after PR #506 merge and production verification: REVIEW GATE — satisfied
 PR #507 post-PR #506 authority synchronization: complete and production-verified
-PR #508 Terminal Date Boundary Review — Batch 1 authorization: active
-PR #509 Terminal Date Boundary Review — Batch 1: reserved implementation
+PR #508 Terminal Date Boundary Review — Batch 1 authorization: complete
+PR #509 Terminal Date Boundary Review — Batch 1: implementation under review
 Required exit after PR #509 merge and production verification: REVIEW GATE
 ```
 
@@ -121,6 +122,23 @@ A canonical terminal date requires exact day-level primary evidence of the final
 PR #509 must either resolve the exact final day or preserve null with a reviewed range, reason code, review date, primary-source list, and rejected shortcuts. No replacement target or automatic Evidence promotion is allowed.
 
 After PR #509 merge and production verification, stop at REVIEW GATE. No second terminal-date batch is authorized automatically.
+
+## PR #509 reviewed terminal-date result
+
+PR #509 reviewed the fixed FEI, NEAR USN, and ESD terminal-date boundaries using primary sources. No source established the final effective end of the same canonical identity.
+
+```text
+exact terminal days resolved: 0
+canonical null dates preserved: 3
+new Evidence identities: 0
+new Evidence Relations: 0
+canonical or public count changes: 0
+legacy redirect changes: 0
+```
+
+FEI final-redemption governance did not establish redemption-route shutdown or residual-distribution completion. The USN Protection Programme deadline did not establish the end of all redemption paths, residual settlement, or the token contract. Empty Set V2 migration availability did not establish a V1 end block, disablement, or final migration deadline.
+
+After PR #509 merge and production verification, stop at REVIEW GATE. No later terminal-date batch is authorized automatically.
 
 ## PR #506 reviewed archive-payload result
 
