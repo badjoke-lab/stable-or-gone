@@ -22,6 +22,8 @@ const productionHash = 'sha256:083860b341f6deebc1109b6b5b044dee584ba5e487e2e9b17
 
 expect(config.status === 'approved_bounded_review', 'authority status is not approved_bounded_review');
 expect(config.authority_pr === 511 && config.implementation_pr === 512, 'PR authority chain changed');
+expect(config.source_queue_expected_total === 6, 'source queue expected total changed');
+expect(config.next_boundary === 'REVIEW_GATE', 'next boundary changed');
 expect(config.target_count === 2, 'target_count changed');
 expect(JSON.stringify(config.target_stablecoin_ids) === JSON.stringify(targetIds), 'target set or order changed');
 expect(config.explicitly_deferred?.stablecoin_id === 'sog_st_gyen', 'GYEN deferment missing');
