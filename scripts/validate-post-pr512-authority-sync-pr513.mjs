@@ -7,6 +7,7 @@ const failures = [];
 const expect = (condition, message) => { if (!condition) failures.push(message); };
 const checkpoint = readJson('docs/migration/current-canonical-checkpoint.json');
 const review = readJson('data/editorial-research/terminal-date-boundary-review-batch-2-pr512-source-review.json');
+const queue = readJson('data/quality/terminal-date-unresolved.json');
 const agents = readText('AGENTS.md');
 const roadmap = readText('docs/roadmap.md');
 const governance = readText('docs/spec-governance.md');
@@ -16,6 +17,9 @@ const productionHash = 'sha256:083860b341f6deebc1109b6b5b044dee584ba5e487e2e9b17
 expect(review.status === 'reviewed_bounded_no_canonical_date_change', 'PR #512 review status changed');
 expect(review.target_count === 2 && review.exact_terminal_day_resolved_count === 0 && review.reviewed_null_preserved_count === 2, 'PR #512 outcomes changed');
 expect(review.canonical_evidence_added_count === 0 && review.canonical_evidence_relation_added_count === 0, 'Evidence boundary changed');
+expect(review.deferred_non_target?.stablecoin_id === 'sog_st_gyen' && review.deferred_non_target?.changed === false, 'GYEN deferment changed');
+expect(queue.expected_total === 6 && queue.records.length === 6, 'terminal queue total changed');
+expect(!('review_outcome' in queue.records.find((record) => record.stablecoin_id === 'sog_st_gyen')), 'GYEN was reviewed prematurely');
 expect(checkpoint.counts.assets === 117 && checkpoint.counts.organizations === 108 && checkpoint.counts.relationships === 129, 'identity counts changed');
 expect(checkpoint.counts.events === 192 && checkpoint.counts.evidence === 579 && checkpoint.counts.evidence_relations === 579, 'event or Evidence counts changed');
 expect(checkpoint.counts.deployments === 184 && checkpoint.counts.market_access_records === 8, 'deployment or Market Access counts changed');
@@ -33,4 +37,4 @@ expect(governance.includes('No work beyond this checkpoint is pre-authorized.'),
 expect(active === "import './validate-post-pr512-authority-sync-pr513.mjs';", 'active workstream is not wired to PR #513');
 for (const temp of ['.github/workflows/pr513-authority-sync-finalize.yml', 'scripts/finalize-post-pr512-authority-sync.py']) expect(!fs.existsSync(path.join(root, temp)), `temporary file remains: ${temp}`);
 if (failures.length) { console.error('PR #513 authority sync failed:'); failures.forEach((f) => console.error('- ' + f)); process.exit(1); }
-console.log(JSON.stringify({ok:true, production_commit:productionCommit, production_hash:productionHash, exact_terminal_day_resolved:0, reviewed_null_preserved:2, canonical_counts_preserved:true, legacy_redirect_changes:0, current_boundary:'REVIEW_GATE'}, null, 2));
+console.log(JSON.stringify({ok:true, production_commit:productionCommit, production_hash:productionHash, exact_terminal_day_resolved:0, reviewed_null_preserved:2, deferred_unchanged:'sog_st_gyen', canonical_counts_preserved:true, legacy_redirect_changes:0, current_boundary:'REVIEW_GATE'}, null, 2));
