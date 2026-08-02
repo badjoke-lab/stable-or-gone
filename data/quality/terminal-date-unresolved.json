@@ -15,40 +15,60 @@
     {
       "stablecoin_id": "sog_st_bac",
       "canonical_status": "failed",
-      "strongest_known_boundary": null,
-      "boundary_type": "no_terminal_boundary_recovered",
-      "last_confirmed_activity": "2026-06-25 canonical BAC ERC-20 contract remains deployed and transferable",
+      "strongest_known_boundary": "2021-06-01 latest recovered official roadmap and development update; final BAC shutdown unresolved",
+      "boundary_type": "reviewed_non_terminal_boundary",
+      "last_confirmed_activity": "2026-06-25 canonical BAC ERC-20 remains deployed and transferable; recovered official project roadmap continued through 2021-06-01",
       "first_confirmed_successor_or_inactive": null,
-      "formal_shutdown_announcement": "not_recovered",
-      "reason_code": "shutdown_source_absent",
-      "review_note": "No new first-party shutdown, final mint stop, governance termination, redemption termination, or contract-level end state was recovered in the 2026-06-25 recheck. Continued transferability does not restore active protocol status or establish a terminal day.",
+      "formal_shutdown_announcement": "not_recovered_after_primary_source_review",
+      "reason_code": "official_continuation_without_shutdown_or_contract_end",
+      "review_note": "Official Basis Cash material records V2 launch, BAS and BAC-liquidity migration work, and continued roadmap execution through 2021-06-01. No reviewed primary source establishes an official BAC shutdown, final mint stop, governance disablement, contract disablement, or final token end. Continued transferability does not restore active protocol status or establish a terminal day.",
       "rejected_shortcuts": [
-        "first_depeg_date",
-        "price_low_date",
-        "last_repository_commit",
-        "last_website_capture",
-        "negligible_liquidity_date"
+        "v2_launch_as_terminal_date",
+        "migration_window_as_bac_shutdown",
+        "last_official_update_as_final_end",
+        "last_repository_commit_as_terminal_date",
+        "depeg_or_negligible_liquidity_as_terminal_date"
       ],
-      "future_review_target": "official_shutdown_notice_final_mint_or_governance_disable_record_or_contract_level_end_state"
+      "future_review_target": "official_shutdown_notice_or_final_mint_stop_or_governance_disablement_or_contract_level_terminal_end_state",
+      "last_reviewed": "2026-08-02",
+      "reviewed_primary_sources": [
+        "https://medium.com/basis-cash/basis-v2-migration-plan-6bdd88198da2",
+        "https://medium.com/basis-cash/basis-v2-launch-day-is-here-950900ac0a9f",
+        "https://medium.com/basis-cash/roadmap-dev-update-fefda027496b",
+        "https://github.com/Basis-Cash/basiscash-protocol"
+      ],
+      "review_outcome": "reviewed_null_preserved",
+      "canonical_terminal_date_before": null,
+      "canonical_terminal_date_after": null
     },
     {
       "stablecoin_id": "sog_st_dsd",
       "canonical_status": "failed",
-      "strongest_known_boundary": "2021-04",
-      "boundary_type": "last_confirmed_protocol_design_activity",
-      "last_confirmed_activity": "2021-04",
-      "first_confirmed_successor_or_inactive": null,
-      "formal_shutdown_announcement": "not_recovered",
-      "reason_code": "development_activity_without_terminal_effect",
-      "review_note": "The 2026-06-25 recheck recovered no executed migration, formal shutdown, final mint stop, governance revocation, or contract-level terminal day. April 2021 V2 design activity remains non-terminal evidence.",
+      "strongest_known_boundary": "2021-04-08 DSD V2 operating guide after DIP-10 and Sushiswap migration activity; final protocol end unresolved",
+      "boundary_type": "reviewed_non_terminal_boundary",
+      "last_confirmed_activity": "2021-04-08 DSD V2 operating guide and launch activity",
+      "first_confirmed_successor_or_inactive": "2021-04-08 V2 mechanics operating as continuation of DSD, not a successor termination",
+      "formal_shutdown_announcement": "not_recovered_after_primary_source_review",
+      "reason_code": "v2_execution_without_shutdown_or_terminal_effect",
+      "review_note": "Official Dynamic Set Dollar material shows DIP-10 replaced the coupon system with CDSD, DSD V2 entered operation, and liquidity migrated toward Sushiswap. These changes continued DSD and did not terminate the canonical token identity. No reviewed primary source establishes formal shutdown, final mint stop, governance revocation, contract disablement, or final token end.",
       "rejected_shortcuts": [
-        "v2_spec_publication_date",
-        "first_depeg_date",
-        "worst_depeg_date",
-        "version_vote_date",
-        "last_medium_post"
+        "v2_execution_as_terminal_date",
+        "sushiswap_migration_as_protocol_shutdown",
+        "coupon_replacement_as_dsd_token_end",
+        "last_official_publication_as_final_end",
+        "last_repository_commit_or_depeg_as_terminal_date"
       ],
-      "future_review_target": "official_migration_execution_shutdown_or_governance_termination_record"
+      "future_review_target": "formal_shutdown_or_final_mint_stop_or_governance_revocation_or_contract_level_terminal_end_state",
+      "last_reviewed": "2026-08-02",
+      "reviewed_primary_sources": [
+        "https://dynamicsetdollar.medium.com/dsd-sushiswap-migration-f413d795aa81",
+        "https://dynamicsetdollar.medium.com/dsd-v2-final-specs-voting-d17db9c8b5a",
+        "https://dynamicsetdollar.medium.com/a-guide-for-dsd-v2-a177026f2cb8",
+        "https://github.com/dynamicsetdollar/dsd-protocol"
+      ],
+      "review_outcome": "reviewed_null_preserved",
+      "canonical_terminal_date_before": null,
+      "canonical_terminal_date_after": null
     },
     {
       "stablecoin_id": "sog_st_esd",

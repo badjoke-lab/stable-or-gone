@@ -1,0 +1,106 @@
+{
+  "schema_version": "1.0",
+  "review_id": "sog_terminal_date_boundary_review_batch_2_pr512_2026_08_02",
+  "status": "reviewed_bounded_no_canonical_date_change",
+  "public_output": false,
+  "authority_pr": 511,
+  "implementation_pr": 512,
+  "reviewed_at": "2026-08-02",
+  "source_queue": "data/quality/terminal-date-unresolved.json",
+  "target_count": 2,
+  "exact_terminal_day_resolved_count": 0,
+  "reviewed_null_preserved_count": 2,
+  "canonical_evidence_added_count": 0,
+  "canonical_evidence_relation_added_count": 0,
+  "method": "Primary-source review of protocol continuation, V2 migration, governance, minting, and contract-continuity boundaries. Day-level dates were accepted only if they proved the final effective end of the same canonical stable-asset identity.",
+  "dispositions": [
+    {
+      "stablecoin_id": "sog_st_bac",
+      "decision": "reviewed_null_preserved",
+      "canonical_terminal_date_before": null,
+      "canonical_terminal_date_after": null,
+      "best_known_range": "Basis Cash V2 launched on 2021-04-26 and official roadmap activity continued through 2021-06-01; final BAC shutdown and contract end unresolved",
+      "reason_code": "official_continuation_without_shutdown_or_contract_end",
+      "review_note": "Official Basis Cash material records a V2 launch, BAS and BAC-liquidity migration work, and continued roadmap execution through 2021-06-01. These sources describe protocol continuation rather than final cessation. No reviewed primary source establishes an official BAC shutdown, final mint stop, governance disablement, contract disablement, or final token end. The final official update, V2 launch, migration window, depeg, low liquidity, and repository inactivity are not coerced into a terminal date.",
+      "reviewed_primary_sources": [
+        "https://medium.com/basis-cash/basis-v2-migration-plan-6bdd88198da2",
+        "https://medium.com/basis-cash/basis-v2-launch-day-is-here-950900ac0a9f",
+        "https://medium.com/basis-cash/roadmap-dev-update-fefda027496b",
+        "https://github.com/Basis-Cash/basiscash-protocol"
+      ],
+      "rejected_shortcuts": [
+        "v2_launch_as_terminal_date",
+        "migration_window_as_bac_shutdown",
+        "last_official_update_as_final_end",
+        "last_repository_commit_as_terminal_date",
+        "depeg_or_negligible_liquidity_as_terminal_date"
+      ],
+      "remaining_unknowns": [
+        "official BAC shutdown notice",
+        "final BAC mint stop",
+        "governance disablement",
+        "contract-level terminal end state"
+      ],
+      "evidence_identity_changes": 0,
+      "evidence_relation_changes": 0
+    },
+    {
+      "stablecoin_id": "sog_st_dsd",
+      "decision": "reviewed_null_preserved",
+      "canonical_terminal_date_before": null,
+      "canonical_terminal_date_after": null,
+      "best_known_range": "DSD V2 and Sushiswap migration were operating by 2021-04-08; formal shutdown, governance revocation, and contract end unresolved",
+      "reason_code": "v2_execution_without_shutdown_or_terminal_effect",
+      "review_note": "Official Dynamic Set Dollar material shows that DIP-10 replaced the coupon system with CDSD, DSD V2 entered operation, and the primary liquidity pool migrated toward Sushiswap. Those changes continued the same protocol and token system; they did not terminate DSD. No reviewed primary source establishes a formal shutdown, final mint stop, governance revocation, contract disablement, final migration away from DSD, or final token end. V2 execution, liquidity-pool migration, the last official publication, depeg, and repository inactivity are not treated as terminal dates.",
+      "reviewed_primary_sources": [
+        "https://dynamicsetdollar.medium.com/dsd-sushiswap-migration-f413d795aa81",
+        "https://dynamicsetdollar.medium.com/dsd-v2-final-specs-voting-d17db9c8b5a",
+        "https://dynamicsetdollar.medium.com/a-guide-for-dsd-v2-a177026f2cb8",
+        "https://github.com/dynamicsetdollar/dsd-protocol"
+      ],
+      "rejected_shortcuts": [
+        "v2_execution_as_terminal_date",
+        "sushiswap_migration_as_protocol_shutdown",
+        "coupon_replacement_as_dsd_token_end",
+        "last_official_publication_as_final_end",
+        "last_repository_commit_or_depeg_as_terminal_date"
+      ],
+      "remaining_unknowns": [
+        "formal DSD shutdown",
+        "final DSD mint stop",
+        "governance revocation",
+        "contract-level terminal end state"
+      ],
+      "evidence_identity_changes": 0,
+      "evidence_relation_changes": 0
+    }
+  ],
+  "deferred_non_target": {
+    "stablecoin_id": "sog_st_gyen",
+    "reason": "official initial redemption period remains open through 2026-11-11",
+    "not_before": "2026-11-12",
+    "changed": false
+  },
+  "decision": {
+    "all_targets_disposed": true,
+    "exact_terminal_day_evidence_found": false,
+    "unsupported_date_coercion": false,
+    "canonical_counts_preserved": true,
+    "terminal_queue_total_preserved": 6,
+    "next_boundary": "REVIEW_GATE"
+  },
+  "constraints": {
+    "asset_changes": 0,
+    "organization_changes": 0,
+    "relationship_changes": 0,
+    "event_changes": 0,
+    "evidence_identity_changes": 0,
+    "evidence_relation_changes": 0,
+    "deployment_changes": 0,
+    "market_access_changes": 0,
+    "route_family_changes": 0,
+    "material_ui_changes": 0,
+    "legacy_redirect_changes": 0,
+    "automatic_continuation": false
+  }
+}

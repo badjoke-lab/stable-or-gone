@@ -90,24 +90,27 @@ PR #496 Record Growth Batch 4 candidate audit
 Current item:
 
 ```text
-PR #511 Terminal Date Boundary Review — Batch 2 authority active
-PR #512 reserved implementation
+PR #512 Terminal Date Boundary Review — Batch 2 implementation under review
 ```
 
 Reviewed decision:
 
 ```text
-PR #510 post-PR #509 authority synchronization complete and production-verified
-production commit: 8344504f41df8debd2da90b1b60a61da6fba9a58
+PR #511 Terminal Date Boundary Review — Batch 2 authority complete and production-verified
+production commit: d33eda34830905e0fc7301dd55e1efd167f47efa
 production canonical hash: sha256:083860b341f6deebc1109b6b5b044dee584ba5e487e2e9b1722213772256b5bb
-convergence attempt: 2
-PR #511 fixed targets: sog_st_bac, sog_st_dsd
-explicitly deferred: sog_st_gyen until after 2026-11-11
-implementation PR: #512
+convergence attempt: 1
+PR #512 exact targets: sog_st_bac, sog_st_dsd
+exact terminal days resolved: 0
+reviewed null preserved: 2
+new Evidence identities or Relations: 0
+canonical and public count changes: 0
+legacy redirect changes: 0
+explicitly deferred and unchanged: sog_st_gyen until after 2026-11-11
 next boundary after PR #512: REVIEW GATE
 ```
 
-Only PR #512 is authorized by this decision.
+PR #512 is the only authorized implementation and is now under review.
 
 ## 5. Change control
 
@@ -266,6 +269,8 @@ The authority checkpoint is production commit `8344504f41df8debd2da90b1b60a61da6
 
 PR #512 must return to REVIEW GATE. No third terminal-date batch is authorized automatically.
 
+PR #512 reviewed both fixed targets and preserved both canonical terminal dates as null. BAC V2 launch, migration activity, and the 2021-06-01 roadmap update do not establish official shutdown, final mint stop, governance disablement, contract disablement, or final token end. DSD DIP-10 execution, CDSD mechanics, and Sushiswap migration do not establish formal shutdown, final mint stop, governance revocation, contract disablement, or final token end. PR #512 adds no Evidence identity or Relation, alters no Market Access record, route family, material UI, or legacy redirect, and must exit to REVIEW GATE after production verification.
+
 ## 11. YLDS scope boundary
 
 YLDS is deferred and is not authorized for canonical implementation.
@@ -388,7 +393,7 @@ Scheduled monitoring and candidate auditing remain artifact-only and do not auth
 
 ## 19. Review gate
 
-PR #511 is the active authority item. Before PR #512 may merge, review:
+PR #512 is the current implementation under review. Before merge and production acceptance, review:
 
 ```text
 exact target set: sog_st_bac, sog_st_dsd
