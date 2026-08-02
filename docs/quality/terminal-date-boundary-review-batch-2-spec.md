@@ -1,6 +1,6 @@
 # Terminal Date Boundary Review — Batch 2
 
-Status: authorized bounded private review  
+Status: reviewed bounded implementation — no canonical date change  
 Authority PR: #511  
 Implementation PR: #512  
 Public output: false
@@ -51,6 +51,23 @@ Every target must receive a reviewed range, reason code, review date, reviewed p
 PR #511 changes authority only. PR #512 must preserve 117 assets, 108 organizations, 129 relationships, 192 events, 579 Evidence identities, 579 Evidence Relations, 184 deployments, 8 Market Access records, 417 detail routes, 417 metadata-checked routes, and archive partition 457/122 unless a separate reviewed Evidence change is authorized.
 
 No asset, organization, relationship, deployment, Market Access, route family, material UI, ranking, score, recommendation, or legacy redirect change is allowed.
+
+## Reviewed implementation result
+
+PR #512 reviewed both fixed targets using first-party project publications and repositories.
+
+```text
+exact terminal days resolved: 0
+reviewed null preserved: 2
+new Evidence identities: 0
+new Evidence Relations: 0
+canonical and public count changes: 0
+legacy redirect changes: 0
+```
+
+BAC V2 launch, migration work, and the 2021-06-01 roadmap update establish continuation rather than final cessation. DSD V2 execution and Sushiswap migration establish continued protocol operation rather than shutdown. Neither target has day-level primary evidence of an official final end.
+
+GYEN remained excluded and unchanged because its initial redemption period is open through 2026-11-11.
 
 ## Exit
 

@@ -1,7 +1,7 @@
 # Stable or Gone Roadmap
 
 Updated: 2026-08-02  
-Status: PR #511 Terminal Date Boundary Review — Batch 2 authorized; PR #512 reserved
+Status: PR #512 Terminal Date Boundary Review — Batch 2 under review; exit boundary REVIEW GATE
 
 ## Current reviewed position
 
@@ -20,11 +20,11 @@ Detail routes: 417
 Metadata-checked detail routes: 417
 Official public origin: https://www.stableorgone.com
 Official-domain migration production checkpoint: bd0e63ac36b1824bf705e8c80d1fb0a1cd79d221
-Current production checkpoint: 8344504f41df8debd2da90b1b60a61da6fba9a58
+Current production checkpoint: d33eda34830905e0fc7301dd55e1efd167f47efa
 Current production canonical hash: sha256:083860b341f6deebc1109b6b5b044dee584ba5e487e2e9b1722213772256b5bb
 ```
 
-Current `main` and production equality is established dynamically by the deployment workflow and Issue #479. PR #510 production converged with exact count, route, metadata, provenance, archive-partition, and canonical-hash parity.
+Current `main` and production equality is established dynamically by the deployment workflow and Issue #479. PR #511 production converged with exact count, route, metadata, provenance, archive-partition, and canonical-hash parity.
 
 ## Completed acceptance points
 
@@ -48,11 +48,29 @@ PR #507 post-PR #506 authority synchronization: complete and production-verified
 PR #508 Terminal Date Boundary Review — Batch 1 authorization: complete
 PR #509 Terminal Date Boundary Review — Batch 1: complete and production-verified
 PR #510 post-PR #509 authority synchronization: complete and production-verified
-PR #511 Terminal Date Boundary Review — Batch 2 authorization: active
-PR #512 Terminal Date Boundary Review — Batch 2: reserved implementation
+PR #511 Terminal Date Boundary Review — Batch 2 authorization: complete and production-verified
+PR #512 Terminal Date Boundary Review — Batch 2: implementation under review
 ```
 
 PR #498 remains the current canonical-asset addition checkpoint. PR #500 is the current canonical maintenance and statistics-history checkpoint. PR #492 remains the Statistics and responsive-layout acceptance point. PR #493 remains the official-domain migration acceptance point.
+
+## PR #512 reviewed item
+
+```text
+Terminal Date Boundary Review — Batch 2
+Authority PR: #511
+Implementation PR: #512
+Targets reviewed: BAC, DSD
+Exact terminal days resolved: 0
+Reviewed null preserved: 2
+Deferred and unchanged: GYEN
+```
+
+BAC official V2 launch, migration, and roadmap sources establish continued protocol work but no official shutdown, final mint stop, governance disablement, contract disablement, or final token end. DSD official DIP-10, V2, and Sushiswap migration sources establish continued operation but no formal shutdown, final mint stop, governance revocation, contract disablement, or final token end.
+
+No canonical stable-asset, organization, relationship, event, Evidence, deployment, Market Access, route, UI, or legacy redirect changed.
+
+After merge and production verification, return to REVIEW GATE.
 
 ## Authorized current item
 
@@ -269,9 +287,7 @@ Result: complete and production-verified
 ## Current boundary
 
 ```text
-PR #511 authority active
-PR #512 reserved implementation
-then REVIEW GATE
+PR #512 implementation under review, then REVIEW GATE
 ```
 
 No later archive batch, launch-date batch, dossier batch, record-growth batch, Figure YLDS amendment, Market Access change, public route family, or material public-surface program is authorized automatically.
