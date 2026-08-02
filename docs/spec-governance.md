@@ -1,7 +1,7 @@
 # Stable or Gone Specification Governance
 
 Status: canonical governance specification  
-Updated: 2026-07-31
+Updated: 2026-08-02
 
 ## 1. Purpose
 
@@ -90,20 +90,23 @@ PR #496 Record Growth Batch 4 candidate audit
 Current item:
 
 ```text
-PR #509 Terminal Date Boundary Review — Batch 1 implementation under review
+REVIEW GATE — PR #509 complete and production-verified
 ```
 
 Reviewed decision:
 
 ```text
-PR #509 Terminal Date Boundary Review — Batch 1
+PR #509 Terminal Date Boundary Review — Batch 1 complete and production-verified
+production commit: 96ae5edd42e9a9e8a652bb27acc2d6a6eb02dfd6
+production canonical hash: sha256:083860b341f6deebc1109b6b5b044dee584ba5e487e2e9b1722213772256b5bb
+convergence attempt: 1
 exact targets: sog_st_fei, sog_st_nearusn, sog_st_esd
 exact terminal days resolved: 0
 reviewed null preserved: 3
 new Evidence identities or Relations: 0
 canonical and public count changes: 0
 legacy redirect changes: 0
-next boundary after PR #509: REVIEW GATE
+current boundary: REVIEW GATE
 ```
 
 No later work is pre-authorized.
@@ -245,7 +248,7 @@ PR #508 closes the current review gate only for a three-target terminal-date evi
 
 The target set is fixed to `sog_st_fei`, `sog_st_nearusn`, and `sog_st_esd`. A canonical terminal day requires exact day-level primary evidence of a final effective end for the same canonical identity. Governance approval, wind-down start, permanent mint stop, migration availability, depeg, market inactivity, repository inactivity, and retrospective publication dates are not terminal dates by default.
 
-PR #509 records a reviewed-null-preserved outcome for all three fixed targets. The reviewed primary sources establish governance, wind-down, programme, and migration boundaries but not final effective termination of the same canonical identity. PR #509 adds no asset or Evidence identity, alters no Market Access record, route family, material UI, or legacy redirect, and exits to REVIEW GATE. No work beyond PR #509 is pre-authorized.
+PR #509 recorded a reviewed-null-preserved outcome for all three fixed targets. The reviewed primary sources establish governance, wind-down, programme, and migration boundaries but not final effective termination of the same canonical identity. PR #509 added no asset or Evidence identity, altered no Market Access record, route family, material UI, or legacy redirect. Production commit `96ae5edd42e9a9e8a652bb27acc2d6a6eb02dfd6` verified canonical hash `sha256:083860b341f6deebc1109b6b5b044dee584ba5e487e2e9b1722213772256b5bb`, the 117/108/129/192/579/579/184/8 canonical counts, 417 detail routes, 417 metadata-checked routes, and archive partition 457/122. The repository is at REVIEW GATE. No work beyond this checkpoint is pre-authorized.
 
 ## 11. YLDS scope boundary
 
@@ -369,16 +372,10 @@ Scheduled monitoring and candidate auditing remain artifact-only and do not auth
 
 ## 19. Review gate
 
-PR #509 is the current implementation under review. Before merge and production acceptance, review:
+PR #509 is complete and production-verified. The repository is at:
 
 ```text
-all three terminal-date dispositions
-exact-day primary evidence quality
-final-effective-end semantics
-null-date preservation
-Evidence additions, if any
-canonical counts and route parity
-production parity
+REVIEW GATE
 ```
 
-Only a later separate reviewed decision may authorize another work item.
+No later terminal-date batch, archive batch, launch-date batch, record-growth batch, Figure YLDS amendment, Market Access change, public route family, or material UI work is authorized automatically. Only a later separate reviewed decision may authorize another work item.
