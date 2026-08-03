@@ -33,7 +33,7 @@
     "id": "sog_st_bison_eub",
     "classifications": [
       {
-        "classification": "fiat_backed_electronic_money_token",
+        "classification": "e_money_token",
         "jurisdiction": "Portugal / European Union",
         "effective_from": "2026-05-06",
         "effective_to": null,
@@ -67,7 +67,7 @@
     "id": "sog_st_bison_usb",
     "classifications": [
       {
-        "classification": "fiat_backed_electronic_money_token",
+        "classification": "e_money_token",
         "jurisdiction": "Portugal / European Union",
         "effective_from": "2026-05-06",
         "effective_to": null,
