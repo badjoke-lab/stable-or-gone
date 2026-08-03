@@ -1,0 +1,573 @@
+{
+  "schema_version": "1.0",
+  "status": "reviewed_internal_complete",
+  "recorded_at": "2026-08-03",
+  "authority_pr": 514,
+  "implementation_pr": 515,
+  "canonical_baseline": {
+    "stable_assets": 117,
+    "organizations": 108,
+    "relationships": 129,
+    "events": 192,
+    "evidence": 579,
+    "evidence_relations": 579,
+    "deployments": 184,
+    "market_access_records": 8,
+    "detail_routes": 417
+  },
+  "canonical_boundary": {
+    "included_in_public_counts": false,
+    "canonical_changes_allowed": false,
+    "public_changes_allowed": false,
+    "automatic_promotion": false,
+    "automatic_canonical_pr_creation": false,
+    "replacement_candidate": false,
+    "ranking": false,
+    "score": false,
+    "recommendation": false
+  },
+  "candidates": [
+    {
+      "candidate_id": "sog_cand_pr515_sofiusd",
+      "name": "SoFiUSD",
+      "reviewed_symbol": "SOFID",
+      "proposed_slug": "sofiusd",
+      "issuer_or_operator": "SoFi Bank, National Association",
+      "reference_asset": "USD",
+      "reviewed_disposition": "insufficient_current_evidence",
+      "scope_note": "SoFi launched the product to members on 2026-05-27 and its current terms identify the on-chain token as SOFID, also called SoFiUSD. Official sources support the issuer, public-blockchain existence, Ethereum and Solana availability, 1:1 design, reserve framework, and approved-customer issuance and redemption. The reviewed public source chain does not expose the exact canonical Ethereum contract or Solana mint identities or a current indexed reserve-attestation body, so a complete deployment and assurance record is not yet supported.",
+      "identity_review": {
+        "decision": "distinct_launched_identity_not_in_registry",
+        "name_resolution": "SoFiUSD is the product name; SOFID is the official token ticker and legal-terms identifier.",
+        "existing_canonical_id": null,
+        "symbol_collision": false
+      },
+      "launch_review": {
+        "state": "launched",
+        "verified_date": "2026-05-27",
+        "public_use": "SoFi members may buy, sell, hold, and convert; official materials state Ethereum and Solana support."
+      },
+      "mechanism_review": {
+        "peg": "1 USD",
+        "issuer": "SoFi Bank, N.A.",
+        "reserve": "High-quality liquid reserve assets intended to equal or exceed outstanding supply; current public product copy describes reserves primarily as cash.",
+        "mint_redeem": "Direct issuance and redemption are limited to approved SoFi customers under separate agreements; ordinary on-chain holders do not automatically receive a direct issuer redemption right.",
+        "yield": "No holder interest or yield by virtue of holding SOFID."
+      },
+      "deployment_review": {
+        "networks_supported_by_official_sources": ["Ethereum", "Solana"],
+        "exact_identifiers_verified": [],
+        "decision": "network_family_supported_exact_token_identifiers_unresolved"
+      },
+      "source_leads": [
+        {
+          "source_id": "sog_src_pr515_sofi_launch",
+          "publisher": "SoFi Technologies",
+          "url": "https://investors.sofi.com/news/news-details/2026/SoFiUSD-Becomes-the-First-Stablecoin-Issued-by-a-US-National-Bank-to-Launch-on-a-Banking-Platform/default.aspx",
+          "source_type": "official_launch_announcement",
+          "primary": true,
+          "reviewed_at": "2026-08-03",
+          "claim_scopes": ["launch_date", "member_availability", "issuer", "redemption_claim", "ethereum", "solana", "SOFID_identifier"]
+        },
+        {
+          "source_id": "sog_src_pr515_sofi_product",
+          "publisher": "SoFi",
+          "url": "https://www.sofi.com/crypto/sofiusd/",
+          "source_type": "official_product_page",
+          "primary": true,
+          "reviewed_at": "2026-08-03",
+          "claim_scopes": ["SOFID_ticker", "SoFiUSD_alias", "issuer", "cash_reserve_description", "risk_disclosure"]
+        },
+        {
+          "source_id": "sog_src_pr515_sofi_terms",
+          "publisher": "SoFi Bank, N.A.",
+          "url": "https://www.sofi.com/crypto/legal/sofid-terms/",
+          "source_type": "official_terms",
+          "primary": true,
+          "reviewed_at": "2026-08-03",
+          "claim_scopes": ["legal_issuer", "holder_character", "reserve_framework", "approved_customer_issuance", "approved_customer_redemption", "administrative_controls", "eligibility"]
+        },
+        {
+          "source_id": "sog_src_pr515_sofi_risk",
+          "publisher": "SoFi Bank, N.A.",
+          "url": "https://www.sofi.com/crypto/legal/sofid-risk-disclosure/",
+          "source_type": "official_risk_disclosure",
+          "primary": true,
+          "reviewed_at": "2026-08-03",
+          "claim_scopes": ["risk_profile", "non_deposit_status", "blockchain_and_redemption_risks"]
+        }
+      ],
+      "blocking_unknowns": [
+        "exact canonical Ethereum contract address",
+        "exact canonical Solana mint address",
+        "current reserve-attestation index and report bodies",
+        "current reserve custodian and asset allocation by category",
+        "fees and minimums under approved-customer issuance and redemption agreements"
+      ],
+      "complete_record_feasibility": {
+        "complete_record_possible_now": false,
+        "reason": "A launched identity and legal framework are supported, but exact deployment identity and current assurance evidence remain incomplete."
+      }
+    },
+    {
+      "candidate_id": "sog_cand_pr515_usat",
+      "name": "USA₮",
+      "reviewed_symbol": "USA₮",
+      "proposed_slug": "usat",
+      "issuer_or_operator": "Anchorage Digital Bank, National Association, in collaboration with Tether",
+      "reference_asset": "USD",
+      "reviewed_disposition": "insufficient_current_evidence",
+      "scope_note": "Tether announced USA₮ as launched on 2026-01-27 and Anchorage currently publishes monthly reserve attestations through June 2026. The issuer and reserve-report series are supported, but the reviewed official public source chain does not establish the complete current network set, exact canonical contract identities, holder terms, or direct mint and redemption eligibility required for a complete canonical record.",
+      "identity_review": {
+        "decision": "distinct_launched_identity_not_in_registry",
+        "existing_canonical_id": null,
+        "symbol_collision": false,
+        "lineage_note": "USA₮ is a distinct Anchorage-issued product and is not the same asset as Tether USD₮."
+      },
+      "launch_review": {
+        "state": "launched",
+        "verified_date": "2026-01-27",
+        "public_use": "Official issuer and collaborator materials describe a launched U.S.-regulated dollar-backed stablecoin."
+      },
+      "mechanism_review": {
+        "peg": "1 USD",
+        "issuer": "Anchorage Digital Bank, N.A.",
+        "reserve": "Monthly reserve holdings disclosed through independent Big Four attestation reports.",
+        "mint_redeem": "Anchorage states stablecoins it issues are redeemable 1:1 for U.S. dollars on its platform; product-specific eligibility and holder terms were not located in the reviewed source chain."
+      },
+      "deployment_review": {
+        "networks_supported_by_official_sources": [],
+        "exact_identifiers_verified": [],
+        "decision": "exact_network_and_token_identities_unresolved"
+      },
+      "source_leads": [
+        {
+          "source_id": "sog_src_pr515_usat_tether_launch",
+          "publisher": "Tether",
+          "url": "https://tether.io/news/tether-announces-the-launch-of-usat-the-federally-regulated-dollar-backed-stablecoin-made-in-america/",
+          "source_type": "official_launch_announcement",
+          "primary": true,
+          "reviewed_at": "2026-08-03",
+          "claim_scopes": ["launch_date", "product_identity", "issuer_relationship", "usd_backing_claim"]
+        },
+        {
+          "source_id": "sog_src_pr515_usat_attestations",
+          "publisher": "Anchorage Digital Bank",
+          "url": "https://www.anchorage.com/platform/usat-reserve-attestations",
+          "source_type": "official_transparency_page",
+          "primary": true,
+          "reviewed_at": "2026-08-03",
+          "claim_scopes": ["legal_issuer", "collaboration", "monthly_attestation_series", "assurance_provider_class"]
+        },
+        {
+          "source_id": "sog_src_pr515_anchorage_reserve_policy",
+          "publisher": "Anchorage Digital Bank",
+          "url": "https://www.anchorage.com/platform/transparency-stablecoin-reserves",
+          "source_type": "official_reserve_portal",
+          "primary": true,
+          "reviewed_at": "2026-08-03",
+          "claim_scopes": ["issuer_inventory", "one_to_one_platform_redemption", "monthly_reporting_policy"]
+        }
+      ],
+      "blocking_unknowns": [
+        "complete current native network set",
+        "exact canonical contract or token identifiers",
+        "product-specific holder terms and legal claim",
+        "direct mint and redemption eligibility, fees, and minimums",
+        "current reserve composition and custodian detail beyond the attestation index"
+      ],
+      "complete_record_feasibility": {
+        "complete_record_possible_now": false,
+        "reason": "Launch and assurance are supported, but deployment identity and product-specific holder and access terms remain incomplete."
+      }
+    },
+    {
+      "candidate_id": "sog_cand_pr515_xreur",
+      "name": "XrymaCoin",
+      "reviewed_symbol": "XREUR",
+      "proposed_slug": "xrymacoin",
+      "issuer_or_operator": "Xryma Plc",
+      "reference_asset": "EUR",
+      "reviewed_disposition": "prelaunch_or_noncanonical",
+      "scope_note": "Xryma published and notified a MiCAR EMT white paper in June 2026 and announced the upcoming product in July. The reviewed official checkpoint remains an upcoming launch with circulation scheduled for 2026-09-03, so no launched canonical asset is established as of 2026-08-03.",
+      "identity_review": {
+        "decision": "distinct_announced_identity_not_launched",
+        "existing_canonical_id": null,
+        "symbol_collision": false
+      },
+      "launch_review": {
+        "state": "upcoming",
+        "planned_date": "2026-09-03",
+        "public_use": null
+      },
+      "mechanism_review": {
+        "peg": "1 EUR intended",
+        "regulatory_state": "MiCAR Article 51 white paper notified to the Central Bank of Cyprus; custody and transfer features separately notified.",
+        "canonical_current_state": "prelaunch"
+      },
+      "source_leads": [
+        {
+          "source_id": "sog_src_pr515_xryma_official",
+          "publisher": "Xryma Plc",
+          "url": "https://www.xryma.com/",
+          "source_type": "official_corporate_site",
+          "primary": true,
+          "reviewed_at": "2026-08-03",
+          "claim_scopes": ["issuer_identity", "whitepaper_notification", "regulatory_notification_dates"]
+        },
+        {
+          "source_id": "sog_src_pr515_xryma_announcements",
+          "publisher": "Xryma Plc",
+          "url": "https://www.xryma.com/investors",
+          "source_type": "official_announcement_index",
+          "primary": true,
+          "reviewed_at": "2026-08-03",
+          "claim_scopes": ["upcoming_launch_state", "announcement_history", "whitepaper_publication"]
+        },
+        {
+          "source_id": "sog_src_pr515_xreur_product",
+          "publisher": "Xryma Plc",
+          "url": "https://www.xrymacoin.money/",
+          "source_type": "official_product_site",
+          "primary": true,
+          "reviewed_at": "2026-08-03",
+          "claim_scopes": ["planned_product_identity", "planned_euro_reference", "planned_terms"]
+        }
+      ],
+      "blocking_unknowns": [
+        "completed first issuance and circulation",
+        "exact canonical chain and token identifiers",
+        "current reserve custody and assurance series",
+        "production mint and redemption access",
+        "post-launch holder terms"
+      ],
+      "complete_record_feasibility": {
+        "complete_record_possible_now": false,
+        "reason": "The reviewed date precedes the announced circulation date."
+      }
+    },
+    {
+      "candidate_id": "sog_cand_pr515_bison_eub",
+      "name": "Bison Bank Electronic Money Token — Euro",
+      "reviewed_symbol": "EUB",
+      "proposed_slug": "bison-bank-eub",
+      "issuer_or_operator": "Bison Bank, S.A.",
+      "reference_asset": "EUR",
+      "reviewed_disposition": "ready_for_full_record_review",
+      "scope_note": "Bison Bank officially launched EUB on 2026-05-06 as one of two distinct EMTs. Current primary sources support the issuer, EUR reference, 1:1 fiat backing and par redemption, institutional allowlist boundary, direct mint and redeem workflow, Solana Token-2022 deployment family, and MiCA legal context. Exact Solana mint identity and report-specific reserve evidence must be freshly resolved or retained as explicit unknowns in any implementation.",
+      "identity_review": {
+        "decision": "distinct_launched_identity_not_in_registry",
+        "existing_canonical_id": null,
+        "symbol_collision": false,
+        "paired_lineage": "Sibling product of USB under the Bison Bank Electronic Money Token program; distinct reference asset and token identity."
+      },
+      "launch_review": {
+        "state": "launched",
+        "verified_date": "2026-05-06",
+        "public_use": "Restricted to pre-approved institutional-partner wallets and Bison Bank account holders."
+      },
+      "mechanism_review": {
+        "peg": "1 EUR",
+        "issuer": "Bison Bank, S.A.",
+        "reserve": "Fully backed by fiat reserves; Bison Bank states it is audited regularly by Deloitte and maintains liquidity for redemption obligations.",
+        "mint_redeem": "Institutional partners request mint and redeem through Bison Mobile; holders have a right to redemption at par subject to KYC and wallet screening.",
+        "access": "Allowlisted Solana-compatible wallets only."
+      },
+      "deployment_review": {
+        "networks_supported_by_official_sources": ["Solana"],
+        "token_standard": "Solana Token-2022 Program",
+        "exact_identifiers_verified": [],
+        "decision": "deployment_family_supported_exact_mint_requires_fresh_implementation_check"
+      },
+      "source_leads": [
+        {
+          "source_id": "sog_src_pr515_bison_launch",
+          "publisher": "Bison Bank",
+          "url": "https://bisonbank.com/bison-electronic-money-token-the-first-portuguese-stablecoin-is-launched-today/",
+          "source_type": "official_launch_announcement",
+          "primary": true,
+          "reviewed_at": "2026-08-03",
+          "claim_scopes": ["launch_date", "two_distinct_assets", "issuer", "one_to_one_backing", "institutional_scope"]
+        },
+        {
+          "source_id": "sog_src_pr515_bison_eub_product",
+          "publisher": "Bison Bank",
+          "url": "https://bisonbank.com/eub/",
+          "source_type": "official_product_page",
+          "primary": true,
+          "reviewed_at": "2026-08-03",
+          "claim_scopes": ["product_identity", "issuer", "EUR_reference", "Solana", "mint", "redemption", "allowlist", "reserve_and_audit_claims"]
+        },
+        {
+          "source_id": "sog_src_pr515_bison_eub_whitepaper",
+          "publisher": "Bison Bank",
+          "url": "https://bisonbank.com/wp-content/uploads/2026/04/Bison-Bank-EUB-White-Paper_20260312-1.pdf",
+          "source_type": "official_micar_whitepaper",
+          "primary": true,
+          "reviewed_at": "2026-08-03",
+          "claim_scopes": ["legal_profile", "Solana_Token_2022", "issuance", "redemption", "access_controls", "technology_risks", "audit_context"]
+        }
+      ],
+      "blocking_unknowns": [
+        "exact canonical Solana mint address",
+        "first verified on-chain mint transaction and circulation amount",
+        "current reserve allocation and custodian detail",
+        "specific annual audit report section covering EUB reserves",
+        "current issuance and redemption fee and minimum schedule"
+      ],
+      "complete_record_feasibility": {
+        "complete_record_possible_now": true,
+        "reason": "Current primary sources support a distinct launched identity, issuer, legal context, backing, redemption, access model, and deployment family. Remaining gaps can be checked at implementation entry and retained explicitly when unsupported."
+      }
+    },
+    {
+      "candidate_id": "sog_cand_pr515_bison_usb",
+      "name": "Bison Bank Electronic Money Token — US Dollar",
+      "reviewed_symbol": "USB",
+      "proposed_slug": "bison-bank-usb",
+      "issuer_or_operator": "Bison Bank, S.A.",
+      "reference_asset": "USD",
+      "reviewed_disposition": "ready_for_full_record_review",
+      "scope_note": "Bison Bank officially launched USB on 2026-05-06 as one of two distinct EMTs. Current primary sources support the issuer, USD reference, 1:1 fiat backing and par redemption, institutional allowlist boundary, direct mint and redeem workflow, Solana Token-2022 deployment family, and MiCA legal context. Exact Solana mint identity and report-specific reserve evidence must be freshly resolved or retained as explicit unknowns in any implementation.",
+      "identity_review": {
+        "decision": "distinct_launched_identity_not_in_registry",
+        "existing_canonical_id": null,
+        "symbol_collision": false,
+        "paired_lineage": "Sibling product of EUB under the Bison Bank Electronic Money Token program; distinct reference asset and token identity."
+      },
+      "launch_review": {
+        "state": "launched",
+        "verified_date": "2026-05-06",
+        "public_use": "Restricted to pre-approved institutional-partner wallets and Bison Bank account holders."
+      },
+      "mechanism_review": {
+        "peg": "1 USD",
+        "issuer": "Bison Bank, S.A.",
+        "reserve": "Fully backed by fiat reserves; Bison Bank states it is audited regularly by Deloitte and maintains liquidity for redemption obligations.",
+        "mint_redeem": "Institutional partners request mint and redeem through Bison Mobile; holders have a right to redemption at par subject to KYC and wallet screening.",
+        "access": "Allowlisted Solana-compatible wallets only."
+      },
+      "deployment_review": {
+        "networks_supported_by_official_sources": ["Solana"],
+        "token_standard": "Solana Token-2022 Program",
+        "exact_identifiers_verified": [],
+        "decision": "deployment_family_supported_exact_mint_requires_fresh_implementation_check"
+      },
+      "source_leads": [
+        {
+          "source_id": "sog_src_pr515_bison_launch",
+          "publisher": "Bison Bank",
+          "url": "https://bisonbank.com/bison-electronic-money-token-the-first-portuguese-stablecoin-is-launched-today/",
+          "source_type": "official_launch_announcement",
+          "primary": true,
+          "reviewed_at": "2026-08-03",
+          "claim_scopes": ["launch_date", "two_distinct_assets", "issuer", "one_to_one_backing", "institutional_scope"]
+        },
+        {
+          "source_id": "sog_src_pr515_bison_usb_product",
+          "publisher": "Bison Bank",
+          "url": "https://bisonbank.com/usb/",
+          "source_type": "official_product_page",
+          "primary": true,
+          "reviewed_at": "2026-08-03",
+          "claim_scopes": ["product_identity", "issuer", "USD_reference", "Solana", "mint", "redemption", "allowlist", "reserve_and_audit_claims"]
+        },
+        {
+          "source_id": "sog_src_pr515_bison_usb_whitepaper",
+          "publisher": "Bison Bank",
+          "url": "https://bisonbank.com/wp-content/uploads/2026/04/Bison-Bank-USB-White-Paper_20260312-1.pdf",
+          "source_type": "official_micar_whitepaper",
+          "primary": true,
+          "reviewed_at": "2026-08-03",
+          "claim_scopes": ["legal_profile", "Solana_Token_2022", "issuance", "redemption", "access_controls", "technology_risks", "audit_context"]
+        }
+      ],
+      "blocking_unknowns": [
+        "exact canonical Solana mint address",
+        "first verified on-chain mint transaction and circulation amount",
+        "current reserve allocation and custodian detail",
+        "specific annual audit report section covering USB reserves",
+        "current issuance and redemption fee and minimum schedule"
+      ],
+      "complete_record_feasibility": {
+        "complete_record_possible_now": true,
+        "reason": "Current primary sources support a distinct launched identity, issuer, legal context, backing, redemption, access model, and deployment family. Remaining gaps can be checked at implementation entry and retained explicitly when unsupported."
+      }
+    },
+    {
+      "candidate_id": "sog_cand_pr515_jpysc",
+      "name": "JPYSC",
+      "reviewed_symbol": "JPYSC",
+      "proposed_slug": "jpysc",
+      "issuer_or_operator": "SBI Shinsei Trust & Banking Co., Ltd.",
+      "reference_asset": "JPY",
+      "reviewed_disposition": "insufficient_current_evidence",
+      "scope_note": "The participating companies announced that JPYSC was issued on 2026-06-24 and began account-limited advance provision within SBI VC Trade. The same announcement states that public-chain circulation will follow only after legal and tax practice is resolved. The limited current issuance is real, but the reviewed source chain does not support a public-chain token identity, complete holder and redemption terms, or a production deployment record.",
+      "identity_review": {
+        "decision": "distinct_limited_issued_identity_not_in_registry",
+        "existing_canonical_id": null,
+        "symbol_collision": false
+      },
+      "launch_review": {
+        "state": "limited_account_only_launch",
+        "verified_date": "2026-06-24",
+        "public_use": "Advance provision limited to SBI VC Trade accounts; public-chain circulation remains future."
+      },
+      "mechanism_review": {
+        "peg": "1 JPY intended",
+        "issuer": "SBI Shinsei Trust & Banking",
+        "structure": "Trust-based category-three electronic payment instrument under Japan's framework.",
+        "distribution": "SBI VC Trade account-limited at the reviewed checkpoint."
+      },
+      "source_leads": [
+        {
+          "source_id": "sog_src_pr515_jpysc_brand",
+          "publisher": "Startale Group",
+          "url": "https://startale.com/en/blog/jpysc",
+          "source_type": "official_prelaunch_announcement",
+          "primary": true,
+          "reviewed_at": "2026-08-03",
+          "claim_scopes": ["brand", "planned_issuer", "planned_regulatory_structure", "planned_launch_window"]
+        },
+        {
+          "source_id": "sog_src_pr515_jpysc_launch",
+          "publisher": "Startale Group and SBI group companies",
+          "url": "https://startale.com/ja/blog/jpysc-launch",
+          "source_type": "official_limited_launch_announcement",
+          "primary": true,
+          "reviewed_at": "2026-08-03",
+          "claim_scopes": ["issuance_date", "legal_issuer", "account_limited_distribution", "future_public_chain_transition"]
+        }
+      ],
+      "blocking_unknowns": [
+        "public-chain launch date",
+        "canonical blockchain and token identifiers",
+        "complete holder claim and redemption terms",
+        "trust asset custody and assurance publications",
+        "availability outside SBI VC Trade's account ledger"
+      ],
+      "complete_record_feasibility": {
+        "complete_record_possible_now": false,
+        "reason": "A limited account-only issuance is supported, but the intended public-chain stablecoin identity and complete operational terms are not yet available."
+      }
+    },
+    {
+      "candidate_id": "sog_cand_pr515_swiss_chf_sandbox",
+      "name": "Swiss joint CHF stablecoin sandbox token",
+      "reviewed_symbol": null,
+      "proposed_slug": null,
+      "issuer_or_operator": "Swiss Stablecoin AG with participating Swiss banks",
+      "reference_asset": "CHF",
+      "reviewed_disposition": "prelaunch_or_noncanonical",
+      "scope_note": "UBS and the participating institutions describe a controlled live sandbox intended to test possible CHF-stablecoin use cases during 2026. The announcement explicitly states that Switzerland does not yet have a regulated CHF stablecoin with broad application and frames the sandbox as preparation for a possible later market decision. No final token name, symbol, legal issuer, public distribution, or canonical deployment identity is established.",
+      "identity_review": {
+        "decision": "sandbox_program_without_final_asset_identity",
+        "existing_canonical_id": null,
+        "symbol_collision": false
+      },
+      "launch_review": {
+        "state": "controlled_sandbox",
+        "verified_date": "2026-04-08",
+        "public_use": null
+      },
+      "source_leads": [
+        {
+          "source_id": "sog_src_pr515_swiss_chf_sandbox_ubs",
+          "publisher": "UBS and participating institutions",
+          "url": "https://www.ubs.com/global/de/media/display-page-ndp/en-20260408-stablecoin.html",
+          "source_type": "official_joint_announcement",
+          "primary": true,
+          "reviewed_at": "2026-08-03",
+          "claim_scopes": ["sandbox_state", "participants", "controlled_live_environment", "future_market_decision", "technical_infrastructure_provider"]
+        }
+      ],
+      "blocking_unknowns": [
+        "final canonical product name and symbol",
+        "legal issuer and holder claim",
+        "market launch decision and date",
+        "canonical chain and token identifiers",
+        "reserve, mint, redemption, and access terms"
+      ],
+      "complete_record_feasibility": {
+        "complete_record_possible_now": false,
+        "reason": "The source describes a testing program rather than a finalized market stablecoin identity."
+      }
+    },
+    {
+      "candidate_id": "sog_cand_pr515_hazel_network_token",
+      "name": "Hazel Network unified token",
+      "reviewed_symbol": null,
+      "proposed_slug": null,
+      "issuer_or_operator": "Vantage Bank, Custodia Bank, and future consortium member banks",
+      "reference_asset": "USD",
+      "reviewed_disposition": "prelaunch_or_noncanonical",
+      "scope_note": "Hazel Network has a live Ethereum mainnet reference implementation and testing program, but its announced design is infrastructure for a dual-character token that changes between a consortium bank deposit and an external stablecoin. Full availability is scheduled for Q4 2026, participating issuers are not yet fully identified, and no final independently named canonical stablecoin identity, symbol, or production contract is established.",
+      "identity_review": {
+        "decision": "infrastructure_and_testing_program_without_final_asset_identity",
+        "existing_canonical_id": null,
+        "symbol_collision": false
+      },
+      "launch_review": {
+        "state": "reference_implementation_and_testing",
+        "verified_date": "2026-03",
+        "planned_full_availability": "2026-Q4",
+        "public_use": null
+      },
+      "mechanism_review": {
+        "inside_consortium": "Tokenized bank deposit with the member bank as obligor.",
+        "outside_consortium": "Planned stablecoin character backed at least 1:1 by liquid assets.",
+        "transition": "The same token is designed to change legal and economic character at the consortium boundary without a separate conversion transaction."
+      },
+      "source_leads": [
+        {
+          "source_id": "sog_src_pr515_hazel_announcement",
+          "publisher": "Vantage Bank and Custodia",
+          "url": "https://www.prnewswire.com/news-releases/vantage-bank-and-custodia-release-white-paper-unveiling-hazel-network-302804851.html",
+          "source_type": "official_syndicated_announcement",
+          "primary": true,
+          "reviewed_at": "2026-08-03",
+          "claim_scopes": ["architecture", "reference_implementation", "testing_phase", "planned_availability", "reserve_control_design"]
+        },
+        {
+          "source_id": "sog_src_pr515_hazel_vantage_update",
+          "publisher": "Vantage Bank",
+          "url": "https://www.vantage.bank/es/insights/hazel-network-cofounders-awarded-no-1-and-no-2-spots-on-american-bankers-2026-top-innovators",
+          "source_type": "official_project_update",
+          "primary": true,
+          "reviewed_at": "2026-08-03",
+          "claim_scopes": ["testing_state", "ethereum_reference_implementation", "dual_character_model"]
+        }
+      ],
+      "blocking_unknowns": [
+        "final canonical asset name and symbol",
+        "exact production contract identity",
+        "final stablecoin legal issuer or issuers",
+        "first external stablecoin issuance and circulation",
+        "final holder terms, reserve custody, mint, redemption, and consortium access"
+      ],
+      "complete_record_feasibility": {
+        "complete_record_possible_now": false,
+        "reason": "The current evidence supports infrastructure and testing, not a finalized independently identifiable production stablecoin."
+      }
+    }
+  ],
+  "reviewed_result": {
+    "ready_for_full_record_review": [
+      "sog_cand_pr515_bison_eub",
+      "sog_cand_pr515_bison_usb"
+    ],
+    "prelaunch_or_noncanonical": [
+      "sog_cand_pr515_xreur",
+      "sog_cand_pr515_swiss_chf_sandbox",
+      "sog_cand_pr515_hazel_network_token"
+    ],
+    "insufficient_current_evidence": [
+      "sog_cand_pr515_sofiusd",
+      "sog_cand_pr515_usat",
+      "sog_cand_pr515_jpysc"
+    ],
+    "duplicate_existing": [],
+    "out_of_scope": []
+  },
+  "next_boundary": "REVIEW_GATE"
+}

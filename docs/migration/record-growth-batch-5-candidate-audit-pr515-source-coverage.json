@@ -1,0 +1,67 @@
+{
+  "schema_version": "1.0",
+  "status": "reviewed_complete",
+  "recorded_at": "2026-08-03",
+  "authority_pr": 514,
+  "implementation_pr": 515,
+  "candidate_count": 8,
+  "primary_source_relation_count": 21,
+  "unique_primary_source_count": 20,
+  "candidate_coverage": [
+    {
+      "candidate_id": "sog_cand_pr515_sofiusd",
+      "primary_sources": 4,
+      "covered": ["identity", "issuer", "launch", "Ethereum_and_Solana_networks", "reserve_framework", "mint_and_redemption_model", "holder_terms", "risk"],
+      "uncovered": ["exact_contract_and_mint_identifiers", "current_attestation_bodies", "current_reserve_allocation"]
+    },
+    {
+      "candidate_id": "sog_cand_pr515_usat",
+      "primary_sources": 3,
+      "covered": ["identity", "issuer", "launch", "monthly_attestation_index", "general_one_to_one_redemption_policy"],
+      "uncovered": ["exact_network_and_token_identifiers", "product_specific_holder_terms", "product_specific_mint_and_redemption_access"]
+    },
+    {
+      "candidate_id": "sog_cand_pr515_xreur",
+      "primary_sources": 3,
+      "covered": ["identity", "issuer", "whitepaper_notification", "upcoming_launch_state"],
+      "uncovered": ["completed_launch", "circulation", "deployment_identity", "production_reserve_and_redemption"]
+    },
+    {
+      "candidate_id": "sog_cand_pr515_bison_eub",
+      "primary_sources": 3,
+      "covered": ["identity", "issuer", "launch", "EUR_reference", "MiCA_context", "Solana_Token_2022", "institutional_allowlist", "mint", "redemption", "backing", "audit_context"],
+      "uncovered": ["exact_Solana_mint", "first_onchain_mint", "token_specific_reserve_allocation"]
+    },
+    {
+      "candidate_id": "sog_cand_pr515_bison_usb",
+      "primary_sources": 3,
+      "covered": ["identity", "issuer", "launch", "USD_reference", "MiCA_context", "Solana_Token_2022", "institutional_allowlist", "mint", "redemption", "backing", "audit_context"],
+      "uncovered": ["exact_Solana_mint", "first_onchain_mint", "token_specific_reserve_allocation"]
+    },
+    {
+      "candidate_id": "sog_cand_pr515_jpysc",
+      "primary_sources": 2,
+      "covered": ["identity", "issuer", "trust_structure", "limited_issue_date", "account_limited_distribution", "future_public_chain_intent"],
+      "uncovered": ["public_chain_launch", "deployment_identity", "complete_holder_and_redemption_terms", "assurance_series"]
+    },
+    {
+      "candidate_id": "sog_cand_pr515_swiss_chf_sandbox",
+      "primary_sources": 1,
+      "covered": ["participants", "sandbox_state", "controlled_live_environment", "future_market_decision"],
+      "uncovered": ["final_asset_identity", "legal_issuer", "market_launch", "deployment", "reserve_and_redemption"]
+    },
+    {
+      "candidate_id": "sog_cand_pr515_hazel_network_token",
+      "primary_sources": 2,
+      "covered": ["architecture", "reference_implementation", "testing_state", "planned_Q4_availability", "dual_character_model"],
+      "uncovered": ["final_asset_identity", "production_contract", "final_issuer", "external_stablecoin_circulation", "holder_terms"]
+    }
+  ],
+  "result": {
+    "all_candidates_have_primary_sources": true,
+    "all_ready_candidates_have_identity_launch_mechanism_and_deployment_family_coverage": true,
+    "ready_candidate_count": 2,
+    "canonical_changes": 0,
+    "public_changes": 0
+  }
+}
