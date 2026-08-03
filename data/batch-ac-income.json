@@ -10,5 +10,29 @@
       "sog_src_mnee_terms_pr498"
     ],
     "notes": "MNEE terms state that the token is not designed to create returns for holders; reserve income is not recorded as a holder income right."
+  },
+  {
+    "id": "sog_st_bison_eub",
+    "availability": "none",
+    "source": "none",
+    "accrual": "none",
+    "rate": "none",
+    "related_asset_ids": [],
+    "evidence_ids": [
+      "sog_src_bison_eub_whitepaper_pr517"
+    ],
+    "notes": "The EUB whitepaper states that holders receive no interest or other remuneration merely by holding EUB. Income earned on assets managed by the issuer is not recorded as a holder income right."
+  },
+  {
+    "id": "sog_st_bison_usb",
+    "availability": "none",
+    "source": "none",
+    "accrual": "none",
+    "rate": "none",
+    "related_asset_ids": [],
+    "evidence_ids": [
+      "sog_src_bison_usb_whitepaper_pr517"
+    ],
+    "notes": "The USB whitepaper states that holders receive no interest or other remuneration merely by holding USB. Income earned on assets managed by the issuer is not recorded as a holder income right."
   }
 ]
