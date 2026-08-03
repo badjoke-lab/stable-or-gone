@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.0",
+  "work_item": "post_pr513_six_week_operating_cycle_pr514",
+  "status": "authority_transition_complete",
+  "recorded_at": "2026-08-03",
+  "authority_pr": 514,
+  "preceding_pr": 513,
+  "preceding_merge_commit": "fe716125a2e52d27bfe0ee515c873eb1d96942ad",
+  "preceding_result": {
+    "production_verified": true,
+    "canonical_hash": "sha256:083860b341f6deebc1109b6b5b044dee584ba5e487e2e9b1722213772256b5bb",
+    "convergence_attempt": 1,
+    "authority_before_pr514": "REVIEW_GATE"
+  },
+  "cycle": {
+    "starts_on": "2026-08-03",
+    "ends_on": "2026-09-13",
+    "ordered_lanes": [
+      "record_growth_batch_5_candidate_audit",
+      "reviewed_canonical_growth_decision",
+      "japan_market_access_pilot_3",
+      "evidence_archive_payload_verification_batch_2",
+      "tier_a_dossier_deepening_batch_4",
+      "cycle_review_and_next_authority"
+    ]
+  },
+  "immediately_authorized": {
+    "implementation_pr": 515,
+    "work_item": "record_growth_batch_5_candidate_audit",
+    "candidate_count": 8,
+    "maximum_ready_candidates": 2,
+    "canonical_changes_allowed": false,
+    "public_changes_allowed": false
+  },
+  "later_lanes_authorized_for_implementation": false,
+  "required_exit_after_pr515": "REVIEW_GATE",
+  "legacy_redirect_changes": 0
+}
