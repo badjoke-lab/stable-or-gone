@@ -15,5 +15,37 @@
     "archived_url": "https://web.archive.org/web/*/https://www.mnee.io/news/mnee-expands-transparency-with-monthly-third-party-reserve-attestations-audited-by-wolf-company-p-c",
     "confidence": "high",
     "notes": "The issuer announcement states that Wolf & Company performs monthly examinations using month-end and random intra-month snapshot dates and that reserves use U.S. Treasury bills with duration no longer than 90 days and U.S. cash held by a qualified custodian. The current transparency index lists May 2026, but the exact latest report-body figures, signed report-specific URL, snapshot dates, and report-specific archive were not independently preserved. The current custodian name and latest category allocation remain unknown."
+  },
+  {
+    "id": "sog_rr_bison_eub_whitepaper_framework_pr517",
+    "stablecoin_id": "sog_st_bison_eub",
+    "issuer_id": "sog_issuer_bison_bank",
+    "report_date": "2026-03-12",
+    "period_covered": "EUB MiCA whitepaper reserve, issuance, and redemption framework reviewed on 2026-08-03; not a token-specific reserve attestation",
+    "publisher": "Bison Bank, S.A.",
+    "report_type": "issuer_whitepaper_reserve_and_redemption_framework",
+    "asset_categories": [
+      "other"
+    ],
+    "url": "https://bisonbank.com/wp-content/uploads/2026/04/Bison-Bank-EUB-White-Paper_20260312-1.pdf",
+    "archived_url": "https://web.archive.org/web/*/https://bisonbank.com/wp-content/uploads/2026/04/Bison-Bank-EUB-White-Paper_20260312-1.pdf",
+    "confidence": "high",
+    "notes": "The whitepaper supports par issuance and redemption and describes a conservative high-quality and liquid management framework for fiat proceeds. It does not establish current token-specific asset categories, amounts, shares, custodian identity, liabilities, excess reserves, or a token-specific audit or attestation opinion. Bison Bank's issuer-level Deloitte audit statement is not treated as EUB reserve assurance."
+  },
+  {
+    "id": "sog_rr_bison_usb_whitepaper_framework_pr517",
+    "stablecoin_id": "sog_st_bison_usb",
+    "issuer_id": "sog_issuer_bison_bank",
+    "report_date": "2026-03-12",
+    "period_covered": "USB MiCA whitepaper reserve, issuance, and redemption framework reviewed on 2026-08-03; not a token-specific reserve attestation",
+    "publisher": "Bison Bank, S.A.",
+    "report_type": "issuer_whitepaper_reserve_and_redemption_framework",
+    "asset_categories": [
+      "other"
+    ],
+    "url": "https://bisonbank.com/wp-content/uploads/2026/04/Bison-Bank-USB-White-Paper_20260312-1.pdf",
+    "archived_url": "https://web.archive.org/web/*/https://bisonbank.com/wp-content/uploads/2026/04/Bison-Bank-USB-White-Paper_20260312-1.pdf",
+    "confidence": "high",
+    "notes": "The whitepaper supports par issuance and redemption and describes a conservative high-quality and liquid management framework for fiat proceeds. It does not establish current token-specific asset categories, amounts, shares, custodian identity, liabilities, excess reserves, or a token-specific audit or attestation opinion. Bison Bank's issuer-level Deloitte audit statement is not treated as USB reserve assurance."
   }
 ]
