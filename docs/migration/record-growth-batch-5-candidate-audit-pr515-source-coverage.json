@@ -5,7 +5,8 @@
   "authority_pr": 514,
   "implementation_pr": 515,
   "candidate_count": 8,
-  "primary_source_count": 19,
+  "primary_source_relation_count": 21,
+  "unique_primary_source_count": 20,
   "candidate_coverage": [
     {
       "candidate_id": "sog_cand_pr515_sofiusd",
