@@ -1,0 +1,58 @@
+{
+  "schema_version": "1.0",
+  "status": "review_gate_handoff",
+  "recorded_at": "2026-08-03",
+  "authority_pr": 514,
+  "implementation_pr": 515,
+  "reviewed_candidates": 8,
+  "ready_candidate_ids": [
+    "sog_cand_pr515_bison_eub",
+    "sog_cand_pr515_bison_usb"
+  ],
+  "ready_candidate_limit": 2,
+  "canonical_implementation_authorized": false,
+  "required_next_decision": {
+    "boundary": "REVIEW_GATE",
+    "options": [
+      "authorize both EUB and USB for a bounded complete-record implementation",
+      "authorize one of EUB or USB",
+      "authorize neither and move the six-week cycle to Japan Market Access Pilot 3"
+    ],
+    "automatic_choice": false
+  },
+  "implementation_entry_checks_if_later_authorized": [
+    "reconfirm the official launch and product pages remain current",
+    "reconfirm EUB and USB are two distinct assets under the Bison Bank EMT program",
+    "search the issuer whitepapers and official product materials for exact Solana mint identities",
+    "verify any mint identity from a second authoritative or direct on-chain source before canonicalization",
+    "record institutional allowlist access as a restriction rather than general public availability",
+    "separate issuer-level annual audit claims from token-specific reserve evidence",
+    "retain unsupported reserve allocation, mint address, fees, minimums, and supply facts as explicit unknowns",
+    "create complete organization, relationship, event, Evidence, Evidence Relation, deployment, and dossier records together"
+  ],
+  "deferred_monitoring": [
+    {
+      "candidate_id": "sog_cand_pr515_xreur",
+      "earliest_review_date": "2026-09-03",
+      "condition": "verify completed circulation and production deployment after the announced date"
+    },
+    {
+      "candidate_id": "sog_cand_pr515_jpysc",
+      "earliest_review_date": null,
+      "condition": "verify public-chain launch, token identity, and complete holder and redemption terms"
+    },
+    {
+      "candidate_id": "sog_cand_pr515_swiss_chf_sandbox",
+      "earliest_review_date": null,
+      "condition": "verify a final market-launch decision and named asset identity"
+    },
+    {
+      "candidate_id": "sog_cand_pr515_hazel_network_token",
+      "earliest_review_date": "2026-10-01",
+      "condition": "verify full availability, final issuer set, named asset identity, and production contract"
+    }
+  ],
+  "canonical_changes": 0,
+  "public_changes": 0,
+  "legacy_redirect_changes": 0
+}
