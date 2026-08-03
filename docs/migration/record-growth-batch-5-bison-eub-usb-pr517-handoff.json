@@ -1,0 +1,69 @@
+{
+  "schema_version": "1.0",
+  "status": "implementation_complete_pending_merge_and_production_verification",
+  "recorded_at": "2026-08-03",
+  "authority_pr": 516,
+  "implementation_pr": 517,
+  "source_audit_pr": 515,
+  "promoted_stablecoin_ids": [
+    "sog_st_bison_eub",
+    "sog_st_bison_usb"
+  ],
+  "shared_issuer_organization_id": "sog_issuer_bison_bank",
+  "expected_counts": {
+    "stable_assets": 119,
+    "organizations": 109,
+    "relationships": 131,
+    "events": 194,
+    "evidence": 584,
+    "evidence_relations": 584,
+    "reserve_reports": 127,
+    "known_unknowns": 352,
+    "deployments": 186,
+    "legal_profiles": 119,
+    "reserve_components": 153,
+    "income_profiles": 119,
+    "market_access_records": 8,
+    "archive_recorded": 462,
+    "archive_not_recorded": 122,
+    "detail_routes": 422,
+    "metadata_checked_routes": 422
+  },
+  "recorded_boundaries": {
+    "lifecycle": "restricted",
+    "direct_access": "preapproved_institutional_partners_only",
+    "chain": "Solana",
+    "token_standard": "Solana Token-2022",
+    "eub_exact_mint": null,
+    "usb_exact_mint": null,
+    "token_specific_reserve_assurance": false,
+    "holder_yield": false,
+    "replacement_candidate_used": false,
+    "market_access_changes": 0,
+    "material_ui_changes": 0,
+    "legacy_redirect_changes": 0
+  },
+  "known_unknowns_per_asset": 5,
+  "required_production_checks": [
+    "merged source commit equals production source commit",
+    "canonical hash is generated from the merged 119-asset source",
+    "stable asset count equals 119",
+    "organization count equals 109",
+    "event count equals 194",
+    "Evidence count equals 584",
+    "deployment count equals 186",
+    "detail routes equal 422",
+    "metadata checks equal 422",
+    "machine-readable public counts equal canonical counts",
+    "EUB and USB detail routes resolve",
+    "Bison Bank organization route resolves",
+    "official origin remains https://www.stableorgone.com"
+  ],
+  "next_authority": {
+    "boundary": "REVIEW_GATE",
+    "automatic_next_implementation": false,
+    "planned_cycle_lane": "Japan Market Access Pilot 3",
+    "implementation_authorized": false,
+    "closeout_pr_required": true
+  }
+}
