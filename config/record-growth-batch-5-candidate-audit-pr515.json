@@ -1,0 +1,155 @@
+{
+  "schema_version": "1.0",
+  "authority_id": "sog_record_growth_batch_5_candidate_audit_pr514_2026_08_03",
+  "status": "approved_bounded_private_candidate_audit",
+  "public_output": false,
+  "authority_pr": 514,
+  "implementation_pr": 515,
+  "authorized_at": "2026-08-03",
+  "operating_cycle": {
+    "starts_on": "2026-08-03",
+    "ends_on": "2026-09-13"
+  },
+  "canonical_baseline": {
+    "production_commit": "fe716125a2e52d27bfe0ee515c873eb1d96942ad",
+    "canonical_hash": "sha256:083860b341f6deebc1109b6b5b044dee584ba5e487e2e9b1722213772256b5bb",
+    "stable_assets": 117,
+    "organizations": 108,
+    "relationships": 129,
+    "events": 192,
+    "evidence": 579,
+    "evidence_relations": 579,
+    "deployments": 184,
+    "market_access_records": 8,
+    "detail_routes": 417,
+    "metadata_checked_routes": 417,
+    "archive_recorded": 457,
+    "archive_not_recorded": 122
+  },
+  "candidate_limit": 8,
+  "candidate_ids": [
+    "sog_cand_pr515_sofiusd",
+    "sog_cand_pr515_usat",
+    "sog_cand_pr515_xreur",
+    "sog_cand_pr515_bison_eub",
+    "sog_cand_pr515_bison_usb",
+    "sog_cand_pr515_jpysc",
+    "sog_cand_pr515_swiss_chf_sandbox",
+    "sog_cand_pr515_hazel_network_token"
+  ],
+  "candidates": [
+    {
+      "candidate_id": "sog_cand_pr515_sofiusd",
+      "name": "SoFiUSD",
+      "symbol": "SoFiUSD",
+      "issuer_or_operator": "SoFi Bank, N.A.",
+      "initial_source_leads": [
+        "https://investors.sofi.com/news/news-details/2026/SoFiUSD-Becomes-the-First-Stablecoin-Issued-by-a-US-National-Bank-to-Launch-on-a-Banking-Platform/default.aspx"
+      ]
+    },
+    {
+      "candidate_id": "sog_cand_pr515_usat",
+      "name": "USA₮",
+      "symbol": "USA₮",
+      "issuer_or_operator": "Anchorage Digital Bank, N.A. / Tether USA₮",
+      "initial_source_leads": [
+        "https://tether.io/news/tether-announces-the-launch-of-usat-the-federally-regulated-dollar-backed-stablecoin-made-in-america/"
+      ]
+    },
+    {
+      "candidate_id": "sog_cand_pr515_xreur",
+      "name": "XrymaCoin",
+      "symbol": "XREUR",
+      "issuer_or_operator": "Xryma Plc",
+      "initial_source_leads": [
+        "https://www.xryma.com/announcements",
+        "https://www.xrymacoin.money/"
+      ]
+    },
+    {
+      "candidate_id": "sog_cand_pr515_bison_eub",
+      "name": "Bison Bank Electronic Token — Euro",
+      "symbol": "EUB",
+      "issuer_or_operator": "Bison Bank",
+      "initial_source_leads": [
+        "https://www.prnewswire.com/news-releases/bison-bank-wholly-owned-by-hong-kongs-bison-capital-launches-its-mica-compliant-stablecoin-for-institutional-cross-border-payments-302764996.html"
+      ]
+    },
+    {
+      "candidate_id": "sog_cand_pr515_bison_usb",
+      "name": "Bison Bank Electronic Token — US Dollar",
+      "symbol": "USB",
+      "issuer_or_operator": "Bison Bank",
+      "initial_source_leads": [
+        "https://www.prnewswire.com/news-releases/bison-bank-wholly-owned-by-hong-kongs-bison-capital-launches-its-mica-compliant-stablecoin-for-institutional-cross-border-payments-302764996.html"
+      ]
+    },
+    {
+      "candidate_id": "sog_cand_pr515_jpysc",
+      "name": "JPYSC",
+      "symbol": "JPYSC",
+      "issuer_or_operator": "Shinsei Trust & Banking / SBI Holdings / Startale Group",
+      "initial_source_leads": [
+        "https://startale.com/en/blog/jpysc"
+      ]
+    },
+    {
+      "candidate_id": "sog_cand_pr515_swiss_chf_sandbox",
+      "name": "Swiss joint CHF stablecoin sandbox token",
+      "symbol": null,
+      "issuer_or_operator": "Swiss Stablecoin AG and participating Swiss banks",
+      "initial_source_leads": [
+        "https://www.ubs.com/global/en/media/display-page-ndp/en-20260408-stablecoin.html"
+      ]
+    },
+    {
+      "candidate_id": "sog_cand_pr515_hazel_network_token",
+      "name": "Hazel Network unified token",
+      "symbol": null,
+      "issuer_or_operator": "Vantage Bank / Custodia",
+      "initial_source_leads": [
+        "https://www.prnewswire.com/news-releases/vantage-bank-and-custodia-release-white-paper-unveiling-hazel-network-302804851.html"
+      ]
+    }
+  ],
+  "required_dispositions": [
+    "ready_for_full_record_review",
+    "prelaunch_or_noncanonical",
+    "insufficient_current_evidence",
+    "duplicate_existing",
+    "out_of_scope"
+  ],
+  "maximum_ready_candidates": 2,
+  "required_review_dimensions": [
+    "canonical_identity_and_name",
+    "legal_issuer_or_operator",
+    "verified_launch_and_public_use",
+    "reference_asset_and_stabilization_mechanism",
+    "current_primary_source_coverage",
+    "canonical_chain_or_issuance_identifier",
+    "mint_and_redemption_model",
+    "reserve_or_collateral_model",
+    "duplicate_and_lineage_review",
+    "complete_record_feasibility"
+  ],
+  "prohibited": [
+    "canonical_asset_change",
+    "canonical_organization_change",
+    "canonical_event_change",
+    "canonical_evidence_change",
+    "canonical_deployment_change",
+    "market_access_change",
+    "public_route_change",
+    "public_ui_change",
+    "machine_readable_public_change",
+    "candidate_publication",
+    "automatic_promotion",
+    "automatic_canonical_pr_creation",
+    "replacement_candidate",
+    "ranking",
+    "score",
+    "recommendation",
+    "legacy_redirect_change"
+  ],
+  "next_boundary": "REVIEW_GATE"
+}
