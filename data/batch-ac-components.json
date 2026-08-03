@@ -38,5 +38,45 @@
       "sog_src_mnee_docs_pr498"
     ],
     "notes": "The 2026-08-01 maintenance review did not establish the latest maturity distribution, custodian, amount, or reserve share."
+  },
+  {
+    "id": "sog_rc_bison_eub_unspecified_liquid_assets_pr517",
+    "stablecoin_id": "sog_st_bison_eub",
+    "reserve_report_id": "sog_rr_bison_eub_whitepaper_framework_pr517",
+    "asset_category": "other",
+    "asset_label": "Euro fiat proceeds managed under the issuer's stated conservative high-quality and liquid investment framework; exact current asset categories are not published",
+    "share_percent": null,
+    "amount_text": null,
+    "currency": "EUR",
+    "liquidity_class": "unknown",
+    "maturity_bucket": "unknown",
+    "custodian_organization_id": null,
+    "as_of_date": null,
+    "confidence": "medium_high",
+    "evidence_ids": [
+      "sog_src_bison_eub_product_pr517",
+      "sog_src_bison_eub_whitepaper_pr517"
+    ],
+    "notes": "This component preserves the issuer's general reserve-management claim without inventing cash, deposit, security, maturity, amount, share, or custodian facts. It is not a token-specific attestation component."
+  },
+  {
+    "id": "sog_rc_bison_usb_unspecified_liquid_assets_pr517",
+    "stablecoin_id": "sog_st_bison_usb",
+    "reserve_report_id": "sog_rr_bison_usb_whitepaper_framework_pr517",
+    "asset_category": "other",
+    "asset_label": "U.S.-dollar fiat proceeds managed under the issuer's stated conservative high-quality and liquid investment framework; exact current asset categories are not published",
+    "share_percent": null,
+    "amount_text": null,
+    "currency": "USD",
+    "liquidity_class": "unknown",
+    "maturity_bucket": "unknown",
+    "custodian_organization_id": null,
+    "as_of_date": null,
+    "confidence": "medium_high",
+    "evidence_ids": [
+      "sog_src_bison_usb_product_pr517",
+      "sog_src_bison_usb_whitepaper_pr517"
+    ],
+    "notes": "This component preserves the issuer's general reserve-management claim without inventing cash, deposit, security, maturity, amount, share, or custodian facts. It is not a token-specific attestation component."
   }
 ]
