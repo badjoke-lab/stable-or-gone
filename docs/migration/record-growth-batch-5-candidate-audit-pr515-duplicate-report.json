@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "status": "reviewed_complete",
+  "recorded_at": "2026-08-03",
+  "authority_pr": 514,
+  "implementation_pr": 515,
+  "canonical_asset_baseline": 117,
+  "candidate_count": 8,
+  "exact_canonical_duplicates": [],
+  "symbol_collisions": [],
+  "lineage_findings": [
+    {
+      "candidate_id": "sog_cand_pr515_sofiusd",
+      "finding": "SoFiUSD is the product name and SOFID is the official ticker; these are aliases for one candidate, not two assets."
+    },
+    {
+      "candidate_id": "sog_cand_pr515_usat",
+      "finding": "USA₮ is a distinct Anchorage-issued product created in collaboration with Tether and is not the same asset as Tether USD₮."
+    },
+    {
+      "candidate_id": "sog_cand_pr515_bison_eub",
+      "finding": "EUB and USB share an issuer and program but are distinct crypto-assets with different reference currencies."
+    },
+    {
+      "candidate_id": "sog_cand_pr515_jpysc",
+      "finding": "The account-limited JPYSC issuance and planned public-chain JPYSC are one announced lineage, not separate candidates."
+    },
+    {
+      "candidate_id": "sog_cand_pr515_hazel_network_token",
+      "finding": "Hazel Network is presently an infrastructure and dual-character token design without a final independently named canonical stablecoin identity."
+    }
+  ],
+  "result": {
+    "duplicate_existing": 0,
+    "ready_candidates_are_distinct_from_each_other": true,
+    "ready_candidates_are_distinct_from_117_asset_baseline": true,
+    "replacement_candidates_added": 0
+  }
+}
