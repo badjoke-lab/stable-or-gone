@@ -1,6 +1,6 @@
 {
   "schema_version": "2.0",
-  "status": "batch_030_complete",
+  "status": "batch_031_complete",
   "candidate_files": [
     "data/candidate-stable-assets.json",
     "data/candidate-stable-assets-growth-70.json",
@@ -15,11 +15,12 @@
     "data/candidate-stable-assets-growth-112.json",
     "data/candidate-stable-assets-growth-114.json",
     "data/candidate-stable-assets-growth-116.json",
-    "data/candidate-stable-assets-growth-117.json"
+    "data/candidate-stable-assets-growth-117.json",
+    "data/candidate-stable-assets-growth-119.json"
   ],
   "protected_minimums": {
-    "total_candidates": 117,
-    "promoted_candidates": 117,
+    "total_candidates": 119,
+    "promoted_candidates": 119,
     "pending_candidates": 0
   },
   "planned_batches": {
@@ -122,6 +123,10 @@
     "batch_030": {
       "minimum_candidates": 1,
       "theme": "MNEE regulated reserve-backed multichain USD stablecoin"
+    },
+    "batch_031": {
+      "minimum_candidates": 2,
+      "theme": "Bison Bank regulated institutional EUR and USD electronic-money tokens"
     }
   }
 }
