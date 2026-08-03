@@ -4,7 +4,17 @@ This file is the mandatory entry point for humans, AI agents, and automation wor
 
 ## Current authority
 
-The current reviewed canonical state is:
+```text
+Repository authority: PR #516 active authority review
+Authorized next implementation: PR #517 only
+Authorized candidates: Bison Bank EUB and USB
+Maximum new canonical assets in PR #517: 2
+Maximum new organizations in PR #517: 1
+Required exit after PR #517: REVIEW GATE
+Replacement candidate: prohibited
+```
+
+Current reviewed and production-verified baseline:
 
 ```text
 Canonical stable assets: 117
@@ -20,385 +30,91 @@ Market Access Records: 8
 Detail routes: 417
 Metadata-checked detail routes: 417
 Official public origin: https://www.stableorgone.com
-Official-domain migration checkpoint: bd0e63ac36b1824bf705e8c80d1fb0a1cd79d221
-Current production checkpoint: 23804561ab544aa54426d595df5bbb4283e791dd
+Current production checkpoint: e33bed83dead360570ab81907fbf4f237b63d136
 Current production canonical hash: sha256:083860b341f6deebc1109b6b5b044dee584ba5e487e2e9b1722213772256b5bb
+Production convergence attempt: 1
 ```
 
-Current authority chain:
+## Current authority chain
 
-1. PR #498 is the reviewed 117-asset canonical-data checkpoint; PR #467 remains the preceding 116-asset checkpoint.
-2. PR #487 through PR #492 are the completed public UI, Statistics, responsive, logo, and deployment-chain normalization sequence.
-3. PR #493 made `https://www.stableorgone.com` the official origin and was production-verified.
-4. PR #495 synchronized post-domain repository authority and completed obsolete issue reconciliation.
-5. PR #496 completed the private Record Growth Batch 4 candidate audit.
-6. PR #497 authorized exactly one complete-record implementation for MNEE.
-7. PR #498 added and production-verified the complete MNEE record.
-8. PR #499 closed the post-PR #498 review gate and authorized one bounded MNEE evidence-maintenance item.
-9. PR #500 completed and production-verified that maintenance item.
-10. PR #502 closed the post-PR #500 review gate and authorized one bounded launch-date boundary review for six named records.
-11. PR #503 completed that review, preserved all six exact launch dates as null, and was production-verified.
-12. PR #504 synchronized the completed checkpoint, was production-verified, and returned the repository to REVIEW GATE.
-13. PR #505 authorized one bounded archived-payload verification pass over ten PR #405 Evidence identities.
-14. PR #506 reviewed all ten archived payload boundaries, accepted seven exact dated archives, preserved three gaps, and was production-verified.
-15. PR #507 synchronized the completed PR #506 checkpoint, was production-verified, and returned repository authority to REVIEW GATE.
-16. PR #508 authorized one bounded terminal-date boundary review for FEI, NEAR USN, and ESD.
-17. PR #509 reviewed all three terminal-date boundaries, preserved all three canonical dates as null, and was production-verified.
-18. PR #510 synchronized the completed PR #509 checkpoint, was production-verified, and returned repository authority to REVIEW GATE.
-19. PR #511 authorized one bounded terminal-date boundary review for BAC and DSD.
-20. PR #512 reviewed both fixed targets, preserved both canonical terminal dates as null, and was production-verified.
-21. PR #513 synchronizes the completed PR #512 checkpoint and returns repository authority to REVIEW GATE.
-22. `docs/ui-v3-remediation-authority.md` remains the regression-protection contract for material public UI work.
+1. PR #498 remains the current 117-asset canonical addition checkpoint.
+2. PR #500 remains the current canonical maintenance and statistics-history checkpoint.
+3. PR #493 established `https://www.stableorgone.com` as the official public origin.
+4. PR #511 and PR #512 completed Terminal Date Boundary Review Batch 2 without canonical date changes.
+5. PR #513 closed that checkpoint and returned the repository to REVIEW GATE.
+6. PR #514 fixed the 2026-08-03 through 2026-09-13 operating cycle and authorized Record Growth Batch 5 candidate audit.
+7. PR #515 reviewed exactly eight private candidates, retained EUB and USB for full-record review, preserved six candidates at their evidence boundaries, and was production-verified at `e33bed83dead360570ab81907fbf4f237b63d136`.
+8. PR #516 authorizes only PR #517 to attempt complete canonical records for Bison Bank EUB and USB.
+9. `docs/ui-v3-remediation-authority.md` remains the regression-protection contract for material public UI work.
 
 ## Mandatory reading order
 
-Before changing code, canonical data, workflows, infrastructure, or documentation, read:
+Before changing canonical data, code, workflows, infrastructure, or documentation, read:
 
 1. `AGENTS.md`
 2. `docs/spec-governance.md`
 3. `docs/roadmap.md`
 4. `docs/deployment-policy.md`
-5. `docs/roadmap-amendments/2026-08-02-terminal-date-boundary-review-batch-2.md`
-6. `docs/quality/terminal-date-boundary-review-batch-2-spec.md`
-7. `config/terminal-date-boundary-review-batch-2.json`
-8. `data/quality/terminal-date-unresolved.json`
-9. `docs/roadmap-amendments/2026-08-01-terminal-date-boundary-review-batch-1.md`
-10. `docs/quality/terminal-date-boundary-review-batch-1-spec.md`
-11. `config/terminal-date-boundary-review-batch-1.json`
-12. `docs/roadmap-amendments/2026-08-01-evidence-archive-payload-verification-batch-1.md`
-13. `docs/quality/evidence-archive-payload-verification-batch-1-spec.md`
-14. `config/evidence-archive-payload-verification-batch-1.json`
-15. `docs/roadmap-amendments/2026-08-01-launch-date-boundary-review-batch-1.md`
-16. `docs/quality/launch-date-boundary-review-batch-1-spec.md`
-17. `config/launch-date-boundary-review-batch-1.json`
-18. `docs/roadmap-amendments/2026-08-01-post-pr498-review-gate.md`
-19. `docs/post-351-data-growth-operating-spec.md`
-20. `docs/quality/mnee-evidence-archive-maintenance-spec.md`
-21. `config/mnee-evidence-archive-maintenance.json`
-22. `data/editorial-research/mnee-evidence-archive-maintenance-batch-1-source-review.json`
-23. `docs/migration/current-canonical-checkpoint.json`
-24. `docs/migration/current-review-checkpoint.json`
-25. `docs/migration/current-stats-history-checkpoint.json`
-26. every named baseline, queue, audit, handoff, source-coverage report, and prior output required by a separately authorized work item
+5. `docs/roadmap-amendments/2026-08-03-six-week-operating-cycle-and-record-growth-batch-5.md`
+6. `docs/quality/record-growth-batch-5-candidate-audit-pr515-spec.md`
+7. `config/record-growth-batch-5-candidate-audit-pr515.json`
+8. `data/editorial-research/record-growth-batch-5-candidate-audit-pr515.json`
+9. `docs/migration/record-growth-batch-5-candidate-audit-pr515-source-coverage.json`
+10. `docs/migration/record-growth-batch-5-candidate-audit-pr515-duplicate-report.json`
+11. `docs/migration/record-growth-batch-5-candidate-audit-pr515-handoff.json`
+12. `docs/roadmap-amendments/2026-08-03-record-growth-batch-5-review-gate.md`
+13. `docs/quality/record-growth-batch-5-review-gate-pr516-spec.md`
+14. `config/record-growth-batch-5-review-gate-pr516.json`
+15. `docs/migration/record-growth-batch-5-review-gate-pr516.json`
+16. `docs/migration/current-canonical-checkpoint.json`
+17. `docs/migration/current-review-checkpoint.json`
+18. `docs/migration/current-stats-history-checkpoint.json`
+19. every named baseline, source, queue, audit, handoff, or prior output required by an authorized work item
 
 Merged repository authority outranks chat memory, handoff prose, issue discussion, generated reports, and unmerged drafts.
 
 ## Current workstream
 
 ```text
-PR #487 stablecoin logo coverage: complete
-PR #488 white background, status badges, and mobile density: complete
-PR #489 homepage information architecture: complete
-PR #490 broad desktop/mobile remediation: complete
-PR #491 Statistics redesign: complete
-PR #492 Statistics panel flow and deployment-chain normalization: complete
-PR #493 official-domain migration: complete and production-verified
-PR #495 post-domain authority synchronization and issue reconciliation: complete
-PR #496 Record Growth Batch 4 candidate audit: complete and production-verified
-PR #497 Record Growth Batch 4 review gate: complete
-PR #498 Record Growth Batch 4 — MNEE: reviewed complete and production-verified
-PR #499 post-PR #498 review gate and MNEE maintenance authorization: complete
-PR #500 MNEE Evidence and Archive Maintenance — Batch 1: complete and production-verified
-Required exit after PR #500 merge and production verification: REVIEW GATE — satisfied
-PR #501 post-PR #500 authority synchronization: complete and production-verified
-PR #502 Launch Date Boundary Review — Batch 1 authorization: complete
-PR #503 Launch Date Boundary Review — Batch 1: complete and production-verified
-Required exit after PR #503 merge and production verification: REVIEW GATE — satisfied
-PR #504 post-PR #503 authority synchronization: complete and production-verified
-PR #505 Evidence Archive Payload Verification — Batch 1 authorization: complete and production-verified
-PR #506 Evidence Archive Payload Verification — Batch 1: complete and production-verified
-Required exit after PR #506 merge and production verification: REVIEW GATE — satisfied
-PR #507 post-PR #506 authority synchronization: complete and production-verified
-PR #508 Terminal Date Boundary Review — Batch 1 authorization: complete
-PR #509 Terminal Date Boundary Review — Batch 1: complete and production-verified
-Required exit after PR #509 merge and production verification: REVIEW GATE — satisfied
-PR #510 post-PR #509 authority synchronization: complete and production-verified
-PR #511 Terminal Date Boundary Review — Batch 2 authorization: complete and production-verified
-PR #512 Terminal Date Boundary Review — Batch 2: complete and production-verified
-Required exit after PR #512 merge and production verification: REVIEW GATE — satisfied
-PR #513 post-PR #512 authority synchronization: active
-Current repository authority: REVIEW GATE
+PR #514 six-week cycle and Batch 5 audit authority: complete
+PR #515 Record Growth Batch 5 candidate audit: complete and production-verified
+PR #516 Record Growth Batch 5 review gate: active authority PR
+PR #517 Bison Bank EUB and USB complete-record implementation: authorized only after PR #516 merge and production verification
+Later cycle lanes: planned but not implementation-authorized
 ```
 
-## PR #512 reviewed terminal-date result — Batch 2
+## PR #517 exact scope
 
-PR #512 reviewed the fixed BAC and DSD terminal-date boundaries using first-party project publications and repositories. No source established the final effective end of the same canonical identity.
+PR #517 may attempt only:
 
 ```text
-exact terminal days resolved: 0
-canonical null dates preserved: 2
-new Evidence identities: 0
-new Evidence Relations: 0
-canonical or public count changes: 0
-legacy redirect changes: 0
+Bison Bank Electronic Money Token — Euro (EUB)
+Bison Bank Electronic Money Token — US Dollar (USB)
+Shared legal issuer: Bison Bank, S.A.
 ```
 
-BAC's V2 launch, BAS and BAC-liquidity migration work, and official roadmap activity through 2021-06-01 establish protocol continuation, not an official BAC shutdown or contract end. DSD's DIP-10 execution, CDSD mechanics, and Sushiswap migration establish continued DSD operation, not formal shutdown, governance revocation, or token termination.
+Before canonical edits, PR #517 must freshly review identity, duplicate and lineage status, official launch and product pages, MiCA whitepaper payloads, exact Solana mint identities, first issuance or mint evidence, current reserve and assurance evidence, current mint and redemption terms, institutional allowlist restrictions, and issuer relationships.
 
-GYEN remained excluded and unchanged because its official initial redemption period remains open through 2026-11-11.
+Every exact deployment identifier requires a second authoritative or direct on-chain confirmation. An issuer-level audit statement must not be promoted into a token-specific reserve attestation without a supporting report body and claim scope.
 
-Production verification:
+PR #517 must create every applicable organization, relationship, classification, profile, event, Evidence, Evidence Relation, reserve, legal, income, deployment, and known-unknown record together. Thin records are prohibited. Unsupported facts remain explicit known unknowns.
+
+A candidate that fails its fresh entry gate must be withheld. The other may proceed only if it independently satisfies the complete-record standard. No deferred candidate may be substituted.
+
+## Deferred Batch 5 candidates
+
+The following remain outside current authority:
 
 ```text
-source commit: 23804561ab544aa54426d595df5bbb4283e791dd
-canonical hash: sha256:083860b341f6deebc1109b6b5b044dee584ba5e487e2e9b1722213772256b5bb
-convergence attempt: 1
-stable assets: 117
-organizations: 108
-events: 192
-detail routes: 417
-metadata-checked detail routes: 417
-archive recorded: 457
-archive not recorded: 122
+SoFiUSD / SOFID
+USA₮
+XrymaCoin / XREUR
+JPYSC
+Swiss joint CHF stablecoin sandbox
+Hazel Network unified token design
 ```
 
-Repository authority is now REVIEW GATE. No third terminal-date batch is authorized automatically.
-
-## PR #511 authorized terminal-date review — Batch 2
-
-PR #512 must review exactly two unresolved terminal-date records:
-
-```text
-sog_st_bac
-sog_st_dsd
-```
-
-BAC must be reviewed for an official shutdown notice, final mint stop, governance disablement, or contract-level terminal end state. DSD must be reviewed for an executed migration, formal shutdown, final mint stop, governance revocation, or contract-level terminal end state.
-
-`sog_st_gyen` is explicitly excluded. Its official initial redemption period remains open through 2026-11-11, so the wind-down start, purchase disablement, and notice date cannot be treated as final token termination.
-
-A canonical terminal date requires exact day-level primary evidence of the final effective end for the same canonical identity. Depeg, negligible liquidity, last repository activity, design publication, migration planning, successor discussion, and market inactivity are insufficient.
-
-PR #512 must either resolve the exact final day or preserve null with a reviewed range, reason code, review date, primary-source list, and rejected shortcuts. No replacement target or automatic Evidence promotion is allowed.
-
-Authority checkpoint:
-
-```text
-source production commit: 8344504f41df8debd2da90b1b60a61da6fba9a58
-canonical hash: sha256:083860b341f6deebc1109b6b5b044dee584ba5e487e2e9b1722213772256b5bb
-convergence attempt: 2
-stable assets: 117
-organizations: 108
-relationships: 129
-events: 192
-Evidence: 579
-Evidence Relations: 579
-deployments: 184
-Market Access records: 8
-detail routes: 417
-metadata-checked routes: 417
-archive recorded: 457
-archive not recorded: 122
-legacy redirect changes: 0
-```
-
-After PR #512 merge and production verification, stop at REVIEW GATE. No third terminal-date batch is authorized automatically.
-
-## PR #508 authorized terminal-date review
-
-PR #509 must review exactly three unresolved terminal-date records:
-
-```text
-sog_st_fei
-sog_st_nearusn
-sog_st_esd
-```
-
-A canonical terminal date requires exact day-level primary evidence of the final effective end for the same canonical identity. Governance votes, wind-down starts, mint stops with settlement still open, migration openings, depegs, market inactivity, and last-activity dates are not final terminal dates by default.
-
-PR #509 must either resolve the exact final day or preserve null with a reviewed range, reason code, review date, primary-source list, and rejected shortcuts. No replacement target or automatic Evidence promotion is allowed.
-
-After PR #509 merge and production verification, stop at REVIEW GATE. No second terminal-date batch is authorized automatically.
-
-## PR #509 reviewed terminal-date result
-
-PR #509 reviewed the fixed FEI, NEAR USN, and ESD terminal-date boundaries using primary sources. No source established the final effective end of the same canonical identity.
-
-```text
-exact terminal days resolved: 0
-canonical null dates preserved: 3
-new Evidence identities: 0
-new Evidence Relations: 0
-canonical or public count changes: 0
-legacy redirect changes: 0
-```
-
-FEI final-redemption governance did not establish redemption-route shutdown or residual-distribution completion. The USN Protection Programme deadline did not establish the end of all redemption paths, residual settlement, or the token contract. Empty Set V2 migration availability did not establish a V1 end block, disablement, or final migration deadline.
-
-Production verification:
-
-```text
-source commit: 96ae5edd42e9a9e8a652bb27acc2d6a6eb02dfd6
-canonical hash: sha256:083860b341f6deebc1109b6b5b044dee584ba5e487e2e9b1722213772256b5bb
-convergence attempt: 1
-stable assets: 117
-organizations: 108
-events: 192
-detail routes: 417
-metadata-checked detail routes: 417
-archive recorded: 457
-archive not recorded: 122
-```
-
-Repository authority is now REVIEW GATE. No later terminal-date batch is authorized automatically.
-
-## PR #506 reviewed archive-payload result
-
-PR #506 reviewed all ten fixed identities. Seven exact dated Wayback payloads preserve the canonical claim scope and are added as canonical `archived_url` values. Three targets remain without a safe archive.
-
-```text
-dated exact archives added: 7
-reviewed no safe change: 3
-Evidence identities: 579
-Evidence Relations: 579
-Archive recorded: 457
-Archive not recorded: 122
-```
-
-The three preserved gaps are the broad RLUSD product page, the SPOT mint-guide placeholder, and the ampleforth.org root whose sampled historical bodies are unrelated or pre-SPOT. Source URLs, Evidence identities, Evidence Relations, non-Evidence canonical records, routes, and UI remain unchanged.
-
-Production verification:
-
-```text
-source commit: 2a6bfac25538388dd7ea6dc12de96c2c2dc2dad0
-canonical hash: sha256:083860b341f6deebc1109b6b5b044dee584ba5e487e2e9b1722213772256b5bb
-convergence attempt: 2
-stable assets: 117
-organizations: 108
-events: 192
-detail routes: 417
-metadata-checked detail routes: 417
-archive recorded: 457
-archive not recorded: 122
-```
-
-Repository authority is now REVIEW GATE. No later archive batch is authorized automatically.
-
-## PR #505 authorized archive-payload review
-
-PR #506 must re-review exactly the ten PR #405 identities listed in the current config. PR #405 established exact-source CDX history but did not inspect archived payload bodies, so all ten remained without a canonical archive.
-
-This pass may add only exact dated Wayback URLs whose HTTP-200 archived payload has been independently reviewed as preserving the existing canonical claim scope. CDX metadata, redirects, domain-level captures, and keyword-only automation are not sufficient. Source replacement and replacement targets are prohibited.
-
-Preserved source state:
-
-```text
-Evidence identities: 579
-Evidence Relations: 579
-Archive recorded: 450
-Archive not recorded: 129
-Maximum accepted archive additions: 10
-```
-
-After PR #506 merge and production verification, stop at REVIEW GATE. No later archive batch or unrelated work is authorized automatically.
-
-## PR #502 authorized review
-
-The next bounded item reviews exactly six unresolved launch-date records that currently lack both a formal review date and reviewed-source list:
-
-```text
-sog_st_msusd
-sog_st_stablesusdx
-sog_st_susde
-sog_st_usd1
-sog_st_usdm
-sog_st_usdh
-```
-
-PR #502 changed authority only. PR #503 reviewed all six named records. No exact day-level primary evidence was found that safely equates announcement, deployment, first mint, testing, terms, rebrand, or later availability with one original public launch day. All six canonical launch dates remain null. The unresolved queue now records a reviewed range, specific reason, review date, and primary-source list for every target. No seventh or replacement target was used.
-
-Production verification:
-
-```text
-source commit: a89832072b6f4fe07cf43b76ae77d2a5a1aac0f0
-canonical hash: sha256:c6fa6b7494fc3e36f599d88edaa3d2af94a0e8c2f0ee6e4c3ee7d8a9121a4372
-convergence attempt: 2
-stable assets: 117
-organizations: 108
-events: 192
-detail routes: 417
-metadata-checked detail routes: 417
-```
-
-No later launch-date batch, record-growth batch, YLDS work, Market Access change, route family, or material UI work is authorized automatically.
-
-## PR #500 maintenance result
-
-The bounded maintenance item reviewed all five authorized MNEE unknown areas.
-
-```text
-Latest attestation body and archive: index through May 2026 reconfirmed; report body and report-specific archive remain unknown
-Current reserve custodian and allocation: reserve categories reconfirmed; custodian identity and category amounts or shares remain unknown
-First public Ethereum issuance date: proxy deployment on 2024-03-21 recorded; first public issuance remains unknown
-Current deployment controls: upgradeable proxy, 2025-09-15 upgrade, and pause-capable source recorded; current roles/state and 1Sat controls remain unknown
-Direct access and jurisdiction inventory: verified-account and compliance-screening boundary recorded; complete current inventory remains unknown
-```
-
-No unknown was deleted or forced closed. No new canonical Evidence ID was added. Both MNEE deployments remain `identifier_recorded_unverified`.
-
-Preserved counts:
-
-```text
-stable assets: 117
-organizations: 108
-events: 192
-Evidence: 579
-reserve reports: 125
-known unknowns: 342
-deployments: 184
-detail routes: 417
-metadata-checked detail routes: 417
-```
-
-Production verification:
-
-```text
-source commit: 9d583845d73e4d758ab245812d165f25dd59ada8
-canonical hash: sha256:c6fa6b7494fc3e36f599d88edaa3d2af94a0e8c2f0ee6e4c3ee7d8a9121a4372
-convergence attempt: 1
-```
-
-No later record-growth batch, YLDS work, Market Access change, public route family, or material UI work is authorized automatically.
-
-## PR #498 reviewed result
-
-PR #498 added exactly one complete canonical record:
-
-```text
-MNEE — sog_st_mnee
-Issuer: MNEE Limited — sog_issuer_mnee_limited
-1Sat Ordinals token ID: ae59f3b898ec61acbdb6cc7a245fabeded0c094bf046f35206a3aec60ef88127_0
-Ethereum contract: 0x8ccedbae4916b79da7f3f612efb2eb93a2bfd6cf
-```
-
-The official `@mnee/ts-sdk` package version 1.2.0 is the source for the production 1Sat token ID. Identifier recording is not independent runtime or control verification.
-
-Figure YLDS remains deferred. It must not be treated as an ordinary stablecoin without a separate reviewed scope amendment.
-
-## Mandatory UI working rule
-
-Before changing public HTML, components, layouts, CSS, client scripts, UI validators, screenshot workflows, or visual acceptance records, read `docs/ui-v3-remediation-authority.md` and the PR #492 Statistics contract.
-
-Every material UI pull request must:
-
-- identify the governing authority;
-- list changed route families and preserved contracts;
-- include desktop and mobile screenshots;
-- manually inspect generated images rather than relying on CI status alone;
-- inspect page top, middle, and bottom, long-page flow, card heights, whitespace, overlaps, duplicates, footer completion, and mobile source order;
-- preserve or strengthen exhaustive color, readability, overlap, route-completeness, and responsive checks;
-- preserve canonical data, routes, metadata, and machine-readable outputs unless separate authority permits a change.
-
-For `/stats/` specifically:
-
-- no data may be hidden in collapsibles;
-- desktop columns must pack independently without shared row heights;
-- mobile must preserve source order in one column;
-- bare `Arbitrum` is unresolved and must not be mapped to Arbitrum One;
-- Arbitrum One and Arbitrum Nova remain distinct;
-- canonical chain totals plus unresolved deployments must reconcile to total deployments.
-
-Automated success never overrides a known visual or semantic defect.
+No automatic recheck or promotion is authorized.
 
 ## Canonical-data boundary
 
@@ -411,9 +127,17 @@ Automated success never overrides a known visual or semantic defect.
 - Name or symbol similarity never authorizes automatic deduplication.
 - USDF Consortium USDF must not be merged with Falcon USDf.
 - Open USD must be disambiguated from Origin Dollar before any future record.
-- YLDS must not be treated as an ordinary stablecoin without a separate reviewed scope amendment.
-- Automatic promotion is prohibited.
-- No later canonical asset addition is currently authorized.
+- Figure YLDS must not be treated as an ordinary stablecoin without a separate reviewed scope amendment.
+- Automatic promotion, ranking, scoring, recommendation, or implied safety are prohibited.
+- No canonical work beyond PR #517 is currently authorized.
+
+## Mandatory UI working rule
+
+Before changing public HTML, components, layouts, CSS, client scripts, UI validators, screenshot workflows, or visual acceptance records, read `docs/ui-v3-remediation-authority.md` and the PR #492 Statistics contract.
+
+Every material UI PR must identify authority, list changed route families, include desktop and mobile screenshots, manually inspect generated images, and preserve canonical data, routes, metadata, and machine-readable output unless separate authority permits change.
+
+PR #516 and PR #517 authorize no material UI redesign or new route family.
 
 ## Domain and deployment boundary
 
@@ -425,8 +149,6 @@ https://www.stableorgone.com
 
 Canonical metadata, hreflang, OGP, JSON-LD, machine-readable files, robots, sitemap, production smoke tests, and deployment reporting must use that origin.
 
-The legacy host `sog.badjoke-lab.com` still resolves to the Pages project. Its 301 redirect is an external Cloudflare configuration task, not permission to reintroduce the old host into repository canonical output.
+The legacy host `sog.badjoke-lab.com` still resolves to the Pages project. Its redirect is an external Cloudflare configuration task. No current repository work may change or reintroduce that host into canonical output.
 
-Issue #479 remains open only for deployment history and the externally blocked redirect.
-
-A merge to `main` is not proof of production parity. Current main/production equality is established dynamically by `docs/deployment-policy.md`, the deployment workflow, and Issue #479.
+Issue #479 remains open for deployment history and the externally blocked redirect. A merge to `main` is not proof of production parity; equality is established by the deployment workflow and Issue #479.
