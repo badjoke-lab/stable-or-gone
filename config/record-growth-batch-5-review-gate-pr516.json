@@ -1,0 +1,149 @@
+{
+  "schema_version": "1.0",
+  "work_item": "record_growth_batch_5_review_gate_pr516",
+  "status": "reviewed_decision",
+  "recorded_at": "2026-08-03",
+  "source_prs": [514, 515],
+  "production_checkpoint": {
+    "source_commit": "e33bed83dead360570ab81907fbf4f237b63d136",
+    "public_origin": "https://www.stableorgone.com",
+    "canonical_hash": "sha256:083860b341f6deebc1109b6b5b044dee584ba5e487e2e9b1722213772256b5bb",
+    "convergence_attempt": 1
+  },
+  "canonical_baseline": {
+    "stable_assets": 117,
+    "organizations": 108,
+    "relationships": 129,
+    "events": 192,
+    "evidence": 579,
+    "evidence_relations": 579,
+    "deployments": 184,
+    "market_access_records": 8,
+    "archive_recorded": 457,
+    "archive_not_recorded": 122,
+    "detail_routes": 417,
+    "metadata_checked_routes": 417
+  },
+  "reviewed_candidates": {
+    "authorized": [
+      {
+        "candidate_id": "sog_cand_pr515_bison_eub",
+        "name": "Bison Bank Electronic Money Token — Euro",
+        "symbol": "EUB",
+        "reference_asset": "EUR",
+        "authorization": "complete_record_implementation_only"
+      },
+      {
+        "candidate_id": "sog_cand_pr515_bison_usb",
+        "name": "Bison Bank Electronic Money Token — US Dollar",
+        "symbol": "USB",
+        "reference_asset": "USD",
+        "authorization": "complete_record_implementation_only"
+      }
+    ],
+    "deferred": [
+      {
+        "candidate_id": "sog_cand_pr515_sofiusd",
+        "reason": "exact_ethereum_and_solana_identifiers_and_current_assurance_evidence_unresolved"
+      },
+      {
+        "candidate_id": "sog_cand_pr515_usat",
+        "reason": "exact_network_and_token_identifiers_and_product_specific_holder_terms_unresolved"
+      },
+      {
+        "candidate_id": "sog_cand_pr515_xreur",
+        "reason": "announced_circulation_date_2026_09_03_not_yet_reached"
+      },
+      {
+        "candidate_id": "sog_cand_pr515_jpysc",
+        "reason": "limited_account_only_issuance_without_public_chain_identity_or_complete_terms"
+      },
+      {
+        "candidate_id": "sog_cand_pr515_swiss_chf_sandbox",
+        "reason": "controlled_sandbox_without_final_asset_identity_or_market_launch_decision"
+      },
+      {
+        "candidate_id": "sog_cand_pr515_hazel_network_token",
+        "reason": "infrastructure_and_testing_without_final_independent_production_asset_identity"
+      }
+    ]
+  },
+  "decision": {
+    "authorize_next_pr": 517,
+    "authorize_work_item": "Record Growth Batch 5 — Bison Bank EUB and USB",
+    "selected_candidate_ids": [
+      "sog_cand_pr515_bison_eub",
+      "sog_cand_pr515_bison_usb"
+    ],
+    "maximum_new_canonical_assets": 2,
+    "maximum_new_organizations": 1,
+    "paired_sibling_implementation_required": true,
+    "partial_implementation_allowed_only_if_other_candidate_fails_entry_gate": true,
+    "replacement_candidate_allowed": false,
+    "review_gate_after_pr517": true,
+    "canonical_changes_in_pr516": 0,
+    "public_changes_in_pr516": 0,
+    "ranking": false,
+    "score": false,
+    "recommendation": false,
+    "automatic_promotion": false,
+    "automatic_canonical_pr_creation": false,
+    "legacy_redirect_changes": 0
+  },
+  "selection_basis": [
+    "two_distinct_launched_assets_not_in_117_asset_registry",
+    "same_verified_legal_issuer_and_program",
+    "official_launch_on_2026_05_06",
+    "separate_eur_and_usd_reference_assets",
+    "official_one_to_one_fiat_backing_and_par_redemption_terms",
+    "official_institutional_allowlist_and_direct_mint_redeem_workflow",
+    "official_solana_token_2022_deployment_family",
+    "official_micar_whitepapers_and_product_pages",
+    "complete_record_feasible_with_explicit_known_unknowns"
+  ],
+  "pr517_entry_gate": {
+    "complete_record_only": true,
+    "thin_record_forbidden": true,
+    "fresh_duplicate_recheck_required": true,
+    "fresh_manual_primary_source_review_required": true,
+    "official_whitepaper_payload_review_required": true,
+    "exact_solana_mint_identity_search_required": true,
+    "exact_identifier_requires_second_authoritative_or_direct_onchain_confirmation": true,
+    "first_public_issuance_or_mint_date_review_required": true,
+    "current_reserve_composition_custodian_and_assurance_review_required": true,
+    "current_issuance_redemption_fee_and_minimum_review_required": true,
+    "institutional_allowlist_restriction_required": true,
+    "issuer_level_audit_claim_must_not_be_promoted_to_token_specific_attestation": true,
+    "unsupported_values_must_remain_known_unknowns": true,
+    "unconfirmed_candidate_must_be_withheld": true,
+    "replacement_candidate_allowed": false,
+    "required_record_families": [
+      "stablecoins",
+      "organizations",
+      "relationships",
+      "classifications",
+      "stablecoin_profiles",
+      "events",
+      "event_details",
+      "evidence",
+      "evidence_relations",
+      "reserve_reports",
+      "known_unknowns",
+      "deployments",
+      "legal_profiles",
+      "reserve_components",
+      "income_profiles"
+    ],
+    "public_surface_change": false,
+    "market_access_change": false,
+    "ui_change": false,
+    "legacy_redirect_change": false
+  },
+  "deferred_candidate_boundary": {
+    "canonical_promotion_authorized": false,
+    "full_record_pr_authorized": false,
+    "automatic_recheck_authorized": false,
+    "replacement_for_eub_or_usb_forbidden": true
+  },
+  "next_boundary_after_pr517": "REVIEW_GATE"
+}

@@ -1,7 +1,7 @@
 # Stable or Gone Roadmap
 
-Updated: 2026-08-02  
-Status: PR #512 complete and production-verified; REVIEW GATE
+Updated: 2026-08-03  
+Status: PR #516 active authority review; PR #517 is the only authorized next implementation after merge and production verification
 
 ## Current reviewed position
 
@@ -19,321 +19,118 @@ Archive not recorded: 122
 Detail routes: 417
 Metadata-checked detail routes: 417
 Official public origin: https://www.stableorgone.com
-Official-domain migration production checkpoint: bd0e63ac36b1824bf705e8c80d1fb0a1cd79d221
-Current production checkpoint: 23804561ab544aa54426d595df5bbb4283e791dd
+Current production checkpoint: e33bed83dead360570ab81907fbf4f237b63d136
 Current production canonical hash: sha256:083860b341f6deebc1109b6b5b044dee584ba5e487e2e9b1722213772256b5bb
+Production convergence attempt: 1
 ```
 
-Current `main` and production equality is established dynamically by the deployment workflow and Issue #479. PR #512 production converged with exact count, route, metadata, provenance, archive-partition, and canonical-hash parity.
+PR #515 and production are equal at the checkpoint above. The private candidate audit changed no canonical or public counts.
 
-## Completed acceptance points
+## Six-week operating cycle
+
+The reviewed operating cycle runs from 2026-08-03 through 2026-09-13.
 
 ```text
-PR #467 Record Growth Batch 3 — PLNQ and GBPQ: reviewed complete
-PR #487–#492 public UI, Statistics, responsive, logo, and chain-normalization sequence: complete
-PR #493 official-domain migration: complete and production-verified
-PR #495 post-domain authority synchronization and obsolete issue reconciliation: complete
-PR #496 Record Growth Batch 4 candidate audit: complete and production-verified
-PR #497 Record Growth Batch 4 review gate: complete
-PR #498 Record Growth Batch 4 — MNEE: reviewed complete and production-verified
-PR #499 post-PR #498 review gate and MNEE maintenance authorization: complete
-PR #500 MNEE Evidence and Archive Maintenance — Batch 1: complete and production-verified
-PR #501 post-PR #500 authority synchronization: complete and production-verified
-PR #502 Launch Date Boundary Review — Batch 1 authorization: complete
-PR #503 Launch Date Boundary Review — Batch 1: complete and production-verified
-PR #504 post-PR #503 authority synchronization: complete and production-verified
-PR #505 Evidence Archive Payload Verification — Batch 1 authorization: complete and production-verified
-PR #506 Evidence Archive Payload Verification — Batch 1: complete and production-verified
-PR #507 post-PR #506 authority synchronization: complete and production-verified
-PR #508 Terminal Date Boundary Review — Batch 1 authorization: complete
-PR #509 Terminal Date Boundary Review — Batch 1: complete and production-verified
-PR #510 post-PR #509 authority synchronization: complete and production-verified
-PR #511 Terminal Date Boundary Review — Batch 2 authorization: complete and production-verified
-PR #512 Terminal Date Boundary Review — Batch 2: complete and production-verified
-PR #513 post-PR #512 authority synchronization: active
+2026-08-03 to 2026-08-09  Record Growth Batch 5 candidate audit and review gate
+2026-08-10 to 2026-08-16  reviewed canonical growth implementation and closeout
+2026-08-17 to 2026-08-23  Japan Market Access Pilot 3
+2026-08-24 to 2026-08-30  Evidence Archive Payload Verification Batch 2
+2026-08-31 to 2026-09-06  Tier A Dossier Deepening Batch 4
+2026-09-07 to 2026-09-13  cycle review and next operating authority
 ```
 
-PR #498 remains the current canonical-asset addition checkpoint. PR #500 is the current canonical maintenance and statistics-history checkpoint. PR #492 remains the Statistics and responsive-layout acceptance point. PR #493 remains the official-domain migration acceptance point.
+Dates are planning windows. Each implementation still requires an explicit merged authority and production checkpoint. Later lanes remain planned but are not yet implementation-authorized.
 
-## PR #512 reviewed item
+## Completed current-cycle steps
 
 ```text
-Terminal Date Boundary Review — Batch 2
-Authority PR: #511
-Implementation PR: #512
-Targets reviewed: BAC, DSD
-Exact terminal days resolved: 0
-Reviewed null preserved: 2
-Deferred and unchanged: GYEN
+PR #514 six-week operating cycle and Batch 5 candidate-audit authority: complete
+PR #515 eight-candidate private audit: complete and production-verified
+PR #515 production commit: e33bed83dead360570ab81907fbf4f237b63d136
+PR #515 result: 2 ready, 3 insufficient-current-evidence, 3 prelaunch-or-noncanonical
 ```
 
-BAC official V2 launch, migration, and roadmap sources establish continued protocol work but no official shutdown, final mint stop, governance disablement, contract disablement, or final token end. DSD official DIP-10, V2, and Sushiswap migration sources establish continued operation but no formal shutdown, final mint stop, governance revocation, contract disablement, or final token end.
+## Active reviewed decision — PR #516
 
-No canonical stable-asset, organization, relationship, event, Evidence, deployment, Market Access, route, UI, or legacy redirect changed.
-
-Production result:
+PR #516 authorizes exactly one next implementation:
 
 ```text
-source commit: 23804561ab544aa54426d595df5bbb4283e791dd
-canonical hash: sha256:083860b341f6deebc1109b6b5b044dee584ba5e487e2e9b1722213772256b5bb
-convergence attempt: 1
-stable assets: 117
-organizations: 108
-events: 192
-detail routes: 417
-metadata-checked detail routes: 417
-archive recorded: 457
-archive not recorded: 122
+PR #517 — Record Growth Batch 5: Bison Bank EUB and USB
+Maximum new stable assets: 2
+Maximum new organizations: 1
+Replacement candidate: prohibited
+Required exit: REVIEW GATE
 ```
 
-The repository is at REVIEW GATE.
-
-## Authorized current item
+Selected candidates:
 
 ```text
-Terminal Date Boundary Review — Batch 2
-Authority PR: #511
-Implementation PR: #512
-Targets: BAC, DSD
-Deferred non-target: GYEN until after its 2026-11-11 initial redemption deadline
+sog_cand_pr515_bison_eub — Bison Bank Electronic Money Token — Euro (EUB)
+sog_cand_pr515_bison_usb — Bison Bank Electronic Money Token — US Dollar (USB)
 ```
 
-PR #512 may resolve an exact terminal day only from day-level primary evidence of final effective cessation for the same canonical identity. BAC requires an official shutdown, final mint stop, governance disablement, or contract-level terminal record. DSD requires an executed migration, formal shutdown, final mint stop, governance revocation, or contract-level terminal record.
+The two candidates are separate sibling assets under the same Bison Bank EMT program. EUB references EUR and USB references USD. First-party launch material, product pages, and MiCA whitepapers support an official 2026-05-06 launch, Bison Bank as issuer, 1:1 fiat backing and par redemption claims, institutional mint and redemption, allowlisted-wallet restrictions, and Solana Token-2022 as the deployment family.
 
-The following remain prohibited: depeg or low-liquidity inference, last-commit inference, design-publication inference, migration-planning inference, replacement targets, automatic Evidence promotion, new assets, Market Access changes, route changes, material UI changes, and legacy redirect changes.
+## PR #517 entry gate
 
-Authority checkpoint:
+Before any canonical edit, PR #517 must freshly establish:
+
+- no canonical duplicate or lineage conflict;
+- current official launch, product, and whitepaper payloads;
+- exact Solana mint identity, or an explicit unresolved identifier;
+- second authoritative or direct on-chain confirmation for any exact identifier;
+- first public issuance or mint date, or an explicit unresolved date;
+- current reserve composition, custodian, and assurance claim scope;
+- current issuance and redemption eligibility, fees, and minimums;
+- institutional allowlist, KYC, jurisdiction, and transfer restrictions;
+- one shared legal issuer organization and correct relationships.
+
+An issuer-level audit claim is not token-specific reserve assurance. Unsupported values remain known unknowns.
+
+PR #517 must create every applicable canonical family together. Thin records and automatic promotion are prohibited. If one candidate fails, it is withheld; the other may proceed only if complete on its own. No replacement candidate is allowed.
+
+## Deferred Batch 5 candidates
 
 ```text
-source production commit: 8344504f41df8debd2da90b1b60a61da6fba9a58
-canonical hash: sha256:083860b341f6deebc1109b6b5b044dee584ba5e487e2e9b1722213772256b5bb
-convergence attempt: 2
-stable assets: 117
-organizations: 108
-relationships: 129
-events: 192
-Evidence: 579
-Evidence Relations: 579
-deployments: 184
-Market Access records: 8
-detail routes: 417
-metadata-checked routes: 417
-archive recorded: 457
-archive not recorded: 122
+SoFiUSD / SOFID — exact deployments and current assurance evidence unresolved
+USA₮ — exact deployments and product-specific holder terms unresolved
+XREUR — announced circulation date is 2026-09-03
+JPYSC — limited account-only issue without public-chain identity and complete terms
+Swiss CHF sandbox — no final asset identity or market-launch decision
+Hazel Network token design — infrastructure/testing without a final independent production asset
 ```
 
-After PR #512 merge and production verification, return to REVIEW GATE.
+No automatic recheck or promotion is authorized.
 
-## PR #509 reviewed item
+## Explicit current exclusions
 
 ```text
-Terminal Date Boundary Review — Batch 1
-Authority PR: #508
-Implementation PR: #509
-Targets reviewed: FEI, NEAR USN, ESD
-Exact terminal days resolved: 0
-Reviewed null preserved: 3
+Terminal Date Boundary Review Batch 3
+GYEN terminal-date review before 2026-11-12
+Figure YLDS ordinary-stablecoin promotion
+Japan Market Access implementation before its separate authority
+Archive Batch 2 implementation before its separate authority
+Tier A Dossier Batch 4 implementation before its separate authority
+new dashboard, ranking, score, or recommendation
+large navigation or UI redesign
+legacy host redirect work
 ```
 
-FEI final-redemption governance did not establish redemption-route shutdown or residual-distribution completion. The USN Protection Programme deadline did not establish the end of all redemption paths, residual settlement, or the token contract. Empty Set V2 migration availability did not establish a V1 end block, disablement, or final migration deadline.
+## Established historical checkpoints
 
-No canonical stable-asset, organization, relationship, event, Evidence, deployment, Market Access, route, UI, or legacy redirect changed.
+- PR #467: Record Growth Batch 3, PLNQ and GBPQ.
+- PR #487–#492: public UI, responsive, Statistics, logo, and chain-normalization acceptance sequence.
+- PR #493: official-domain migration.
+- PR #498: MNEE complete canonical record and the current 117-asset addition checkpoint.
+- PR #500: MNEE Evidence and archive maintenance.
+- PR #503: Launch Date Boundary Review Batch 1.
+- PR #506: Evidence Archive Payload Verification Batch 1.
+- PR #509: Terminal Date Boundary Review Batch 1.
+- PR #512: Terminal Date Boundary Review Batch 2.
+- PR #513: post-PR #512 REVIEW GATE checkpoint.
 
-Production result:
+## Deployment boundary
 
-```text
-source commit: 96ae5edd42e9a9e8a652bb27acc2d6a6eb02dfd6
-canonical hash: sha256:083860b341f6deebc1109b6b5b044dee584ba5e487e2e9b1722213772256b5bb
-convergence attempt: 1
-stable assets: 117
-organizations: 108
-events: 192
-detail routes: 417
-metadata-checked detail routes: 417
-archive recorded: 457
-archive not recorded: 122
-```
+The only official public origin is `https://www.stableorgone.com`.
 
-The repository is at REVIEW GATE.
-
-## PR #506 reviewed item
-
-```text
-Evidence Archive Payload Verification — Batch 1
-Authority PR: #505
-Implementation PR: #506
-Targets reviewed: 10
-Dated exact archives added: 7
-Reviewed no safe change: 3
-Archive coverage: 457 / 579
-```
-
-Every accepted archive is an exact canonical-source HTTP-200 Wayback body with a timestamped URL, payload digest, and manual claim-scope review. The RLUSD product page, SPOT mint-guide placeholder, and ampleforth.org root remain without a canonical archive because the reviewed bodies did not preserve their current claim scopes.
-
-PR #506 changes no Evidence identity or Relation, source URL, asset, organization, relationship, event, deployment, Market Access record, route family, or material UI.
-
-Production result:
-
-```text
-source commit: 2a6bfac25538388dd7ea6dc12de96c2c2dc2dad0
-canonical hash: sha256:083860b341f6deebc1109b6b5b044dee584ba5e487e2e9b1722213772256b5bb
-convergence attempt: 2
-stable assets: 117
-organizations: 108
-events: 192
-detail routes: 417
-metadata-checked detail routes: 417
-archive recorded: 457
-archive not recorded: 122
-```
-
-The repository is at REVIEW GATE.
-
-## PR #500 completed item
-
-```text
-MNEE Evidence and Archive Maintenance — Batch 1
-```
-
-Governing files:
-
-```text
-docs/roadmap-amendments/2026-08-01-post-pr498-review-gate.md
-docs/quality/mnee-evidence-archive-maintenance-spec.md
-config/mnee-evidence-archive-maintenance.json
-data/editorial-research/mnee-evidence-archive-maintenance-batch-1-source-review.json
-scripts/validate-mnee-evidence-archive-maintenance-pr500.mjs
-docs/migration/current-canonical-checkpoint.json
-docs/migration/current-review-checkpoint.json
-docs/migration/current-stats-history-checkpoint.json
-```
-
-Result by target:
-
-```text
-latest attestation body and archive:
-  May 2026 index entry reconfirmed
-  report body, signed report-specific URL, figures, snapshot dates, and report-specific archive remain unknown
-
-current reserve custodian and allocation:
-  U.S. cash at a qualified custodian and U.S. Treasury bills <=90 days reconfirmed
-  current custodian identity and latest category amounts or shares remain unknown
-
-first public Ethereum issuance date:
-  proxy deployment and initial implementation upgrade on 2024-03-21 recorded
-  contract deployment is not treated as proof of first public issuance or availability
-
-current deployment control configuration:
-  TransparentUpgradeableProxy, 2025-09-15 implementation upgrade, and active PausableUpgradeable source recorded
-  current Ethereum role holders and operational state, post-upgrade permissions, and current 1Sat controls remain unknown
-
-direct access and jurisdiction inventory:
-  verified-account, company-document, beneficial-owner, sanctions, PEP, watchlist, prohibited-jurisdiction, and higher-risk screening boundaries recorded
-  complete current jurisdiction, customer-type, and country availability inventory remains unknown
-```
-
-The implementation added no canonical Evidence ID, deleted no known unknown, and promoted no deployment verification state. Both MNEE deployments remain `identifier_recorded_unverified`.
-
-Preserved counts:
-
-```text
-stable assets: 117
-organizations: 108
-events: 192
-Evidence: 579
-reserve reports: 125
-known unknowns: 342
-deployments: 184
-detail routes: 417
-metadata-checked detail routes: 417
-```
-
-Production result:
-
-```text
-source commit: 9d583845d73e4d758ab245812d165f25dd59ada8
-canonical hash: sha256:c6fa6b7494fc3e36f599d88edaa3d2af94a0e8c2f0ee6e4c3ee7d8a9121a4372
-convergence attempt: 1
-```
-
-## PR #503 completed item
-
-```text
-Launch Date Boundary Review — Batch 1
-Authority PR: #502
-Implementation PR: #503
-Targets: sog_st_msusd, sog_st_stablesusdx, sog_st_susde, sog_st_usd1, sog_st_usdm, sog_st_usdh
-```
-
-PR #503 reviewed all six named targets using primary sources and the prior PR #220 source checkpoint. Result:
-
-```text
-exact day resolved: 0
-canonical null preserved: 6
-queue rows completed with reviewed range, reason, date, and sources: 6
-new Evidence identities: 0
-new Evidence Relations: 0
-```
-
-Announcement, deployment, first mint, testing, terms-effective, rebrand, underlying-asset launch, and later availability boundaries were not coerced into original launch dates. The item added no new asset and authorized no replacement target, YLDS work, Market Access change, route family, ranking, recommendation, or material UI change.
-
-Production result:
-
-```text
-source commit: a89832072b6f4fe07cf43b76ae77d2a5a1aac0f0
-canonical hash: sha256:c6fa6b7494fc3e36f599d88edaa3d2af94a0e8c2f0ee6e4c3ee7d8a9121a4372
-convergence attempt: 2
-stable assets: 117
-organizations: 108
-events: 192
-detail routes: 417
-metadata-checked detail routes: 417
-```
-
-## Completed current item
-
-```text
-Terminal Date Boundary Review — Batch 2
-Authority PR: #511
-Implementation PR: #512
-Authority synchronization PR: #513
-Result: complete and production-verified
-```
-
-## Current boundary
-
-```text
-REVIEW GATE
-```
-
-No later archive batch, launch-date batch, dossier batch, record-growth batch, Figure YLDS amendment, Market Access change, public route family, or material public-surface program is authorized automatically.
-
-The PR #496 candidate audit remains the latest complete candidate review. Its non-MNEE candidates were not supported for complete-record promotion at that checkpoint.
-
-## YLDS boundary
-
-Figure YLDS remains deferred. Its issuer describes it as a registered fixed-income security rather than a stablecoin. Its face-amount units, holder yield, issuer-credit exposure, securities eligibility, transfer and redemption restrictions, and chain or wrapper semantics require a separate reviewed scope amendment. No YLDS canonical work is authorized.
-
-## Statistics contract
-
-- no Statistics section hidden in a collapsible disclosure;
-- independent desktop column packing without shared row heights;
-- single-column mobile source order;
-- canonical BNB Chain and Gnosis Chain labels;
-- distinct Arbitrum One and Arbitrum Nova values;
-- bare `Arbitrum` retained as unresolved;
-- total deployments reconciled from canonical-chain and unresolved counts.
-
-## Legacy-host redirect boundary
-
-The old host `sog.badjoke-lab.com` still resolves to the Pages project. A path- and query-preserving 301 to `www.stableorgone.com` remains an external Cloudflare configuration task. The current token has Pages publication access but no visible `badjoke-lab.com` zone, so no Pages Function workaround or unverified zone write is authorized. Issue #479 remains open only for production history and this external dependency.
-
-## Active operating mode
-
-The governing operating specification remains `docs/post-351-data-growth-operating-spec.md`. Allowed default lanes are reviewed data depth, explicitly authorized bounded growth, explicit Market Access review, read-only monitoring review, corrections and Evidence maintenance, monthly maintenance, and small correctness or accessibility fixes.
-
-New public pages, dashboards, rankings, explorer families, or major navigation changes remain frozen unless a separate reviewed roadmap amendment and canonical specification authorize them.
-
-## Production publication boundary
-
-`main` is the repository source of truth. Production publication follows `docs/deployment-policy.md` through `.github/workflows/deploy-production.yml`. Deployment conclusions require exact deployed-commit verification, canonical-data hash and provenance parity, reviewed count parity, route and metadata parity, public-origin consistency, and Issue #479 reporting.
+Main/production equality is established dynamically by `docs/deployment-policy.md`, the production workflow, and Issue #479. The legacy-host redirect remains an external Cloudflare task and is excluded from current repository work.
