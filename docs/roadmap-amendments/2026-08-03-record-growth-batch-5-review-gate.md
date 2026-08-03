@@ -46,7 +46,7 @@ required exit: REVIEW GATE
 
 PR #517 must add every applicable organization, relationship, profile, classification, event, Evidence, Evidence Relation, deployment, reserve, legal, income, and known-unknown record together. A thin asset record is not acceptable.
 
-A candidate that fails fresh identity or complete-record review must be withheld. The other candidate may proceed only on its own evidence. No deferred candidate may be substituted.
+A candidate that fails fresh identity or complete-record review must be withheld. The other candidate may proceed only on its own evidence. No replacement candidate is allowed. No deferred candidate may be substituted.
 
 ## Deferred candidates
 
