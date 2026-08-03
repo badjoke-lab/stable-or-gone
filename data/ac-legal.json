@@ -28,5 +28,73 @@
     "evidence_ids": [
       "sog_src_mnee_terms_pr498"
     ]
+  },
+  {
+    "id": "sog_st_bison_eub",
+    "classifications": [
+      {
+        "classification": "fiat_backed_electronic_money_token",
+        "jurisdiction": "Portugal / European Union",
+        "effective_from": "2026-05-06",
+        "effective_to": null,
+        "authority_or_basis": "Bison Bank EUB MiCA crypto-asset whitepaper under Regulation (EU) 2023/1114 and official issuer product materials",
+        "confidence": "high",
+        "evidence_ids": [
+          "sog_src_bison_eub_product_pr517",
+          "sog_src_bison_eub_whitepaper_pr517"
+        ]
+      }
+    ],
+    "holder_claim_type": "direct_claim_on_issuer",
+    "claim_against_organization_ids": [
+      "sog_issuer_bison_bank"
+    ],
+    "reserve_ownership": "issuer_owned",
+    "reserve_segregation": "unclear",
+    "bankruptcy_remoteness": "not_established",
+    "licensed_or_regulated_as": [
+      "Portuguese credit institution",
+      "MiCA electronic money token issuer"
+    ],
+    "notes": "Approved institutional holders have a par-redemption claim against Bison Bank under the reviewed EUB whitepaper framework. The reviewed sources do not establish token-specific reserve segregation, bankruptcy remoteness, or protection equivalent to a bank deposit guarantee.",
+    "evidence_ids": [
+      "sog_src_bison_emt_launch_pr517",
+      "sog_src_bison_eub_product_pr517",
+      "sog_src_bison_eub_whitepaper_pr517"
+    ]
+  },
+  {
+    "id": "sog_st_bison_usb",
+    "classifications": [
+      {
+        "classification": "fiat_backed_electronic_money_token",
+        "jurisdiction": "Portugal / European Union",
+        "effective_from": "2026-05-06",
+        "effective_to": null,
+        "authority_or_basis": "Bison Bank USB MiCA crypto-asset whitepaper under Regulation (EU) 2023/1114 and official issuer product materials",
+        "confidence": "high",
+        "evidence_ids": [
+          "sog_src_bison_usb_product_pr517",
+          "sog_src_bison_usb_whitepaper_pr517"
+        ]
+      }
+    ],
+    "holder_claim_type": "direct_claim_on_issuer",
+    "claim_against_organization_ids": [
+      "sog_issuer_bison_bank"
+    ],
+    "reserve_ownership": "issuer_owned",
+    "reserve_segregation": "unclear",
+    "bankruptcy_remoteness": "not_established",
+    "licensed_or_regulated_as": [
+      "Portuguese credit institution",
+      "MiCA electronic money token issuer"
+    ],
+    "notes": "Approved institutional holders have a par-redemption claim against Bison Bank under the reviewed USB whitepaper framework. The reviewed sources do not establish token-specific reserve segregation, bankruptcy remoteness, or protection equivalent to a bank deposit guarantee.",
+    "evidence_ids": [
+      "sog_src_bison_emt_launch_pr517",
+      "sog_src_bison_usb_product_pr517",
+      "sog_src_bison_usb_whitepaper_pr517"
+    ]
   }
 ]
