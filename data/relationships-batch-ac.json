@@ -12,5 +12,35 @@
       "sog_src_mnee_terms_pr498"
     ],
     "notes": "MNEE Limited is recorded as the legal issuer and direct issuance/redemption counterparty under the reviewed terms."
+  },
+  {
+    "id": "sog_rel_bison_eub_bison_bank_pr517",
+    "stablecoin_id": "sog_st_bison_eub",
+    "organization_id": "sog_issuer_bison_bank",
+    "role": "legal_issuer",
+    "start_date": "2026-05-06",
+    "end_date": null,
+    "status": "active",
+    "evidence_ids": [
+      "sog_src_bison_emt_launch_pr517",
+      "sog_src_bison_eub_product_pr517",
+      "sog_src_bison_eub_whitepaper_pr517"
+    ],
+    "notes": "Bison Bank, S.A. is recorded as EUB's legal issuer, direct issuance and redemption counterparty, and operator of the approved institutional-partner workflow."
+  },
+  {
+    "id": "sog_rel_bison_usb_bison_bank_pr517",
+    "stablecoin_id": "sog_st_bison_usb",
+    "organization_id": "sog_issuer_bison_bank",
+    "role": "legal_issuer",
+    "start_date": "2026-05-06",
+    "end_date": null,
+    "status": "active",
+    "evidence_ids": [
+      "sog_src_bison_emt_launch_pr517",
+      "sog_src_bison_usb_product_pr517",
+      "sog_src_bison_usb_whitepaper_pr517"
+    ],
+    "notes": "Bison Bank, S.A. is recorded as USB's legal issuer, direct issuance and redemption counterparty, and operator of the approved institutional-partner workflow."
   }
 ]
