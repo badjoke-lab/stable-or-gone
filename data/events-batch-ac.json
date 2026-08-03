@@ -12,5 +12,33 @@
     "source_count": 4,
     "event_status_effect": "active",
     "notes": "The launch event records the verified 1Sat launch date. Ethereum availability and exact deployment identities are recorded separately without inferring an Ethereum launch date."
+  },
+  {
+    "id": "sog_ev_bison_eub_launch_pr517",
+    "stablecoin_id": "sog_st_bison_eub",
+    "issuer_id": "sog_issuer_bison_bank",
+    "event_type": "launch",
+    "event_date": "2026-05-06",
+    "title": "Bison Bank launches the EUB euro electronic-money token",
+    "description": "Bison Bank announced the launch of EUB for pre-approved institutional partners as a euro-referenced electronic-money token using an approved-wallet Solana Token-2022 deployment.",
+    "impact_level": "high",
+    "confidence": "high",
+    "source_count": 3,
+    "event_status_effect": "restricted",
+    "notes": "The canonical launch date follows the official 2026-05-06 public launch article. The whitepaper's 2026-04-10 offer start date is retained as context and not substituted for the first verified public launch statement or an unknown first on-chain mint date."
+  },
+  {
+    "id": "sog_ev_bison_usb_launch_pr517",
+    "stablecoin_id": "sog_st_bison_usb",
+    "issuer_id": "sog_issuer_bison_bank",
+    "event_type": "launch",
+    "event_date": "2026-05-06",
+    "title": "Bison Bank launches the USB U.S.-dollar electronic-money token",
+    "description": "Bison Bank announced the launch of USB for pre-approved institutional partners as a U.S.-dollar-referenced electronic-money token using an approved-wallet Solana Token-2022 deployment.",
+    "impact_level": "high",
+    "confidence": "high",
+    "source_count": 3,
+    "event_status_effect": "restricted",
+    "notes": "The canonical launch date follows the official 2026-05-06 public launch article. The whitepaper's 2026-04-10 offer start date is retained as context and not substituted for the first verified public launch statement or an unknown first on-chain mint date."
   }
 ]
