@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0",
+  "reviewed_at": "2026-08-03",
+  "source_review": "data/editorial-research/record-growth-batch-5-bison-eub-usb-pr517-source-review.json",
+  "expected_additions": 2,
+  "status_counts": {
+    "verified": 0,
+    "identifier_recorded_unverified": 0,
+    "source_linked_no_identifier": 2,
+    "review_needed": 0,
+    "unknown": 0,
+    "not_recorded": 0
+  },
+  "status_ids": {
+    "verified": [],
+    "identifier_recorded_unverified": [],
+    "source_linked_no_identifier": [
+      "sog_dep_bison_eub_solana_pr517",
+      "sog_dep_bison_usb_solana_pr517"
+    ],
+    "review_needed": [],
+    "unknown": [],
+    "not_recorded": []
+  },
+  "reviewed_records": [
+    {
+      "id": "sog_dep_bison_eub_solana_pr517",
+      "identifier_type": "solana_mint",
+      "identifier": null,
+      "source_url": "https://bisonbank.com/wp-content/uploads/2026/04/Bison-Bank-EUB-White-Paper_20260312-1.pdf",
+      "verification_status": "source_linked_no_identifier",
+      "notes": "Official Solana Token-2022 deployment family is source-linked. The whitepaper's digital-token identifier field is not applicable and no exact mint received second authoritative or direct on-chain confirmation."
+    },
+    {
+      "id": "sog_dep_bison_usb_solana_pr517",
+      "identifier_type": "solana_mint",
+      "identifier": null,
+      "source_url": "https://bisonbank.com/wp-content/uploads/2026/04/Bison-Bank-USB-White-Paper_20260312-1.pdf",
+      "verification_status": "source_linked_no_identifier",
+      "notes": "Official Solana Token-2022 deployment family is source-linked. The whitepaper's digital-token identifier field is not applicable and no exact mint received second authoritative or direct on-chain confirmation."
+    }
+  ]
+}
