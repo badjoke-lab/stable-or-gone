@@ -26,5 +26,59 @@
         "sog_issuer_mnee_limited"
       ]
     }
+  },
+  {
+    "id": "sog_ev_bison_eub_launch_pr517",
+    "title": "Bison Bank launches the EUB euro electronic-money token",
+    "subject_stablecoin_ids": [
+      "sog_st_bison_eub"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_bison_bank"
+    ],
+    "evidence_ids": [
+      "sog_src_bison_emt_launch_pr517",
+      "sog_src_bison_eub_product_pr517",
+      "sog_src_bison_eub_whitepaper_pr517"
+    ],
+    "event_detail_kind": "launch",
+    "launch_detail": {
+      "summary": "Official launch of EUB for approved institutional partners with restricted issuance, redemption, and allowlisted Solana Token-2022 transfers.",
+      "status": "restricted",
+      "resolution_date": null,
+      "affected_deployment_ids": [
+        "sog_dep_bison_eub_solana_pr517"
+      ],
+      "related_organization_ids": [
+        "sog_issuer_bison_bank"
+      ]
+    }
+  },
+  {
+    "id": "sog_ev_bison_usb_launch_pr517",
+    "title": "Bison Bank launches the USB U.S.-dollar electronic-money token",
+    "subject_stablecoin_ids": [
+      "sog_st_bison_usb"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_bison_bank"
+    ],
+    "evidence_ids": [
+      "sog_src_bison_emt_launch_pr517",
+      "sog_src_bison_usb_product_pr517",
+      "sog_src_bison_usb_whitepaper_pr517"
+    ],
+    "event_detail_kind": "launch",
+    "launch_detail": {
+      "summary": "Official launch of USB for approved institutional partners with restricted issuance, redemption, and allowlisted Solana Token-2022 transfers.",
+      "status": "restricted",
+      "resolution_date": null,
+      "affected_deployment_ids": [
+        "sog_dep_bison_usb_solana_pr517"
+      ],
+      "related_organization_ids": [
+        "sog_issuer_bison_bank"
+      ]
+    }
   }
 ]
