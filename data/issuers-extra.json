@@ -63,5 +63,18 @@
     "confidence": "medium",
     "last_verified_at": "2026-06-14",
     "notes": "Batch A legacy compatibility record."
+  },
+  {
+    "id": "sog_issuer_bison_bank",
+    "slug": "bison-bank",
+    "name": "Bison Bank, S.A.",
+    "issuer_type": "company",
+    "jurisdiction": "Portugal",
+    "related_stablecoins": ["bison-bank-eub", "bison-bank-usb"],
+    "official_url": "https://bisonbank.com/",
+    "summary": "Portuguese credit institution and legal issuer of the EUB and USB electronic-money tokens for pre-approved institutional partners.",
+    "confidence": "high",
+    "last_verified_at": "2026-08-03",
+    "notes": "PR #517 legacy issuer compatibility record for the canonical Bison Bank organization."
   }
 ]
