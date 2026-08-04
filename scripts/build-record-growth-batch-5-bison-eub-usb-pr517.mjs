@@ -145,7 +145,7 @@ export function buildPr517GeneratedState() {
     schema_version: '1.0',
     status: 'reviewed_growth_checkpoint',
     checkpoint_id: 'sog_stats_pr517_record_growth_batch_5_bison_eub_usb_2026_08_03',
-    checkpoint_kind: 'record_growth_checkpoint',
+    checkpoint_kind: 'controlled_growth_checkpoint',
     recorded_at: '2026-08-03',
     registry_version: 'pr517-record-growth-batch-5-bison-eub-usb',
     asset_count: 119,
