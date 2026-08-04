@@ -113,7 +113,10 @@ export const footerNavigationGroups = Object.freeze([
       Object.freeze({ label: 'Stablecoin record pages', href: '/stablecoins/page/2/' }),
       Object.freeze({ label: 'Event record pages', href: '/events/page/2/' }),
       Object.freeze({ label: 'Organization record pages', href: '/issuers/page/2/' }),
-      Object.freeze({ label: 'BadJoke-Lab project hub', href: 'https://badjoke-lab.com/' })
+      Object.freeze({ label: 'BadJoke-Lab project hub', href: 'https://badjoke-lab.com/' }),
+      Object.freeze({ label: 'Historical Exchange Index', href: 'https://hei.badjoke-lab.com/' }),
+      Object.freeze({ label: 'Crypto Yield Archive', href: 'https://cya.badjoke-lab.com/' }),
+      Object.freeze({ label: 'Bridge Incident Registry', href: 'https://bir.badjoke-lab.com/' })
     ])
   })
 ]);
