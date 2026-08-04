@@ -1,5 +1,6 @@
 ---
 import StablecoinDetailView from '../../components/StablecoinDetailView.astro';
+import { PUBLIC_ORIGIN } from '../../../config/public-origin.mjs';
 import { getStablecoins } from '../../lib/data/registry';
 
 export function getStaticPaths() {
@@ -7,5 +8,38 @@ export function getStaticPaths() {
 }
 
 const { coin } = Astro.props;
+const canonicalUrl = new URL(`/stablecoin/${coin.slug}/`, PUBLIC_ORIGIN).toString();
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Dataset',
+      '@id': `${canonicalUrl}#dataset`,
+      name: `${coin.name} stablecoin history`,
+      identifier: coin.id,
+      url: canonicalUrl,
+      dateModified: coin.last_verified_at,
+      isAccessibleForFree: true,
+      license: 'https://creativecommons.org/licenses/by/4.0/',
+      creator: { '@type': 'Organization', name: 'BadJoke-Lab', url: 'https://badjoke-lab.com/' },
+      publisher: { '@type': 'Organization', name: 'Stable or Gone', url: PUBLIC_ORIGIN },
+      distribution: {
+        '@type': 'DataDownload',
+        encodingFormat: 'application/json',
+        contentUrl: new URL('/data/manifest.json', PUBLIC_ORIGIN).toString(),
+      },
+    },
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${canonicalUrl}#breadcrumb`,
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${PUBLIC_ORIGIN}/` },
+        { '@type': 'ListItem', position: 2, name: 'Stablecoins', item: `${PUBLIC_ORIGIN}/stablecoins/` },
+        { '@type': 'ListItem', position: 3, name: coin.name, item: canonicalUrl },
+      ],
+    },
+  ],
+};
 ---
+<script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
 <StablecoinDetailView coin={coin} />
