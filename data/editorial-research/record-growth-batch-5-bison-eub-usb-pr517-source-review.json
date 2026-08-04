@@ -1,0 +1,142 @@
+{
+  "schema_version": "1.0",
+  "status": "reviewed_complete_record_entry_gate",
+  "recorded_at": "2026-08-03",
+  "authority_pr": 516,
+  "implementation_pr": 517,
+  "source_audit_pr": 515,
+  "production_authority_commit": "9e5d7071cdcd4d398d36e8235aa6b8eae173d019",
+  "selected_candidate_ids": [
+    "sog_cand_pr515_bison_eub",
+    "sog_cand_pr515_bison_usb"
+  ],
+  "duplicate_and_lineage_review": {
+    "exact_duplicates_in_117_asset_baseline": [],
+    "symbol_collisions_in_117_asset_baseline": [],
+    "decision": "two_distinct_sibling_assets_under_one_issuer_program",
+    "notes": "EUB and USB share Bison Bank, S.A. as issuer and the same Electronic Money Token program, but have separate names, symbols, whitepapers, reference currencies, and holder claims. They are not aliases, wrappers, or deployments of one another."
+  },
+  "issuer_review": {
+    "organization_id": "sog_issuer_bison_bank",
+    "legal_name": "Bison Bank, S.A.",
+    "jurisdiction": "Portugal",
+    "role": "legal_issuer",
+    "maximum_new_organizations": 1,
+    "notes": "The reviewed Bison Bank launch article, product pages, and MiCA whitepapers identify Bison Bank, S.A. as issuer of both EMTs."
+  },
+  "launch_boundary_review": {
+    "canonical_launch_date": "2026-05-06",
+    "official_launch_source": "https://bisonbank.com/bison-electronic-money-token-the-first-portuguese-stablecoin-is-launched-today/",
+    "whitepaper_offer_start_date": "2026-04-10",
+    "decision": "use_public_launch_announcement_date",
+    "notes": "The whitepapers state an offer start date of 2026-04-10, while Bison Bank's official public launch article states that both tokens launched on 2026-05-06. The exact first on-chain mint, first holder allocation, and initial circulating supply remain unknown and are not inferred from either date."
+  },
+  "deployment_identity_review": {
+    "chain": "Solana",
+    "token_standard": "Solana Token-2022 Program",
+    "official_whitepaper_identifier_field": "not_applicable",
+    "exact_eub_mint": null,
+    "exact_usb_mint": null,
+    "second_authoritative_or_direct_onchain_confirmation": false,
+    "decision": "record_deployment_family_without_exact_mint",
+    "notes": "Official product pages and whitepapers support Solana Token-2022 and approved-wallet transfers. The reviewed official whitepapers do not publish a digital-token identifier in section B.12, and no exact mint address received the required second authoritative or direct on-chain confirmation. Contract addresses therefore remain null."
+  },
+  "reserve_and_assurance_review": {
+    "issuer_claim": "Each token is issued and redeemed at par against the corresponding fiat currency and is described as fully backed by fiat proceeds managed under a conservative high-quality and liquid investment strategy.",
+    "exact_asset_categories": [],
+    "custodian": null,
+    "token_specific_attestation_or_audit_report": null,
+    "issuer_level_audit_claim": "Bison Bank states that it is regularly audited by Deloitte.",
+    "decision": "record_whitepaper_framework_not_token_specific_attestation",
+    "notes": "No reviewed report body establishes current token-specific reserve amounts, asset allocations, custodian identity, liabilities, excess reserves, or a token-specific assurance opinion. The issuer-level audit statement is not promoted to an EUB or USB reserve attestation."
+  },
+  "issuance_redemption_and_access_review": {
+    "issuance": "Pre-approved institutional partners may request issuance through the Bison workflow after fiat funding, compliance validation, and use of an approved Solana-compatible wallet.",
+    "redemption": "Eligible institutional holders may request redemption at par; reviewed whitepaper terms describe processing within two Lisbon business days after compliance checks and token transfer.",
+    "retail_direct_access": false,
+    "institutional_direct_access": true,
+    "wallet_allowlist": true,
+    "kyc_aml": true,
+    "minimum_amount": null,
+    "fee_schedule": null,
+    "complete_current_partner_inventory": null,
+    "complete_jurisdiction_inventory": null,
+    "decision": "restricted_institutional_only"
+  },
+  "income_review": {
+    "holder_yield": false,
+    "reserve_income_right": false,
+    "notes": "The reviewed whitepapers state that holders do not receive interest or other remuneration merely by holding EUB or USB. Any income earned on reserve assets is not recorded as a holder income right."
+  },
+  "control_review": {
+    "allowlist_capability": true,
+    "freeze_or_block_capability_described": true,
+    "current_authority_addresses": [],
+    "current_role_assignments": [],
+    "current_operational_freeze_state": null,
+    "decision": "record_control_capability_boundary_with_current_roles_unknown"
+  },
+  "sources": [
+    {
+      "source_id": "sog_src_bison_emt_launch_pr517",
+      "title": "Bison Electronic Money Token: the first Portuguese stablecoin is launched today",
+      "publisher": "Bison Bank",
+      "url": "https://bisonbank.com/bison-electronic-money-token-the-first-portuguese-stablecoin-is-launched-today/",
+      "source_type": "official_launch_announcement",
+      "published_at": "2026-05-06",
+      "primary": true,
+      "claim_scopes": ["identity", "issuer", "launch", "two_distinct_assets", "backing_claim", "institutional_access"]
+    },
+    {
+      "source_id": "sog_src_bison_eub_product_pr517",
+      "title": "EUB — Bison Bank Electronic Money Token — Euro",
+      "publisher": "Bison Bank",
+      "url": "https://bisonbank.com/eub/",
+      "source_type": "official_product_page",
+      "published_at": null,
+      "primary": true,
+      "claim_scopes": ["identity", "issuer", "EUR_reference", "Solana", "issuance", "redemption", "allowlist", "reserve_framework"]
+    },
+    {
+      "source_id": "sog_src_bison_eub_whitepaper_pr517",
+      "title": "Bison Bank EUB Crypto-Asset White Paper",
+      "publisher": "Bison Bank",
+      "url": "https://bisonbank.com/wp-content/uploads/2026/04/Bison-Bank-EUB-White-Paper_20260312-1.pdf",
+      "source_type": "official_micar_whitepaper",
+      "published_at": "2026-03-12",
+      "primary": true,
+      "claim_scopes": ["legal", "MiCA", "offer_start", "Solana_Token_2022", "identifier_boundary", "issuance", "redemption", "access", "controls", "reserve_framework", "no_holder_yield"]
+    },
+    {
+      "source_id": "sog_src_bison_usb_product_pr517",
+      "title": "USB — Bison Bank Electronic Money Token — US Dollar",
+      "publisher": "Bison Bank",
+      "url": "https://bisonbank.com/usb/",
+      "source_type": "official_product_page",
+      "published_at": null,
+      "primary": true,
+      "claim_scopes": ["identity", "issuer", "USD_reference", "Solana", "issuance", "redemption", "allowlist", "reserve_framework"]
+    },
+    {
+      "source_id": "sog_src_bison_usb_whitepaper_pr517",
+      "title": "Bison Bank USB Crypto-Asset White Paper",
+      "publisher": "Bison Bank",
+      "url": "https://bisonbank.com/wp-content/uploads/2026/04/Bison-Bank-USB-White-Paper_20260312-1.pdf",
+      "source_type": "official_micar_whitepaper",
+      "published_at": "2026-03-12",
+      "primary": true,
+      "claim_scopes": ["legal", "MiCA", "offer_start", "Solana_Token_2022", "identifier_boundary", "issuance", "redemption", "access", "controls", "reserve_framework", "no_holder_yield"]
+    }
+  ],
+  "record_decision": {
+    "eub": "promote_complete_record_with_exact_mint_and_token_specific_reserve_assurance_unknown",
+    "usb": "promote_complete_record_with_exact_mint_and_token_specific_reserve_assurance_unknown",
+    "maximum_assets": 2,
+    "maximum_organizations": 1,
+    "replacement_candidate_used": false,
+    "market_access_change": false,
+    "material_ui_change": false,
+    "legacy_redirect_change": false,
+    "required_exit": "REVIEW_GATE"
+  }
+}

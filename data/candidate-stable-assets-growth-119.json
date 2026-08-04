@@ -1,0 +1,44 @@
+[
+  {
+    "candidate_id": "sog_cand_000118",
+    "proposed_record_id": "sog_st_bison_eub",
+    "slug": "bison-bank-eub",
+    "name": "Bison Bank Electronic Money Token — Euro",
+    "symbol": "EUB",
+    "aliases": [
+      "EUB",
+      "Bison Bank EUB",
+      "Bison Electronic Money Token Euro"
+    ],
+    "candidate_type": "stablecoin",
+    "asset_class": "stablecoin",
+    "reference_kind": "fiat",
+    "reference_label": "EUR",
+    "priority": "P0",
+    "status": "accepted",
+    "target_batch": "batch_031",
+    "notes": "Reviewed in PR #515, authorized by PR #516, and promoted by PR #517 as a restricted institutional electronic-money-token record with Solana Token-2022 deployment family and explicit mint, reserve, assurance, fee, supply, and control unknowns.",
+    "source_candidate_id": "sog_cand_pr515_bison_eub"
+  },
+  {
+    "candidate_id": "sog_cand_000119",
+    "proposed_record_id": "sog_st_bison_usb",
+    "slug": "bison-bank-usb",
+    "name": "Bison Bank Electronic Money Token — US Dollar",
+    "symbol": "USB",
+    "aliases": [
+      "USB",
+      "Bison Bank USB",
+      "Bison Electronic Money Token US Dollar"
+    ],
+    "candidate_type": "stablecoin",
+    "asset_class": "stablecoin",
+    "reference_kind": "fiat",
+    "reference_label": "USD",
+    "priority": "P0",
+    "status": "accepted",
+    "target_batch": "batch_031",
+    "notes": "Reviewed in PR #515, authorized by PR #516, and promoted by PR #517 as a restricted institutional electronic-money-token record with Solana Token-2022 deployment family and explicit mint, reserve, assurance, fee, supply, and control unknowns.",
+    "source_candidate_id": "sog_cand_pr515_bison_usb"
+  }
+]

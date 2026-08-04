@@ -48,5 +48,105 @@
     "severity": "medium",
     "last_checked_at": "2026-08-01",
     "notes": "Public exchange, wallet, developer, or partner availability is not equivalent to direct issuer access."
+  },
+  {
+    "id": "sog_ku_bison_eub_solana_mint_pr517",
+    "stablecoin_id": "sog_st_bison_eub",
+    "issuer_id": "sog_issuer_bison_bank",
+    "topic": "exact_solana_mint_and_digital_token_identifier",
+    "description": "Official EUB materials establish Solana Token-2022 and approved-wallet use, but the reviewed whitepaper records its digital-token identifier field as not applicable and no exact mint address received a second authoritative or direct on-chain confirmation.",
+    "severity": "high",
+    "last_checked_at": "2026-08-03",
+    "notes": "The canonical deployment records chain and token standard only. Do not publish an address based on symbol search, wallet display, or unverified explorer labels."
+  },
+  {
+    "id": "sog_ku_bison_eub_first_issuance_pr517",
+    "stablecoin_id": "sog_st_bison_eub",
+    "issuer_id": "sog_issuer_bison_bank",
+    "topic": "first_onchain_issuance_supply_and_date_boundary",
+    "description": "The EUB whitepaper states an offer start date of 2026-04-10 and the official launch article states a public launch on 2026-05-06. The exact first on-chain mint, first holder allocation, initial circulating supply, and current supply remain unestablished.",
+    "severity": "medium",
+    "last_checked_at": "2026-08-03",
+    "notes": "The canonical launch date is the explicit public launch date. Neither date is used as a proxy for an unknown first mint or first circulation timestamp."
+  },
+  {
+    "id": "sog_ku_bison_eub_reserves_pr517",
+    "stablecoin_id": "sog_st_bison_eub",
+    "issuer_id": "sog_issuer_bison_bank",
+    "topic": "current_reserve_composition_custodian_and_token_specific_assurance",
+    "description": "The issuer describes par issuance and redemption and a conservative high-quality and liquid investment framework, but the reviewed sources do not establish current EUB reserve categories, amounts, shares, custodian identity, liabilities, excess reserves, or a token-specific audit or attestation opinion.",
+    "severity": "high",
+    "last_checked_at": "2026-08-03",
+    "notes": "Bison Bank's issuer-level Deloitte audit statement is not EUB-specific reserve assurance."
+  },
+  {
+    "id": "sog_ku_bison_eub_access_fees_pr517",
+    "stablecoin_id": "sog_st_bison_eub",
+    "issuer_id": "sog_issuer_bison_bank",
+    "topic": "current_issuance_redemption_fees_minimums_and_access_inventory",
+    "description": "Approved institutional access, AML/KYC, a Bison Bank relationship, and an approved wallet are supported. The current issuance and redemption fee schedule, minimum amounts, complete partner inventory, customer-type policy, country inventory, and approved-wallet inventory remain unpublished in the reviewed sources.",
+    "severity": "medium",
+    "last_checked_at": "2026-08-03",
+    "notes": "Do not infer retail, exchange, or jurisdiction-wide availability from the institutional product launch."
+  },
+  {
+    "id": "sog_ku_bison_eub_controls_pr517",
+    "stablecoin_id": "sog_st_bison_eub",
+    "issuer_id": "sog_issuer_bison_bank",
+    "topic": "current_token_2022_control_authorities_and_operational_state",
+    "description": "The reviewed EUB whitepaper describes approved-wallet restrictions and issuer control capabilities, but the exact mint authority, freeze authority, permanent delegate, transfer hook, allowlist administrator, block or recall authority, role-holder addresses, and current operational control state remain unestablished.",
+    "severity": "high",
+    "last_checked_at": "2026-08-03",
+    "notes": "Control capability does not prove a particular current role assignment or use event."
+  },
+  {
+    "id": "sog_ku_bison_usb_solana_mint_pr517",
+    "stablecoin_id": "sog_st_bison_usb",
+    "issuer_id": "sog_issuer_bison_bank",
+    "topic": "exact_solana_mint_and_digital_token_identifier",
+    "description": "Official USB materials establish Solana Token-2022 and approved-wallet use, but the reviewed whitepaper records its digital-token identifier field as not applicable and no exact mint address received a second authoritative or direct on-chain confirmation.",
+    "severity": "high",
+    "last_checked_at": "2026-08-03",
+    "notes": "The canonical deployment records chain and token standard only. Do not publish an address based on symbol search, wallet display, or unverified explorer labels."
+  },
+  {
+    "id": "sog_ku_bison_usb_first_issuance_pr517",
+    "stablecoin_id": "sog_st_bison_usb",
+    "issuer_id": "sog_issuer_bison_bank",
+    "topic": "first_onchain_issuance_supply_and_date_boundary",
+    "description": "The USB whitepaper states an offer start date of 2026-04-10 and the official launch article states a public launch on 2026-05-06. The exact first on-chain mint, first holder allocation, initial circulating supply, and current supply remain unestablished.",
+    "severity": "medium",
+    "last_checked_at": "2026-08-03",
+    "notes": "The canonical launch date is the explicit public launch date. Neither date is used as a proxy for an unknown first mint or first circulation timestamp."
+  },
+  {
+    "id": "sog_ku_bison_usb_reserves_pr517",
+    "stablecoin_id": "sog_st_bison_usb",
+    "issuer_id": "sog_issuer_bison_bank",
+    "topic": "current_reserve_composition_custodian_and_token_specific_assurance",
+    "description": "The issuer describes par issuance and redemption and a conservative high-quality and liquid investment framework, but the reviewed sources do not establish current USB reserve categories, amounts, shares, custodian identity, liabilities, excess reserves, or a token-specific audit or attestation opinion.",
+    "severity": "high",
+    "last_checked_at": "2026-08-03",
+    "notes": "Bison Bank's issuer-level Deloitte audit statement is not USB-specific reserve assurance."
+  },
+  {
+    "id": "sog_ku_bison_usb_access_fees_pr517",
+    "stablecoin_id": "sog_st_bison_usb",
+    "issuer_id": "sog_issuer_bison_bank",
+    "topic": "current_issuance_redemption_fees_minimums_and_access_inventory",
+    "description": "Approved institutional access, AML/KYC, a Bison Bank relationship, and an approved wallet are supported. The current issuance and redemption fee schedule, minimum amounts, complete partner inventory, customer-type policy, country inventory, and approved-wallet inventory remain unpublished in the reviewed sources.",
+    "severity": "medium",
+    "last_checked_at": "2026-08-03",
+    "notes": "Do not infer retail, exchange, or jurisdiction-wide availability from the institutional product launch."
+  },
+  {
+    "id": "sog_ku_bison_usb_controls_pr517",
+    "stablecoin_id": "sog_st_bison_usb",
+    "issuer_id": "sog_issuer_bison_bank",
+    "topic": "current_token_2022_control_authorities_and_operational_state",
+    "description": "The reviewed USB whitepaper describes approved-wallet restrictions and issuer control capabilities, but the exact mint authority, freeze authority, permanent delegate, transfer hook, allowlist administrator, block or recall authority, role-holder addresses, and current operational control state remain unestablished.",
+    "severity": "high",
+    "last_checked_at": "2026-08-03",
+    "notes": "Control capability does not prove a particular current role assignment or use event."
   }
 ]

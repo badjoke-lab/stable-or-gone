@@ -90,6 +90,7 @@ jobs:
           path: |
             artifacts/stats-current.json
             artifacts/stats-history-validation.json
+            artifacts/pr517-generated-state/**
       - name: Validate counts, manifest, version, and provenance integrity
         run: npm run validate:release-integrity
       - name: Validate reproducible build contract

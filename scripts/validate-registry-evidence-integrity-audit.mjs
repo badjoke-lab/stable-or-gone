@@ -7,6 +7,7 @@ const jsonPath = 'data/generated/registry-evidence-integrity-audit.json';
 const baseline = loadRegistryV2Baseline(process.cwd());
 const checkpoint = JSON.parse(fs.readFileSync('docs/migration/current-canonical-checkpoint.json', 'utf8'));
 const checkpointCounts = checkpoint.expected_counts ?? {};
+const checkpointCurrentCounts = checkpoint.counts ?? {};
 const expectedEvidence = baseline.minimum_counts?.evidence;
 const expectedRelations = baseline.minimum_counts?.evidence_relations ?? expectedEvidence;
 const expectedPublicSources = expectedEvidence - evidenceSourceAliasCount;
@@ -15,10 +16,12 @@ const correctionOutcomePath = 'docs/migration/evidence-correction-outcomes-pr360
 const correctionConfig = fs.existsSync(correctionConfigPath) ? JSON.parse(fs.readFileSync(correctionConfigPath, 'utf8')) : null;
 const correctionOutcome = fs.existsSync(correctionOutcomePath) ? JSON.parse(fs.readFileSync(correctionOutcomePath, 'utf8')) : null;
 const expectedArchiveNotRecorded = checkpoint.evidence_quality?.archive_not_recorded_count
+  ?? checkpointCurrentCounts.archive_not_recorded_count
   ?? correctionOutcome?.archive_not_recorded_count_after
   ?? correctionConfig?.archive_not_recorded_count_before
   ?? 177;
 const expectedArchiveRecorded = checkpoint.evidence_quality?.archive_index_count
+  ?? checkpointCurrentCounts.archive_index_count
   ?? correctionOutcome?.archive_index_count_after
   ?? (expectedEvidence - expectedArchiveNotRecorded);
 

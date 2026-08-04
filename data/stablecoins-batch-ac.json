@@ -26,5 +26,63 @@
     "confidence": "high",
     "last_verified_at": "2026-07-31",
     "notes": "PR #498 complete-record promotion. Exact 1Sat token ID and Ethereum contract are recorded. Current reserve allocations, custodian identity, latest attestation report-body figures, Ethereum first-issuance date, and issuer-control capabilities remain explicit known unknowns."
+  },
+  {
+    "id": "sog_st_bison_eub",
+    "slug": "bison-bank-eub",
+    "name": "Bison Bank Electronic Money Token — Euro",
+    "symbol": "EUB",
+    "aliases": [
+      "EUB",
+      "Bison Bank EUB",
+      "Bison Electronic Money Token Euro"
+    ],
+    "status": "limited",
+    "issuer_id": "sog_issuer_bison_bank",
+    "peg_asset": "EUR",
+    "collateral_model": "fiat_reserve_backed",
+    "reserve_disclosure_status": "micar_whitepaper_framework_no_token_specific_attestation",
+    "redemption_status": "institutional_only",
+    "who_can_redeem": "Pre-approved institutional partners that maintain the required Bison Bank relationship, pass current AML/KYC checks, and use an approved Solana-compatible wallet may request redemption at par under the reviewed terms.",
+    "retail_redemption": "not_available",
+    "institutional_redemption": "available_to_preapproved_institutional_partners_subject_to_compliance_and_allowlist_controls",
+    "minimum_redemption": "not stated in the reviewed public sources",
+    "redemption_region_notes": "Direct access is restricted to approved institutional partners and approved wallets. A complete current partner, customer-type, jurisdiction, and approved-wallet inventory is not published in the reviewed sources.",
+    "redemption_notes": "The reviewed whitepaper describes redemption processing within two Lisbon business days after compliance checks and transfer of the tokens. Current fees and minimums were not established.",
+    "launch_date": "2026-05-06",
+    "discontinued_date": null,
+    "summary": "Euro-referenced electronic-money token issued by Bison Bank, S.A. for pre-approved institutional partners, with 1:1 issuance and redemption claims and an allowlisted Solana Token-2022 deployment whose exact mint address is not published in the reviewed official sources.",
+    "confidence": "high",
+    "last_verified_at": "2026-08-03",
+    "notes": "PR #517 complete-record promotion. The official public launch date is 2026-05-06; the whitepaper states an offer start date of 2026-04-10. Exact first mint, circulating supply, Solana mint address, reserve allocation, custodian, token-specific assurance, fees, minimums, and current control-role assignments remain explicit known unknowns."
+  },
+  {
+    "id": "sog_st_bison_usb",
+    "slug": "bison-bank-usb",
+    "name": "Bison Bank Electronic Money Token — US Dollar",
+    "symbol": "USB",
+    "aliases": [
+      "USB",
+      "Bison Bank USB",
+      "Bison Electronic Money Token US Dollar"
+    ],
+    "status": "limited",
+    "issuer_id": "sog_issuer_bison_bank",
+    "peg_asset": "USD",
+    "collateral_model": "fiat_reserve_backed",
+    "reserve_disclosure_status": "micar_whitepaper_framework_no_token_specific_attestation",
+    "redemption_status": "institutional_only",
+    "who_can_redeem": "Pre-approved institutional partners that maintain the required Bison Bank relationship, pass current AML/KYC checks, and use an approved Solana-compatible wallet may request redemption at par under the reviewed terms.",
+    "retail_redemption": "not_available",
+    "institutional_redemption": "available_to_preapproved_institutional_partners_subject_to_compliance_and_allowlist_controls",
+    "minimum_redemption": "not stated in the reviewed public sources",
+    "redemption_region_notes": "Direct access is restricted to approved institutional partners and approved wallets. A complete current partner, customer-type, jurisdiction, and approved-wallet inventory is not published in the reviewed sources.",
+    "redemption_notes": "The reviewed whitepaper describes redemption processing within two Lisbon business days after compliance checks and transfer of the tokens. Current fees and minimums were not established.",
+    "launch_date": "2026-05-06",
+    "discontinued_date": null,
+    "summary": "U.S.-dollar-referenced electronic-money token issued by Bison Bank, S.A. for pre-approved institutional partners, with 1:1 issuance and redemption claims and an allowlisted Solana Token-2022 deployment whose exact mint address is not published in the reviewed official sources.",
+    "confidence": "high",
+    "last_verified_at": "2026-08-03",
+    "notes": "PR #517 complete-record promotion. The official public launch date is 2026-05-06; the whitepaper states an offer start date of 2026-04-10. Exact first mint, circulating supply, Solana mint address, reserve allocation, custodian, token-specific assurance, fees, minimums, and current control-role assignments remain explicit known unknowns."
   }
 ]

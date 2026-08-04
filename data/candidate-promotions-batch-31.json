@@ -1,0 +1,42 @@
+[
+  {
+    "candidate_id": "sog_cand_000118",
+    "stablecoin_id": "sog_st_bison_eub",
+    "symbol": "EUB",
+    "reviewed_disposition": "promoted_complete_record",
+    "source_pr": 515,
+    "authority_pr": 516,
+    "implementation_pr": 517,
+    "recorded_at": "2026-08-03",
+    "complete_record": true,
+    "replacement_candidate_used": false,
+    "canonical_asset_increment": 1,
+    "public_surface_change": false,
+    "market_access_change": false,
+    "notes": "Fresh PR #517 entry-gate review preserved Solana Token-2022 without inventing an exact mint, recorded restricted institutional issuance and redemption, and kept reserve composition, token-specific assurance, fees, supply, and current controls explicit as unknowns.",
+    "status": "promoted",
+    "promotion_pr": 517,
+    "promoted_record_id": "sog_st_bison_eub",
+    "source_candidate_id": "sog_cand_pr515_bison_eub"
+  },
+  {
+    "candidate_id": "sog_cand_000119",
+    "stablecoin_id": "sog_st_bison_usb",
+    "symbol": "USB",
+    "reviewed_disposition": "promoted_complete_record",
+    "source_pr": 515,
+    "authority_pr": 516,
+    "implementation_pr": 517,
+    "recorded_at": "2026-08-03",
+    "complete_record": true,
+    "replacement_candidate_used": false,
+    "canonical_asset_increment": 1,
+    "public_surface_change": false,
+    "market_access_change": false,
+    "notes": "Fresh PR #517 entry-gate review preserved Solana Token-2022 without inventing an exact mint, recorded restricted institutional issuance and redemption, and kept reserve composition, token-specific assurance, fees, supply, and current controls explicit as unknowns.",
+    "status": "promoted",
+    "promotion_pr": 517,
+    "promoted_record_id": "sog_st_bison_usb",
+    "source_candidate_id": "sog_cand_pr515_bison_usb"
+  }
+]

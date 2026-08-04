@@ -45,5 +45,51 @@
     "mint_authority_type": "issuer_controlled_current_roles_unverified",
     "contract_version": "TransparentUpgradeableProxy; active MNEEv2 implementation after 2025-09-15 upgrade",
     "is_primary": false
+  },
+  {
+    "id": "sog_dep_bison_eub_solana_pr517",
+    "stablecoin_id": "sog_st_bison_eub",
+    "chain": "Solana",
+    "deployment_type": "issuer_native_token",
+    "token_standard": "Solana Token-2022",
+    "contract_address": null,
+    "status": "active",
+    "control_event_ids": [
+      "sog_ev_bison_eub_launch_pr517"
+    ],
+    "notes": "Issuer-native Solana Token-2022 deployment restricted to approved wallets. The reviewed official EUB whitepaper records the digital-token identifier field as not applicable, and no exact mint received the required second authoritative or direct on-chain confirmation. Current mint, permanent delegate, transfer-hook, allowlist, freeze, block, recall, and administrative role addresses and operational states remain unresolved.",
+    "evidence_ids": [
+      "sog_src_bison_eub_product_pr517",
+      "sog_src_bison_eub_whitepaper_pr517"
+    ],
+    "canonicality": "issuer_native",
+    "origin_deployment_id": null,
+    "bridge_operator_organization_id": null,
+    "mint_authority_type": "issuer_controlled_allowlist_and_current_roles_unverified",
+    "contract_version": "Solana Token-2022; exact mint identity not published in reviewed official sources",
+    "is_primary": true
+  },
+  {
+    "id": "sog_dep_bison_usb_solana_pr517",
+    "stablecoin_id": "sog_st_bison_usb",
+    "chain": "Solana",
+    "deployment_type": "issuer_native_token",
+    "token_standard": "Solana Token-2022",
+    "contract_address": null,
+    "status": "active",
+    "control_event_ids": [
+      "sog_ev_bison_usb_launch_pr517"
+    ],
+    "notes": "Issuer-native Solana Token-2022 deployment restricted to approved wallets. The reviewed official USB whitepaper records the digital-token identifier field as not applicable, and no exact mint received the required second authoritative or direct on-chain confirmation. Current mint, permanent delegate, transfer-hook, allowlist, freeze, block, recall, and administrative role addresses and operational states remain unresolved.",
+    "evidence_ids": [
+      "sog_src_bison_usb_product_pr517",
+      "sog_src_bison_usb_whitepaper_pr517"
+    ],
+    "canonicality": "issuer_native",
+    "origin_deployment_id": null,
+    "bridge_operator_organization_id": null,
+    "mint_authority_type": "issuer_controlled_allowlist_and_current_roles_unverified",
+    "contract_version": "Solana Token-2022; exact mint identity not published in reviewed official sources",
+    "is_primary": true
   }
 ]

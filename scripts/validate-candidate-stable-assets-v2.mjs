@@ -37,7 +37,7 @@ const stablecoinById = new Map(stablecoins.map((row) => [row.id, row]));
 const stablecoinBySlug = new Map(stablecoins.map((row) => [normalize(row.slug), row]));
 const classificationIds = new Set(classifications.map((row) => row.id));
 const profileIds = new Set(profiles.map((row) => row.id));
-const organizationIds = new Set(organizations.map((row) => row.id));
+const organizationIds = new Set(organizations.map((row) => [row.id, row]));
 const candidateByRecordId = new Map();
 const seenCandidateIds = new Set();
 const seenRecordIds = new Set();
@@ -47,7 +47,7 @@ for (const row of [...relationships, ...events, ...evidence]) { if (row.stableco
 for (const candidate of candidates) {
   const id = candidate.candidate_id ?? '(missing)';
   if (!/^sog_cand_\d{6}$/.test(candidate.candidate_id ?? '')) failures.push(`${id}: invalid candidate_id`);
-  if (!/^sog_st_[a-z0-9]+$/.test(candidate.proposed_record_id ?? '')) failures.push(`${id}: invalid proposed_record_id`);
+  if (!/^sog_st_[a-z0-9]+(?:_[a-z0-9]+)*$/.test(candidate.proposed_record_id ?? '')) failures.push(`${id}: invalid proposed_record_id`);
   if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(candidate.slug ?? '')) failures.push(`${id}: invalid slug`);
   if (!/^batch_\d{3}$/.test(candidate.target_batch ?? '')) failures.push(`${id}: invalid target_batch`);
   if (!Array.isArray(candidate.aliases)) failures.push(`${id}: aliases must be an array`);

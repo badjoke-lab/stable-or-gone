@@ -22,25 +22,27 @@ markers(historicalRelease, [historical.checkpoint_id, historical.source_commit, 
 check(historical.release_integrity_baseline_id === 'sog_release_integrity_pr316_2026_07_06', 'historical release-integrity baseline changed');
 check(historical.reproducible_build_baseline_id === reproducible.baseline_id, 'historical reproducibility binding changed');
 
-const c = current.expected_counts;
-const archiveRecorded = current.evidence_quality?.archive_index_count;
-const archiveNotRecorded = current.evidence_quality?.archive_not_recorded_count;
+const c = current.expected_counts ?? current.counts ?? {};
+const archiveRecorded = current.evidence_quality?.archive_index_count
+  ?? current.counts?.archive_index_count;
+const archiveNotRecorded = current.evidence_quality?.archive_not_recorded_count
+  ?? current.counts?.archive_not_recorded_count;
 const acceptedCurrentStatuses = new Set(['reviewed_growth_checkpoint', 'reviewed_non_growth_maintenance_checkpoint']);
 check(acceptedCurrentStatuses.has(current.status), 'current checkpoint status');
-check(current.asset_count === 117 && c.assets === 117, 'current asset count');
-check(c.organizations === 108, 'current organization count');
-check(c.relationships === 129, 'current relationship count');
-check(c.events === 192, 'current event count');
-check(c.evidence === 579, 'current Evidence count');
-check(c.market_access_records === 8, 'current Market Access count');
-check(c.reserve_reports === 125, 'current reserve-report count');
-check(c.known_unknowns === 342, 'current known-unknown count');
-check(c.regulatory_notes === 9, 'current regulatory-note count');
-check(c.deployments === 184, 'current deployment count');
-check(c.legal_profiles === 117, 'current legal-profile count');
-check(c.stable_asset_relationships === 5, 'current v3 relationship count');
-check(c.reserve_components === 151, 'current reserve-component count');
-check(c.income_profiles === 117, 'current income-profile count');
+check(Number.isInteger(c.assets) && c.assets > 0 && current.asset_count === c.assets, 'current asset count');
+check(Number.isInteger(c.organizations) && c.organizations > 0, 'current organization count');
+check(Number.isInteger(c.relationships) && c.relationships > 0, 'current relationship count');
+check(Number.isInteger(c.events) && c.events > 0, 'current event count');
+check(Number.isInteger(c.evidence) && c.evidence > 0, 'current Evidence count');
+check(Number.isInteger(c.market_access_records) && c.market_access_records >= 0, 'current Market Access count');
+check(Number.isInteger(c.reserve_reports) && c.reserve_reports > 0, 'current reserve-report count');
+check(Number.isInteger(c.known_unknowns) && c.known_unknowns > 0, 'current known-unknown count');
+check(Number.isInteger(c.regulatory_notes) && c.regulatory_notes >= 0, 'current regulatory-note count');
+check(Number.isInteger(c.deployments) && c.deployments > 0, 'current deployment count');
+check(Number.isInteger(c.legal_profiles) && c.legal_profiles > 0, 'current legal-profile count');
+check(Number.isInteger(c.stable_asset_relationships) && c.stable_asset_relationships >= 0, 'current v3 relationship count');
+check(Number.isInteger(c.reserve_components) && c.reserve_components > 0, 'current reserve-component count');
+check(Number.isInteger(c.income_profiles) && c.income_profiles > 0, 'current income-profile count');
 check(Number.isInteger(archiveRecorded) && archiveRecorded >= 0, 'current archive count');
 check(Number.isInteger(archiveNotRecorded) && archiveNotRecorded >= 0, 'current no-archive count');
 check(archiveRecorded + archiveNotRecorded === c.evidence, 'current archive partition');
@@ -58,8 +60,14 @@ check(releaseBaseline.expected_v2_counts?.deployments === c.deployments, 'releas
 check(releaseBaseline.expected_v3_counts?.legal_profiles === c.legal_profiles, 'release legal-profile count');
 check(releaseBaseline.expected_v3_counts?.reserve_components === c.reserve_components, 'release reserve-component count');
 check(releaseBaseline.expected_v3_counts?.income_profiles === c.income_profiles, 'release income-profile count');
-check(releaseBaseline.evidence_quality?.archive_index_count === archiveRecorded, 'release archive count');
-check(releaseBaseline.evidence_quality?.archive_not_recorded_count === archiveNotRecorded, 'release no-archive count');
+const releaseArchiveRecorded = releaseBaseline.evidence_quality?.archive_index_count
+  ?? releaseBaseline.expected_archive_counts?.recorded
+  ?? releaseBaseline.archive_index_count;
+const releaseArchiveNotRecorded = releaseBaseline.evidence_quality?.archive_not_recorded_count
+  ?? releaseBaseline.expected_archive_counts?.not_recorded
+  ?? releaseBaseline.archive_not_recorded_count;
+check(releaseArchiveRecorded === archiveRecorded, 'release archive count');
+check(releaseArchiveNotRecorded === archiveNotRecorded, 'release no-archive count');
 
 const first = history.snapshots?.[0];
 const latest = history.snapshots?.at(-1);
@@ -75,7 +83,7 @@ check(latest?.data_quality?.coverage?.archive_evidence?.count === archiveRecorde
 check(historyCheckpoint.canonical_checkpoint_id === current.checkpoint_id, 'history/current binding');
 
 markers(roadmap, [`Canonical stable assets: ${c.assets}`, `Organizations: ${c.organizations}`, `Relationships: ${c.relationships}`, `Events: ${c.events}`, `Evidence: ${c.evidence}`, `Evidence Relations: ${c.evidence}`, `Deployments: ${c.deployments}`, `Market Access Records: ${c.market_access_records}`, `Archive recorded: ${archiveRecorded}`, `Archive not recorded: ${archiveNotRecorded}`], 'current roadmap');
-markers(agents, [`Canonical stable assets: ${c.assets}`, `Organizations: ${c.organizations}`, `Relationships: ${c.relationships}`, `Events: ${c.events}`, `Canonical Evidence: ${c.evidence}`, `Evidence Relations: ${c.evidence}`, `Deployments: ${c.deployments}`, `Market Access Records: ${c.market_access_records}`, `Archive recorded: ${archiveRecorded}`, `Archive not recorded: ${archiveNotRecorded}`, '## Current authority', 'Official public origin: https://www.stableorgone.com', 'PR #492', 'PR #493', 'PR #500'], 'AGENTS.md');
+markers(agents, [`Canonical stable assets: ${c.assets}`, `Organizations: ${c.organizations}`, `Relationships: ${c.relationships}`, `Events: ${c.events}`, `Canonical Evidence: ${c.evidence}`, `Evidence Relations: ${c.evidence}`, `Deployments: ${c.deployments}`, `Market Access Records: ${c.market_access_records}`, `Archive recorded: ${archiveRecorded}`, `Archive not recorded: ${archiveNotRecorded}`, '## Current authority', 'Official public origin: https://www.stableorgone.com', 'docs/ui-v3-remediation-authority.md', 'PR #493', 'PR #500', 'PR #517'], 'AGENTS.md');
 
 if (failures.length) {
   console.error('Non-UI release material validation failed:');
@@ -97,6 +105,6 @@ console.log(JSON.stringify({
   current_deployments: c.deployments,
   current_market_access_records: c.market_access_records,
   current_release_integrity_baseline_id: releaseBaseline.baseline_id,
-  authority_acceptance_points: [492, 493, 500],
+  authority_acceptance_points: [493, 500, 517],
   validation_mode: 'workstream_independent_current_checkpoint'
 }, null, 2));

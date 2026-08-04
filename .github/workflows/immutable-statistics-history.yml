@@ -32,6 +32,8 @@ jobs:
         run: npm run validate:income-v3
       - name: Validate deterministic statistics
         run: node scripts/validate-stats.mjs
+      - name: Build PR517 controlled-growth history state
+        run: node scripts/build-record-growth-batch-5-bison-eub-usb-pr517-controlled-stats.mjs
       - name: Generate current checkpoint snapshot candidate
         shell: bash
         run: |
@@ -51,3 +53,5 @@ jobs:
           path: |
             artifacts/stats-history-current-snapshot.json
             artifacts/stats-history-validation.json
+            artifacts/pr517-generated-state/data/stats-history.json
+            artifacts/pr517-generated-state/docs/migration/current-stats-history-checkpoint.json

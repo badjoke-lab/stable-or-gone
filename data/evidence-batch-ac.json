@@ -245,5 +245,198 @@
     ],
     "event_ids": [],
     "is_primary": true
+  },
+  {
+    "id": "sog_src_bison_emt_launch_pr517",
+    "stablecoin_id": "sog_st_bison_eub",
+    "issuer_id": "sog_issuer_bison_bank",
+    "event_id": "sog_ev_bison_eub_launch_pr517",
+    "source_type": "official_announcement",
+    "title": "Bison Electronic Money Token: the first Portuguese stablecoin is launched today",
+    "url": "https://bisonbank.com/bison-electronic-money-token-the-first-portuguese-stablecoin-is-launched-today/",
+    "publisher": "Bison Bank",
+    "published_at": "2026-05-06",
+    "archived_url": "https://web.archive.org/web/*/https://bisonbank.com/bison-electronic-money-token-the-first-portuguese-stablecoin-is-launched-today/",
+    "accessed_at": "2026-08-03",
+    "reliability": "high",
+    "claim_scope": "bison_eub_usb_launch_identity_issuer_backing_and_institutional_access",
+    "stablecoin_ids": [
+      "sog_st_bison_eub",
+      "sog_st_bison_usb"
+    ],
+    "organization_ids": [
+      "sog_issuer_bison_bank"
+    ],
+    "claim_scopes": [
+      "identity",
+      "issuer",
+      "launch",
+      "lineage",
+      "reference_asset",
+      "reserve_framework",
+      "access",
+      "event"
+    ],
+    "event_ids": [
+      "sog_ev_bison_eub_launch_pr517",
+      "sog_ev_bison_usb_launch_pr517"
+    ],
+    "is_primary": true
+  },
+  {
+    "id": "sog_src_bison_eub_product_pr517",
+    "stablecoin_id": "sog_st_bison_eub",
+    "issuer_id": "sog_issuer_bison_bank",
+    "event_id": "sog_ev_bison_eub_launch_pr517",
+    "source_type": "official_product_page",
+    "title": "EUB — Bison Bank Electronic Money Token — Euro",
+    "url": "https://bisonbank.com/eub/",
+    "publisher": "Bison Bank",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://bisonbank.com/eub/",
+    "accessed_at": "2026-08-03",
+    "reliability": "high",
+    "claim_scope": "bison_eub_identity_eur_reference_solana_issuance_redemption_allowlist_and_reserve_framework",
+    "stablecoin_ids": [
+      "sog_st_bison_eub"
+    ],
+    "organization_ids": [
+      "sog_issuer_bison_bank"
+    ],
+    "claim_scopes": [
+      "identity",
+      "issuer",
+      "reference_asset",
+      "deployment",
+      "issuance",
+      "redemption",
+      "access",
+      "reserve_framework",
+      "event"
+    ],
+    "event_ids": [
+      "sog_ev_bison_eub_launch_pr517"
+    ],
+    "is_primary": true
+  },
+  {
+    "id": "sog_src_bison_eub_whitepaper_pr517",
+    "stablecoin_id": "sog_st_bison_eub",
+    "issuer_id": "sog_issuer_bison_bank",
+    "event_id": "sog_ev_bison_eub_launch_pr517",
+    "source_type": "official_legal_documentation",
+    "title": "Bison Bank EUB Crypto-Asset White Paper",
+    "url": "https://bisonbank.com/wp-content/uploads/2026/04/Bison-Bank-EUB-White-Paper_20260312-1.pdf",
+    "publisher": "Bison Bank, S.A.",
+    "published_at": "2026-03-12",
+    "archived_url": "https://web.archive.org/web/*/https://bisonbank.com/wp-content/uploads/2026/04/Bison-Bank-EUB-White-Paper_20260312-1.pdf",
+    "accessed_at": "2026-08-03",
+    "reliability": "high",
+    "claim_scope": "bison_eub_mica_legal_offer_solana_token_2022_identifier_boundary_issuance_redemption_access_controls_reserve_framework_and_no_yield",
+    "stablecoin_ids": [
+      "sog_st_bison_eub"
+    ],
+    "organization_ids": [
+      "sog_issuer_bison_bank"
+    ],
+    "claim_scopes": [
+      "identity",
+      "issuer",
+      "legal",
+      "regulatory_context",
+      "offer_start",
+      "deployment",
+      "contract_identity_boundary",
+      "issuance",
+      "redemption",
+      "access",
+      "control_policy",
+      "reserve_framework",
+      "income",
+      "risk",
+      "event"
+    ],
+    "event_ids": [
+      "sog_ev_bison_eub_launch_pr517"
+    ],
+    "is_primary": true
+  },
+  {
+    "id": "sog_src_bison_usb_product_pr517",
+    "stablecoin_id": "sog_st_bison_usb",
+    "issuer_id": "sog_issuer_bison_bank",
+    "event_id": "sog_ev_bison_usb_launch_pr517",
+    "source_type": "official_product_page",
+    "title": "USB — Bison Bank Electronic Money Token — US Dollar",
+    "url": "https://bisonbank.com/usb/",
+    "publisher": "Bison Bank",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://bisonbank.com/usb/",
+    "accessed_at": "2026-08-03",
+    "reliability": "high",
+    "claim_scope": "bison_usb_identity_usd_reference_solana_issuance_redemption_allowlist_and_reserve_framework",
+    "stablecoin_ids": [
+      "sog_st_bison_usb"
+    ],
+    "organization_ids": [
+      "sog_issuer_bison_bank"
+    ],
+    "claim_scopes": [
+      "identity",
+      "issuer",
+      "reference_asset",
+      "deployment",
+      "issuance",
+      "redemption",
+      "access",
+      "reserve_framework",
+      "event"
+    ],
+    "event_ids": [
+      "sog_ev_bison_usb_launch_pr517"
+    ],
+    "is_primary": true
+  },
+  {
+    "id": "sog_src_bison_usb_whitepaper_pr517",
+    "stablecoin_id": "sog_st_bison_usb",
+    "issuer_id": "sog_issuer_bison_bank",
+    "event_id": "sog_ev_bison_usb_launch_pr517",
+    "source_type": "official_legal_documentation",
+    "title": "Bison Bank USB Crypto-Asset White Paper",
+    "url": "https://bisonbank.com/wp-content/uploads/2026/04/Bison-Bank-USB-White-Paper_20260312-1.pdf",
+    "publisher": "Bison Bank, S.A.",
+    "published_at": "2026-03-12",
+    "archived_url": "https://web.archive.org/web/*/https://bisonbank.com/wp-content/uploads/2026/04/Bison-Bank-USB-White-Paper_20260312-1.pdf",
+    "accessed_at": "2026-08-03",
+    "reliability": "high",
+    "claim_scope": "bison_usb_mica_legal_offer_solana_token_2022_identifier_boundary_issuance_redemption_access_controls_reserve_framework_and_no_yield",
+    "stablecoin_ids": [
+      "sog_st_bison_usb"
+    ],
+    "organization_ids": [
+      "sog_issuer_bison_bank"
+    ],
+    "claim_scopes": [
+      "identity",
+      "issuer",
+      "legal",
+      "regulatory_context",
+      "offer_start",
+      "deployment",
+      "contract_identity_boundary",
+      "issuance",
+      "redemption",
+      "access",
+      "control_policy",
+      "reserve_framework",
+      "income",
+      "risk",
+      "event"
+    ],
+    "event_ids": [
+      "sog_ev_bison_usb_launch_pr517"
+    ],
+    "is_primary": true
   }
 ]

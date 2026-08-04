@@ -11,5 +11,18 @@
     "confidence": "high",
     "last_verified_at": "2026-07-31",
     "notes": "PR #498 organization record. Legal entity, licence representation, issuance, redemption, and reserve obligations are sourced to current issuer terms; independent regulator-record details and licence-effective date remain reviewable."
+  },
+  {
+    "id": "sog_issuer_bison_bank",
+    "slug": "bison-bank",
+    "name": "Bison Bank, S.A.",
+    "organization_type": "regulated_credit_institution",
+    "legacy_issuer_type": "company",
+    "jurisdiction": "Portugal",
+    "official_url": "https://bisonbank.com/",
+    "summary": "Portuguese credit institution and legal issuer of the EUB and USB electronic-money tokens for pre-approved institutional partners under the reviewed MiCA whitepapers and product terms.",
+    "confidence": "high",
+    "last_verified_at": "2026-08-03",
+    "notes": "PR #517 shared issuer record. Bison Bank is recorded as the legal issuer, issuance and redemption counterparty, and operator of the approved-partner workflow for EUB and USB. Issuer-level audit statements are not treated as token-specific reserve assurance."
   }
 ]
