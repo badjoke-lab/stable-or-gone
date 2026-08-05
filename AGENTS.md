@@ -54,13 +54,17 @@ PR #522 changes authority only. PR #523 is the only implementation authorized by
 
 1. PR #128 added canonical `sog_st_jpysc`, issuer relationships, launch Evidence, and a restricted deployment placeholder.
 2. PR #493 established `https://www.stableorgone.com` as the official public origin.
-3. PR #514 fixed the current six-week operating cycle.
-4. PR #515 reviewed growth proposals; its JPYSC row was a duplicate proposal, not a missing canonical identity.
-5. PRs #516–#519 completed EUB/USB growth, sibling links, and production closeout.
-6. PR #520 authorized the JPYSC eligibility review.
-7. PR #521 confirmed canonical JPYSC and the four-function state, returned `eligible_for_later_separate_authority`, and production verified commit `c29c63de22bda81572d040b972539a7d4c735bd8`.
-8. PR #522 authorizes exactly PR #523's bounded canonical implementation.
-9. `docs/ui-v3-remediation-authority.md` remains the regression-protection contract for material public UI work.
+3. PR #500 completed the bounded MNEE Evidence and Archive Maintenance checkpoint.
+4. PR #514 fixed the current six-week operating cycle.
+5. PR #515 reviewed growth proposals; its JPYSC row was a duplicate proposal, not a missing canonical identity.
+6. PR #516 authorized EUB and USB complete records.
+7. PR #517 added EUB and USB as complete reviewed canonical records.
+8. PR #518 added sibling-registry footer links.
+9. PR #519 closed the combined checkpoint and restored REVIEW GATE.
+10. PR #520 authorized the JPYSC eligibility review.
+11. PR #521 confirmed canonical JPYSC and the four-function state, returned `eligible_for_later_separate_authority`, and production verified commit `c29c63de22bda81572d040b972539a7d4c735bd8`.
+12. PR #522 authorizes exactly PR #523's bounded canonical implementation.
+13. `docs/ui-v3-remediation-authority.md` remains the regression-protection contract for material public UI work.
 
 ## Mandatory reading order
 
