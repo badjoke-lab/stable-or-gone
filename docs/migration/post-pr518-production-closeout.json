@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0",
+  "status": "production_verified_closeout",
+  "recorded_at": "2026-08-05",
+  "source_prs": [517, 518],
+  "canonical_growth_commit": "6fa514f95c86ebd44c216ef2927aa0e48d52d51d",
+  "production_commit": "e51f7440c7761d0a70cb36807a8ca452aa2622da",
+  "production": {
+    "origin": "https://www.stableorgone.com",
+    "canonical_hash": "sha256:57749955faa96d2bd836bac83ef41a0c5dc13f2342763dc4d975c588cd50c650",
+    "convergence_attempt": 1,
+    "counts": {
+      "assets": 119,
+      "organizations": 109,
+      "relationships": 131,
+      "events": 194,
+      "evidence": 584,
+      "evidence_relations": 584,
+      "deployments": 186,
+      "market_access_records": 8,
+      "archive_recorded": 462,
+      "archive_not_recorded": 122,
+      "detail_routes": 422,
+      "metadata_checked_routes": 422
+    }
+  },
+  "pr517_result": {
+    "new_assets": ["sog_st_bison_eub", "sog_st_bison_usb"],
+    "new_organization": "sog_issuer_bison_bank",
+    "exact_solana_mints_recorded": 0,
+    "token_specific_reserve_attestations_recorded": 0
+  },
+  "pr518_result": {
+    "changed_source_files": ["config/site-architecture.mjs"],
+    "footer_links_added": [
+      "https://hei.badjoke-lab.com/",
+      "https://cya.badjoke-lab.com/",
+      "https://bir.badjoke-lab.com/"
+    ],
+    "canonical_count_changes": 0,
+    "route_changes": 0,
+    "metadata_changes": 0
+  },
+  "repository_authority": "REVIEW_GATE",
+  "later_lane_authorized": false
+}

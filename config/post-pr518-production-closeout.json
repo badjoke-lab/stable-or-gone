@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0",
+  "work_item": "post_pr518_production_closeout",
+  "status": "active",
+  "recorded_at": "2026-08-05",
+  "canonical_growth_pr": 517,
+  "navigation_pr": 518,
+  "canonical_growth_commit": "6fa514f95c86ebd44c216ef2927aa0e48d52d51d",
+  "production_commit": "e51f7440c7761d0a70cb36807a8ca452aa2622da",
+  "production_canonical_hash": "sha256:57749955faa96d2bd836bac83ef41a0c5dc13f2342763dc4d975c588cd50c650",
+  "convergence_attempt": 1,
+  "expected_counts": {
+    "assets": 119,
+    "organizations": 109,
+    "relationships": 131,
+    "events": 194,
+    "evidence": 584,
+    "evidence_relations": 584,
+    "deployments": 186,
+    "market_access_records": 8,
+    "archive_recorded": 462,
+    "archive_not_recorded": 122,
+    "detail_routes": 422,
+    "metadata_checked_routes": 422
+  },
+  "required_footer_links": [
+    "https://hei.badjoke-lab.com/",
+    "https://cya.badjoke-lab.com/",
+    "https://bir.badjoke-lab.com/"
+  ],
+  "canonical_changes_allowed": false,
+  "public_changes_allowed": false,
+  "later_lane_authorized": false,
+  "exit_boundary": "REVIEW_GATE"
+}

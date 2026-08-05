@@ -9,29 +9,40 @@ SOG is not a live price dashboard, trading terminal, safety ranking, market-cap 
 ## Current reviewed checkpoint
 
 ```text
-Canonical stable assets: 116
-Organizations: 107
-Relationships: 128
-Events: 191
-Evidence: 571
-Evidence Relations: 571
-Deployments: 182
+Canonical stable assets: 119
+Organizations: 109
+Relationships: 131
+Events: 194
+Evidence: 584
+Evidence Relations: 584
+Deployments: 186
 Market Access Records: 8
-Archive recorded: 442
-Archive not recorded: 129
-Detail routes: 414
-Metadata-checked detail routes: 414
+Archive recorded: 462
+Archive not recorded: 122
+Detail routes: 422
+Metadata-checked detail routes: 422
 ```
 
-Official-domain migration production checkpoint:
+Production checkpoint:
 
 ```text
-bd0e63ac36b1824bf705e8c80d1fb0a1cd79d221
+source commit: e51f7440c7761d0a70cb36807a8ca452aa2622da
+canonical hash: sha256:57749955faa96d2bd836bac83ef41a0c5dc13f2342763dc4d975c588cd50c650
+convergence attempt: 1
+official origin: https://www.stableorgone.com
 ```
 
-Current `main` and production equality is verified dynamically by `.github/workflows/deploy-production.yml` and Issue #479. The checkpoint above records the completed PR #493 migration and is not an immutable pointer to the latest `main`.
+Current `main` and production equality is verified dynamically by `.github/workflows/deploy-production.yml` and Issue #479. All public counts are derived from canonical repository data and validated projections.
 
-All public counts are derived from canonical repository data and generated or validated projections. This README is not an independent count authority.
+## Current workstream
+
+```text
+PR #517 complete — Bison Bank EUB and USB complete records
+PR #518 complete — HEI, CYA, and BIR footer links
+Current repository authority — REVIEW GATE
+```
+
+No later canonical, Market Access, archive-maintenance, dossier, public-surface, or infrastructure work is pre-authorized. The next planned lane is Japan Market Access Pilot 3, subject to a separate reviewed authority PR.
 
 ## Public research surfaces
 
@@ -48,33 +59,6 @@ Guides
 machine-readable projections and manifest discovery
 ```
 
-## Current workstream
-
-The reviewed UI and domain sequence is complete:
-
-```text
-PR #487 stablecoin logo coverage
-PR #488 white background, status badges, and mobile density
-PR #489 homepage information architecture
-PR #490 broad desktop/mobile remediation
-PR #491 Statistics redesign
-PR #492 Statistics panel flow and deployment-chain normalization
-PR #493 official-domain migration to www.stableorgone.com
-```
-
-PR #493 was production-verified at the migration checkpoint with 116 stablecoins, 107 organizations, 191 events, 414 detail routes, and 414 metadata-checked routes.
-
-The current bounded continuation is:
-
-```text
-PR #495 post-domain authority synchronization
-issue and checkpoint reconciliation
-Record Growth Batch 4 candidate audit
-REVIEW GATE before canonical promotion
-```
-
-No candidate and no later growth batch is pre-authorized.
-
 ## Official domain
 
 The canonical public origin is:
@@ -85,7 +69,7 @@ https://www.stableorgone.com
 
 It governs canonical links, hreflang, OGP, JSON-LD, sitemap URLs, robots, machine-readable outputs, production verification, and deployment reporting.
 
-The legacy host `sog.badjoke-lab.com` still reaches the same Pages project. A path- and query-preserving 301 redirect remains an external Cloudflare zone task. The current deployment token can publish Pages but cannot read the `badjoke-lab.com` zone, so no redirect write has been attempted.
+The legacy host `sog.badjoke-lab.com` still reaches the same Pages project. A path- and query-preserving 301 redirect remains an external Cloudflare zone task and is not authorized by the current review gate.
 
 ## Repository authority
 
@@ -96,8 +80,10 @@ AGENTS.md
 docs/spec-governance.md
 docs/roadmap.md
 docs/deployment-policy.md
-docs/roadmap-amendments/2026-07-31-post-domain-authority-sync.md
-docs/post-351-data-growth-operating-spec.md
+docs/roadmap-amendments/2026-08-05-post-pr518-production-closeout.md
+docs/quality/post-pr518-production-closeout-spec.md
+config/post-pr518-production-closeout.json
+docs/migration/post-pr518-production-closeout.json
 work-item-specific specification
 named baselines, queues, audits, handoffs, and prior outputs
 ```
@@ -113,21 +99,7 @@ Merged repository authority outranks chat memory, handoff prose, issue discussio
 - Rebrands, aliases, wrapped representations, migrations, and deployments do not become separate canonical assets without scope and lineage review.
 - Automatic candidate promotion is prohibited.
 
-## Statistics contract
-
-The Statistics page is a visible analytical projection over reviewed canonical records.
-
-- No section is hidden in a collapsible disclosure.
-- Desktop panels pack independently rather than sharing row heights.
-- Mobile preserves source order in a single column.
-- BNB Chain and Gnosis Chain variants normalize to their canonical labels.
-- Arbitrum One and Arbitrum Nova remain distinct.
-- Bare `Arbitrum` remains unresolved rather than being coerced to Arbitrum One.
-- Canonical chain counts plus unresolved deployments reconcile to total deployments.
-
 ## Development and deployment
-
-Install and validate with the locked Node and npm dependency set:
 
 ```bash
 npm ci --no-audit --no-fund
@@ -137,13 +109,9 @@ npm run check
 npm run build
 ```
 
-Normal merged changes publish automatically from `main` through `.github/workflows/deploy-production.yml`. The workflow builds a preverified `dist`, uploads it to the `stable-or-gone` Cloudflare Pages project, verifies the deployed commit and public output, and reports the result to Issue #479.
-
-A repository merge is not itself proof of production parity.
+Normal merged changes publish automatically from `main` through `.github/workflows/deploy-production.yml`. A repository merge is not itself proof of production parity.
 
 ## Public machine-readable layer
-
-Reviewed canonical information is exposed through:
 
 ```text
 /version.json
