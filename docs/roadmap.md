@@ -6,7 +6,7 @@ Status: PR #521 active Japan Market Access Pilot 3 JPYSC review
 ## Current production checkpoint
 
 ```text
-Canonical stable assets: 119
+Stable assets: 119
 Organizations: 109
 Relationships: 131
 Events: 194
@@ -19,13 +19,12 @@ Legal profiles: 119
 Reserve components: 153
 Income profiles: 119
 Market Access Records: 8
-Archive recorded: 462
-Archive not recorded: 122
+Archive recorded / not recorded: 462 / 122
 Detail routes: 422
-Metadata-checked detail routes: 422
-Official public origin: https://www.stableorgone.com
-Current production commit: 196f8e20cd55c9b229c88127afa236dc5060b3fd
-Production canonical hash: sha256:57749955faa96d2bd836bac83ef41a0c5dc13f2342763dc4d975c588cd50c650
+Metadata-checked routes: 422
+Official origin: https://www.stableorgone.com
+Production commit: 196f8e20cd55c9b229c88127afa236dc5060b3fd
+Canonical hash: sha256:57749955faa96d2bd836bac83ef41a0c5dc13f2342763dc4d975c588cd50c650
 Convergence attempt: 2
 ```
 
@@ -33,11 +32,11 @@ Convergence attempt: 2
 
 ```text
 PR #514 — six-week cycle and Batch 5 audit authority
-PR #515 — eight-candidate private audit
+PR #515 — eight-proposal private audit
 PR #516 — EUB/USB complete-record authority
 PR #517 — EUB/USB complete canonical implementation
 PR #518 — sibling-registry footer links
-PR #519 — post-PR #518 production closeout
+PR #519 — production closeout
 PR #520 — JPYSC Pilot 3 review authority
 ```
 
@@ -52,7 +51,8 @@ PR #521 changes private reviewed artifacts and authority documentation only. Can
 ## Reviewed JPYSC result
 
 ```text
-asset: JPYSC / proposed sog_st_jpysc
+asset: JPYSC / sog_st_jpysc
+canonical identity: present since PR #128
 jurisdiction: JP / Japan
 platform: SBI VC Trade
 service: VCTRADE
@@ -64,64 +64,46 @@ withdrawal: unavailable
 external_wallet_transfer: unavailable
 ```
 
-JPYSC is issued and available for account-internal purchase, sale, and conversion. The reviewed current state does not establish deposit, withdrawal, external-wallet transfer, or public-chain circulation.
+JPYSC is canonical and available for account-internal purchase, sale, and conversion. The reviewed state does not establish deposit, withdrawal, external-wallet transfer, or current public-chain circulation.
 
-Future public-chain capability remains future-only. A network reference or technical-readiness statement does not override explicit current unavailability. JPYSC lending is outside Market Access Record v1 and is excluded.
+PR #515's deferred JPYSC candidate was a duplicate growth proposal; it did not remove or invalidate the canonical identity created by PR #128.
+
+Future capability remains future-only. JPYSC lending is outside Market Access Record v1 and is excluded.
 
 ## Eligibility decision
 
 ```text
-blocked_canonical_asset_identity_absent
+eligible_for_later_separate_authority
 ```
 
-Market Access Record v1 requires an existing canonical asset identity. `sog_st_jpysc` is not present in the canonical 119-asset registry.
+The canonical asset prerequisite is satisfied and the four-function matrix is complete. PR #520 authorized review only, so PR #521 adds zero canonical assets, Evidence identities, Evidence Relations, Market Access Records, routes, and public changes. The Market Access count remains eight.
 
-PR #521 therefore adds:
+A later bounded authority may authorize exactly four provider-scoped JPYSC records and the count transition from 8 to 12. It must decide canonical Evidence reuse or additions for the current product and trading sources, preserve the reviewed function states, and require production convergence.
+
+## Exit and next work
+
+PR #521 exits only to `REVIEW GATE`.
+
+The next recommended authority is:
 
 ```text
-canonical stable assets: 0
-canonical Evidence identities: 0
-canonical Evidence Relations: 0
-canonical Market Access Records: 0
-public changes: 0
+Japan Market Access Pilot 3 — JPYSC implementation
 ```
 
-The canonical Market Access count remains eight.
+It is not implementation-authorized by PR #521.
 
-A later JPYSC promotion would require a separate complete canonical asset review, approved canonical identity, sufficient canonical Evidence scope, fresh current-state review, and a separate Market Access authority decision.
+Evidence Archive Payload Verification Batch 2 remains the later planned lane and also requires separate authority.
 
-## PR #521 exit
-
-PR #521 exits only to:
-
-```text
-REVIEW GATE
-```
-
-Evidence Archive Payload Verification Batch 2 remains the next planned lane but is not implementation-authorized.
-
-## Six-week operating cycle
-
-The cycle remains 2026-08-03 through 2026-09-13. Dates are planning windows, not automatic authority.
+## Six-week cycle
 
 ```text
 2026-08-03 to 2026-08-09  Record Growth Batch 5, navigation insertion, closeout, and Pilot 3 review
-2026-08-05 onward          PR #521 JPYSC review, then REVIEW GATE
-2026-08-17 to 2026-08-23  Evidence Archive Payload Verification Batch 2, only after separate authority
-2026-08-24 to 2026-08-30  Tier A Dossier Deepening Batch 4, only after separate authority
-2026-08-31 to 2026-09-06  cycle review, quality assessment, and backlog reconciliation
-2026-09-07 to 2026-09-13  next operating authority and contingency window
+2026-08-05 onward          PR #521 review, then separate JPYSC implementation authority
+2026-08-17 to 2026-08-23  Evidence Archive Payload Verification Batch 2, after separate authority
+2026-08-24 to 2026-08-30  Tier A Dossier Deepening Batch 4, after separate authority
+2026-08-31 to 2026-09-06  cycle review and backlog reconciliation
+2026-09-07 to 2026-09-13  next operating authority and contingency
 ```
-
-## Remaining lanes
-
-```text
-Evidence Archive Payload Verification Batch 2
-Tier A Dossier Deepening Batch 4
-cycle review and next operating authority
-```
-
-Each lane requires a separate reviewed authority PR defining the exact targets, evidence boundary, validation, and exit gate.
 
 ## Deferred candidates
 
@@ -129,28 +111,21 @@ Each lane requires a separate reviewed authority PR defining the exact targets, 
 SoFiUSD / SOFID — exact deployments and current assurance evidence unresolved
 USA₮ — exact deployments and product-specific holder terms unresolved
 XREUR — announced circulation date is 2026-09-03
-JPYSC canonical asset — account-internal current state without an approved canonical identity
 Swiss CHF sandbox — no final asset identity or market-launch decision
 Hazel Network token design — infrastructure/testing without a final independent production asset
 ```
 
+JPYSC is not a deferred canonical asset. Only its four Market Access records remain pending separate authority.
+
 ## Preserved exclusions
 
 ```text
-replacement asset
-thin JPYSC canonical record
-unreviewed canonical promotion
+duplicate JPYSC canonical asset
 future capability represented as current access
 lending represented as transfer evidence
 country-wide availability inference
-new dashboard, ranking, score, or recommendation
-large navigation or UI redesign
-legacy host redirect work
-automatic monitoring promotion
+ranking, score, recommendation, or implied safety
+large UI or navigation work
+legacy redirect work
+automatic promotion
 ```
-
-## Deployment boundary
-
-The only official public origin is `https://www.stableorgone.com`.
-
-PR #521 authorizes no deployment behavior, route-family, canonical data, machine-readable schema, or legacy redirect change.
