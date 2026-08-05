@@ -1,0 +1,77 @@
+{
+  "schema_version": "1.0",
+  "report_id": "sog_japan_market_access_pilot_3_jpysc_source_coverage_pr521",
+  "status": "reviewed_complete",
+  "recorded_at": "2026-08-05",
+  "authority_pr": 520,
+  "review_pr": 521,
+  "target": "JPYSC on SBI VC Trade / VCTRADE in Japan",
+  "required_claims": [
+    {
+      "claim": "effective date and account-internal launch",
+      "covered": true,
+      "sources": ["https://www.sbivc.co.jp/newsview/fx4zmjwbl"]
+    },
+    {
+      "claim": "current account-internal buy and sell capability",
+      "covered": true,
+      "sources": [
+        "https://www.sbivc.co.jp/jpysc",
+        "https://www.sbivc.co.jp/services/crypto/jpysc"
+      ]
+    },
+    {
+      "claim": "current deposit unavailability",
+      "covered": true,
+      "sources": ["https://www.sbivc.co.jp/jpysc"]
+    },
+    {
+      "claim": "current withdrawal unavailability",
+      "covered": true,
+      "sources": ["https://www.sbivc.co.jp/jpysc"]
+    },
+    {
+      "claim": "current external-wallet transfer unavailability",
+      "covered": true,
+      "sources": [
+        "https://www.sbivc.co.jp/newsview/fx4zmjwbl",
+        "https://www.sbivc.co.jp/jpysc"
+      ],
+      "scope_note": "The product remains account-internal and withdrawal is not supported."
+    },
+    {
+      "claim": "provider and handled-asset register scope",
+      "covered": true,
+      "sources": ["https://www.fsa.go.jp/menkyo/menkyoj/denshikessaisyudan.pdf"]
+    },
+    {
+      "claim": "issuer and trust structure",
+      "covered": true,
+      "sources": ["https://www.shinseitrust.com/stablecoin/jpysc.html"]
+    },
+    {
+      "claim": "canonical asset identity exists",
+      "covered": false,
+      "sources": [],
+      "scope_note": "No canonical sog_st_jpysc identity exists in the 119-asset registry at this checkpoint."
+    },
+    {
+      "claim": "current public-chain deposit, withdrawal, or transfer capability",
+      "covered": false,
+      "sources": [],
+      "scope_note": "Future or conditional public-chain language is not current capability evidence."
+    }
+  ],
+  "excluded_sources": [
+    {
+      "url": "https://www.sbivc.co.jp/newsview/ycvsqvfcw4",
+      "reason": "JPYSC lending is outside Market Access Record v1 and does not establish deposit, withdrawal, or external-wallet transfer capability."
+    }
+  ],
+  "coverage_result": {
+    "four_function_review_complete": true,
+    "canonical_promotion_evidence_complete": false,
+    "primary_blocker": "canonical_asset_identity_absent",
+    "canonical_market_access_records_added": 0
+  }
+}
