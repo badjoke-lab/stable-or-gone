@@ -58,6 +58,9 @@ const isGuideArticle = pathname.startsWith('/guides/') && !isGuideIndex;
 const isReferencePage = ['/models/', '/glossary/', '/updates/'].includes(pathname);
 const isLongformPage = ['/methodology/', '/about/'].includes(pathname);
 const isUtilityPage = ['/contact/', '/support/'].includes(pathname);
+const isHomePage = pathname === '/';
+const isSupportPage = pathname === '/support/';
+const showFooterSupport = !isHomePage && !isSupportPage;
 const pageKind = isGuideIndex ? 'guide-index' : isGuideArticle ? 'guide-article' : isReferencePage ? 'reference' : isLongformPage ? 'longform' : isUtilityPage ? 'utility' : undefined;
 const isCurrent = (href: string) => (routeFamilies[href] ?? [href]).some((prefix) => pathname === prefix || pathname.startsWith(prefix));
 
@@ -122,7 +125,11 @@ const dataLinks = [
             </span>
           </div>
           <div class="masthead-actions" aria-label="Project actions">
-            <a class="support-cta support-cta--header" href="/support/" aria-current={isCurrent('/support/') ? 'page' : undefined} aria-label="Support this archive"><span class="support-cta-label--full">Support this archive</span><span class="support-cta-label--compact" aria-hidden="true">Support</span></a>
+            {isSupportPage ? (
+              <span class="support-cta support-cta--header" aria-current="page"><span class="support-cta-label--full">Support this archive</span><span class="support-cta-label--compact" aria-hidden="true">Support</span></span>
+            ) : (
+              <a class="support-cta support-cta--header" href="/support/" aria-label="Support this archive"><span class="support-cta-label--full">Support this archive</span><span class="support-cta-label--compact" aria-hidden="true">Support</span></a>
+            )}
             <a class="correction-link" href="/contact/">Submit correction</a>
           </div>
         </div>
@@ -156,7 +163,7 @@ const dataLinks = [
             <div class="guide-article-content"><slot /></div>
             <aside class="context-support-callout" aria-label="Support Stable or Gone">
               <p><strong>Help keep this archive public.</strong> Support source checks, broken-link review, record updates, and long-term maintenance.</p>
-              <a class="support-cta" href="/support/">View support wallets</a>
+              <a class="support-cta" href="/support/">View support options</a>
             </aside>
             <nav class="guide-article-footer" aria-label="Guide reference navigation">
               <a href="/guides/">All guides</a>
@@ -175,7 +182,7 @@ const dataLinks = [
             <div class="longform-content"><slot /></div>
             <aside class="context-support-callout" aria-label="Support Stable or Gone">
               <p><strong>Stable or Gone is independently maintained.</strong> Support the research, source review, and upkeep behind the public registry.</p>
-              <a class="support-cta" href="/support/">View support wallets</a>
+              <a class="support-cta" href="/support/">View support options</a>
             </aside>
             <nav class="longform-footer" aria-label="Project reference navigation">
               <a href="/glossary/">Glossary</a>
@@ -189,19 +196,31 @@ const dataLinks = [
       </main>
 
       <footer class="site-footer">
-        <div class="footer-support site-shell">
-          <div>
-            <strong>Help keep Stable or Gone public</strong>
-            <p>Support source verification, record updates, broken-link review, and long-term archive maintenance. Support does not buy listings or editorial influence.</p>
+        {showFooterSupport && (
+          <div class="footer-support site-shell">
+            <div>
+              <strong>Help keep Stable or Gone public</strong>
+              <p>Support source verification, record updates, broken-link review, and long-term archive maintenance. Support does not buy listings or editorial influence.</p>
+            </div>
+            <a class="support-cta" href="/support/">View support options</a>
           </div>
-          <a class="support-cta" href="/support/">View support wallets</a>
-        </div>
+        )}
         <div class="footer-navigation site-shell">
           {footerNavigationGroups.map((group) => (
             <details class="footer-navigation-group" data-footer-group data-disclosure open>
               <summary>{group.label}</summary>
               <nav aria-label={`${group.label} footer navigation`}>
-                {group.items.map((item) => <a href={item.href}>{item.label}</a>)}
+                {String(group.id) === 'discovery' && (
+                  <span aria-current="page">
+                    <strong>Stable or Gone</strong>
+                    <small>Current project</small>
+                  </span>
+                )}
+                {group.items.map((item) => isSupportPage && item.href === '/support/' ? (
+                  <span aria-current="page">Support</span>
+                ) : (
+                  <a href={item.href}>{item.label}</a>
+                ))}
               </nav>
             </details>
           ))}

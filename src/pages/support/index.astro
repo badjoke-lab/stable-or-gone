@@ -1,17 +1,29 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import EditorialPageHeader from '../../components/EditorialPageHeader.astro';
-const wallets = [
+
+interface SupportWallet {
+  asset: string;
+  name: string;
+  network: string;
+  address: string;
+  note?: string;
+  addressReference?: string;
+}
+
+const evmAddress = '0xea2a0fb0def0473d161b7958f6d584533db9202d';
+const primaryWallets: SupportWallet[] = [
   { asset: 'BTC', name: 'Bitcoin', network: 'Bitcoin network', address: 'bc1qk3y8x72me37aj8d236z9v0gu42t8xxr2ytspmd' },
-  { asset: 'ETH', name: 'Ether', network: 'Ethereum Mainnet', address: '0xea2a0fb0def0473d161b7958f6d584533db9202d' },
-  { asset: 'USDT', name: 'Tether USD', network: 'Ethereum · ERC-20', address: '0xea2a0fb0def0473d161b7958f6d584533db9202d' },
-  { asset: 'USDC', name: 'USD Coin', network: 'Ethereum · ERC-20', address: '0xea2a0fb0def0473d161b7958f6d584533db9202d' },
+  { asset: 'ETH · USDT · USDC', name: 'EVM address', network: 'Ethereum Mainnet · ERC-20', address: evmAddress, note: 'Use this address for ETH, ERC-20 USDT, and ERC-20 USDC on Ethereum Mainnet.' }
+];
+const additionalWallets: SupportWallet[] = [
   { asset: 'SOL', name: 'Solana', network: 'Solana network', address: '9e9kZkwA6tYYAfCzb76aimta26yyPEgR39GZK2oBVH3q' },
-  { asset: 'BNB', name: 'BNB', network: 'BNB Smart Chain · BEP-20', address: '0xea2a0fb0def0473d161b7958f6d584533db9202d' },
+  { asset: 'BNB', name: 'BNB', network: 'BNB Smart Chain · BEP-20', address: evmAddress, addressReference: 'Use the EVM address shown in Primary options.' },
   { asset: 'DOGE', name: 'Dogecoin', network: 'Dogecoin network', address: 'DP1m7675rSCZC5s5wzWSHNaA9bLVpsyjse' },
-  { asset: 'AVAX', name: 'Avalanche', network: 'Avalanche C-Chain', address: '0xea2a0fb0def0473d161b7958f6d584533db9202d' },
+  { asset: 'AVAX', name: 'Avalanche', network: 'Avalanche C-Chain', address: evmAddress, addressReference: 'Use the EVM address shown in Primary options.' },
   { asset: 'XRP', name: 'XRP', network: 'XRP Ledger', address: 'rUHSmDUteyPSr7FDq4p3BzQV627gSiJdCr', note: 'Destination tag / memo is optional for this address. Leave it blank unless your wallet requires a value.' }
 ];
+const supportedAssetCount = 9;
 const googleFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSeEUxdPktIm46X0HgwuYvk8vpx0N3R0EezOaC2fz64nfE6JjA/viewform?usp=dialog';
 const githubIssueUrl = 'https://github.com/badjoke-lab/stable-or-gone/issues/new/choose';
 const title = 'Support Stable or Gone';
@@ -20,27 +32,84 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'WebPage', name: tit
 ---
 <BaseLayout title={title} description={description} canonicalPath="/support/" jsonLd={jsonLd}>
   <article class="editorial-utility-page" data-ui-v3-utility="support">
-    <EditorialPageHeader kind="utility" eyebrow="Utility / support" title="Help keep Stable or Gone updated" description="Support helps cover research, source checks, broken-link review, new records, and ongoing site maintenance." facts={[{ label: 'Supported assets', value: wallets.length }, { label: 'Use', value: 'Maintenance' }, { label: 'Editorial influence', value: 'None' }]} />
+    <EditorialPageHeader kind="utility" eyebrow="Utility / support" title="Help keep Stable or Gone updated" description="Support helps cover research, source checks, broken-link review, new records, and ongoing site maintenance." facts={[{ label: 'Supported assets', value: supportedAssetCount }, { label: 'Use', value: 'Maintenance' }, { label: 'Editorial influence', value: 'None' }]} />
+
     <section class="support-intro" aria-labelledby="before-sending">
       <div class="bar" id="before-sending">Before sending</div>
-      <div class="support-intro-body"><p>Select the exact asset and network shown below. Sending through a different network can result in permanent loss. Check the full address before confirming and consider a small test transfer first.</p><p>Support is optional. It does not affect which records are included, how they are written, or how corrections are reviewed. Crypto transfers are generally irreversible, and charitable donation receipts are not issued.</p></div>
-    </section>
-    <section class="wallet-section" aria-labelledby="wallet-addresses">
-      <div class="section-heading"><div><div class="prompt">Available payment options</div><h2 id="wallet-addresses">Wallet addresses</h2></div><p>Use only the network shown for each record.</p></div>
-      <div class="wallet-grid">
-        {wallets.map((wallet) => <article class="wallet-card"><header class="wallet-card-header"><div><span class="asset-symbol">{wallet.asset}</span><h3>{wallet.name}</h3></div><span class="network-chip">{wallet.network}</span></header><div class="address-block"><span class="address-label">Address</span><code>{wallet.address}</code><button class="copy-button" type="button" data-copy-address={wallet.address} aria-label={`Copy ${wallet.asset} support address`}>Copy address</button></div>{wallet.note && <p class="network-note">{wallet.note}</p>}</article>)}
+      <div class="support-intro-body">
+        <p>Select the exact asset and network shown below. Sending through a different network can result in permanent loss. Check the full address before confirming and consider a small test transfer first.</p>
+        <p>Support is optional. It does not affect which records are included, how they are written, or how corrections are reviewed. Crypto transfers are generally irreversible, and charitable donation receipts are not issued.</p>
       </div>
+    </section>
+
+    <section class="wallet-section" aria-labelledby="wallet-addresses">
+      <div class="section-heading">
+        <div><div class="prompt">Available payment options</div><h2 id="wallet-addresses">Support options</h2></div>
+        <p>Primary options are shown first. Open Additional networks only when needed.</p>
+      </div>
+
+      <section class="wallet-option-group" aria-labelledby="primary-wallet-options">
+        <h3 id="primary-wallet-options">Primary options</h3>
+        <div class="wallet-grid wallet-grid--grouped">
+          {primaryWallets.map((wallet) => (
+            <article class="wallet-card" data-copy-container>
+              <header class="wallet-card-header">
+                <div><span class="asset-symbol">{wallet.asset}</span><h4>{wallet.name}</h4></div>
+                <span class="network-chip">{wallet.network}</span>
+              </header>
+              {wallet.note && <p class="network-note">{wallet.note}</p>}
+              <div class="address-block">
+                <span class="address-label">Address</span>
+                <code>{wallet.address}</code>
+                <button class="copy-button" type="button" data-copy-address={wallet.address} aria-label={`Copy ${wallet.asset} support address`}>Copy address</button>
+                <span class="wallet-copy-feedback" data-copy-feedback></span>
+              </div>
+              <p class="wallet-network-warning">Verify the asset, chain, and address before sending. Transfers on the wrong network may be unrecoverable.</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <details class="additional-wallet-options" data-disclosure>
+        <summary>Additional networks</summary>
+        <div class="wallet-grid wallet-grid--grouped">
+          {additionalWallets.map((wallet) => (
+            <article class="wallet-card" data-copy-container>
+              <header class="wallet-card-header">
+                <div><span class="asset-symbol">{wallet.asset}</span><h4>{wallet.name}</h4></div>
+                <span class="network-chip">{wallet.network}</span>
+              </header>
+              {wallet.addressReference ? (
+                <p class="evm-address-reference"><strong>{wallet.addressReference}</strong> The copy button uses that same address without repeating it here.</p>
+              ) : (
+                <div class="address-block">
+                  <span class="address-label">Address</span>
+                  <code>{wallet.address}</code>
+                </div>
+              )}
+              <button class="copy-button copy-button--standalone" type="button" data-copy-address={wallet.address} aria-label={`Copy ${wallet.asset} support address`}>Copy address</button>
+              {wallet.note && <p class="network-note">{wallet.note}</p>}
+              <span class="wallet-copy-feedback" data-copy-feedback></span>
+              <p class="wallet-network-warning">Verify the asset, chain, and address before sending. Transfers on the wrong network may be unrecoverable.</p>
+            </article>
+          ))}
+        </div>
+      </details>
+
       <p class="copy-status" data-copy-status aria-live="polite"></p>
     </section>
+
     <section class="support-principles" aria-label="Support principles">
       <div><h2>What support funds</h2><p>Research, source review, record updates, link maintenance, and expansion of the archive.</p></div>
-      <div><h2>What support does not buy</h2><p>Listings, favorable wording, faster corrections, status changes, or influence over the methodology.</p></div>
+      <div><h2>What support does not buy</h2><p>Listings, favorable wording, faster corrections, status changes, rankings, or influence over the methodology.</p></div>
       <div><h2>Corrections remain open</h2><p>Anyone can submit a correction, missing source, broken link, or missing record through the contact form or public GitHub Issues.</p></div>
     </section>
+
     <section class="support-footer-note">
       <div class="bar">Questions or corrections</div>
       <div class="support-footer-body"><p>To report incorrect information, add a source, suggest a missing record, or contact the maintainers, use the <a href={googleFormUrl} target="_blank" rel="noopener noreferrer">Google contact form</a>. For public, source-backed corrections, use <a href={githubIssueUrl} target="_blank" rel="noopener noreferrer">GitHub Issues</a>.</p><p>Stable or Gone provides historical information only. Check current issuer terms, exchange notices, and market data before making decisions.</p></div>
     </section>
+
     <script is:inline>
       (() => {
         const status = document.querySelector('[data-copy-status]');
@@ -68,8 +137,15 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'WebPage', name: tit
             } catch { copied = fallbackCopy(address); }
             button.textContent = copied ? 'Copied' : 'Copy failed';
             button.setAttribute('data-copy-state', copied ? 'success' : 'error');
+            const container = button.closest('[data-copy-container]');
+            const feedback = container?.querySelector('[data-copy-feedback]');
+            if (feedback) feedback.textContent = copied ? 'Address copied to clipboard.' : 'Copy failed. Select the address manually.';
             if (status) status.textContent = copied ? 'Address copied to clipboard.' : 'Could not copy automatically. Select and copy the address manually.';
-            window.setTimeout(() => { button.textContent = originalLabel; button.removeAttribute('data-copy-state'); }, 1800);
+            window.setTimeout(() => {
+              button.textContent = originalLabel;
+              button.removeAttribute('data-copy-state');
+              if (feedback) feedback.textContent = '';
+            }, 2000);
           });
         });
       })();

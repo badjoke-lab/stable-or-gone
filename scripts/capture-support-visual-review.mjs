@@ -54,6 +54,7 @@ for (const [deviceName, device] of Object.entries(devices)) {
             const text = `${element.textContent ?? ''} ${element.getAttribute('aria-label') ?? ''}`.replace(/\s+/g, ' ').trim();
             const href = element instanceof HTMLAnchorElement ? element.href : '';
             return {
+              tag: element.tagName.toLowerCase(),
               text,
               href,
               location: element.closest('header') ? 'header' : element.closest('footer') ? 'footer' : element.closest('main') ? 'main' : 'other',
@@ -61,7 +62,25 @@ for (const [deviceName, device] of Object.entries(devices)) {
               in_initial_viewport: rect.bottom > 0 && rect.top < innerHeight
             };
           })
-          .filter((item) => supportPattern.test(`${item.text} ${item.href}`));
+          .filter((item) => {
+            if (supportPattern.test(item.text)) return true;
+            if (!item.href) return false;
+            try {
+              const url = new URL(item.href);
+              return url.pathname === '/support/' && !url.hash;
+            } catch {
+              return false;
+            }
+          });
+        const selfSupportLinks = supportLinks.filter((item) => {
+          if (item.tag !== 'a' || !item.href) return false;
+          try {
+            const url = new URL(item.href);
+            return url.pathname === '/support/' && !url.hash;
+          } catch {
+            return false;
+          }
+        });
         const root = document.documentElement;
         return {
           h1_count: document.querySelectorAll('h1').length,
@@ -70,7 +89,12 @@ for (const [deviceName, device] of Object.entries(devices)) {
           broken_images: [...document.images].filter((image) => image.complete && image.naturalWidth === 0).map((image) => image.currentSrc || image.src),
           support_links: supportLinks,
           support_link_count: supportLinks.length,
-          support_links_in_initial_viewport: supportLinks.filter((item) => item.in_initial_viewport).length
+          support_links_in_initial_viewport: supportLinks.filter((item) => item.in_initial_viewport).length,
+          self_support_link_count: selfSupportLinks.length,
+          additional_networks_collapsed: (() => {
+            const details = document.querySelector('.additional-wallet-options');
+            return details instanceof HTMLDetailsElement ? !details.open : null;
+          })()
         };
       }, visible);
       const viewportFile = path.join(dir, `${spec.id}-${deviceName}.viewport.png`);
@@ -82,7 +106,13 @@ for (const [deviceName, device] of Object.entries(devices)) {
       if (metrics.main_count !== 1) issues.push(`expected one main, found ${metrics.main_count}`);
       if (metrics.horizontal_overflow_px > 2) issues.push(`horizontal overflow ${metrics.horizontal_overflow_px}px`);
       if (metrics.broken_images.length) issues.push(`${metrics.broken_images.length} broken image(s)`);
-      if (spec.route === '/support/' && metrics.support_link_count === 0) issues.push('support page exposes no support action');
+      if (spec.route === '/support/') {
+        if (metrics.self_support_link_count > 0) issues.push(`support page contains ${metrics.self_support_link_count} self-referencing support link(s)`);
+        if (metrics.additional_networks_collapsed !== true) issues.push('additional support networks are not collapsed by default');
+      } else {
+        if (metrics.support_link_count === 0) issues.push('page exposes no visible support route');
+        if (metrics.support_links_in_initial_viewport === 0) issues.push('support route is not visible in the initial viewport');
+      }
       const record = { page_id: spec.id, route: spec.route, device: deviceName, viewport: device, viewport_file: viewportFile, full_file: fullFile, metrics, issues };
       records.push(record);
       if (issues.length) failures.push(record);
@@ -97,7 +127,7 @@ for (const [deviceName, device] of Object.entries(devices)) {
 await browser.close();
 
 const manifest = {
-  schema_version: '1.0',
+  schema_version: '1.1',
   site: 'Stable or Gone',
   generated_at: new Date().toISOString(),
   expected_state_count: pages.length * Object.keys(devices).length,
@@ -109,6 +139,6 @@ const manifest = {
   status: failures.length === 0 ? 'pass' : 'fail'
 };
 await writeFile(path.join(output, 'manifest.json'), `${JSON.stringify(manifest, null, 2)}\n`);
-const cards = records.map((record) => `<article><h2>${record.page_id} · ${record.device}</h2><p><code>${record.route}</code></p><img src="${path.relative(output, record.viewport_file)}"><img src="${path.relative(output, record.full_file)}"><p>Support-like links: ${record.metrics.support_link_count}; initial viewport: ${record.metrics.support_links_in_initial_viewport}</p></article>`).join('');
+const cards = records.map((record) => `<article><h2>${record.page_id} · ${record.device}</h2><p><code>${record.route}</code></p><img src="${path.relative(output, record.viewport_file)}"><img src="${path.relative(output, record.full_file)}"><p>Support-like controls: ${record.metrics.support_link_count}; initial viewport: ${record.metrics.support_links_in_initial_viewport}; self-links: ${record.metrics.self_support_link_count}</p></article>`).join('');
 await writeFile(path.join(output, 'index.html'), `<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>SOG support visual review</title><style>body{font-family:system-ui;margin:24px;background:#eee}article{background:#fff;border:1px solid #bbb;padding:16px;margin:24px 0}img{display:block;max-width:100%;border:1px solid #ddd;margin:12px 0}</style><h1>SOG support visual review</h1>${cards}`);
 if (manifest.status !== 'pass') process.exitCode = 1;
