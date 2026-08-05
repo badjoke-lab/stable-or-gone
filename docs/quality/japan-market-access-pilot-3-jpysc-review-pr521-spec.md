@@ -3,47 +3,40 @@
 Status: reviewed work-item result  
 Updated: 2026-08-05
 
-## 1. Purpose
+## Purpose
 
-PR #521 reviews the existing private JPYSC Japan access row under PR #520 authority. It does not promote a canonical asset, Evidence identity, or Market Access Record.
+PR #521 reviews the existing private JPYSC Japan access row under PR #520 authority. It changes no canonical data or public output.
 
-## 2. Reviewed target
+## Reviewed target and function state
 
 ```text
-asset: JPYSC / proposed sog_st_jpysc
+asset: JPYSC / sog_st_jpysc
 jurisdiction: JP / Japan
 platform: SBI VC Trade
 service: VCTRADE
 effective from: 2026-06-24
 observed at: 2026-08-05
-```
-
-## 3. Function result
-
-```text
 buy_sell: account_internal_only
 deposit: unavailable
 withdrawal: unavailable
 external_wallet_transfer: unavailable
 ```
 
-SBI VC Trade supports JPYSC purchase, sale, and conversion inside customer accounts. Current product information does not support JPYSC deposit or withdrawal. The reviewed state therefore does not support external-wallet transfer.
+SBI VC Trade supports JPYSC purchase, sale, and conversion inside customer accounts. Current product information does not support deposit or withdrawal, so external-wallet transfer is unavailable.
 
-## 4. Future-capability boundary
+## Corrected canonical context
 
-A network reference, technical readiness statement, or future public-chain plan does not establish current deposit, withdrawal, or external-wallet transfer capability. Future capability must be recorded as a later dated state only after source-backed activation.
+`JPYSC` is already canonical. PR #128 added `sog_st_jpysc` in `data/stablecoins-batch-n.json`, along with canonical launch Evidence and a restricted deployment placeholder.
 
-JPYSC lending is a separate service family. It is outside Market Access Record v1 and cannot be used as evidence of deposit, withdrawal, or external-wallet transfer availability.
+PR #515's deferred candidate row did not mean that the canonical identity was absent. It meant that the duplicate growth proposal was not eligible for another complete-record promotion.
 
-## 5. Canonical eligibility result
-
-The reviewed disposition is:
+## Eligibility result
 
 ```text
-blocked_canonical_asset_identity_absent
+eligible_for_later_separate_authority
 ```
 
-Market Access Record v1 requires an existing canonical asset identity. `sog_st_jpysc` is not in the canonical 119-asset registry at this checkpoint.
+The canonical asset prerequisite is satisfied and the four-function review is complete. PR #520 nevertheless authorized review only and capped PR #521 at zero canonical Market Access and Evidence changes.
 
 PR #521 therefore adds:
 
@@ -58,19 +51,33 @@ public UI changes: 0
 
 The canonical Market Access count remains eight.
 
-## 6. Reviewed source set
+## Source and future-capability boundary
+
+Existing canonical Evidence includes:
 
 ```text
-https://www.sbivc.co.jp/newsview/fx4zmjwbl
-https://www.sbivc.co.jp/jpysc
-https://www.sbivc.co.jp/services/crypto/jpysc
-https://www.fsa.go.jp/menkyo/menkyoj/denshikessaisyudan.pdf
-https://www.shinseitrust.com/stablecoin/jpysc.html
+sog_src_jpysc_launch_sbi_vc_2026
+sog_src_jpysc_announcement_sbi_2026
 ```
 
-The source set supports the account-internal function matrix, provider scope, issuer, and trust structure. It does not override the missing canonical asset prerequisite.
+The current SBI VC Trade product and trading pages were reviewed privately as of 2026-08-05. A later authority must decide their canonical Evidence identity treatment before implementation.
 
-## 7. Preserved production baseline
+A network reference, technical-readiness statement, or future public-chain plan does not establish current deposit, withdrawal, or external-wallet-transfer capability. JPYSC lending is outside Market Access Record v1 and cannot be used as transfer evidence.
+
+## Later implementation boundary
+
+A separate authority PR may authorize exactly four provider-scoped JPYSC Market Access records:
+
+```text
+buy_sell: account_internal_only
+deposit: unavailable
+withdrawal: unavailable
+external_wallet_transfer: unavailable
+```
+
+That authority must define canonical Evidence additions or reuse, deterministic IDs, the Market Access count transition from 8 to 12, validation, production convergence, and REVIEW GATE exit.
+
+## Preserved production baseline
 
 ```text
 stable assets: 119
@@ -85,39 +92,10 @@ detail routes: 422
 metadata-checked routes: 422
 ```
 
-## 8. Non-goals
+## Non-goals
 
-PR #521 does not:
+PR #521 does not duplicate the JPYSC canonical asset, create canonical Evidence, add Market Access records, infer universal Japan availability, backfill future transfer capability, use lending as transfer evidence, change UI or deployment behavior, or rank or recommend assets.
 
-```text
-create a thin JPYSC canonical record
-create canonical Evidence from private source leads
-promote unavailable functions merely to record negative rows
-infer universal Japan availability
-claim government guarantee, recommendation, or safety
-backfill future public-chain capability
-use lending as transfer evidence
-substitute another asset
-change UI, navigation, schema, deployment, or redirect behavior
-rank, score, or recommend
-```
+## Exit
 
-## 9. Later promotion boundary
-
-A later JPYSC promotion would require all of the following through separate reviewed authority:
-
-1. a complete canonical asset review;
-2. an approved canonical JPYSC identity;
-3. sufficient canonical Evidence scope for each function;
-4. a fresh current-state review;
-5. a separate Market Access promotion decision.
-
-PR #521 provides none of those later authorities.
-
-## 10. Validation
-
-The dedicated validator must verify the exact four-function matrix, the canonical-asset blocker, zero canonical changes, unchanged counts, source coverage, duplicate review, exclusion of lending, preservation of future-state semantics, and `REVIEW GATE` exit.
-
-## 11. Exit
-
-PR #521 exits only to `REVIEW GATE`. Evidence Archive Payload Verification Batch 2 remains planned but is not implementation-authorized.
+PR #521 exits only to `REVIEW GATE`. The next recommended authority is the bounded JPYSC Market Access Pilot 3 implementation. Evidence Archive Payload Verification Batch 2 remains the later planned cycle lane.
