@@ -62,10 +62,24 @@ for (const [deviceName, device] of Object.entries(devices)) {
               in_initial_viewport: rect.bottom > 0 && rect.top < innerHeight
             };
           })
-          .filter((item) => supportPattern.test(`${item.text} ${item.href}`));
+          .filter((item) => {
+            if (supportPattern.test(item.text)) return true;
+            if (!item.href) return false;
+            try {
+              const url = new URL(item.href);
+              return url.pathname === '/support/' && !url.hash;
+            } catch {
+              return false;
+            }
+          });
         const selfSupportLinks = supportLinks.filter((item) => {
           if (item.tag !== 'a' || !item.href) return false;
-          try { return new URL(item.href).pathname === '/support/'; } catch { return false; }
+          try {
+            const url = new URL(item.href);
+            return url.pathname === '/support/' && !url.hash;
+          } catch {
+            return false;
+          }
         });
         const root = document.documentElement;
         return {
