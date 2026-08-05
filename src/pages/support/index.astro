@@ -2,12 +2,21 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import EditorialPageHeader from '../../components/EditorialPageHeader.astro';
 
+interface SupportWallet {
+  asset: string;
+  name: string;
+  network: string;
+  address: string;
+  note?: string;
+  addressReference?: string;
+}
+
 const evmAddress = '0xea2a0fb0def0473d161b7958f6d584533db9202d';
-const primaryWallets = [
+const primaryWallets: SupportWallet[] = [
   { asset: 'BTC', name: 'Bitcoin', network: 'Bitcoin network', address: 'bc1qk3y8x72me37aj8d236z9v0gu42t8xxr2ytspmd' },
   { asset: 'ETH · USDT · USDC', name: 'EVM address', network: 'Ethereum Mainnet · ERC-20', address: evmAddress, note: 'Use this address for ETH, ERC-20 USDT, and ERC-20 USDC on Ethereum Mainnet.' }
 ];
-const additionalWallets = [
+const additionalWallets: SupportWallet[] = [
   { asset: 'SOL', name: 'Solana', network: 'Solana network', address: '9e9kZkwA6tYYAfCzb76aimta26yyPEgR39GZK2oBVH3q' },
   { asset: 'BNB', name: 'BNB', network: 'BNB Smart Chain · BEP-20', address: evmAddress, addressReference: 'Use the EVM address shown in Primary options.' },
   { asset: 'DOGE', name: 'Dogecoin', network: 'Dogecoin network', address: 'DP1m7675rSCZC5s5wzWSHNaA9bLVpsyjse' },
