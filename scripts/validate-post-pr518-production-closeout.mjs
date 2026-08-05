@@ -12,6 +12,7 @@ const closeout = readJson('docs/migration/post-pr518-production-closeout.json');
 const checkpoint = readJson('docs/migration/current-canonical-checkpoint.json');
 const review = readJson('docs/migration/current-review-checkpoint.json');
 const stats = readJson('docs/migration/current-stats-history-checkpoint.json');
+const statsHistory = readJson('data/stats-history.json');
 const agents = readText('AGENTS.md');
 const roadmap = readText('docs/roadmap.md');
 const readme = readText('README.md');
@@ -43,6 +44,10 @@ expect(checkpoint.counts.metadata_checked_routes === expected.metadata_checked_r
 
 expect(review.source_pr === 517 && review.exit_boundary === 'REVIEW_GATE', 'PR517 review checkpoint changed');
 expect(stats.growth_pr === 517 && stats.asset_count === 119, 'PR517 statistics checkpoint changed');
+const historySnapshot = statsHistory.snapshots.find((row) => row.checkpoint_id === stats.checkpoint_id);
+expect(Boolean(historySnapshot), 'PR517 statistics checkpoint missing from immutable history');
+expect(historySnapshot?.asset_count === 119, 'PR517 immutable history asset count changed');
+expect(historySnapshot?.snapshot_sha256 === '4a1dee137d20b91a78c1485f01e5805ab2c924ba1dc6ae74e0b8d04012465918', 'PR517 immutable history digest changed');
 
 for (const link of config.required_footer_links) {
   expect(architecture.includes(`href: '${link}'`), `missing footer link: ${link}`);
