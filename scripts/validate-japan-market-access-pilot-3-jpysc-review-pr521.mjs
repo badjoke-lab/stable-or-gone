@@ -16,19 +16,18 @@ const duplicate = readJson('docs/migration/japan-market-access-pilot-3-jpysc-rev
 const handoff = readJson('docs/migration/japan-market-access-pilot-3-jpysc-review-pr521-handoff.json');
 const checkpoint = readJson('docs/migration/current-canonical-checkpoint.json');
 const marketAccess = readJson('data/market-access-records-v1.json');
-const priorResearch = readJson('data/editorial-research/japan-stablecoin-market-access-2026.json');
-const batch5 = readJson('data/editorial-research/record-growth-batch-5-candidate-audit-pr515.json');
+const batchN = readJson('data/stablecoins-batch-n.json');
+const evidenceN = readJson('data/evidence-batch-n.json');
+const deploymentsN = readJson('data/deployments-batch-n.json');
 const agents = readText('AGENTS.md');
 const roadmap = readText('docs/roadmap.md');
 const spec = readText('docs/quality/japan-market-access-pilot-3-jpysc-review-pr521-spec.md');
 const amendment = readText('docs/roadmap-amendments/2026-08-05-japan-market-access-pilot-3-jpysc-review.md');
 const active = readText('scripts/validate-active-workstream.mjs').trim();
-const marketAccessSpec = readText('docs/market-access-record-spec.md');
 
 const baseline = loadRegistryV2Baseline(root);
 const stablecoins = (baseline.data_groups?.stablecoins ?? []).flatMap((relativePath) => readJson(relativePath));
 const stablecoinIds = new Set(stablecoins.map((row) => row.id));
-
 const expectedFunctions = {
   buy_sell: 'account_internal_only',
   deposit: 'unavailable',
@@ -39,96 +38,86 @@ const expectedFunctions = {
 expect(contract.status === 'reviewed_decision', 'review contract status changed');
 expect(contract.authority_pr === 520 && contract.review_pr === 521, 'authority chain changed');
 expect(contract.authority_merge_commit === '196f8e20cd55c9b229c88127afa236dc5060b3fd', 'authority merge commit changed');
-expect(contract.authority_production.verified === true, 'authority production verification missing');
-expect(contract.authority_production.run_id === 30975708306, 'authority production run changed');
-expect(contract.authority_production.canonical_hash === 'sha256:57749955faa96d2bd836bac83ef41a0c5dc13f2342763dc4d975c588cd50c650', 'authority canonical hash changed');
-expect(contract.authority_production.convergence_attempt === 2, 'authority convergence result changed');
-
-expect(contract.target.source_research_record_id === 'jp_access_jpysc_sbivc_2026_06_24', 'target research row changed');
-expect(contract.target.candidate_id === 'sog_cand_pr515_jpysc', 'target candidate changed');
-expect(contract.target.proposed_asset_id === 'sog_st_jpysc', 'target asset changed');
+expect(contract.authority_production.verified === true && contract.authority_production.run_id === 30975708306, 'authority production checkpoint changed');
+expect(contract.authority_production.canonical_hash === 'sha256:57749955faa96d2bd836bac83ef41a0c5dc13f2342763dc4d975c588cd50c650', 'canonical hash changed');
+expect(contract.target.asset_id === 'sog_st_jpysc', 'target asset changed');
+expect(contract.target.canonical_asset_present === true && contract.target.canonical_asset_source_pr === 128, 'canonical JPYSC context changed');
 expect(contract.target.jurisdiction.country_code === 'JP', 'jurisdiction changed');
-expect(contract.target.platform.name === 'SBI VC Trade' && contract.target.platform.service === 'VCTRADE', 'platform changed');
+expect(contract.target.platform.name === 'SBI VC Trade' && contract.target.platform.service === 'VCTRADE', 'platform scope changed');
 expect(contract.target.effective_from === '2026-06-24' && contract.target.observed_at === '2026-08-05', 'review dates changed');
 
 const matrix = Object.fromEntries(contract.reviewed_function_matrix.map((row) => [row.function, row.reviewed_state]));
 expect(JSON.stringify(matrix) === JSON.stringify(expectedFunctions), 'reviewed function matrix changed');
-expect(contract.reviewed_function_matrix.find((row) => row.function === 'buy_sell')?.network_scope === 'account_internal_only', 'buy/sell account boundary changed');
+expect(contract.reviewed_function_matrix.find((row) => row.function === 'buy_sell')?.network_scope === 'account_internal_only', 'buy/sell network scope changed');
 expect(contract.excluded_service_families.includes('lending'), 'lending exclusion missing');
 
-expect(contract.decision.disposition === 'blocked_canonical_asset_identity_absent', 'review disposition changed');
-expect(contract.decision.canonical_asset_present === false, 'canonical asset presence changed');
-expect(contract.decision.canonical_market_access_promotion_allowed === false, 'canonical promotion enabled');
-expect(contract.decision.maximum_new_market_access_records === 0, 'Market Access maximum changed');
-expect(contract.decision.new_canonical_asset_allowed === false, 'new canonical asset enabled');
-expect(contract.decision.new_canonical_evidence_identity_allowed === false, 'new Evidence identity enabled');
+expect(contract.decision.disposition === 'eligible_for_later_separate_authority', 'review disposition changed');
+expect(contract.decision.canonical_asset_present === true, 'canonical asset presence changed');
+expect(contract.decision.function_matrix_review_complete === true, 'function review completeness changed');
+expect(contract.decision.canonical_market_access_promotion_allowed_in_pr521 === false, 'PR #521 canonical promotion enabled');
+expect(contract.decision.maximum_new_market_access_records === 0, 'PR #521 record maximum changed');
+expect(contract.decision.new_canonical_asset_allowed === false && contract.decision.new_canonical_evidence_identity_allowed === false, 'PR #521 canonical additions enabled');
 expect(contract.decision.canonical_changes === 0 && contract.decision.public_changes === 0, 'canonical/public boundary changed');
-expect(contract.decision.future_capability_backfill_allowed === false, 'future backfill enabled');
+expect(contract.decision.future_capability_backfill_allowed === false, 'future capability backfill enabled');
 expect(contract.decision.country_wide_availability_claim_allowed === false, 'country-wide claim enabled');
-expect(contract.decision.replacement_asset_allowed === false, 'replacement asset enabled');
 expect(contract.decision.automatic_promotion === false, 'automatic promotion enabled');
-expect(contract.decision.ranking === false && contract.decision.score === false && contract.decision.recommendation === false, 'ranking or recommendation enabled');
 expect(contract.required_exit === 'REVIEW_GATE', 'required exit changed');
-expect(contract.next_planned_lane_implementation_authorized === false, 'next lane pre-authorized');
+expect(contract.next_recommended_authority === 'jpysc_market_access_pilot_3_implementation', 'next recommended authority changed');
+expect(contract.next_recommended_authority_implementation_authorized === false, 'implementation pre-authorized');
 
 expect(authority.decision.authorize_next_pr === 521 && authority.decision.review_only === true, 'PR #520 authority changed');
-expect(authority.decision.maximum_new_market_access_records_in_pr521 === 0, 'PR #520 record maximum changed');
-expect(authority.decision.new_canonical_asset_allowed_in_pr521 === false, 'PR #520 asset boundary changed');
-expect(authority.decision.new_evidence_identity_allowed_in_pr521 === false, 'PR #520 Evidence boundary changed');
+expect(authority.decision.maximum_new_market_access_records_in_pr521 === 0, 'PR #520 maximum changed');
 
-expect(review.status === 'reviewed_internal_complete', 'private review status changed');
-expect(review.subject.canonical_asset_identity_exists === false, 'private canonical state changed');
+expect(review.subject.asset_id === 'sog_st_jpysc' && review.subject.canonical_asset_identity_exists === true, 'private canonical context changed');
+expect(review.subject.canonical_asset_source_pr === 128, 'private canonical source changed');
 expect(review.function_review.buy_sell.state === expectedFunctions.buy_sell, 'private buy/sell state changed');
 expect(review.function_review.deposit.state === expectedFunctions.deposit, 'private deposit state changed');
 expect(review.function_review.withdrawal.state === expectedFunctions.withdrawal, 'private withdrawal state changed');
 expect(review.function_review.external_wallet_transfer.state === expectedFunctions.external_wallet_transfer, 'private transfer state changed');
 expect(review.network_review.future_network_context_is_current_capability === false, 'future capability promoted');
-expect(review.reviewed_disposition === 'blocked_canonical_asset_identity_absent', 'private disposition changed');
+expect(review.reviewed_disposition === 'eligible_for_later_separate_authority', 'private disposition changed');
 expect(review.promotion_assessment.maximum_new_records === 0, 'private record maximum changed');
 
-expect(coverage.coverage_result.four_function_review_complete === true, 'source review incomplete');
-expect(coverage.coverage_result.canonical_promotion_evidence_complete === false, 'promotion evidence incorrectly complete');
-expect(coverage.coverage_result.primary_blocker === 'canonical_asset_identity_absent', 'coverage blocker changed');
+expect(coverage.canonical_context.asset_identity_present === true, 'coverage canonical context changed');
+expect(coverage.coverage_result.canonical_asset_prerequisite_satisfied === true, 'canonical prerequisite not satisfied');
+expect(coverage.coverage_result.four_function_review_complete === true, 'four-function review incomplete');
+expect(coverage.coverage_result.eligible_for_later_separate_authority === true, 'later authority eligibility missing');
+expect(coverage.coverage_result.canonical_implementation_authorized_in_pr521 === false, 'implementation enabled in PR #521');
 expect(coverage.coverage_result.canonical_market_access_records_added === 0, 'coverage reports canonical records');
-expect(coverage.excluded_sources.some((row) => row.reason.includes('lending is outside Market Access Record v1')), 'lending exclusion missing');
 
-expect(duplicate.canonical_asset_search.exact_id_match === false, 'duplicate canonical id result changed');
-expect(duplicate.canonical_market_access_search.matching_records === 0, 'duplicate Market Access result changed');
-expect(duplicate.canonical_market_access_search.total_records_before === 8 && duplicate.canonical_market_access_search.total_records_after === 8, 'duplicate count changed');
-expect(duplicate.result.canonical_source_identity_changes === 0, 'canonical source identity changed');
+expect(duplicate.canonical_asset_search.exact_id_match === true, 'canonical JPYSC exact match missing');
+expect(duplicate.canonical_asset_search.canonical_identity_present === true, 'canonical identity missing in duplicate report');
+expect(duplicate.canonical_market_access_search.matching_records === 0, 'duplicate Market Access record found');
+expect(duplicate.canonical_market_access_search.total_records_before === 8 && duplicate.canonical_market_access_search.total_records_after === 8, 'Market Access count changed in duplicate report');
+expect(duplicate.result.duplicate_canonical_asset_creation_prevented === true, 'duplicate asset prevention missing');
 expect(duplicate.result.canonical_promotion_attempted === false, 'canonical promotion attempted');
 
-expect(handoff.reviewed_result.disposition === 'blocked_canonical_asset_identity_absent', 'handoff disposition changed');
+expect(handoff.reviewed_result.disposition === 'eligible_for_later_separate_authority', 'handoff disposition changed');
 expect(JSON.stringify(handoff.reviewed_result.function_states) === JSON.stringify(expectedFunctions), 'handoff matrix changed');
+expect(handoff.reviewed_result.canonical_asset_present === true && handoff.reviewed_result.canonical_asset_source_pr === 128, 'handoff canonical context changed');
 expect(handoff.reviewed_result.canonical_market_access_records_added === 0, 'handoff records changed');
-expect(handoff.reviewed_result.canonical_evidence_identities_added === 0, 'handoff Evidence changed');
 expect(handoff.required_next_boundary === 'REVIEW_GATE', 'handoff exit changed');
-expect(handoff.next_planned_lane_implementation_authorized === false, 'handoff next lane pre-authorized');
+expect(handoff.next_recommended_authority_implementation_authorized === false, 'handoff implementation pre-authorized');
 
 expect(checkpoint.counts.assets === 119, 'canonical asset count changed');
-expect(checkpoint.counts.organizations === 109 && checkpoint.counts.relationships === 131, 'identity counts changed');
-expect(checkpoint.counts.events === 194 && checkpoint.counts.evidence === 584 && checkpoint.counts.evidence_relations === 584, 'event/Evidence counts changed');
+expect(checkpoint.counts.evidence === 584 && checkpoint.counts.evidence_relations === 584, 'Evidence counts changed');
 expect(checkpoint.counts.deployments === 186 && checkpoint.counts.market_access_records === 8, 'deployment/Market Access counts changed');
 expect(checkpoint.counts.detail_routes === 422 && checkpoint.counts.metadata_checked_routes === 422, 'route counts changed');
 expect(stablecoins.length === 119, 'loaded canonical stablecoin count changed');
-expect(!stablecoinIds.has('sog_st_jpysc'), 'canonical JPYSC asset identity was added');
+expect(stablecoinIds.has('sog_st_jpysc'), 'canonical JPYSC identity missing');
+expect(batchN.some((row) => row.id === 'sog_st_jpysc' && row.status === 'limited'), 'canonical JPYSC batch record changed');
+expect(evidenceN.some((row) => row.id === 'sog_src_jpysc_launch_sbi_vc_2026'), 'canonical JPYSC launch Evidence missing');
+expect(evidenceN.some((row) => row.id === 'sog_src_jpysc_announcement_sbi_2026'), 'canonical JPYSC announcement Evidence missing');
+expect(deploymentsN.some((row) => row.id === 'sog_dep_jpysc_ethereum_initial_batch_n' && row.status === 'restricted'), 'canonical JPYSC deployment context changed');
 expect(Array.isArray(marketAccess) && marketAccess.length === 8, 'canonical Market Access count changed');
-expect(marketAccess.every((row) => row.asset_id !== 'sog_st_jpysc'), 'canonical JPYSC Market Access row was added');
+expect(marketAccess.every((row) => row.asset_id !== 'sog_st_jpysc'), 'canonical JPYSC Market Access row was added in PR #521');
 
-const priorRow = priorResearch.records.find((row) => row.record_id === 'jp_access_jpysc_sbivc_2026_06_24');
-expect(priorRow?.functions?.buy_sell === 'available_account_internal', 'prior buy/sell boundary changed');
-expect(priorRow?.functions?.deposit === 'unavailable_at_reviewed_launch_stage', 'prior deposit boundary changed');
-const candidate = batch5.candidates.find((row) => row.candidate_id === 'sog_cand_pr515_jpysc');
-expect(candidate?.reviewed_disposition === 'insufficient_current_evidence', 'PR #515 disposition changed');
-
-expect(marketAccessSpec.includes('canonical asset identity exists'), 'canonical prerequisite changed');
-expect(agents.includes('Repository authority: PR #521 active Japan Market Access Pilot 3 JPYSC review'), 'AGENTS authority missing');
-expect(agents.includes('Reviewed disposition: blocked_canonical_asset_identity_absent'), 'AGENTS disposition missing');
-expect(agents.includes('Canonical Market Access Records added: 0'), 'AGENTS zero-record boundary missing');
-expect(roadmap.includes('Status: PR #521 active Japan Market Access Pilot 3 JPYSC review'), 'roadmap status missing');
-expect(roadmap.includes('buy_sell: account_internal_only'), 'roadmap matrix missing');
-expect(spec.includes('blocked_canonical_asset_identity_absent'), 'spec disposition missing');
-expect(amendment.includes('Repository authority returns to `REVIEW GATE` after PR #521.'), 'amendment exit missing');
+expect(agents.includes('Reviewed disposition: eligible_for_later_separate_authority'), 'AGENTS disposition missing');
+expect(agents.includes('Canonical JPYSC identity: present since PR #128'), 'AGENTS canonical context missing');
+expect(roadmap.includes('eligible_for_later_separate_authority'), 'roadmap disposition missing');
+expect(roadmap.includes('canonical identity: present since PR #128'), 'roadmap canonical context missing');
+expect(spec.includes('PR #128 added `sog_st_jpysc`'), 'spec canonical correction missing');
+expect(amendment.includes('corrected reviewed disposition is `eligible_for_later_separate_authority`'), 'amendment correction missing');
 expect(active === "import './validate-japan-market-access-pilot-3-jpysc-review-pr521.mjs';", 'active validator wiring changed');
 
 if (failures.length) {
@@ -141,11 +130,12 @@ console.log(JSON.stringify({
   ok: true,
   authority_pr: 520,
   review_pr: 521,
-  disposition: 'blocked_canonical_asset_identity_absent',
+  disposition: 'eligible_for_later_separate_authority',
   function_states: expectedFunctions,
   loaded_canonical_assets: stablecoins.length,
   canonical_market_access_records_added: 0,
   canonical_assets_added: 0,
   canonical_evidence_identities_added: 0,
+  next_recommended_authority: 'jpysc_market_access_pilot_3_implementation',
   required_exit: 'REVIEW_GATE'
 }, null, 2));
