@@ -29,8 +29,10 @@
     "source_research_id": "japan-stablecoin-market-access-2026",
     "source_research_record_id": "jp_access_jpysc_sbivc_2026_06_24",
     "candidate_id": "sog_cand_pr515_jpysc",
-    "proposed_asset_id": "sog_st_jpysc",
+    "asset_id": "sog_st_jpysc",
     "asset_symbol": "JPYSC",
+    "canonical_asset_present": true,
+    "canonical_asset_source_pr": 128,
     "jurisdiction": {
       "country_code": "JP",
       "label": "Japan",
@@ -56,23 +58,33 @@
       "function": "deposit",
       "reviewed_state": "unavailable",
       "current": true,
-      "network_scope": "not_applicable_while_unavailable",
-      "reason": "The current SBI VC Trade JPYSC product information states that deposits are not supported."
+      "network_scope": "not_applicable",
+      "reason": "Current SBI VC Trade JPYSC product information states that deposits are not supported."
     },
     {
       "function": "withdrawal",
       "reviewed_state": "unavailable",
       "current": true,
-      "network_scope": "not_applicable_while_unavailable",
-      "reason": "The current SBI VC Trade JPYSC product information states that withdrawals are not supported."
+      "network_scope": "not_applicable",
+      "reason": "Current SBI VC Trade JPYSC product information states that withdrawals are not supported."
     },
     {
       "function": "external_wallet_transfer",
       "reviewed_state": "unavailable",
       "current": true,
-      "network_scope": "not_applicable_while_unavailable",
-      "reason": "External-wallet transfer is unavailable because the reviewed product remains account-internal and withdrawal is not supported."
+      "network_scope": "not_applicable",
+      "reason": "The reviewed product remains account-internal and withdrawal is unavailable, so external-wallet transfer is unavailable."
     }
+  ],
+  "existing_canonical_evidence_ids": [
+    "sog_src_jpysc_launch_sbi_vc_2026",
+    "sog_src_jpysc_announcement_sbi_2026"
+  ],
+  "current_private_review_sources_requiring_later_evidence_decision": [
+    "https://www.sbivc.co.jp/jpysc",
+    "https://www.sbivc.co.jp/services/crypto/jpysc",
+    "https://www.fsa.go.jp/menkyo/menkyoj/denshikessaisyudan.pdf",
+    "https://www.shinseitrust.com/stablecoin/jpysc.html"
   ],
   "excluded_functions": [
     "direct_issuer_mint",
@@ -83,63 +95,11 @@
     "staking",
     "yield"
   ],
-  "reviewed_sources": [
-    {
-      "url": "https://www.sbivc.co.jp/newsview/fx4zmjwbl",
-      "publisher": "SBI VC Trade",
-      "source_type": "official_limited_launch_announcement",
-      "claim_scopes": [
-        "effective_date",
-        "account_internal_launch",
-        "future_public_chain_boundary"
-      ]
-    },
-    {
-      "url": "https://www.sbivc.co.jp/jpysc",
-      "publisher": "SBI VC Trade",
-      "source_type": "official_current_product_page",
-      "claim_scopes": [
-        "current_buy_sell",
-        "current_deposit_unavailable",
-        "current_withdrawal_unavailable",
-        "current_external_transfer_unavailable",
-        "conditional_future_network_context"
-      ]
-    },
-    {
-      "url": "https://www.sbivc.co.jp/services/crypto/jpysc",
-      "publisher": "SBI VC Trade",
-      "source_type": "official_current_trading_page",
-      "claim_scopes": [
-        "current_buy_sell",
-        "account_internal_conversion",
-        "one_yen_reference"
-      ]
-    },
-    {
-      "url": "https://www.fsa.go.jp/menkyo/menkyoj/denshikessaisyudan.pdf",
-      "publisher": "Financial Services Agency of Japan",
-      "source_type": "official_provider_register",
-      "claim_scopes": [
-        "provider_registration",
-        "handled_asset_scope"
-      ]
-    },
-    {
-      "url": "https://www.shinseitrust.com/stablecoin/jpysc.html",
-      "publisher": "SBI Shinsei Trust & Banking",
-      "source_type": "official_issuer_page",
-      "claim_scopes": [
-        "issuer_identity",
-        "trust_structure",
-        "category_three_context"
-      ]
-    }
-  ],
   "decision": {
-    "disposition": "blocked_canonical_asset_identity_absent",
-    "canonical_asset_present": false,
-    "canonical_market_access_promotion_allowed": false,
+    "disposition": "eligible_for_later_separate_authority",
+    "canonical_asset_present": true,
+    "function_matrix_review_complete": true,
+    "canonical_market_access_promotion_allowed_in_pr521": false,
     "maximum_new_market_access_records": 0,
     "new_canonical_asset_allowed": false,
     "new_canonical_evidence_identity_allowed": false,
@@ -155,14 +115,16 @@
     "recommendation": false,
     "legacy_redirect_changes": 0
   },
-  "blocking_reasons": [
-    "Market Access Record v1 requires an existing canonical asset identity.",
-    "JPYSC is not present in the canonical 119-asset registry at this review checkpoint.",
-    "The current product remains account-internal for access purposes; deposits, withdrawals, and external-wallet transfers are unavailable.",
-    "Future public-chain capability cannot be backfilled into the current dated state.",
-    "A later canonical asset review and a separate Market Access authority decision are both required before promotion."
+  "later_authority_requirements": [
+    "Authorize exactly four provider-scoped JPYSC Market Access records.",
+    "Decide whether current SBI VC Trade product and trading pages require new canonical Evidence identities or may be covered by existing canonical source identities.",
+    "Preserve account-internal buy/sell and unavailable deposit, withdrawal, and external-wallet-transfer states.",
+    "Preserve future public-chain capability as future-only.",
+    "Validate the canonical Market Access count transition from 8 to 12."
   ],
   "required_exit": "REVIEW_GATE",
-  "next_planned_lane": "evidence_archive_payload_verification_batch_2",
-  "next_planned_lane_implementation_authorized": false
+  "next_recommended_authority": "jpysc_market_access_pilot_3_implementation",
+  "next_recommended_authority_implementation_authorized": false,
+  "later_cycle_lane": "evidence_archive_payload_verification_batch_2",
+  "later_cycle_lane_implementation_authorized": false
 }
