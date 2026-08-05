@@ -28,11 +28,11 @@ Official public origin: https://www.stableorgone.com
 Current production counts remain:
 
 ```text
-Stable assets: 119
+Canonical stable assets: 119
 Organizations: 109
 Relationships: 131
 Events: 194
-Evidence: 584
+Canonical Evidence: 584
 Evidence Relations: 584
 Reserve reports: 127
 Known unknowns: 352
@@ -41,7 +41,8 @@ Legal profiles: 119
 Reserve components: 153
 Income profiles: 119
 Market Access Records: 8
-Archive recorded / not recorded: 462 / 122
+Archive recorded: 462
+Archive not recorded: 122
 Detail routes: 422
 Metadata-checked routes: 422
 ```
@@ -61,6 +62,7 @@ PR #521 records a private reviewed result only. It changes no canonical data, pu
 9. PR #519 closed that checkpoint and restored REVIEW GATE.
 10. PR #520 authorized only PR #521's JPYSC eligibility review.
 11. PR #521 confirms the four-function matrix and exits only to REVIEW GATE.
+12. `docs/ui-v3-remediation-authority.md` remains the regression-protection contract for material public UI work.
 
 ## Mandatory reading order
 
@@ -68,19 +70,20 @@ PR #521 records a private reviewed result only. It changes no canonical data, pu
 2. `docs/spec-governance.md`
 3. `docs/roadmap.md`
 4. `docs/deployment-policy.md`
-5. `docs/market-access-record-spec.md`
-6. `schemas/market-access-record-v1.schema.json`
-7. `config/japan-market-access-pilot-3-review-authority-pr520.json`
-8. `config/japan-market-access-pilot-3-jpysc-review-pr521.json`
-9. `data/editorial-research/japan-market-access-pilot-3-jpysc-review-pr521.json`
-10. `docs/migration/japan-market-access-pilot-3-jpysc-review-pr521-source-coverage.json`
-11. `docs/migration/japan-market-access-pilot-3-jpysc-review-pr521-duplicate-report.json`
-12. `docs/migration/japan-market-access-pilot-3-jpysc-review-pr521-handoff.json`
-13. `docs/quality/japan-market-access-pilot-3-jpysc-review-pr521-spec.md`
-14. `data/stablecoins-batch-n.json`
-15. `data/evidence-batch-n.json`
-16. `data/deployments-batch-n.json`
-17. current canonical, review, and statistics checkpoints
+5. `docs/ui-v3-remediation-authority.md`
+6. `docs/market-access-record-spec.md`
+7. `schemas/market-access-record-v1.schema.json`
+8. `config/japan-market-access-pilot-3-review-authority-pr520.json`
+9. `config/japan-market-access-pilot-3-jpysc-review-pr521.json`
+10. `data/editorial-research/japan-market-access-pilot-3-jpysc-review-pr521.json`
+11. `docs/migration/japan-market-access-pilot-3-jpysc-review-pr521-source-coverage.json`
+12. `docs/migration/japan-market-access-pilot-3-jpysc-review-pr521-duplicate-report.json`
+13. `docs/migration/japan-market-access-pilot-3-jpysc-review-pr521-handoff.json`
+14. `docs/quality/japan-market-access-pilot-3-jpysc-review-pr521-spec.md`
+15. `data/stablecoins-batch-n.json`
+16. `data/evidence-batch-n.json`
+17. `data/deployments-batch-n.json`
+18. current canonical, review, and statistics checkpoints
 
 Merged repository authority outranks chat memory, handoff prose, issue discussion, and unmerged drafts.
 
