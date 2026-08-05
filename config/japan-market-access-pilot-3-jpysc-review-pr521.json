@@ -1,0 +1,168 @@
+{
+  "schema_version": "1.0",
+  "work_item": "japan_market_access_pilot_3_jpysc_review_pr521",
+  "status": "reviewed_decision",
+  "recorded_at": "2026-08-05",
+  "authority_pr": 520,
+  "review_pr": 521,
+  "authority_merge_commit": "196f8e20cd55c9b229c88127afa236dc5060b3fd",
+  "authority_production": {
+    "verified": true,
+    "run_id": 30975708306,
+    "public_origin": "https://www.stableorgone.com",
+    "canonical_hash": "sha256:57749955faa96d2bd836bac83ef41a0c5dc13f2342763dc4d975c588cd50c650",
+    "convergence_attempt": 2
+  },
+  "canonical_baseline": {
+    "stable_assets": 119,
+    "organizations": 109,
+    "relationships": 131,
+    "events": 194,
+    "evidence": 584,
+    "evidence_relations": 584,
+    "deployments": 186,
+    "market_access_records": 8,
+    "detail_routes": 422,
+    "metadata_checked_routes": 422
+  },
+  "target": {
+    "source_research_id": "japan-stablecoin-market-access-2026",
+    "source_research_record_id": "jp_access_jpysc_sbivc_2026_06_24",
+    "candidate_id": "sog_cand_pr515_jpysc",
+    "proposed_asset_id": "sog_st_jpysc",
+    "asset_symbol": "JPYSC",
+    "jurisdiction": {
+      "country_code": "JP",
+      "label": "Japan",
+      "subdivision_code": null
+    },
+    "platform": {
+      "name": "SBI VC Trade",
+      "service": "VCTRADE",
+      "organization_id": "sog_org_sbi_vc_trade"
+    },
+    "effective_from": "2026-06-24",
+    "observed_at": "2026-08-05"
+  },
+  "reviewed_function_matrix": [
+    {
+      "function": "buy_sell",
+      "reviewed_state": "account_internal_only",
+      "current": true,
+      "network_scope": "account_internal_only",
+      "reason": "SBI VC Trade supports account-internal purchase, sale, and conversion between JPY and JPYSC. This does not establish external transfer capability."
+    },
+    {
+      "function": "deposit",
+      "reviewed_state": "unavailable",
+      "current": true,
+      "network_scope": "not_applicable_while_unavailable",
+      "reason": "The current SBI VC Trade JPYSC product information states that deposits are not supported."
+    },
+    {
+      "function": "withdrawal",
+      "reviewed_state": "unavailable",
+      "current": true,
+      "network_scope": "not_applicable_while_unavailable",
+      "reason": "The current SBI VC Trade JPYSC product information states that withdrawals are not supported."
+    },
+    {
+      "function": "external_wallet_transfer",
+      "reviewed_state": "unavailable",
+      "current": true,
+      "network_scope": "not_applicable_while_unavailable",
+      "reason": "External-wallet transfer is unavailable because the reviewed product remains account-internal and withdrawal is not supported."
+    }
+  ],
+  "excluded_functions": [
+    "direct_issuer_mint",
+    "direct_issuer_redemption"
+  ],
+  "excluded_service_families": [
+    "lending",
+    "staking",
+    "yield"
+  ],
+  "reviewed_sources": [
+    {
+      "url": "https://www.sbivc.co.jp/newsview/fx4zmjwbl",
+      "publisher": "SBI VC Trade",
+      "source_type": "official_limited_launch_announcement",
+      "claim_scopes": [
+        "effective_date",
+        "account_internal_launch",
+        "future_public_chain_boundary"
+      ]
+    },
+    {
+      "url": "https://www.sbivc.co.jp/jpysc",
+      "publisher": "SBI VC Trade",
+      "source_type": "official_current_product_page",
+      "claim_scopes": [
+        "current_buy_sell",
+        "current_deposit_unavailable",
+        "current_withdrawal_unavailable",
+        "current_external_transfer_unavailable",
+        "conditional_future_network_context"
+      ]
+    },
+    {
+      "url": "https://www.sbivc.co.jp/services/crypto/jpysc",
+      "publisher": "SBI VC Trade",
+      "source_type": "official_current_trading_page",
+      "claim_scopes": [
+        "current_buy_sell",
+        "account_internal_conversion",
+        "one_yen_reference"
+      ]
+    },
+    {
+      "url": "https://www.fsa.go.jp/menkyo/menkyoj/denshikessaisyudan.pdf",
+      "publisher": "Financial Services Agency of Japan",
+      "source_type": "official_provider_register",
+      "claim_scopes": [
+        "provider_registration",
+        "handled_asset_scope"
+      ]
+    },
+    {
+      "url": "https://www.shinseitrust.com/stablecoin/jpysc.html",
+      "publisher": "SBI Shinsei Trust & Banking",
+      "source_type": "official_issuer_page",
+      "claim_scopes": [
+        "issuer_identity",
+        "trust_structure",
+        "category_three_context"
+      ]
+    }
+  ],
+  "decision": {
+    "disposition": "blocked_canonical_asset_identity_absent",
+    "canonical_asset_present": false,
+    "canonical_market_access_promotion_allowed": false,
+    "maximum_new_market_access_records": 0,
+    "new_canonical_asset_allowed": false,
+    "new_canonical_evidence_identity_allowed": false,
+    "canonical_changes": 0,
+    "public_changes": 0,
+    "private_review_artifacts_added": true,
+    "future_capability_backfill_allowed": false,
+    "country_wide_availability_claim_allowed": false,
+    "replacement_asset_allowed": false,
+    "automatic_promotion": false,
+    "ranking": false,
+    "score": false,
+    "recommendation": false,
+    "legacy_redirect_changes": 0
+  },
+  "blocking_reasons": [
+    "Market Access Record v1 requires an existing canonical asset identity.",
+    "JPYSC is not present in the canonical 119-asset registry at this review checkpoint.",
+    "The current product remains account-internal for access purposes; deposits, withdrawals, and external-wallet transfers are unavailable.",
+    "Future public-chain capability cannot be backfilled into the current dated state.",
+    "A later canonical asset review and a separate Market Access authority decision are both required before promotion."
+  ],
+  "required_exit": "REVIEW_GATE",
+  "next_planned_lane": "evidence_archive_payload_verification_batch_2",
+  "next_planned_lane_implementation_authorized": false
+}
