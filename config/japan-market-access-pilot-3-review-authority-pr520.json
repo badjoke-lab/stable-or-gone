@@ -1,0 +1,131 @@
+{
+  "schema_version": "1.0",
+  "work_item": "japan_market_access_pilot_3_review_authority_pr520",
+  "status": "review_authority",
+  "recorded_at": "2026-08-05",
+  "source_prs": [514, 515, 519],
+  "production_checkpoint": {
+    "source_commit": "0648272f4271e68deac0a9603d77392eb7b63a3f",
+    "public_origin": "https://www.stableorgone.com",
+    "canonical_hash": "sha256:57749955faa96d2bd836bac83ef41a0c5dc13f2342763dc4d975c588cd50c650",
+    "convergence_attempt": 1,
+    "stable_assets": 119,
+    "organizations": 109,
+    "relationships": 131,
+    "events": 194,
+    "evidence": 584,
+    "evidence_relations": 584,
+    "deployments": 186,
+    "market_access_records": 8,
+    "detail_routes": 422,
+    "metadata_checked_routes": 422
+  },
+  "target": {
+    "source_research_id": "japan-stablecoin-market-access-2026",
+    "source_research_record_id": "jp_access_jpysc_sbivc_2026_06_24",
+    "candidate_id": "sog_cand_pr515_jpysc",
+    "asset_id": "sog_st_jpysc",
+    "asset_symbol": "JPYSC",
+    "canonical_asset_present_at_authority_entry": false,
+    "jurisdiction": {
+      "country_code": "JP",
+      "label": "Japan",
+      "subdivision_code": null
+    },
+    "platform": {
+      "name": "SBI VC Trade",
+      "service": "VCTRADE",
+      "organization_id": "sog_org_sbi_vc_trade"
+    },
+    "effective_from": "2026-06-24",
+    "review_cutoff": "2026-08-05",
+    "functions": [
+      "buy_sell",
+      "deposit",
+      "withdrawal",
+      "external_wallet_transfer"
+    ],
+    "excluded_functions": [
+      "direct_issuer_mint",
+      "direct_issuer_redemption"
+    ],
+    "excluded_service_families": [
+      "lending",
+      "staking",
+      "yield"
+    ]
+  },
+  "reviewed_source_basis": [
+    {
+      "url": "https://www.sbivc.co.jp/newsview/fx4zmjwbl",
+      "publisher": "SBI VC Trade",
+      "role": "dated_limited_launch_and_account_internal_boundary"
+    },
+    {
+      "url": "https://www.sbivc.co.jp/jpysc",
+      "publisher": "SBI VC Trade",
+      "role": "current_product_and_no_deposit_withdrawal_boundary"
+    },
+    {
+      "url": "https://www.sbivc.co.jp/services/crypto/jpysc",
+      "publisher": "SBI VC Trade",
+      "role": "current_buy_sell_service_confirmation"
+    },
+    {
+      "url": "https://www.fsa.go.jp/menkyo/menkyoj/denshikessaisyudan.pdf",
+      "publisher": "Financial Services Agency of Japan",
+      "role": "provider_and_handled_asset_register_scope"
+    },
+    {
+      "url": "https://www.shinseitrust.com/stablecoin/jpysc.html",
+      "publisher": "SBI Shinsei Trust & Banking",
+      "role": "issuer_and_trust_structure_scope"
+    }
+  ],
+  "decision": {
+    "authorize_next_pr": 521,
+    "authorize_work_item": "Japan Market Access Pilot 3 — JPYSC eligibility review",
+    "review_only": true,
+    "canonical_changes_in_pr520": 0,
+    "public_changes_in_pr520": 0,
+    "market_access_changes_in_pr520": 0,
+    "maximum_new_market_access_records_in_pr521": 0,
+    "new_canonical_asset_allowed_in_pr521": false,
+    "new_evidence_identity_allowed_in_pr521": false,
+    "private_editorial_research_update_allowed_in_pr521": true,
+    "review_artifact_allowed_in_pr521": true,
+    "replacement_asset_allowed": false,
+    "automatic_promotion": false,
+    "ranking": false,
+    "score": false,
+    "recommendation": false,
+    "legacy_redirect_changes": 0,
+    "later_canonical_promotion_requires_separate_authority_pr": true,
+    "required_exit_after_pr521": "REVIEW_GATE"
+  },
+  "pr521_review_gate": {
+    "recheck_canonical_asset_prerequisite": true,
+    "recheck_current_primary_sources": true,
+    "verify_buy_sell_account_internal_scope": true,
+    "verify_deposit_state": true,
+    "verify_withdrawal_state": true,
+    "verify_external_wallet_transfer_state": true,
+    "verify_effective_and_observed_dates": true,
+    "verify_platform_and_service_scope": true,
+    "review_existing_canonical_evidence_identity_coverage": true,
+    "review_duplicate_source_urls": true,
+    "preserve_future_public_chain_capability_as_future_only": true,
+    "exclude_lending_from_market_access_v1": true,
+    "unsupported_values_must_remain_unknown": true,
+    "no_country_wide_availability_claim": true,
+    "no_government_guarantee_or_recommendation_claim": true,
+    "no_canonical_or_public_output_change": true
+  },
+  "known_entry_blocker": {
+    "code": "canonical_asset_identity_absent",
+    "source_contract": "docs/market-access-record-spec.md",
+    "requirement": "canonical asset identity exists before Market Access promotion",
+    "effect": "PR #521 may review the JPYSC function matrix but may not promote canonical Market Access records"
+  },
+  "next_boundary_after_pr521": "REVIEW_GATE"
+}
