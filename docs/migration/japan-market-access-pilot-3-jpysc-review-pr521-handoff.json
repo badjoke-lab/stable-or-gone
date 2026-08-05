@@ -1,0 +1,63 @@
+{
+  "schema_version": "1.0",
+  "handoff_id": "sog_japan_market_access_pilot_3_jpysc_review_pr521_handoff_2026_08_05",
+  "status": "reviewed_handoff",
+  "recorded_at": "2026-08-05",
+  "authority_pr": 520,
+  "review_pr": 521,
+  "authority_merge_commit": "196f8e20cd55c9b229c88127afa236dc5060b3fd",
+  "authority_production": {
+    "verified": true,
+    "run_id": 30975708306,
+    "canonical_hash": "sha256:57749955faa96d2bd836bac83ef41a0c5dc13f2342763dc4d975c588cd50c650",
+    "convergence_attempt": 2
+  },
+  "reviewed_result": {
+    "target": "JPYSC / Japan / SBI VC Trade / VCTRADE",
+    "disposition": "blocked_canonical_asset_identity_absent",
+    "function_states": {
+      "buy_sell": "account_internal_only",
+      "deposit": "unavailable",
+      "withdrawal": "unavailable",
+      "external_wallet_transfer": "unavailable"
+    },
+    "effective_from": "2026-06-24",
+    "observed_at": "2026-08-05",
+    "canonical_asset_present": false,
+    "canonical_market_access_records_added": 0,
+    "canonical_evidence_identities_added": 0,
+    "canonical_changes": 0,
+    "public_changes": 0
+  },
+  "preserved_counts": {
+    "stable_assets": 119,
+    "organizations": 109,
+    "relationships": 131,
+    "events": 194,
+    "evidence": 584,
+    "evidence_relations": 584,
+    "deployments": 186,
+    "market_access_records": 8,
+    "detail_routes": 422,
+    "metadata_checked_routes": 422
+  },
+  "future_boundary": {
+    "future_public_chain_capability_backfilled": false,
+    "lending_used_as_transfer_evidence": false,
+    "country_wide_availability_claimed": false,
+    "government_guarantee_or_recommendation_claimed": false,
+    "automatic_promotion": false,
+    "replacement_asset": false
+  },
+  "later_jpysc_promotion_requirements": [
+    "separate complete canonical asset review",
+    "canonical asset identity established through reviewed authority",
+    "canonical Evidence scope sufficient for each function",
+    "separate Market Access promotion authority",
+    "fresh current-state review at the later effective and observed dates"
+  ],
+  "required_next_boundary": "REVIEW_GATE",
+  "next_planned_lane": "evidence_archive_payload_verification_batch_2",
+  "next_planned_lane_implementation_authorized": false,
+  "legacy_redirect_changes": 0
+}
