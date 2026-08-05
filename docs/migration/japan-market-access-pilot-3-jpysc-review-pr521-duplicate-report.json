@@ -1,0 +1,56 @@
+{
+  "schema_version": "1.0",
+  "report_id": "sog_japan_market_access_pilot_3_jpysc_duplicate_review_pr521",
+  "status": "reviewed_complete",
+  "recorded_at": "2026-08-05",
+  "authority_pr": 520,
+  "review_pr": 521,
+  "source_research_record_id": "jp_access_jpysc_sbivc_2026_06_24",
+  "canonical_asset_search": {
+    "proposed_asset_id": "sog_st_jpysc",
+    "exact_id_match": false,
+    "canonical_identity_present": false,
+    "alias_or_lineage_match_promoted": false
+  },
+  "canonical_market_access_search": {
+    "asset_id": "sog_st_jpysc",
+    "matching_records": 0,
+    "total_records_before": 8,
+    "total_records_after": 8
+  },
+  "source_url_review": [
+    {
+      "url": "https://www.sbivc.co.jp/newsview/fx4zmjwbl",
+      "existing_private_research_reference": true,
+      "new_canonical_evidence_identity_created": false
+    },
+    {
+      "url": "https://www.sbivc.co.jp/jpysc",
+      "existing_private_research_reference": true,
+      "new_canonical_evidence_identity_created": false
+    },
+    {
+      "url": "https://www.sbivc.co.jp/services/crypto/jpysc",
+      "existing_private_research_reference": false,
+      "new_canonical_evidence_identity_created": false,
+      "disposition": "private_review_support_only"
+    },
+    {
+      "url": "https://www.fsa.go.jp/menkyo/menkyoj/denshikessaisyudan.pdf",
+      "existing_private_research_reference": true,
+      "new_canonical_evidence_identity_created": false
+    },
+    {
+      "url": "https://www.shinseitrust.com/stablecoin/jpysc.html",
+      "existing_private_research_reference": true,
+      "new_canonical_evidence_identity_created": false
+    }
+  ],
+  "result": {
+    "duplicate_canonical_asset_found": false,
+    "duplicate_market_access_record_found": false,
+    "canonical_source_identity_changes": 0,
+    "canonical_promotion_attempted": false,
+    "replacement_asset_used": false
+  }
+}
