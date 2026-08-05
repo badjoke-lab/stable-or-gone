@@ -1,7 +1,7 @@
 # Stable or Gone Roadmap
 
 Updated: 2026-08-05  
-Status: PR #521 active Japan Market Access Pilot 3 JPYSC review
+Status: PR #522 active JPYSC Market Access implementation authority
 
 ## Current production checkpoint
 
@@ -24,39 +24,36 @@ Archive not recorded: 122
 Detail routes: 422
 Metadata-checked routes: 422
 Official origin: https://www.stableorgone.com
-Production commit: 196f8e20cd55c9b229c88127afa236dc5060b3fd
+Production commit: c29c63de22bda81572d040b972539a7d4c735bd8
 Canonical hash: sha256:57749955faa96d2bd836bac83ef41a0c5dc13f2342763dc4d975c588cd50c650
-Convergence attempt: 2
+Convergence attempt: 1
 ```
 
 ## Completed current-cycle work
 
 ```text
-PR #514 — six-week cycle and Batch 5 audit authority
-PR #515 — eight-proposal private audit
-PR #516 — EUB/USB complete-record authority
-PR #517 — EUB/USB complete canonical implementation
-PR #518 — sibling-registry footer links
-PR #519 — production closeout
-PR #520 — JPYSC Pilot 3 review authority
+PR #514 — six-week cycle and Batch 5 authority
+PR #515 — candidate audit
+PRs #516–#519 — EUB/USB implementation, navigation insertion, and closeout
+PR #520 — JPYSC review authority
+PR #521 — JPYSC eligibility review and corrected canonical context
 ```
 
-## Current work
+## Current authority
 
 ```text
-PR #521 — JPYSC eligibility review only
+PR #522 — JPYSC Market Access implementation authority
+PR #523 — exactly four JPYSC Market Access records
 ```
 
-PR #521 changes private reviewed artifacts and authority documentation only. Canonical and public data remain unchanged.
+PR #522 changes authority only. PR #523 is the only authorized implementation.
 
-## Reviewed JPYSC result
+## Exact PR #523 target
 
 ```text
-asset: JPYSC / sog_st_jpysc
-canonical identity: present since PR #128
+asset: sog_st_jpysc
 jurisdiction: JP / Japan
-platform: SBI VC Trade
-service: VCTRADE
+provider: SBI VC Trade / VCTRADE
 effective from: 2026-06-24
 observed at: 2026-08-05
 buy_sell: account_internal_only
@@ -65,68 +62,62 @@ withdrawal: unavailable
 external_wallet_transfer: unavailable
 ```
 
-JPYSC is canonical and available for account-internal purchase, sale, and conversion. The reviewed state does not establish deposit, withdrawal, external-wallet transfer, or current public-chain circulation.
-
-PR #515's deferred JPYSC candidate was a duplicate growth proposal; it did not remove or invalidate the canonical identity created by PR #128.
-
-Future capability remains future-only. JPYSC lending is outside Market Access Record v1 and is excluded.
-
-## Eligibility decision
+Expected records:
 
 ```text
-eligible_for_later_separate_authority
+sog_ma_jpysc_jp_sbivc_vctrade_buy_sell_20260624
+sog_ma_jpysc_jp_sbivc_vctrade_deposit_20260624
+sog_ma_jpysc_jp_sbivc_vctrade_withdrawal_20260624
+sog_ma_jpysc_jp_sbivc_vctrade_external_wallet_transfer_20260624
 ```
 
-The canonical asset prerequisite is satisfied and the four-function matrix is complete. PR #520 authorized review only, so PR #521 adds zero canonical assets, Evidence identities, Evidence Relations, Market Access Records, routes, and public changes. The Market Access count remains eight.
+## Evidence and count transition
 
-A later bounded authority may authorize exactly four provider-scoped JPYSC records and the count transition from 8 to 12. It must decide canonical Evidence reuse or additions for the current product and trading sources, preserve the reviewed function states, and require production convergence.
-
-## Exit and next work
-
-PR #521 exits only to `REVIEW GATE`.
-
-The next recommended authority is:
+PR #523 may add exactly one current SBI VC Trade product-page Evidence identity and extend the existing JFSA register Evidence only for JPYSC handled-asset scope.
 
 ```text
-Japan Market Access Pilot 3 — JPYSC implementation
+Evidence: 584 -> 585
+Evidence Relations: 584 -> 585
+Market Access Records: 8 -> 12
+Archive recorded: 462 -> 463
+Archive not recorded: 122 -> 122
+Detail routes: 422 -> 422
+Metadata-checked routes: 422 -> 422
 ```
 
-It is not implementation-authorized by PR #521.
+All other canonical counts remain unchanged.
 
-Evidence Archive Payload Verification Batch 2 remains the later planned lane and also requires separate authority.
+## Semantic boundary
 
-## Six-week cycle
+Buy/sell remains account-internal. Deposit, withdrawal, and external-wallet transfer remain unavailable. Future network capability is not current capability. Lending is outside Market Access Record v1.
+
+The records are provider-scoped and do not establish universal Japan availability, government recommendation, guarantee, ranking, score, or safety.
+
+## Exit
+
+PR #523 must production-verify the exact transition and return to `REVIEW GATE`.
+
+Evidence Archive Payload Verification Batch 2 remains the later planned lane and is not implementation-authorized here.
+
+## Remaining cycle
 
 ```text
-2026-08-03 to 2026-08-09  Record Growth Batch 5, navigation insertion, closeout, and Pilot 3 review
-2026-08-05 onward          PR #521 review, then separate JPYSC implementation authority
+2026-08-05 onward          PR #522 authority and PR #523 JPYSC implementation
 2026-08-17 to 2026-08-23  Evidence Archive Payload Verification Batch 2, after separate authority
 2026-08-24 to 2026-08-30  Tier A Dossier Deepening Batch 4, after separate authority
 2026-08-31 to 2026-09-06  cycle review and backlog reconciliation
 2026-09-07 to 2026-09-13  next operating authority and contingency
 ```
 
-## Deferred candidates
-
-```text
-SoFiUSD / SOFID — exact deployments and current assurance evidence unresolved
-USA₮ — exact deployments and product-specific holder terms unresolved
-XREUR — announced circulation date is 2026-09-03
-Swiss CHF sandbox — no final asset identity or market-launch decision
-Hazel Network token design — infrastructure/testing without a final independent production asset
-```
-
-JPYSC is not a deferred canonical asset. Only its four Market Access records remain pending separate authority.
-
 ## Preserved exclusions
 
 ```text
-duplicate JPYSC canonical asset
+new or duplicate JPYSC asset
 future capability represented as current access
 lending represented as transfer evidence
 country-wide availability inference
+unbounded Evidence additions
+UI, schema, route, or redirect work
 ranking, score, recommendation, or implied safety
-large UI or navigation work
-legacy redirect work
 automatic promotion
 ```

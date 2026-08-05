@@ -1,1 +1,1 @@
-import './validate-japan-market-access-pilot-3-jpysc-review-pr521.mjs';
+import './validate-jpysc-market-access-pilot-3-implementation-authority-pr522.mjs';

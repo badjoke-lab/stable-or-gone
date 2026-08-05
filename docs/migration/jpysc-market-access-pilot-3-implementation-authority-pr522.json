@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0",
+  "transition_id": "sog_jpysc_market_access_pilot_3_implementation_authority_pr522_2026_08_05",
+  "status": "reviewed_authority_transition",
+  "recorded_at": "2026-08-05",
+  "source_review_pr": 521,
+  "source_review_merge_commit": "c29c63de22bda81572d040b972539a7d4c735bd8",
+  "source_production": {
+    "verified": true,
+    "run_id": 30976964428,
+    "canonical_hash": "sha256:57749955faa96d2bd836bac83ef41a0c5dc13f2342763dc4d975c588cd50c650",
+    "convergence_attempt": 1
+  },
+  "authority_before_pr522": "REVIEW_GATE",
+  "authorized_next": {
+    "pr": 523,
+    "work_item": "JPYSC Market Access Pilot 3 canonical implementation",
+    "asset_id": "sog_st_jpysc",
+    "jurisdiction_code": "JP",
+    "platform": "SBI VC Trade",
+    "service": "VCTRADE",
+    "exact_new_market_access_records": 4,
+    "exact_new_evidence_identities": 1,
+    "exact_existing_evidence_scope_extensions": 1,
+    "market_access_count_after": 12,
+    "evidence_count_after": 585,
+    "evidence_relations_after": 585,
+    "detail_routes_after": 422
+  },
+  "prohibited": {
+    "new_assets": true,
+    "new_organizations": true,
+    "new_events": true,
+    "new_deployments": true,
+    "new_routes": true,
+    "ui_changes": true,
+    "schema_changes": true,
+    "future_capability_backfill": true,
+    "lending_as_access_evidence": true,
+    "country_wide_claim": true,
+    "ranking_score_recommendation": true,
+    "replacement_asset": true,
+    "redirect_changes": true
+  },
+  "required_exit_after_pr523": "REVIEW_GATE"
+}

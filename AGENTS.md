@@ -5,27 +5,28 @@ This file is the mandatory entry point for humans, AI agents, and automation wor
 ## Current authority
 
 ```text
-Repository authority: PR #521 active Japan Market Access Pilot 3 JPYSC review
-Authority PR: #520
-Target: JPYSC on SBI VC Trade / VCTRADE in Japan
-Reviewed disposition: eligible_for_later_separate_authority
-Canonical JPYSC identity: present since PR #128
+Repository authority: PR #522 active JPYSC Market Access implementation authority
+Authorized implementation: PR #523 only
+Asset: JPYSC / sog_st_jpysc
+Provider: SBI VC Trade / VCTRADE
+Jurisdiction: JP / Japan
 buy_sell: account_internal_only
 deposit: unavailable
 withdrawal: unavailable
 external_wallet_transfer: unavailable
-Canonical Market Access Records added: 0
-Canonical assets added: 0
-Canonical Evidence identities added: 0
-Public changes: 0
-Required exit after PR #521: REVIEW GATE
-Current production commit: 196f8e20cd55c9b229c88127afa236dc5060b3fd
+Evidence: 584 -> 585
+Evidence Relations: 584 -> 585
+Market Access Records: 8 -> 12
+Archive recorded: 462 -> 463
+Detail routes: 422 -> 422
+Required exit after PR #523: REVIEW GATE
+Current production commit: c29c63de22bda81572d040b972539a7d4c735bd8
 Production canonical hash: sha256:57749955faa96d2bd836bac83ef41a0c5dc13f2342763dc4d975c588cd50c650
-Convergence attempt: 2
+Convergence attempt: 1
 Official public origin: https://www.stableorgone.com
 ```
 
-Current production counts remain:
+Current production counts:
 
 ```text
 Canonical stable assets: 119
@@ -47,22 +48,23 @@ Detail routes: 422
 Metadata-checked routes: 422
 ```
 
-PR #521 records a private reviewed result only. It changes no canonical data, public output, route, UI, schema, deployment behavior, or redirect.
+PR #522 changes authority only. PR #523 is the only implementation authorized by this checkpoint.
 
 ## Authority chain
 
 1. PR #128 added canonical `sog_st_jpysc`, issuer relationships, launch Evidence, and a restricted deployment placeholder.
 2. PR #493 established `https://www.stableorgone.com` as the official public origin.
-3. PR #500 completed the MNEE Evidence and Archive Maintenance checkpoint.
-4. PR #514 fixed the 2026-08-03 through 2026-09-13 operating cycle.
-5. PR #515 reviewed eight growth proposals. Its deferred JPYSC candidate was a duplicate growth proposal, not proof that the canonical identity was absent.
-6. PR #516 authorized complete records only for Bison Bank EUB and USB.
-7. PR #517 added EUB, USB, and Bison Bank, S.A.
+3. PR #500 completed the bounded MNEE Evidence and Archive Maintenance checkpoint.
+4. PR #514 fixed the current six-week operating cycle.
+5. PR #515 reviewed growth proposals; its JPYSC row was a duplicate proposal, not a missing canonical identity.
+6. PR #516 authorized EUB and USB complete records.
+7. PR #517 added EUB and USB as complete reviewed canonical records.
 8. PR #518 added sibling-registry footer links.
-9. PR #519 closed that checkpoint and restored REVIEW GATE.
-10. PR #520 authorized only PR #521's JPYSC eligibility review.
-11. PR #521 confirms the four-function matrix and exits only to REVIEW GATE.
-12. `docs/ui-v3-remediation-authority.md` remains the regression-protection contract for material public UI work.
+9. PR #519 closed the combined checkpoint and restored REVIEW GATE.
+10. PR #520 authorized the JPYSC eligibility review.
+11. PR #521 confirmed canonical JPYSC and the four-function state, returned `eligible_for_later_separate_authority`, and production verified commit `c29c63de22bda81572d040b972539a7d4c735bd8`.
+12. PR #522 authorizes exactly PR #523's bounded canonical implementation.
+13. `docs/ui-v3-remediation-authority.md` remains the regression-protection contract for material public UI work.
 
 ## Mandatory reading order
 
@@ -73,55 +75,55 @@ PR #521 records a private reviewed result only. It changes no canonical data, pu
 5. `docs/ui-v3-remediation-authority.md`
 6. `docs/market-access-record-spec.md`
 7. `schemas/market-access-record-v1.schema.json`
-8. `config/japan-market-access-pilot-3-review-authority-pr520.json`
-9. `config/japan-market-access-pilot-3-jpysc-review-pr521.json`
-10. `data/editorial-research/japan-market-access-pilot-3-jpysc-review-pr521.json`
-11. `docs/migration/japan-market-access-pilot-3-jpysc-review-pr521-source-coverage.json`
-12. `docs/migration/japan-market-access-pilot-3-jpysc-review-pr521-duplicate-report.json`
-13. `docs/migration/japan-market-access-pilot-3-jpysc-review-pr521-handoff.json`
-14. `docs/quality/japan-market-access-pilot-3-jpysc-review-pr521-spec.md`
-15. `data/stablecoins-batch-n.json`
-16. `data/evidence-batch-n.json`
-17. `data/deployments-batch-n.json`
-18. current canonical, review, and statistics checkpoints
+8. `config/jpysc-market-access-pilot-3-implementation-authority-pr522.json`
+9. `docs/quality/jpysc-market-access-pilot-3-implementation-authority-pr522-spec.md`
+10. `docs/migration/jpysc-market-access-pilot-3-implementation-authority-pr522.json`
+11. `config/japan-market-access-pilot-3-jpysc-review-pr521.json`
+12. `data/editorial-research/japan-market-access-pilot-3-jpysc-review-pr521.json`
+13. `data/stablecoins-batch-n.json`
+14. `data/evidence-batch-n.json`
+15. `data/evidence-pr356-market-access-pilot-1.json`
+16. `data/market-access-records-v1.json`
+17. current canonical, review, statistics, release-integrity, and provenance checkpoints
 
-Merged repository authority outranks chat memory, handoff prose, issue discussion, and unmerged drafts.
+Merged repository authority outranks chat memory, issue discussion, and unmerged drafts.
 
-## Reviewed PR #521 result
+## Exact PR #523 implementation
+
+PR #523 must add only these records:
 
 ```text
-asset: JPYSC / sog_st_jpysc
-jurisdiction: JP / Japan
-platform: SBI VC Trade
-service: VCTRADE
-effective from: 2026-06-24
-observed at: 2026-08-05
-buy_sell: account_internal_only
-deposit: unavailable
-withdrawal: unavailable
-external_wallet_transfer: unavailable
+sog_ma_jpysc_jp_sbivc_vctrade_buy_sell_20260624
+  buy_sell / account_internal_only / account_internal_only
+sog_ma_jpysc_jp_sbivc_vctrade_deposit_20260624
+  deposit / unavailable / not_applicable
+sog_ma_jpysc_jp_sbivc_vctrade_withdrawal_20260624
+  withdrawal / unavailable / not_applicable
+sog_ma_jpysc_jp_sbivc_vctrade_external_wallet_transfer_20260624
+  external_wallet_transfer / unavailable / not_applicable
 ```
 
-JPYSC is canonical and available for account-internal purchase, sale, and conversion. This does not establish current deposit, withdrawal, external-wallet transfer, or public-chain circulation.
+All four records use jurisdiction JP, organization `sog_org_sbi_vc_trade`, service VCTRADE, effective date 2026-06-24, and observed date 2026-08-05.
 
-Existing canonical Evidence includes `sog_src_jpysc_launch_sbi_vc_2026` and `sog_src_jpysc_announcement_sbi_2026`. Current SBI VC Trade product and trading pages were reviewed privately; a later authority must decide their canonical Evidence treatment.
+## Evidence boundary
 
-A current network label, technical-readiness statement, or future public-chain plan must not be backfilled into current capability. JPYSC lending is outside Market Access Record v1 and cannot be used as transfer evidence.
+PR #523 may add exactly one Evidence identity:
 
-## Next boundary
+```text
+sog_src_jpysc_sbivc_current_product_pr523
+https://www.sbivc.co.jp/jpysc
+```
 
-PR #521 exits to `REVIEW GATE`. The next recommended authority is a bounded implementation of exactly four provider-scoped JPYSC Market Access records, with a count transition from 8 to 12. PR #521 does not authorize that implementation.
+It may reuse existing canonical JPYSC launch and announcement Evidence. It may extend `sog_src_jfsa_electronic_payment_instrument_register_pr356` only to add JPYSC handled-asset scope and `sog_st_jpysc` to its stablecoin ID list.
 
-Evidence Archive Payload Verification Batch 2 remains the later planned cycle lane and also requires separate authority.
+The JPYSC trading page remains private review support only. Lending, staking, and yield are outside Market Access Record v1.
 
-## Canonical and public boundary
+## Prohibited work
 
-- Unknown values remain unknown unless reviewed evidence supports replacement.
-- Private research is not canonical Evidence.
-- A provider observation must not be generalized into country-wide availability.
-- Future capability is not current capability.
-- Automatic promotion, ranking, scoring, recommendation, or implied safety are prohibited.
-- Public output remains canonical-only.
-- The legacy host redirect is not authorized here.
+PR #523 may not add assets, organizations, events, deployments, routes, UI, schema, ranking, score, recommendation, replacement assets, redirects, or future capability. A provider observation must not be generalized into Japan-wide availability.
 
-Issue #479 remains the deployment-history authority. A merge is not production parity until the production workflow records successful convergence.
+## Exit
+
+PR #523 must update deterministic statistics, immutable history, checkpoints, provenance, release integrity, dedicated validation, and production convergence. It exits only to `REVIEW GATE`.
+
+Issue #479 remains the deployment-history authority.
