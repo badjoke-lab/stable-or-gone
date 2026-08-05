@@ -1,0 +1,93 @@
+{
+  "schema_version": "1.0",
+  "work_item": "jpysc_market_access_pilot_3_implementation_authority_pr522",
+  "status": "implementation_authority",
+  "recorded_at": "2026-08-05",
+  "authority_pr": 522,
+  "authorized_implementation_pr": 523,
+  "source_review_pr": 521,
+  "source_review_merge_commit": "c29c63de22bda81572d040b972539a7d4c735bd8",
+  "source_review_production": {
+    "verified": true,
+    "run_id": 30976964428,
+    "public_origin": "https://www.stableorgone.com",
+    "canonical_hash": "sha256:57749955faa96d2bd836bac83ef41a0c5dc13f2342763dc4d975c588cd50c650",
+    "convergence_attempt": 1
+  },
+  "target": {
+    "asset_id": "sog_st_jpysc",
+    "asset_symbol": "JPYSC",
+    "canonical_asset_present": true,
+    "jurisdiction": {"country_code":"JP","subdivision_code":null},
+    "platform": {"organization_id":"sog_org_sbi_vc_trade","name":"SBI VC Trade","service":"VCTRADE"},
+    "effective_from": "2026-06-24",
+    "observed_at": "2026-08-05",
+    "records": [
+      {"id":"sog_ma_jpysc_jp_sbivc_vctrade_buy_sell_20260624","function":"buy_sell","access_state":"account_internal_only","network_scope_kind":"account_internal_only"},
+      {"id":"sog_ma_jpysc_jp_sbivc_vctrade_deposit_20260624","function":"deposit","access_state":"unavailable","network_scope_kind":"not_applicable"},
+      {"id":"sog_ma_jpysc_jp_sbivc_vctrade_withdrawal_20260624","function":"withdrawal","access_state":"unavailable","network_scope_kind":"not_applicable"},
+      {"id":"sog_ma_jpysc_jp_sbivc_vctrade_external_wallet_transfer_20260624","function":"external_wallet_transfer","access_state":"unavailable","network_scope_kind":"not_applicable"}
+    ]
+  },
+  "evidence_authority": {
+    "new_evidence_file": "data/evidence-pr523-jpysc-market-access.json",
+    "new_evidence": [{
+      "id": "sog_src_jpysc_sbivc_current_product_pr523",
+      "url": "https://www.sbivc.co.jp/jpysc",
+      "stablecoin_id": "sog_st_jpysc",
+      "source_type": "official_product_page",
+      "archive_required": true
+    }],
+    "existing_evidence_reuse": [
+      "sog_src_jpysc_launch_sbi_vc_2026",
+      "sog_src_jpysc_announcement_sbi_2026",
+      "sog_src_jfsa_electronic_payment_instrument_register_pr356"
+    ],
+    "existing_jfsa_evidence_scope_extension": {
+      "allowed": true,
+      "evidence_id": "sog_src_jfsa_electronic_payment_instrument_register_pr356",
+      "add_stablecoin_id": "sog_st_jpysc",
+      "add_claim_scope": "JPYSC listed among electronic payment instruments handled by SBI VC Trade"
+    },
+    "current_trading_page_role": "private_review_support_only",
+    "current_trading_page_url": "https://www.sbivc.co.jp/services/crypto/jpysc",
+    "maximum_new_evidence_identities": 1
+  },
+  "count_transition": {
+    "stable_assets": [119,119],
+    "organizations": [109,109],
+    "relationships": [131,131],
+    "events": [194,194],
+    "evidence": [584,585],
+    "evidence_relations": [584,585],
+    "reserve_reports": [127,127],
+    "known_unknowns": [352,352],
+    "deployments": [186,186],
+    "market_access_records": [8,12],
+    "archive_recorded": [462,463],
+    "archive_not_recorded": [122,122],
+    "detail_routes": [422,422],
+    "metadata_checked_routes": [422,422]
+  },
+  "implementation_boundary": {
+    "exact_new_market_access_records": 4,
+    "exact_new_evidence_identities": 1,
+    "exact_existing_evidence_scope_extensions": 1,
+    "new_assets": 0,
+    "new_organizations": 0,
+    "new_events": 0,
+    "new_deployments": 0,
+    "new_routes": 0,
+    "ui_changes": 0,
+    "schema_changes": 0,
+    "redirect_changes": 0,
+    "future_capability_backfill": false,
+    "lending_as_access_evidence": false,
+    "country_wide_claim": false,
+    "ranking": false,
+    "score": false,
+    "recommendation": false,
+    "replacement_asset": false,
+    "required_exit_after_pr523": "REVIEW_GATE"
+  }
+}
