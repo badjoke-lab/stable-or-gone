@@ -8,7 +8,8 @@ This file is the mandatory entry point for humans, AI agents, and automation wor
 Repository authority: PR #521 active Japan Market Access Pilot 3 JPYSC review
 Authority PR: #520
 Target: JPYSC on SBI VC Trade / VCTRADE in Japan
-Reviewed disposition: blocked_canonical_asset_identity_absent
+Reviewed disposition: eligible_for_later_separate_authority
+Canonical JPYSC identity: present since PR #128
 buy_sell: account_internal_only
 deposit: unavailable
 withdrawal: unavailable
@@ -24,14 +25,14 @@ Convergence attempt: 2
 Official public origin: https://www.stableorgone.com
 ```
 
-Current reviewed production result:
+Current production counts remain:
 
 ```text
-Canonical stable assets: 119
+Stable assets: 119
 Organizations: 109
 Relationships: 131
 Events: 194
-Canonical Evidence: 584
+Evidence: 584
 Evidence Relations: 584
 Reserve reports: 127
 Known unknowns: 352
@@ -40,61 +41,53 @@ Legal profiles: 119
 Reserve components: 153
 Income profiles: 119
 Market Access Records: 8
-Archive recorded: 462
-Archive not recorded: 122
+Archive recorded / not recorded: 462 / 122
 Detail routes: 422
-Metadata-checked detail routes: 422
+Metadata-checked routes: 422
 ```
 
-PR #521 records a private reviewed result only. It changes no canonical data, public output, route, UI, machine-readable schema, deployment behavior, or redirect.
+PR #521 records a private reviewed result only. It changes no canonical data, public output, route, UI, schema, deployment behavior, or redirect.
 
-## Current authority chain
+## Authority chain
 
-1. PR #493 established `https://www.stableorgone.com` as the official public origin.
-2. PR #500 completed the bounded MNEE Evidence and Archive Maintenance checkpoint.
-3. PR #514 fixed the 2026-08-03 through 2026-09-13 operating cycle.
-4. PR #515 reviewed eight private Record Growth Batch 5 candidates and deferred JPYSC.
-5. PR #516 authorized complete records only for Bison Bank EUB and USB.
-6. PR #517 added EUB, USB, and Bison Bank, S.A. as complete reviewed canonical records.
-7. PR #518 added only sibling-registry footer links for HEI, CYA, and BIR.
-8. PR #519 closed that checkpoint and restored REVIEW GATE.
-9. PR #520 authorized only PR #521's JPYSC eligibility review.
-10. PR #520 production converged at `196f8e20cd55c9b229c88127afa236dc5060b3fd`.
-11. PR #521 reviews the exact four-function state and exits only to REVIEW GATE.
-12. `docs/ui-v3-remediation-authority.md` remains the regression-protection contract for material public UI work.
+1. PR #128 added canonical `sog_st_jpysc`, issuer relationships, launch Evidence, and a restricted deployment placeholder.
+2. PR #493 established `https://www.stableorgone.com` as the official public origin.
+3. PR #500 completed the MNEE Evidence and Archive Maintenance checkpoint.
+4. PR #514 fixed the 2026-08-03 through 2026-09-13 operating cycle.
+5. PR #515 reviewed eight growth proposals. Its deferred JPYSC candidate was a duplicate growth proposal, not proof that the canonical identity was absent.
+6. PR #516 authorized complete records only for Bison Bank EUB and USB.
+7. PR #517 added EUB, USB, and Bison Bank, S.A.
+8. PR #518 added sibling-registry footer links.
+9. PR #519 closed that checkpoint and restored REVIEW GATE.
+10. PR #520 authorized only PR #521's JPYSC eligibility review.
+11. PR #521 confirms the four-function matrix and exits only to REVIEW GATE.
 
 ## Mandatory reading order
-
-Before changing canonical data, code, workflows, infrastructure, or documentation, read:
 
 1. `AGENTS.md`
 2. `docs/spec-governance.md`
 3. `docs/roadmap.md`
 4. `docs/deployment-policy.md`
 5. `docs/market-access-record-spec.md`
-6. `config/japan-market-access-pilot-3-review-authority-pr520.json`
-7. `docs/quality/japan-market-access-pilot-3-review-authority-pr520-spec.md`
+6. `schemas/market-access-record-v1.schema.json`
+7. `config/japan-market-access-pilot-3-review-authority-pr520.json`
 8. `config/japan-market-access-pilot-3-jpysc-review-pr521.json`
 9. `data/editorial-research/japan-market-access-pilot-3-jpysc-review-pr521.json`
 10. `docs/migration/japan-market-access-pilot-3-jpysc-review-pr521-source-coverage.json`
 11. `docs/migration/japan-market-access-pilot-3-jpysc-review-pr521-duplicate-report.json`
 12. `docs/migration/japan-market-access-pilot-3-jpysc-review-pr521-handoff.json`
 13. `docs/quality/japan-market-access-pilot-3-jpysc-review-pr521-spec.md`
-14. `data/editorial-research/japan-stablecoin-market-access-2026.json`
-15. `data/editorial-research/record-growth-batch-5-candidate-audit-pr515.json`
-16. `docs/migration/current-canonical-checkpoint.json`
-17. `docs/migration/current-review-checkpoint.json`
-18. `docs/migration/current-stats-history-checkpoint.json`
-19. every named source, baseline, audit, and prior output required by the active work item
+14. `data/stablecoins-batch-n.json`
+15. `data/evidence-batch-n.json`
+16. `data/deployments-batch-n.json`
+17. current canonical, review, and statistics checkpoints
 
-Merged repository authority outranks chat memory, handoff prose, issue discussion, generated reports, and unmerged drafts.
+Merged repository authority outranks chat memory, handoff prose, issue discussion, and unmerged drafts.
 
 ## Reviewed PR #521 result
 
-The exact provider-scoped result as of 2026-08-05 is:
-
 ```text
-asset: JPYSC / proposed sog_st_jpysc
+asset: JPYSC / sog_st_jpysc
 jurisdiction: JP / Japan
 platform: SBI VC Trade
 service: VCTRADE
@@ -106,37 +99,26 @@ withdrawal: unavailable
 external_wallet_transfer: unavailable
 ```
 
-JPYSC is issued and available for account-internal purchase, sale, and conversion. That does not establish current public-chain circulation or external transfer.
+JPYSC is canonical and available for account-internal purchase, sale, and conversion. This does not establish current deposit, withdrawal, external-wallet transfer, or public-chain circulation.
 
-A current network label, technical-readiness statement, or future public-chain plan must not be backfilled into current deposit, withdrawal, or external-wallet transfer capability. JPYSC lending is outside Market Access Record v1 and cannot be used as transfer evidence.
+Existing canonical Evidence includes `sog_src_jpysc_launch_sbi_vc_2026` and `sog_src_jpysc_announcement_sbi_2026`. Current SBI VC Trade product and trading pages were reviewed privately; a later authority must decide their canonical Evidence treatment.
 
-## Canonical blocker
-
-Market Access Record v1 requires an existing canonical asset identity. `sog_st_jpysc` is not present in the canonical 119-asset registry.
-
-PR #521 therefore adds zero canonical Market Access records. A later promotion requires a separate complete canonical asset review, an approved canonical identity, sufficient canonical Evidence scope, a fresh current-state review, and a separate Market Access authority PR.
-
-No later JPYSC promotion is authorized by PR #521.
+A current network label, technical-readiness statement, or future public-chain plan must not be backfilled into current capability. JPYSC lending is outside Market Access Record v1 and cannot be used as transfer evidence.
 
 ## Next boundary
 
-After PR #521 merges and production verifies, repository authority returns to:
+PR #521 exits to `REVIEW GATE`. The next recommended authority is a bounded implementation of exactly four provider-scoped JPYSC Market Access records, with a count transition from 8 to 12. PR #521 does not authorize that implementation.
 
-```text
-REVIEW GATE
-```
-
-Evidence Archive Payload Verification Batch 2 is the next planned lane. It is not implementation-authorized by PR #521.
+Evidence Archive Payload Verification Batch 2 remains the later planned cycle lane and also requires separate authority.
 
 ## Canonical and public boundary
 
 - Unknown values remain unknown unless reviewed evidence supports replacement.
-- Monitoring, candidates, discovery leads, editorial research, and private notes are not canonical data.
-- Candidate source leads are not canonical Evidence.
-- A platform observation must not be generalized into country-wide availability.
+- Private research is not canonical Evidence.
+- A provider observation must not be generalized into country-wide availability.
 - Future capability is not current capability.
 - Automatic promotion, ranking, scoring, recommendation, or implied safety are prohibited.
 - Public output remains canonical-only.
-- The legacy host redirect remains an external Cloudflare task and is not authorized here.
+- The legacy host redirect is not authorized here.
 
 Issue #479 remains the deployment-history authority. A merge is not production parity until the production workflow records successful convergence.
