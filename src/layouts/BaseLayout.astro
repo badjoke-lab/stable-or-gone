@@ -210,7 +210,7 @@ const dataLinks = [
             <details class="footer-navigation-group" data-footer-group data-disclosure open>
               <summary>{group.label}</summary>
               <nav aria-label={`${group.label} footer navigation`}>
-                {group.id === 'discovery' && (
+                {String(group.id) === 'discovery' && (
                   <span aria-current="page">
                     <strong>Stable or Gone</strong>
                     <small>Current project</small>
