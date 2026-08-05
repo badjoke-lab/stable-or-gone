@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0",
+  "report_id": "sog_japan_market_access_pilot_3_jpysc_duplicate_review_pr521",
+  "status": "reviewed_complete",
+  "recorded_at": "2026-08-05",
+  "authority_pr": 520,
+  "review_pr": 521,
+  "source_research_record_id": "jp_access_jpysc_sbivc_2026_06_24",
+  "canonical_asset_search": {
+    "asset_id": "sog_st_jpysc",
+    "exact_id_match": true,
+    "canonical_identity_present": true,
+    "source_file": "data/stablecoins-batch-n.json",
+    "source_pr": 128,
+    "duplicate_asset_creation_required": false
+  },
+  "canonical_market_access_search": {
+    "asset_id": "sog_st_jpysc",
+    "matching_records": 0,
+    "total_records_before": 8,
+    "total_records_after": 8
+  },
+  "canonical_evidence_search": {
+    "existing_ids": [
+      "sog_src_jpysc_launch_sbi_vc_2026",
+      "sog_src_jpysc_announcement_sbi_2026"
+    ],
+    "new_canonical_evidence_identities_created_in_pr521": 0,
+    "later_current_source_identity_decision_required": true
+  },
+  "result": {
+    "existing_canonical_asset_confirmed": true,
+    "duplicate_canonical_asset_creation_prevented": true,
+    "duplicate_market_access_record_found": false,
+    "canonical_source_identity_changes": 0,
+    "canonical_promotion_attempted": false,
+    "replacement_asset_used": false,
+    "eligible_for_later_separate_authority": true
+  }
+}
