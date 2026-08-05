@@ -2,7 +2,6 @@
 import BrandLockup from '../components/BrandLockup.astro';
 import { PUBLIC_ORIGIN } from '../../config/public-origin.mjs';
 import { aboutNavigation, footerNavigationGroups, globalNavigationGroups } from '../../config/site-architecture.mjs';
-import '../styles/support-cleanup.css';
 
 interface Props {
   title?: string;
@@ -127,7 +126,7 @@ const dataLinks = [
           </div>
           <div class="masthead-actions" aria-label="Project actions">
             {isSupportPage ? (
-              <span class="support-cta support-cta--header support-cta--current" aria-current="page"><span class="support-cta-label--full">Support this archive</span><span class="support-cta-label--compact" aria-hidden="true">Support</span></span>
+              <span class="support-cta support-cta--header" aria-current="page"><span class="support-cta-label--full">Support this archive</span><span class="support-cta-label--compact" aria-hidden="true">Support</span></span>
             ) : (
               <a class="support-cta support-cta--header" href="/support/" aria-label="Support this archive"><span class="support-cta-label--full">Support this archive</span><span class="support-cta-label--compact" aria-hidden="true">Support</span></a>
             )}
@@ -212,13 +211,13 @@ const dataLinks = [
               <summary>{group.label}</summary>
               <nav aria-label={`${group.label} footer navigation`}>
                 {group.id === 'discovery' && (
-                  <span class="footer-current-project" aria-current="page">
+                  <span aria-current="page">
                     <strong>Stable or Gone</strong>
                     <small>Current project</small>
                   </span>
                 )}
                 {group.items.map((item) => isSupportPage && item.href === '/support/' ? (
-                  <span class="footer-current-link" aria-current="page">Support</span>
+                  <span aria-current="page">Support</span>
                 ) : (
                   <a href={item.href}>{item.label}</a>
                 ))}
@@ -336,7 +335,7 @@ const dataLinks = [
         textarea.setAttribute('readonly', '');
         textarea.style.position = 'fixed';
         textarea.style.opacity = '0';
-        document.body.appendChild(textarea);
+        document.body.append(textarea);
         textarea.select();
         const copied = document.execCommand('copy');
         textarea.remove();
