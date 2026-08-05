@@ -11,10 +11,10 @@ withdrawal: unavailable
 external_wallet_transfer: unavailable
 ```
 
-The product is issued and available for account-internal buy/sell activity. That does not establish current external circulation.
+JPYSC is already canonical. PR #128 added `sog_st_jpysc`, its issuer relationships, canonical launch Evidence, and a restricted deployment placeholder. PR #515's deferred candidate was a duplicate growth proposal, not proof that the canonical identity was missing.
 
-The reviewed disposition is `blocked_canonical_asset_identity_absent`. Market Access Record v1 requires an existing canonical asset identity, and `sog_st_jpysc` is not present in the canonical 119-asset registry.
+The corrected reviewed disposition is `eligible_for_later_separate_authority`. The canonical asset prerequisite is satisfied and the four-function matrix is complete, but PR #520 authorized review only and capped PR #521 at zero canonical Market Access and Evidence changes.
 
 PR #521 adds zero canonical assets, zero canonical Evidence identities, zero canonical Market Access Records, and zero public changes. Future public-chain capability is not backfilled. Lending remains outside Market Access Record v1.
 
-Repository authority returns to `REVIEW GATE` after PR #521. Evidence Archive Payload Verification Batch 2 remains the next planned lane, but a separate authority PR is required before implementation.
+Repository authority returns to `REVIEW GATE` after PR #521. The next recommended authority is a bounded JPYSC implementation for exactly four provider-scoped records and a Market Access count transition from 8 to 12. Evidence Archive Payload Verification Batch 2 remains the later planned cycle lane.
