@@ -6,7 +6,7 @@ Status: PR #521 active Japan Market Access Pilot 3 JPYSC review
 ## Current production checkpoint
 
 ```text
-Stable assets: 119
+Canonical stable assets: 119
 Organizations: 109
 Relationships: 131
 Events: 194
@@ -19,7 +19,8 @@ Legal profiles: 119
 Reserve components: 153
 Income profiles: 119
 Market Access Records: 8
-Archive recorded / not recorded: 462 / 122
+Archive recorded: 462
+Archive not recorded: 122
 Detail routes: 422
 Metadata-checked routes: 422
 Official origin: https://www.stableorgone.com
