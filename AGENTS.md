@@ -41,14 +41,16 @@ No canonical, Market Access, archive-maintenance, dossier, route-family, materia
 
 ## Current authority chain
 
-1. PR #514 fixed the 2026-08-03 through 2026-09-13 operating cycle.
-2. PR #515 reviewed eight private Record Growth Batch 5 candidates.
-3. PR #516 authorized only complete records for Bison Bank EUB and USB.
-4. PR #517 added EUB, USB, and Bison Bank, S.A. as complete reviewed canonical records.
-5. PR #518 added only sibling-registry footer links for HEI, CYA, and BIR.
-6. Production converged at commit `e51f7440c7761d0a70cb36807a8ca452aa2622da`.
-7. Repository authority is now `REVIEW GATE`.
-8. `docs/ui-v3-remediation-authority.md` remains the regression-protection contract for material public UI work.
+1. PR #493 established `https://www.stableorgone.com` as the official public origin.
+2. PR #500 completed the bounded MNEE Evidence and Archive Maintenance checkpoint without changing the 117-asset count.
+3. PR #514 fixed the 2026-08-03 through 2026-09-13 operating cycle.
+4. PR #515 reviewed eight private Record Growth Batch 5 candidates.
+5. PR #516 authorized only complete records for Bison Bank EUB and USB.
+6. PR #517 added EUB, USB, and Bison Bank, S.A. as complete reviewed canonical records.
+7. PR #518 added only sibling-registry footer links for HEI, CYA, and BIR.
+8. Production converged at commit `e51f7440c7761d0a70cb36807a8ca452aa2622da`.
+9. Repository authority is now `REVIEW GATE`.
+10. `docs/ui-v3-remediation-authority.md` remains the regression-protection contract for material public UI work.
 
 ## Mandatory reading order
 
