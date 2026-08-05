@@ -7,10 +7,12 @@
   "review_pr": 521,
   "source_research_record_id": "jp_access_jpysc_sbivc_2026_06_24",
   "canonical_asset_search": {
-    "proposed_asset_id": "sog_st_jpysc",
-    "exact_id_match": false,
-    "canonical_identity_present": false,
-    "alias_or_lineage_match_promoted": false
+    "asset_id": "sog_st_jpysc",
+    "exact_id_match": true,
+    "canonical_identity_present": true,
+    "source_file": "data/stablecoins-batch-n.json",
+    "source_pr": 128,
+    "duplicate_asset_creation_required": false
   },
   "canonical_market_access_search": {
     "asset_id": "sog_st_jpysc",
@@ -18,39 +20,21 @@
     "total_records_before": 8,
     "total_records_after": 8
   },
-  "source_url_review": [
-    {
-      "url": "https://www.sbivc.co.jp/newsview/fx4zmjwbl",
-      "existing_private_research_reference": true,
-      "new_canonical_evidence_identity_created": false
-    },
-    {
-      "url": "https://www.sbivc.co.jp/jpysc",
-      "existing_private_research_reference": true,
-      "new_canonical_evidence_identity_created": false
-    },
-    {
-      "url": "https://www.sbivc.co.jp/services/crypto/jpysc",
-      "existing_private_research_reference": false,
-      "new_canonical_evidence_identity_created": false,
-      "disposition": "private_review_support_only"
-    },
-    {
-      "url": "https://www.fsa.go.jp/menkyo/menkyoj/denshikessaisyudan.pdf",
-      "existing_private_research_reference": true,
-      "new_canonical_evidence_identity_created": false
-    },
-    {
-      "url": "https://www.shinseitrust.com/stablecoin/jpysc.html",
-      "existing_private_research_reference": true,
-      "new_canonical_evidence_identity_created": false
-    }
-  ],
+  "canonical_evidence_search": {
+    "existing_ids": [
+      "sog_src_jpysc_launch_sbi_vc_2026",
+      "sog_src_jpysc_announcement_sbi_2026"
+    ],
+    "new_canonical_evidence_identities_created_in_pr521": 0,
+    "later_current_source_identity_decision_required": true
+  },
   "result": {
-    "duplicate_canonical_asset_found": false,
+    "existing_canonical_asset_confirmed": true,
+    "duplicate_canonical_asset_creation_prevented": true,
     "duplicate_market_access_record_found": false,
     "canonical_source_identity_changes": 0,
     "canonical_promotion_attempted": false,
-    "replacement_asset_used": false
+    "replacement_asset_used": false,
+    "eligible_for_later_separate_authority": true
   }
 }
