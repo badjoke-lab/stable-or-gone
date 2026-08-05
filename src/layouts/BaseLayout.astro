@@ -126,7 +126,11 @@ const dataLinks = [
             </span>
           </div>
           <div class="masthead-actions" aria-label="Project actions">
-            <a class="support-cta support-cta--header" href="/support/" aria-current={isCurrent('/support/') ? 'page' : undefined} aria-label="Support this archive"><span class="support-cta-label--full">Support this archive</span><span class="support-cta-label--compact" aria-hidden="true">Support</span></a>
+            {isSupportPage ? (
+              <span class="support-cta support-cta--header support-cta--current" aria-current="page"><span class="support-cta-label--full">Support this archive</span><span class="support-cta-label--compact" aria-hidden="true">Support</span></span>
+            ) : (
+              <a class="support-cta support-cta--header" href="/support/" aria-label="Support this archive"><span class="support-cta-label--full">Support this archive</span><span class="support-cta-label--compact" aria-hidden="true">Support</span></a>
+            )}
             <a class="correction-link" href="/contact/">Submit correction</a>
           </div>
         </div>
@@ -213,7 +217,11 @@ const dataLinks = [
                     <small>Current project</small>
                   </span>
                 )}
-                {group.items.map((item) => <a href={item.href}>{item.label}</a>)}
+                {group.items.map((item) => isSupportPage && item.href === '/support/' ? (
+                  <span class="footer-current-link" aria-current="page">Support</span>
+                ) : (
+                  <a href={item.href}>{item.label}</a>
+                ))}
               </nav>
             </details>
           ))}
@@ -328,7 +336,7 @@ const dataLinks = [
         textarea.setAttribute('readonly', '');
         textarea.style.position = 'fixed';
         textarea.style.opacity = '0';
-        document.body.append(textarea);
+        document.body.appendChild(textarea);
         textarea.select();
         const copied = document.execCommand('copy');
         textarea.remove();
