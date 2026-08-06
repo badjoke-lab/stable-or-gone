@@ -221,6 +221,9 @@ const dataLinks = [
                 ) : (
                   <a href={item.href}>{item.label}</a>
                 ))}
+                {String(group.id) === 'discovery' && (
+                  <a href="https://mag.badjoke-lab.com/">Minted &amp; Gone</a>
+                )}
               </nav>
             </details>
           ))}
