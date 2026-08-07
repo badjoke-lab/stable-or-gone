@@ -8,6 +8,7 @@ const distRoot = path.join(root, 'dist');
 const legacyHostname = ['sog', 'badjoke-lab', 'com'].join('.');
 const failures = [];
 const htmlRecords = [];
+let nonIndexableHtmlChecked = 0;
 
 function walk(dir) {
   return fs.readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
@@ -41,6 +42,12 @@ for (const file of files) {
   if (content.includes(legacyHostname)) failures.push(`${relative}: legacy hostname remains in built output`);
 
   if (ext !== '.html') continue;
+  const distRelative = path.relative(distRoot, file).split(path.sep).join('/');
+  if (distRelative === '404.html') {
+    nonIndexableHtmlChecked += 1;
+    continue;
+  }
+
   const route = relativeRoute(file);
   const expected = new URL(route, `${PUBLIC_ORIGIN}/`).toString();
   const canonical = firstAttribute(content, /<link\b[^>]*rel=["']canonical["'][^>]*href=["']([^"']+)["'][^>]*>/i)
@@ -77,7 +84,8 @@ for (const file of sitemapFiles) {
 const result = {
   ok: failures.length === 0,
   public_origin: PUBLIC_ORIGIN,
-  html_routes_checked: htmlRecords.length,
+  indexable_html_routes_checked: htmlRecords.length,
+  non_indexable_html_checked: nonIndexableHtmlChecked,
   sitemap_files_checked: sitemapFiles.length,
   legacy_hostname_findings: failures.filter((item) => item.includes('legacy hostname')).length,
   failures
