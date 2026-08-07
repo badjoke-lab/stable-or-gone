@@ -1,4 +1,4 @@
-name: Preflight account bulk redirect access
+name: Preflight Pages legacy-host transfer
 
 on:
   push:
@@ -14,7 +14,7 @@ jobs:
   preflight:
     runs-on: ubuntu-latest
     steps:
-      - name: Check account-level Bulk Redirect access
+      - name: Inspect current Pages project and custom domains
         shell: bash
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -24,22 +24,23 @@ jobs:
           test -n "${CLOUDFLARE_API_TOKEN:-}" || { echo 'Missing CLOUDFLARE_API_TOKEN'; exit 2; }
           test -n "${CLOUDFLARE_ACCOUNT_ID:-}" || { echo 'Missing CLOUDFLARE_ACCOUNT_ID'; exit 2; }
 
-          request() {
-            local label="$1" url="$2" out="$3"
+          api_get() {
+            local url="$1" out="$2"
             local status
             status="$(curl -sS -o "$out" -w '%{http_code}' \
               -H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" \
               -H 'Content-Type: application/json' "$url")"
-            echo "${label}: HTTP ${status}"
-            jq '{success, errors, messages, result_count: (if (.result|type)=="array" then (.result|length) else null end)}' "$out" || true
-            [ "$status" = '200' ] && jq -e '.success == true' "$out" >/dev/null
+            echo "HTTP ${status}: ${url%%\?*}"
+            if [ "$status" != '200' ] || ! jq -e '.success == true' "$out" >/dev/null; then
+              jq '{success, errors, messages}' "$out" || true
+              return 1
+            fi
           }
 
-          request 'Account redirect lists' \
-            "https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/rules/lists" \
-            /tmp/lists.json
-          request 'Account rulesets' \
-            "https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/rulesets" \
-            /tmp/rulesets.json
+          api_get "https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/pages/projects/stable-or-gone" /tmp/project.json
+          jq '{name: .result.name, subdomain: .result.subdomain, domains: .result.domains, production_branch: .result.production_branch}' /tmp/project.json
 
-          echo 'Account-level Bulk Redirect read access is available.'
+          api_get "https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/pages/projects/stable-or-gone/domains" /tmp/domains.json
+          jq '{domains: [.result[] | {name, status, validation_data}]}' /tmp/domains.json
+
+          echo 'Pages project/domain access is available.'
