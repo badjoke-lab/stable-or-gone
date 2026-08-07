@@ -13,7 +13,6 @@ permissions:
 jobs:
   preflight:
     runs-on: ubuntu-latest
-    environment: production
     steps:
       - name: Check account-level Bulk Redirect access
         shell: bash
