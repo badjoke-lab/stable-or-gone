@@ -1,0 +1,180 @@
+name: SOG domain migration audit
+
+on:
+  pull_request:
+    paths:
+      - 'config/public-origin.mjs'
+      - 'src/**'
+      - 'public/**'
+      - 'astro.config.mjs'
+      - 'scripts/audit-built-origin.mjs'
+      - 'scripts/audit-domain-migration.mjs'
+      - '.github/workflows/domain-migration-audit.yml'
+      - 'docs/deployment-policy.md'
+  workflow_run:
+    workflows:
+      - Deploy production
+    types:
+      - completed
+  schedule:
+    - cron: '17 3 * * *'
+  workflow_dispatch:
+    inputs:
+      strict_redirect:
+        description: Fail unless every legacy-host probe is an exact path/query-preserving HTTP 301
+        required: true
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sog-domain-migration-${{ github.event.workflow_run.head_sha || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  repository-origin-contract:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout audited commit
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Validate official-origin source contract
+        run: npm run validate:public-origin
+
+      - name: Build exact audited commit
+        run: npm run build
+
+      - name: Audit every built HTML canonical and social URL
+        run: node scripts/audit-built-origin.mjs
+
+      - name: Upload built-origin audit
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sog-built-origin-audit-${{ github.run_id }}
+          retention-days: 30
+          if-no-files-found: error
+          path: artifacts/built-origin-audit.json
+
+  live-domain-migration:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout audited commit
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
+
+      - name: Audit official and legacy hosts
+        shell: bash
+        env:
+          STRICT_REDIRECT: ${{ inputs.strict_redirect || false }}
+        run: |
+          set -euo pipefail
+          if [ "$STRICT_REDIRECT" = "true" ]; then
+            node scripts/audit-domain-migration.mjs --strict
+          else
+            node scripts/audit-domain-migration.mjs
+          fi
+
+      - name: Publish migration summary
+        if: always()
+        shell: bash
+        run: |
+          if [ -f artifacts/domain-migration-audit/summary.md ]; then
+            cat artifacts/domain-migration-audit/summary.md >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Upload migration audit
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sog-domain-migration-audit-${{ github.run_id }}
+          retention-days: 30
+          if-no-files-found: error
+          path: artifacts/domain-migration-audit/**
+
+  production-desktop-mobile-review:
+    if: github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      SOG_SCREENSHOT_BASE_URL: https://www.stableorgone.com
+    steps:
+      - name: Checkout deployed commit
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Build route-size reference
+        run: npm run build
+
+      - name: Capture production desktop representatives
+        run: node scripts/capture-site-screenshots.mjs --device desktop --mode representative --samples-per-family 3 --base-url "$SOG_SCREENSHOT_BASE_URL"
+
+      - name: Capture production mobile representatives
+        run: node scripts/capture-site-screenshots.mjs --device mobile --mode representative --samples-per-family 3 --base-url "$SOG_SCREENSHOT_BASE_URL"
+
+      - name: Upload production desktop screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sog-production-migration-desktop-${{ github.run_id }}
+          retention-days: 30
+          compression-level: 0
+          if-no-files-found: error
+          path: |
+            artifacts/screenshots/desktop/**
+            artifacts/screenshots/manifest.desktop.json
+
+      - name: Upload production mobile screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sog-production-migration-mobile-${{ github.run_id }}
+          retention-days: 30
+          compression-level: 0
+          if-no-files-found: error
+          path: |
+            artifacts/screenshots/mobile/**
+            artifacts/screenshots/manifest.mobile.json
+
+      - name: Write production visual summary
+        if: always()
+        shell: bash
+        run: |
+          echo '## SOG production PC/mobile migration review' >> "$GITHUB_STEP_SUMMARY"
+          for device in desktop mobile; do
+            manifest="artifacts/screenshots/manifest.${device}.json"
+            if [ -f "$manifest" ]; then
+              node -e "const x=require('./$manifest'); console.log('- ${device}: '+x.captured_count+'/'+x.selected_route_count+' captured; '+x.failed_count+' failed')" >> "$GITHUB_STEP_SUMMARY"
+            fi
+          done
