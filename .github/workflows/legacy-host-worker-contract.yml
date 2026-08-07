@@ -1,0 +1,31 @@
+name: Legacy host worker contract
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+      - name: Verify host-aware redirect worker
+        run: node scripts/check-legacy-host-worker.mjs
+      - name: Build site
+        run: |
+          npm ci --no-audit --no-fund
+          npm run build:site
+      - name: Verify worker is emitted in Pages output
+        run: |
+          test -f dist/_worker.js
+          cmp public/_worker.js dist/_worker.js
