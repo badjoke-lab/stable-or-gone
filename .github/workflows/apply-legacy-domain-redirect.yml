@@ -18,7 +18,7 @@ concurrency:
 env:
   CF_API_BASE: https://api.cloudflare.com/client/v4
   CF_ZONE_NAME: badjoke-lab.com
-  LEGACY_HOST: sog.badjoke-lab.com
+  LEGACY_SUBDOMAIN: sog
   CANONICAL_ORIGIN: https://www.stableorgone.com
   RULE_REF: sog_legacy_host_to_stableorgone
   RULE_PHASE: http_request_dynamic_redirect
@@ -66,8 +66,8 @@ jobs:
         run: |
           set -euo pipefail
 
-          MATCH_EXPR='(http.host eq "sog.badjoke-lab.com")'
-          TARGET_EXPR='concat("https://www.stableorgone.com", http.request.uri.path)'
+          MATCH_EXPR="(http.host eq \"${LEGACY_SUBDOMAIN}.${CF_ZONE_NAME}\")"
+          TARGET_EXPR="concat(\"${CANONICAL_ORIGIN}\", http.request.uri.path)"
 
           jq -n \
             --arg ref "$RULE_REF" \
@@ -180,8 +180,8 @@ jobs:
           ZONE_ID: ${{ steps.zone.outputs.zone_id }}
         run: |
           set -euo pipefail
-          MATCH_EXPR='(http.host eq "sog.badjoke-lab.com")'
-          TARGET_EXPR='concat("https://www.stableorgone.com", http.request.uri.path)'
+          MATCH_EXPR="(http.host eq \"${LEGACY_SUBDOMAIN}.${CF_ZONE_NAME}\")"
+          TARGET_EXPR="concat(\"${CANONICAL_ORIGIN}\", http.request.uri.path)"
 
           curl -sS \
             --header "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" \
@@ -229,8 +229,8 @@ jobs:
           {
             echo '## SOG legacy-domain migration complete'
             echo
-            echo '- Legacy host: `sog.badjoke-lab.com`'
-            echo '- Canonical origin: `https://www.stableorgone.com`'
+            echo "- Legacy host: \`${LEGACY_SUBDOMAIN}.${CF_ZONE_NAME}\`"
+            echo "- Canonical origin: \`${CANONICAL_ORIGIN}\`"
             echo '- Status: `301`'
             echo '- Path preservation: enabled'
             echo '- Query-string preservation: enabled'
