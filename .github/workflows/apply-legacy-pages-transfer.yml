@@ -1,0 +1,266 @@
+name: Apply SOG legacy Pages redirect transfer
+
+on:
+  push:
+    branches:
+      - agent/sog-account-bulk-301
+    paths:
+      - '.github/workflows/apply-legacy-pages-transfer.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sog-legacy-pages-transfer
+  cancel-in-progress: false
+
+env:
+  SOURCE_PROJECT: stable-or-gone
+  REDIRECT_PROJECT: sog-legacy-redirect
+  LEGACY_SUBDOMAIN: sog
+  CF_ZONE_NAME: badjoke-lab.com
+  CANONICAL_ORIGIN: https://www.stableorgone.com
+
+jobs:
+  transfer:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout migration audit
+        uses: actions/checkout@v4
+
+      - name: Prepare redirect-only Pages project
+        id: prepare
+        shell: bash
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          set -euo pipefail
+          test -n "${CLOUDFLARE_API_TOKEN:-}" || { echo 'Missing CLOUDFLARE_API_TOKEN' >&2; exit 2; }
+          test -n "${CLOUDFLARE_ACCOUNT_ID:-}" || { echo 'Missing CLOUDFLARE_ACCOUNT_ID' >&2; exit 2; }
+
+          API="https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/pages/projects"
+          status="$(curl -sS -o /tmp/redirect-project.json -w '%{http_code}' \
+            -H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" \
+            -H 'Content-Type: application/json' \
+            "${API}/${REDIRECT_PROJECT}")"
+
+          if [ "$status" = '404' ]; then
+            curl -sS -o /tmp/redirect-project-create.json \
+              -X POST \
+              -H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" \
+              -H 'Content-Type: application/json' \
+              --data "{\"name\":\"${REDIRECT_PROJECT}\",\"production_branch\":\"main\"}" \
+              "$API"
+            jq -e '.success == true' /tmp/redirect-project-create.json >/dev/null || {
+              jq '{success, errors, messages}' /tmp/redirect-project-create.json >&2
+              exit 1
+            }
+            echo "Created redirect-only Pages project ${REDIRECT_PROJECT}."
+          elif [ "$status" = '200' ] && jq -e '.success == true' /tmp/redirect-project.json >/dev/null; then
+            echo "Redirect-only Pages project ${REDIRECT_PROJECT} already exists."
+          else
+            echo "Unable to inspect redirect project; HTTP ${status}." >&2
+            jq '{success, errors, messages}' /tmp/redirect-project.json >&2 || true
+            exit 1
+          fi
+
+          mkdir -p redirect-dist
+          cat > redirect-dist/_worker.js <<'EOF'
+          export default {
+            async fetch(request) {
+              const source = new URL(request.url);
+              const target = 'https://www.stableorgone.com' + source.pathname + source.search;
+              return new Response(null, {
+                status: 301,
+                headers: {
+                  Location: target,
+                  'Cache-Control': 'public, max-age=3600'
+                }
+              });
+            }
+          };
+          EOF
+          printf '%s\n' '<!doctype html><meta charset="utf-8"><title>Moved permanently</title>' > redirect-dist/index.html
+
+      - name: Deploy redirect-only Pages project
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy redirect-dist --project-name=${{ env.REDIRECT_PROJECT }} --branch=main --commit-dirty=true
+
+      - name: Verify redirect project before hostname transfer
+        shell: bash
+        run: |
+          set -euo pipefail
+          base="https://${REDIRECT_PROJECT}.pages.dev"
+          verify_redirect() {
+            local path="$1" expected="$2"
+            local headers status location
+            headers="$(mktemp)"
+            status="$(curl -sS -o /dev/null -D "$headers" -w '%{http_code}' --max-time 20 "${base}${path}")"
+            location="$(awk 'BEGIN{IGNORECASE=1} /^location:/ {sub(/^[^:]+:[[:space:]]*/,""); sub(/\r$/,""); print; exit}' "$headers")"
+            echo "${base}${path} -> ${status} ${location}"
+            [ "$status" = '301' ]
+            [ "$location" = "$expected" ]
+          }
+          for attempt in $(seq 1 12); do
+            if verify_redirect '/stablecoin/usdt/?migration_probe=pages-transfer' "${CANONICAL_ORIGIN}/stablecoin/usdt/?migration_probe=pages-transfer" && \
+               verify_redirect '/events/' "${CANONICAL_ORIGIN}/events/"; then
+              echo 'Redirect-only Pages project is ready.'
+              exit 0
+            fi
+            sleep 5
+          done
+          echo 'Redirect-only Pages project did not become ready.' >&2
+          exit 1
+
+      - name: Transfer legacy custom domain to redirect project
+        id: transfer
+        shell: bash
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          set -euo pipefail
+          API="https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/pages/projects"
+          LEGACY_HOST="${LEGACY_SUBDOMAIN}.${CF_ZONE_NAME}"
+          encoded_host="$(python3 -c 'import sys,urllib.parse; print(urllib.parse.quote(sys.argv[1], safe=""))' "$LEGACY_HOST")"
+
+          get_domains() {
+            local project="$1" out="$2"
+            curl -sS -o "$out" \
+              -H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" \
+              -H 'Content-Type: application/json' \
+              "${API}/${project}/domains"
+            jq -e '.success == true' "$out" >/dev/null
+          }
+
+          get_domains "$SOURCE_PROJECT" /tmp/source-domains-before.json
+          get_domains "$REDIRECT_PROJECT" /tmp/redirect-domains-before.json
+
+          source_has="$(jq -r --arg h "$LEGACY_HOST" '[.result[] | select(.name == $h)] | length' /tmp/source-domains-before.json)"
+          redirect_has="$(jq -r --arg h "$LEGACY_HOST" '[.result[] | select(.name == $h)] | length' /tmp/redirect-domains-before.json)"
+
+          if [ "$redirect_has" = '1' ]; then
+            echo 'Legacy custom domain is already attached to redirect project.'
+            echo 'moved=true' >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          [ "$source_has" = '1' ] || { echo 'Legacy custom domain is not attached to the expected source project.' >&2; exit 1; }
+
+          echo 'Removing legacy hostname from the canonical Pages project.'
+          curl -sS -o /tmp/delete-source-domain.json \
+            -X DELETE \
+            -H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" \
+            -H 'Content-Type: application/json' \
+            "${API}/${SOURCE_PROJECT}/domains/${encoded_host}"
+          jq -e '.success == true' /tmp/delete-source-domain.json >/dev/null || {
+            jq '{success, errors, messages}' /tmp/delete-source-domain.json >&2
+            exit 1
+          }
+
+          echo 'Attaching legacy hostname to the redirect-only Pages project.'
+          add_status="$(curl -sS -o /tmp/add-redirect-domain.json -w '%{http_code}' \
+            -X POST \
+            -H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" \
+            -H 'Content-Type: application/json' \
+            --data "{\"name\":\"${LEGACY_HOST}\"}" \
+            "${API}/${REDIRECT_PROJECT}/domains")"
+
+          if [ "$add_status" != '200' ] || ! jq -e '.success == true' /tmp/add-redirect-domain.json >/dev/null; then
+            echo "Attach to redirect project failed (HTTP ${add_status}); rolling back association." >&2
+            jq '{success, errors, messages}' /tmp/add-redirect-domain.json >&2 || true
+            curl -sS -o /tmp/rollback-source-domain.json \
+              -X POST \
+              -H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" \
+              -H 'Content-Type: application/json' \
+              --data "{\"name\":\"${LEGACY_HOST}\"}" \
+              "${API}/${SOURCE_PROJECT}/domains" || true
+            jq '{success, errors, messages}' /tmp/rollback-source-domain.json >&2 || true
+            exit 1
+          fi
+
+          echo 'moved=true' >> "$GITHUB_OUTPUT"
+          echo 'Legacy custom domain association moved to redirect project.'
+
+      - name: Wait for transferred custom domain and strict 301 behavior
+        id: verify
+        shell: bash
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          set -euo pipefail
+          API="https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/pages/projects"
+          LEGACY_HOST="${LEGACY_SUBDOMAIN}.${CF_ZONE_NAME}"
+          encoded_host="$(python3 -c 'import sys,urllib.parse; print(urllib.parse.quote(sys.argv[1], safe=""))' "$LEGACY_HOST")"
+
+          rollback() {
+            echo 'Rolling legacy hostname back to canonical Pages project.' >&2
+            curl -sS -o /tmp/rollback-delete-redirect.json \
+              -X DELETE \
+              -H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" \
+              -H 'Content-Type: application/json' \
+              "${API}/${REDIRECT_PROJECT}/domains/${encoded_host}" || true
+            curl -sS -o /tmp/rollback-add-source.json \
+              -X POST \
+              -H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" \
+              -H 'Content-Type: application/json' \
+              --data "{\"name\":\"${LEGACY_HOST}\"}" \
+              "${API}/${SOURCE_PROJECT}/domains" || true
+            jq '{success, errors, messages}' /tmp/rollback-add-source.json >&2 || true
+          }
+
+          ready=false
+          for attempt in $(seq 1 24); do
+            curl -sS -o /tmp/domain-state.json \
+              -H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" \
+              -H 'Content-Type: application/json' \
+              "${API}/${REDIRECT_PROJECT}/domains/${encoded_host}" || true
+            state="$(jq -r '.result.status // "unknown"' /tmp/domain-state.json 2>/dev/null || echo unknown)"
+            validation="$(jq -r '.result.validation_data.status // "unknown"' /tmp/domain-state.json 2>/dev/null || echo unknown)"
+            echo "Domain activation ${attempt}/24: status=${state}, validation=${validation}"
+
+            headers="$(mktemp)"
+            code="$(curl -sS -o /dev/null -D "$headers" -w '%{http_code}' --max-time 20 "https://${LEGACY_HOST}/stablecoin/usdt/?migration_probe=pages-transfer" || true)"
+            location="$(awk 'BEGIN{IGNORECASE=1} /^location:/ {sub(/^[^:]+:[[:space:]]*/,""); sub(/\r$/,""); print; exit}' "$headers")"
+            echo "Probe: ${code} ${location}"
+
+            if [ "$code" = '301' ] && [ "$location" = "${CANONICAL_ORIGIN}/stablecoin/usdt/?migration_probe=pages-transfer" ]; then
+              ready=true
+              break
+            fi
+            sleep 5
+          done
+
+          if [ "$ready" != 'true' ]; then
+            rollback
+            echo 'Transferred legacy hostname never reached the exact redirect contract.' >&2
+            exit 1
+          fi
+
+          if ! node scripts/audit-domain-migration.mjs --strict; then
+            rollback
+            echo 'Strict domain migration audit failed after custom-domain transfer.' >&2
+            exit 1
+          fi
+
+          mkdir -p artifacts/pages-transfer
+          jq '{name: .result.name, status: .result.status, validation_data: .result.validation_data, verification_data: .result.verification_data}' /tmp/domain-state.json > artifacts/pages-transfer/domain-state.json
+          printf '%s\n' '{"source_project":"stable-or-gone","redirect_project":"sog-legacy-redirect","status":301,"path_preserved":true,"query_preserved":true,"strict_audit":true}' > artifacts/pages-transfer/result.json
+          echo 'Exact legacy-host 301 contract verified.'
+
+      - name: Upload migration proof
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sog-legacy-pages-transfer-${{ github.run_id }}
+          retention-days: 30
+          if-no-files-found: warn
+          path: |
+            artifacts/pages-transfer/**
+            artifacts/domain-migration-audit/**
