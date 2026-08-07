@@ -23,11 +23,12 @@ on:
       strict_redirect:
         description: Fail unless every legacy-host probe is an exact path/query-preserving HTTP 301
         required: true
-        default: false
+        default: true
         type: boolean
 
 permissions:
   contents: read
+  issues: write
 
 concurrency:
   group: sog-domain-migration-${{ github.event.workflow_run.head_sha || github.ref }}
@@ -84,7 +85,7 @@ jobs:
       - name: Audit official and legacy hosts
         shell: bash
         env:
-          STRICT_REDIRECT: ${{ inputs.strict_redirect || false }}
+          STRICT_REDIRECT: ${{ (github.event_name == 'workflow_run' || github.event_name == 'schedule') || (github.event_name == 'workflow_dispatch' && inputs.strict_redirect) }}
         run: |
           set -euo pipefail
           if [ "$STRICT_REDIRECT" = "true" ]; then
@@ -100,6 +101,32 @@ jobs:
           if [ -f artifacts/domain-migration-audit/summary.md ]; then
             cat artifacts/domain-migration-audit/summary.md >> "$GITHUB_STEP_SUMMARY"
           fi
+
+      - name: Report production migration gate
+        if: always() && github.event_name == 'workflow_run'
+        uses: actions/github-script@v7
+        env:
+          AUDITED_SHA: ${{ github.event.workflow_run.head_sha }}
+        with:
+          script: |
+            const fs = require('fs');
+            const runUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            let detail = 'Migration report was not produced.';
+            if (fs.existsSync('artifacts/domain-migration-audit/report.json')) {
+              const report = JSON.parse(fs.readFileSync('artifacts/domain-migration-audit/report.json', 'utf8'));
+              detail = [
+                `- Strict mode: \`${report.strict}\``,
+                `- Legacy redirects: \`${report.redirect_ready_count}/${report.request_count}\``,
+                `- Migration complete: \`${report.migration_complete}\``,
+                `- Official-origin failures: \`${report.official_failures}\``
+              ].join('\n');
+            }
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: 479,
+              body: `Domain migration production gate finished.\n\n- Source commit: \`${process.env.AUDITED_SHA}\`\n${detail}\n- Run: ${runUrl}`
+            });
 
       - name: Upload migration audit
         if: always()
@@ -178,3 +205,29 @@ jobs:
               node -e "const x=require('./$manifest'); console.log('- ${device}: '+x.captured_count+'/'+x.selected_route_count+' captured; '+x.failed_count+' failed')" >> "$GITHUB_STEP_SUMMARY"
             fi
           done
+
+      - name: Report production visual gate
+        if: always()
+        uses: actions/github-script@v7
+        env:
+          AUDITED_SHA: ${{ github.event.workflow_run.head_sha }}
+        with:
+          script: |
+            const fs = require('fs');
+            const runUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            const rows = [];
+            for (const device of ['desktop', 'mobile']) {
+              const file = `artifacts/screenshots/manifest.${device}.json`;
+              if (!fs.existsSync(file)) {
+                rows.push(`- ${device}: manifest missing`);
+                continue;
+              }
+              const x = JSON.parse(fs.readFileSync(file, 'utf8'));
+              rows.push(`- ${device}: \`${x.captured_count}/${x.selected_route_count}\` captured; \`${x.failed_count}\` failed`);
+            }
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: 479,
+              body: `Production PC/mobile migration review finished.\n\n- Source commit: \`${process.env.AUDITED_SHA}\`\n${rows.join('\n')}\n- Run: ${runUrl}`
+            });
