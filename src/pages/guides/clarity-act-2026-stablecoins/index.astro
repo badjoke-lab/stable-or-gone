@@ -1,0 +1,115 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import GuideArticleHeader from '../../../components/GuideArticleHeader.astro';
+import GuideRevisionHistory from '../../../components/GuideRevisionHistory.astro';
+import RelatedSogRecords from '../../../components/RelatedSogRecords.astro';
+import { getGuide, guideCategoryLabels } from '../../../data/guideCatalog';
+
+const guide = getGuide('clarity-act-2026-stablecoins');
+const title = 'CLARITY Act Misses the August Window: What It Means for Stablecoins — Stable or Gone';
+const description = 'The CLARITY Act missed the U.S. Senate pre-recess window in August 2026. Here is what that changes, what remains pending, and why the separate GENIUS Act still governs the federal stablecoin framework.';
+const canonicalPath = '/guides/clarity-act-2026-stablecoins/';
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: guide.title,
+  description,
+  url: `https://www.stableorgone.com${canonicalPath}`,
+  inLanguage: 'en',
+  isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://www.stableorgone.com/' },
+  about: ['CLARITY Act', 'GENIUS Act', 'United States crypto regulation', 'stablecoin regulation'],
+  ...(guide.publishedAt ? { datePublished: guide.publishedAt } : {})
+};
+
+const relatedRecords = [
+  { href: '/stablecoin/usdc/', title: 'USDC', summary: 'Review the canonical asset, issuer, reserve, access, event, and evidence record.' },
+  { href: '/stablecoin/usdt/', title: 'USDT', summary: 'Review the global dollar stablecoin and separate U.S. policy from global circulation.' },
+  { href: '/stablecoin/pyusd/', title: 'PYUSD', summary: 'Review the PayPal-branded token and its trust-company issuer structure.' },
+  { href: '/stablecoin/rlusd/', title: 'RLUSD', summary: 'Review the Ripple-branded stablecoin and its issuer and regulatory context.' }
+];
+---
+<BaseLayout title={title} description={description} canonicalPath={canonicalPath} jsonLd={jsonLd}>
+  <GuideArticleHeader
+    category={guideCategoryLabels[guide.category]}
+    title="CLARITY Act Misses the August Window"
+    description="The Senate did not complete the expected pre-recess vote. That is a major delay for U.S. crypto market structure, but it is not the same as the bill being voted down, and it does not undo the separate GENIUS Act stablecoin law."
+    publishedAt={guide.publishedAt}
+    informationCurrentThrough={guide.informationCurrentThrough}
+    updatedAt={guide.updatedAt}
+  />
+
+  <section class="panel registry">
+    <div class="bar">30-second summary</div>
+    <p><strong>The CLARITY Act missed its August 2026 pre-recess passage window.</strong> The Senate Banking Committee had advanced H.R. 3633 by a 15–9 vote on May 14, but the full Senate did not complete a floor vote before the chamber left for its summer recess.</p>
+    <p>That is a serious legislative setback, not a final rejection. More importantly for stablecoins, the CLARITY Act is <strong>not</strong> the federal payment-stablecoin law. The GENIUS Act became law in July 2025 and remains in implementation.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">What happened</div>
+    <table>
+      <thead><tr><th>Date</th><th>Stage</th></tr></thead>
+      <tbody>
+        <tr><td>2025-07-17</td><td>The House passed the CLARITY Act.</td></tr>
+        <tr><td>2026-05-14</td><td>The Senate Banking Committee advanced the legislation 15–9.</td></tr>
+        <tr><td>July 2026</td><td>Senate negotiators continued work on market-structure text and outstanding political issues.</td></tr>
+        <tr><td>2026-08-08</td><td>The Senate entered its summer recess without completing the expected floor vote.</td></tr>
+        <tr><td>Next window</td><td>Further Senate action can still occur after the recess; missing the deadline does not itself terminate the bill.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">CLARITY and GENIUS are different laws</div>
+    <table>
+      <thead><tr><th></th><th>CLARITY Act</th><th>GENIUS Act</th></tr></thead>
+      <tbody>
+        <tr><th>Main subject</th><td>Digital-asset market structure, agency jurisdiction, trading and intermediary framework</td><td>Payment stablecoin issuers, reserves, redemption, disclosure, supervision, and related requirements</td></tr>
+        <tr><th>Status on 2026-08-08</th><td>Pending; no completed full-Senate passage before recess</td><td>Enacted federal law, with implementation and rulemaking underway</td></tr>
+        <tr><th>Does the CLARITY delay repeal GENIUS?</th><td colspan="2"><strong>No.</strong> They are separate pieces of legislation.</td></tr>
+      </tbody>
+    </table>
+    <p><a href="/guides/genius-act-stablecoins/">Read the GENIUS Act guide →</a></p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">What the delay does change</div>
+    <p>The delay preserves uncertainty around the broader U.S. digital-asset market structure: which regulator has authority over which assets and activities, how trading venues and intermediaries fit into a federal framework, and how the Senate resolves disputed provisions.</p>
+    <p>For stablecoins, this matters indirectly because stablecoins trade inside the wider crypto market. But issuer permission, reserve requirements, redemption rules, and payment-stablecoin supervision remain primarily a GENIUS Act implementation question.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">What the delay does not prove</div>
+    <ul>
+      <li>It does not prove that the CLARITY Act has been permanently defeated.</li>
+      <li>It does not mean Congress voted to reject the bill in August.</li>
+      <li>It does not cancel the GENIUS Act.</li>
+      <li>It does not automatically change the legal status of USDC, USDT, PYUSD, RLUSD, or any other named stablecoin.</li>
+      <li>It does not replace asset-, issuer-, platform-, and jurisdiction-specific access evidence.</li>
+    </ul>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Why this matters for SOG records</div>
+    <p>SOG should treat the CLARITY delay as a <strong>regulatory event</strong>, not as an asset lifecycle event. A stablecoin should not be reclassified merely because a market-structure bill is delayed.</p>
+    <p>Where the delay affects a service, issuer plan, listing, or access condition, that claim needs its own source and scope. Missing evidence stays missing rather than being converted into a regulatory conclusion.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Sources</div>
+    <ul>
+      <li><a href="https://www.banking.senate.gov/newsroom/majority/chairman-scott-senate-banking-committee-advance-clarity-act-in-historic-bipartisan-vote">Senate Banking Committee — CLARITY Act advanced 15–9, 14 May 2026</a></li>
+      <li><a href="https://www.banking.senate.gov/newsroom/majority/chairman-scott-senators-lummis-tillis-release-market-structure-bill-text-ahead-of-banking-committee-markup">Senate Banking Committee — market-structure text ahead of markup</a></li>
+      <li><a href="https://www.coindesk.com/policy/2026/07/23/clarity-act-expected-to-miss-its-window-before-congress-summer-break-leadership-says">CoinDesk — Senate leadership expected the pre-recess window to be missed</a></li>
+      <li><a href="https://www.investors.com/news/clarity-act-senate-vote-recess-deadline-cryptocurrency-market-structure-bitcoin/">Investor's Business Daily — Senate vote postponed until after the summer recess</a></li>
+      <li><a href="/guides/genius-act-stablecoins/">SOG — GENIUS Act and Stablecoins</a></li>
+    </ul>
+  </section>
+
+  <RelatedSogRecords records={relatedRecords} />
+  <GuideRevisionHistory revisions={guide.revisions} />
+
+  <section class="panel registry">
+    <div class="bar">Scope and disclaimer</div>
+    <p>This page tracks legislative status and its relationship to stablecoin regulation. It is not legal or investment advice and does not convert a pending federal bill into an asset-level availability or approval conclusion.</p>
+  </section>
+</BaseLayout>
