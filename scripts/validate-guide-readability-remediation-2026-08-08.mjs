@@ -11,6 +11,7 @@ const css = read('src/styles/guide-readability-remediation.css');
 const brand = read('src/components/BrandLockup.astro');
 const layout = read('src/layouts/BaseLayout.astro');
 const home = read('src/pages/index.astro');
+const catalog = read('src/data/guideCatalog.ts');
 const spec = read('docs/quality/guide-readability-remediation-2026-08-08-spec.md');
 const authority = readJson('config/post-pr531-authority-reconciliation.json');
 const marketAccess = readJson('data/market-access-records-v1.json');
@@ -43,7 +44,8 @@ expect(layout.includes('class="guide-article-layout"'), 'Guide shared layout wra
 expect(layout.includes('class="guide-article-toc"'), 'Guide TOC wrapper missing');
 expect(layout.includes('class="context-support-callout"'), 'Guide contextual support callout missing');
 expect(home.includes('id="research-guides-title"'), 'home Research & Guides anchor missing');
-expect(home.includes("leadGuide.slug === 'global-stablecoin-regulation-2026'"), 'global 2026 Guide is no longer the home lead');
+expect(/featuredGuides\.find\(\(guide\) => guide\.slug === ['"]global-stablecoin-regulation-2026['"]\)/.test(home), 'global 2026 Guide is no longer explicitly selected as the home lead');
+expect(/slug:\s*['"]global-stablecoin-regulation-2026['"][\s\S]{0,900}?featured:\s*true/.test(catalog), 'global 2026 Guide is no longer a featured catalog entry');
 
 expect(fs.existsSync(path.join(root, 'src/pages/guides/global-stablecoin-regulation-2026/index.astro')), 'global 2026 Guide route missing');
 expect(fs.existsSync(path.join(root, 'src/pages/guides/uk-stablecoin-capital-rules-2026/index.astro')), 'UK Guide acceptance route missing');
@@ -71,6 +73,7 @@ console.log(JSON.stringify({
   section_hierarchy: 'serif_h2_24px_desktop_22px_mobile',
   duplicate_footer_support: 'suppressed_for_guide_and_longform',
   home_research_secondary_layout: 'three_columns_then_single_stack',
+  home_lead_guide: 'global-stablecoin-regulation-2026',
   canonical_changes: 0,
   market_access_records: 8,
   visual_review_still_required: true
