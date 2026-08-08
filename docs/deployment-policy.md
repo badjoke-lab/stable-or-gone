@@ -1,6 +1,6 @@
 # Stable or Gone Deployment Policy
 
-Updated: 2026-07-31
+Updated: 2026-08-08
 
 ## Status
 
@@ -10,30 +10,54 @@ Stable or Gone publishes the current `main` branch automatically.
 Source of truth: main
 Production workflow: .github/workflows/deploy-production.yml
 Pages project: stable-or-gone
-Official public origin: https://www.stableorgone.com/
-Official-domain migration production checkpoint: bd0e63ac36b1824bf705e8c80d1fb0a1cd79d221
+Official public origin: https://www.stableorgone.com
 Automatic main publication: enabled
-Manual workflow dispatch: fallback only
+Legacy-host migration: complete
+Legacy redirect implementation: public/_worker.js / Pages Advanced Mode
+Strict migration gate: enabled
 Deployment record: Issue #479
+Current verified production commit: 210d68001fbd2560ffadf538fdb7cc9302b400a7
+Current canonical hash: sha256:57749955faa96d2bd836bac83ef41a0c5dc13f2342763dc4d975c588cd50c650
+Convergence attempt: 1
 ```
 
-The checkpoint records the completed PR #493 migration. Current `main` and production equality must be read from the deployment workflow and Issue #479 rather than inferred from this document.
+Current `main` and production equality must be read from the deployment workflow, strict migration audit, production visual gate, and Issue #479. A repository merge is not itself proof of production parity.
 
 ## Core publication rule
 
-A normal merged change must not require a separate publication decision.
+A normal merged change follows:
 
 ```text
 PR merged to main
--> validate the official origin and publishable site
--> build dist from the exact main commit
+-> validate exact main commit
+-> build dist from that commit
 -> upload dist to Cloudflare Pages with Wrangler
--> verify the deployed commit and canonical-data hash
--> verify reviewed counts, routes, metadata, and public guides
--> report the result to Issue #479
+-> verify deployed commit and canonical-data hash
+-> verify reviewed counts, routes, metadata, public guides, and machine-readable outputs
+-> enforce strict legacy-host migration checks
+-> run required production visual review for relevant public-surface changes
+-> report result to Issue #479
 ```
 
-A merge is not itself proof of production parity.
+No unmerged branch is a production source.
+
+## Current verified production baseline
+
+```text
+Stablecoins: 119
+Organizations: 109
+Relationships: 131
+Events: 194
+Evidence: 584
+Evidence Relations: 584
+Deployments: 186
+Market Access Records: 8
+Detail routes: 422
+Metadata-checked routes: 422
+Archive recorded / not recorded: 462 / 122
+Production commit: 210d68001fbd2560ffadf538fdb7cc9302b400a7
+Canonical hash: sha256:57749955faa96d2bd836bac83ef41a0c5dc13f2342763dc4d975c588cd50c650
+```
 
 ## Official-origin contract
 
@@ -43,50 +67,24 @@ The only official public origin is:
 https://www.stableorgone.com
 ```
 
-The same origin must govern:
+The same origin governs:
 
-- Astro `site` configuration;
+- Astro site configuration;
 - canonical and hreflang links;
 - OGP and Twitter URLs;
 - JSON-LD;
-- `version.json` and `data/manifest.json` canonical origins;
+- `version.json` and `data/manifest.json`;
 - `llms.txt` and `ai.txt`;
-- `robots.txt` and sitemap URLs;
-- production smoke, provenance, and output-parity checks;
-- deployment summaries and Issue #479 reports;
-- repository public-site documentation.
+- robots and sitemap URLs;
+- production smoke, provenance, output-parity, and deployment summaries.
 
-`config/public-origin.mjs` is the repository source for runtime and build-time origin consumers. `npm run validate:public-origin` must reject accidental reintroduction of the legacy host in active files, including escaped regular-expression forms.
-
-## Production verification
-
-Every automatic deployment must verify:
-
-- the deployed commit is the intended `main` commit;
-- the public origin is `https://www.stableorgone.com`;
-- canonical-data hash and source provenance match the build;
-- Stablecoin, Organization, Event, and detail-route sets exactly match reviewed repository state;
-- all detail routes expose the required metadata;
-- canonical links and sitemap URLs use the official origin;
-- machine-readable and public outputs are internally consistent;
-- `/guides/` and required dated guide routes are public;
-- the deployment result is recorded in Issue #479.
-
-Current verified production baseline:
-
-```text
-Stablecoins: 116
-Organizations: 107
-Events: 191
-Detail routes: 414
-Metadata-checked routes: 414
-```
+`config/public-origin.mjs` remains the repository source for build/runtime origin consumers. `npm run validate:public-origin` and the built-origin audit must reject legacy-host leakage into canonical output.
 
 ## Cloudflare publication configuration
 
 ```text
 Production branch: main
-GitHub Actions performs the production upload
+GitHub Actions performs production upload
 Cloudflare Pages project: stable-or-gone
 Build output: dist
 Required repository secrets:
@@ -94,100 +92,117 @@ Required repository secrets:
 - CLOUDFLARE_ACCOUNT_ID
 ```
 
-The workflow uploads prebuilt assets using Wrangler. Cloudflare is not used as an independent source-build system.
+GitHub Actions builds the static site and uploads the prebuilt output with Wrangler. Cloudflare is not an independent source-build authority.
 
-The current token has sufficient Pages publication access. It does not expose the `badjoke-lab.com` zone through the Zones API and therefore must not be assumed to have zone or redirect-ruleset authority.
+## Legacy-host migration — complete
 
-## Legacy-host redirect
+The legacy host is migrated permanently to the official origin.
 
-The legacy host is:
-
-```text
-https://sog.badjoke-lab.com
-```
-
-It currently reaches the same Pages project. Repository canonical output already identifies `www.stableorgone.com` as official, but a host-level 301 is still required for complete migration.
-
-Required behavior:
+Required and deployed behavior:
 
 ```text
 https://sog.badjoke-lab.com/<path>?<query>
 -> 301 https://www.stableorgone.com/<path>?<query>
 ```
 
-The redirect must preserve both path and query string. Redirecting every old URL to the new homepage is prohibited.
+PR #529 implemented the redirect in `public/_worker.js` using Cloudflare Pages Advanced Mode because the available credential could publish/manage Pages but could not safely operate the `badjoke-lab.com` zone-level redirect rules.
 
-Required Cloudflare zone permissions:
+The worker contract is deliberately narrow:
 
-```text
-Zone Read for badjoke-lab.com
-Single Redirect / Rulesets Edit for badjoke-lab.com
-```
+- only the legacy hostname receives the 301;
+- path and query string are preserved exactly;
+- canonical `www.stableorgone.com` requests pass through to `env.ASSETS.fetch(request)`;
+- `stable-or-gone.pages.dev` requests also pass through to the static asset binding;
+- no canonical registry or guide content is generated by the worker.
 
-Required dynamic redirect rule:
+PR #530 made the migration strict for production and scheduled audits. The earlier policy statement that a Pages worker was unauthorized is superseded by the reviewed and production-verified PR #529/#530 implementation.
 
-```text
-match: http.host eq "sog.badjoke-lab.com"
-status: 301
-target: concat("https://www.stableorgone.com", http.request.uri.path)
-preserve_query_string: true
-```
+## Strict migration verification
 
-No Cloudflare zone write may be attempted until the credential can read the target zone and existing redirect entry-point ruleset.
+Every relevant production run must preserve the strict migration contract.
 
-A Pages `_redirects` file is not a valid substitute because Pages does not support domain-level redirects there.
-
-A Pages Function or advanced-mode `_worker.js` workaround is not authorized because it would move all official-site requests through Workers request accounting and change the existing static-serving and header boundary.
-
-## Redirect verification gate
-
-After suitable Cloudflare permissions are available, the redirect change must be verified with at least:
+The migration audit checks representative registry, detail, guide, reference, support, stats, and query-string routes. Completion requires:
 
 ```text
-/ -> https://www.stableorgone.com/
-/about/ -> https://www.stableorgone.com/about/
-/stablecoin/tusd/?source=legacy -> https://www.stableorgone.com/stablecoin/tusd/?source=legacy
+legacy status: exact HTTP 301
+Location: canonical origin + exact original path/query
+official-origin failures: 0
+redirect loops: 0
+built canonical/og/sitemap legacy-host leakage: 0
 ```
 
-Verification must inspect status code, `Location`, path preservation, query preservation, absence of loops, and continued success of the official production smoke test.
+The worker unit/build contract must also confirm canonical and `pages.dev` asset pass-through.
 
-Issue #479 remains open while this external redirect is incomplete.
+## Production verification
+
+Every automatic deployment must verify at least:
+
+- intended `main` source commit;
+- canonical-data hash and build provenance;
+- reviewed counts and route sets;
+- detail metadata coverage;
+- official canonical and sitemap origin;
+- machine-readable/public-output consistency;
+- public Guide catalog/routes;
+- strict legacy-host 301 behavior;
+- deployment result in Issue #479.
+
+## Material public UI changes
+
+Material public UI changes have an additional gate.
+
+Before merge:
+
+- build the exact PR head;
+- capture desktop and mobile screenshots of the changed route families and named acceptance routes;
+- inspect both initial viewport and full-page output when page hierarchy/length is relevant;
+- directly inspect generated artifacts rather than treating screenshot generation as acceptance;
+- block merge on any known visual defect even when automated checks pass.
+
+After merge:
+
+- automatic production publication must complete;
+- the production visual workflow must capture the deployed commit where configured;
+- changed-route production output must be rechecked when the work-item specification requires it;
+- completion is recorded only after production parity and visual acceptance.
+
+For the active Guide/readability remediation, the minimum required production-review routes are:
+
+```text
+/
+/guides/global-stablecoin-regulation-2026/
+/guides/uk-stablecoin-capital-rules-2026/
+```
+
+at desktop and mobile widths, with viewport and full-page inspection.
 
 ## Guide publication
 
-Guide visibility is controlled by `src/data/guideCatalog.ts`. `publishedAt` is metadata, not a removal switch for established evergreen guides.
+Guide visibility is controlled by `src/data/guideCatalog.ts`.
 
 ```text
-catalog entry + public route
--> included in /guides/
--> included in the sitemap
-
-publishedAt set
--> exposes dated publication metadata
-
-featured: true + publishedAt set
--> eligible for homepage guide cards
+catalog entry + public route -> /guides/ + sitemap
+publishedAt -> publication metadata
+featured: true + publishedAt -> eligible for home/Guide discovery presentation
 ```
 
-An existing guide must not disappear as a side effect of metadata handling.
+`publishedAt` is metadata, not a removal switch for an established evergreen guide. A visual remediation must not silently remove Guide routes, factual content, current-through metadata, canonical URLs, or source links.
 
 ## Manual fallback
 
-`workflow_dispatch` remains available only when the automatic main deployment must be repeated after an infrastructure interruption or edge-convergence failure.
-
-Manual fallback requires `confirm=DEPLOY` and must deploy the selected `main` commit. It is not permission to publish an unmerged branch.
+`workflow_dispatch` remains a fallback when an automatic production deployment must be repeated after infrastructure interruption or convergence failure. It is not permission to publish an unmerged branch or bypass the active specification.
 
 ## Infrastructure change boundary
 
-Explicit review is required for:
+Explicit reviewed authority is required for:
 
 - domain or DNS changes;
-- redirect-ruleset changes;
+- redirect implementation changes;
 - secret or Cloudflare account changes;
-- Pages Functions or Worker introduction;
+- replacing/removing the current Pages Advanced Mode worker contract;
 - destructive schema migrations;
 - mass deletion;
 - major route removal;
 - emergency rollback.
 
-Ordinary reviewed registry, guide, copy, UI, and documentation changes follow automatic main publication after their required repository validation passes.
+Ordinary reviewed registry, guide, copy, UI, and documentation changes follow automatic `main` publication after their repository and work-item validation gates pass.

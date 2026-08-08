@@ -1,6 +1,6 @@
 # Stable or Gone
 
-Stable or Gone (SOG) is a public historical registry for stablecoins and closely related stable-value assets. It records identity, issuers and organizations, backing and stabilization models, redemption, legal and regulatory context, deployments, launches, incidents, migrations, wind-downs, failures, evidence, and unresolved questions.
+Stable or Gone (SOG) is a public historical registry for stablecoins and closely related stable-value assets. It records identity, issuers and organizations, backing and stabilization models, redemption, legal and regulatory context, deployments, launches, incidents, migrations, wind-downs, failures, evidence, access conditions, and unresolved questions.
 
 Public site: https://www.stableorgone.com/
 
@@ -26,25 +26,28 @@ Metadata-checked detail routes: 422
 Production checkpoint:
 
 ```text
-source commit: e51f7440c7761d0a70cb36807a8ca452aa2622da
+source commit: 210d68001fbd2560ffadf538fdb7cc9302b400a7
 canonical hash: sha256:57749955faa96d2bd836bac83ef41a0c5dc13f2342763dc4d975c588cd50c650
 convergence attempt: 1
 official origin: https://www.stableorgone.com
+legacy-host 301: complete and strict-gated
 ```
 
-Current `main` and production equality is verified dynamically by `.github/workflows/deploy-production.yml` and Issue #479. All public counts are derived from canonical repository data and validated projections.
+Current `main` and production equality is verified dynamically by `.github/workflows/deploy-production.yml`, the domain-migration gate, production visual review, and Issue #479.
 
 ## Current workstream
 
 ```text
-PR #517 complete — Bison Bank EUB and USB complete records
-PR #518 complete — HEI, CYA, and BIR footer links
-Current repository authority — REVIEW GATE
+PRs #524–#531: merged and recognized current-main history
+Current documentation task: post-PR #531 authority/specification/schedule reconciliation
+Immediate next implementation: Guide & Research Surface Readability Remediation
+PR #523: paused; later current-main reconciliation and bounded completion only
+Required exit after PR #523: REVIEW GATE
 ```
 
-No later canonical, Market Access, archive-maintenance, dossier, public-surface, or infrastructure work is pre-authorized. The next planned lane is Japan Market Access Pilot 3, subject to a separate reviewed authority PR.
+Direct production review on 2026-08-08 found a blocking shared Guide-layout/readability defect on both newly published and pre-existing Guide pages. The defect must be repaired at the shared layout/CSS level before PR #523 resumes. Automated screenshot/build success is not visual acceptance when a defect is known.
 
-## Public research surfaces
+## Current public surfaces
 
 ```text
 Registry records
@@ -59,7 +62,9 @@ Guides
 machine-readable projections and manifest discovery
 ```
 
-## Official domain
+The 2026 regulation guide cluster is published, but the Guide presentation is under a bounded readability remediation. Guide content moves to maintenance-only mode after that repair; there is no automatic recurring article cadence.
+
+## Official domain and legacy migration
 
 The canonical public origin is:
 
@@ -69,26 +74,61 @@ https://www.stableorgone.com
 
 It governs canonical links, hreflang, OGP, JSON-LD, sitemap URLs, robots, machine-readable outputs, production verification, and deployment reporting.
 
-The legacy host `sog.badjoke-lab.com` still reaches the same Pages project. A path- and query-preserving 301 redirect remains an external Cloudflare zone task and is not authorized by the current review gate.
+The legacy host `sog.badjoke-lab.com` now receives an exact path- and query-preserving HTTP 301 through `public/_worker.js` in Cloudflare Pages Advanced Mode. PR #530 made the migration contract strict in production and scheduled audits.
 
 ## Repository authority
 
-Read in this order before non-trivial work:
+Read the merged current versions in this order before non-trivial work:
 
 ```text
 AGENTS.md
 docs/spec-governance.md
 docs/roadmap.md
 docs/deployment-policy.md
-docs/roadmap-amendments/2026-08-05-post-pr518-production-closeout.md
-docs/quality/post-pr518-production-closeout-spec.md
-config/post-pr518-production-closeout.json
-docs/migration/post-pr518-production-closeout.json
-work-item-specific specification
-named baselines, queues, audits, handoffs, and prior outputs
+docs/roadmap-amendments/2026-08-08-post-pr531-authority-reconciliation.md
+docs/quality/post-pr531-authority-reconciliation-spec.md
+current work-item specification
+named baselines, queues, audits, validators, handoffs, and prior outputs
 ```
 
-Merged repository authority outranks chat memory, handoff prose, issue discussion, generated reports, and unmerged drafts.
+The immediate work-item specification is:
+
+```text
+docs/quality/guide-readability-remediation-2026-08-08-spec.md
+```
+
+Merged repository authority outranks chat memory, handoff prose, issue discussion, stale branch state, generated reports, and unmerged drafts. If authority, production checkpoint, counts, schedule, deployment behavior, or a blocking visual conclusion changes, update the governing specifications and roadmap before continuing.
+
+## Current Guide/readability remediation
+
+The shared Guide repair must:
+
+- remove the persistent desktop left-rail TOC;
+- restore real primary section-heading hierarchy;
+- widen data/table presentation while preserving readable prose measure;
+- stop rendering every long-form section as a four-sided audit-sheet panel;
+- remove duplicate contextual/footer support presentation;
+- keep the contextual support block at the intended article width;
+- rebalance the home Research & Guides secondary items;
+- preserve mobile table semantics and the UI V3 readability floor.
+
+Minimum direct visual acceptance routes are the home page, the global 2026 regulation guide, and the pre-existing UK stablecoin guide at desktop and mobile widths.
+
+## Later JPYSC Market Access work
+
+After the Guide remediation is merged and production-verified, PR #523 may resume only after incorporating the then-current `main`.
+
+Its original bounded transition remains:
+
+```text
+Evidence: 584 -> 585
+Evidence Relations: 584 -> 585
+Market Access Records: 8 -> 12
+Archive recorded: 462 -> 463
+Detail routes: 422 -> 422
+```
+
+The JPYSC records remain provider-scoped to SBI VC Trade / VCTRADE in Japan and may not be generalized into country-wide availability or future transfer capability.
 
 ## Core data rules
 
@@ -98,6 +138,7 @@ Merged repository authority outranks chat memory, handoff prose, issue discussio
 - Stable assets, organizations, events, evidence, deployments, legal profiles, reserve components, income profiles, known unknowns, and Market Access Records remain distinct record families.
 - Rebrands, aliases, wrapped representations, migrations, and deployments do not become separate canonical assets without scope and lineage review.
 - Automatic candidate promotion is prohibited.
+- Guide/editorial context is not automatically canonical asset-level availability, approval, legality, or safety evidence.
 
 ## Development and deployment
 
@@ -109,7 +150,7 @@ npm run check
 npm run build
 ```
 
-Normal merged changes publish automatically from `main` through `.github/workflows/deploy-production.yml`. A repository merge is not itself proof of production parity.
+Normal merged changes publish automatically from `main` through `.github/workflows/deploy-production.yml`. Material UI work additionally requires desktop/mobile artifact capture and direct inspection under the active specification. A repository merge is not itself proof of production parity.
 
 ## Public machine-readable layer
 

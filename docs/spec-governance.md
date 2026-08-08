@@ -1,168 +1,136 @@
 # Stable or Gone Specification Governance
 
 Status: canonical governance specification  
-Updated: 2026-08-02
+Updated: 2026-08-08
 
 ## 1. Purpose
 
-This document defines repository authority, conflict resolution, change control, PR traceability, canonical-data preservation, monitoring safety, public-surface control, deployment governance, and bounded continuation rules.
+This document defines repository authority, conflict resolution, change control, canonical-data preservation, public-surface governance, visual-quality gates, deployment governance, and bounded continuation rules.
 
-Merged repository specifications are the source of truth. Chat memory, handoff prose, issue discussion, generated reports, stale roadmap text, and unmerged drafts do not override merged repository authority.
+Merged repository specifications are the source of truth. Chat memory, handoff prose, issue discussion, stale branch state, generated reports, stale roadmap text, and unmerged drafts do not override merged repository authority.
+
+Historical PR-specific specifications and checkpoints remain historical records. Their completed semantic contracts remain useful, but their old `current`, `active`, schedule, count, domain, or workstream wording does not override this document and the current roadmap.
 
 ## 2. Authority order
 
-When documents disagree, use this order:
+When active documents disagree, use this order:
 
-1. `docs/deployment-policy.md` for publication, production verification, Cloudflare, and domain rules.
+1. `docs/deployment-policy.md` for publication, production verification, Cloudflare, domain, and production-visual gates.
 2. `docs/spec-governance.md` for authority and change control.
-3. `docs/roadmap.md` for current phase, active item, next item, and bounded sequence.
-4. active merged roadmap amendments named by the roadmap.
-5. the canonical operating specification for the active program.
-6. the work-item-specific canonical specification.
-7. named audits, inventories, baselines, fixtures, release notes, research checkpoints, queues, and reviewed prior outputs.
-8. conversation history and unmerged drafts.
+3. `docs/roadmap.md` for current phase, immediate item, bounded sequence, and schedule.
+4. the active merged roadmap amendment named below.
+5. the active authority/reconciliation specification named below.
+6. the current work-item specification.
+7. enduring regression authorities such as `docs/ui-v3-remediation-authority.md`.
+8. named audits, inventories, baselines, fixtures, release notes, research checkpoints, queues, and reviewed prior outputs.
+9. conversation history and unmerged drafts.
 
 Current active roadmap amendment:
 
 ```text
-docs/roadmap-amendments/2026-08-01-terminal-date-boundary-review-batch-1.md
+docs/roadmap-amendments/2026-08-08-post-pr531-authority-reconciliation.md
 ```
 
-Current operating specification:
+Current authority/reconciliation specification:
 
 ```text
-docs/post-351-data-growth-operating-spec.md
+docs/quality/post-pr531-authority-reconciliation-spec.md
 ```
 
 Current work-item specification:
 
 ```text
-docs/quality/terminal-date-boundary-review-batch-1-spec.md
+docs/quality/guide-readability-remediation-2026-08-08-spec.md
 ```
 
-Historical amendments and PR-specific specifications remain historical records. Their completed semantic contracts remain useful, but their old “current” wording and schedules do not override the current roadmap.
+## 3. Mandatory reading and update protocol
 
-## 3. Mandatory reading order
-
-Before changing code, canonical data, workflows, infrastructure, or documentation:
+Before every substantive change to code, canonical data, UI, workflows, infrastructure, or documentation:
 
 1. read `AGENTS.md`;
 2. read this file;
 3. read `docs/roadmap.md`;
 4. read `docs/deployment-policy.md`;
 5. read the active roadmap amendment;
-6. read `docs/post-351-data-growth-operating-spec.md`;
-7. read the work-item-specific specification;
-8. read the PR #496 candidate-audit specification and handoff;
-9. read every named queue, validator, audit, fixture, baseline, release note, research checkpoint, and prior output required by the work item.
+6. read the active authority/reconciliation specification;
+7. read the current work-item specification;
+8. read every enduring regression authority and named input required by that work item.
 
 A non-trivial PR is not ready for implementation until its exact roadmap item and governing specification are identified.
 
-## 4. Current execution state
+If merged repository state changes authority, production checkpoint, canonical counts, schedule, deployment behavior, public route behavior, or a blocking visual conclusion, update the governing specification and roadmap before implementation continues.
+
+## 4. Current verified execution state
 
 ```text
-Canonical stable assets: 117
-Organizations: 108
-Relationships: 129
-Events: 192
-Evidence: 579
-Evidence Relations: 579
-Deployments: 184
+Canonical stable assets: 119
+Organizations: 109
+Relationships: 131
+Events: 194
+Evidence: 584
+Evidence Relations: 584
+Reserve reports: 127
+Known unknowns: 352
+Regulatory notes: 9
+Deployments: 186
+Legal profiles: 119
+Reserve components: 153
+Income profiles: 119
 Market Access Records: 8
-Detail routes: 417
-Metadata-checked detail routes: 417
+Archive recorded: 462
+Archive not recorded: 122
+Detail routes: 422
+Metadata-checked detail routes: 422
 Official public origin: https://www.stableorgone.com
-Official-domain migration production checkpoint: bd0e63ac36b1824bf705e8c80d1fb0a1cd79d221
+Production commit: 210d68001fbd2560ffadf538fdb7cc9302b400a7
+Production canonical hash: sha256:57749955faa96d2bd836bac83ef41a0c5dc13f2342763dc4d975c588cd50c650
+Convergence attempt: 1
+Legacy-host migration: complete
 ```
 
-Current `main` and production equality is verified dynamically by `.github/workflows/deploy-production.yml` and Issue #479.
+Current `main` and production equality is verified dynamically by `.github/workflows/deploy-production.yml`, the strict domain-migration workflow, production visual capture, and Issue #479.
 
-Completed acceptance points:
+## 5. Current bounded sequence
+
+The current sequence is:
 
 ```text
-PR #467 reviewed 116-asset canonical-data checkpoint
-PR #492 Statistics panel flow and deployment-chain normalization
-PR #493 official-domain migration and production verification
-PR #495 post-domain authority synchronization and issue reconciliation
-PR #496 Record Growth Batch 4 candidate audit
+1. post-PR #531 authority/specification/schedule reconciliation
+2. Guide & Research Surface Readability Remediation
+3. production verification of the Guide remediation
+4. PR #523 current-main reconciliation and bounded JPYSC implementation
+5. production verification and separate REVIEW GATE closeout
+6. later planned lanes only after their own merged authority
 ```
 
-Current item:
+PR #523 is paused during the Guide remediation. The old PR #523 head must not be merged as-is because it predates PRs #524–#531 and the required shared Guide repair.
+
+The Guide remediation changes presentation only. It authorizes no canonical mutation.
+
+## 6. Material UI governance and the 2026-08-08 blocking defect
+
+`docs/ui-v3-remediation-authority.md` remains the minimum regression contract for public UI work.
+
+Direct production review on 2026-08-08 found a blocking Guide-system defect on both the new global regulation guide and a pre-existing UK guide. The defect includes narrow desktop reading width caused by a persistent left TOC rail, weak primary section hierarchy, audit-sheet-like repeated box treatment, duplicated/mispositioned support UI, and an unbalanced home Research & Guides composition.
+
+The governing repair specification is:
 
 ```text
-REVIEW GATE — PR #512 complete and production-verified
+docs/quality/guide-readability-remediation-2026-08-08-spec.md
 ```
 
-Reviewed decision:
+For material UI changes:
 
-```text
-PR #512 Terminal Date Boundary Review — Batch 2 complete and production-verified
-production commit: 23804561ab544aa54426d595df5bbb4283e791dd
-production canonical hash: sha256:083860b341f6deebc1109b6b5b044dee584ba5e487e2e9b1722213772256b5bb
-convergence attempt: 1
-PR #512 exact targets: sog_st_bac, sog_st_dsd
-exact terminal days resolved: 0
-reviewed null preserved: 2
-new Evidence identities or Relations: 0
-canonical and public count changes: 0
-legacy redirect changes: 0
-explicitly deferred and unchanged: sog_st_gyen until after 2026-11-11
-current boundary: REVIEW GATE
-```
-
-No work beyond this checkpoint is pre-authorized.
-
-## 5. Change control
-
-A change to any of the following requires a specification update in the same PR or an earlier dependency PR:
-
-- canonical enum meaning;
-- evidence interpretation or source identity handling;
-- unknown-state semantics;
-- route families or machine-readable output shape;
-- count or denominator semantics;
-- deployment-chain normalization semantics;
-- build provenance or canonical-hash boundaries;
-- audited checkpoint source or digest boundaries;
-- dependency-lock or reproducible-build semantics;
-- monitoring source, baseline, schedule, permission, or retention semantics;
-- candidate-audit disposition semantics;
-- complete-record feasibility semantics;
-- duplicate, symbol-collision, or lineage decisions;
-- stable-value scope, security, face-amount, or yield-bearing product semantics;
-- Statistics semantics;
-- canonical Market Access Record semantics;
-- production publication gates;
-- official public origin;
-- legacy-host redirect behavior;
-- approved PR sequence;
-- active workstream state;
-- product-surface freeze boundary.
-
-No implementation PR may introduce an undocumented alternative.
-
-## 6. Pull-request traceability
-
-Every non-trivial PR body must identify:
-
-```text
-Specification references
-Roadmap item
-Scope
-Explicit non-goals
-Named inputs and prior outputs
-Canonical-data preservation
-Public-output preservation
-Validation
-Deployment classification
-Next review gate
-```
-
-A PR that cannot cite an approved work item must pause until repository authority is corrected.
+- desktop and mobile screenshots are mandatory;
+- direct human inspection of changed route families is mandatory;
+- initial-viewport and full-page review must be used where page length or hierarchy is part of the defect;
+- horizontal overflow, clipping, overlapping text, unreadable density, essential-content loss, or visibly broken composition are blocking;
+- automated build, contrast, geometry, screenshot, or workflow success cannot override a known visual defect;
+- a newly discovered material defect blocks merge until fixed and, where practical, covered by a regression check.
 
 ## 7. Canonical and public safety boundary
 
-Public HTML and machine-readable release claims remain canonical-only.
+Public registry and machine-readable claims remain canonical-only.
 
 ```text
 canonical_only = true
@@ -171,9 +139,7 @@ includes_internal_monitoring = false
 includes_private_notes = false
 ```
 
-Candidate, monitoring, discovery, editorial-research, and private material remains outside canonical public surfaces unless separately reviewed and promoted.
-
-A candidate source lead is not canonical Evidence. A current product page does not by itself prove launch, circulation, contract identity, reserve custody, assurance, or redemption eligibility.
+Candidate, monitoring, discovery, editorial-research, and private material remains outside canonical public data unless separately reviewed and promoted.
 
 Unknown values remain unknown until reviewed evidence supports replacement.
 
@@ -187,179 +153,51 @@ not_applicable
 source_review_needed
 ```
 
-Missing evidence, a candidate row, a monitoring signal, or a planning gap is not proof of a value.
+Missing evidence, a candidate row, a monitoring signal, a guide statement, or a planning gap is not proof of a canonical value.
 
-## 8. PR #496 candidate-audit checkpoint
+Editorial context must not be converted automatically into asset-level availability, approval, legality, safety, ranking, or support claims.
 
-PR #496 reviewed exactly eight private candidates, recorded 21 primary source identities, found no exact canonical duplicates, and changed no canonical or public data.
+## 8. PR #523 preserved semantic authority
 
-The reviewed complete-record-feasible candidates were MNEE and Figure YLDS. That disposition was not promotion authorization.
+After the Guide remediation is production-verified, PR #523 may resume only under the bounded PR #522 JPYSC authority.
 
-USDF Consortium USDF remains distinct from Falcon USDf. Open USD requires explicit OUSD issuer and lineage disambiguation from Origin Dollar.
-
-## 9. PR #497 review-gate checkpoint
-
-PR #497 authorized exactly one complete-record implementation for MNEE and prohibited replacement candidates, YLDS promotion, and continuation after PR #498. That decision is complete.
-
-## 10. PR #498 Record Growth Batch 4 — MNEE
-
-PR #498 is the current reviewed canonical-growth checkpoint. It added exactly one stable asset, one issuer organization, one legal-issuer relationship, one launch event, eight canonical Evidence records, one reserve-report context, five explicit known unknowns, two deployment identifiers, one legal profile, two reserve components, and one income profile.
-
-Binding identity checkpoint:
+Exact later target:
 
 ```text
-MNEE stablecoin ID: sog_st_mnee
-MNEE Limited issuer ID: sog_issuer_mnee_limited
-1Sat Ordinals production token ID: ae59f3b898ec61acbdb6cc7a245fabeded0c094bf046f35206a3aec60ef88127_0
-Ethereum contract: 0x8ccedbae4916b79da7f3f612efb2eb93a2bfd6cf
-launch date: 2025-03-03
+asset: sog_st_jpysc
+jurisdiction: JP / Japan
+provider: SBI VC Trade / VCTRADE
+effective from: 2026-06-24
+observed at: 2026-08-05
+buy_sell: account_internal_only
+deposit: unavailable
+withdrawal: unavailable
+external_wallet_transfer: unavailable
 ```
 
-The official `@mnee/ts-sdk` package version 1.2.0 is the source for the production 1Sat token ID. Both new deployment records remain classified as `identifier_recorded_unverified`; identifier recording does not prove current control configuration, independent runtime operation, or safety.
-
-PR #498 preserves explicit unknowns for the latest listed attestation report body and archive, current reserve custodian and allocation, first public Ethereum issuance date, deployment controls, and complete direct-access and jurisdiction inventory. It does not infer unsupported values.
-
-PR #498 changed no Market Access record, public route family, material UI/CSS contract, ranking, score, recommendation, or monitoring-publication boundary. The three additional detail routes are data-driven dossier routes for the new asset, issuer, and launch event.
-
-PR #498 exits only to `REVIEW GATE`. No later work is authorized automatically.
-
-## 10A. PR #502 Launch Date Boundary Review — Batch 1
-
-PR #502 closes the post-PR #500 review gate only for a six-target launch-date evidence review. It changes no canonical data itself.
-
-The target set is fixed to `sog_st_msusd`, `sog_st_stablesusdx`, `sog_st_susde`, `sog_st_usd1`, `sog_st_usdm`, and `sog_st_usdh`. PR #503 must review every target and may not substitute another record.
-
-A canonical date requires exact day-level primary evidence matching the same identity and launch boundary. Announcement, contract deployment, first mint, exchange listing, network activation, migration, and rebrand dates remain distinct unless primary evidence explicitly establishes equivalence. Unresolved outcomes remain null.
-
-PR #503 reviewed every named target. All six remain null because the reviewed primary sources establish only operating-product, month/range, deployment, testing, terms-effective, underlying-asset, rebrand, or later-availability boundaries. The queue records the reviewed range, reason, date, and source list for each target. No canonical Evidence identity or Evidence Relation was added. It may not add assets, organizations, relationships, deployments, Market Access records, route families, rankings, recommendations, or material UI changes. It exits to REVIEW GATE.
-
-## 10B. PR #505 Evidence Archive Payload Verification — Batch 1
-
-PR #505 closes the current review gate only for one ten-identity archived-payload verification pass. PR #506 is the only authorized implementation.
-
-The target set is fixed by `config/evidence-archive-payload-verification-batch-1.json` and consists of the ten PR #405 identities that had exact-source CDX metadata but no independently reviewed archive payload.
-
-An archive may be accepted only when the exact canonical URL returns an HTTP-200 dated Wayback snapshot and the fetched archived body visibly preserves the existing canonical claim scope. CDX metadata, redirect status, root-domain capture, or automated keyword matching without manual payload review cannot authorize a canonical `archived_url`.
-
-PR #506 changed only seven accepted target `archived_url` fields and forward archive-quality checkpoints. It replaced no source URL, added no Evidence identity or Relation, changed no non-Evidence canonical record, public route, or material UI. Production commit `2a6bfac25538388dd7ea6dc12de96c2c2dc2dad0` verified canonical hash `sha256:083860b341f6deebc1109b6b5b044dee584ba5e487e2e9b1722213772256b5bb`, the 117/108/129/192/579/579/184/8 canonical counts, 417 detail routes, 417 metadata-checked routes, and archive partition 457/122. The repository is at REVIEW GATE. No work beyond this checkpoint is pre-authorized.
-
-## 10C. PR #508 Terminal Date Boundary Review — Batch 1
-
-PR #508 closes the current review gate only for a three-target terminal-date evidence review. PR #509 is the only authorized implementation.
-
-The target set is fixed to `sog_st_fei`, `sog_st_nearusn`, and `sog_st_esd`. A canonical terminal day requires exact day-level primary evidence of a final effective end for the same canonical identity. Governance approval, wind-down start, permanent mint stop, migration availability, depeg, market inactivity, repository inactivity, and retrospective publication dates are not terminal dates by default.
-
-PR #509 recorded a reviewed-null-preserved outcome for all three fixed targets. The reviewed primary sources establish governance, wind-down, programme, and migration boundaries but not final effective termination of the same canonical identity. PR #509 added no asset or Evidence identity, altered no Market Access record, route family, material UI, or legacy redirect. Production commit `96ae5edd42e9a9e8a652bb27acc2d6a6eb02dfd6` verified canonical hash `sha256:083860b341f6deebc1109b6b5b044dee584ba5e487e2e9b1722213772256b5bb`, the 117/108/129/192/579/579/184/8 canonical counts, 417 detail routes, 417 metadata-checked routes, and archive partition 457/122. The repository is at REVIEW GATE. No work beyond this checkpoint is pre-authorized.
-
-## 10A. Terminal Date Boundary Review — Batch 2 authority
-
-PR #511 closes the current review gate only for a two-target terminal-date evidence review. Implementation is reserved for PR #512.
-
-The exact target set is `sog_st_bac` and `sog_st_dsd`.
-
-- BAC requires day-level primary evidence of an official shutdown, final mint stop, governance disablement, or contract-level terminal end state.
-- DSD requires day-level primary evidence of an executed migration, formal shutdown, final mint stop, governance revocation, or contract-level terminal end state.
-- GYEN is not a target. Its official initial redemption period remains open through 2026-11-11, so no final terminal day may be inferred from the wind-down start, purchase disablement, or notice date.
-
-Allowed outcomes are `exact_terminal_day_resolved` and `reviewed_null_preserved`. Every target must receive a reviewed range, reason code, review date, primary-source list, and rejected-shortcut record.
-
-The implementation may not add a replacement target, infer a date from depeg, price lows, negligible liquidity, last repository activity, design publication, migration planning, successor discussion, or market inactivity, or automatically promote a new Evidence identity.
-
-The authority checkpoint is production commit `8344504f41df8debd2da90b1b60a61da6fba9a58`, canonical hash `sha256:083860b341f6deebc1109b6b5b044dee584ba5e487e2e9b1722213772256b5bb`, convergence attempt 2, canonical counts 117/108/129/192/579/579/184/8, 417 detail routes, 417 metadata-checked routes, and archive partition 457/122. No legacy redirect change is authorized.
-
-PR #512 must return to REVIEW GATE. No third terminal-date batch is authorized automatically.
-
-PR #512 reviewed both fixed targets and preserved both canonical terminal dates as null. BAC V2 launch, migration activity, and the 2021-06-01 roadmap update do not establish official shutdown, final mint stop, governance disablement, contract disablement, or final token end. DSD DIP-10 execution, CDSD mechanics, and Sushiswap migration do not establish formal shutdown, final mint stop, governance revocation, contract disablement, or final token end. PR #512 added no Evidence identity or Relation, altered no Market Access record, route family, material UI, or legacy redirect. Production commit `23804561ab544aa54426d595df5bbb4283e791dd` verified canonical hash `sha256:083860b341f6deebc1109b6b5b044dee584ba5e487e2e9b1722213772256b5bb`, canonical counts 117/108/129/192/579/579/184/8, 417 detail routes, 417 metadata-checked routes, and archive partition 457/122. The repository is at REVIEW GATE. No work beyond this checkpoint is pre-authorized.
-
-## 11. YLDS scope boundary
-
-YLDS is deferred and is not authorized for canonical implementation.
-
-The issuer describes YLDS as a registered fixed-income security rather than a stablecoin. Its material semantics include:
-
-- $0.01 face-amount certificate units;
-- holder interest and yield;
-- issuer-credit and asset-portfolio risk;
-- securities-law eligibility and transfer requirements;
-- registered-offering redemption terms;
-- chain and third-party wrapper distinctions.
-
-A future YLDS proposal requires a separate reviewed scope amendment. Ordinary stablecoin treatment is prohibited.
-
-## 12. Canonical growth governance
-
-Dossier deepening and new-asset growth are distinct operations.
-
-Every canonical promotion requires:
+Expected transition:
 
 ```text
-candidate identity and scope review
-current-source review
-duplicate and lineage review
-organization reuse review
-lifecycle review
-reserve and redemption review
-deployment identity review
-Evidence and archive review
-known-unknown preservation
-manual canonical review
-reviewed repository PR
+Evidence: 584 -> 585
+Evidence Relations: 584 -> 585
+Market Access Records: 8 -> 12
+Archive recorded: 462 -> 463
+Archive not recorded: 122 -> 122
+Detail routes: 422 -> 422
+Metadata-checked routes: 422 -> 422
 ```
 
-Automatic promotion, thin records, inferred facts, indefinite batch sequences, and ranking or recommendation semantics are prohibited.
+No new asset, organization, event, deployment, route family, schema, unrelated UI work, future-capability backfill, lending-as-access inference, country-wide availability claim, ranking, score, recommendation, or replacement asset is authorized by PR #523.
 
-## 13. Monitoring governance
+## 9. Monitoring, editorial, and candidate governance
 
-Monitoring remains private, review-only, and read-only with respect to canonical data.
+Monitoring remains private, review-only, and read-only with respect to canonical data. It may discover leads and prepare review material but may not write canonical data, self-accept baselines, auto-edit guides, auto-promote candidates, or deploy.
 
-Monitoring may observe, compare, classify, identify stale review state, prepare private review material, and discover bounded leads.
+The current regulation guide cluster enters maintenance-only mode after the Guide/readability repair. There is no automatic article cadence. A new editorial route requires a material regulatory change, material correction/source update, or observed search-demand/content-gap basis and its own reviewed scope when the change is material.
 
-Monitoring may not write canonical data, self-accept baselines, edit guides automatically, create canonical pull requests automatically, publish candidates, or deploy.
+Canonical growth, dossier deepening, archive verification, and Market Access expansion remain distinct operations. Schedule placement does not authorize implementation.
 
-A registered source is not an accepted baseline. Monitoring observations are not canonical Evidence or canonical Market Access Records.
-
-## 14. Product-surface governance
-
-Existing public surfaces are sufficient for the current phase:
-
-```text
-Registry records
-Stats
-Compare
-Compare presets
-Access & Regulation Explorer
-Change Timeline
-Update Feed
-Maintenance Log
-Guides
-machine-readable projections and manifest discovery
-```
-
-A new page, explorer, dashboard, ranking surface, or navigation family requires an identified need, evidence that current surfaces cannot answer it, a reviewed roadmap amendment, a canonical specification, and route, metadata, machine-output, and deployment analysis.
-
-Small correctness, accessibility, readability, broken-link, and maintenance fixes remain allowed.
-
-## 15. Material UI and Statistics governance
-
-`docs/ui-v3-remediation-authority.md` remains the regression contract for material public UI work.
-
-PR #492 is the current Statistics acceptance point. Its semantic and responsive rules are binding until deliberately amended.
-
-Material UI work requires desktop and mobile screenshots and direct human inspection of generated artifacts. CI success cannot override visible defects.
-
-Binding deployment-chain examples:
-
-```text
-BNB Chain / BNB Smart Chain -> BNB Chain
-Gnosis / Gnosis Chain -> Gnosis Chain
-Arbitrum One -> Arbitrum One
-Arbitrum Nova -> Arbitrum Nova
-bare Arbitrum -> unresolved
-```
-
-Total deployments must reconcile as canonical-chain counts plus unresolved deployments.
-
-## 16. Official-domain governance
+## 10. Official-domain and deployment governance
 
 The only official origin is:
 
@@ -367,36 +205,69 @@ The only official origin is:
 https://www.stableorgone.com
 ```
 
-Repository output must not reintroduce `sog.badjoke-lab.com` as a canonical origin, production base URL, sitemap host, machine-readable canonical origin, OGP URL, or documentation public site.
+The legacy host migration is complete. `public/_worker.js` in Cloudflare Pages Advanced Mode performs the exact path- and query-preserving HTTP 301 for the legacy hostname while canonical and `pages.dev` requests pass through to the static asset binding.
 
-The legacy host redirect is external Cloudflare zone configuration. It must preserve path and query and must not redirect every old URL to the new homepage.
+The strict domain-migration gate established by PR #530 is binding. Repository output must not reintroduce the legacy host as a canonical origin, sitemap host, machine-readable canonical origin, OGP URL, or production base URL.
 
-The current deployment token has Pages publication access but no visible `badjoke-lab.com` zone. No zone write may be attempted until suitable Zone Read and Redirect Edit permission exists.
+Normal merged changes publish automatically from `main`. A merge is not production-parity evidence; deployment verification remains governed by `docs/deployment-policy.md` and Issue #479.
 
-A Pages Function workaround is not authorized because it would change static-serving, request-accounting, and header behavior for the official site. Issue #479 remains open for this externally blocked redirect.
+## 11. Change control
 
-## 17. Historical checkpoints
+A change to any of the following requires a specification update in the same PR or an earlier dependency PR:
 
-Do not rewrite historical checkpoints merely because current counts, UI, domain, or workstream changed.
+- active workstream or approved PR sequence;
+- roadmap schedule when execution order materially changes;
+- canonical enum or record meaning;
+- evidence interpretation or source identity handling;
+- unknown-state semantics;
+- route families or machine-readable output shape;
+- count or denominator semantics;
+- build provenance or canonical-hash boundaries;
+- monitoring source, baseline, schedule, permission, or retention semantics;
+- candidate-audit or complete-record feasibility semantics;
+- canonical Market Access Record semantics;
+- material UI/readability or product-surface behavior;
+- production publication gates;
+- official public origin or legacy-host redirect behavior.
 
-Historical material includes release-integrity and reproducible-build baselines, audited asset checkpoints, monitoring snapshots, Statistics history, completed PR-specific handoffs, closed Maintenance Log periods, and completed UI and domain acceptance records.
+No implementation PR may introduce an undocumented alternative.
 
-Forward-only checkpoints may be added when current canonical state advances.
+## 12. Pull-request traceability
 
-## 18. Deployment governance
+Every non-trivial PR body must identify:
 
-Normal merged changes publish from `main` under `docs/deployment-policy.md`.
+```text
+Specification references
+Roadmap item
+Scope
+Explicit non-goals
+Named inputs and prior outputs
+Canonical-data preservation
+Public-output preservation
+Validation
+Visual inspection when applicable
+Deployment classification
+Next review gate
+```
 
-Production parity requires independent verification after merge. Issue #479 is the current deployment record.
+A PR that cannot cite an approved work item must pause until repository authority is corrected.
 
-Scheduled monitoring and candidate auditing remain artifact-only and do not authorize canonical writes, guide edits, automatic canonical pull requests, or deployment decisions outside the normal main workflow.
+## 13. Schedule versus authority
 
-## 19. Review gate
+The current planning windows live in `docs/roadmap.md` and the active amendment. Dates are targets, not implementation permission.
 
-PR #512 is complete and production-verified. The repository is at:
+A delayed item does not silently unlock the next lane. Evidence Archive Payload Verification Batch 2, Tier A Dossier Deepening Batch 4, cycle review, and the next operating cycle require the authority specified by the roadmap.
+
+## 14. Historical checkpoints
+
+Do not rewrite historical checkpoint artifacts merely because current counts, UI, domain, or workstream changed. Forward authority documents must point to current state while historical release-integrity baselines, completed PR specifications, archived audits, and prior production checkpoints remain immutable historical evidence unless a specific correction is required.
+
+## 15. Required exit
+
+After the Guide/readability remediation is production-verified, PR #523 may resume against current `main`. After PR #523 is merged and production-verified, a separate closeout must return repository authority to:
 
 ```text
 REVIEW GATE
 ```
 
-No later terminal-date batch, archive batch, launch-date batch, record-growth batch, Figure YLDS amendment, Market Access change, public route family, or material UI work is authorized automatically. Only a later separate reviewed decision may authorize another work item.
+No later archive, dossier, record-growth, Market Access, editorial, or material UI lane is pre-authorized by that exit.
