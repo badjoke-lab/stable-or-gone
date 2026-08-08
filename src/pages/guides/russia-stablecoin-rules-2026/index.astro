@@ -1,0 +1,99 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import GuideArticleHeader from '../../../components/GuideArticleHeader.astro';
+import GuideRevisionHistory from '../../../components/GuideRevisionHistory.astro';
+import RelatedSogRecords from '../../../components/RelatedSogRecords.astro';
+import { getGuide, guideCategoryLabels } from '../../../data/guideCatalog';
+
+const guide = getGuide('russia-stablecoin-rules-2026');
+const title = 'Russia Stablecoin Rules in 2026: Domestic Limits and Cross-Border Use — Stable or Gone';
+const description = 'Russia does not define stablecoin as a legal term, but its digital financial asset framework can accommodate stablecoin-like instruments for investment and cross-border settlement while excluding domestic settlement.';
+const canonicalPath = '/guides/russia-stablecoin-rules-2026/';
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: guide.title,
+  description,
+  url: `https://www.stableorgone.com${canonicalPath}`,
+  inLanguage: 'en',
+  isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://www.stableorgone.com/' },
+  about: ['Russia stablecoin regulation', 'digital financial assets', 'cross-border settlement', 'ruble stablecoins'],
+  ...(guide.publishedAt ? { datePublished: guide.publishedAt } : {})
+};
+
+const relatedRecords = [
+  { href: '/stablecoin/usdt/', title: 'USDT', summary: 'Review the canonical record separately from any Russia-specific access or settlement claim.' },
+  { href: '/stablecoin/usdc/', title: 'USDC', summary: 'Review issuer, reserve, event, and access evidence without inferring local availability.' }
+];
+---
+<BaseLayout title={title} description={description} canonicalPath={canonicalPath} jsonLd={jsonLd}>
+  <GuideArticleHeader
+    category={guideCategoryLabels[guide.category]}
+    title="Russia’s Stablecoin Rules in 2026"
+    description="Russia's framework is neither a simple stablecoin ban nor unrestricted permission. The Bank of Russia distinguishes investment and cross-border settlement from domestic settlement, while policy work continues around ruble-linked instruments."
+    publishedAt={guide.publishedAt}
+    informationCurrentThrough={guide.informationCurrentThrough}
+    updatedAt={guide.updatedAt}
+  />
+
+  <section class="panel registry">
+    <div class="bar">30-second summary</div>
+    <p><strong>Russian law does not define “stablecoin” as a legal category.</strong> The Bank of Russia says, however, that digital financial assets can be issued with stablecoin-like characteristics.</p>
+    <p>According to the Bank's 25 June 2026 consultation paper, these instruments can be used as investments and for cross-border settlements, but they are not allowed for domestic settlements. The Bank is also consulting on the development of a ruble stablecoin market.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">The key legal distinction</div>
+    <table>
+      <thead><tr><th>Use</th><th>Bank of Russia description</th></tr></thead>
+      <tbody>
+        <tr><td>Investment</td><td>Stablecoin-like digital financial assets may serve as an investment option.</td></tr>
+        <tr><td>Cross-border settlement</td><td>They may serve as an instrument for cross-border settlements.</td></tr>
+        <tr><td>Domestic settlement</td><td>They are not allowed to be used for domestic settlements.</td></tr>
+        <tr><td>Ruble stablecoin development</td><td>The 2026 consultation asks how a ruble stablecoin market should develop while protecting monetary sovereignty and controlling risks.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Why “Russia allows stablecoins” is too broad</div>
+    <p>A headline that says Russia “allows stablecoins” loses the most important part of the framework. Permission depends on the legal instrument and the use case. A token may be permitted in an investment or cross-border context while still being prohibited as a domestic settlement instrument.</p>
+    <p>SOG should therefore avoid one generic country flag and preserve the function scope: trading, transfer, redemption, payment, and settlement are not the same activity.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Ruble stablecoins and monetary sovereignty</div>
+    <p>The Bank of Russia explicitly frames the discussion around the global dominance of U.S.-dollar stablecoins and growing international interest in national stablecoins. Its consultation paper links ruble stablecoin development to monetary sovereignty as well as financial and operational risk.</p>
+    <p>This is a policy-development signal, not proof that a generally available retail ruble stablecoin has been authorised or launched. A future asset would still require its own issuer, issuance, access, and evidence records.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">What SOG should record separately</div>
+    <table>
+      <tbody>
+        <tr><th>Framework</th><td>The legal and regulatory rules for stablecoin-like DFAs.</td></tr>
+        <tr><th>Asset</th><td>A named stablecoin or ruble-linked token, if one exists and meets SOG scope.</td></tr>
+        <tr><th>Provider access</th><td>Whether a named exchange, wallet, bank, or intermediary supports a specific function.</td></tr>
+        <tr><th>Cross-border use</th><td>A settlement use case should be scoped to the relevant parties, jurisdiction, and date.</td></tr>
+        <tr><th>Domestic payment</th><td>The consultation paper states stablecoin-like DFAs are not permitted for domestic settlements.</td></tr>
+      </tbody>
+    </table>
+    <p><a href="/access-regulation/">Explore canonical Access &amp; Regulation records →</a></p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Source</div>
+    <ul>
+      <li><a href="https://www.cbr.ru/eng/press/event/?id=32666">Bank of Russia — Stablecoins in Russia: consultation paper, 25 June 2026</a></li>
+    </ul>
+    <p>The Bank of Russia source is the anchor for the legal-use distinctions on this page. Broader claims about specific tokens or service providers require separate evidence.</p>
+  </section>
+
+  <RelatedSogRecords records={relatedRecords} />
+  <GuideRevisionHistory revisions={guide.revisions} />
+
+  <section class="panel registry">
+    <div class="bar">Scope and disclaimer</div>
+    <p>This guide describes the Bank of Russia's public 2026 position on stablecoin-like digital financial assets and the ruble-stablecoin policy discussion. It is not legal advice and does not establish that a named stablecoin is available to a particular user or provider in Russia.</p>
+  </section>
+</BaseLayout>
