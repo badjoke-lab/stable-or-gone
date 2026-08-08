@@ -1,0 +1,40 @@
+name: Temporary fold Guide remediation into public UI
+
+on:
+  push:
+    branches:
+      - agent/guide-readability-remediation-2026-08-08
+    paths:
+      - 'scripts/_temporary-fold-guide-remediation.mjs'
+      - '.github/workflows/_temporary-fold-guide-remediation.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  fold:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+        with:
+          ref: agent/guide-readability-remediation-2026-08-08
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Fold Guide remediation into the single public stylesheet
+        run: node scripts/_temporary-fold-guide-remediation.mjs
+
+      - name: Commit folded result and remove temporary updater
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --cached --check
+          git commit -m "ui: fold Guide remediation into public stylesheet"
+          git push origin HEAD:agent/guide-readability-remediation-2026-08-08
