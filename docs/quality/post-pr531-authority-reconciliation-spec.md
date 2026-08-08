@@ -5,9 +5,9 @@ Date: 2026-08-08
 
 ## Scope
 
-Reconcile repository authority and schedule with production commit `210d68001fbd2560ffadf538fdb7cc9302b400a7`, recognize merged PRs #524–#531, and authorize only the current-main reconciliation and completion of existing PR #523.
+Reconcile repository authority and schedule with production commit `210d68001fbd2560ffadf538fdb7cc9302b400a7`, recognize merged PRs #524–#531, record the completed legacy-host migration, incorporate the 2026-08-08 direct production visual finding, authorize the bounded Guide/readability remediation as the immediate next implementation, and preserve PR #523 only as the later bounded canonical implementation after that UI repair is production-verified.
 
-This specification changes repository control documentation only. It authorizes no canonical mutation in this reconciliation PR.
+This reconciliation changes repository control documentation and validation only. It authorizes no canonical mutation inside this reconciliation PR.
 
 ## Required source-of-truth sequence
 
@@ -19,7 +19,13 @@ Before every substantive continuation, read the merged current versions of:
 4. `docs/deployment-policy.md`
 5. `docs/roadmap-amendments/2026-08-08-post-pr531-authority-reconciliation.md`
 6. this specification
-7. the active work-item specification and named inputs
+7. the current work-item specification and named inputs
+
+The immediate work-item specification is:
+
+```text
+docs/quality/guide-readability-remediation-2026-08-08-spec.md
+```
 
 Chat history, handoff prose, stale branch state, old generated reports, and unmerged drafts do not override the merged repository documents above.
 
@@ -47,20 +53,57 @@ archive recorded: 462
 archive not recorded: 122
 detail routes: 422
 metadata-checked routes: 422
+legacy-host 301: complete
 ```
 
 ## Required authority assertions
 
 - PRs #524 through #531 are recognized as merged current-main history.
 - The legacy SOG host migration is complete through the Pages Advanced Mode worker and strict migration gate.
-- The only next canonical implementation authorized is existing PR #523.
-- PR #523 is authorized only after current-main reconciliation; its stale pre-#524 state may not be merged directly.
-- PR #523 must preserve the merged behavior of PRs #524–#531.
+- Direct production review on 2026-08-08 identified a blocking shared Guide-system readability/composition defect.
+- The Guide & Research Surface Readability Remediation is the immediate next implementation.
+- The Guide remediation is presentation-only and may not change canonical data, Guide factual claims, source conclusions, URLs, schemas, official-origin behavior, or redirect behavior.
+- PR #523 is paused until the Guide remediation is merged and production-verified.
+- PR #523's stale pre-#524 state may not be merged directly.
+- When PR #523 resumes, it must incorporate then-current `main` and preserve PRs #524–#531 plus the Guide remediation.
 - The PR #522 JPYSC semantic/evidence boundary remains binding unless a later merged authority explicitly changes it.
 - PR #523 must exit through production verification to a separate REVIEW GATE closeout.
 - Evidence Archive Payload Verification Batch 2 and every later lane remain planned, not implementation-authorized.
 
-## PR #523 bounded transition
+## Guide/readability remediation boundary
+
+Binding specification:
+
+```text
+docs/quality/guide-readability-remediation-2026-08-08-spec.md
+```
+
+The repair must address the shared system rather than patching only the newly published guides.
+
+At minimum it must correct:
+
+```text
+desktop left-rail TOC that compresses the reading/data column
+weak primary section hierarchy caused by metadata-style headings
+continuous audit-sheet appearance from repeated full panel borders
+duplicate/mispositioned support blocks on Guide pages
+unbalanced orphan item in the home Research & Guides secondary composition
+avoidable page-length/density inflation caused by the shared layout
+```
+
+Minimum direct acceptance routes:
+
+```text
+/
+/guides/global-stablecoin-regulation-2026/
+/guides/uk-stablecoin-capital-rules-2026/
+```
+
+Each must be inspected at desktop and mobile widths, including the initial viewport and full-page output. Automated success cannot override a known visual defect.
+
+## Later PR #523 bounded transition
+
+After the Guide remediation is production-verified, PR #523 may resume with exactly:
 
 ```text
 Evidence: 584 -> 585
@@ -72,26 +115,29 @@ Detail routes: 422 -> 422
 Metadata-checked routes: 422 -> 422
 ```
 
-No asset, organization, relationship, event, deployment, legal-profile, reserve-component, income-profile, route-family, schema, ranking, score, recommendation, or unrelated UI addition is authorized by PR #523.
+No asset, organization, relationship, event, deployment, legal-profile, reserve-component, income-profile, route-family, schema, ranking, score, recommendation, replacement asset, future-capability backfill, lending-as-access inference, or country-wide availability claim is authorized by PR #523.
 
 ## Schedule contract
 
 ```text
 2026-08-08..2026-08-09  reconcile authority/specification/schedule
-2026-08-08..2026-08-10  reconcile and complete PR #523 on current main
+2026-08-08..2026-08-10  Guide/readability remediation and production verification
+2026-08-09..2026-08-11  reconcile and complete PR #523 on then-current main, after Guide verification
 post-#523                 production verify and close out to REVIEW GATE
-2026-08-10..2026-08-16  stabilization and preparation only
+2026-08-10..2026-08-16  stabilization and preparation only; no active-authority bypass
 2026-08-17..2026-08-23  Evidence Archive Payload Verification Batch 2; separate authority required
 2026-08-24..2026-08-30  Tier A Dossier Deepening Batch 4; separate authority required
 2026-08-31..2026-09-06  cycle review and backlog reconciliation
 2026-09-07..2026-09-13  next operating authority and contingency
 ```
 
-Dates are planning windows, not permission boundaries. If a work item slips, authority remains bounded; the schedule must be revised rather than silently authorizing the next lane.
+Dates are planning windows, not permission boundaries. If a work item slips, authority remains bounded; revise the schedule rather than silently authorizing the next lane.
 
 ## Editorial contract
 
-The regulation guide cluster is maintenance-only for the current phase. No automatic new-article cadence exists. New editorial pages require a material regulatory change, material correction/source update, or observed search-demand/content-gap basis. Existing evergreen URLs should be updated in place when practical.
+The regulation guide cluster is maintenance-only after the current readability repair. No automatic new-article cadence exists. New editorial pages require a material regulatory change, material correction/source update, or observed search-demand/content-gap basis. Existing evergreen URLs should be updated in place when practical.
+
+The current Guide/readability repair is a correctness repair to an already published surface, not an open-ended new UI program.
 
 ## Next-cycle planning contract
 
@@ -108,8 +154,12 @@ This is not implementation authority.
 
 ## Preservation
 
-This reconciliation must not alter canonical registry data, public counts, machine-readable schemas, route families, UI behavior, guide content, Cloudflare behavior, or production output. It updates control documents and validation only.
+This reconciliation must not alter canonical registry data, public counts, machine-readable schemas, route families, UI behavior, Guide content, Cloudflare behavior, or production output. It updates control documents and active-workstream validation only.
+
+The subsequent Guide remediation may alter presentation exactly within its own specification but still may not change canonical data or article claims.
 
 ## Exit
 
-The reconciliation exits with PR #523 as the only authorized canonical implementation, subject to current-main integration and current validation. PR #523 itself must exit to a separately recorded `REVIEW GATE` after production verification.
+This reconciliation exits with the Guide/readability remediation as the immediate authorized implementation and PR #523 paused behind it.
+
+After the Guide repair is production-verified, PR #523 may resume only through current-main reconciliation. PR #523 itself must exit to a separately recorded `REVIEW GATE` after production verification.
