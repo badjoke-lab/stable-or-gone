@@ -20,6 +20,7 @@ on:
       - 'public/stablecoin-logos/**'
       - 'config/public-routes.json'
       - 'config/stablecoin-logo-decisions.json'
+      - 'config/stablecoin-logo-decisions-additions.json'
       - 'scripts/capture-site-screenshots.mjs'
       - 'scripts/capture-stablecoin-mark-mix.mjs'
       - 'scripts/capture-stablecoin-logo-catalog.mjs'
@@ -39,6 +40,7 @@ on:
       - 'public/stablecoin-logos/**'
       - 'config/public-routes.json'
       - 'config/stablecoin-logo-decisions.json'
+      - 'config/stablecoin-logo-decisions-additions.json'
       - 'scripts/capture-site-screenshots.mjs'
       - 'scripts/capture-stablecoin-mark-mix.mjs'
       - 'scripts/capture-stablecoin-logo-catalog.mjs'
@@ -107,7 +109,7 @@ jobs:
       - name: Audit canonical Stablecoin logo coverage
         run: node scripts/audit-stablecoin-logo-coverage.mjs
 
-      - name: Capture all 117 Stablecoin marks
+      - name: Capture all 119 Stablecoin marks
         run: node scripts/capture-stablecoin-logo-catalog.mjs
 
       - name: Capture and validate mixed Stablecoin marks
@@ -197,8 +199,8 @@ jobs:
           echo "## SOG representative screenshot capture" >> "$GITHUB_STEP_SUMMARY"
           echo "- Mode: $CAPTURE_MODE" >> "$GITHUB_STEP_SUMMARY"
           echo "- Detail samples per family: 3" >> "$GITHUB_STEP_SUMMARY"
-          echo "- Stablecoin mark decisions: 117 of 117" >> "$GITHUB_STEP_SUMMARY"
-          echo "- All-record Stablecoin mark catalog: 117 cards" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Stablecoin mark decisions: 119 of 119" >> "$GITHUB_STEP_SUMMARY"
+          echo "- All-record Stablecoin mark catalog: 119 cards" >> "$GITHUB_STEP_SUMMARY"
           echo "- Mixed Stablecoin marks: desktop and mobile" >> "$GITHUB_STEP_SUMMARY"
           echo "- Layout geometry: every representative desktop/mobile route" >> "$GITHUB_STEP_SUMMARY"
           for DEVICE in desktop mobile; do
