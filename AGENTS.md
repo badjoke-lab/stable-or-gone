@@ -60,6 +60,14 @@ PR #530 — strict legacy-domain migration gate finalization
 PR #531 — 2026 regulation guide cluster and 119-record mark-audit repair
 ```
 
+Required historical authority anchors retained for compatibility and audit traceability:
+
+```text
+PR #493 — official-domain migration and production verification
+PR #500 — bounded MNEE Evidence and Archive Maintenance checkpoint
+PR #517 — Bison Bank EUB and USB complete-record growth checkpoint
+```
+
 Historical authority through PR #522 remains useful for the later bounded JPYSC implementation, but stale wording that names PR #522/#523 as the immediate active item does not override the current merged authority documents.
 
 ## Mandatory reading order
