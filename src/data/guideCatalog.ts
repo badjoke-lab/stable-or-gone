@@ -35,6 +35,58 @@ export const guideCategoryDescriptions: Record<GuideCategory, string> = {
 
 export const guides: GuideEntry[] = [
   {
+    slug: 'global-stablecoin-regulation-2026',
+    title: 'Stablecoin Regulation in 2026: Seven Jurisdictions Compared',
+    summary: 'A current-through-August comparison of the United States, European Union, United Kingdom, Japan, mainland China, Hong Kong, and Russia across issuance, distribution, payments, cross-border use, and regulatory direction.',
+    category: 'regulation',
+    publishedAt: '2026-08-08',
+    informationCurrentThrough: '2026-08-08',
+    updatedAt: null,
+    revisions: [],
+    featured: true,
+    theme: 'neutral',
+    regionLabel: 'Global'
+  },
+  {
+    slug: 'clarity-act-2026-stablecoins',
+    title: 'CLARITY Act Misses the August Window',
+    summary: 'What the U.S. Senate delay means for crypto market structure, why the bill is not dead, and why the separate GENIUS Act remains the central federal stablecoin law.',
+    category: 'regulation',
+    publishedAt: '2026-08-08',
+    informationCurrentThrough: '2026-08-08',
+    updatedAt: null,
+    revisions: [],
+    featured: true,
+    theme: 'us',
+    regionLabel: 'United States'
+  },
+  {
+    slug: 'china-hong-kong-stablecoin-rules-2026',
+    title: 'China Restricts, Hong Kong Licenses',
+    summary: 'Why mainland China and Hong Kong now present sharply different stablecoin policy environments, and why jurisdiction must be separated from asset-level access claims.',
+    category: 'regulation',
+    publishedAt: '2026-08-08',
+    informationCurrentThrough: '2026-08-08',
+    updatedAt: null,
+    revisions: [],
+    featured: true,
+    theme: 'neutral',
+    regionLabel: 'Mainland China / Hong Kong'
+  },
+  {
+    slug: 'russia-stablecoin-rules-2026',
+    title: 'Russia’s Stablecoin Rules in 2026',
+    summary: 'How Russia distinguishes domestic settlement from investment and cross-border uses for stablecoin-like digital financial assets, and what remains under policy discussion.',
+    category: 'regulation',
+    publishedAt: '2026-08-08',
+    informationCurrentThrough: '2026-08-08',
+    updatedAt: null,
+    revisions: [],
+    featured: true,
+    theme: 'neutral',
+    regionLabel: 'Russia'
+  },
+  {
     slug: 'japan-stablecoin-access-usdc-rlusd-jpysc',
     title: 'RLUSD’s Japan Launch Is Only Part of the Story',
     summary: 'What USDC, RLUSD, and JPYSC reveal about Japan’s emerging stablecoin access model, legal routes, platform functions, and the difference between availability and unrestricted circulation.',
