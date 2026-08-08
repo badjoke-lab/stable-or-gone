@@ -2,6 +2,7 @@ import evidencePr354Data from '../../../data/evidence-pr354-tier-a-batch-1.json'
 import evidencePr355Data from '../../../data/evidence-pr355-tier-a-batch-2.json';
 import evidencePr356Data from '../../../data/evidence-pr356-market-access-pilot-1.json';
 import evidencePr364Data from '../../../data/evidence-pr364-tier-a-batch-4.json';
+import evidencePr523Data from '../../../data/evidence-pr523-jpysc-market-access.json';
 import type { EvidenceRelationRow, EvidenceRow } from './registryBase';
 
 const unique = (items: Array<string | null | undefined>) => [
@@ -21,6 +22,7 @@ const rows = [
   ...(evidencePr355Data as EvidenceRow[]),
   ...(evidencePr356Data as EvidenceRow[]),
   ...(evidencePr364Data as EvidenceRow[]),
+  ...(evidencePr523Data as EvidenceRow[]),
 ].map(normalizeEvidence);
 
 export function getPost351Evidence(): EvidenceRow[] {

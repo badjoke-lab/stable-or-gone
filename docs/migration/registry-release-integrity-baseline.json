@@ -1,9 +1,9 @@
 {
   "schema_version": "1.0",
   "status": "current",
-  "baseline_id": "sog_release_integrity_pr517_119_assets_2026_08_03",
-  "recorded_at": "2026-08-03",
-  "source_checkpoint_commit": "pr517-record-growth-batch-5-bison-eub-usb",
+  "baseline_id": "sog_release_integrity_pr523_119_assets_2026_08_05",
+  "recorded_at": "2026-08-05",
+  "source_checkpoint_commit": "pr523-jpysc-market-access",
   "registry_parity_baseline": "docs/migration/registry-v3-parity-baseline.json",
   "expected_v2_counts": {
     "stablecoins": 119,
@@ -13,8 +13,8 @@
     "profiles": 119,
     "events": 194,
     "event_details": 194,
-    "evidence": 584,
-    "evidence_relations": 584,
+    "evidence": 585,
+    "evidence_relations": 585,
     "reserve_reports": 127,
     "known_unknowns": 352,
     "regulatory_notes": 9,
@@ -29,13 +29,13 @@
   "expected_public_record_counts": {
     "primary_records": 119,
     "events": 194,
-    "evidence": 584
+    "evidence": 585
   },
   "expected_public_breakdown_counts": {
     "stablecoins": 119,
     "organizations": 109,
     "relationships": 131,
-    "evidence_relations": 584,
+    "evidence_relations": 585,
     "reserve_reports": 127,
     "known_unknowns": 352,
     "regulatory_notes": 9,
@@ -74,18 +74,18 @@
     "runtime_generation_required": true
   },
   "evidence_quality": {
-    "archive_index_count": 462,
+    "archive_index_count": 463,
     "archive_not_recorded_count": 122,
     "archive_partition_complete": true,
-    "new_evidence_records": 5,
+    "new_evidence_records": 1,
     "source_replacements": 0,
     "all_new_evidence_primary": true
   },
   "validator": "scripts/validate-counts-manifest-version-provenance-integrity.mjs",
   "audit_report": "docs/audits/counts-manifest-version-provenance-integrity-100-assets.md",
-  "source_pr": 517,
-  "source_commit": "pr517-record-growth-batch-5-bison-eub-usb",
-  "captured_at": "2026-08-03",
-  "expected_market_access_records": 8,
+  "source_pr": 523,
+  "source_commit": "pr523-jpysc-market-access",
+  "captured_at": "2026-08-05",
+  "expected_market_access_records": 12,
   "expected_detail_routes": 422
 }

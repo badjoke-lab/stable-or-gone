@@ -1,1 +1,1 @@
-import './validate-post-pr531-authority-reconciliation.mjs';
+import './validate-jpysc-market-access-pilot-3-implementation-pr523.mjs';

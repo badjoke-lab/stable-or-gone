@@ -1,0 +1,23 @@
+[
+  {
+    "id": "sog_src_jpysc_sbivc_current_product_pr523",
+    "stablecoin_id": "sog_st_jpysc",
+    "event_id": null,
+    "source_type": "official_product_page",
+    "title": "JPYSC",
+    "url": "https://www.sbivc.co.jp/jpysc",
+    "archived_url": "https://web.archive.org/web/*/https://www.sbivc.co.jp/jpysc",
+    "publisher": "SBI VC Trade",
+    "published_at": null,
+    "accessed_at": "2026-08-05",
+    "reliability": "high",
+    "claim_scopes": [
+      "JPYSC current product availability on SBI VC Trade VCTRADE",
+      "JPYSC account-internal buy, sell, and conversion boundary",
+      "JPYSC deposit unavailable",
+      "JPYSC withdrawal unavailable",
+      "JPYSC external-wallet transfer unavailable under the reviewed account-internal state"
+    ],
+    "notes": "Primary SBI VC Trade product page reviewed on 2026-08-05. It supports the current provider-scoped account-internal JPYSC service and the explicit no-deposit/no-withdrawal boundary. It does not establish public-chain circulation, direct issuer access, universal Japan-wide availability, or future transfer capability."
+  }
+]

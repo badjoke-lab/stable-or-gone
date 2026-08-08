@@ -200,5 +200,102 @@
     "review_status": "reviewed",
     "supersedes_record_ids": [],
     "notes": "Provider-scoped Japan observation. External-wallet transfer is represented through the reviewed Ethereum withdrawal route and is not a claim of universal or issuer-level transfer access."
+  },
+  {
+    "id": "sog_ma_jpysc_jp_sbivc_vctrade_buy_sell_20260624",
+    "schema_version": "1.0",
+    "asset_id": "sog_st_jpysc",
+    "jurisdiction": {"country_code":"JP","subdivision_code":null},
+    "platform": {"organization_id":"sog_org_sbi_vc_trade","name":"SBI VC Trade","service":"VCTRADE"},
+    "function": "buy_sell",
+    "access_state": "account_internal_only",
+    "effective_from": "2026-06-24",
+    "effective_to": null,
+    "observed_at": "2026-08-05",
+    "date_precision": "day",
+    "network_scope": {"kind":"account_internal_only","network_ids":[],"note":"The reviewed JPYSC service supports buy, sell, and conversion within the VCTRADE account only; no external transfer network is currently available."},
+    "customer_scope": {"kind":"mixed_or_platform_defined","note":"Limited to customers accepted by SBI VC Trade under its VCTRADE account, jurisdiction, eligibility, and compliance rules."},
+    "conditions": [
+      {"type":"account_internal","description":"JPYSC may be bought, sold, and converted within an eligible SBI VC Trade account, but the reviewed current product does not support deposit, withdrawal, or external-wallet transfer."},
+      {"type":"service_condition","description":"Availability and execution remain subject to VCTRADE account eligibility, maintenance, compliance checks, and platform controls."}
+    ],
+    "legal_route": {"status":"documented","description":"The JFSA register lists JPYSC among the electronic payment instruments handled by SBI VC Trade. The record is provider-scoped and does not assert government recommendation or universal Japan-wide availability."},
+    "evidence_ids": ["sog_src_jpysc_sbivc_current_product_pr523","sog_src_jpysc_launch_sbi_vc_2026","sog_src_jpysc_announcement_sbi_2026","sog_src_jfsa_electronic_payment_instrument_register_pr356"],
+    "confidence": "high",
+    "review_status": "reviewed",
+    "supersedes_record_ids": [],
+    "notes": "Provider-scoped Japan observation. Account-internal trading does not establish public-chain circulation, direct issuer access, or external transfer capability."
+  },
+  {
+    "id": "sog_ma_jpysc_jp_sbivc_vctrade_deposit_20260624",
+    "schema_version": "1.0",
+    "asset_id": "sog_st_jpysc",
+    "jurisdiction": {"country_code":"JP","subdivision_code":null},
+    "platform": {"organization_id":"sog_org_sbi_vc_trade","name":"SBI VC Trade","service":"VCTRADE"},
+    "function": "deposit",
+    "access_state": "unavailable",
+    "effective_from": "2026-06-24",
+    "effective_to": null,
+    "observed_at": "2026-08-05",
+    "date_precision": "day",
+    "network_scope": {"kind":"not_applicable","network_ids":[],"note":"The reviewed current JPYSC product does not support deposits, so no deposit network applies."},
+    "customer_scope": {"kind":"mixed_or_platform_defined","note":"Limited to customers accepted by SBI VC Trade under its VCTRADE account, jurisdiction, eligibility, and compliance rules."},
+    "conditions": [
+      {"type":"service_condition","description":"SBI VC Trade's reviewed current JPYSC product information states that JPYSC deposits are not supported."}
+    ],
+    "legal_route": {"status":"documented","description":"The JFSA register lists JPYSC among the electronic payment instruments handled by SBI VC Trade. The record is provider-scoped and does not assert government recommendation or universal Japan-wide availability."},
+    "evidence_ids": ["sog_src_jpysc_sbivc_current_product_pr523","sog_src_jpysc_launch_sbi_vc_2026","sog_src_jpysc_announcement_sbi_2026","sog_src_jfsa_electronic_payment_instrument_register_pr356"],
+    "confidence": "high",
+    "review_status": "reviewed",
+    "supersedes_record_ids": [],
+    "notes": "Provider-scoped current-state observation. Planned or future network support is not backfilled into the reviewed unavailable deposit state."
+  },
+  {
+    "id": "sog_ma_jpysc_jp_sbivc_vctrade_withdrawal_20260624",
+    "schema_version": "1.0",
+    "asset_id": "sog_st_jpysc",
+    "jurisdiction": {"country_code":"JP","subdivision_code":null},
+    "platform": {"organization_id":"sog_org_sbi_vc_trade","name":"SBI VC Trade","service":"VCTRADE"},
+    "function": "withdrawal",
+    "access_state": "unavailable",
+    "effective_from": "2026-06-24",
+    "effective_to": null,
+    "observed_at": "2026-08-05",
+    "date_precision": "day",
+    "network_scope": {"kind":"not_applicable","network_ids":[],"note":"The reviewed current JPYSC product does not support withdrawals, so no withdrawal network applies."},
+    "customer_scope": {"kind":"mixed_or_platform_defined","note":"Limited to customers accepted by SBI VC Trade under its VCTRADE account, jurisdiction, eligibility, and compliance rules."},
+    "conditions": [
+      {"type":"service_condition","description":"SBI VC Trade's reviewed current JPYSC product information states that JPYSC withdrawals are not supported."}
+    ],
+    "legal_route": {"status":"documented","description":"The JFSA register lists JPYSC among the electronic payment instruments handled by SBI VC Trade. The record is provider-scoped and does not assert government recommendation or universal Japan-wide availability."},
+    "evidence_ids": ["sog_src_jpysc_sbivc_current_product_pr523","sog_src_jpysc_launch_sbi_vc_2026","sog_src_jpysc_announcement_sbi_2026","sog_src_jfsa_electronic_payment_instrument_register_pr356"],
+    "confidence": "high",
+    "review_status": "reviewed",
+    "supersedes_record_ids": [],
+    "notes": "Provider-scoped current-state observation. Planned or future network support is not backfilled into the reviewed unavailable withdrawal state."
+  },
+  {
+    "id": "sog_ma_jpysc_jp_sbivc_vctrade_external_wallet_transfer_20260624",
+    "schema_version": "1.0",
+    "asset_id": "sog_st_jpysc",
+    "jurisdiction": {"country_code":"JP","subdivision_code":null},
+    "platform": {"organization_id":"sog_org_sbi_vc_trade","name":"SBI VC Trade","service":"VCTRADE"},
+    "function": "external_wallet_transfer",
+    "access_state": "unavailable",
+    "effective_from": "2026-06-24",
+    "effective_to": null,
+    "observed_at": "2026-08-05",
+    "date_precision": "day",
+    "network_scope": {"kind":"not_applicable","network_ids":[],"note":"The reviewed service is account-internal and withdrawal is unavailable, so no external-wallet transfer network applies."},
+    "customer_scope": {"kind":"mixed_or_platform_defined","note":"Limited to customers accepted by SBI VC Trade under its VCTRADE account, jurisdiction, eligibility, and compliance rules."},
+    "conditions": [
+      {"type":"account_internal","description":"JPYSC remains within the reviewed VCTRADE account service and cannot currently be transferred to an external wallet."}
+    ],
+    "legal_route": {"status":"documented","description":"The JFSA register lists JPYSC among the electronic payment instruments handled by SBI VC Trade. The record is provider-scoped and does not assert government recommendation or universal Japan-wide availability."},
+    "evidence_ids": ["sog_src_jpysc_sbivc_current_product_pr523","sog_src_jpysc_launch_sbi_vc_2026","sog_src_jpysc_announcement_sbi_2026","sog_src_jfsa_electronic_payment_instrument_register_pr356"],
+    "confidence": "high",
+    "review_status": "reviewed",
+    "supersedes_record_ids": [],
+    "notes": "Provider-scoped current-state observation. This does not infer any future external transfer capability from planned network context."
   }
 ]
