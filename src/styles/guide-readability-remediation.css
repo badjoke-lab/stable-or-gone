@@ -1,0 +1,198 @@
+/*
+ * Guide & Research Surface Readability Remediation — 2026-08-08
+ * Shared presentation repair governed by:
+ * docs/quality/guide-readability-remediation-2026-08-08-spec.md
+ */
+
+/* Guide articles are reading surfaces, not two-column audit sheets. */
+.guide-article-layout {
+  width: min(100%, 1120px);
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+  align-items: start;
+}
+
+.guide-article-toc {
+  position: static;
+  top: auto;
+  width: 100%;
+  margin: 0 0 26px;
+  padding: 10px 0 14px;
+  border-top: 1px solid var(--ui-text);
+  border-bottom: 1px solid var(--ui-text);
+}
+
+.guide-article-toc > summary {
+  min-height: 44px;
+  font-size: 15px;
+}
+
+.guide-article-toc ol {
+  margin: 4px 0 0;
+  padding-left: 1.35rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: 32px;
+  row-gap: 0;
+}
+
+.guide-article-toc li {
+  min-width: 0;
+}
+
+.guide-article-toc a {
+  min-height: 40px;
+  width: 100%;
+  align-items: flex-start;
+  padding-block: 8px;
+  line-height: 1.45;
+}
+
+.guide-article-content {
+  width: 100%;
+  max-width: none;
+  min-width: 0;
+}
+
+/* Direct article sections use hierarchy and whitespace instead of four-sided boxes. */
+.guide-article-content > section {
+  margin: 0;
+  padding: 38px 0;
+  border-bottom: 1px solid var(--ui-line-strong);
+}
+
+.guide-article-content > section.panel {
+  border-top: 0;
+  border-right: 0;
+  border-bottom: 1px solid var(--ui-line-strong);
+  border-left: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.guide-article-content > section > h2.bar,
+.guide-article-content > section > .guide-article-section-title {
+  width: auto;
+  max-width: 34ch;
+  margin: 0 0 18px;
+  color: var(--ui-text);
+  font: 600 1.55rem/1.16 var(--ui-serif);
+  letter-spacing: -.018em;
+  text-transform: none;
+  text-wrap: balance;
+}
+
+.guide-article-content > section > :where(p, ul, ol),
+.guide-article-content > section > div > :where(p, ul, ol) {
+  max-width: 76ch;
+}
+
+.guide-article-content p,
+.guide-article-content li {
+  font-size: 17px;
+  line-height: 1.68;
+}
+
+/* Data tables get the article's full data width; prose remains measure-limited above. */
+.guide-article-content .table-wrap,
+.guide-article-content .evidence-table-wrap {
+  width: 100%;
+  max-width: none;
+  overflow-x: auto;
+}
+
+.guide-article-content table {
+  width: 100%;
+  max-width: none;
+  table-layout: auto;
+}
+
+.guide-article-content th,
+.guide-article-content td {
+  padding: 11px 13px;
+  vertical-align: top;
+  line-height: 1.48;
+}
+
+/* The contextual Guide support block owns the support CTA in the article flow. */
+.guide-article-layout > .context-support-callout,
+.guide-article-layout > .guide-article-footer {
+  grid-column: 1 / -1;
+  width: 100%;
+}
+
+.guide-article-layout > .context-support-callout {
+  margin-top: 34px;
+}
+
+body:has(main[data-page-kind="guide-article"]) .site-footer > .footer-support,
+body:has(main[data-page-kind="longform"]) .site-footer > .footer-support {
+  display: none;
+}
+
+/* Three secondary research links form a complete row instead of a 2+1 orphan grid. */
+section:has(#research-guides-title) > .editorial-directory {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+section:has(#research-guides-title) > .editorial-directory a {
+  min-height: 146px;
+}
+
+@media (max-width: 980px) {
+  .guide-article-toc ol {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  section:has(#research-guides-title) > .editorial-directory {
+    grid-template-columns: 1fr;
+  }
+
+  section:has(#research-guides-title) > .editorial-directory a {
+    min-height: 104px;
+  }
+}
+
+@media (max-width: 640px) {
+  .guide-article-layout {
+    width: 100%;
+  }
+
+  .guide-article-toc {
+    margin-bottom: 18px;
+  }
+
+  .guide-article-toc ol {
+    grid-template-columns: 1fr;
+    padding-left: 1.25rem;
+  }
+
+  .guide-article-content > section {
+    padding: 28px 0;
+  }
+
+  .guide-article-content > section > h2.bar,
+  .guide-article-content > section > .guide-article-section-title {
+    max-width: none;
+    margin-bottom: 14px;
+    font-size: 1.375rem;
+    line-height: 1.18;
+  }
+
+  .guide-article-content p,
+  .guide-article-content li {
+    font-size: 16px;
+    line-height: 1.66;
+  }
+
+  .guide-article-content th,
+  .guide-article-content td {
+    font-size: 15px;
+  }
+
+  .guide-article-layout > .context-support-callout {
+    margin-top: 24px;
+  }
+}
