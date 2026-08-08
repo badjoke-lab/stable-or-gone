@@ -6,6 +6,7 @@ import { formatReferenceTargetLabel } from '../utils/referenceTarget';
 import { resolvePrimaryRelationshipForStablecoin } from '../utils/primaryDisplayRelationship';
 import { getStablecoins, getOrganizations, getRelationships, getEvents, getEvidence } from '../lib/data/registry';
 import { getEvidenceSourceIdentitySummary } from '../lib/data/evidenceSources';
+import { getFeaturedGuides } from '../data/guideCatalog';
 
 const stablecoins = getStablecoins();
 const organizations = getOrganizations();
@@ -57,6 +58,10 @@ const previewRows = [...stablecoins]
       events: eventCount(coin.id)
     };
   });
+
+const featuredGuides = getFeaturedGuides(4);
+const leadGuide = featuredGuides.find((guide) => guide.slug === 'global-stablecoin-regulation-2026') ?? featuredGuides[0];
+const latestGuides = featuredGuides.filter((guide) => guide.slug !== leadGuide?.slug).slice(0, 3);
 
 const title = 'Stable or Gone — Stablecoin Historical Registry';
 const description = 'A source-backed historical registry of stablecoins, connected organizations, material events, access conditions, and evidence.';
@@ -142,6 +147,36 @@ const jsonLd = {
         </div>
       </div>
     </section>
+
+    {leadGuide && (
+      <section class="directory-section" aria-labelledby="research-guides-title">
+        <div class="section-heading">
+          <div>
+            <p class="kicker">Research &amp; guides</p>
+            <h2 id="research-guides-title">Read the regulatory context</h2>
+          </div>
+          <a class="registry-heading-link" href="/guides/">All guides →</a>
+        </div>
+        <div class="panel registry">
+          <div class="bar">Featured research</div>
+          <h3><a href={`/guides/${leadGuide.slug}/`}>{leadGuide.title}</a></h3>
+          <p>{leadGuide.summary}</p>
+          <p><strong>{leadGuide.regionLabel ?? 'Global'}</strong> · Published {leadGuide.publishedAt} · Current through {leadGuide.informationCurrentThrough}</p>
+          <p><a href={`/guides/${leadGuide.slug}/`}>Open the 2026 global comparison →</a></p>
+        </div>
+        {latestGuides.length > 0 && (
+          <div class="editorial-directory" aria-label="Latest featured guides">
+            {latestGuides.map((guide, index) => (
+              <a href={`/guides/${guide.slug}/`}>
+                <span class="directory-number">{String(index + 1).padStart(2, '0')}</span>
+                <span class="directory-copy"><strong>{guide.title}</strong><small>{guide.regionLabel ?? 'Guide'} · Current through {guide.informationCurrentThrough}</small></span>
+                <span aria-hidden="true">→</span>
+              </a>
+            ))}
+          </div>
+        )}
+      </section>
+    )}
 
     <section class="archive-note" aria-label="Registry scope note">
       <span>Evidence-based static registry</span>

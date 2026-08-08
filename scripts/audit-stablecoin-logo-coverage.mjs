@@ -7,6 +7,7 @@ const dataDir = path.join(root, 'data');
 const logoDir = path.join(root, 'public/stablecoin-logos');
 const resolverPath = path.join(root, 'src/utils/stablecoinLogo.ts');
 const decisionsPath = path.join(root, 'config/stablecoin-logo-decisions.json');
+const decisionAdditionsPath = path.join(root, 'config/stablecoin-logo-decisions-additions.json');
 const displayPolicyPath = path.join(root, 'config/stablecoin-logo-display-policy.json');
 const outputPath = path.join(root, 'artifacts/stablecoin-logo-coverage.json');
 const recordsBySlug = new Map();
@@ -20,15 +21,19 @@ const resolver = fs.readFileSync(resolverPath, 'utf8');
 const mappingBlock = resolver.match(/const LOGOS_BY_SLUG:[\s\S]*?= \{([\s\S]*?)\n\};/)?.[1] ?? '';
 const mappings = [...mappingBlock.matchAll(/^\s*'([^']+)':\s*'([^']+)'\s*,?$/gm)].map((match) => ({ slug: match[1], asset: match[2] }));
 const decisions = JSON.parse(fs.readFileSync(decisionsPath, 'utf8'));
+const decisionAdditions = fs.existsSync(decisionAdditionsPath)
+  ? JSON.parse(fs.readFileSync(decisionAdditionsPath, 'utf8'))
+  : { records: [] };
+const decisionRecords = [...(decisions.records ?? []), ...(decisionAdditions.records ?? [])];
 const displayPolicy = JSON.parse(fs.readFileSync(displayPolicyPath, 'utf8'));
 const failures = [];
 const localAssets = fs.readdirSync(logoDir).filter((name) => /\.(?:svg|png)$/.test(name)).sort();
 const mappedAssets = new Set(mappings.map((mapping) => path.basename(mapping.asset)));
-const decisionBySlug = new Map((decisions.records ?? []).map((record) => [record.slug, record]));
+const decisionBySlug = new Map(decisionRecords.map((record) => [record.slug, record]));
 const displayTypes = new Set(displayPolicy.display_logo_mark_types ?? []);
 const fallbackTypes = new Set(displayPolicy.neutral_fallback_mark_types ?? []);
 const fallbackSlugs = new Set(displayPolicy.neutral_fallback_slugs ?? []);
-const researchOnlyAssets = new Set((decisions.records ?? []).filter((record) => fallbackSlugs.has(record.slug) && record.asset_path).map((record) => path.basename(record.asset_path)));
+const researchOnlyAssets = new Set(decisionRecords.filter((record) => fallbackSlugs.has(record.slug) && record.asset_path).map((record) => path.basename(record.asset_path)));
 
 const expectedCanonicalRecords = Number(displayPolicy.canonical_records);
 const expectedDirectLogoRecords = Number(displayPolicy.direct_logo_records);
@@ -36,7 +41,7 @@ const expectedFallbackRecords = Number(displayPolicy.neutral_fallback_records);
 if (recordsBySlug.size !== expectedCanonicalRecords) failures.push(`expected ${expectedCanonicalRecords} canonical records, found ${recordsBySlug.size}`);
 if (mappings.length !== expectedDirectLogoRecords) failures.push(`expected ${expectedDirectLogoRecords} direct Stablecoin/product logo mappings, found ${mappings.length}`);
 if (fallbackSlugs.size !== expectedFallbackRecords) failures.push(`expected ${expectedFallbackRecords} neutral fallback records, found ${fallbackSlugs.size}`);
-if (!Array.isArray(decisions.records) || decisions.records.length !== expectedCanonicalRecords) failures.push(`research decision ledger must contain ${expectedCanonicalRecords} records`);
+if (decisionRecords.length !== expectedCanonicalRecords) failures.push(`research decision ledger must contain ${expectedCanonicalRecords} records`);
 if (decisionBySlug.size !== expectedCanonicalRecords) failures.push('research decision ledger contains duplicate slugs');
 
 for (const [slug] of recordsBySlug) {
@@ -80,6 +85,7 @@ const report = {
   neutral_fallback_records: fallbackSlugs.size,
   direct_logo_coverage_percent: Number(((mappings.length / Math.max(recordsBySlug.size, 1)) * 100).toFixed(2)),
   research_decisions: decisionBySlug.size,
+  decision_additions: decisionAdditions.records?.length ?? 0,
   display_logo_mark_types: [...displayTypes],
   neutral_fallback_mark_types: [...fallbackTypes],
   neutral_fallback_slugs: [...fallbackSlugs],

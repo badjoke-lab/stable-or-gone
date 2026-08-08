@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-08-08T05:55:00.000Z",
+  "purpose": "Append-only decisions for canonical stablecoins added after the 117-record logo research closure pass.",
+  "records": [
+    {
+      "slug": "bison-bank-eub",
+      "name": "Bison Bank Electronic Money Token — Euro",
+      "symbol": "EUB",
+      "decision": "neutral_fallback",
+      "mark_type": "official_issuer_mark",
+      "asset_path": null,
+      "source_page": "https://bisonbank.com/eub/",
+      "source_asset_url": null,
+      "source_class": "official_product_page_no_token_specific_local_mark_recorded",
+      "identity_basis": "canonical slug, stablecoin name, symbol, issuer, and PR #517 first-party source review",
+      "evidence": "No token-specific local logo decision was recorded when EUB entered the canonical registry; retain the neutral monogram fallback rather than substituting the Bison Bank issuer mark.",
+      "transformation": "none"
+    },
+    {
+      "slug": "bison-bank-usb",
+      "name": "Bison Bank Electronic Money Token — US Dollar",
+      "symbol": "USB",
+      "decision": "neutral_fallback",
+      "mark_type": "official_issuer_mark",
+      "asset_path": null,
+      "source_page": "https://bisonbank.com/usb/",
+      "source_asset_url": null,
+      "source_class": "official_product_page_no_token_specific_local_mark_recorded",
+      "identity_basis": "canonical slug, stablecoin name, symbol, issuer, and PR #517 first-party source review",
+      "evidence": "No token-specific local logo decision was recorded when USB entered the canonical registry; retain the neutral monogram fallback rather than substituting the Bison Bank issuer mark.",
+      "transformation": "none"
+    }
+  ]
+}

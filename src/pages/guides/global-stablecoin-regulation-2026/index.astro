@@ -1,0 +1,172 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import GuideArticleHeader from '../../../components/GuideArticleHeader.astro';
+import GuideRevisionHistory from '../../../components/GuideRevisionHistory.astro';
+import RelatedSogRecords from '../../../components/RelatedSogRecords.astro';
+import { getGuide, guideCategoryLabels } from '../../../data/guideCatalog';
+
+const guide = getGuide('global-stablecoin-regulation-2026');
+const title = 'Stablecoin Regulation in 2026: Seven Jurisdictions Compared — Stable or Gone';
+const description = 'Compare 2026 stablecoin regulation in the United States, European Union, United Kingdom, Japan, mainland China, Hong Kong, and Russia without turning legal frameworks into asset-level availability claims.';
+const canonicalPath = '/guides/global-stablecoin-regulation-2026/';
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: guide.title,
+  description,
+  url: `https://www.stableorgone.com${canonicalPath}`,
+  inLanguage: 'en',
+  isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://www.stableorgone.com/' },
+  about: ['stablecoin regulation', 'GENIUS Act', 'CLARITY Act', 'MiCA', 'Japan stablecoins', 'Hong Kong stablecoins', 'Russia stablecoins'],
+  ...(guide.publishedAt ? { datePublished: guide.publishedAt } : {}),
+  ...(guide.updatedAt ? { dateModified: guide.updatedAt } : {})
+};
+
+const relatedRecords = [
+  { href: '/stablecoin/usdc/', title: 'USDC', summary: 'Open the canonical SOG record for issuer, reserve, event, access, and evidence context.' },
+  { href: '/stablecoin/usdt/', title: 'USDT', summary: 'Open the canonical SOG record and separate global circulation from jurisdiction-specific service access.' },
+  { href: '/stablecoin/rlusd/', title: 'RLUSD', summary: 'Review the asset and its issuer, regulatory, access, and evidence relationships.' },
+  { href: '/stablecoin/pyusd/', title: 'PYUSD', summary: 'Review the PayPal-branded stablecoin and its legal issuer structure.' }
+];
+---
+<BaseLayout title={title} description={description} canonicalPath={canonicalPath} jsonLd={jsonLd}>
+  <GuideArticleHeader
+    category={guideCategoryLabels[guide.category]}
+    title="Stablecoin Regulation in 2026: Seven Jurisdictions Compared"
+    description="The same stablecoin can face different issuer, distribution, payment, and service rules across borders. This guide compares the frameworks without treating a country-level rule as proof that any particular asset is available, approved, or banned everywhere in that jurisdiction."
+    publishedAt={guide.publishedAt}
+    informationCurrentThrough={guide.informationCurrentThrough}
+    updatedAt={guide.updatedAt}
+  />
+
+  <section class="panel registry">
+    <div class="bar">30-second summary</div>
+    <p><strong>There is no single global direction for stablecoin regulation in 2026.</strong> The United States has a federal payment-stablecoin law while its broader crypto market-structure bill has missed the Senate's pre-recess window. The EU has moved beyond the MiCA transition period. The UK is finalising a comprehensive regime for 2027. Japan is expanding regulated intermediary routes. Mainland China continues a restrictive virtual-currency policy, while Hong Kong operates a licensing regime for fiat-referenced stablecoin issuers. Russia permits stablecoin-like digital financial assets for investment and cross-border settlement but not domestic settlement.</p>
+    <p>The important distinction is between <strong>issuer legality, service-provider authorisation, asset distribution, payment use, and actual platform access</strong>. They are related, but they are not interchangeable.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">At a glance</div>
+    <table>
+      <thead><tr><th>Jurisdiction</th><th>2026 direction</th><th>Issuer / service framework</th><th>Payment or settlement boundary</th></tr></thead>
+      <tbody>
+        <tr><td>United States</td><td>Federal stablecoin framework in implementation; broader market structure delayed</td><td>GENIUS Act creates permitted payment-stablecoin issuer routes</td><td>Payment stablecoins are regulated separately from the still-pending CLARITY market-structure bill</td></tr>
+        <tr><td>European Union</td><td>MiCA transition completed</td><td>Authorised CASPs and MiCA issuer requirements govern the regulated perimeter</td><td>Unauthorised CASPs must wind down EU activity after the 1 July 2026 transition end</td></tr>
+        <tr><td>United Kingdom</td><td>Final rules published; implementation runway remains</td><td>FCA regime for qualifying stablecoins, with Bank of England involvement for systemic issuers</td><td>New crypto regime starts in October 2027; applications open earlier</td></tr>
+        <tr><td>Japan</td><td>Regulated distribution and intermediary framework expanding</td><td>Electronic payment instruments and registered intermediaries sit inside the Payment Services Act framework</td><td>Asset availability still depends on registered providers, functions, dates, and customer scope</td></tr>
+        <tr><td>Mainland China</td><td>Restrictive</td><td>2026 authorities reaffirmed virtual-currency-related activities as illegal financial activities</td><td>Do not infer that Hong Kong's licensing regime applies to mainland China</td></tr>
+        <tr><td>Hong Kong</td><td>Licensed development</td><td>Stablecoins Ordinance establishes licensing for fiat-referenced stablecoin issuers</td><td>Licensed issuance and regulated intermediary activity are distinct from mainland policy</td></tr>
+        <tr><td>Russia</td><td>Selective legal use</td><td>Russian law can accommodate stablecoin-like digital financial assets even without defining “stablecoin” as a term</td><td>Investment and cross-border settlement can be permitted; domestic settlement is not</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">United States: stablecoin law moved first</div>
+    <p>The U.S. comparison starts with a distinction that is often lost in headlines. The <a href="/guides/genius-act-stablecoins/">GENIUS Act</a> is already law and governs payment stablecoins. The CLARITY Act addresses the broader digital-asset market structure and has not become law.</p>
+    <p>On May 14, 2026, the Senate Banking Committee advanced the CLARITY Act 15–9. By August 8, the Senate had not completed the expected pre-recess floor vote. That is a major timing setback, but it does not repeal or suspend the GENIUS Act.</p>
+    <p><a href="/guides/clarity-act-2026-stablecoins/">Read the CLARITY Act timing guide →</a></p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">European Union: the transition period is over</div>
+    <p>MiCA has applied broadly since December 2024, but some crypto-asset service providers relied on national transitional arrangements. ESMA stated that the EU-wide transitional period expired on 1 July 2026 and that unauthorised providers must wind down EU crypto-asset services in an orderly manner.</p>
+    <p>This does <strong>not</strong> mean that every stablecoin is simply “legal” or “illegal” across every product and platform. Issuer status, CASP authorisation, customer location, product function, redemption route, and supported network remain separate questions.</p>
+    <p><a href="/guides/eu-stablecoin-access-after-mica/">Read the SOG EU access guide →</a> · <a href="/guides/mica-stablecoins/">Read the MiCA explainer →</a></p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">United Kingdom: rules are clearer, the regime is not live yet</div>
+    <p>On 30 June 2026, the FCA published final rules for qualifying stablecoin issuance and related crypto activities. The Bank of England and FCA also published their joint approach for systemic stablecoin issuers. The wider new UK crypto regime is scheduled to start on 25 October 2027, with an application period beginning in 2026.</p>
+    <p>The UK therefore belongs in a different bucket from both the EU and the United States: a substantial rulebook exists, but the main new authorisation regime has a future start date.</p>
+    <p><a href="/guides/uk-stablecoin-capital-rules-2026/">Read the UK stablecoin guide →</a></p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Japan: regulated access is becoming more granular</div>
+    <p>Japan already regulates fiat-linked stablecoin intermediation as electronic payment instruments. A further Payment Services Act reform took effect on 1 June 2026, including a new electronic-payment-instrument and cryptoasset service intermediary framework.</p>
+    <p>For SOG, the useful question is not “does Japan allow stablecoins?” but which asset, which provider, which customer scope, which product function, which network, and which date are supported by evidence.</p>
+    <p><a href="/guides/japan-stablecoin-access-usdc-rlusd-jpysc/">Read the Japan access guide →</a></p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Mainland China and Hong Kong: one country, two very different policy surfaces</div>
+    <p>Mainland Chinese authorities issued a new notice on 6 February 2026 that continued the restrictive treatment of virtual-currency-related financial activity. Hong Kong, by contrast, operates a licensing regime for fiat-referenced stablecoin issuers under its Stablecoins Ordinance and announced its first batch of licensed issuers in April 2026.</p>
+    <p>These should never be collapsed into a single “China stablecoin policy” field. Mainland legal treatment, Hong Kong issuer licensing, and any individual stablecoin's actual distribution are separate records.</p>
+    <p><a href="/guides/china-hong-kong-stablecoin-rules-2026/">Read the China / Hong Kong guide →</a></p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Russia: cross-border use and domestic use split apart</div>
+    <p>The Bank of Russia's 25 June 2026 consultation paper says Russian law does not define “stablecoin” but permits digital financial assets with similar characteristics. Those instruments may be used as investments and for cross-border settlements, but not for domestic settlements.</p>
+    <p>That makes Russia a useful example of why a simple pro-crypto / anti-crypto label is too crude for stablecoin access research.</p>
+    <p><a href="/guides/russia-stablecoin-rules-2026/">Read the Russia stablecoin guide →</a></p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">What this means for actual stablecoins</div>
+    <table>
+      <thead><tr><th>Question</th><th>Why a country-level rule is not enough</th></tr></thead>
+      <tbody>
+        <tr><td>Can the token be issued?</td><td>The legal issuer may be regulated in one jurisdiction while the token circulates globally.</td></tr>
+        <tr><td>Can a platform list it?</td><td>Provider authorisation and product-specific rules may matter separately from issuer status.</td></tr>
+        <tr><td>Can a user buy or sell it?</td><td>Customer residence, account type, product function, and effective date can change the answer.</td></tr>
+        <tr><td>Can it be used for payments?</td><td>Trading, redemption, transfers, and domestic settlement can sit under different rules.</td></tr>
+        <tr><td>Is it “approved”?</td><td>A licence held by an issuer, group company, exchange, or custodian does not automatically transfer to every asset or service.</td></tr>
+      </tbody>
+    </table>
+    <p><a href="/access-regulation/">Explore canonical Access &amp; Regulation records →</a></p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">2026 timeline</div>
+    <table>
+      <thead><tr><th>Date</th><th>Development</th></tr></thead>
+      <tbody>
+        <tr><td>2026-02-06</td><td>Mainland Chinese authorities published a new notice on virtual-currency and tokenisation-related risks and illegal financial activity.</td></tr>
+        <tr><td>2026-05-14</td><td>U.S. Senate Banking Committee advanced the CLARITY Act 15–9.</td></tr>
+        <tr><td>2026-06-01</td><td>Japan's amended Payment Services Act framework, including the new intermediary system, took effect.</td></tr>
+        <tr><td>2026-06-25</td><td>Bank of Russia published its consultation paper on ruble stablecoins.</td></tr>
+        <tr><td>2026-06-30</td><td>UK FCA stablecoin and crypto rule packages were published in final form; Bank/FCA joint systemic-stablecoin approach was also published.</td></tr>
+        <tr><td>2026-07-01</td><td>The EU-wide MiCA transitional period ended.</td></tr>
+        <tr><td>2026-08-08</td><td>The U.S. Senate entered its summer recess without completing the expected CLARITY Act floor vote.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Frequently asked questions</div>
+    <h2>Did the CLARITY Act fail?</h2>
+    <p>It failed to meet the pre-August-recess passage window. It was not voted down by the full Senate and had already advanced from the Senate Banking Committee. Further Senate action can still occur after the recess.</p>
+    <h2>Does the CLARITY delay change the GENIUS Act?</h2>
+    <p>No. The GENIUS Act is a separate enacted payment-stablecoin law.</p>
+    <h2>Is USDT banned in the EU?</h2>
+    <p>A one-word answer is usually misleading. MiCA issuer rules and CASP obligations matter, but access also depends on the provider, customer scope, product function, network, and date. See the dedicated EU access guide for reviewed examples.</p>
+    <h2>Are stablecoins legal in China?</h2>
+    <p>Mainland China maintains a restrictive virtual-currency policy. Hong Kong is a separate regulatory jurisdiction with a licensed fiat-referenced stablecoin issuer regime.</p>
+    <h2>Can stablecoins be used in Russia?</h2>
+    <p>The Bank of Russia says stablecoin-like DFAs may be used for investment and cross-border settlement but not domestic settlement. This is narrower than a general permission for stablecoin payments.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Primary and current sources</div>
+    <ul>
+      <li><a href="https://www.banking.senate.gov/newsroom/majority/chairman-scott-senate-banking-committee-advance-clarity-act-in-historic-bipartisan-vote">U.S. Senate Banking Committee — CLARITY Act committee vote</a></li>
+      <li><a href="https://www.esma.europa.eu/sites/default/files/2026-06/ESMA75-113276571-1710_Public_Statement_MiCA_transitional_period_ends.pdf">ESMA — MiCA transitional period ends</a></li>
+      <li><a href="https://www.fca.org.uk/publications/consultation-papers/cp25-14-stablecoin-issuance-cryptoasset-custody">FCA — stablecoin issuance and custody final rules status</a></li>
+      <li><a href="https://www.bankofengland.co.uk/paper/2026/boe-and-fcas-approach-to-joint-regulation-of-systemic-stablecoin-issuers">Bank of England / FCA — joint systemic stablecoin approach</a></li>
+      <li><a href="https://www.fsa.go.jp/news/r7/sonota/20260522/20260522.html">Japan FSA — 2026 Payment Services Act implementation materials</a></li>
+      <li><a href="https://www.csrc.gov.cn/csrc/c100028/c7614318/content.shtml">Mainland China — 6 February 2026 virtual-currency risk notice</a></li>
+      <li><a href="https://www.hkma.gov.hk/media/eng/publication-and-research/annual-report/2025/16_International_Financial_Centre.pdf">HKMA — stablecoin issuer licensing regime and first licence batch</a></li>
+      <li><a href="https://www.cbr.ru/eng/press/event/?id=32666">Bank of Russia — Stablecoins in Russia consultation paper</a></li>
+    </ul>
+  </section>
+
+  <RelatedSogRecords records={relatedRecords} />
+  <GuideRevisionHistory revisions={guide.revisions} />
+
+  <section class="panel registry">
+    <div class="bar">Scope and interpretation boundary</div>
+    <p>This page compares public regulatory frameworks. It does not convert missing SOG records into legal conclusions, and it does not treat a jurisdiction-wide rule as proof of a particular stablecoin's availability, approval, legality, safety, or service support. Historical registry context only; not legal or investment advice.</p>
+  </section>
+</BaseLayout>

@@ -2,8 +2,11 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { guides, guideCategoryDescriptions, guideCategoryLabels, type GuideCategory } from '../data/guideCatalog';
 
+const featuredGuide = guides.find((guide) => guide.slug === 'global-stablecoin-regulation-2026');
 const categoryOrder: GuideCategory[] = ['regulation', 'asset-comparisons', 'core-concepts'];
-const categories = categoryOrder.map((category) => ({ category, entries: guides.filter((guide) => guide.category === category) })).filter((group) => group.entries.length > 0);
+const categories = categoryOrder
+  .map((category) => ({ category, entries: guides.filter((guide) => guide.category === category && guide.slug !== featuredGuide?.slug) }))
+  .filter((group) => group.entries.length > 0);
 const published = guides.filter((guide) => Boolean(guide.publishedAt));
 const currentThrough = [...guides].map((guide) => guide.informationCurrentThrough).sort().at(-1) ?? 'Not recorded';
 const title = 'Guides — Stable or Gone';
@@ -32,9 +35,20 @@ const jsonLd = {
     </header>
 
     <nav class="guide-index-nav" aria-label="Guide categories">
+      {featuredGuide && <a href="#guide-featured">Global overview</a>}
       {categories.map(({ category }) => <a href={`#guide-category-${category}`}>{guideCategoryLabels[category]}</a>)}
       <a href="#guide-reference">How to use the archive</a>
     </nav>
+
+    {featuredGuide && (
+      <section class="panel registry" id="guide-featured" aria-labelledby="guide-featured-title">
+        <div class="bar">Featured / Global overview</div>
+        <h2 id="guide-featured-title"><a href={`/guides/${featuredGuide.slug}/`}>{featuredGuide.title}</a></h2>
+        <p>{featuredGuide.summary}</p>
+        <p><strong>{featuredGuide.regionLabel}</strong> · Published {featuredGuide.publishedAt} · Current through {featuredGuide.informationCurrentThrough}</p>
+        <p><a href={`/guides/${featuredGuide.slug}/`}>Open the 2026 global comparison →</a></p>
+      </section>
+    )}
 
     {categories.map(({ category, entries }) => (
       <section class="guide-index-section" id={`guide-category-${category}`}>
