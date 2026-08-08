@@ -1,0 +1,104 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import GuideArticleHeader from '../../../components/GuideArticleHeader.astro';
+import GuideRevisionHistory from '../../../components/GuideRevisionHistory.astro';
+import RelatedSogRecords from '../../../components/RelatedSogRecords.astro';
+import { getGuide, guideCategoryLabels } from '../../../data/guideCatalog';
+
+const guide = getGuide('china-hong-kong-stablecoin-rules-2026');
+const title = 'China Restricts, Hong Kong Licenses: Stablecoin Rules in 2026 — Stable or Gone';
+const description = 'Mainland China and Hong Kong now present sharply different stablecoin policy surfaces. This guide separates mainland restrictions, Hong Kong issuer licensing, and asset-level access claims.';
+const canonicalPath = '/guides/china-hong-kong-stablecoin-rules-2026/';
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: guide.title,
+  description,
+  url: `https://www.stableorgone.com${canonicalPath}`,
+  inLanguage: 'en',
+  isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://www.stableorgone.com/' },
+  about: ['China stablecoin regulation', 'Hong Kong stablecoin licensing', 'Stablecoins Ordinance'],
+  ...(guide.publishedAt ? { datePublished: guide.publishedAt } : {})
+};
+
+const relatedRecords = [
+  { href: '/stablecoin/usdt/', title: 'USDT', summary: 'Review the global dollar stablecoin record without treating global circulation as proof of local access.' },
+  { href: '/stablecoin/usdc/', title: 'USDC', summary: 'Review issuer, reserve, event, access, and evidence context in the canonical record.' },
+  { href: '/stablecoin/rlusd/', title: 'RLUSD', summary: 'Review the asset and its issuer and access relationships separately from jurisdiction-wide rules.' }
+];
+---
+<BaseLayout title={title} description={description} canonicalPath={canonicalPath} jsonLd={jsonLd}>
+  <GuideArticleHeader
+    category={guideCategoryLabels[guide.category]}
+    title="China Restricts, Hong Kong Licenses"
+    description="Mainland China and Hong Kong should not be represented as one stablecoin regime. Mainland authorities continue a restrictive virtual-currency policy, while Hong Kong operates a licensing framework for fiat-referenced stablecoin issuers."
+    publishedAt={guide.publishedAt}
+    informationCurrentThrough={guide.informationCurrentThrough}
+    updatedAt={guide.updatedAt}
+  />
+
+  <section class="panel registry">
+    <div class="bar">30-second summary</div>
+    <p><strong>Mainland China and Hong Kong moved in very different directions.</strong> On 6 February 2026, mainland Chinese authorities published a new notice that continued to treat virtual-currency-related illegal financial activity as prohibited and strengthened the risk-control framework around virtual currency and tokenisation-related activity.</p>
+    <p>Hong Kong, by contrast, has a Stablecoins Ordinance that licenses issuers of fiat-referenced stablecoins. The HKMA began accepting applications in 2025 and reported the first batch of two licensed stablecoin issuers in April 2026.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Do not collapse the two jurisdictions</div>
+    <table>
+      <thead><tr><th></th><th>Mainland China</th><th>Hong Kong</th></tr></thead>
+      <tbody>
+        <tr><th>Policy direction</th><td>Restrictive virtual-currency framework</td><td>Licensed fiat-referenced stablecoin development</td></tr>
+        <tr><th>2026 anchor</th><td>Eight-authority notice dated 6 February 2026</td><td>Stablecoins Ordinance licensing regime; first licence batch reported in April 2026</td></tr>
+        <tr><th>What SOG should infer</th><td>Broad mainland restrictions are relevant context</td><td>Issuer licensing is a positive regulatory pathway for qualifying issuers</td></tr>
+        <tr><th>What SOG should not infer</th><td colspan="2">Neither regime alone proves that a specific stablecoin is available, approved, supported by a platform, or usable for every function.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Mainland China: 2026 notice</div>
+    <p>The 6 February 2026 notice was jointly issued by major mainland financial and administrative authorities. It reiterates a restrictive approach to virtual-currency-related activity and states that illegal financial activity connected to virtual currency and real-world-asset tokenisation can be subject to penalties and criminal liability where applicable.</p>
+    <p>For SOG, the safe interpretation is a <strong>jurisdiction-level regulatory context</strong>. It is not a licence to fabricate asset-specific availability records. A platform access claim still needs provider-, function-, customer-, and date-scoped evidence.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Hong Kong: licensing instead of blanket prohibition</div>
+    <p>The HKMA describes the Stablecoins Ordinance as a licensing regime for issuers of fiat-referenced stablecoins. The framework includes supervisory and anti-money-laundering expectations and is designed to create a regulated path for issuance rather than an unrestricted market.</p>
+    <p>The HKMA's 2025 annual report states that it began accepting licence applications in August 2025 and announced the first batch of two licensed stablecoin issuers in April 2026. In May 2026, Hong Kong regulators also published guidance concerning virtual-asset activities involving stablecoins issued by licensed issuers.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Issuer licence is not the same as universal access</div>
+    <p>A Hong Kong stablecoin issuer licence answers one question: whether an issuer is licensed under that regime. It does not automatically answer whether every exchange, bank, broker, wallet, network, customer type, or product function supports the stablecoin.</p>
+    <table>
+      <tbody>
+        <tr><th>Issuer status</th><td>Is the entity licensed to issue a fiat-referenced stablecoin?</td></tr>
+        <tr><th>Intermediary status</th><td>Is the service provider authorised for the relevant virtual-asset activity?</td></tr>
+        <tr><th>Asset access</th><td>Is the specific stablecoin supported by the named provider?</td></tr>
+        <tr><th>Function access</th><td>Buy/sell, deposit, withdrawal, transfer, redemption, and payment use may differ.</td></tr>
+        <tr><th>Jurisdiction scope</th><td>Hong Kong evidence should not be copied into mainland China records.</td></tr>
+      </tbody>
+    </table>
+    <p><a href="/access-regulation/">Explore SOG Access &amp; Regulation records →</a></p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Sources</div>
+    <ul>
+      <li><a href="https://www.csrc.gov.cn/csrc/c100028/c7614318/content.shtml">China Securities Regulatory Commission — joint notice on virtual-currency and related risks, 6 February 2026</a></li>
+      <li><a href="https://www.csrc.gov.cn/csrc/c100028/c7614320/content.shtml">PBOC / CSRC Q&amp;A on the 2026 notice</a></li>
+      <li><a href="https://www.hkma.gov.hk/media/eng/publication-and-research/annual-report/2025/16_International_Financial_Centre.pdf">HKMA Annual Report 2025 — stablecoin issuer licensing regime and first licence batch</a></li>
+      <li><a href="https://www.hkma.gov.hk/media/eng/doc/key-functions/ifc/stablecoin-issuers/Explanatory_Notes_on_Licensing_of_Stablecoin_Issuers_eng.pdf">HKMA — Explanatory Note on Licensing of Stablecoin Issuers</a></li>
+      <li><a href="https://brdr.hkma.gov.hk/eng/doc-ldg/current/20260527-2-EN">HKMA — virtual-asset activities in relation to stablecoins issued by licensed issuers</a></li>
+    </ul>
+  </section>
+
+  <RelatedSogRecords records={relatedRecords} />
+  <GuideRevisionHistory revisions={guide.revisions} />
+
+  <section class="panel registry">
+    <div class="bar">Scope and disclaimer</div>
+    <p>This guide compares regulatory frameworks and preserves the jurisdiction boundary between mainland China and Hong Kong. It is not legal advice, and it does not convert jurisdiction-level policy into a claim that a named stablecoin is available, unavailable, approved, illegal, or safe.</p>
+  </section>
+</BaseLayout>
