@@ -1,11 +1,15 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "transition": "post_pr531_authority_reconciliation",
   "recorded_at": "2026-08-08",
   "before": {
     "documented_authority": "PR_522_PR_523_only",
     "documented_production_commit": "c29c63de22bda81572d040b972539a7d4c735bd8",
-    "problem": "authority_and_schedule_documents_lagged_merged_main"
+    "problems": [
+      "authority_and_schedule_documents_lagged_merged_main",
+      "legacy_host_migration_documentation_lagged_completed_pages_worker_cutover",
+      "production_visual_review_found_blocking_shared_guide_readability_defect"
+    ]
   },
   "current_verified": {
     "production_commit": "210d68001fbd2560ffadf538fdb7cc9302b400a7",
@@ -19,11 +23,24 @@
     "archive_recorded": 462,
     "detail_routes": 422
   },
-  "authorized_next": {
+  "authorized_immediate": {
+    "work_item": "guide_and_research_surface_readability_remediation",
+    "spec": "docs/quality/guide-readability-remediation-2026-08-08-spec.md",
+    "canonical_changes": 0,
+    "guide_claim_changes": 0,
+    "production_visual_verification_required": true,
+    "acceptance_routes": [
+      "/",
+      "/guides/global-stablecoin-regulation-2026/",
+      "/guides/uk-stablecoin-capital-rules-2026/"
+    ]
+  },
+  "authorized_after_ui_verification": {
     "pr": 523,
-    "mode": "reconcile_with_current_main_then_complete",
-    "minimum_main_checkpoint": "210d68001fbd2560ffadf538fdb7cc9302b400a7",
+    "mode": "reconcile_with_then_current_main_then_complete",
+    "minimum_existing_checkpoint": "210d68001fbd2560ffadf538fdb7cc9302b400a7",
     "preserve_intervening_main_changes": true,
+    "preserve_guide_remediation": true,
     "market_access_records_after": 12,
     "evidence_after": 585,
     "evidence_relations_after": 585,
