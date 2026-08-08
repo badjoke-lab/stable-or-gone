@@ -8,6 +8,7 @@ const failures = [];
 const expect = (condition, message) => { if (!condition) failures.push(message); };
 
 const css = read('src/styles/public-ui.css');
+const cssFiles = fs.readdirSync(path.join(root, 'src/styles')).filter((name) => name.endsWith('.css'));
 const brand = read('src/components/BrandLockup.astro');
 const layout = read('src/layouts/BaseLayout.astro');
 const home = read('src/pages/index.astro');
@@ -17,6 +18,7 @@ const authority = readJson('config/post-pr531-authority-reconciliation.json');
 const marketAccess = readJson('data/market-access-records-v1.json');
 
 const baseImport = "import '../styles/public-ui.css';";
+expect(cssFiles.length === 1 && cssFiles[0] === 'public-ui.css', 'Guide remediation must preserve the repository single-stylesheet contract');
 expect(brand.includes(baseImport), 'base public UI stylesheet import missing');
 expect(!brand.includes('guide-readability-remediation.css'), 'Guide remediation must be folded into public-ui.css, not loaded as a second stylesheet');
 expect(css.includes('/* Guide & Research Surface Readability Remediation — 2026-08-08 */'), 'folded Guide remediation marker missing from public-ui.css');
@@ -73,6 +75,7 @@ console.log(JSON.stringify({
   duplicate_footer_support: 'suppressed_for_guide_and_longform',
   home_research_secondary_layout: 'three_columns_then_single_stack',
   home_lead_guide: 'global-stablecoin-regulation-2026',
+  public_stylesheets: cssFiles,
   canonical_changes: 0,
   market_access_records: 8,
   visual_review_still_required: true
