@@ -1,0 +1,102 @@
+name: Guide readability visual acceptance
+
+on:
+  pull_request:
+    paths:
+      - 'src/styles/guide-readability-remediation.css'
+      - 'src/styles/public-ui.css'
+      - 'src/components/BrandLockup.astro'
+      - 'src/layouts/BaseLayout.astro'
+      - 'src/pages/index.astro'
+      - 'src/pages/guides/**'
+      - 'scripts/capture-guide-readability-acceptance.mjs'
+      - 'scripts/validate-guide-readability-remediation-2026-08-08.mjs'
+      - '.github/workflows/guide-readability-visual-acceptance.yml'
+  push:
+    branches:
+      - main
+    paths:
+      - 'src/styles/guide-readability-remediation.css'
+      - 'src/styles/public-ui.css'
+      - 'src/components/BrandLockup.astro'
+      - 'src/layouts/BaseLayout.astro'
+      - 'src/pages/index.astro'
+      - 'src/pages/guides/**'
+      - 'scripts/capture-guide-readability-acceptance.mjs'
+      - 'scripts/validate-guide-readability-remediation-2026-08-08.mjs'
+      - '.github/workflows/guide-readability-visual-acceptance.yml'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  acceptance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      CAPTURE_BASE_URL: http://127.0.0.1:4173
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Validate active Guide remediation contract
+        run: npm run validate:active-workstream
+
+      - name: Build site
+        run: npm run build
+
+      - name: Start local site
+        run: |
+          python3 -m http.server 4173 --directory dist > /tmp/sog-guide-readability-server.log 2>&1 &
+          for attempt in $(seq 1 30); do
+            if curl -fsS "$CAPTURE_BASE_URL/" > /dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/sog-guide-readability-server.log
+          exit 1
+
+      - name: Capture exact desktop and mobile acceptance routes
+        run: node scripts/capture-guide-readability-acceptance.mjs --base-url "$CAPTURE_BASE_URL"
+
+      - name: Upload Guide readability acceptance artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sog-guide-readability-acceptance-${{ github.run_id }}
+          if-no-files-found: error
+          retention-days: 14
+          compression-level: 0
+          path: |
+            artifacts/guide-readability-acceptance/**
+            /tmp/sog-guide-readability-server.log
+
+      - name: Write acceptance summary
+        if: always()
+        run: |
+          echo "## Guide readability acceptance" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Required routes: /, global 2026 regulation guide, UK stablecoin guide" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Viewports: 1440x900 desktop, 390x844 mobile" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Captures: viewport + full-page for every route/device" >> "$GITHUB_STEP_SUMMARY"
+          if [ -f artifacts/guide-readability-acceptance/manifest.json ]; then
+            FAILURES=$(node -e "const x=require('./artifacts/guide-readability-acceptance/manifest.json'); console.log(x.failure_count)")
+            echo "- Automated layout failures: $FAILURES" >> "$GITHUB_STEP_SUMMARY"
+          fi
+          echo "- Manual artifact inspection remains required before merge" >> "$GITHUB_STEP_SUMMARY"
