@@ -1,3 +1,4 @@
+import './validate-guide-readability-remediation-2026-08-08.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 
