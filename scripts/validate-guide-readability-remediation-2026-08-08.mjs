@@ -7,7 +7,7 @@ const readJson = (file) => JSON.parse(read(file));
 const failures = [];
 const expect = (condition, message) => { if (!condition) failures.push(message); };
 
-const css = read('src/styles/guide-readability-remediation.css');
+const css = read('src/styles/public-ui.css');
 const brand = read('src/components/BrandLockup.astro');
 const layout = read('src/layouts/BaseLayout.astro');
 const home = read('src/pages/index.astro');
@@ -17,10 +17,9 @@ const authority = readJson('config/post-pr531-authority-reconciliation.json');
 const marketAccess = readJson('data/market-access-records-v1.json');
 
 const baseImport = "import '../styles/public-ui.css';";
-const remediationImport = "import '../styles/guide-readability-remediation.css';";
 expect(brand.includes(baseImport), 'base public UI stylesheet import missing');
-expect(brand.includes(remediationImport), 'Guide readability stylesheet import missing');
-expect(brand.indexOf(remediationImport) > brand.indexOf(baseImport), 'Guide readability stylesheet must load after public-ui.css');
+expect(!brand.includes('guide-readability-remediation.css'), 'Guide remediation must be folded into public-ui.css, not loaded as a second stylesheet');
+expect(css.includes('/* Guide & Research Surface Readability Remediation — 2026-08-08 */'), 'folded Guide remediation marker missing from public-ui.css');
 
 expect(css.includes('.guide-article-layout'), 'Guide shared layout rule missing');
 expect(css.includes('grid-template-columns: minmax(0, 1fr);'), 'persistent two-column Guide layout not removed');
