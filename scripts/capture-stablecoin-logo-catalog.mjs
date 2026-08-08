@@ -6,6 +6,7 @@ import { chromium } from 'playwright';
 
 const root = process.cwd();
 const decisionsPath = path.join(root, 'config/stablecoin-logo-decisions.json');
+const decisionAdditionsPath = path.join(root, 'config/stablecoin-logo-decisions-additions.json');
 const displayPolicyPath = path.join(root, 'config/stablecoin-logo-display-policy.json');
 const outputDir = path.join(root, 'artifacts/stablecoin-logo-catalog');
 const htmlPath = path.join(outputDir, 'index.html');
@@ -13,11 +14,18 @@ const screenshotPath = path.join(outputDir, 'stablecoin-logo-catalog.png');
 const reportPath = path.join(outputDir, 'stablecoin-logo-catalog.json');
 
 const ledger = JSON.parse(fs.readFileSync(decisionsPath, 'utf8'));
+const additions = fs.existsSync(decisionAdditionsPath)
+  ? JSON.parse(fs.readFileSync(decisionAdditionsPath, 'utf8'))
+  : { records: [] };
+const decisionRecords = [...(ledger.records ?? []), ...(additions.records ?? [])];
 const displayPolicy = JSON.parse(fs.readFileSync(displayPolicyPath, 'utf8'));
 const fallbackSlugs = new Set(displayPolicy.neutral_fallback_slugs ?? []);
 const expectedCanonicalRecords = Number(displayPolicy.canonical_records);
-if (!Array.isArray(ledger.records) || ledger.records.length !== expectedCanonicalRecords) {
-  throw new Error(`expected ${expectedCanonicalRecords} decision records, found ${ledger.records?.length ?? 0}`);
+if (decisionRecords.length !== expectedCanonicalRecords) {
+  throw new Error(`expected ${expectedCanonicalRecords} decision records, found ${decisionRecords.length}`);
+}
+if (new Set(decisionRecords.map((record) => record.slug)).size !== expectedCanonicalRecords) {
+  throw new Error('decision records contain duplicate slugs');
 }
 
 fs.rmSync(outputDir, { recursive: true, force: true });
@@ -30,7 +38,7 @@ const escapeHtml = (value) => String(value ?? '')
   .replaceAll('"', '&quot;');
 const fallbackText = (record) => String(record.symbol || record.name || '?').replace(/[^A-Za-z0-9]/g, '').slice(0, 2).toUpperCase() || '?';
 
-const cards = [...ledger.records]
+const cards = [...decisionRecords]
   .sort((left, right) => left.slug.localeCompare(right.slug))
   .map((record) => {
     const isFallback = fallbackSlugs.has(record.slug);
@@ -95,6 +103,7 @@ const report = {
   schema_version: '2.0',
   generated_at: new Date().toISOString(),
   screenshot: path.relative(root, screenshotPath),
+  decision_additions: additions.records?.length ?? 0,
   ...metrics,
   failures
 };
