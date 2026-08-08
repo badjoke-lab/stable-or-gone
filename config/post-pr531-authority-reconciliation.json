@@ -1,0 +1,81 @@
+{
+  "schema_version": "1.0",
+  "work_item": "post_pr531_authority_reconciliation",
+  "status": "active",
+  "recorded_at": "2026-08-08",
+  "official_origin": "https://www.stableorgone.com",
+  "production_checkpoint": {
+    "commit": "210d68001fbd2560ffadf538fdb7cc9302b400a7",
+    "canonical_hash": "sha256:57749955faa96d2bd836bac83ef41a0c5dc13f2342763dc4d975c588cd50c650",
+    "convergence_attempt": 1,
+    "counts": {
+      "assets": 119,
+      "organizations": 109,
+      "relationships": 131,
+      "events": 194,
+      "evidence": 584,
+      "evidence_relations": 584,
+      "reserve_reports": 127,
+      "known_unknowns": 352,
+      "regulatory_notes": 9,
+      "deployments": 186,
+      "legal_profiles": 119,
+      "reserve_components": 153,
+      "income_profiles": 119,
+      "market_access_records": 8,
+      "archive_recorded": 462,
+      "archive_not_recorded": 122,
+      "detail_routes": 422,
+      "metadata_checked_routes": 422
+    }
+  },
+  "intervening_merged_prs": [524, 525, 526, 527, 528, 529, 530, 531],
+  "completed_infrastructure_state": {
+    "official_domain": "https://www.stableorgone.com",
+    "legacy_host_301": "complete",
+    "legacy_redirect_implementation": "pages_advanced_mode_worker",
+    "strict_migration_gate": "enabled",
+    "production_deployment": "automatic_from_main"
+  },
+  "current_authority": {
+    "authorized_pr": 523,
+    "mode": "current_main_reconciliation_and_completion_only",
+    "required_main_checkpoint_at_or_after": "210d68001fbd2560ffadf538fdb7cc9302b400a7",
+    "target": "JPYSC Japan Market Access Pilot 3",
+    "required_exit": "REVIEW_GATE",
+    "stale_head_merge_prohibited": true
+  },
+  "pr523_transition": {
+    "evidence": [584, 585],
+    "evidence_relations": [584, 585],
+    "market_access_records": [8, 12],
+    "archive_recorded": [462, 463],
+    "archive_not_recorded": [122, 122],
+    "detail_routes": [422, 422],
+    "metadata_checked_routes": [422, 422]
+  },
+  "schedule": [
+    {"window": "2026-08-08/2026-08-09", "lane": "authority_and_schedule_reconciliation", "authorization": "current"},
+    {"window": "2026-08-08/2026-08-10", "lane": "pr523_current_main_reconciliation_and_completion", "authorization": "current_after_this_reconciliation"},
+    {"window": "immediately_after_pr523", "lane": "production_verification_and_review_gate_closeout", "authorization": "required_exit"},
+    {"window": "2026-08-10/2026-08-16", "lane": "stabilization_and_next_batch_preparation", "authorization": "planned"},
+    {"window": "2026-08-17/2026-08-23", "lane": "evidence_archive_payload_verification_batch_2", "authorization": "planned_separate_authority_required"},
+    {"window": "2026-08-24/2026-08-30", "lane": "tier_a_dossier_deepening_batch_4", "authorization": "planned_separate_authority_required"},
+    {"window": "2026-08-31/2026-09-06", "lane": "cycle_review_and_backlog_reconciliation", "authorization": "planned"},
+    {"window": "2026-09-07/2026-09-13", "lane": "next_operating_authority_and_contingency", "authorization": "planned"}
+  ],
+  "editorial_policy": {
+    "mode": "maintenance_only",
+    "automatic_new_article_cadence": false,
+    "allowed_triggers": ["material_regulatory_change", "search_demand_or_gap_supported_by_observed_data", "material_correction_or_source_update"]
+  },
+  "next_cycle_priority_planning_only": [
+    "market_access_expansion",
+    "tier_a_dossier_deepening",
+    "record_growth",
+    "new_ui"
+  ],
+  "future_lanes_pre_authorized": false,
+  "canonical_changes_allowed_in_this_reconciliation": false,
+  "public_product_changes_allowed_in_this_reconciliation": false
+}
