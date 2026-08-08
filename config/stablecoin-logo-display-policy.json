@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0",
-  "canonical_records": 117,
+  "canonical_records": 119,
   "direct_logo_records": 98,
-  "neutral_fallback_records": 19,
+  "neutral_fallback_records": 21,
   "display_logo_mark_types": [
     "token_logo",
     "official_product_mark",
@@ -16,6 +16,8 @@
   "neutral_fallback_slugs": [
     "acala-ausd",
     "avalon-usda",
+    "bison-bank-eub",
+    "bison-bank-usb",
     "brz",
     "chfau",
     "coins-phpc",
