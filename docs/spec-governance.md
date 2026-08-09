@@ -1,75 +1,66 @@
 # Stable or Gone Specification Governance
 
 Status: canonical governance specification  
-Updated: 2026-08-09
+Updated: 2026-08-10
 
 ## 1. Purpose
 
-This document defines repository authority, conflict resolution, change control, canonical-data preservation, public-surface governance, visual-quality gates, deployment governance, and bounded continuation rules.
+This document defines repository authority, conflict resolution, canonical-data preservation, public-surface governance, visual-quality gates, deployment governance, and bounded continuation rules.
 
-Merged repository specifications are the source of truth. Chat memory, handoff prose, issue discussion, stale branch state, generated reports, stale roadmap text, and unmerged drafts do not override merged repository authority.
-
-Historical PR-specific specifications and checkpoints remain historical records. Their completed semantic contracts remain useful, but old `current`, `active`, schedule, count, domain, or workstream wording does not override this document and the current roadmap.
+Merged repository specifications are the source of truth. Chat memory, handoff prose, issue discussion, stale branch state, generated reports, and unmerged drafts do not override merged repository authority.
 
 ## 2. Authority order
 
 When active documents disagree, use this order:
 
-1. `docs/deployment-policy.md` for publication, production verification, Cloudflare, domain, and production-visual gates.
+1. `docs/deployment-policy.md` for production/publication and production visual gates.
 2. `docs/spec-governance.md` for authority and change control.
-3. `docs/roadmap.md` for current phase, immediate item, bounded sequence, and schedule.
-4. the current merged roadmap amendment named below.
-5. the current work-item specification named below.
+3. `docs/roadmap.md` for current phase and bounded sequence.
+4. the current merged roadmap amendment.
+5. the current work-item specification and machine-readable authority contract.
 6. enduring regression authorities such as `docs/ui-v3-remediation-authority.md`.
-7. named audits, inventories, baselines, fixtures, release notes, research checkpoints, queues, and reviewed prior outputs.
+7. named audits, inventories, baselines, fixtures, queues, and reviewed prior outputs.
 8. conversation history and unmerged drafts.
 
-Current roadmap authority and handoff:
+Current roadmap authority:
+
+```text
+docs/roadmap-amendments/2026-08-10-stablecoin-compare-matrix-remediation-authority.md
+```
+
+Current work-item specification and contract:
+
+```text
+docs/quality/stablecoin-compare-matrix-remediation-spec.md
+config/stablecoin-compare-matrix-remediation-authority.json
+```
+
+Paused-but-preserved Evidence Archive authority remains recorded in:
 
 ```text
 docs/roadmap-amendments/2026-08-09-evidence-archive-payload-verification-batch-2-review-authority.md
 docs/roadmap-amendments/2026-08-09-evidence-archive-payload-verification-batch-2-candidates.md
-```
-
-Current work-item specifications:
-
-```text
 docs/quality/evidence-archive-payload-verification-batch-2-review-authority-spec.md
 docs/quality/evidence-archive-payload-verification-batch-2-candidate-spec.md
-```
-
-Current authority and candidate contracts:
-
-```text
 config/evidence-archive-payload-verification-batch-2-review-authority.json
 data/editorial-research/evidence-archive-payload-verification-batch-2-candidates-2026-08-09.json
 ```
 
-Required historical Evidence Archive inputs:
-
-```text
-config/evidence-archive-payload-verification-batch-1.json
-docs/migration/evidence-archive-maintenance-queue-v7-pr403.json
-config/evidence-archive-maintenance-queue-v7-pr403.json
-docs/roadmap-amendments/2026-08-01-evidence-archive-payload-verification-batch-1.md
-```
-
 ## 3. Mandatory reading and update protocol
 
-Before every substantive change to code, canonical data, UI, workflows, infrastructure, or documentation:
+Before every substantive change to code, canonical data, UI, workflows, infrastructure, or governing documentation:
 
 1. read `AGENTS.md`;
 2. read this file;
 3. read `docs/roadmap.md`;
 4. read `docs/deployment-policy.md`;
-5. read the current roadmap authority and candidate handoff;
-6. read the current review-authority and candidate specifications and contracts;
-7. read the required Batch 1 and Queue v7 inputs;
-8. read every enduring regression authority and named input required by the work item.
+5. read the current roadmap amendment, work-item spec, and authority contract;
+6. read `docs/ui-v3-remediation-authority.md` for material public UI work;
+7. read paused Evidence Archive authority before modifying or resuming that lane.
 
 A non-trivial PR is not ready for implementation until its exact roadmap item and governing specification are identified.
 
-If merged repository state changes authority, canonical counts, schedule, deployment behavior, public route behavior, or a blocking visual conclusion, update the governing specification and roadmap before implementation continues.
+If merged repository state changes authority, canonical counts, schedule, deployment behavior, public route behavior, or a blocking visual conclusion, update governing specification and roadmap before implementation continues.
 
 ## 4. Current reviewed execution state
 
@@ -93,7 +84,6 @@ Archive not recorded: 122
 Detail routes: 422
 Metadata-checked detail routes: 422
 Official public origin: https://www.stableorgone.com
-Review authority entry commit: c9588b092277bd14d87ce9209ba087e4752b3346
 Current production commit: dynamic; verify via deploy-production workflow and Issue #479
 Last canonical-changing implementation commit: 77e80dd3e2a62fea53ea0eabe91ef78a2d8ab1da
 Canonical hash: sha256:f386c1043ca5e83cafbd88e99746d0609aab0154ed48de1970677758a66ed5fa
@@ -101,76 +91,62 @@ Canonical file count: 466
 Legacy-host migration: complete
 ```
 
-A fixed production commit in a work-item document is an immutable entry checkpoint. It must not be treated as a perpetually current production commit after later documentation-only merges.
-
-Current `main` and production equality is verified dynamically by `.github/workflows/deploy-production.yml`, the strict domain-migration workflow, relevant production visual checks, provenance/output-parity checks, and Issue #479.
+Every canonical value above is frozen for the active Compare remediation.
 
 ## 5. Current bounded sequence
 
 ```text
 1. PR #523 bounded JPYSC implementation — complete
 2. PR #534 closeout and REVIEW GATE restoration — complete
-3. PR #535 Japan Market Access Expansion Review Batch 1 authority — complete
-4. PR #536 Japan Market Access Expansion Review Batch 1 no-go closeout — complete
-5. PR #537 Evidence Archive Payload Verification Batch 2 review-only authority — complete and production-verified
-6. Batch 2 deterministic candidate selection — complete
-7. MANUAL_PAYLOAD_REVIEW — current review stage
-8. REVIEW GATE remains the canonical implementation boundary
+3. PR #535/#536 Japan Market Access Expansion Review Batch 1 — complete no-go
+4. PR #537 Evidence Archive Payload Verification Batch 2 review-only authority — complete
+5. PR #538 deterministic Batch 2 candidate selection — complete
+6. PR #539 manual payload review — draft and paused; must not merge during Compare remediation
+7. Stablecoin Compare Matrix Remediation authority — current
+8. Stablecoin Compare Matrix implementation and visual acceptance — next under current authority
+9. Compare closeout / production parity — required
+10. Evidence Archive Payload Verification Batch 2 MANUAL_PAYLOAD_REVIEW — resume only after closeout
 ```
 
-There is no active canonical implementation authority.
+There is no active canonical-record implementation authority. `REVIEW GATE` remains the canonical implementation boundary.
 
-## 6. Active Evidence Archive Payload Verification Batch 2 review
+## 6. Active Stablecoin Compare Matrix Remediation
 
-The review-only lane is fixed to exactly ten current unarchived canonical Evidence identities selected deterministically under the merged PR #537 authority.
+The existing Stablecoin Register comparison selection supports two to four stablecoins but renders selected records as independent stacked dossiers. The active bounded remediation exists only to make that existing feature an actual comparison matrix.
 
-The generator reapplies the Queue v7 deterministic non-ranking semantics to current canonical Evidence, while preserving alias, Wayback-source, missing-source, and review-history suppression exclusions and additionally excluding all ten Evidence identities reviewed in Payload Verification Batch 1.
-
-Current deterministic result:
+Authorized behavior:
 
 ```text
-canonical Evidence: 585
-archive not recorded: 122
-eligible pool after exclusions: 68
-selected: 10
-selected priority bucket: official_issuer_protocol_product
+public route: /stablecoins/
+minimum ready selections: 2
+maximum selections: 4
+fifth selection: rejected
+matrix: attribute rows × selected record columns
+Differences only: required
+individual column removal: required
+Unknown / Not recorded: remain explicit
+URL compare state: selected order preserved
+mobile: internal bounded horizontal scroll; no page-level horizontal overflow
+```
+
+Only already-exposed comparison facts may be displayed. No new canonical inference, ranking, scoring, recommendation, winner/loser framing, or safety assessment is permitted.
+
+No canonical or schema delta is authorized.
+
+## 7. Paused Evidence Archive Payload Verification Batch 2
+
+The Evidence Archive review is not cancelled. It is paused at the already-created manual payload review checkpoint.
+
+```text
+stage: MANUAL_PAYLOAD_REVIEW
+candidate count: 10
+draft PR: #539
 canonical archive additions authorized: 0
 ```
 
-Fixed candidates:
+Its exact candidate set, Wayback review requirements, and Batch 1/Queue v7 semantic inputs remain unchanged. PR #539 may retain research artifacts but must not be merged while Compare remediation is active.
 
-```text
-sog_src_susd_legacy_context_batch_a
-sog_src_susd_rebuilding_2026
-sog_src_susd_roadmap_2026
-sog_src_susd_sip_status_2026
-sog_src_susd_sip420_2024
-sog_src_susd_sip423_2026
-sog_src_susd_synthetix_docs
-sog_src_susd_v3_faq_batch_a
-sog_src_terra_docs
-sog_src_tether_transparency
-```
-
-Priority order remains:
-
-```text
-reactivated tier
-regulator / court / legal
-official issuer / protocol / product
-reserve / attestation / audit
-high-quality reporting / research
-other reviewed source
-Evidence ID deterministic tie-break
-```
-
-This queue is not a ranking or safety score. Only three Batch 1 identities remain in the current unarchived input because seven received reviewed archive additions in Batch 1; all ten remain semantically excluded.
-
-For every selected candidate, review starts from the exact canonical source URL and a dated Wayback payload. Redirect-only responses, CDX metadata alone, replacement targets, unrelated archived pages, or payloads whose claim scope cannot be independently verified are insufficient. Valid review dispositions are `dated_exact_archive_proposal` and `reviewed_no_safe_change`.
-
-The review authority permits no canonical `archived_url` edits. Any promotable archive result requires a new separately reviewed and merged implementation authority binding exact Evidence IDs and exact dated archive URLs.
-
-## 7. Canonical and public safety boundary
+## 8. Canonical and public safety boundary
 
 Public registry and machine-readable claims remain canonical-only.
 
@@ -178,134 +154,39 @@ Public registry and machine-readable claims remain canonical-only.
 canonical_only = true
 includes_unreviewed_candidates = false
 includes_internal_monitoring = false
-includes_private_notes = false
+canonical implementation authority = REVIEW GATE
 ```
 
-Candidate, monitoring, discovery, editorial-research, and private material remains outside canonical public data unless separately reviewed and promoted.
+UI work cannot change stablecoin identity, lifecycle/issuance taxonomy, organization relationships, reserve claims, evidence, archive URLs, Market Access, route identity, or machine-readable canonical outputs.
 
-Unknown values remain unknown until reviewed evidence supports replacement.
+## 9. Material UI regression requirements
 
-Protected unresolved states include:
+`docs/ui-v3-remediation-authority.md` remains binding. Material UI changes require:
+
+- exact-head repository validation;
+- existing exhaustive desktop/mobile route and readability/color/overflow gates;
+- direct artifact review of the changed route family and relevant states;
+- no known visual defect accepted because CI is green;
+- no page-level horizontal overflow, clipping, overlap, or essential text loss;
+- no contradictory empty/error/ready state;
+- interactive targets preserving the shared accessibility floor.
+
+For Compare specifically, direct acceptance must cover desktop 2/3/4 selections and mobile 2/4 selections, differences-only on/off, column removal, fifth-selection rejection, URL restoration, and explicit Unknown/Not recorded values.
+
+## 10. Historical anchors
+
+Historical PR-specific checkpoints remain immutable audit evidence, including:
 
 ```text
-null
-unknown
-not_recorded
-not_applicable
-source_review_needed
+PR #493 — official-domain migration and production verification
+PR #500 — bounded MNEE Evidence and Archive Maintenance checkpoint
+PR #517 — Bison Bank EUB/USB complete-record growth checkpoint
+PR #522 — semantic authority for PR #523
+PR #523 — last canonical-changing implementation
+PR #537 — Evidence Archive Batch 2 review authority
+PR #538 — Evidence Archive Batch 2 deterministic candidates
 ```
 
-Missing evidence, a candidate row, a monitoring signal, a guide statement, a product-list omission, an archive metadata hit, or a planning gap is not proof of a canonical value.
+## 11. Exit rule
 
-Editorial context must not be converted automatically into asset-level availability, approval, legality, safety, ranking, or support claims.
-
-## 8. Historical PR #523 semantic authority
-
-The completed PR #523 result remains historical canonical truth:
-
-```text
-asset: sog_st_jpysc
-jurisdiction: JP / Japan
-provider: SBI VC Trade / VCTRADE
-effective from: 2026-06-24
-observed at: 2026-08-05
-buy_sell: account_internal_only
-deposit: unavailable
-withdrawal: unavailable
-external_wallet_transfer: unavailable
-Evidence: 584 -> 585
-Evidence Relations: 584 -> 585
-Market Access Records: 8 -> 12
-Archive recorded: 462 -> 463
-Archive not recorded: 122 -> 122
-Detail routes: 422 -> 422
-Metadata-checked routes: 422 -> 422
-```
-
-Historical closeout artifacts for PR #523/#534/#535/#536 remain historical evidence and are not rewritten merely to equal a later docs-only production commit.
-
-## 9. Material UI governance
-
-`docs/ui-v3-remediation-authority.md` remains the minimum regression contract for material public UI work.
-
-For material UI changes:
-
-- desktop and mobile screenshots are mandatory;
-- direct inspection of changed route families is mandatory;
-- initial-viewport and full-page review must be used where hierarchy or page length is relevant;
-- horizontal overflow, clipping, overlapping text, unreadable density, essential-content loss, or broken composition are blocking;
-- automated success cannot override a known visual defect.
-
-The active Evidence Archive review permits no material UI change.
-
-## 10. Monitoring, editorial, and candidate governance
-
-Monitoring remains private, review-only, and read-only with respect to canonical data. It may discover leads and prepare review material but may not write canonical data, self-accept baselines, auto-edit guides, auto-promote candidates, or deploy.
-
-The regulation guide cluster remains maintenance-only. There is no automatic article cadence. A new editorial route requires a material regulatory change, material correction/source update, or observed search-demand/content-gap basis and its own reviewed scope when material.
-
-Canonical growth, dossier deepening, archive verification, and Market Access expansion remain distinct operations. Schedule placement does not authorize implementation.
-
-## 11. Official-domain and deployment governance
-
-The only official origin is:
-
-```text
-https://www.stableorgone.com
-```
-
-The legacy host migration is complete. `public/_worker.js` in Cloudflare Pages Advanced Mode performs the exact path- and query-preserving HTTP 301 for the legacy hostname while canonical and `pages.dev` requests pass through to the static asset binding.
-
-The strict domain-migration gate established by PR #530 is binding. Repository output must not reintroduce the legacy host as a canonical origin, sitemap host, machine-readable canonical origin, OGP URL, or production base URL.
-
-Normal merged changes publish automatically from `main`. A merge is not production-parity evidence; deployment verification remains governed by `docs/deployment-policy.md` and Issue #479.
-
-## 12. Change control
-
-A change to any of the following requires a specification update in the same PR or an earlier dependency PR:
-
-- active workstream or approved PR sequence;
-- roadmap schedule when execution order materially changes;
-- canonical enum or record meaning;
-- evidence interpretation or source identity handling;
-- Evidence Archive selection, review, or promotion semantics;
-- unknown-state semantics;
-- route families or machine-readable output shape;
-- count or denominator semantics;
-- build provenance or canonical-hash boundaries;
-- monitoring source, baseline, schedule, permission, or retention semantics;
-- candidate-audit or complete-record feasibility semantics;
-- canonical Market Access Record semantics;
-- material UI/readability or product-surface behavior;
-- production publication gates;
-- official public origin or legacy-host redirect behavior.
-
-No implementation PR may introduce an undocumented alternative.
-
-## 13. Pull-request traceability
-
-Every non-trivial PR body must identify specification references, roadmap item, scope, explicit non-goals, named inputs and prior outputs, canonical-data preservation, public-output preservation, validation, visual inspection when applicable, deployment classification, and next review gate.
-
-A PR that cannot cite an approved work item must pause until repository authority is corrected.
-
-## 14. Schedule versus authority
-
-Dates in `docs/roadmap.md` are targets, not implementation permission.
-
-Evidence Archive Payload Verification Batch 2 is the current review workstream. Its candidate set is fixed and manual payload review is active. The review authority does not authorize canonical archive additions. Tier A Dossier Deepening Batch 4, Record Growth, cycle review, and later work require their own authority.
-
-## 15. Historical checkpoints
-
-Do not rewrite historical checkpoint artifacts merely because current counts, UI, domain, or workstream changed. Forward authority documents describe current state while historical release-integrity baselines, completed PR specifications, archived audits, and prior production checkpoints remain immutable historical evidence unless a specific correction is required.
-
-Required compatibility anchors include PR #493 official-domain migration, PR #500 bounded MNEE Evidence/Archive maintenance, PR #517 Bison Bank growth, and PR #522 semantic authority for PR #523.
-
-## 16. Required exit
-
-Current canonical implementation boundary:
-
-```text
-REVIEW GATE
-```
-
-The active review may produce exact candidate dispositions and a bounded implementation proposal only. Any canonical archive promotion requires a new separately reviewed and merged implementation authority with exact IDs, exact archive URLs, deltas, and validators.
+After the Compare implementation is merged, production-verified, and directly visually accepted, a separate closeout must restore Evidence Archive Payload Verification Batch 2 manual review as the active lane. The Compare authority ends at that closeout. Canonical implementation remains behind REVIEW GATE throughout.
