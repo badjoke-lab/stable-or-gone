@@ -54,7 +54,11 @@ for (const forbidden of ['canonical_archived_url_change', 'source_url_replacemen
 expect(spec.includes('separately reviewed and merged implementation authority'), 'spec missing separately reviewed and merged implementation authority boundary');
 expect(spec.includes('exactly ten candidates'), 'spec missing exact candidate bound');
 expect(amendment.includes('No canonical archive mutation is authorized'), 'amendment missing canonical mutation prohibition');
-expect(active === "import './validate-evidence-archive-payload-verification-batch-2-review-authority.mjs';", 'active validator wiring changed');
+const allowedActiveWiring = new Set([
+  "import './validate-evidence-archive-payload-verification-batch-2-review-authority.mjs';",
+  "import './validate-post-pr541-compare-closeout-evidence-review-restoration.mjs';"
+]);
+expect(allowedActiveWiring.has(active), 'active validator wiring changed outside direct/restored Evidence review authority');
 
 if (failures.length) {
   console.error('Evidence Archive Payload Verification Batch 2 review authority validation failed:');

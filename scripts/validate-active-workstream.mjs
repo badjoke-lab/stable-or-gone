@@ -1,1 +1,1 @@
-import './validate-stablecoin-compare-matrix-remediation.mjs';
+import './validate-post-pr541-compare-closeout-evidence-review-restoration.mjs';

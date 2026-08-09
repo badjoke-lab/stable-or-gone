@@ -5,13 +5,13 @@ This file is the mandatory entry point for humans, AI agents, and automation wor
 ## Current authority
 
 ```text
-Repository state: Stablecoin Compare Matrix Remediation active
-Current public implementation authority: Stablecoin Compare Matrix Remediation
-Authorized public route: /stablecoins/
-Evidence Archive Payload Verification Batch 2: paused at MANUAL_PAYLOAD_REVIEW
-Paused Evidence review draft PR: #539
+Repository state: Evidence Archive Payload Verification Batch 2 manual review active
+Current review authority: Evidence Archive Payload Verification Batch 2
+Current stage: MANUAL_PAYLOAD_REVIEW
+Active draft review PR: #539
+Fixed candidate count: 10
+Canonical archive additions authorized: 0
 Canonical implementation authority: REVIEW GATE
-Canonical promotions authorized: no
 Current canonical checkpoint: sog_jpysc_market_access_pilot_3_canonical_119_checkpoint_pr523_2026_08_05
 Current production commit: dynamic; verify via deploy-production workflow and Issue #479
 Last canonical-changing implementation commit: 77e80dd3e2a62fea53ea0eabe91ef78a2d8ab1da
@@ -21,9 +21,9 @@ Official public origin: https://www.stableorgone.com
 Legacy-host 301: complete via Pages Advanced Mode worker and strict migration gate
 ```
 
-The Compare remediation is an explicit interruption for a known public comparison defect. The existing comparison selector already supports two to four records, but the current rendering stacks whole record dossiers instead of aligning like-for-like attributes. The remediation must preserve the 2–4 selection contract and replace the stacked presentation with one attribute-by-record matrix.
+The Stablecoin Compare Matrix Remediation is complete. PR #540 authorized the bounded repair; PR #541 implemented it and merged as `539a27fd5854a1c2544f4653a2161be36860a002`. Production run `31326135906` succeeded. Exact-head visual acceptance run `31325811381` passed with `audit.json: ok=true / failures=[]` and `zero-state.json: ok=true`.
 
-Evidence Archive Payload Verification Batch 2 remains valid historical/review authority but is temporarily suspended. PR #539 and its Wayback probe artifacts remain draft review evidence only and must not merge while the Compare remediation authority is active.
+The Compare interruption is closed. Evidence Archive Payload Verification Batch 2 is restored exactly at the pre-interruption manual review boundary. PR #539 is again the active review draft; it remains review-only and must not promote canonical archive URLs.
 
 ## Current reviewed canonical counts
 
@@ -48,7 +48,7 @@ Detail routes: 422
 Metadata-checked routes: 422
 ```
 
-Every count above must remain unchanged by the Compare lane.
+Every count above remains frozen while the active lane is review-only.
 
 ## Historical authority anchors
 
@@ -65,6 +65,8 @@ PR #535 — Japan Market Access Expansion Review Batch 1 authority
 PR #536 — Japan Market Access Expansion Review Batch 1 no-go closeout
 PR #537 — Evidence Archive Payload Verification Batch 2 review-only authority
 PR #538 — deterministic Evidence Archive Payload Verification Batch 2 candidate set
+PR #540 — Stablecoin Compare Matrix Remediation authority
+PR #541 — Stablecoin Compare Matrix implementation and production-verified closeout target
 ```
 
 Merged repository authority outranks chat memory, handoff prose, issue discussion, stale branch state, generated reports, and unmerged drafts.
@@ -77,57 +79,44 @@ Before substantive continuation, read the merged current versions of:
 2. `docs/spec-governance.md`
 3. `docs/roadmap.md`
 4. `docs/deployment-policy.md`
-5. `docs/roadmap-amendments/2026-08-10-stablecoin-compare-matrix-remediation-authority.md`
-6. `docs/quality/stablecoin-compare-matrix-remediation-spec.md`
-7. `config/stablecoin-compare-matrix-remediation-authority.json`
-8. `docs/ui-v3-remediation-authority.md`
-9. the paused Evidence Archive Batch 2 authority/candidate documents before changing or resuming that lane
+5. `docs/roadmap-amendments/2026-08-10-post-pr541-compare-closeout-evidence-review-restoration.md`
+6. `docs/roadmap-amendments/2026-08-09-evidence-archive-payload-verification-batch-2-review-authority.md`
+7. `docs/roadmap-amendments/2026-08-09-evidence-archive-payload-verification-batch-2-candidates.md`
+8. `docs/quality/evidence-archive-payload-verification-batch-2-review-authority-spec.md`
+9. `docs/quality/evidence-archive-payload-verification-batch-2-candidate-spec.md`
+10. `config/evidence-archive-payload-verification-batch-2-review-authority.json`
+11. `data/editorial-research/evidence-archive-payload-verification-batch-2-candidates-2026-08-09.json`
+12. `docs/ui-v3-remediation-authority.md` as the enduring material-public-UI regression authority.
+13. Batch 1 review history and Queue v7 inputs before making any review disposition.
 
-## Active Compare remediation boundary
-
-Required public behavior:
-
-```text
-selection ready range: 2 to 4 stablecoins
-fifth selection: reject without changing state
-rendering: one attribute-by-record matrix
-2 selected: 2 value columns
-3 selected: 3 value columns
-4 selected: 4 value columns
-individual column removal: required
-Differences only: required, default off
-Unknown / Not recorded: explicit
-shareable compare URL: preserve selected order
-mobile: bounded comparison-region horizontal scroll; no page-level overflow
-ranking / scoring / recommendation: prohibited
-```
-
-Required comparison rows are lifecycle, issuance, asset class, launch, reference, backing, stabilization, reserve disclosure, redemption, organizations/control, deployments, linked events, source identities, evidence relations, and known unknowns.
-
-Authorized implementation files are limited to the Stablecoin Register comparison presentation, supporting script/component/style code, and tests/audits needed to prove the fix. No canonical data, schema, taxonomy, route-set, unrelated redesign, or public recommendation changes are authorized.
-
-## Visual acceptance
-
-The enduring `docs/ui-v3-remediation-authority.md` regression contract remains binding. Exact-head acceptance must include direct artifact review for desktop 2/3/4-record comparison and mobile 2/4-record comparison, differences-only on/off, column removal, fifth-selection rejection, URL restoration, and explicit Unknown/Not recorded rendering.
-
-Known overlap, clipping, page-level horizontal overflow, unreadable essential text, contradictory state, or another visual defect blocks merge even if CI is green.
-
-## Paused Evidence Archive lane
-
-The paused lane remains exactly:
+## Active Evidence Archive review boundary
 
 ```text
-Evidence Archive Payload Verification Batch 2
+lane: Evidence Archive Payload Verification Batch 2
 stage: MANUAL_PAYLOAD_REVIEW
-candidate count: 10
-canonical archive additions authorized: 0
+candidate count: exactly 10
+candidate artifact: fixed by PR #538
 draft review PR: #539
+canonical archived_url changes: prohibited
+new Evidence / Evidence Relation changes: prohibited
+canonical source URL replacement: prohibited
+Market Access / route / schema / taxonomy changes: prohibited
+canonical implementation authority: REVIEW GATE
+maximum canonical archive additions: 0
 ```
 
-The fixed candidate set and review rules remain in the existing PR #537/#538 authority, candidate artifact, Queue v7 inputs, and Batch 1 history. Do not silently modify or promote them during Compare work.
+Manual review must use the exact canonical source URL, find a dated Wayback capture, independently fetch the archived payload, inspect HTTP/body content, and compare preserved body content against the canonical claim scope. CDX metadata alone, redirect-only captures, generic shells, unrelated payloads, or future-only text are insufficient. `reviewed_no_safe_change` is a valid outcome.
+
+Any exact dated archive proposal remains a review result only. Canonical promotion requires a separate reviewed and merged implementation authority.
+
+## Completed Compare behavior
+
+The public `/stablecoins/` comparison now preserves the existing 2–4 selection contract, rejects a fifth selection, renders one attribute-by-record matrix, supports individual column removal and `Differences only`, preserves ordered shared URL state, keeps Unknown/Not recorded explicit, and uses bounded internal mobile scrolling without page-level overflow.
+
+Compare follow-up implementation requires separate authority; it is not the active workstream.
 
 ## Exit
 
-After the Compare implementation is merged, production-verified, and visually accepted, create a closeout that restores Evidence Archive Payload Verification Batch 2 manual review as the active lane. Canonical implementation remains behind REVIEW GATE throughout.
+Complete the ten-candidate manual payload review in PR #539. The valid review outcomes are exact dated archive proposals or `reviewed_no_safe_change`. After review completion, return to `REVIEW_GATE`; any canonical archive mutation must be separately authorized.
 
 Issue #479 remains the deployment-history authority.
