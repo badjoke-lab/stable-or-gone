@@ -60,8 +60,11 @@ export function buildBatch2ArchiveCandidates() {
   if (archiveNotRecorded.length !== authority.entry_canonical_checkpoint.archive_not_recorded) {
     throw new Error(`Expected ${authority.entry_canonical_checkpoint.archive_not_recorded} unarchived rows, found ${archiveNotRecorded.length}`);
   }
-  if (checkpoint.evidence_quality.archive_not_recorded_count !== archiveNotRecorded.length) {
+  if (checkpoint.counts.archive_not_recorded_count !== archiveNotRecorded.length) {
     throw new Error('Current canonical checkpoint archive-not-recorded count differs from loaded Evidence');
+  }
+  if (checkpoint.counts.archive_index_count !== authority.entry_canonical_checkpoint.archive_recorded) {
+    throw new Error('Current canonical checkpoint archive-recorded count differs from merged authority');
   }
 
   const historyById = new Map((historyManifest.effective_evidence_identities ?? []).map((row) => [row.evidence_id, row]));
