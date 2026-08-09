@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.0",
+  "status": "production_verified_closeout",
+  "recorded_at": "2026-08-09",
+  "source_prs": [521, 522, 523],
+  "market_access_pr": 523,
+  "production_commit": "77e80dd3e2a62fea53ea0eabe91ef78a2d8ab1da",
+  "production": {
+    "origin": "https://www.stableorgone.com",
+    "canonical_hash": "sha256:f386c1043ca5e83cafbd88e99746d0609aab0154ed48de1970677758a66ed5fa",
+    "canonical_file_count": 466,
+    "convergence_attempt": 2,
+    "provenance_convergence_attempt": 3,
+    "counts": {
+      "assets": 119,
+      "organizations": 109,
+      "relationships": 131,
+      "events": 194,
+      "evidence": 585,
+      "evidence_relations": 585,
+      "deployments": 186,
+      "market_access_records": 12,
+      "archive_recorded": 463,
+      "archive_not_recorded": 122,
+      "detail_routes": 422,
+      "metadata_checked_routes": 422
+    }
+  },
+  "pr523_result": {
+    "asset": "sog_st_jpysc",
+    "provider": "SBI VC Trade / VCTRADE",
+    "jurisdiction": "JP / Japan",
+    "buy_sell": "account_internal_only",
+    "deposit": "unavailable",
+    "withdrawal": "unavailable",
+    "external_wallet_transfer": "unavailable",
+    "evidence_delta": 1,
+    "evidence_relation_delta": 1,
+    "market_access_delta": 4,
+    "archive_recorded_delta": 1,
+    "route_changes": 0
+  },
+  "repository_authority": "REVIEW_GATE",
+  "later_lane_authorized": false
+}

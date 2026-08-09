@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0",
+  "work_item": "post_pr523_production_closeout",
+  "status": "active",
+  "recorded_at": "2026-08-09",
+  "market_access_pr": 523,
+  "market_access_authority_pr": 522,
+  "source_review_pr": 521,
+  "merge_commit": "77e80dd3e2a62fea53ea0eabe91ef78a2d8ab1da",
+  "production_commit": "77e80dd3e2a62fea53ea0eabe91ef78a2d8ab1da",
+  "production_canonical_hash": "sha256:f386c1043ca5e83cafbd88e99746d0609aab0154ed48de1970677758a66ed5fa",
+  "production_canonical_file_count": 466,
+  "convergence_attempt": 2,
+  "provenance_convergence_attempt": 3,
+  "expected_counts": {
+    "assets": 119,
+    "organizations": 109,
+    "relationships": 131,
+    "events": 194,
+    "evidence": 585,
+    "evidence_relations": 585,
+    "deployments": 186,
+    "market_access_records": 12,
+    "archive_recorded": 463,
+    "archive_not_recorded": 122,
+    "detail_routes": 422,
+    "metadata_checked_routes": 422
+  },
+  "canonical_changes_allowed": false,
+  "public_changes_allowed": false,
+  "later_lane_authorized": false,
+  "exit_boundary": "REVIEW_GATE"
+}
