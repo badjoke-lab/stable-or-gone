@@ -18,40 +18,37 @@ When active documents disagree, use this order:
 1. `docs/deployment-policy.md` for publication, production verification, Cloudflare, domain, and production-visual gates.
 2. `docs/spec-governance.md` for authority and change control.
 3. `docs/roadmap.md` for current phase, immediate item, bounded sequence, and schedule.
-4. the current merged roadmap amendment named below.
-5. the current work-item specification named below.
+4. the current merged roadmap result named below.
+5. the current work-item result specification named below.
 6. enduring regression authorities such as `docs/ui-v3-remediation-authority.md`.
 7. named audits, inventories, baselines, fixtures, release notes, research checkpoints, queues, and reviewed prior outputs.
 8. conversation history and unmerged drafts.
 
-Current roadmap authority and handoff:
+Current roadmap result:
 
 ```text
-docs/roadmap-amendments/2026-08-09-evidence-archive-payload-verification-batch-2-review-authority.md
-docs/roadmap-amendments/2026-08-09-evidence-archive-payload-verification-batch-2-candidates.md
+docs/roadmap-amendments/2026-08-09-evidence-archive-payload-verification-batch-2-review-result.md
 ```
 
-Current work-item specifications:
+Current work-item result specification:
 
 ```text
-docs/quality/evidence-archive-payload-verification-batch-2-review-authority-spec.md
-docs/quality/evidence-archive-payload-verification-batch-2-candidate-spec.md
+docs/quality/evidence-archive-payload-verification-batch-2-review-result-spec.md
 ```
 
-Current authority and candidate contracts:
+Current private review result:
+
+```text
+data/editorial-research/evidence-archive-payload-verification-batch-2-review-2026-08-09.json
+```
+
+Required review lineage:
 
 ```text
 config/evidence-archive-payload-verification-batch-2-review-authority.json
 data/editorial-research/evidence-archive-payload-verification-batch-2-candidates-2026-08-09.json
-```
-
-Required historical Evidence Archive inputs:
-
-```text
 config/evidence-archive-payload-verification-batch-1.json
 docs/migration/evidence-archive-maintenance-queue-v7-pr403.json
-config/evidence-archive-maintenance-queue-v7-pr403.json
-docs/roadmap-amendments/2026-08-01-evidence-archive-payload-verification-batch-1.md
 ```
 
 ## 3. Mandatory reading and update protocol
@@ -62,10 +59,10 @@ Before every substantive change to code, canonical data, UI, workflows, infrastr
 2. read this file;
 3. read `docs/roadmap.md`;
 4. read `docs/deployment-policy.md`;
-5. read the current roadmap authority and candidate handoff;
-6. read the current review-authority and candidate specifications and contracts;
-7. read the required Batch 1 and Queue v7 inputs;
-8. read every enduring regression authority and named input required by the work item.
+5. read the current roadmap result;
+6. read the current result specification and private review result;
+7. read the authority, candidate, Batch 1, and Queue v7 lineage named above;
+8. read every enduring regression authority and named input required by the next separately authorized work item.
 
 A non-trivial PR is not ready for implementation until its exact roadmap item and governing specification are identified.
 
@@ -110,65 +107,55 @@ Current `main` and production equality is verified dynamically by `.github/workf
 ```text
 1. PR #523 bounded JPYSC implementation — complete
 2. PR #534 closeout and REVIEW GATE restoration — complete
-3. PR #535 Japan Market Access Expansion Review Batch 1 authority — complete
-4. PR #536 Japan Market Access Expansion Review Batch 1 no-go closeout — complete
-5. PR #537 Evidence Archive Payload Verification Batch 2 review-only authority — complete and production-verified
-6. Batch 2 deterministic candidate selection — complete
-7. MANUAL_PAYLOAD_REVIEW — current review stage
-8. REVIEW GATE remains the canonical implementation boundary
+3. PRs #535–#536 Japan Market Access Expansion Review Batch 1 — complete no-go
+4. PR #537 Evidence Archive Payload Verification Batch 2 review-only authority — complete and production-verified
+5. PR #538 deterministic Batch 2 candidate selection — complete and production-verified
+6. Batch 2 manual payload review — complete, 8 proposals / 2 no-safe-change
+7. REVIEW GATE — current canonical implementation boundary
 ```
 
 There is no active canonical implementation authority.
 
-## 6. Active Evidence Archive Payload Verification Batch 2 review
+## 6. Evidence Archive Payload Verification Batch 2 result
 
-The review-only lane is fixed to exactly ten current unarchived canonical Evidence identities selected deterministically under the merged PR #537 authority.
+The ten deterministic candidates were reviewed using exact canonical-source Wayback discovery, independent raw replay payload retrieval with redirects disabled, payload byte and SHA-256 recording, extracted-text inspection, and manual comparison against the existing canonical claim scope or source role.
 
-The generator reapplies the Queue v7 deterministic non-ranking semantics to current canonical Evidence, while preserving alias, Wayback-source, missing-source, and review-history suppression exclusions and additionally excluding all ten Evidence identities reviewed in Payload Verification Batch 1.
-
-Current deterministic result:
+Review result:
 
 ```text
-canonical Evidence: 585
-archive not recorded: 122
-eligible pool after exclusions: 68
-selected: 10
-selected priority bucket: official_issuer_protocol_product
+reviewed: 10
+dated exact archive proposals: 8
+reviewed no safe change: 2
 canonical archive additions authorized: 0
 ```
 
-Fixed candidates:
+Proposed Evidence IDs:
 
 ```text
 sog_src_susd_legacy_context_batch_a
 sog_src_susd_rebuilding_2026
 sog_src_susd_roadmap_2026
 sog_src_susd_sip_status_2026
-sog_src_susd_sip420_2024
-sog_src_susd_sip423_2026
 sog_src_susd_synthetix_docs
 sog_src_susd_v3_faq_batch_a
 sog_src_terra_docs
 sog_src_tether_transparency
 ```
 
-Priority order remains:
+No-safe-change Evidence IDs:
 
 ```text
-reactivated tier
-regulator / court / legal
-official issuer / protocol / product
-reserve / attestation / audit
-high-quality reporting / research
-other reviewed source
-Evidence ID deterministic tie-break
+sog_src_susd_sip420_2024
+sog_src_susd_sip423_2026
 ```
 
-This queue is not a ranking or safety score. Only three Batch 1 identities remain in the current unarchived input because seven received reviewed archive additions in Batch 1; all ten remain semantically excluded.
+For SIP-420, every reviewed replay of the exact canonical no-slash URL returned HTTP 302 to a trailing-slash archived target. The review contract does not permit redirect-only promotion or silent source-URL normalization.
 
-For every selected candidate, review starts from the exact canonical source URL and a dated Wayback payload. Redirect-only responses, CDX metadata alone, replacement targets, unrelated archived pages, or payloads whose claim scope cannot be independently verified are insufficient. Valid review dispositions are `dated_exact_archive_proposal` and `reviewed_no_safe_change`.
+For SIP-423, a dedicated retry found zero HTTP-200 capture rows across the exact canonical URL, exact-match canonical query, and trailing-slash discovery query. The live source is not a dated archived payload.
 
-The review authority permits no canonical `archived_url` edits. Any promotable archive result requires a new separately reviewed and merged implementation authority binding exact Evidence IDs and exact dated archive URLs.
+The eight proposal URLs, capture timestamps, HTTP-200 status, payload byte counts, SHA-256 digests, payload markers, review reasons, and Actions artifact lineage are fixed in the private review result.
+
+The review itself changes no canonical Evidence row. A separate implementation authority is required before any proposed archive URL can be promoted.
 
 ## 7. Canonical and public safety boundary
 
@@ -195,7 +182,7 @@ not_applicable
 source_review_needed
 ```
 
-Missing evidence, a candidate row, a monitoring signal, a guide statement, a product-list omission, an archive metadata hit, or a planning gap is not proof of a canonical value.
+Missing evidence, a candidate row, monitoring signal, guide statement, product-list omission, archive metadata hit, redirect-only replay, or planning gap is not proof of a canonical value.
 
 Editorial context must not be converted automatically into asset-level availability, approval, legality, safety, ranking, or support claims.
 
@@ -222,7 +209,7 @@ Detail routes: 422 -> 422
 Metadata-checked routes: 422 -> 422
 ```
 
-Historical closeout artifacts for PR #523/#534/#535/#536 remain historical evidence and are not rewritten merely to equal a later docs-only production commit.
+Historical closeout artifacts remain historical evidence and are not rewritten merely to equal a later docs-only production commit.
 
 ## 9. Material UI governance
 
@@ -236,7 +223,7 @@ For material UI changes:
 - horizontal overflow, clipping, overlapping text, unreadable density, essential-content loss, or broken composition are blocking;
 - automated success cannot override a known visual defect.
 
-The active Evidence Archive review permits no material UI change.
+The completed Evidence Archive review permits no material UI change.
 
 ## 10. Monitoring, editorial, and candidate governance
 
@@ -268,7 +255,7 @@ A change to any of the following requires a specification update in the same PR 
 - roadmap schedule when execution order materially changes;
 - canonical enum or record meaning;
 - evidence interpretation or source identity handling;
-- Evidence Archive selection, review, or promotion semantics;
+- Evidence Archive selection, review, source normalization, or promotion semantics;
 - unknown-state semantics;
 - route families or machine-readable output shape;
 - count or denominator semantics;
@@ -292,7 +279,7 @@ A PR that cannot cite an approved work item must pause until repository authorit
 
 Dates in `docs/roadmap.md` are targets, not implementation permission.
 
-Evidence Archive Payload Verification Batch 2 is the current review workstream. Its candidate set is fixed and manual payload review is active. The review authority does not authorize canonical archive additions. Tier A Dossier Deepening Batch 4, Record Growth, cycle review, and later work require their own authority.
+Evidence Archive Payload Verification Batch 2 review is complete. Its eight archive proposals remain non-canonical until a separate implementation authority is reviewed and merged. The roadmap's 2026-08-17 to 2026-08-23 implementation window remains a planning target, not implicit permission. Tier A Dossier Deepening Batch 4, Record Growth, cycle review, and later work also require their own authority.
 
 ## 15. Historical checkpoints
 
@@ -308,4 +295,4 @@ Current canonical implementation boundary:
 REVIEW GATE
 ```
 
-The active review may produce exact candidate dispositions and a bounded implementation proposal only. Any canonical archive promotion requires a new separately reviewed and merged implementation authority with exact IDs, exact archive URLs, deltas, and validators.
+The completed Batch 2 review authorizes no canonical mutation. Any archive promotion requires a new separately reviewed and merged implementation authority binding exact IDs, exact archive URLs, maximum deltas, validators, and production verification.
