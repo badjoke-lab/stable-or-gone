@@ -5,20 +5,24 @@ This file is the mandatory entry point for humans, AI agents, and automation wor
 ## Current authority
 
 ```text
-Repository state: PR #523 merged and production-verified; REVIEW GATE
+Repository state: PR #534 merged and production-verified; Market Access review-only authority active
 Current canonical checkpoint: sog_jpysc_market_access_pilot_3_canonical_119_checkpoint_pr523_2026_08_05
-Production commit: 77e80dd3e2a62fea53ea0eabe91ef78a2d8ab1da
+Current production commit: 8ba1ed2b4aff36aaa9545c6f3e3cdd113dbb5ed2
+Last canonical-changing implementation commit: 77e80dd3e2a62fea53ea0eabe91ef78a2d8ab1da
 Production canonical hash: sha256:f386c1043ca5e83cafbd88e99746d0609aab0154ed48de1970677758a66ed5fa
 Production canonical file count: 466
-Production parity convergence attempt: 2
-Production provenance convergence attempt: 3
+Current production parity convergence attempt: 1
+Current production provenance convergence attempt: 3
 Official public origin: https://www.stableorgone.com
 Legacy-host 301: complete via Pages Advanced Mode worker and strict migration gate
-Current authority: REVIEW GATE
-Later implementation lanes authorized: no
+Current implementation authority: REVIEW GATE
+Current review authority: Japan Market Access Expansion Review Batch 1
+Later canonical implementation lanes authorized: no
 ```
 
-PR #523 completed the bounded JPYSC Japan Market Access implementation after incorporating the then-current `main`. The merged commit above has been deployed to Cloudflare Pages and production verification passed. Repository authority is now `REVIEW GATE`; no later lane is implementation-authorized by this closeout.
+PR #523 completed the bounded JPYSC Japan Market Access implementation. PR #534 then closed the production checkpoint without changing canonical data and returned implementation authority to `REVIEW GATE`. The current `8ba1ed2b...` production commit therefore has the same canonical hash and counts as the historical canonical-changing PR #523 commit `77e80dd3...`.
+
+A new separately bounded review-only authority is now active for Japan Market Access Expansion Review Batch 1. It permits source review and candidate selection only. It does not permit canonical Market Access promotion, new Evidence, or public product changes.
 
 ## Current reviewed canonical counts
 
@@ -62,16 +66,10 @@ PR #530 — strict legacy-domain migration gate finalization
 PR #531 — 2026 regulation guide cluster and 119-record mark-audit repair
 PR #532 — post-PR #531 authority and schedule reconciliation
 PR #533 — shared Guide readability and research-layout remediation
+PR #534 — post-PR #523 production closeout and REVIEW GATE restoration
 ```
 
-Required historical authority anchors retained for compatibility and audit traceability:
-
-```text
-PR #493 — official-domain migration and production verification
-PR #500 — bounded MNEE Evidence and Archive Maintenance checkpoint
-PR #517 — Bison Bank EUB and USB complete-record growth checkpoint
-PR #522 — semantic authority for the completed PR #523 JPYSC implementation
-```
+Historical PR-specific checkpoints remain immutable audit evidence. Forward authority documents must describe the current production and authority state rather than re-label historical artifacts.
 
 Merged repository authority outranks chat memory, handoff prose, issue discussion, stale branch state, generated reports, and unmerged drafts.
 
@@ -83,31 +81,62 @@ Before every substantive continuation, read the merged current versions of:
 2. `docs/spec-governance.md`
 3. `docs/roadmap.md`
 4. `docs/deployment-policy.md`
-5. `docs/roadmap-amendments/2026-08-09-post-pr523-production-closeout.md`
-6. `docs/quality/post-pr523-production-closeout-spec.md`
-7. the specification and authority for the next separately authorized work item
-8. `docs/ui-v3-remediation-authority.md` for any material public UI work
-9. every named validator, audit, fixture, baseline, queue, source review, and prior output required by that work item
+5. `docs/roadmap-amendments/2026-08-09-post-pr534-market-access-review-authority.md`
+6. `docs/quality/market-access-expansion-review-authority-2026-08-09-spec.md`
+7. `docs/market-access-record-spec.md`
+8. `config/market-access-governance-v1.json`
+9. every named validator, source review, fixture, baseline, queue, handoff, and prior output required by the active review item
+10. `docs/ui-v3-remediation-authority.md` before any material public UI work
 
-The completed PR #523 lineage remains:
+The completed PR #523 lineage remains historical input:
 
 ```text
-docs/market-access-record-spec.md
-schemas/market-access-record-v1.schema.json
+docs/roadmap-amendments/2026-08-09-post-pr523-production-closeout.md
+docs/quality/post-pr523-production-closeout-spec.md
 config/jpysc-market-access-pilot-3-implementation-authority-pr522.json
-docs/quality/jpysc-market-access-pilot-3-implementation-authority-pr522-spec.md
-docs/migration/jpysc-market-access-pilot-3-implementation-authority-pr522.json
 config/japan-market-access-pilot-3-jpysc-review-pr521.json
 data/editorial-research/japan-market-access-pilot-3-jpysc-review-pr521.json
-data/evidence-pr356-market-access-pilot-1.json
 data/market-access-records-v1.json
 ```
 
 If merged repository state changes authority, production checkpoint, counts, schedule, deployment behavior, or a blocking visual conclusion, update the governing specification and roadmap before implementation continues.
 
+## Active review boundary
+
+The active lane is:
+
+```text
+Japan Market Access Expansion Review Batch 1
+jurisdiction: JP / Japan
+maximum asset x platform/service candidate pairs: 3
+assets: existing canonical identities only
+provider/service selection: source-led, not predetermined
+functions:
+- buy_sell
+- deposit
+- withdrawal
+- external_wallet_transfer
+```
+
+Allowed work is limited to primary-source discovery/review, private or editorial review artifacts, function-scoped source dispositions, effective/observed date review, Evidence-identity reuse review, duplicate-URL review, and a bounded implementation proposal or no-go result.
+
+The following remain prohibited in the active review lane:
+
+```text
+canonical Market Access additions
+new Evidence identities or Evidence Relations
+new assets, organizations, events, or deployments
+public product or material UI changes
+direct issuer mint/redemption claims
+lending, staking, or yield as Market Access v1
+country-wide availability inference
+automatic promotion
+ranking, score, recommendation, or implied safety
+```
+
 ## Completed PR #523 boundary
 
-The production-verified bounded JPYSC result is:
+The historical production-verified bounded JPYSC result remains:
 
 ```text
 asset: sog_st_jpysc
@@ -126,14 +155,14 @@ Archive recorded: 463
 Detail routes: 422
 ```
 
-No country-wide availability inference, future-capability backfill, lending-as-access evidence, ranking, scoring, recommendation, replacement asset, or unrelated product/UI expansion was authorized or added by the closeout.
+No country-wide availability inference, future-capability backfill, lending-as-access evidence, ranking, scoring, recommendation, replacement asset, or unrelated product/UI expansion was authorized by PR #523 or PR #534.
 
 ## Validation and next boundary
 
-The PR #523 implementation passed the current canonical-data, Evidence, release-integrity, reproducible-build, non-UI release-material, UI/public-surface, screenshot, domain-migration, and production-verification gates. Production parity converged on attempt 2 and build provenance converged on attempt 3 after deployment propagation.
+The active review authority must preserve all current canonical counts and public output. Its exit is `REVIEW GATE`.
 
-Repository authority is `REVIEW GATE`.
+If source review identifies promotable Market Access rows, a new separately reviewed and merged implementation authority must bind exact asset/platform/service pairs, functions, states, dates, Evidence identities, maximum deltas, and validation before canonical data may change.
 
-Evidence Archive Payload Verification Batch 2, Tier A dossier deepening, Market Access expansion, record growth, and every other later cycle lane remain planning items only and require their own reviewed and merged authority before implementation.
+Evidence Archive Payload Verification Batch 2, Tier A dossier deepening, record growth, new UI, and every other later lane remain planning items only.
 
 Issue #479 remains the deployment-history authority.
