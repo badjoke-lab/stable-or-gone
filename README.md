@@ -13,11 +13,11 @@ Canonical stable assets: 119
 Organizations: 109
 Relationships: 131
 Events: 194
-Evidence: 584
-Evidence Relations: 584
+Evidence: 585
+Evidence Relations: 585
 Deployments: 186
-Market Access Records: 8
-Archive recorded: 462
+Market Access Records: 12
+Archive recorded: 463
 Archive not recorded: 122
 Detail routes: 422
 Metadata-checked detail routes: 422
@@ -26,9 +26,11 @@ Metadata-checked detail routes: 422
 Production checkpoint:
 
 ```text
-source commit: 210d68001fbd2560ffadf538fdb7cc9302b400a7
-canonical hash: sha256:57749955faa96d2bd836bac83ef41a0c5dc13f2342763dc4d975c588cd50c650
-convergence attempt: 1
+source commit: 77e80dd3e2a62fea53ea0eabe91ef78a2d8ab1da
+canonical hash: sha256:f386c1043ca5e83cafbd88e99746d0609aab0154ed48de1970677758a66ed5fa
+canonical file count: 466
+production parity convergence attempt: 2
+production provenance convergence attempt: 3
 official origin: https://www.stableorgone.com
 legacy-host 301: complete and strict-gated
 ```
@@ -38,14 +40,13 @@ Current `main` and production equality is verified dynamically by `.github/workf
 ## Current workstream
 
 ```text
-PRs #524–#531: merged and recognized current-main history
-Current documentation task: post-PR #531 authority/specification/schedule reconciliation
-Immediate next implementation: Guide & Research Surface Readability Remediation
-PR #523: paused; later current-main reconciliation and bounded completion only
-Required exit after PR #523: REVIEW GATE
+PR #523: merged and production-verified
+PR #533: Guide/readability remediation complete
+Current authority: REVIEW GATE
+Later implementation lane authorized: no
 ```
 
-Direct production review on 2026-08-08 found a blocking shared Guide-layout/readability defect on both newly published and pre-existing Guide pages. The defect must be repaired at the shared layout/CSS level before PR #523 resumes. Automated screenshot/build success is not visual acceptance when a defect is known.
+PR #523 completed the bounded JPYSC Japan Market Access implementation after reconciliation with the intervening merged work. The provider-scoped SBI VC Trade / VCTRADE record now captures account-internal buy/sell and explicit unavailable deposit, withdrawal, and external-wallet transfer states. No country-wide availability inference or future capability is represented.
 
 ## Current public surfaces
 
@@ -62,7 +63,7 @@ Guides
 machine-readable projections and manifest discovery
 ```
 
-The 2026 regulation guide cluster is published, but the Guide presentation is under a bounded readability remediation. Guide content moves to maintenance-only mode after that repair; there is no automatic recurring article cadence.
+The 2026 regulation guide cluster is published and the shared Guide/readability remediation is complete. Guide content is maintenance-only unless a material regulatory change, correction/source update, or justified search/content gap requires new work.
 
 ## Official domain and legacy migration
 
@@ -74,7 +75,7 @@ https://www.stableorgone.com
 
 It governs canonical links, hreflang, OGP, JSON-LD, sitemap URLs, robots, machine-readable outputs, production verification, and deployment reporting.
 
-The legacy host `sog.badjoke-lab.com` now receives an exact path- and query-preserving HTTP 301 through `public/_worker.js` in Cloudflare Pages Advanced Mode. PR #530 made the migration contract strict in production and scheduled audits.
+The legacy host `sog.badjoke-lab.com` receives an exact path- and query-preserving HTTP 301 through `public/_worker.js` in Cloudflare Pages Advanced Mode. PR #530 made the migration contract strict in production and scheduled audits.
 
 ## Repository authority
 
@@ -85,40 +86,17 @@ AGENTS.md
 docs/spec-governance.md
 docs/roadmap.md
 docs/deployment-policy.md
-docs/roadmap-amendments/2026-08-08-post-pr531-authority-reconciliation.md
-docs/quality/post-pr531-authority-reconciliation-spec.md
-current work-item specification
+docs/roadmap-amendments/2026-08-09-post-pr523-production-closeout.md
+docs/quality/post-pr523-production-closeout-spec.md
+current separately authorized work-item specification
 named baselines, queues, audits, validators, handoffs, and prior outputs
-```
-
-The immediate work-item specification is:
-
-```text
-docs/quality/guide-readability-remediation-2026-08-08-spec.md
 ```
 
 Merged repository authority outranks chat memory, handoff prose, issue discussion, stale branch state, generated reports, and unmerged drafts. If authority, production checkpoint, counts, schedule, deployment behavior, or a blocking visual conclusion changes, update the governing specifications and roadmap before continuing.
 
-## Current Guide/readability remediation
+## Completed JPYSC Market Access work
 
-The shared Guide repair must:
-
-- remove the persistent desktop left-rail TOC;
-- restore real primary section-heading hierarchy;
-- widen data/table presentation while preserving readable prose measure;
-- stop rendering every long-form section as a four-sided audit-sheet panel;
-- remove duplicate contextual/footer support presentation;
-- keep the contextual support block at the intended article width;
-- rebalance the home Research & Guides secondary items;
-- preserve mobile table semantics and the UI V3 readability floor.
-
-Minimum direct visual acceptance routes are the home page, the global 2026 regulation guide, and the pre-existing UK stablecoin guide at desktop and mobile widths.
-
-## Later JPYSC Market Access work
-
-After the Guide remediation is merged and production-verified, PR #523 may resume only after incorporating the then-current `main`.
-
-Its original bounded transition remains:
+PR #523's bounded transition is complete and production-verified:
 
 ```text
 Evidence: 584 -> 585
@@ -128,7 +106,9 @@ Archive recorded: 462 -> 463
 Detail routes: 422 -> 422
 ```
 
-The JPYSC records remain provider-scoped to SBI VC Trade / VCTRADE in Japan and may not be generalized into country-wide availability or future transfer capability.
+The JPYSC records remain provider-scoped to SBI VC Trade / VCTRADE in Japan and are not generalized into country-wide availability or future transfer capability.
+
+Repository authority after this completion is `REVIEW GATE`. Evidence Archive Payload Verification Batch 2, Tier A dossier deepening, Market Access expansion, record growth, and other later lanes require separate reviewed and merged authority.
 
 ## Core data rules
 
