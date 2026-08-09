@@ -30,11 +30,11 @@ The Stablecoin Compare Matrix Remediation is also complete: PR #540 authority, P
 ## Current reviewed canonical counts
 
 ```text
-Stable assets: 119
+Canonical stable assets: 119
 Organizations: 109
 Relationships: 131
 Events: 194
-Evidence: 585
+Canonical Evidence: 585
 Evidence Relations: 585
 Reserve reports: 127
 Known unknowns: 352
