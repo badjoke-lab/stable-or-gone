@@ -1,7 +1,7 @@
 # Stable or Gone Roadmap
 
 Updated: 2026-08-09  
-Status: PR #523 merged and production-verified; REVIEW GATE
+Status: PR #534 merged and production-verified; Japan Market Access Expansion Review Batch 1 active — review only
 
 ## Current reviewed checkpoint
 
@@ -25,15 +25,18 @@ Archive not recorded: 122
 Detail routes: 422
 Metadata-checked routes: 422
 Official origin: https://www.stableorgone.com
-Production commit: 77e80dd3e2a62fea53ea0eabe91ef78a2d8ab1da
+Current production commit: 8ba1ed2b4aff36aaa9545c6f3e3cdd113dbb5ed2
+Last canonical-changing implementation commit: 77e80dd3e2a62fea53ea0eabe91ef78a2d8ab1da
 Production canonical hash: sha256:f386c1043ca5e83cafbd88e99746d0609aab0154ed48de1970677758a66ed5fa
 Production canonical file count: 466
-Production parity convergence attempt: 2
-Production provenance convergence attempt: 3
+Current production parity convergence attempt: 1
+Current production provenance convergence attempt: 3
 Legacy-host 301: complete
 ```
 
-PR #523 is merged and production-verified. The repository is at `REVIEW GATE`; no later implementation lane is authorized by this checkpoint.
+PR #523 is the last canonical-changing Market Access implementation. PR #534 is merged and production-verified and changed forward authority/closeout material only, so the canonical hash and reviewed counts remain unchanged.
+
+Canonical implementation remains at `REVIEW GATE`. A new review-only Market Access authority is active and does not itself permit promotion.
 
 ## Completed current-cycle work
 
@@ -50,11 +53,12 @@ PRs #527–#530 — official-domain migration hardening and completed legacy-hos
 PR #531 — 2026 stablecoin regulation guide cluster and 119-record mark-audit repair
 PR #532 — post-PR #531 authority and schedule reconciliation
 PR #533 — shared Guide readability and research-layout remediation
+PR #534 — post-PR #523 production closeout and REVIEW GATE restoration
 ```
 
 ## PR #523 verified result
 
-The bounded production result is:
+The bounded historical canonical-changing result remains:
 
 ```text
 asset: sog_st_jpysc
@@ -82,17 +86,27 @@ Metadata-checked routes: 422 -> 422
 
 All other canonical counts remain unchanged.
 
-## Current boundary — REVIEW GATE
+## Current boundary — Market Access review only
 
-No implementation lane is currently authorized.
-
-The next substantive lane must receive separate reviewed and merged authority before code or canonical data changes begin. Planning priority remains:
+Planning priority remains:
 
 ```text
 Market Access expansion > Tier A dossier deepening > Record Growth > new UI
 ```
 
-This priority order is planning guidance only.
+The first priority is now advanced only to a bounded review lane:
+
+```text
+Japan Market Access Expansion Review Batch 1
+jurisdiction: JP / Japan
+candidate limit: 3 asset x platform/service pairs
+asset prerequisite: existing canonical identity
+provider/service selection: source-led
+functions: buy_sell, deposit, withdrawal, external_wallet_transfer
+canonical promotion: prohibited
+```
+
+The review may produce a bounded implementation proposal or no-go decision. Any canonical promotion still requires a separate reviewed and merged implementation authority.
 
 ## Schedule
 
@@ -100,8 +114,9 @@ This priority order is planning guidance only.
 2026-08-08 to 2026-08-09  authority/specification/schedule reconciliation — complete
 2026-08-08 to 2026-08-09  Guide & Research Surface Readability Remediation — complete through PR #533
 2026-08-09                 PR #523 reconciliation, validation, merge, and production verification — complete
-2026-08-09                 post-PR #523 production closeout — active until merged, exit REVIEW GATE
-2026-08-10 to 2026-08-16  stabilization and next-batch preparation — planning only
+2026-08-09                 post-PR #523 production closeout — complete through PR #534
+2026-08-09 onward          Japan Market Access Expansion Review Batch 1 — active review-only preparation
+2026-08-10 to 2026-08-16  stabilization and next-batch preparation — review work may continue; no implementation bypass
 2026-08-17 to 2026-08-23  Evidence Archive Payload Verification Batch 2 — separate authority required
 2026-08-24 to 2026-08-30  Tier A Dossier Deepening Batch 4 — separate authority required
 2026-08-31 to 2026-09-06  cycle review and backlog reconciliation
@@ -110,9 +125,25 @@ This priority order is planning guidance only.
 
 Schedule windows are planning targets, not permission boundaries. A scheduled date never substitutes for reviewed authority.
 
+## Market Access review acceptance
+
+For at most three candidate asset × platform/service pairs, the review must record:
+
+- current provider/service primary sources;
+- regulator/official-register support when registration or legal route is claimed;
+- function-scoped states without overgeneralization;
+- effective and observation dates where supported;
+- network/customer scope where explicit;
+- existing canonical Evidence identity reuse eligibility;
+- duplicate source URL review;
+- unsupported values that remain unknown/out of scope;
+- bounded implementation proposal or no-go result.
+
+The review may not add canonical data, Evidence, routes, or material UI.
+
 ## Guides / editorial
 
-The 2026 regulation guide cluster and the shared Guide/readability repair are complete for the current content phase. Guide content is now maintenance-only; there is no automatic recurring article cadence.
+The 2026 regulation guide cluster and the shared Guide/readability repair are complete for the current content phase. Guide content is maintenance-only; there is no automatic recurring article cadence.
 
 New editorial pages require at least one of:
 
@@ -127,7 +158,6 @@ Existing evergreen URLs should be updated in place where practical.
 ## Preserved exclusions
 
 ```text
-new or duplicate JPYSC asset
 future capability represented as current access
 lending represented as transfer evidence
 country-wide availability inference
@@ -135,7 +165,7 @@ unbounded Evidence additions
 ranking, score, recommendation, or implied safety
 automatic promotion
 silent continuation from a planning window
-implementation beyond REVIEW GATE without separate authority
+canonical implementation beyond REVIEW GATE without separate authority
 known visual defect accepted merely because CI is green
 ```
 
@@ -148,10 +178,11 @@ AGENTS.md
 docs/spec-governance.md
 docs/roadmap.md
 docs/deployment-policy.md
-docs/roadmap-amendments/2026-08-09-post-pr523-production-closeout.md
-docs/quality/post-pr523-production-closeout-spec.md
-current separately authorized work-item specification
-named inputs, audits, validators, and prior outputs
+docs/roadmap-amendments/2026-08-09-post-pr534-market-access-review-authority.md
+docs/quality/market-access-expansion-review-authority-2026-08-09-spec.md
+docs/market-access-record-spec.md
+config/market-access-governance-v1.json
+current named inputs, source reviews, audits, validators, and prior outputs
 ```
 
 If authority, production checkpoint, counts, schedule, deployment behavior, or a blocking visual conclusion changes, update these documents before implementation continues.
