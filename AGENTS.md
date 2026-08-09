@@ -69,6 +69,15 @@ PR #533 — shared Guide readability and research-layout remediation
 PR #534 — post-PR #523 production closeout and REVIEW GATE restoration
 ```
 
+Required historical authority anchors retained for compatibility and audit traceability:
+
+```text
+PR #493 — official-domain migration and production verification
+PR #500 — bounded MNEE Evidence and Archive Maintenance checkpoint
+PR #517 — Bison Bank EUB and USB complete-record growth checkpoint
+PR #522 — semantic authority for the completed PR #523 JPYSC implementation
+```
+
 Historical PR-specific checkpoints remain immutable audit evidence. Forward authority documents must describe the current production and authority state rather than re-label historical artifacts.
 
 Merged repository authority outranks chat memory, handoff prose, issue discussion, stale branch state, generated reports, and unmerged drafts.
