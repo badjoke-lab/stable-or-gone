@@ -26,8 +26,8 @@ if (failures.length === 0) {
   for (const marker of [
     "table.className = 'comparison-matrix'",
     "attributeHead.textContent = 'Attribute'",
-    'data.removeComparison',
-    'data-remove-comparison',
+    'button.dataset.removeComparison',
+    "event.target.closest<HTMLElement>('[data-remove-comparison]')",
     'compareDifferences?.addEventListener',
     "selectedComparisons.size >= 4",
     "slice(0, 4)",
