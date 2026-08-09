@@ -24,22 +24,25 @@ When active documents disagree, use this order:
 7. named audits, inventories, baselines, fixtures, release notes, research checkpoints, queues, and reviewed prior outputs.
 8. conversation history and unmerged drafts.
 
-Current roadmap authority:
+Current roadmap authority and handoff:
 
 ```text
 docs/roadmap-amendments/2026-08-09-evidence-archive-payload-verification-batch-2-review-authority.md
+docs/roadmap-amendments/2026-08-09-evidence-archive-payload-verification-batch-2-candidates.md
 ```
 
-Current work-item specification:
+Current work-item specifications:
 
 ```text
 docs/quality/evidence-archive-payload-verification-batch-2-review-authority-spec.md
+docs/quality/evidence-archive-payload-verification-batch-2-candidate-spec.md
 ```
 
-Current authority contract:
+Current authority and candidate contracts:
 
 ```text
 config/evidence-archive-payload-verification-batch-2-review-authority.json
+data/editorial-research/evidence-archive-payload-verification-batch-2-candidates-2026-08-09.json
 ```
 
 Required historical Evidence Archive inputs:
@@ -59,8 +62,8 @@ Before every substantive change to code, canonical data, UI, workflows, infrastr
 2. read this file;
 3. read `docs/roadmap.md`;
 4. read `docs/deployment-policy.md`;
-5. read the current roadmap authority;
-6. read the current work-item specification and config;
+5. read the current roadmap authority and candidate handoff;
+6. read the current review-authority and candidate specifications and contracts;
 7. read the required Batch 1 and Queue v7 inputs;
 8. read every enduring regression authority and named input required by the work item.
 
@@ -109,17 +112,45 @@ Current `main` and production equality is verified dynamically by `.github/workf
 2. PR #534 closeout and REVIEW GATE restoration — complete
 3. PR #535 Japan Market Access Expansion Review Batch 1 authority — complete
 4. PR #536 Japan Market Access Expansion Review Batch 1 no-go closeout — complete
-5. Evidence Archive Payload Verification Batch 2 review authority — active
-6. REVIEW GATE remains the canonical implementation boundary
+5. PR #537 Evidence Archive Payload Verification Batch 2 review-only authority — complete and production-verified
+6. Batch 2 deterministic candidate selection — complete
+7. MANUAL_PAYLOAD_REVIEW — current review stage
+8. REVIEW GATE remains the canonical implementation boundary
 ```
 
 There is no active canonical implementation authority.
 
 ## 6. Active Evidence Archive Payload Verification Batch 2 review
 
-The review-only lane is bounded to ten current unarchived canonical Evidence identities when at least ten remain eligible.
+The review-only lane is fixed to exactly ten current unarchived canonical Evidence identities selected deterministically under the merged PR #537 authority.
 
-Selection must reapply the Queue v7 deterministic non-ranking semantics to current canonical Evidence, while preserving its alias, Wayback-source, and review-history suppression exclusions and additionally excluding all ten Evidence identities reviewed in Payload Verification Batch 1.
+The generator reapplies the Queue v7 deterministic non-ranking semantics to current canonical Evidence, while preserving alias, Wayback-source, missing-source, and review-history suppression exclusions and additionally excluding all ten Evidence identities reviewed in Payload Verification Batch 1.
+
+Current deterministic result:
+
+```text
+canonical Evidence: 585
+archive not recorded: 122
+eligible pool after exclusions: 68
+selected: 10
+selected priority bucket: official_issuer_protocol_product
+canonical archive additions authorized: 0
+```
+
+Fixed candidates:
+
+```text
+sog_src_susd_legacy_context_batch_a
+sog_src_susd_rebuilding_2026
+sog_src_susd_roadmap_2026
+sog_src_susd_sip_status_2026
+sog_src_susd_sip420_2024
+sog_src_susd_sip423_2026
+sog_src_susd_synthetix_docs
+sog_src_susd_v3_faq_batch_a
+sog_src_terra_docs
+sog_src_tether_transparency
+```
 
 Priority order remains:
 
@@ -133,9 +164,9 @@ other reviewed source
 Evidence ID deterministic tie-break
 ```
 
-This queue is not a ranking or safety score.
+This queue is not a ranking or safety score. Only three Batch 1 identities remain in the current unarchived input because seven received reviewed archive additions in Batch 1; all ten remain semantically excluded.
 
-For every selected candidate, review starts from the exact canonical source URL and a dated Wayback payload. Redirect-only responses, CDX metadata alone, replacement targets, or payloads whose claim scope cannot be independently verified are insufficient. `reviewed_no_safe_change` is a valid result.
+For every selected candidate, review starts from the exact canonical source URL and a dated Wayback payload. Redirect-only responses, CDX metadata alone, replacement targets, unrelated archived pages, or payloads whose claim scope cannot be independently verified are insufficient. Valid review dispositions are `dated_exact_archive_proposal` and `reviewed_no_safe_change`.
 
 The review authority permits no canonical `archived_url` edits. Any promotable archive result requires a new separately reviewed and merged implementation authority binding exact Evidence IDs and exact dated archive URLs.
 
@@ -261,7 +292,7 @@ A PR that cannot cite an approved work item must pause until repository authorit
 
 Dates in `docs/roadmap.md` are targets, not implementation permission.
 
-Evidence Archive Payload Verification Batch 2 is the current review workstream. Its review authority does not authorize canonical archive additions. Tier A Dossier Deepening Batch 4, Record Growth, cycle review, and later work require their own authority.
+Evidence Archive Payload Verification Batch 2 is the current review workstream. Its candidate set is fixed and manual payload review is active. The review authority does not authorize canonical archive additions. Tier A Dossier Deepening Batch 4, Record Growth, cycle review, and later work require their own authority.
 
 ## 15. Historical checkpoints
 
@@ -277,4 +308,4 @@ Current canonical implementation boundary:
 REVIEW GATE
 ```
 
-The active review may produce candidate dispositions and a bounded proposal only. Any canonical archive promotion requires a new separately reviewed and merged implementation authority with exact IDs, exact archive URLs, deltas, and validators.
+The active review may produce exact candidate dispositions and a bounded implementation proposal only. Any canonical archive promotion requires a new separately reviewed and merged implementation authority with exact IDs, exact archive URLs, deltas, and validators.
