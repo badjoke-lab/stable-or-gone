@@ -9,6 +9,7 @@
   "asset_count": 119,
   "source_checkpoint_id": "sog_pr517_record_growth_batch_5_bison_eub_usb_119_2026_08_03",
   "previous_checkpoint_id": "sog_pr517_record_growth_batch_5_bison_eub_usb_119_2026_08_03",
+  "growth_pr": 523,
   "market_access_pr": 523,
   "authority_pr": 522,
   "source_review_pr": 521,
@@ -71,5 +72,5 @@
   },
   "release_integrity_baseline_id": "sog_release_integrity_pr523_119_assets_2026_08_05",
   "reproducible_build_baseline_id": "sog_reproducible_build_pr317_2026_07_06",
-  "notes": "Current deterministic canonical checkpoint after PR #523 JPYSC Market Access Pilot 3. Four provider-scoped Japan / SBI VC Trade / VCTRADE records add account-internal buy/sell and explicit unavailable deposit, withdrawal, and external-wallet transfer states. One canonical SBI VC Trade product Evidence identity is added and the existing JFSA Evidence scope is extended to JPYSC. Assets, organizations, relationships, events, deployments, routes, UI, schema, and redirects remain unchanged."
+  "notes": "Current deterministic canonical checkpoint after PR #523 JPYSC Market Access Pilot 3. Four provider-scoped Japan / SBI VC Trade / VCTRADE records add account-internal buy/sell and explicit unavailable deposit, withdrawal, and external-wallet transfer states. One canonical SBI VC Trade product Evidence identity is added and the existing JFSA Evidence scope is extended to JPYSC. Assets, organizations, relationships, events, deployments, routes, UI, schema, and redirects remain unchanged. growth_pr identifies the PR that advances the canonical Evidence composition while checkpoint_kind remains non-growth for the 119-asset boundary."
 }
