@@ -51,7 +51,7 @@ expect(checkpoint.counts.metadata_checked_routes === expected.metadata_checked_r
 for (const forbidden of ['canonical_archived_url_change', 'source_url_replacement', 'new_evidence_identity', 'automatic_archive_promotion']) {
   expect(authority.prohibited.includes(forbidden), `missing prohibition: ${forbidden}`);
 }
-expect(spec.includes('separate merged implementation authority'), 'spec missing separate implementation authority boundary');
+expect(spec.includes('separately reviewed and merged implementation authority'), 'spec missing separately reviewed and merged implementation authority boundary');
 expect(spec.includes('exactly ten candidates'), 'spec missing exact candidate bound');
 expect(amendment.includes('No canonical archive mutation is authorized'), 'amendment missing canonical mutation prohibition');
 expect(active === "import './validate-evidence-archive-payload-verification-batch-2-review-authority.mjs';", 'active validator wiring changed');
