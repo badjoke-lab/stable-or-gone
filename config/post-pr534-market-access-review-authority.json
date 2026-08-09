@@ -1,0 +1,107 @@
+{
+  "schema_version": "1.0",
+  "work_item": "post_pr534_market_access_review_authority",
+  "status": "review_authority",
+  "recorded_at": "2026-08-09",
+  "official_origin": "https://www.stableorgone.com",
+  "entry_repository_commit": "8ba1ed2b4aff36aaa9545c6f3e3cdd113dbb5ed2",
+  "entry_production_checkpoint": {
+    "commit": "8ba1ed2b4aff36aaa9545c6f3e3cdd113dbb5ed2",
+    "canonical_hash": "sha256:f386c1043ca5e83cafbd88e99746d0609aab0154ed48de1970677758a66ed5fa",
+    "canonical_file_count": 466,
+    "production_parity_convergence_attempt": 1,
+    "production_provenance_convergence_attempt": 3,
+    "counts": {
+      "assets": 119,
+      "organizations": 109,
+      "relationships": 131,
+      "events": 194,
+      "evidence": 585,
+      "evidence_relations": 585,
+      "deployments": 186,
+      "market_access_records": 12,
+      "archive_recorded": 463,
+      "archive_not_recorded": 122,
+      "detail_routes": 422,
+      "metadata_checked_routes": 422
+    }
+  },
+  "historical_canonical_change_checkpoint": {
+    "pr": 523,
+    "commit": "77e80dd3e2a62fea53ea0eabe91ef78a2d8ab1da",
+    "canonical_hash": "sha256:f386c1043ca5e83cafbd88e99746d0609aab0154ed48de1970677758a66ed5fa",
+    "closeout_pr": 534
+  },
+  "reconciliation": {
+    "required": true,
+    "reason": "Forward governance and deployment documents still describe the pre-PR523 584/8/462 checkpoint or the PR523 implementation commit instead of the production-verified PR534 closeout commit.",
+    "historical_checkpoint_artifacts_mutable": false,
+    "forward_authority_documents_must_use_current_production": true
+  },
+  "review_lane": {
+    "name": "Japan Market Access Expansion Review Batch 1",
+    "mode": "review_only",
+    "jurisdiction": {
+      "country_code": "JP",
+      "label": "Japan",
+      "subdivision_code": null
+    },
+    "maximum_asset_platform_service_candidates": 3,
+    "existing_canonical_assets_only": true,
+    "provider_or_service_preselected": false,
+    "functions": [
+      "buy_sell",
+      "deposit",
+      "withdrawal",
+      "external_wallet_transfer"
+    ],
+    "excluded_functions": [
+      "direct_issuer_mint",
+      "direct_issuer_redemption"
+    ],
+    "excluded_service_families": [
+      "lending",
+      "staking",
+      "yield"
+    ],
+    "required_source_layers": [
+      "platform_or_service_provider",
+      "regulator_or_official_register_when_legal_route_or_registration_is_claimed"
+    ],
+    "preferred_supporting_layers": [
+      "issuer_or_protocol",
+      "reputable_secondary_source"
+    ],
+    "required_review_outputs": [
+      "candidate_asset_platform_service_matrix",
+      "function_scoped_source_dispositions",
+      "effective_from_and_observed_at_review",
+      "existing_canonical_evidence_identity_reuse_review",
+      "duplicate_source_url_review",
+      "bounded_implementation_proposal_or_no_go_decision"
+    ]
+  },
+  "boundaries": {
+    "canonical_changes_allowed": false,
+    "new_market_access_records_allowed": false,
+    "new_evidence_identities_allowed": false,
+    "new_evidence_relations_allowed": false,
+    "new_assets_allowed": false,
+    "new_organizations_allowed": false,
+    "new_events_allowed": false,
+    "public_product_changes_allowed": false,
+    "material_ui_changes_allowed": false,
+    "editorial_research_review_allowed": true,
+    "private_review_artifacts_allowed": true,
+    "automatic_promotion": false,
+    "country_wide_availability_inference": false,
+    "ranking": false,
+    "score": false,
+    "recommendation": false
+  },
+  "implementation_boundary": {
+    "current": "REVIEW_GATE",
+    "later_canonical_promotion_requires_separate_merged_authority": true,
+    "required_exit_of_review_lane": "REVIEW_GATE"
+  }
+}
