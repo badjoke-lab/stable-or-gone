@@ -1,6 +1,6 @@
 # Stable or Gone Deployment Policy
 
-Updated: 2026-08-08
+Updated: 2026-08-09
 
 ## Status
 
@@ -16,12 +16,17 @@ Legacy-host migration: complete
 Legacy redirect implementation: public/_worker.js / Pages Advanced Mode
 Strict migration gate: enabled
 Deployment record: Issue #479
-Current verified production commit: 210d68001fbd2560ffadf538fdb7cc9302b400a7
-Current canonical hash: sha256:57749955faa96d2bd836bac83ef41a0c5dc13f2342763dc4d975c588cd50c650
-Convergence attempt: 1
+Current verified production commit: 8ba1ed2b4aff36aaa9545c6f3e3cdd113dbb5ed2
+Last canonical-changing implementation commit: 77e80dd3e2a62fea53ea0eabe91ef78a2d8ab1da
+Current canonical hash: sha256:f386c1043ca5e83cafbd88e99746d0609aab0154ed48de1970677758a66ed5fa
+Canonical file count: 466
+Current production parity convergence attempt: 1
+Current production provenance convergence attempt: 3
 ```
 
-Current `main` and production equality must be read from the deployment workflow, strict migration audit, production visual gate, and Issue #479. A repository merge is not itself proof of production parity.
+PR #534 is a closeout/authority-only change. Its production-verified commit has the same canonical hash and counts as PR #523's historical canonical-changing implementation commit.
+
+Current `main` and production equality must be read from the deployment workflow, strict migration audit, relevant production visual gates, and Issue #479. A repository merge is not itself proof of production parity.
 
 ## Core publication rule
 
@@ -48,16 +53,20 @@ Stablecoins: 119
 Organizations: 109
 Relationships: 131
 Events: 194
-Evidence: 584
-Evidence Relations: 584
+Evidence: 585
+Evidence Relations: 585
 Deployments: 186
-Market Access Records: 8
+Market Access Records: 12
 Detail routes: 422
 Metadata-checked routes: 422
-Archive recorded / not recorded: 462 / 122
-Production commit: 210d68001fbd2560ffadf538fdb7cc9302b400a7
-Canonical hash: sha256:57749955faa96d2bd836bac83ef41a0c5dc13f2342763dc4d975c588cd50c650
+Archive recorded / not recorded: 463 / 122
+Current production commit: 8ba1ed2b4aff36aaa9545c6f3e3cdd113dbb5ed2
+Last canonical-changing implementation commit: 77e80dd3e2a62fea53ea0eabe91ef78a2d8ab1da
+Canonical hash: sha256:f386c1043ca5e83cafbd88e99746d0609aab0154ed48de1970677758a66ed5fa
+Canonical file count: 466
 ```
+
+The current active work item is review-only. It authorizes no canonical or public product mutation, so any production change from its authority PR must remain documentation/validation only and preserve the baseline above.
 
 ## Official-origin contract
 
@@ -147,6 +156,8 @@ Every automatic deployment must verify at least:
 - strict legacy-host 301 behavior;
 - deployment result in Issue #479.
 
+A docs-only authority merge is still required to converge to its exact `main` commit in production. Unchanged canonical hash/counts are expected, not a reason to skip deployment verification.
+
 ## Material public UI changes
 
 Material public UI changes have an additional gate.
@@ -154,7 +165,7 @@ Material public UI changes have an additional gate.
 Before merge:
 
 - build the exact PR head;
-- capture desktop and mobile screenshots of the changed route families and named acceptance routes;
+- capture desktop and mobile screenshots of changed route families and named acceptance routes;
 - inspect both initial viewport and full-page output when page hierarchy/length is relevant;
 - directly inspect generated artifacts rather than treating screenshot generation as acceptance;
 - block merge on any known visual defect even when automated checks pass.
@@ -166,15 +177,7 @@ After merge:
 - changed-route production output must be rechecked when the work-item specification requires it;
 - completion is recorded only after production parity and visual acceptance.
 
-For the active Guide/readability remediation, the minimum required production-review routes are:
-
-```text
-/
-/guides/global-stablecoin-regulation-2026/
-/guides/uk-stablecoin-capital-rules-2026/
-```
-
-at desktop and mobile widths, with viewport and full-page inspection.
+The active Japan Market Access Expansion Review Batch 1 permits no material public UI changes and therefore adds no new visual acceptance routes.
 
 ## Guide publication
 
@@ -186,7 +189,7 @@ publishedAt -> publication metadata
 featured: true + publishedAt -> eligible for home/Guide discovery presentation
 ```
 
-`publishedAt` is metadata, not a removal switch for an established evergreen guide. A visual remediation must not silently remove Guide routes, factual content, current-through metadata, canonical URLs, or source links.
+`publishedAt` is metadata, not a removal switch for an established evergreen guide. A later visual remediation must not silently remove Guide routes, factual content, current-through metadata, canonical URLs, or source links.
 
 ## Manual fallback
 
@@ -206,3 +209,5 @@ Explicit reviewed authority is required for:
 - emergency rollback.
 
 Ordinary reviewed registry, guide, copy, UI, and documentation changes follow automatic `main` publication after their repository and work-item validation gates pass.
+
+Canonical implementation remains at `REVIEW GATE`. The active review-only lane cannot be used to bypass a later implementation authority.
