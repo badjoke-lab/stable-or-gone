@@ -170,9 +170,19 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'CollectionPage', na
     </section>
 
     <section class="stablecoin-index-comparison" data-comparison-panel hidden aria-labelledby="comparison-heading">
-      <div class="comparison-heading"><div><p class="stablecoin-index-eyebrow">Bounded comparison</p><h2 id="comparison-heading">Compare historical records</h2><p data-comparison-status aria-live="polite">Select two to four records. Unknown and not-recorded values remain explicit.</p></div><button class="ui-button stablecoin-index-action" type="button" data-clear-comparison>Clear comparison</button></div>
+      <div class="comparison-heading">
+        <div>
+          <p class="stablecoin-index-eyebrow">Bounded comparison</p>
+          <h2 id="comparison-heading">Compare historical records</h2>
+          <p data-comparison-status aria-live="polite">Select two to four records. Unknown and not-recorded values remain explicit.</p>
+        </div>
+        <div class="comparison-actions">
+          <label class="comparison-differences-toggle"><input type="checkbox" data-comparison-differences /><span>Differences only</span></label>
+          <button class="ui-button stablecoin-index-action" type="button" data-clear-comparison>Clear comparison</button>
+        </div>
+      </div>
       <div class="comparison-alert" data-comparison-alert aria-live="assertive"></div>
-      <div class="comparison-grid" data-comparison-grid></div>
+      <div class="stablecoin-index-table comparison-matrix-shell" data-comparison-grid tabindex="0" aria-label="Stablecoin comparison matrix"></div>
       <p class="comparison-disclaimer">Comparison is historical registry context, not a ranking, recommendation, or investment assessment.</p>
     </section>
     <div hidden>{records.map((record) => <StablecoinComparisonSource record={record} />)}</div>
