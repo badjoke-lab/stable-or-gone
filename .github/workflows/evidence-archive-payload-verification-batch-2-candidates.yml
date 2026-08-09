@@ -1,0 +1,43 @@
+name: Evidence Archive Payload Verification Batch 2 candidates
+
+on:
+  pull_request:
+    paths:
+      - 'scripts/build-evidence-archive-payload-verification-batch-2-candidates.mjs'
+      - 'scripts/validate-evidence-archive-payload-verification-batch-2-candidates.mjs'
+      - 'data/editorial-research/evidence-archive-payload-verification-batch-2-candidates-2026-08-09.json'
+      - 'config/evidence-archive-payload-verification-batch-2-review-authority.json'
+      - 'config/evidence-archive-payload-verification-batch-1.json'
+      - 'config/evidence-source-identities.mjs'
+      - 'data/evidence*.json'
+      - 'docs/migration/evidence-archive-review-history-manifest-v6-pr402.json'
+      - 'docs/migration/evidence-archive-review-history-audit-v6-pr402.json'
+      - 'docs/migration/current-canonical-checkpoint.json'
+      - '.github/workflows/evidence-archive-payload-verification-batch-2-candidates.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  generate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Validate committed Batch 2 candidate artifact
+        run: node scripts/validate-evidence-archive-payload-verification-batch-2-candidates.mjs
+      - name: Generate deterministic Batch 2 candidates
+        shell: bash
+        run: |
+          set -o pipefail
+          node scripts/build-evidence-archive-payload-verification-batch-2-candidates.mjs | tee batch-2-candidates.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: evidence-archive-payload-verification-batch-2-candidates
+          path: batch-2-candidates.json

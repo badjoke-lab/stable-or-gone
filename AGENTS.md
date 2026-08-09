@@ -5,7 +5,7 @@ This file is the mandatory entry point for humans, AI agents, and automation wor
 ## Current authority
 
 ```text
-Repository state: Evidence Archive Payload Verification Batch 2 review authority active
+Repository state: Evidence Archive Payload Verification Batch 2 candidates fixed; manual payload review active
 Current canonical checkpoint: sog_jpysc_market_access_pilot_3_canonical_119_checkpoint_pr523_2026_08_05
 Review authority entry commit: c9588b092277bd14d87ce9209ba087e4752b3346
 Current production commit: dynamic; verify via deploy-production workflow and Issue #479
@@ -16,10 +16,11 @@ Official public origin: https://www.stableorgone.com
 Legacy-host 301: complete via Pages Advanced Mode worker and strict migration gate
 Current implementation authority: REVIEW GATE
 Current review authority: Evidence Archive Payload Verification Batch 2
+Current review stage: MANUAL_PAYLOAD_REVIEW
 Later canonical implementation lanes authorized: no
 ```
 
-PR #523 remains the last canonical-changing Market Access implementation. PR #534 closed that checkpoint. PR #535 authorized Japan Market Access Expansion Review Batch 1, and PR #536 closed that review no-go with zero canonical additions. The active lane is now a separately bounded Evidence Archive payload-verification review only.
+PR #523 remains the last canonical-changing Market Access implementation. PR #534 closed that checkpoint. PR #535 authorized Japan Market Access Expansion Review Batch 1, and PR #536 closed that review no-go with zero canonical additions. PR #537 opened the bounded Evidence Archive Payload Verification Batch 2 review-only authority and is merged and production-verified. The exact ten review candidates are now deterministically fixed; canonical archive mutation remains prohibited.
 
 A fixed commit in a work-item document is an immutable entry checkpoint, not a perpetually current production claim. Current production parity must be verified dynamically from the production workflow and Issue #479.
 
@@ -63,6 +64,7 @@ PR #533 — shared Guide readability and research-layout remediation
 PR #534 — post-PR #523 production closeout and REVIEW GATE restoration
 PR #535 — bounded Japan Market Access Expansion Review Batch 1 authority
 PR #536 — Japan Market Access Expansion Review Batch 1 no-go closeout
+PR #537 — Evidence Archive Payload Verification Batch 2 review-only authority, merged and production-verified
 ```
 
 Required historical authority anchors retained for compatibility and audit traceability:
@@ -85,35 +87,60 @@ Before every substantive continuation, read the merged current versions of:
 3. `docs/roadmap.md`
 4. `docs/deployment-policy.md`
 5. `docs/roadmap-amendments/2026-08-09-evidence-archive-payload-verification-batch-2-review-authority.md`
-6. `docs/quality/evidence-archive-payload-verification-batch-2-review-authority-spec.md`
-7. `config/evidence-archive-payload-verification-batch-2-review-authority.json`
-8. `config/evidence-archive-payload-verification-batch-1.json`
-9. `docs/migration/evidence-archive-maintenance-queue-v7-pr403.json`
-10. `config/evidence-archive-maintenance-queue-v7-pr403.json`
-11. every named validator, review-history contract, source review, fixture, baseline, queue, handoff, and prior output required by the active review item
-12. `docs/ui-v3-remediation-authority.md` before any material public UI work
+6. `docs/roadmap-amendments/2026-08-09-evidence-archive-payload-verification-batch-2-candidates.md`
+7. `docs/quality/evidence-archive-payload-verification-batch-2-review-authority-spec.md`
+8. `docs/quality/evidence-archive-payload-verification-batch-2-candidate-spec.md`
+9. `config/evidence-archive-payload-verification-batch-2-review-authority.json`
+10. `data/editorial-research/evidence-archive-payload-verification-batch-2-candidates-2026-08-09.json`
+11. `config/evidence-archive-payload-verification-batch-1.json`
+12. `docs/migration/evidence-archive-maintenance-queue-v7-pr403.json`
+13. every named validator, review-history contract, source review, fixture, baseline, queue, handoff, and prior output required by the active review item
+14. `docs/ui-v3-remediation-authority.md` before any material public UI work
 
 ## Active Evidence Archive Payload Verification Batch 2 boundary
 
-The active lane is review-only.
+The active lane remains review-only. Deterministic selection is complete and the active stage is manual payload review.
 
 ```text
 current archive recorded: 463
 current archive not recorded: 122
+eligible pool after exclusions: 68
 candidate target count: 10
-selection: current unarchived canonical Evidence, Queue v7 deterministic non-ranking priority
-Batch 1 reviewed set excluded: 10 Evidence identities
+selected count: 10
+selection bucket: official_issuer_protocol_product
 manual payload review required: yes
 canonical archive additions authorized: 0
 ```
 
-Queue v7 exclusions and ordering remain semantic input. The ten Batch 1 Evidence identities are excluded from Batch 2 selection. The selected candidates must be reviewed from their exact canonical source URLs against dated Wayback payloads. Redirect-only results, CDX metadata alone, replacement targets, or payloads whose claim scope cannot be independently verified are insufficient.
+Fixed candidate set:
 
-Allowed outcomes at review stage are an exact dated archive proposal or `reviewed_no_safe_change`. No canonical `archived_url` is changed in this authority lane.
+```text
+sog_src_susd_legacy_context_batch_a
+sog_src_susd_rebuilding_2026
+sog_src_susd_roadmap_2026
+sog_src_susd_sip_status_2026
+sog_src_susd_sip420_2024
+sog_src_susd_sip423_2026
+sog_src_susd_synthetix_docs
+sog_src_susd_v3_faq_batch_a
+sog_src_terra_docs
+sog_src_tether_transparency
+```
+
+Queue v7 exclusions and ordering remain semantic input. All ten Batch 1 Evidence identities are excluded from Batch 2 selection; only three remain in the current unarchived input because seven received reviewed archive additions in Batch 1.
+
+Each candidate must be reviewed from its exact canonical source URL against a dated Wayback payload. Redirect-only results, CDX metadata alone, replacement targets, unrelated archived pages, or payloads whose claim scope cannot be independently verified are insufficient.
+
+Allowed review dispositions are:
+
+```text
+dated_exact_archive_proposal
+reviewed_no_safe_change
+```
+
+No canonical `archived_url` is changed in this authority lane.
 
 ## Completed Market Access Expansion Review Batch 1 result
-
-The three reviewed candidate pairs were:
 
 ```text
 RLUSD × SBI VC Trade / BITPOINT — no-go
@@ -123,11 +150,7 @@ promotable pairs: 0
 promotable Market Access Records: 0
 ```
 
-The FSA register reviewed for the lane listed one electronic-payment-instrument service provider, SBI VC Trade, handling USDC, RLUSD, and JPYSC. This did not support a new provider or fourth handled stablecoin.
-
-RLUSD has explicit service-level evidence that BITPOINT is excluded, but that sentence is not expanded into four function-level `unavailable` rows. USDC and JPYSC lack direct BITPOINT function-level sources. Absence from a product/price surface is not canonical unavailability evidence, and VCTRADE-specific restrictions are not cross-service evidence.
-
-No canonical Evidence identity or URL is added or repurposed to manufacture BITPOINT function states.
+The FSA register reviewed for the lane listed one electronic-payment-instrument service provider, SBI VC Trade, handling USDC, RLUSD, and JPYSC. This did not support a new provider or fourth handled stablecoin. Service-level exclusions, missing product-list entries, and VCTRADE-specific restrictions were not inflated into unsupported BITPOINT function states.
 
 ## Completed PR #523 boundary
 
@@ -152,13 +175,15 @@ No country-wide availability inference, future-capability backfill, lending-as-a
 
 ## Validation and next boundary
 
-The active review must preserve every canonical count and all public output. Its exit is:
+The active review preserves every canonical count and all public output. The candidate artifact must reproduce exactly from the current canonical inputs under `scripts/validate-evidence-archive-payload-verification-batch-2-candidates.mjs`.
+
+If manual payload review identifies promotable dated archive payloads, a new separately reviewed and merged implementation authority must bind exact Evidence IDs, exact archive URLs, maximum canonical delta, and validation before any canonical edit.
+
+The implementation boundary remains:
 
 ```text
 REVIEW GATE
 ```
-
-If exact dated archive payloads are judged promotable, a new separately reviewed and merged implementation authority must bind the exact Evidence IDs, archive URLs, maximum canonical delta, and validation before any canonical edit.
 
 Tier A dossier deepening, Record Growth, new UI, and every other later lane remain planning items until separately authorized.
 
