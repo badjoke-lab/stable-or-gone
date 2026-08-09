@@ -1,0 +1,49 @@
+name: Normalize stablecoin compare capture focus
+
+on:
+  push:
+    branches:
+      - agent/stablecoin-compare-matrix-remediation
+    paths:
+      - .github/workflows/normalize-stablecoin-compare-capture.yml
+
+permissions:
+  contents: write
+
+jobs:
+  normalize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/stablecoin-compare-matrix-remediation
+      - name: Normalize screenshot-only skip-link focus
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('scripts/audit-stablecoin-compare-matrix-visual.mjs')
+          text = p.read_text()
+          old = """  await page.evaluate(() => { if (document.activeElement instanceof HTMLElement) document.activeElement.blur(); });
+            await section.screenshot({ path: path.join(outputDir, `${name}.png`) });"""
+          new = """  await page.evaluate(() => {
+              if (document.activeElement instanceof HTMLElement) document.activeElement.blur();
+              const skip = document.querySelector('.skip-link');
+              if (skip instanceof HTMLElement) skip.style.visibility = 'hidden';
+            });
+            await section.screenshot({ path: path.join(outputDir, `${name}.png`) });
+            await page.evaluate(() => {
+              const skip = document.querySelector('.skip-link');
+              if (skip instanceof HTMLElement) skip.style.removeProperty('visibility');
+            });"""
+          if old not in text:
+              raise SystemExit('capture normalization pattern not found')
+          p.write_text(text.replace(old, new, 1))
+          PY
+      - name: Commit capture normalization
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add scripts/audit-stablecoin-compare-matrix-visual.mjs
+          git diff --cached --quiet && exit 0
+          git commit -m "Normalize compare visual capture focus state"
+          git push origin HEAD:agent/stablecoin-compare-matrix-remediation
