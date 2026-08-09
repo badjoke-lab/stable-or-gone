@@ -303,11 +303,15 @@ if (foundRoot instanceof HTMLElement) {
       const sectionRow = document.createElement('tr');
       sectionRow.className = 'comparison-section-row';
       sectionRow.dataset.comparisonSection = section.label;
-      const sectionCell = document.createElement('th');
-      sectionCell.colSpan = selectedSources.length + 1;
-      sectionCell.scope = 'colgroup';
-      sectionCell.textContent = section.label;
-      sectionRow.append(sectionCell);
+      const sectionLabelCell = document.createElement('th');
+      sectionLabelCell.scope = 'rowgroup';
+      sectionLabelCell.className = 'comparison-attribute-column comparison-section-label';
+      sectionLabelCell.textContent = section.label;
+      const sectionFillCell = document.createElement('td');
+      sectionFillCell.colSpan = selectedSources.length;
+      sectionFillCell.className = 'comparison-section-fill';
+      sectionFillCell.setAttribute('aria-hidden', 'true');
+      sectionRow.append(sectionLabelCell, sectionFillCell);
       body.append(sectionRow);
 
       for (const row of preparedRows) {

@@ -29,6 +29,7 @@ const pageHasOverflow = async (page) => page.evaluate(() => document.documentEle
 const captureState = async (page, name) => {
   const section = page.locator('[data-comparison-panel]');
   await section.scrollIntoViewIfNeeded();
+  await page.evaluate(() => { if (document.activeElement instanceof HTMLElement) document.activeElement.blur(); });
   await section.screenshot({ path: path.join(outputDir, `${name}.png`) });
 };
 
@@ -132,6 +133,19 @@ const runMobile = async (browser) => {
     if (count === 4) {
       await page.locator('[data-comparison-grid]').evaluate((shell) => { shell.scrollLeft = shell.scrollWidth; });
       await page.waitForTimeout(50);
+      const rightEdgeGeometry = await page.evaluate(() => {
+        const attribute = document.querySelector('.comparison-matrix .comparison-attribute-column');
+        const headers = [...document.querySelectorAll('.comparison-record-header')];
+        const last = headers.at(-1);
+        const sectionLabel = document.querySelector('.comparison-section-label');
+        if (!(attribute instanceof HTMLElement) || !(last instanceof HTMLElement) || !(sectionLabel instanceof HTMLElement)) return null;
+        const attributeRect = attribute.getBoundingClientRect();
+        const lastRect = last.getBoundingClientRect();
+        const sectionRect = sectionLabel.getBoundingClientRect();
+        return { attributeRight: attributeRect.right, lastLeft: lastRect.left, sectionLeft: sectionRect.left, sectionRight: sectionRect.right };
+      });
+      record('mobile_4_last_column_clears_sticky_attribute', Boolean(rightEdgeGeometry) && rightEdgeGeometry.lastLeft >= rightEdgeGeometry.attributeRight - 1, rightEdgeGeometry ?? {});
+      record('mobile_4_section_label_remains_sticky', Boolean(rightEdgeGeometry) && rightEdgeGeometry.sectionLeft >= -1 && rightEdgeGeometry.sectionRight > 100, rightEdgeGeometry ?? {});
       await captureState(page, 'mobile-4-selected-right');
     }
   }
