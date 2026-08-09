@@ -26,7 +26,7 @@ Metadata-checked detail routes: 422
 Production/canonical checkpoint semantics:
 
 ```text
-review entry production checkpoint: 58cbd7e621794c33fedbc3e263d7f64e9b8a5099
+review authority entry commit: c9588b092277bd14d87ce9209ba087e4752b3346
 current production commit: dynamic; verify via deploy-production workflow and Issue #479
 last canonical-changing implementation commit: 77e80dd3e2a62fea53ea0eabe91ef78a2d8ab1da
 canonical hash: sha256:f386c1043ca5e83cafbd88e99746d0609aab0154ed48de1970677758a66ed5fa
@@ -43,15 +43,16 @@ A fixed work-item commit is an immutable entry checkpoint, not a perpetually cur
 PR #523: merged and production-verified canonical Market Access implementation
 PR #534: merged and production-verified closeout
 PR #535: bounded Japan Market Access Expansion Review Batch 1 authority
-Japan Market Access Expansion Review Batch 1: complete no-go
+PR #536: Market Access review no-go closeout
 Current implementation authority: REVIEW GATE
-Current active review authority: none
+Current active review authority: Evidence Archive Payload Verification Batch 2
+Review mode: review-only
 Later canonical implementation lane authorized: no
 ```
 
-The completed review inspected three source-led candidate pairs — RLUSD, USDC, and JPYSC on the separate BITPOINT service operated by SBI VC Trade — and found **zero promotable pairs and zero promotable Market Access Records**.
+The active Batch 2 lane deterministically selects ten current unarchived canonical Evidence identities using the historical Queue v7 non-ranking priority semantics after excluding the ten Evidence identities already reviewed in Payload Verification Batch 1. It then permits manual exact-source and dated-Wayback payload review only.
 
-The current 12 canonical Market Access Records remain unchanged. Service-level exclusion, missing product-list entries, and VCTRADE-specific restrictions are not expanded into unsupported BITPOINT function states.
+Canonical `archived_url` changes remain prohibited in this review authority. Any exact dated archive URLs judged promotable require a separate reviewed and merged implementation authority.
 
 ## Current public surfaces
 
@@ -91,15 +92,30 @@ AGENTS.md
 docs/spec-governance.md
 docs/roadmap.md
 docs/deployment-policy.md
-docs/roadmap-amendments/2026-08-09-japan-market-access-expansion-review-b1-result.md
-docs/quality/japan-market-access-expansion-review-b1-result-spec.md
-data/editorial-research/japan-market-access-expansion-review-b1-2026-08-09.json
-docs/market-access-record-spec.md
-config/market-access-governance-v1.json
+docs/roadmap-amendments/2026-08-09-evidence-archive-payload-verification-batch-2-review-authority.md
+docs/quality/evidence-archive-payload-verification-batch-2-review-authority-spec.md
+config/evidence-archive-payload-verification-batch-2-review-authority.json
+config/evidence-archive-payload-verification-batch-1.json
+docs/migration/evidence-archive-maintenance-queue-v7-pr403.json
+config/evidence-archive-maintenance-queue-v7-pr403.json
 current named source reviews, baselines, queues, audits, and validators
 ```
 
-Merged repository authority outranks chat memory, handoff prose, issue discussion, stale branch state, generated reports, and unmerged drafts. Historical PR #523/#534/#535 checkpoint artifacts remain historical evidence.
+Merged repository authority outranks chat memory, handoff prose, issue discussion, stale branch state, generated reports, and unmerged drafts. Historical PR-specific checkpoint artifacts remain historical evidence.
+
+## Evidence Archive Payload Verification Batch 2 boundary
+
+```text
+archive recorded: 463
+archive not recorded: 122
+candidate target count: 10
+Batch 1 reviewed identities excluded: 10
+selection semantics: Queue v7 deterministic non-ranking order
+manual archived payload review required: yes
+canonical archive additions authorized by this review: 0
+```
+
+Redirect-only results, CDX metadata alone, replacement targets, or payloads whose claim scope cannot be independently verified are insufficient. `reviewed_no_safe_change` is a valid outcome. Automatic archive promotion is prohibited.
 
 ## Completed JPYSC Market Access work
 
@@ -126,8 +142,6 @@ promotable Market Access Records: 0
 ```
 
 Market Access expansion may be reopened only on material new source evidence, such as an FSA provider/handled-instrument register change, a published stablecoin intermediary relationship, BITPOINT-specific function-level evidence, or a material BITPOINT/VCTRADE integration change.
-
-The immediate repository boundary is `REVIEW GATE`. Evidence Archive Payload Verification Batch 2 is the next dated workstream, but only preparation is allowed until a separate authority is merged.
 
 ## Core data rules
 
