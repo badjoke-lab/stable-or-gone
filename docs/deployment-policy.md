@@ -67,7 +67,40 @@ Canonical hash: sha256:f386c1043ca5e83cafbd88e99746d0609aab0154ed48de1970677758a
 Canonical file count: 466
 ```
 
-The active Stablecoin Compare Matrix Remediation must preserve every canonical value above.
+## Compare remediation is complete
+
+The bounded Stablecoin Compare Matrix Remediation is production-complete.
+
+```text
+Authority PR: #540
+Implementation PR: #541
+Implementation merge commit: 539a27fd5854a1c2544f4653a2161be36860a002
+Production run: 31326135906
+Production result: success
+Visual exact head: bf27f4fe79ca19774ed92a4ff82854188c4edbe0
+Visual acceptance run: 31325811381
+Visual audit: ok=true / failures=[]
+Zero-selection audit: ok=true
+Canonical delta: 0
+```
+
+The accepted public behavior is the 2–4 record aligned matrix, fifth-selection rejection, individual column removal, `Differences only`, ordered shared URL restoration, explicit Unknown/Not recorded values, and bounded mobile comparison scrolling without page-level overflow.
+
+Compare no longer has active implementation authority. Further material Compare work requires separate reviewed authority.
+
+## Current active work is review-only
+
+The active lane is Evidence Archive Payload Verification Batch 2 manual review:
+
+```text
+stage: MANUAL_PAYLOAD_REVIEW
+candidate count: 10
+draft review PR: #539
+canonical archive additions authorized: 0
+canonical implementation authority: REVIEW_GATE
+```
+
+This review lane does not authorize a production/canonical publication delta. PR #539 may contain internal/editorial review artifacts and dispositions only. Any canonical `archived_url` addition requires a separate reviewed and merged implementation authority followed by normal production verification.
 
 ## Official-origin contract
 
@@ -122,60 +155,11 @@ Every automatic deployment must verify at least:
 - strict legacy-host 301 behavior;
 - deployment result in Issue #479.
 
-Docs-only authority merges still must converge to their exact main commit in production. Unchanged canonical hash/counts are expected, not a reason to skip deployment verification.
-
-## Active material public UI authority
-
-The current active material UI authority is the bounded Stablecoin Compare Matrix Remediation:
-
-```text
-docs/roadmap-amendments/2026-08-10-stablecoin-compare-matrix-remediation-authority.md
-docs/quality/stablecoin-compare-matrix-remediation-spec.md
-config/stablecoin-compare-matrix-remediation-authority.json
-```
-
-Authorized public route:
-
-```text
-/stablecoins/
-```
-
-The authority exists only to replace the current two-to-four-record stacked-dossier comparison rendering with a true attribute-by-record matrix while preserving existing canonical data and comparison semantics.
-
-The Evidence Archive Payload Verification Batch 2 manual review is paused while this material UI remediation is active. Draft PR #539 must not merge during this lane.
-
-## Material public UI verification
-
-Material public UI changes require exact-head build, desktop/mobile screenshots of changed route families and acceptance states, direct artifact inspection, and blocking on known visual defects even if automated checks pass.
-
-For the active Compare remediation, exact-head direct review must cover at least:
-
-```text
-desktop 2 selected
-desktop 3 selected
-desktop 4 selected
-mobile 2 selected
-mobile 4 selected
-Differences only off/on
-individual column removal
-fifth-selection rejection
-shared compare URL restoration
-Unknown / Not recorded visibility
-```
-
-The enduring UI V3 regression contract remains binding, including existing exhaustive route, color, readability, heading-overlap, overflow, image, brand, and empty-state gates. Page-level horizontal overflow, clipping, overlapping text, essential ellipsis, inaccessible controls, or another known defect blocks merge.
-
-Horizontal scrolling is permitted only inside the bounded comparison region where needed for the multi-column matrix. It must not create page-level overflow.
-
-## Public safety
-
-The Compare lane must not introduce ranking, scoring, recommendation, winner/loser language, safety grading, investment framing, or unreviewed data. Counts such as events/evidence remain descriptive historical-record depth only.
-
-No canonical stablecoin, organization, relationship, event, evidence, reserve, legal, income, deployment, Market Access, archive, schema, taxonomy, or route-set changes are authorized by this lane.
+Docs-only authority/closeout merges still must converge to their exact main commit in production. Unchanged canonical hash/counts are expected, not a reason to skip deployment verification.
 
 ## Guide publication
 
-Guide visibility remains controlled by `src/data/guideCatalog.ts`. A catalog entry plus public route exposes the guide; `publishedAt` supplies publication metadata. Compare remediation does not authorize Guide changes.
+Guide visibility remains controlled by `src/data/guideCatalog.ts`. A catalog entry plus public route exposes the guide; `publishedAt` supplies publication metadata. The active Evidence Archive review does not authorize Guide changes.
 
 ## Manual fallback
 
@@ -185,6 +169,6 @@ Guide visibility remains controlled by `src/data/guideCatalog.ts`. A catalog ent
 
 Explicit reviewed authority is required for domain/DNS changes, redirect implementation changes, secret/Cloudflare account changes, replacing/removing the Pages worker contract, destructive schema migrations, mass deletion, major route removal, or emergency rollback.
 
-## Exit and authority restoration
+## Review-to-production boundary
 
-After the Compare implementation is merged, production-verified, and visually accepted, a closeout must restore Evidence Archive Payload Verification Batch 2 manual review as the active lane. Canonical implementation remains at REVIEW GATE throughout.
+The restored Evidence Archive manual review may end with exact dated archive proposals or `reviewed_no_safe_change`. Neither outcome changes production by itself. Canonical archive promotion requires a separate reviewed and merged implementation authority and the full production pipeline above.
