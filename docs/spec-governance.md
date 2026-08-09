@@ -3,48 +3,41 @@
 Status: canonical governance specification  
 Updated: 2026-08-10
 
-## 1. Purpose
-
-This document defines repository authority, conflict resolution, canonical-data preservation, public-surface governance, visual-quality gates, deployment governance, and bounded continuation rules.
+## 1. Authority rule
 
 Merged repository specifications are the source of truth. Chat memory, handoff prose, issue discussion, stale branch state, generated reports, and unmerged drafts do not override merged repository authority.
 
-## 2. Authority order
+Authority order:
 
-When active documents disagree, use this order:
+1. `docs/deployment-policy.md`
+2. `docs/spec-governance.md`
+3. `docs/roadmap.md`
+4. current merged roadmap amendment
+5. current work-item specification / machine-readable contract
+6. enduring regression authorities
+7. named audits, baselines, queues, and reviewed prior outputs
+8. conversation history and unmerged drafts
 
-1. `docs/deployment-policy.md` for production/publication rules.
-2. `docs/spec-governance.md` for authority and change control.
-3. `docs/roadmap.md` for current phase and bounded sequence.
-4. the current merged roadmap amendment.
-5. the active work-item specification and machine-readable authority contract.
-6. enduring regression authorities.
-7. named audits, inventories, baselines, fixtures, queues, and reviewed prior outputs.
-8. conversation history and unmerged drafts.
-
-Current restoration/closeout authority:
+Current result authority:
 
 ```text
-docs/roadmap-amendments/2026-08-10-post-pr541-compare-closeout-evidence-review-restoration.md
-docs/quality/post-pr541-compare-closeout-evidence-review-restoration-spec.md
-config/post-pr541-compare-closeout-evidence-review-restoration.json
+docs/roadmap-amendments/2026-08-10-evidence-archive-payload-verification-batch-2-review-result.md
+docs/quality/evidence-archive-payload-verification-batch-2-review-result-spec.md
+data/editorial-research/evidence-archive-payload-verification-batch-2-review-2026-08-09.json
 ```
 
-Restored active review authority:
+Historical inputs remain:
 
 ```text
-docs/roadmap-amendments/2026-08-09-evidence-archive-payload-verification-batch-2-review-authority.md
-docs/roadmap-amendments/2026-08-09-evidence-archive-payload-verification-batch-2-candidates.md
-docs/quality/evidence-archive-payload-verification-batch-2-review-authority-spec.md
-docs/quality/evidence-archive-payload-verification-batch-2-candidate-spec.md
-config/evidence-archive-payload-verification-batch-2-review-authority.json
-data/editorial-research/evidence-archive-payload-verification-batch-2-candidates-2026-08-09.json
+PR #537 — review-only authority
+PR #538 — deterministic candidate set
+PR #539 — manual network/payload research lineage
 ```
 
-## 3. Current reviewed execution state
+## 2. Current canonical state
 
 ```text
-Canonical stable assets: 119
+Stable assets: 119
 Organizations: 109
 Relationships: 131
 Events: 194
@@ -61,81 +54,74 @@ Market Access Records: 12
 Archive recorded: 463
 Archive not recorded: 122
 Detail routes: 422
-Metadata-checked detail routes: 422
+Metadata-checked routes: 422
 Official public origin: https://www.stableorgone.com
-Current production commit: dynamic; verify via deploy-production workflow and Issue #479
-Last canonical-changing implementation commit: 77e80dd3e2a62fea53ea0eabe91ef78a2d8ab1da
+Last canonical-changing commit: 77e80dd3e2a62fea53ea0eabe91ef78a2d8ab1da
 Canonical hash: sha256:f386c1043ca5e83cafbd88e99746d0609aab0154ed48de1970677758a66ed5fa
 Canonical file count: 466
-Legacy-host migration: complete
 ```
 
-There is no active canonical-record implementation authority. `REVIEW_GATE` remains the canonical implementation boundary.
+There is no active canonical-record implementation authority. The repository is at `REVIEW_GATE`.
+
+## 3. Evidence Archive Payload Verification Batch 2 — review complete
+
+The exact ten PR #538 candidates have completed manual payload review under the PR #537 contract.
+
+```text
+reviewed: 10
+dated exact archive proposals: 8
+reviewed no safe change: 2
+canonical changes authorized: 0
+next boundary: REVIEW_GATE
+```
+
+Accepted proposal IDs:
+
+```text
+sog_src_susd_legacy_context_batch_a
+sog_src_susd_rebuilding_2026
+sog_src_susd_roadmap_2026
+sog_src_susd_sip_status_2026
+sog_src_susd_synthetix_docs
+sog_src_susd_v3_faq_batch_a
+sog_src_terra_docs
+sog_src_tether_transparency
+```
+
+No-safe-change IDs:
+
+```text
+sog_src_susd_sip420_2024
+sog_src_susd_sip423_2026
+```
+
+Review acceptance required exact canonical source URLs, dated Wayback captures, independent HTTP-200 archived-payload retrieval, payload inspection, and claim-scope/source-role preservation. CDX metadata alone, redirects, normalized replacement URLs, unrelated bodies, and unsupported snapshots are insufficient.
+
+The review result cannot mutate canonical `archived_url`, source URLs, Evidence identities, Evidence Relations, Market Access, routes, schema, taxonomy, or public canonical output.
+
+Any archive promotion requires a separate reviewed and merged implementation authority binding the exact eight IDs, exact eight archive URLs, maximum archive deltas `+8/-8`, unchanged Evidence/Evidence Relation counts, validators, and production verification.
 
 ## 4. Compare remediation — complete
 
-The bounded Stablecoin Compare Matrix Remediation is closed.
+PR #540/#541 completed the bounded Stablecoin Compare Matrix repair. Merge `539a27fd5854a1c2544f4653a2161be36860a002`; production run `31326135906` succeeded; exact-head visual run `31325811381` succeeded. Further Compare work requires separate authority.
+
+## 5. Current sequence
 
 ```text
-Authority PR: #540
-Implementation PR: #541
-Implementation merge commit: 539a27fd5854a1c2544f4653a2161be36860a002
-Production run: 31326135906 — success
-Visual exact head: bf27f4fe79ca19774ed92a4ff82854188c4edbe0
-Visual run: 31325811381 — success
-Visual audit: ok=true / failures=[]
-Zero-state audit: ok=true
+PR #523 — last canonical-changing implementation — complete
+PR #534 — REVIEW_GATE restoration — complete
+PR #535/#536 — Japan Market Access review — complete no-go
+PR #537 — Evidence Archive Batch 2 review authority — complete
+PR #538 — deterministic candidates — complete
+PR #539 — manual payload research lineage — complete research, not safe to merge as stale branch
+PR #540/#541 — Compare remediation — complete
+PR #542 — Compare closeout / Evidence review restoration — complete
+current — clean Evidence Archive Batch 2 review-result recording
+next — REVIEW_GATE
+later archive implementation — separate authority only
 ```
 
-The completed public behavior is two-to-four selection, fifth rejected, one aligned attribute-by-record matrix, individual column removal, `Differences only`, ordered shared URL state, explicit Unknown/Not recorded values, and bounded internal mobile horizontal scrolling with no page-level overflow.
-
-PR #540/#541 changed no canonical records, schema, taxonomy, route identities, Evidence, Evidence Relations, Market Access, or archive data. Any further material Compare implementation requires separate authority.
-
-## 5. Restored active lane — Evidence Archive Payload Verification Batch 2
-
-```text
-stage: MANUAL_PAYLOAD_REVIEW
-candidate count: exactly 10
-draft review PR: #539
-canonical archive additions authorized: 0
-canonical implementation authority: REVIEW_GATE
-```
-
-The PR #537 review authority and PR #538 deterministic candidate set remain authoritative and unchanged. The candidate artifact remains internal/review-only and `canonical_change_authorized=false`.
-
-Manual review must retain the original semantic contract:
-
-- exact canonical source URL;
-- dated Wayback snapshot;
-- successful independent archived-payload fetch;
-- HTTP/body inspection;
-- claim-scope preservation in the archived body;
-- CDX metadata, redirect-only captures, generic shells, unrelated content, and future-only content are insufficient;
-- `reviewed_no_safe_change` is valid.
-
-PR #539 may record review dispositions and bounded implementation proposals, but it may not mutate canonical `archived_url`, source URL, Evidence identity, Evidence Relations, Market Access, routes, schema, taxonomy, or public canonical output.
-
-Any canonical archive promotion requires a separate reviewed and merged implementation authority.
-
-## 6. Current bounded sequence
-
-```text
-1. PR #523 bounded JPYSC implementation — complete
-2. PR #534 closeout / REVIEW GATE restoration — complete
-3. PR #535/#536 Japan Market Access Expansion Review Batch 1 — complete no-go
-4. PR #537 Evidence Archive Payload Verification Batch 2 review-only authority — complete
-5. PR #538 deterministic Batch 2 candidate selection — complete
-6. PR #539 manual payload review — active draft
-7. PR #540 Compare remediation authority — complete
-8. PR #541 Compare implementation / visual acceptance / production — complete
-9. post-PR #541 closeout — restore #539 manual review without canonical mutation
-10. finish #539 review, then return to REVIEW_GATE
-11. any archive implementation — separate merged authority only
-```
-
-## 7. Canonical and public safety boundary
-
-Public registry and machine-readable claims remain canonical-only.
+## 6. Canonical/public safety
 
 ```text
 canonical_only = true
@@ -144,40 +130,29 @@ includes_internal_monitoring = false
 canonical implementation authority = REVIEW_GATE
 ```
 
-Review work cannot change stablecoin identity, lifecycle/issuance taxonomy, organization relationships, reserve claims, evidence identity, archive URLs, Market Access, route identity, or machine-readable canonical outputs.
+No review artifact is public canonical output.
 
-## 8. Historical anchors
+## 7. Historical anchors
 
-Historical PR-specific checkpoints remain immutable audit evidence, including:
+Preserve at minimum:
 
 ```text
-PR #493 — official-domain migration and production verification
-PR #500 — bounded MNEE Evidence and Archive Maintenance checkpoint
-PR #517 — Bison Bank EUB/USB complete-record growth checkpoint
-PR #522 — semantic authority for PR #523
-PR #523 — last canonical-changing implementation
-PR #537 — Evidence Archive Batch 2 review authority
-PR #538 — Evidence Archive Batch 2 deterministic candidates
-PR #540 — Compare remediation authority
-PR #541 — production-verified Compare implementation
+PR #493
+PR #500
+PR #517
+PR #522
+PR #523
+PR #537
+PR #538
+PR #540
+PR #541
+PR #542
 ```
 
-## 9. Mandatory work-start protocol
+## 8. Mandatory reading
 
-Before substantive continuation, read:
+Before further work, read `AGENTS.md`, this file, `docs/roadmap.md`, `docs/deployment-policy.md`, the Batch 2 review-result amendment/spec/artifact, PR #537/#538 authority/candidate material, and `docs/ui-v3-remediation-authority.md` for any material public UI work.
 
-1. `AGENTS.md`;
-2. this file;
-3. `docs/roadmap.md`;
-4. `docs/deployment-policy.md`;
-5. the post-PR #541 closeout/restoration amendment/spec/contract;
-6. the PR #537/#538 Evidence Archive authority and candidate contracts;
-7. the fixed candidate artifact;
-8. Batch 1 review history and Queue v7 inputs before making review dispositions;
-9. PR #539 review artifacts when continuing its draft branch.
+## 9. Exit
 
-If authority, canonical counts, schedule, deployment behavior, or review boundary changes, update governing documentation before implementation continues.
-
-## 10. Exit rule
-
-Complete the ten-candidate manual payload review. Valid review outcomes are exact dated archive proposals or `reviewed_no_safe_change`. The review itself authorizes zero canonical archive additions. After review completion, return to `REVIEW_GATE`; implementation requires a separate reviewed and merged authority.
+The completed review exits to `REVIEW_GATE`. No automatic continuation is authorized. Any canonical archive mutation must be separately reviewed and merged before implementation begins.
