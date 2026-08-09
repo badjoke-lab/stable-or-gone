@@ -5,34 +5,36 @@ This file is the mandatory entry point for humans, AI agents, and automation wor
 ## Current authority
 
 ```text
-Repository state: Evidence Archive Payload Verification Batch 2 manual review active
-Current review authority: Evidence Archive Payload Verification Batch 2
-Current stage: MANUAL_PAYLOAD_REVIEW
-Active draft review PR: #539
-Fixed candidate count: 10
+Repository state: Evidence Archive Payload Verification Batch 2 review complete
+Current stage: REVIEW_GATE
+Canonical implementation authority: REVIEW_GATE
 Canonical archive additions authorized: 0
-Canonical implementation authority: REVIEW GATE
+Reviewed candidates: 10
+Dated exact archive proposals: 8
+Reviewed no safe change: 2
+Review research lineage: draft PR #539
 Current canonical checkpoint: sog_jpysc_market_access_pilot_3_canonical_119_checkpoint_pr523_2026_08_05
 Current production commit: dynamic; verify via deploy-production workflow and Issue #479
 Last canonical-changing implementation commit: 77e80dd3e2a62fea53ea0eabe91ef78a2d8ab1da
 Canonical hash: sha256:f386c1043ca5e83cafbd88e99746d0609aab0154ed48de1970677758a66ed5fa
 Canonical file count: 466
 Official public origin: https://www.stableorgone.com
-Legacy-host 301: complete via Pages Advanced Mode worker and strict migration gate
 ```
 
-The Stablecoin Compare Matrix Remediation is complete. PR #540 authorized the bounded repair; PR #541 implemented it and merged as `539a27fd5854a1c2544f4653a2161be36860a002`. Production run `31326135906` succeeded. Exact-head visual acceptance run `31325811381` passed with `audit.json: ok=true / failures=[]` and `zero-state.json: ok=true`.
+Evidence Archive Payload Verification Batch 2 manual review is complete. The exact ten PR #538 candidates were reviewed using the PR #537 payload-verification contract. Eight exact dated archive URLs are proposals only; two candidates remain `reviewed_no_safe_change`. No canonical `archived_url`, Evidence, Evidence Relation, Market Access, route, schema, taxonomy, or public-output mutation is authorized by the review result.
 
-The Compare interruption is closed. Evidence Archive Payload Verification Batch 2 is restored exactly at the pre-interruption manual review boundary. PR #539 is again the active review draft; it remains review-only and must not promote canonical archive URLs.
+The eight proposed archive additions require a separate reviewed and merged implementation authority. Until that authority exists, the repository remains at `REVIEW_GATE`.
+
+The Stablecoin Compare Matrix Remediation is also complete: PR #540 authority, PR #541 implementation, merge `539a27fd5854a1c2544f4653a2161be36860a002`, production run `31326135906` success, visual run `31325811381` success.
 
 ## Current reviewed canonical counts
 
 ```text
-Canonical stable assets: 119
+Stable assets: 119
 Organizations: 109
 Relationships: 131
 Events: 194
-Canonical Evidence: 585
+Evidence: 585
 Evidence Relations: 585
 Reserve reports: 127
 Known unknowns: 352
@@ -48,75 +50,73 @@ Detail routes: 422
 Metadata-checked routes: 422
 ```
 
-Every count above remains frozen while the active lane is review-only.
-
 ## Historical authority anchors
-
-The following completed anchors remain required for compatibility and audit traceability:
 
 ```text
 PR #493 — official-domain migration and production verification
 PR #500 — bounded MNEE Evidence and Archive Maintenance checkpoint
-PR #517 — Bison Bank EUB and USB complete-record growth checkpoint
-PR #522 — semantic authority for the completed PR #523 JPYSC implementation
-PR #523 — bounded JPYSC Japan Market Access implementation
-PR #534 — post-PR #523 production closeout and REVIEW GATE restoration
-PR #535 — Japan Market Access Expansion Review Batch 1 authority
-PR #536 — Japan Market Access Expansion Review Batch 1 no-go closeout
-PR #537 — Evidence Archive Payload Verification Batch 2 review-only authority
-PR #538 — deterministic Evidence Archive Payload Verification Batch 2 candidate set
+PR #517 — Bison Bank EUB/USB complete-record growth checkpoint
+PR #522 — semantic authority for PR #523
+PR #523 — last canonical-changing implementation
+PR #534 — REVIEW_GATE restoration
+PR #535/#536 — Japan Market Access Expansion Review Batch 1
+PR #537 — Evidence Archive Payload Verification Batch 2 review authority
+PR #538 — deterministic Batch 2 candidate set
+PR #539 — manual network/payload research lineage
 PR #540 — Stablecoin Compare Matrix Remediation authority
-PR #541 — Stablecoin Compare Matrix implementation and production-verified closeout target
+PR #541 — Stablecoin Compare Matrix implementation
+PR #542 — Compare closeout and Evidence review restoration
 ```
 
 Merged repository authority outranks chat memory, handoff prose, issue discussion, stale branch state, generated reports, and unmerged drafts.
 
 ## Mandatory reading order
 
-Before substantive continuation, read the merged current versions of:
+Before substantive continuation, read:
 
 1. `AGENTS.md`
 2. `docs/spec-governance.md`
 3. `docs/roadmap.md`
 4. `docs/deployment-policy.md`
-5. `docs/roadmap-amendments/2026-08-10-post-pr541-compare-closeout-evidence-review-restoration.md`
-6. `docs/roadmap-amendments/2026-08-09-evidence-archive-payload-verification-batch-2-review-authority.md`
-7. `docs/roadmap-amendments/2026-08-09-evidence-archive-payload-verification-batch-2-candidates.md`
-8. `docs/quality/evidence-archive-payload-verification-batch-2-review-authority-spec.md`
-9. `docs/quality/evidence-archive-payload-verification-batch-2-candidate-spec.md`
-10. `config/evidence-archive-payload-verification-batch-2-review-authority.json`
-11. `data/editorial-research/evidence-archive-payload-verification-batch-2-candidates-2026-08-09.json`
-12. `docs/ui-v3-remediation-authority.md` as the enduring material-public-UI regression authority.
-13. Batch 1 review history and Queue v7 inputs before making any review disposition.
+5. `docs/roadmap-amendments/2026-08-10-evidence-archive-payload-verification-batch-2-review-result.md`
+6. `docs/quality/evidence-archive-payload-verification-batch-2-review-result-spec.md`
+7. `data/editorial-research/evidence-archive-payload-verification-batch-2-review-2026-08-09.json`
+8. PR #537/#538 authority and candidate artifacts
+9. Batch 1 payload-review history and Queue v7 inputs when interpreting review semantics
+10. `docs/ui-v3-remediation-authority.md` as the enduring material-public-UI regression authority
 
-## Active Evidence Archive review boundary
+## Review result
 
 ```text
-lane: Evidence Archive Payload Verification Batch 2
-stage: MANUAL_PAYLOAD_REVIEW
-candidate count: exactly 10
-candidate artifact: fixed by PR #538
-draft review PR: #539
-canonical archived_url changes: prohibited
-new Evidence / Evidence Relation changes: prohibited
-canonical source URL replacement: prohibited
-Market Access / route / schema / taxonomy changes: prohibited
-canonical implementation authority: REVIEW GATE
-maximum canonical archive additions: 0
+reviewed: 10
+proposals: 8
+no safe change: 2
+canonical change authorized: false
+next boundary: REVIEW_GATE
 ```
 
-Manual review must use the exact canonical source URL, find a dated Wayback capture, independently fetch the archived payload, inspect HTTP/body content, and compare preserved body content against the canonical claim scope. CDX metadata alone, redirect-only captures, generic shells, unrelated payloads, or future-only text are insufficient. `reviewed_no_safe_change` is a valid outcome.
+Proposal Evidence IDs:
 
-Any exact dated archive proposal remains a review result only. Canonical promotion requires a separate reviewed and merged implementation authority.
+```text
+sog_src_susd_legacy_context_batch_a
+sog_src_susd_rebuilding_2026
+sog_src_susd_roadmap_2026
+sog_src_susd_sip_status_2026
+sog_src_susd_synthetix_docs
+sog_src_susd_v3_faq_batch_a
+sog_src_terra_docs
+sog_src_tether_transparency
+```
 
-## Completed Compare behavior
+No-safe-change IDs:
 
-The public `/stablecoins/` comparison now preserves the existing 2–4 selection contract, rejects a fifth selection, renders one attribute-by-record matrix, supports individual column removal and `Differences only`, preserves ordered shared URL state, keeps Unknown/Not recorded explicit, and uses bounded internal mobile scrolling without page-level overflow.
+```text
+sog_src_susd_sip420_2024
+sog_src_susd_sip423_2026
+```
 
-Compare follow-up implementation requires separate authority; it is not the active workstream.
+## Current boundary
 
-## Exit
-
-Complete the ten-candidate manual payload review in PR #539. The valid review outcomes are exact dated archive proposals or `reviewed_no_safe_change`. After review completion, return to `REVIEW_GATE`; any canonical archive mutation must be separately authorized.
+Do not write any proposed archive URL into canonical Evidence from the review result alone. A later implementation authority must bind the exact eight IDs, exact eight URLs, maximum archive deltas `+8/-8`, unchanged Evidence/Evidence Relation counts, validators, and production verification.
 
 Issue #479 remains the deployment-history authority.
