@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "status": "reviewed_non_growth_checkpoint",
+  "status": "reviewed_non_growth_maintenance_checkpoint",
   "checkpoint_id": "sog_jpysc_market_access_pilot_3_canonical_119_checkpoint_pr523_2026_08_05",
   "checkpoint_kind": "non_growth_market_access_checkpoint",
   "recorded_at": "2026-08-05",
