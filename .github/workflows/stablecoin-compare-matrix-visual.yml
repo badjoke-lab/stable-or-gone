@@ -45,10 +45,10 @@ jobs:
           done
           cat /tmp/sog-compare-server.log
           exit 1
-      - name: Audit zero-selection hidden state
-        run: node scripts/audit-stablecoin-compare-zero-state.mjs
       - name: Audit 2-4 record comparison states
         run: node scripts/audit-stablecoin-compare-matrix-visual.mjs
+      - name: Audit zero-selection hidden state
+        run: node scripts/audit-stablecoin-compare-zero-state.mjs
       - name: Upload comparison visual acceptance artifact
         if: always()
         uses: actions/upload-artifact@v4
