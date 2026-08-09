@@ -1,0 +1,106 @@
+name: Finalize stablecoin compare scroll behavior
+
+on:
+  push:
+    branches:
+      - agent/stablecoin-compare-matrix-remediation
+    paths:
+      - .github/workflows/finalize-stablecoin-compare-scroll.yml
+
+permissions:
+  contents: write
+
+jobs:
+  refine:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/stablecoin-compare-matrix-remediation
+      - name: Patch comparison section rows and mobile column geometry
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          script = Path('src/scripts/stablecoin-index.ts')
+          text = script.read_text()
+          old = """      const sectionRow = document.createElement('tr');
+                sectionRow.className = 'comparison-section-row';
+                sectionRow.dataset.comparisonSection = section.label;
+                const sectionCell = document.createElement('th');
+                sectionCell.colSpan = selectedSources.length + 1;
+                sectionCell.scope = 'colgroup';
+                sectionCell.textContent = section.label;
+                sectionRow.append(sectionCell);
+                body.append(sectionRow);"""
+          new = """      const sectionRow = document.createElement('tr');
+                sectionRow.className = 'comparison-section-row';
+                sectionRow.dataset.comparisonSection = section.label;
+                const sectionLabelCell = document.createElement('th');
+                sectionLabelCell.scope = 'rowgroup';
+                sectionLabelCell.className = 'comparison-attribute-column comparison-section-label';
+                sectionLabelCell.textContent = section.label;
+                const sectionFillCell = document.createElement('td');
+                sectionFillCell.colSpan = selectedSources.length;
+                sectionFillCell.className = 'comparison-section-fill';
+                sectionFillCell.setAttribute('aria-hidden', 'true');
+                sectionRow.append(sectionLabelCell, sectionFillCell);
+                body.append(sectionRow);"""
+          if old not in text:
+              raise SystemExit('section row source pattern not found')
+          script.write_text(text.replace(old, new, 1))
+
+          css = Path('src/styles/public-ui.css')
+          ctext = css.read_text().rstrip()
+          rule = '.comparison-section-row .comparison-section-label{position:sticky;left:0;z-index:3;width:168px;min-width:168px;max-width:168px;background:var(--ui-bg-soft)}.comparison-section-row .comparison-section-fill{min-width:0;background:var(--ui-bg-soft);border-bottom-color:var(--ui-line-strong)}@media(max-width:640px){.comparison-matrix-shell .comparison-matrix{min-width:564px}.comparison-matrix-shell .comparison-matrix[data-selected-count="3"]{min-width:774px}.comparison-matrix-shell .comparison-matrix[data-selected-count="4"]{min-width:984px}.comparison-matrix th,.comparison-matrix td{min-width:210px}.comparison-matrix .comparison-attribute-column,.comparison-section-row .comparison-section-label{width:144px;min-width:144px;max-width:144px}.comparison-record-header{min-width:210px}}'
+          if rule not in ctext:
+              ctext += '\n' + rule
+          css.write_text(ctext + '\n')
+
+          audit = Path('scripts/audit-stablecoin-compare-matrix-visual.mjs')
+          atext = audit.read_text()
+          old_capture = """const captureState = async (page, name) => {
+            const section = page.locator('[data-comparison-panel]');
+            await section.scrollIntoViewIfNeeded();
+            await section.screenshot({ path: path.join(outputDir, `${name}.png`) });
+          };"""
+          new_capture = """const captureState = async (page, name) => {
+            const section = page.locator('[data-comparison-panel]');
+            await section.scrollIntoViewIfNeeded();
+            await page.evaluate(() => { if (document.activeElement instanceof HTMLElement) document.activeElement.blur(); });
+            await section.screenshot({ path: path.join(outputDir, `${name}.png`) });
+          };"""
+          if old_capture not in atext:
+              raise SystemExit('captureState pattern not found')
+          atext = atext.replace(old_capture, new_capture, 1)
+          old_scroll = """      await page.locator('[data-comparison-grid]').evaluate((shell) => { shell.scrollLeft = shell.scrollWidth; });
+                await page.waitForTimeout(50);
+                await captureState(page, 'mobile-4-selected-right');"""
+          new_scroll = """      await page.locator('[data-comparison-grid]').evaluate((shell) => { shell.scrollLeft = shell.scrollWidth; });
+                await page.waitForTimeout(50);
+                const rightEdgeGeometry = await page.evaluate(() => {
+                  const attribute = document.querySelector('.comparison-matrix .comparison-attribute-column');
+                  const headers = [...document.querySelectorAll('.comparison-record-header')];
+                  const last = headers.at(-1);
+                  const sectionLabel = document.querySelector('.comparison-section-label');
+                  if (!(attribute instanceof HTMLElement) || !(last instanceof HTMLElement) || !(sectionLabel instanceof HTMLElement)) return null;
+                  const attributeRect = attribute.getBoundingClientRect();
+                  const lastRect = last.getBoundingClientRect();
+                  const sectionRect = sectionLabel.getBoundingClientRect();
+                  return { attributeRight: attributeRect.right, lastLeft: lastRect.left, sectionLeft: sectionRect.left, sectionRight: sectionRect.right };
+                });
+                record('mobile_4_last_column_clears_sticky_attribute', Boolean(rightEdgeGeometry) && rightEdgeGeometry.lastLeft >= rightEdgeGeometry.attributeRight - 1, rightEdgeGeometry ?? {});
+                record('mobile_4_section_label_remains_sticky', Boolean(rightEdgeGeometry) && rightEdgeGeometry.sectionLeft >= -1 && rightEdgeGeometry.sectionRight > 100, rightEdgeGeometry ?? {});
+                await captureState(page, 'mobile-4-selected-right');"""
+          if old_scroll not in atext:
+              raise SystemExit('mobile scroll audit pattern not found')
+          audit.write_text(atext.replace(old_scroll, new_scroll, 1))
+          PY
+      - name: Commit refinement
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/scripts/stablecoin-index.ts src/styles/public-ui.css scripts/audit-stablecoin-compare-matrix-visual.mjs
+          git diff --cached --quiet && exit 0
+          git commit -m "Finalize comparison matrix scroll readability"
+          git push origin HEAD:agent/stablecoin-compare-matrix-remediation
