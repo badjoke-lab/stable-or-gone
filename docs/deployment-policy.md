@@ -64,7 +64,7 @@ Canonical hash: sha256:f386c1043ca5e83cafbd88e99746d0609aab0154ed48de1970677758a
 Canonical file count: 466
 ```
 
-The active Evidence Archive Payload Verification Batch 2 authority is review-only and requires zero canonical/public deltas. Candidate selection and manual archive-payload review are internal review work. Any canonical `archived_url` additions require a separate reviewed and merged implementation authority.
+Evidence Archive Payload Verification Batch 2 review is complete with eight exact dated archive proposals and two no-safe-change results. The review itself requires zero canonical/public deltas. Any canonical `archived_url` additions require a new separately reviewed and merged implementation authority.
 
 ## Official-origin contract
 
@@ -127,7 +127,7 @@ A docs-only authority/result merge still must converge to its exact `main` commi
 
 Material public UI changes require exact-head build, desktop/mobile screenshots of changed route families and acceptance routes, direct artifact inspection, and blocking on known visual defects even if automated checks pass. After merge, production publication and required visual review must complete.
 
-The active Evidence Archive review permits no material public UI changes.
+The completed Evidence Archive review permits no material public UI changes.
 
 ## Guide publication
 
@@ -143,4 +143,4 @@ Explicit reviewed authority is required for domain/DNS changes, redirect impleme
 
 Ordinary reviewed registry, guide, copy, UI, and documentation changes follow automatic `main` publication after repository and work-item validation gates pass.
 
-Canonical implementation remains at `REVIEW GATE`. Evidence Archive Payload Verification Batch 2 review authority permits review only; it does not authorize canonical archive promotion.
+Canonical implementation remains at `REVIEW GATE`. The completed Batch 2 review does not authorize canonical archive promotion; the eight proposals require a separate implementation authority and production verification after any later canonical implementation merge.
