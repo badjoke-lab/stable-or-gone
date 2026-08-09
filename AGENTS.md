@@ -5,24 +5,25 @@ This file is the mandatory entry point for humans, AI agents, and automation wor
 ## Current authority
 
 ```text
-Repository state: Evidence Archive Payload Verification Batch 2 candidates fixed; manual payload review active
+Repository state: Stablecoin Compare Matrix Remediation active
+Current public implementation authority: Stablecoin Compare Matrix Remediation
+Authorized public route: /stablecoins/
+Evidence Archive Payload Verification Batch 2: paused at MANUAL_PAYLOAD_REVIEW
+Paused Evidence review draft PR: #539
+Canonical implementation authority: REVIEW GATE
+Canonical promotions authorized: no
 Current canonical checkpoint: sog_jpysc_market_access_pilot_3_canonical_119_checkpoint_pr523_2026_08_05
-Review authority entry commit: c9588b092277bd14d87ce9209ba087e4752b3346
 Current production commit: dynamic; verify via deploy-production workflow and Issue #479
 Last canonical-changing implementation commit: 77e80dd3e2a62fea53ea0eabe91ef78a2d8ab1da
 Canonical hash: sha256:f386c1043ca5e83cafbd88e99746d0609aab0154ed48de1970677758a66ed5fa
 Canonical file count: 466
 Official public origin: https://www.stableorgone.com
 Legacy-host 301: complete via Pages Advanced Mode worker and strict migration gate
-Current implementation authority: REVIEW GATE
-Current review authority: Evidence Archive Payload Verification Batch 2
-Current review stage: MANUAL_PAYLOAD_REVIEW
-Later canonical implementation lanes authorized: no
 ```
 
-PR #523 remains the last canonical-changing Market Access implementation. PR #534 closed that checkpoint. PR #535 authorized Japan Market Access Expansion Review Batch 1, and PR #536 closed that review no-go with zero canonical additions. PR #537 opened the bounded Evidence Archive Payload Verification Batch 2 review-only authority and is merged and production-verified. The exact ten review candidates are now deterministically fixed; canonical archive mutation remains prohibited.
+The Compare remediation is an explicit interruption for a known public comparison defect. The existing comparison selector already supports two to four records, but the current rendering stacks whole record dossiers instead of aligning like-for-like attributes. The remediation must preserve the 2–4 selection contract and replace the stacked presentation with one attribute-by-record matrix.
 
-A fixed commit in a work-item document is an immutable entry checkpoint, not a perpetually current production claim. Current production parity must be verified dynamically from the production workflow and Issue #479.
+Evidence Archive Payload Verification Batch 2 remains valid historical/review authority but is temporarily suspended. PR #539 and its Wayback probe artifacts remain draft review evidence only and must not merge while the Compare remediation authority is active.
 
 ## Current reviewed canonical counts
 
@@ -47,144 +48,86 @@ Detail routes: 422
 Metadata-checked routes: 422
 ```
 
-## Completed current-cycle work recognized by authority
+Every count above must remain unchanged by the Compare lane.
 
-```text
-PR #517 — Bison Bank EUB and USB complete-record growth checkpoint
-PRs #518–#519 — sibling-registry footer insertion and production closeout
-PRs #520–#522 — JPYSC review and bounded implementation authority
-PR #523 — bounded JPYSC Japan Market Access implementation, merged and production-verified
-PR #524 — fixed desktop/mobile support visual audit
-PR #525 — support-option consolidation and duplicate-call cleanup
-PR #526 — complete Ledger Series project network navigation
-PRs #527–#530 — official-domain migration hardening and completed legacy-host 301
-PR #531 — 2026 regulation guide cluster and 119-record mark-audit repair
-PR #532 — post-PR #531 authority and schedule reconciliation
-PR #533 — shared Guide readability and research-layout remediation
-PR #534 — post-PR #523 production closeout and REVIEW GATE restoration
-PR #535 — bounded Japan Market Access Expansion Review Batch 1 authority
-PR #536 — Japan Market Access Expansion Review Batch 1 no-go closeout
-PR #537 — Evidence Archive Payload Verification Batch 2 review-only authority, merged and production-verified
-```
+## Historical authority anchors
 
-Required historical authority anchors retained for compatibility and audit traceability:
+The following completed anchors remain required for compatibility and audit traceability:
 
 ```text
 PR #493 — official-domain migration and production verification
 PR #500 — bounded MNEE Evidence and Archive Maintenance checkpoint
 PR #517 — Bison Bank EUB and USB complete-record growth checkpoint
 PR #522 — semantic authority for the completed PR #523 JPYSC implementation
+PR #523 — bounded JPYSC Japan Market Access implementation
+PR #534 — post-PR #523 production closeout and REVIEW GATE restoration
+PR #535 — Japan Market Access Expansion Review Batch 1 authority
+PR #536 — Japan Market Access Expansion Review Batch 1 no-go closeout
+PR #537 — Evidence Archive Payload Verification Batch 2 review-only authority
+PR #538 — deterministic Evidence Archive Payload Verification Batch 2 candidate set
 ```
 
-Historical PR-specific checkpoints remain immutable audit evidence. Merged repository authority outranks chat memory, handoff prose, issue discussion, stale branch state, generated reports, and unmerged drafts.
+Merged repository authority outranks chat memory, handoff prose, issue discussion, stale branch state, generated reports, and unmerged drafts.
 
 ## Mandatory reading order
 
-Before every substantive continuation, read the merged current versions of:
+Before substantive continuation, read the merged current versions of:
 
 1. `AGENTS.md`
 2. `docs/spec-governance.md`
 3. `docs/roadmap.md`
 4. `docs/deployment-policy.md`
-5. `docs/roadmap-amendments/2026-08-09-evidence-archive-payload-verification-batch-2-review-authority.md`
-6. `docs/roadmap-amendments/2026-08-09-evidence-archive-payload-verification-batch-2-candidates.md`
-7. `docs/quality/evidence-archive-payload-verification-batch-2-review-authority-spec.md`
-8. `docs/quality/evidence-archive-payload-verification-batch-2-candidate-spec.md`
-9. `config/evidence-archive-payload-verification-batch-2-review-authority.json`
-10. `data/editorial-research/evidence-archive-payload-verification-batch-2-candidates-2026-08-09.json`
-11. `config/evidence-archive-payload-verification-batch-1.json`
-12. `docs/migration/evidence-archive-maintenance-queue-v7-pr403.json`
-13. every named validator, review-history contract, source review, fixture, baseline, queue, handoff, and prior output required by the active review item
-14. `docs/ui-v3-remediation-authority.md` before any material public UI work
+5. `docs/roadmap-amendments/2026-08-10-stablecoin-compare-matrix-remediation-authority.md`
+6. `docs/quality/stablecoin-compare-matrix-remediation-spec.md`
+7. `config/stablecoin-compare-matrix-remediation-authority.json`
+8. `docs/ui-v3-remediation-authority.md`
+9. the paused Evidence Archive Batch 2 authority/candidate documents before changing or resuming that lane
 
-## Active Evidence Archive Payload Verification Batch 2 boundary
+## Active Compare remediation boundary
 
-The active lane remains review-only. Deterministic selection is complete and the active stage is manual payload review.
+Required public behavior:
 
 ```text
-current archive recorded: 463
-current archive not recorded: 122
-eligible pool after exclusions: 68
-candidate target count: 10
-selected count: 10
-selection bucket: official_issuer_protocol_product
-manual payload review required: yes
+selection ready range: 2 to 4 stablecoins
+fifth selection: reject without changing state
+rendering: one attribute-by-record matrix
+2 selected: 2 value columns
+3 selected: 3 value columns
+4 selected: 4 value columns
+individual column removal: required
+Differences only: required, default off
+Unknown / Not recorded: explicit
+shareable compare URL: preserve selected order
+mobile: bounded comparison-region horizontal scroll; no page-level overflow
+ranking / scoring / recommendation: prohibited
+```
+
+Required comparison rows are lifecycle, issuance, asset class, launch, reference, backing, stabilization, reserve disclosure, redemption, organizations/control, deployments, linked events, source identities, evidence relations, and known unknowns.
+
+Authorized implementation files are limited to the Stablecoin Register comparison presentation, supporting script/component/style code, and tests/audits needed to prove the fix. No canonical data, schema, taxonomy, route-set, unrelated redesign, or public recommendation changes are authorized.
+
+## Visual acceptance
+
+The enduring `docs/ui-v3-remediation-authority.md` regression contract remains binding. Exact-head acceptance must include direct artifact review for desktop 2/3/4-record comparison and mobile 2/4-record comparison, differences-only on/off, column removal, fifth-selection rejection, URL restoration, and explicit Unknown/Not recorded rendering.
+
+Known overlap, clipping, page-level horizontal overflow, unreadable essential text, contradictory state, or another visual defect blocks merge even if CI is green.
+
+## Paused Evidence Archive lane
+
+The paused lane remains exactly:
+
+```text
+Evidence Archive Payload Verification Batch 2
+stage: MANUAL_PAYLOAD_REVIEW
+candidate count: 10
 canonical archive additions authorized: 0
+draft review PR: #539
 ```
 
-Fixed candidate set:
+The fixed candidate set and review rules remain in the existing PR #537/#538 authority, candidate artifact, Queue v7 inputs, and Batch 1 history. Do not silently modify or promote them during Compare work.
 
-```text
-sog_src_susd_legacy_context_batch_a
-sog_src_susd_rebuilding_2026
-sog_src_susd_roadmap_2026
-sog_src_susd_sip_status_2026
-sog_src_susd_sip420_2024
-sog_src_susd_sip423_2026
-sog_src_susd_synthetix_docs
-sog_src_susd_v3_faq_batch_a
-sog_src_terra_docs
-sog_src_tether_transparency
-```
+## Exit
 
-Queue v7 exclusions and ordering remain semantic input. All ten Batch 1 Evidence identities are excluded from Batch 2 selection; only three remain in the current unarchived input because seven received reviewed archive additions in Batch 1.
-
-Each candidate must be reviewed from its exact canonical source URL against a dated Wayback payload. Redirect-only results, CDX metadata alone, replacement targets, unrelated archived pages, or payloads whose claim scope cannot be independently verified are insufficient.
-
-Allowed review dispositions are:
-
-```text
-dated_exact_archive_proposal
-reviewed_no_safe_change
-```
-
-No canonical `archived_url` is changed in this authority lane.
-
-## Completed Market Access Expansion Review Batch 1 result
-
-```text
-RLUSD × SBI VC Trade / BITPOINT — no-go
-USDC × SBI VC Trade / BITPOINT — no-go
-JPYSC × SBI VC Trade / BITPOINT — no-go
-promotable pairs: 0
-promotable Market Access Records: 0
-```
-
-The FSA register reviewed for the lane listed one electronic-payment-instrument service provider, SBI VC Trade, handling USDC, RLUSD, and JPYSC. This did not support a new provider or fourth handled stablecoin. Service-level exclusions, missing product-list entries, and VCTRADE-specific restrictions were not inflated into unsupported BITPOINT function states.
-
-## Completed PR #523 boundary
-
-```text
-asset: sog_st_jpysc
-jurisdiction: JP / Japan
-provider: SBI VC Trade / VCTRADE
-effective from: 2026-06-24
-observed at: 2026-08-05
-buy_sell: account_internal_only
-deposit: unavailable
-withdrawal: unavailable
-external_wallet_transfer: unavailable
-Evidence: 585
-Evidence Relations: 585
-Market Access Records: 12
-Archive recorded: 463
-Detail routes: 422
-```
-
-No country-wide availability inference, future-capability backfill, lending-as-access evidence, ranking, scoring, recommendation, replacement asset, or unrelated product/UI expansion is authorized.
-
-## Validation and next boundary
-
-The active review preserves every canonical count and all public output. The candidate artifact must reproduce exactly from the current canonical inputs under `scripts/validate-evidence-archive-payload-verification-batch-2-candidates.mjs`.
-
-If manual payload review identifies promotable dated archive payloads, a new separately reviewed and merged implementation authority must bind exact Evidence IDs, exact archive URLs, maximum canonical delta, and validation before any canonical edit.
-
-The implementation boundary remains:
-
-```text
-REVIEW GATE
-```
-
-Tier A dossier deepening, Record Growth, new UI, and every other later lane remain planning items until separately authorized.
+After the Compare implementation is merged, production-verified, and visually accepted, create a closeout that restores Evidence Archive Payload Verification Batch 2 manual review as the active lane. Canonical implementation remains behind REVIEW GATE throughout.
 
 Issue #479 remains the deployment-history authority.
