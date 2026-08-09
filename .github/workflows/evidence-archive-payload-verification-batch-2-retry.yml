@@ -1,0 +1,30 @@
+name: Evidence Archive Payload Verification Batch 2 unresolved retry
+
+on:
+  pull_request:
+    paths:
+      - 'scripts/retry-evidence-archive-payload-verification-batch-2-unresolved.mjs'
+      - '.github/workflows/evidence-archive-payload-verification-batch-2-retry.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  retry:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Retry unresolved exact-source Wayback payloads
+        run: node scripts/retry-evidence-archive-payload-verification-batch-2-unresolved.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: evidence-archive-payload-verification-batch-2-unresolved-retry
+          path: artifacts/evidence-archive-payload-verification-batch-2-retry/**
+          if-no-files-found: warn
