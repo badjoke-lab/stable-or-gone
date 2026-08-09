@@ -68,7 +68,7 @@ for (const phrase of [
   'two-to-four-record comparison boundary',
   'Differences only',
   'fifth selected record',
-  'No canonical',
+  'canonical stablecoin, organization, relationship, event, evidence',
   'PR #539'
 ]) {
   if (!amendment.includes(phrase)) fail(`roadmap amendment missing phrase: ${phrase}`);
