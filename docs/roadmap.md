@@ -1,7 +1,7 @@
 # Stable or Gone Roadmap
 
 Updated: 2026-08-09  
-Status: Evidence Archive Payload Verification Batch 2 review authority active; canonical implementation authority remains REVIEW GATE
+Status: Evidence Archive Payload Verification Batch 2 candidates fixed; manual payload review active; canonical implementation authority remains REVIEW GATE
 
 ## Current reviewed checkpoint
 
@@ -33,7 +33,7 @@ Canonical file count: 466
 Legacy-host 301: complete
 ```
 
-A fixed production commit in a work-item specification is an immutable entry checkpoint. It is not labeled as perpetually current after later documentation-only merges. Current production parity is established dynamically by the production workflow and Issue #479.
+A fixed production commit in a work-item specification is an immutable entry checkpoint. Current production parity is established dynamically by the production workflow and Issue #479.
 
 ## Completed current-cycle work
 
@@ -53,31 +53,46 @@ PR #533 — shared Guide readability and research-layout remediation
 PR #534 — post-PR #523 production closeout and REVIEW GATE restoration
 PR #535 — bounded Japan Market Access Expansion Review Batch 1 authority
 PR #536 — Japan Market Access Expansion Review Batch 1 no-go closeout
+PR #537 — Evidence Archive Payload Verification Batch 2 review-only authority, merged and production-verified
 ```
 
 ## Active Evidence Archive Payload Verification Batch 2 review
 
-The next dated workstream is now opened for review only.
+PR #537 opened a review-only lane. The deterministic candidate-generation stage is now complete and the exact ten Evidence identities are fixed for manual payload review.
 
 ```text
 candidate universe: current canonical Evidence with archive not recorded
+Evidence: 585
 archive recorded: 463
 archive not recorded: 122
-Batch 1 already reviewed: 10 Evidence identities
-Batch 2 target: 10 Evidence identities
-selection: Queue v7 deterministic non-ranking priority reapplied to current canonical data, excluding Batch 1 reviewed identities
+eligible after current exclusions: 68
+Batch 2 selected: 10
+selection bucket: official_issuer_protocol_product
 canonical archive additions authorized in review lane: 0
 ```
 
-Selection preserves the Queue v7 semantics: accepted reactivation tier first, then regulator/court/legal, official issuer/protocol/product, reserve/attestation/audit, high-quality reporting/research, other reviewed source, with Evidence ID as deterministic tie-breaker. Existing Queue v7 exclusions for alias identities, Wayback source URLs, and review-history suppression remain in force. Batch 1's ten reviewed Evidence identities are additionally excluded.
+Fixed candidate set:
 
-Each selected candidate requires exact-source and dated-Wayback payload review. Redirect-only responses, CDX metadata only, replacement targets, or payloads whose claim scope cannot be verified are insufficient. `reviewed_no_safe_change` remains a valid and preferred outcome when the archive payload cannot safely support the canonical claim scope.
+```text
+sog_src_susd_legacy_context_batch_a
+sog_src_susd_rebuilding_2026
+sog_src_susd_roadmap_2026
+sog_src_susd_sip_status_2026
+sog_src_susd_sip420_2024
+sog_src_susd_sip423_2026
+sog_src_susd_synthetix_docs
+sog_src_susd_v3_faq_batch_a
+sog_src_terra_docs
+sog_src_tether_transparency
+```
 
-If review identifies exact dated archive URLs suitable for promotion, a separate merged implementation authority must bind those exact Evidence IDs and URLs before canonical data changes.
+The generator reapplies Queue v7 semantics to current canonical data: valid reactivation tier first, then regulator/court/legal, official issuer/protocol/product, reserve/attestation/audit, high-quality reporting/research, other reviewed source, with Evidence ID as deterministic tie-breaker. Alias identities, Wayback source URLs, missing source URLs, review-history suppression, and all ten Batch 1 reviewed identities remain excluded. Only three Batch 1 identities are still present in the current unarchived input because seven received reviewed archive additions in Batch 1.
+
+Each selected candidate now requires exact-source and dated-Wayback payload review. Redirect-only responses, CDX metadata only, replacement targets, or payloads whose claim scope cannot be independently verified are insufficient. Valid review dispositions are `dated_exact_archive_proposal` or `reviewed_no_safe_change`.
+
+If review identifies exact dated archive URLs suitable for promotion, a separately reviewed and merged implementation authority must bind those exact Evidence IDs and URLs before canonical data changes.
 
 ## Market Access Expansion Review Batch 1 result
-
-The source-led review used the full three-pair bound:
 
 ```text
 RLUSD × SBI VC Trade / BITPOINT — no-go
@@ -90,17 +105,14 @@ Evidence: 585 -> 585
 Evidence Relations: 585 -> 585
 ```
 
-The reviewed FSA register dated 2026-06-24 lists one electronic-payment-instrument service provider, SBI VC Trade Co., Ltd., and handled instruments USDC, RLUSD, and JPYSC. The bounded review therefore found no official-register basis for a new provider or fourth handled stablecoin.
-
-RLUSD is explicitly excluded from BITPOINT at the service level, but the review does not inflate that into four function-level `unavailable` records. USDC and JPYSC lack direct BITPOINT function-level evidence. Negative inference from a price/product list is prohibited, and VCTRADE-specific restrictions are not copied across services.
-
-The review exits with no implementation proposal.
+The reviewed FSA register dated 2026-06-24 listed one electronic-payment-instrument service provider, SBI VC Trade Co., Ltd., and handled instruments USDC, RLUSD, and JPYSC. No provider/function-level evidence supported a new canonical promotion.
 
 ## Current boundary
 
 ```text
 Current implementation authority: REVIEW GATE
 Current active review authority: Evidence Archive Payload Verification Batch 2
+Current review stage: MANUAL_PAYLOAD_REVIEW
 Canonical promotion authorized: no
 ```
 
@@ -112,15 +124,16 @@ Canonical promotion authorized: no
 2026-08-09                 PR #523 reconciliation, validation, merge, and production verification — complete
 2026-08-09                 post-PR #523 production closeout — complete through PR #534
 2026-08-09                 Japan Market Access Expansion Review Batch 1 — complete no-go
-2026-08-09                 Evidence Archive Payload Verification Batch 2 review authority — active
-2026-08-10 to 2026-08-16  stabilization and Batch 2 candidate/payload review preparation
+2026-08-09                 Evidence Archive Payload Verification Batch 2 review authority — complete through PR #537
+2026-08-09                 Batch 2 deterministic candidate selection — complete; manual payload review follows
+2026-08-10 to 2026-08-16  stabilization and Batch 2 payload review preparation/review
 2026-08-17 to 2026-08-23  Evidence Archive Payload Verification Batch 2 implementation window — only if separately authorized
 2026-08-24 to 2026-08-30  Tier A Dossier Deepening Batch 4 — separate authority required
 2026-08-31 to 2026-09-06  cycle review and backlog reconciliation
 2026-09-07 to 2026-09-13  next operating authority and contingency
 ```
 
-Schedule windows are planning targets, not permission boundaries. A scheduled date never substitutes for reviewed authority.
+Schedule windows are planning targets, not permission boundaries.
 
 ## PR #523 historical result
 
@@ -165,7 +178,7 @@ known visual defect accepted merely because CI is green
 
 ## Required work-start protocol
 
-Every substantive work item must begin by reading the merged current versions of:
+Every substantive continuation must begin by reading the merged current versions of:
 
 ```text
 AGENTS.md
@@ -173,11 +186,11 @@ docs/spec-governance.md
 docs/roadmap.md
 docs/deployment-policy.md
 docs/roadmap-amendments/2026-08-09-evidence-archive-payload-verification-batch-2-review-authority.md
+docs/roadmap-amendments/2026-08-09-evidence-archive-payload-verification-batch-2-candidates.md
 docs/quality/evidence-archive-payload-verification-batch-2-review-authority-spec.md
+docs/quality/evidence-archive-payload-verification-batch-2-candidate-spec.md
 config/evidence-archive-payload-verification-batch-2-review-authority.json
-config/evidence-archive-payload-verification-batch-1.json
-docs/migration/evidence-archive-maintenance-queue-v7-pr403.json
-config/evidence-archive-maintenance-queue-v7-pr403.json
+data/editorial-research/evidence-archive-payload-verification-batch-2-candidates-2026-08-09.json
 current named inputs, source reviews, audits, validators, and prior outputs
 ```
 
