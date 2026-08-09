@@ -8,6 +8,7 @@ on:
       - 'src/scripts/stablecoin-index.ts'
       - 'src/styles/public-ui.css'
       - 'scripts/audit-stablecoin-compare-matrix-visual.mjs'
+      - 'scripts/audit-stablecoin-compare-zero-state.mjs'
       - '.github/workflows/stablecoin-compare-matrix-visual.yml'
   workflow_dispatch:
 
@@ -44,6 +45,8 @@ jobs:
           done
           cat /tmp/sog-compare-server.log
           exit 1
+      - name: Audit zero-selection hidden state
+        run: node scripts/audit-stablecoin-compare-zero-state.mjs
       - name: Audit 2-4 record comparison states
         run: node scripts/audit-stablecoin-compare-matrix-visual.mjs
       - name: Upload comparison visual acceptance artifact
