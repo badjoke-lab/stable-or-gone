@@ -1,0 +1,37 @@
+name: Fix stablecoin compare hidden and readability
+
+on:
+  push:
+    branches:
+      - agent/stablecoin-compare-matrix-remediation
+    paths:
+      - .github/workflows/fix-stablecoin-compare-hidden-readability.yml
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/stablecoin-compare-matrix-remediation
+      - name: Preserve hidden state and readability floor
+        run: |
+          RULE='.stablecoin-index-comparison[hidden]{display:none}.comparison-disclaimer{font-size:17px}@media(max-width:640px){.comparison-disclaimer{font-size:16px}}'
+          if grep -Fq "$RULE" src/styles/public-ui.css; then
+            echo "Fix already present."
+          else
+            printf '%s\n' "$RULE" >> src/styles/public-ui.css
+          fi
+      - name: Commit fix
+        run: |
+          if git diff --quiet -- src/styles/public-ui.css; then
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/styles/public-ui.css
+          git commit -m "Preserve hidden comparison state and readable disclaimer"
+          git push origin HEAD:agent/stablecoin-compare-matrix-remediation
