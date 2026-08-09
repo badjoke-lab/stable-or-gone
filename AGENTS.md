@@ -86,7 +86,8 @@ Before substantive continuation, read the merged current versions of:
 9. `docs/quality/evidence-archive-payload-verification-batch-2-candidate-spec.md`
 10. `config/evidence-archive-payload-verification-batch-2-review-authority.json`
 11. `data/editorial-research/evidence-archive-payload-verification-batch-2-candidates-2026-08-09.json`
-12. Batch 1 review history and Queue v7 inputs before making any review disposition.
+12. `docs/ui-v3-remediation-authority.md` as the enduring material-public-UI regression authority.
+13. Batch 1 review history and Queue v7 inputs before making any review disposition.
 
 ## Active Evidence Archive review boundary
 
