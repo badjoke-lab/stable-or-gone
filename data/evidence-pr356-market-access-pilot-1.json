@@ -33,18 +33,20 @@
     "archived_url": "https://web.archive.org/web/*/https://www.fsa.go.jp/menkyo/menkyoj/denshikessaisyudan.pdf",
     "publisher": "Financial Services Agency, Japan",
     "published_at": "2026-06-24",
-    "accessed_at": "2026-07-13",
+    "accessed_at": "2026-08-05",
     "reliability": "high",
     "claim_scopes": [
       "SBI VC Trade registration as an electronic payment instrument service provider",
       "USDC listed among electronic payment instruments handled by SBI VC Trade",
       "Japan provider and legal-route scope",
-      "RLUSD listed among electronic payment instruments handled by SBI VC Trade"
+      "RLUSD listed among electronic payment instruments handled by SBI VC Trade",
+      "JPYSC listed among electronic payment instruments handled by SBI VC Trade"
     ],
-    "notes": "Primary JFSA register snapshot dated 2026-06-24. It supports SBI VC Trade registration and the handled-asset scope for USDC and RLUSD. It does not prove individual platform functions, constitute a value guarantee or recommendation, or establish universal Japan-wide availability.",
+    "notes": "Primary JFSA register snapshot dated 2026-06-24. It supports SBI VC Trade registration and the handled-asset scope for USDC, RLUSD, and JPYSC. It does not prove individual platform functions, constitute a value guarantee or recommendation, or establish universal Japan-wide availability.",
     "stablecoin_ids": [
       "sog_st_usdc",
-      "sog_st_rlusd"
+      "sog_st_rlusd",
+      "sog_st_jpysc"
     ]
   }
 ]

@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "base_manifest": "docs/migration/registry-v2-baseline.json",
+  "batch_id": "pr523_jpysc_market_access_pilot_3",
+  "defer_legacy_v3_full_coverage": false,
+  "checkpoint_kind": "non_growth_market_access_checkpoint",
+  "source_checkpoint_id": "sog_pr517_record_growth_batch_5_bison_eub_usb_119_2026_08_03",
+  "captured_at": "2026-08-05",
+  "minimum_counts": {
+    "stablecoins": 119,
+    "evidence": 585,
+    "evidence_relations": 585
+  },
+  "data_group_additions": {
+    "evidence": [
+      "data/evidence-pr523-jpysc-market-access.json"
+    ],
+    "evidence_relations": [
+      "data/evidence-pr523-jpysc-market-access.json"
+    ]
+  },
+  "notes": "Forward-only non-growth checkpoint for PR #523 JPYSC Market Access Pilot 3. Adds the reviewed SBI VC Trade JPYSC product Evidence identity to the canonical Registry v2 evidence composition without changing the 119-asset registry boundary."
+}

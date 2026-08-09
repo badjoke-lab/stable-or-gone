@@ -13,7 +13,7 @@
     "profiles": 119,
     "events": 194,
     "event_details": 194,
-    "evidence": 584,
+    "evidence": 585,
     "reserve_reports": 127,
     "known_unknowns": 352,
     "regulatory_notes": 9,
@@ -22,7 +22,7 @@
     "stable_asset_relationships": 5,
     "reserve_components": 153,
     "income_profiles": 119,
-    "evidence_relations": 584
+    "evidence_relations": 585
   },
   "route_counts": {
     "stablecoin_detail": 119,
