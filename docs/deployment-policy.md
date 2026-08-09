@@ -4,45 +4,34 @@ Updated: 2026-08-10
 
 ## Status
 
-Stable or Gone publishes the current `main` branch automatically.
-
 ```text
 Source of truth: main
 Production workflow: .github/workflows/deploy-production.yml
 Pages project: stable-or-gone
 Official public origin: https://www.stableorgone.com
 Automatic main publication: enabled
-Legacy-host migration: complete
-Legacy redirect implementation: public/_worker.js / Pages Advanced Mode
-Strict migration gate: enabled
 Deployment record: Issue #479
-Current production commit: dynamic; verify via deploy-production workflow and Issue #479
 Last canonical-changing implementation commit: 77e80dd3e2a62fea53ea0eabe91ef78a2d8ab1da
-Current canonical hash: sha256:f386c1043ca5e83cafbd88e99746d0609aab0154ed48de1970677758a66ed5fa
+Canonical hash: sha256:f386c1043ca5e83cafbd88e99746d0609aab0154ed48de1970677758a66ed5fa
 Canonical file count: 466
 ```
 
 A repository merge is not itself proof of production parity.
 
-## Core publication rule
-
-A normal merged change follows:
+## Publication rule
 
 ```text
 PR merged to main
 -> validate exact main commit
--> build dist from that commit
--> upload dist to Cloudflare Pages with Wrangler
--> verify deployed commit and canonical-data hash
--> verify reviewed counts, routes, metadata, public guides, and machine-readable outputs
--> enforce strict legacy-host migration checks
--> run required production visual review for relevant public-surface changes
+-> build dist
+-> upload to Cloudflare Pages
+-> verify deployed commit and canonical hash
+-> verify counts/routes/metadata/machine-readable output
+-> verify legacy-host migration
 -> report result to Issue #479
 ```
 
-No unmerged branch is a production source.
-
-## Current canonical production baseline
+## Current canonical baseline
 
 ```text
 Stablecoins: 119
@@ -59,116 +48,48 @@ Legal profiles: 119
 Reserve components: 153
 Income profiles: 119
 Market Access Records: 12
+Archive recorded / not recorded: 463 / 122
 Detail routes: 422
 Metadata-checked routes: 422
-Archive recorded / not recorded: 463 / 122
-Last canonical-changing implementation commit: 77e80dd3e2a62fea53ea0eabe91ef78a2d8ab1da
 Canonical hash: sha256:f386c1043ca5e83cafbd88e99746d0609aab0154ed48de1970677758a66ed5fa
 Canonical file count: 466
 ```
 
-## Compare remediation is complete
-
-The bounded Stablecoin Compare Matrix Remediation is production-complete.
+## Evidence Archive Payload Verification Batch 2 review complete
 
 ```text
-Authority PR: #540
-Implementation PR: #541
-Implementation merge commit: 539a27fd5854a1c2544f4653a2161be36860a002
-Production run: 31326135906
-Production result: success
-Visual exact head: bf27f4fe79ca19774ed92a4ff82854188c4edbe0
-Visual acceptance run: 31325811381
-Visual audit: ok=true / failures=[]
-Zero-selection audit: ok=true
-Canonical delta: 0
-```
-
-The accepted public behavior is the 2–4 record aligned matrix, fifth-selection rejection, individual column removal, `Differences only`, ordered shared URL restoration, explicit Unknown/Not recorded values, and bounded mobile comparison scrolling without page-level overflow.
-
-Compare no longer has active implementation authority. Further material Compare work requires separate reviewed authority.
-
-## Current active work is review-only
-
-The active lane is Evidence Archive Payload Verification Batch 2 manual review:
-
-```text
-stage: MANUAL_PAYLOAD_REVIEW
-candidate count: 10
-draft review PR: #539
+reviewed: 10
+dated exact archive proposals: 8
+reviewed no safe change: 2
 canonical archive additions authorized: 0
-canonical implementation authority: REVIEW_GATE
+next boundary: REVIEW_GATE
 ```
 
-This review lane does not authorize a production/canonical publication delta. PR #539 may contain internal/editorial review artifacts and dispositions only. Any canonical `archived_url` addition requires a separate reviewed and merged implementation authority followed by normal production verification.
+This review result is non-public/editorial evidence and does not itself produce a canonical or production-data change. The eight archive proposals require a separate reviewed and merged implementation authority before any `archived_url` can change.
+
+The later authority must bind exact IDs/URLs, maximum archive deltas `+8/-8`, unchanged Evidence and Evidence Relation counts, validators, and production verification.
+
+## Compare remediation complete
+
+PR #541 merged as `539a27fd5854a1c2544f4653a2161be36860a002`; production run `31326135906` and visual run `31325811381` succeeded. Further Compare changes require separate authority.
 
 ## Official-origin contract
 
-The only official public origin is:
+The only official public origin is `https://www.stableorgone.com`. Canonical/hreflang, OGP/Twitter, JSON-LD, version/manifest, llms/ai, robots, sitemap, and production verification must use the official origin. `config/public-origin.mjs` remains the repository source for origin consumers.
 
-```text
-https://www.stableorgone.com
-```
-
-The same origin governs Astro site configuration, canonical/hreflang links, OGP/Twitter URLs, JSON-LD, `version.json`, `data/manifest.json`, `llms.txt`, `ai.txt`, robots, sitemap URLs, and production verification.
-
-`config/public-origin.mjs` remains the repository source for build/runtime origin consumers. Built-origin and public-origin validators must reject legacy-host leakage into canonical output.
-
-## Cloudflare publication configuration
-
-```text
-Production branch: main
-GitHub Actions performs production upload
-Cloudflare Pages project: stable-or-gone
-Build output: dist
-Required repository secrets:
-- CLOUDFLARE_API_TOKEN
-- CLOUDFLARE_ACCOUNT_ID
-```
-
-GitHub Actions builds the static site and uploads the prebuilt output with Wrangler. Cloudflare is not an independent source-build authority.
-
-## Legacy-host migration — complete
-
-Required behavior remains:
+## Legacy-host migration
 
 ```text
 https://sog.badjoke-lab.com/<path>?<query>
 -> 301 https://www.stableorgone.com/<path>?<query>
 ```
 
-Only the legacy hostname receives the 301; path/query are preserved; canonical and `pages.dev` requests pass through to static assets; no canonical content is generated by the worker.
-
-Every relevant production run must preserve exact HTTP 301 behavior, exact path/query Location forwarding, zero official-origin failures, zero redirect loops, and zero legacy-host leakage into built canonical/OG/sitemap outputs.
-
-## Production verification
-
-Every automatic deployment must verify at least:
-
-- intended `main` source commit;
-- canonical-data hash/build provenance;
-- reviewed counts and route sets;
-- detail metadata coverage;
-- official canonical/sitemap origin;
-- machine-readable/public-output consistency;
-- public Guide catalog/routes;
-- strict legacy-host 301 behavior;
-- deployment result in Issue #479.
-
-Docs-only authority/closeout merges still must converge to their exact main commit in production. Unchanged canonical hash/counts are expected, not a reason to skip deployment verification.
-
-## Guide publication
-
-Guide visibility remains controlled by `src/data/guideCatalog.ts`. A catalog entry plus public route exposes the guide; `publishedAt` supplies publication metadata. The active Evidence Archive review does not authorize Guide changes.
-
-## Manual fallback
-
-`workflow_dispatch` remains a fallback when an automatic production deployment must be repeated after infrastructure interruption or convergence failure. It is not permission to publish an unmerged branch or bypass active specification.
-
-## Infrastructure change boundary
-
-Explicit reviewed authority is required for domain/DNS changes, redirect implementation changes, secret/Cloudflare account changes, replacing/removing the Pages worker contract, destructive schema migrations, mass deletion, major route removal, or emergency rollback.
+Path/query preservation, no redirect loops, and no legacy-origin leakage remain mandatory.
 
 ## Review-to-production boundary
 
-The restored Evidence Archive manual review may end with exact dated archive proposals or `reviewed_no_safe_change`. Neither outcome changes production by itself. Canonical archive promotion requires a separate reviewed and merged implementation authority and the full production pipeline above.
+The current state is `REVIEW_GATE`. No review proposal changes production automatically. Canonical archive promotion requires a separate implementation authority and the full production pipeline above.
+
+## Infrastructure boundary
+
+Explicit reviewed authority remains required for DNS/domain changes, redirect implementation changes, Cloudflare secret/account changes, worker-contract replacement, destructive schema migrations, mass deletion, major route removal, or emergency rollback.
