@@ -28,8 +28,12 @@ jobs:
           cache: npm
       - run: npm ci --no-audit --no-fund
       - name: Generate deterministic Batch 2 candidates
-        run: node scripts/build-evidence-archive-payload-verification-batch-2-candidates.mjs | tee batch-2-candidates.json
+        shell: bash
+        run: |
+          set -o pipefail
+          node scripts/build-evidence-archive-payload-verification-batch-2-candidates.mjs | tee batch-2-candidates.json
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: evidence-archive-payload-verification-batch-2-candidates
           path: batch-2-candidates.json
