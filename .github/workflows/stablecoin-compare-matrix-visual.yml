@@ -1,0 +1,62 @@
+name: Stablecoin compare matrix visual acceptance
+
+on:
+  pull_request:
+    paths:
+      - 'src/pages/stablecoins/index.astro'
+      - 'src/components/StablecoinComparisonSource.astro'
+      - 'src/scripts/stablecoin-index.ts'
+      - 'src/styles/public-ui.css'
+      - 'scripts/audit-stablecoin-compare-matrix-visual.mjs'
+      - 'scripts/audit-stablecoin-compare-zero-state.mjs'
+      - '.github/workflows/stablecoin-compare-matrix-visual.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  compare-matrix-visual:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      CAPTURE_BASE_URL: http://127.0.0.1:4173
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Build exact PR head
+        run: npm run build
+      - name: Start local site
+        run: |
+          python3 -m http.server 4173 --directory dist > /tmp/sog-compare-server.log 2>&1 &
+          echo $! > /tmp/sog-compare-server.pid
+          for attempt in $(seq 1 30); do
+            if curl -fsS "$CAPTURE_BASE_URL/stablecoins/" > /dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/sog-compare-server.log
+          exit 1
+      - name: Audit 2-4 record comparison states
+        run: node scripts/audit-stablecoin-compare-matrix-visual.mjs
+      - name: Audit zero-selection hidden state
+        run: node scripts/audit-stablecoin-compare-zero-state.mjs
+      - name: Upload comparison visual acceptance artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: stablecoin-compare-matrix-visual-${{ github.run_id }}
+          if-no-files-found: error
+          retention-days: 14
+          compression-level: 0
+          path: |
+            artifacts/stablecoin-compare-matrix/**
+            /tmp/sog-compare-server.log

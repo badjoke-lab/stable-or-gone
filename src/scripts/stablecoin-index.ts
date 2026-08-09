@@ -23,6 +23,7 @@ if (foundRoot instanceof HTMLElement) {
   const compareGrid = root.querySelector<HTMLElement>('[data-comparison-grid]');
   const compareStatus = root.querySelector<HTMLElement>('[data-comparison-status]');
   const compareAlert = root.querySelector<HTMLElement>('[data-comparison-alert]');
+  const compareDifferences = root.querySelector<HTMLInputElement>('[data-comparison-differences]');
   const compareSources = new Map(Array.from(root.querySelectorAll<HTMLElement>('[data-comparison-source]')).map((source) => [source.dataset.recordSlug ?? '', source]));
   const groups = ['lifecycle', 'issuance', 'asset_class', 'reference', 'backing', 'stabilization'] as const;
   const dataAttribute = { lifecycle: 'data-lifecycle', issuance: 'data-issuance', asset_class: 'data-asset-class', reference: 'data-reference', backing: 'data-backing', stabilization: 'data-stabilization' } as const;
@@ -30,6 +31,46 @@ if (foundRoot instanceof HTMLElement) {
   const defaultSort = 'name_asc';
   const validSorts = new Set(['name_asc', 'name_desc', 'lifecycle_then_name', 'launch_oldest', 'launch_newest', 'evidence_most']);
   const pageSize = Math.max(1, Number.parseInt(root.dataset.pageSize ?? '20', 10) || 20);
+  const comparisonSections = [
+    {
+      label: 'Identity and current state',
+      rows: [
+        { key: 'lifecycle', label: 'Lifecycle' },
+        { key: 'issuance', label: 'Issuance' },
+        { key: 'asset_class', label: 'Asset class' },
+        { key: 'launch', label: 'Launch' }
+      ]
+    },
+    {
+      label: 'Reference, backing, stabilization',
+      rows: [
+        { key: 'reference', label: 'Reference' },
+        { key: 'backing', label: 'Backing' },
+        { key: 'stabilization', label: 'Stabilization' }
+      ]
+    },
+    {
+      label: 'Reserve and redemption',
+      rows: [
+        { key: 'reserve_disclosure', label: 'Reserve disclosure' },
+        { key: 'redemption', label: 'Redemption' }
+      ]
+    },
+    {
+      label: 'Organizations and control',
+      rows: [{ key: 'organizations_control', label: 'Organizations / control' }]
+    },
+    {
+      label: 'Historical record depth',
+      rows: [
+        { key: 'deployments', label: 'Deployments' },
+        { key: 'linked_events', label: 'Linked events' },
+        { key: 'source_identities', label: 'Source identities' },
+        { key: 'evidence_relations', label: 'Evidence relations' },
+        { key: 'known_unknowns', label: 'Known unknowns' }
+      ]
+    }
+  ] as const;
   let currentPage = 1;
   let selectedComparisons = new Set<string>();
 
@@ -39,6 +80,7 @@ if (foundRoot instanceof HTMLElement) {
   const selectedFor = (group: string) => filters.filter((input) => input.dataset.filterGroup === group && input.checked).map((input) => input.value);
   const labelFor = (group: string, value: string) => filters.find((input) => input.dataset.filterGroup === group && input.value === value)?.dataset.label ?? value;
   const knownSlugs = new Set(compareSources.keys());
+  const comparisonValue = (source: HTMLElement, key: string) => source.querySelector<HTMLElement>(`[data-compare-value="${key}"]`)?.textContent?.trim() || 'Not recorded';
 
   function stateFromUrl() {
     const params = new URLSearchParams(window.location.search);
@@ -176,20 +218,137 @@ if (foundRoot instanceof HTMLElement) {
     for (const input of compareInputs) input.checked = selectedComparisons.has(input.value);
   }
 
+  function createComparisonHeader(source: HTMLElement) {
+    const header = document.createElement('div');
+    header.className = 'comparison-column-header';
+
+    const identity = document.createElement('div');
+    identity.className = 'comparison-column-identity';
+    const symbol = document.createElement('span');
+    symbol.className = 'record-symbol';
+    symbol.textContent = source.dataset.recordSymbol || 'No symbol';
+    const link = document.createElement('a');
+    link.href = source.dataset.recordHref || `/stablecoin/${source.dataset.recordSlug ?? ''}/`;
+    link.textContent = source.dataset.recordName || source.dataset.recordSlug || 'Stablecoin';
+    identity.append(symbol, link);
+
+    const remove = document.createElement('button');
+    remove.type = 'button';
+    remove.className = 'ui-button comparison-remove-record';
+    remove.dataset.removeComparison = source.dataset.recordSlug ?? '';
+    remove.textContent = 'Remove';
+    remove.setAttribute('aria-label', `Remove ${source.dataset.recordName || source.dataset.recordSlug || 'stablecoin'} from comparison`);
+
+    header.append(identity, remove);
+    return header;
+  }
+
   function renderComparison() {
     syncComparisonInputs();
     if (!comparePanel || !compareGrid) return;
     compareGrid.replaceChildren();
-    for (const slug of selectedComparisons) {
-      const source = compareSources.get(slug);
-      if (!source) continue;
-      const clone = source.cloneNode(true);
-      if (clone instanceof HTMLElement) { clone.hidden = false; clone.removeAttribute('data-comparison-source'); clone.classList.remove('comparison-source'); clone.classList.add('comparison-record'); }
-      compareGrid.append(clone);
+
+    const selectedSources = [...selectedComparisons]
+      .map((slug) => compareSources.get(slug))
+      .filter((source): source is HTMLElement => Boolean(source));
+
+    comparePanel.hidden = selectedSources.length === 0;
+    comparePanel.dataset.ready = String(selectedSources.length >= 2);
+    if (compareStatus) compareStatus.textContent = selectedSources.length < 2
+      ? `${selectedSources.length} selected. Select one more record to compare.`
+      : `${selectedSources.length} records selected for comparison.`;
+    if (selectedSources.length === 0) return;
+
+    const differencesOnly = compareDifferences?.checked ?? false;
+    const table = document.createElement('table');
+    table.className = 'comparison-matrix';
+    table.dataset.comparisonTable = '';
+    table.dataset.selectedCount = String(selectedSources.length);
+    table.setAttribute('data-mobile-table', 'scroll-preserve');
+
+    const caption = document.createElement('caption');
+    caption.className = 'visually-hidden';
+    caption.textContent = `Historical comparison of ${selectedSources.length} selected stablecoin records by aligned attributes.`;
+    table.append(caption);
+
+    const head = document.createElement('thead');
+    const headRow = document.createElement('tr');
+    const attributeHead = document.createElement('th');
+    attributeHead.scope = 'col';
+    attributeHead.className = 'comparison-attribute-column comparison-attribute-header';
+    attributeHead.textContent = 'Attribute';
+    headRow.append(attributeHead);
+    for (const source of selectedSources) {
+      const cell = document.createElement('th');
+      cell.scope = 'col';
+      cell.className = 'comparison-record-header';
+      cell.append(createComparisonHeader(source));
+      headRow.append(cell);
     }
-    comparePanel.hidden = selectedComparisons.size === 0;
-    if (compareStatus) compareStatus.textContent = selectedComparisons.size < 2 ? `${selectedComparisons.size} selected. Select one more record to compare.` : `${selectedComparisons.size} records selected for comparison.`;
-    comparePanel.dataset.ready = String(selectedComparisons.size >= 2);
+    head.append(headRow);
+    table.append(head);
+
+    const body = document.createElement('tbody');
+    let visibleRowCount = 0;
+
+    for (const section of comparisonSections) {
+      const preparedRows = section.rows.map((row) => {
+        const values = selectedSources.map((source) => comparisonValue(source, row.key));
+        const different = new Set(values.map(normalize)).size > 1;
+        return { ...row, values, different };
+      }).filter((row) => !differencesOnly || row.different);
+
+      if (preparedRows.length === 0) continue;
+
+      const sectionRow = document.createElement('tr');
+      sectionRow.className = 'comparison-section-row';
+      sectionRow.dataset.comparisonSection = section.label;
+      const sectionLabelCell = document.createElement('th');
+      sectionLabelCell.scope = 'rowgroup';
+      sectionLabelCell.className = 'comparison-attribute-column comparison-section-label';
+      sectionLabelCell.textContent = section.label;
+      const sectionFillCell = document.createElement('td');
+      sectionFillCell.colSpan = selectedSources.length;
+      sectionFillCell.className = 'comparison-section-fill';
+      sectionFillCell.setAttribute('aria-hidden', 'true');
+      sectionRow.append(sectionLabelCell, sectionFillCell);
+      body.append(sectionRow);
+
+      for (const row of preparedRows) {
+        const tableRow = document.createElement('tr');
+        tableRow.dataset.comparisonRow = row.key;
+        tableRow.dataset.different = String(row.different);
+
+        const labelCell = document.createElement('th');
+        labelCell.scope = 'row';
+        labelCell.className = 'comparison-attribute-column';
+        labelCell.textContent = row.label;
+        tableRow.append(labelCell);
+
+        for (const value of row.values) {
+          const valueCell = document.createElement('td');
+          valueCell.textContent = value;
+          valueCell.dataset.comparisonValue = value;
+          const normalized = normalize(value);
+          if (normalized === 'unknown') valueCell.dataset.valueState = 'unknown';
+          else if (normalized === 'not recorded') valueCell.dataset.valueState = 'not-recorded';
+          tableRow.append(valueCell);
+        }
+
+        body.append(tableRow);
+        visibleRowCount += 1;
+      }
+    }
+
+    table.append(body);
+    compareGrid.append(table);
+
+    if (visibleRowCount === 0) {
+      const message = document.createElement('p');
+      message.className = 'comparison-no-differences';
+      message.textContent = 'All displayed comparison values match across the selected records.';
+      compareGrid.append(message);
+    }
   }
 
   function refresh(mode?: 'push' | 'replace') {
@@ -238,6 +397,16 @@ if (foundRoot instanceof HTMLElement) {
       return;
     }
     if (input.checked) selectedComparisons.add(input.value); else selectedComparisons.delete(input.value);
+    if (compareAlert) compareAlert.textContent = '';
+    renderComparison();
+    writeUrl('push');
+  });
+  compareDifferences?.addEventListener('change', () => renderComparison());
+  compareGrid?.addEventListener('click', (event) => {
+    const button = event.target instanceof Element ? event.target.closest<HTMLElement>('[data-remove-comparison]') : null;
+    const slug = button?.dataset.removeComparison;
+    if (!slug || !selectedComparisons.has(slug)) return;
+    selectedComparisons.delete(slug);
     if (compareAlert) compareAlert.textContent = '';
     renderComparison();
     writeUrl('push');

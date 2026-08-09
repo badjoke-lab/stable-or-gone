@@ -1,14 +1,31 @@
 ---
 import { formatIssuanceLabel, formatLifecycleLabel } from '../utils/publicTaxonomy';
 const { record } = Astro.props;
+const deploymentLabel = `${record.deploymentCount} recorded deployment${record.deploymentCount === 1 ? '' : 's'}`;
+const eventLabel = `${record.eventCount} linked event${record.eventCount === 1 ? '' : 's'}`;
 ---
-<article class="comparison-source" data-comparison-source data-record-slug={record.slug} hidden>
-  <header><span class="record-symbol">{record.symbol || 'No symbol'}</span><h3><a href={`/stablecoin/${record.slug}/`}>{record.name}</a></h3></header>
-  <section><h4>Identity and current state</h4><dl><div><dt>Lifecycle</dt><dd>{formatLifecycleLabel(record.lifecycle)}</dd></div><div><dt>Issuance</dt><dd>{formatIssuanceLabel(record.issuance)}</dd></div><div><dt>Asset class</dt><dd>{record.assetClassLabel}</dd></div><div><dt>Launch</dt><dd>{record.launchDate || 'Not recorded'}</dd></div></dl></section>
-  <section><h4>Reference, backing, stabilization</h4><dl><div><dt>Reference</dt><dd>{record.referenceLabel}</dd></div><div><dt>Backing</dt><dd>{record.backingLabel}</dd></div><div><dt>Stabilization</dt><dd>{record.stabilizationLabel}</dd></div></dl></section>
-  <section><h4>Reserve and redemption</h4><dl><div><dt>Reserve disclosure</dt><dd>{record.reserveSummary}</dd></div><div><dt>Redemption</dt><dd>{record.redemptionSummary}</dd></div></dl></section>
-  <section><h4>Organizations and control</h4><p>{record.organizationSummary}</p></section>
-  <section><h4>Deployments</h4><p>{record.deploymentCount} recorded deployment{record.deploymentCount === 1 ? '' : 's'}</p></section>
-  <section><h4>Event summary</h4><p>{record.eventCount} linked event{record.eventCount === 1 ? '' : 's'}</p></section>
-  <section><h4>Evidence and known unknowns</h4><dl><div><dt>Source identities</dt><dd>{record.sourceIdentityCount}</dd></div><div><dt>Evidence relations</dt><dd>{record.evidenceRelationCount}</dd></div><div><dt>Known unknowns</dt><dd>{record.knownUnknownCount}</dd></div></dl></section>
-</article>
+<div
+  class="comparison-source"
+  data-comparison-source
+  data-record-slug={record.slug}
+  data-record-name={record.name}
+  data-record-symbol={record.symbol || 'No symbol'}
+  data-record-href={`/stablecoin/${record.slug}/`}
+  hidden
+>
+  <span data-compare-value="lifecycle">{formatLifecycleLabel(record.lifecycle)}</span>
+  <span data-compare-value="issuance">{formatIssuanceLabel(record.issuance)}</span>
+  <span data-compare-value="asset_class">{record.assetClassLabel}</span>
+  <span data-compare-value="launch">{record.launchDate || 'Not recorded'}</span>
+  <span data-compare-value="reference">{record.referenceLabel}</span>
+  <span data-compare-value="backing">{record.backingLabel}</span>
+  <span data-compare-value="stabilization">{record.stabilizationLabel}</span>
+  <span data-compare-value="reserve_disclosure">{record.reserveSummary}</span>
+  <span data-compare-value="redemption">{record.redemptionSummary}</span>
+  <span data-compare-value="organizations_control">{record.organizationSummary}</span>
+  <span data-compare-value="deployments">{deploymentLabel}</span>
+  <span data-compare-value="linked_events">{eventLabel}</span>
+  <span data-compare-value="source_identities">{record.sourceIdentityCount}</span>
+  <span data-compare-value="evidence_relations">{record.evidenceRelationCount}</span>
+  <span data-compare-value="known_unknowns">{record.knownUnknownCount}</span>
+</div>
