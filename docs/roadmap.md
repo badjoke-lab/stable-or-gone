@@ -1,7 +1,7 @@
 # Stable or Gone Roadmap
 
 Updated: 2026-08-09  
-Status: Evidence Archive Payload Verification Batch 2 candidates fixed; manual payload review active; canonical implementation authority remains REVIEW GATE
+Status: Evidence Archive Payload Verification Batch 2 review complete; 8 archive proposals / 2 no-safe-change; canonical implementation remains at REVIEW GATE
 
 ## Current reviewed checkpoint
 
@@ -54,43 +54,59 @@ PR #534 — post-PR #523 production closeout and REVIEW GATE restoration
 PR #535 — bounded Japan Market Access Expansion Review Batch 1 authority
 PR #536 — Japan Market Access Expansion Review Batch 1 no-go closeout
 PR #537 — Evidence Archive Payload Verification Batch 2 review-only authority, merged and production-verified
+PR #538 — deterministic Batch 2 candidate set, merged and production-verified
 ```
 
-## Active Evidence Archive Payload Verification Batch 2 review
+## Evidence Archive Payload Verification Batch 2 review result
 
-PR #537 opened a review-only lane. The deterministic candidate-generation stage is now complete and the exact ten Evidence identities are fixed for manual payload review.
+The exact ten candidates fixed by PR #538 were reviewed under the PR #537 review-only authority using exact canonical-source Wayback discovery, independent raw replay retrieval with redirects disabled, payload byte/SHA-256 recording, extracted-text inspection, and manual claim-scope/source-role comparison.
 
 ```text
-candidate universe: current canonical Evidence with archive not recorded
-Evidence: 585
-archive recorded: 463
-archive not recorded: 122
-eligible after current exclusions: 68
-Batch 2 selected: 10
-selection bucket: official_issuer_protocol_product
-canonical archive additions authorized in review lane: 0
+reviewed: 10
+dated exact archive proposals: 8
+reviewed no safe change: 2
+canonical Evidence changes: 0
+canonical archive additions authorized: 0
+public-output changes: 0
 ```
 
-Fixed candidate set:
+### Eight implementation proposals
 
 ```text
-sog_src_susd_legacy_context_batch_a
-sog_src_susd_rebuilding_2026
-sog_src_susd_roadmap_2026
-sog_src_susd_sip_status_2026
+sog_src_susd_legacy_context_batch_a -> 20250720161454
+sog_src_susd_rebuilding_2026        -> 20260514190950
+sog_src_susd_roadmap_2026           -> 20260427180444
+sog_src_susd_sip_status_2026        -> 20251117181931
+sog_src_susd_synthetix_docs         -> 20251014024417
+sog_src_susd_v3_faq_batch_a         -> 20250430131854
+sog_src_terra_docs                   -> 20210903073902
+sog_src_tether_transparency          -> 20220712233033
+```
+
+Exact URLs, HTTP status, payload bytes, SHA-256 digests, payload markers, and probe artifact lineage are fixed in `data/editorial-research/evidence-archive-payload-verification-batch-2-review-2026-08-09.json`.
+
+### Two no-safe-change results
+
+```text
 sog_src_susd_sip420_2024
 sog_src_susd_sip423_2026
-sog_src_susd_synthetix_docs
-sog_src_susd_v3_faq_batch_a
-sog_src_terra_docs
-sog_src_tether_transparency
 ```
 
-The generator reapplies Queue v7 semantics to current canonical data: valid reactivation tier first, then regulator/court/legal, official issuer/protocol/product, reserve/attestation/audit, high-quality reporting/research, other reviewed source, with Evidence ID as deterministic tie-breaker. Alias identities, Wayback source URLs, missing source URLs, review-history suppression, and all ten Batch 1 reviewed identities remain excluded. Only three Batch 1 identities are still present in the current unarchived input because seven received reviewed archive additions in Batch 1.
+SIP-420 remains unchanged because all reviewed replays of the exact canonical no-slash URL returned HTTP 302 to a normalized trailing-slash archive replay. Redirect-only/replacement normalization is outside the review contract.
 
-Each selected candidate now requires exact-source and dated-Wayback payload review. Redirect-only responses, CDX metadata only, replacement targets, or payloads whose claim scope cannot be independently verified are insufficient. Valid review dispositions are `dated_exact_archive_proposal` or `reviewed_no_safe_change`.
+SIP-423 remains unchanged because the dedicated default/exact/trailing-slash discovery retry returned zero HTTP-200 capture rows. A live source page does not substitute for a dated archived payload.
 
-If review identifies exact dated archive URLs suitable for promotion, a separately reviewed and merged implementation authority must bind those exact Evidence IDs and URLs before canonical data changes.
+## Current boundary
+
+```text
+Current implementation authority: REVIEW GATE
+Current active review authority: none
+Batch 2 review: complete
+Bounded archive implementation proposal: 8 rows
+Canonical promotion authorized: no
+```
+
+A new separately reviewed and merged implementation authority is required before the eight proposed archive URLs can be written into canonical Evidence. It must bind exact Evidence IDs, exact archive URLs, a maximum archive-recorded delta of +8, a maximum archive-not-recorded delta of -8, unchanged Evidence/Evidence Relation counts, validators, and production verification.
 
 ## Market Access Expansion Review Batch 1 result
 
@@ -105,17 +121,6 @@ Evidence: 585 -> 585
 Evidence Relations: 585 -> 585
 ```
 
-The reviewed FSA register dated 2026-06-24 listed one electronic-payment-instrument service provider, SBI VC Trade Co., Ltd., and handled instruments USDC, RLUSD, and JPYSC. No provider/function-level evidence supported a new canonical promotion.
-
-## Current boundary
-
-```text
-Current implementation authority: REVIEW GATE
-Current active review authority: Evidence Archive Payload Verification Batch 2
-Current review stage: MANUAL_PAYLOAD_REVIEW
-Canonical promotion authorized: no
-```
-
 ## Schedule
 
 ```text
@@ -125,15 +130,16 @@ Canonical promotion authorized: no
 2026-08-09                 post-PR #523 production closeout — complete through PR #534
 2026-08-09                 Japan Market Access Expansion Review Batch 1 — complete no-go
 2026-08-09                 Evidence Archive Payload Verification Batch 2 review authority — complete through PR #537
-2026-08-09                 Batch 2 deterministic candidate selection — complete; manual payload review follows
-2026-08-10 to 2026-08-16  stabilization and Batch 2 payload review preparation/review
+2026-08-09                 Batch 2 deterministic candidate selection — complete through PR #538
+2026-08-09                 Batch 2 manual payload review — complete; 8 proposals / 2 no-safe-change
+2026-08-10 to 2026-08-16  stabilization and bounded implementation-authority preparation
 2026-08-17 to 2026-08-23  Evidence Archive Payload Verification Batch 2 implementation window — only if separately authorized
 2026-08-24 to 2026-08-30  Tier A Dossier Deepening Batch 4 — separate authority required
 2026-08-31 to 2026-09-06  cycle review and backlog reconciliation
 2026-09-07 to 2026-09-13  next operating authority and contingency
 ```
 
-Schedule windows are planning targets, not permission boundaries.
+Schedule windows are planning targets, not permission boundaries. Completing review early does not itself advance canonical implementation permission.
 
 ## PR #523 historical result
 
@@ -169,6 +175,7 @@ cross-service copying of VCTRADE restrictions to BITPOINT
 unbounded Evidence additions
 unsupported archive promotion
 redirect/CDX-only archive promotion
+canonical source URL normalization without authority
 ranking, score, recommendation, or implied safety
 automatic promotion
 silent continuation from a planning window
@@ -185,10 +192,9 @@ AGENTS.md
 docs/spec-governance.md
 docs/roadmap.md
 docs/deployment-policy.md
-docs/roadmap-amendments/2026-08-09-evidence-archive-payload-verification-batch-2-review-authority.md
-docs/roadmap-amendments/2026-08-09-evidence-archive-payload-verification-batch-2-candidates.md
-docs/quality/evidence-archive-payload-verification-batch-2-review-authority-spec.md
-docs/quality/evidence-archive-payload-verification-batch-2-candidate-spec.md
+docs/roadmap-amendments/2026-08-09-evidence-archive-payload-verification-batch-2-review-result.md
+docs/quality/evidence-archive-payload-verification-batch-2-review-result-spec.md
+data/editorial-research/evidence-archive-payload-verification-batch-2-review-2026-08-09.json
 config/evidence-archive-payload-verification-batch-2-review-authority.json
 data/editorial-research/evidence-archive-payload-verification-batch-2-candidates-2026-08-09.json
 current named inputs, source reviews, audits, validators, and prior outputs
