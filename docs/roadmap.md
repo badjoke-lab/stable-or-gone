@@ -6,7 +6,7 @@ Status: Evidence Archive Payload Verification Batch 2 review complete; current b
 ## Current reviewed checkpoint
 
 ```text
-Stable assets: 119
+Canonical stable assets: 119
 Organizations: 109
 Relationships: 131
 Events: 194
