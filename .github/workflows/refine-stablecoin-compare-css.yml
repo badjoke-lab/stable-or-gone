@@ -1,0 +1,37 @@
+name: Refine stablecoin compare mobile CSS
+
+on:
+  push:
+    branches:
+      - agent/stablecoin-compare-matrix-remediation
+    paths:
+      - .github/workflows/refine-stablecoin-compare-css.yml
+
+permissions:
+  contents: write
+
+jobs:
+  refine:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/stablecoin-compare-matrix-remediation
+      - name: Refine sticky attribute column readability
+        run: |
+          RULE='.comparison-matrix .comparison-attribute-column{overflow-wrap:normal;word-break:normal}@media(max-width:640px){.comparison-matrix .comparison-attribute-column{width:144px;min-width:144px;max-width:144px}}'
+          if grep -Fq "$RULE" src/styles/public-ui.css; then
+            echo "Refinement already present."
+          else
+            printf '%s\n' "$RULE" >> src/styles/public-ui.css
+          fi
+      - name: Commit refinement when needed
+        run: |
+          if git diff --quiet -- src/styles/public-ui.css; then
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/styles/public-ui.css
+          git commit -m "Improve mobile comparison attribute readability"
+          git push origin HEAD:agent/stablecoin-compare-matrix-remediation
