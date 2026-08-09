@@ -1,1 +1,1 @@
-import './validate-post-pr534-market-access-review-authority.mjs';
+import './validate-japan-market-access-expansion-review-b1.mjs';
