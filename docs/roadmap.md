@@ -1,7 +1,7 @@
 # Stable or Gone Roadmap
 
 Updated: 2026-08-09  
-Status: Japan Market Access Expansion Review Batch 1 complete — no-go; implementation authority at REVIEW GATE
+Status: Evidence Archive Payload Verification Batch 2 review authority active; canonical implementation authority remains REVIEW GATE
 
 ## Current reviewed checkpoint
 
@@ -25,7 +25,7 @@ Archive not recorded: 122
 Detail routes: 422
 Metadata-checked routes: 422
 Official origin: https://www.stableorgone.com
-Review entry production checkpoint: 58cbd7e621794c33fedbc3e263d7f64e9b8a5099
+Review authority entry commit: c9588b092277bd14d87ce9209ba087e4752b3346
 Current production commit: dynamic; verify via deploy-production workflow and Issue #479
 Last canonical-changing implementation commit: 77e80dd3e2a62fea53ea0eabe91ef78a2d8ab1da
 Canonical hash: sha256:f386c1043ca5e83cafbd88e99746d0609aab0154ed48de1970677758a66ed5fa
@@ -52,8 +52,28 @@ PR #532 — post-PR #531 authority and schedule reconciliation
 PR #533 — shared Guide readability and research-layout remediation
 PR #534 — post-PR #523 production closeout and REVIEW GATE restoration
 PR #535 — bounded Japan Market Access Expansion Review Batch 1 authority
-Japan Market Access Expansion Review Batch 1 — complete no-go
+PR #536 — Japan Market Access Expansion Review Batch 1 no-go closeout
 ```
+
+## Active Evidence Archive Payload Verification Batch 2 review
+
+The next dated workstream is now opened for review only.
+
+```text
+candidate universe: current canonical Evidence with archive not recorded
+archive recorded: 463
+archive not recorded: 122
+Batch 1 already reviewed: 10 Evidence identities
+Batch 2 target: 10 Evidence identities
+selection: Queue v7 deterministic non-ranking priority reapplied to current canonical data, excluding Batch 1 reviewed identities
+canonical archive additions authorized in review lane: 0
+```
+
+Selection preserves the Queue v7 semantics: accepted reactivation tier first, then regulator/court/legal, official issuer/protocol/product, reserve/attestation/audit, high-quality reporting/research, other reviewed source, with Evidence ID as deterministic tie-breaker. Existing Queue v7 exclusions for alias identities, Wayback source URLs, and review-history suppression remain in force. Batch 1's ten reviewed Evidence identities are additionally excluded.
+
+Each selected candidate requires exact-source and dated-Wayback payload review. Redirect-only responses, CDX metadata only, replacement targets, or payloads whose claim scope cannot be verified are insufficient. `reviewed_no_safe_change` remains a valid and preferred outcome when the archive payload cannot safely support the canonical claim scope.
+
+If review identifies exact dated archive URLs suitable for promotion, a separate merged implementation authority must bind those exact Evidence IDs and URLs before canonical data changes.
 
 ## Market Access Expansion Review Batch 1 result
 
@@ -80,26 +100,9 @@ The review exits with no implementation proposal.
 
 ```text
 Current implementation authority: REVIEW GATE
-Current active review authority: none
+Current active review authority: Evidence Archive Payload Verification Batch 2
 Canonical promotion authorized: no
 ```
-
-Market Access expansion may be reopened only on material new source evidence, including:
-
-```text
-FSA provider/handled-instrument register change
-published registered stablecoin intermediary relationship
-BITPOINT-specific function-level USDC/RLUSD/JPYSC evidence
-material BITPOINT/VCTRADE integration change
-```
-
-Planning priority remains:
-
-```text
-Market Access expansion > Tier A dossier deepening > Record Growth > new UI
-```
-
-Because the current Market Access source review closed no-go, no immediate Market Access implementation is authorized.
 
 ## Schedule
 
@@ -109,16 +112,15 @@ Because the current Market Access source review closed no-go, no immediate Marke
 2026-08-09                 PR #523 reconciliation, validation, merge, and production verification — complete
 2026-08-09                 post-PR #523 production closeout — complete through PR #534
 2026-08-09                 Japan Market Access Expansion Review Batch 1 — complete no-go
-2026-08-10 to 2026-08-16  stabilization and next-batch preparation
-2026-08-17 to 2026-08-23  Evidence Archive Payload Verification Batch 2 — separate authority required
+2026-08-09                 Evidence Archive Payload Verification Batch 2 review authority — active
+2026-08-10 to 2026-08-16  stabilization and Batch 2 candidate/payload review preparation
+2026-08-17 to 2026-08-23  Evidence Archive Payload Verification Batch 2 implementation window — only if separately authorized
 2026-08-24 to 2026-08-30  Tier A Dossier Deepening Batch 4 — separate authority required
 2026-08-31 to 2026-09-06  cycle review and backlog reconciliation
 2026-09-07 to 2026-09-13  next operating authority and contingency
 ```
 
 Schedule windows are planning targets, not permission boundaries. A scheduled date never substitutes for reviewed authority.
-
-The immediate permitted continuation after this no-go is **next-batch preparation only**. Evidence Archive Payload Verification Batch 2 is the next dated workstream and must receive its own bounded authority before implementation.
 
 ## PR #523 historical result
 
@@ -152,6 +154,8 @@ country-wide availability inference
 negative inference from missing product-list entries
 cross-service copying of VCTRADE restrictions to BITPOINT
 unbounded Evidence additions
+unsupported archive promotion
+redirect/CDX-only archive promotion
 ranking, score, recommendation, or implied safety
 automatic promotion
 silent continuation from a planning window
@@ -168,9 +172,12 @@ AGENTS.md
 docs/spec-governance.md
 docs/roadmap.md
 docs/deployment-policy.md
-docs/roadmap-amendments/2026-08-09-japan-market-access-expansion-review-b1-result.md
-docs/quality/japan-market-access-expansion-review-b1-result-spec.md
-data/editorial-research/japan-market-access-expansion-review-b1-2026-08-09.json
+docs/roadmap-amendments/2026-08-09-evidence-archive-payload-verification-batch-2-review-authority.md
+docs/quality/evidence-archive-payload-verification-batch-2-review-authority-spec.md
+config/evidence-archive-payload-verification-batch-2-review-authority.json
+config/evidence-archive-payload-verification-batch-1.json
+docs/migration/evidence-archive-maintenance-queue-v7-pr403.json
+config/evidence-archive-maintenance-queue-v7-pr403.json
 current named inputs, source reviews, audits, validators, and prior outputs
 ```
 

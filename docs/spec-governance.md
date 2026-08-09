@@ -18,35 +18,37 @@ When active documents disagree, use this order:
 1. `docs/deployment-policy.md` for publication, production verification, Cloudflare, domain, and production-visual gates.
 2. `docs/spec-governance.md` for authority and change control.
 3. `docs/roadmap.md` for current phase, immediate item, bounded sequence, and schedule.
-4. the current merged roadmap amendment/result named below.
-5. the current work-item/result specification named below.
+4. the current merged roadmap amendment named below.
+5. the current work-item specification named below.
 6. enduring regression authorities such as `docs/ui-v3-remediation-authority.md`.
 7. named audits, inventories, baselines, fixtures, release notes, research checkpoints, queues, and reviewed prior outputs.
 8. conversation history and unmerged drafts.
 
-Current roadmap result:
+Current roadmap authority:
 
 ```text
-docs/roadmap-amendments/2026-08-09-japan-market-access-expansion-review-b1-result.md
+docs/roadmap-amendments/2026-08-09-evidence-archive-payload-verification-batch-2-review-authority.md
 ```
 
-Current work-item result specification:
+Current work-item specification:
 
 ```text
-docs/quality/japan-market-access-expansion-review-b1-result-spec.md
+docs/quality/evidence-archive-payload-verification-batch-2-review-authority-spec.md
 ```
 
-Current private review result:
+Current authority contract:
 
 ```text
-data/editorial-research/japan-market-access-expansion-review-b1-2026-08-09.json
+config/evidence-archive-payload-verification-batch-2-review-authority.json
 ```
 
-Enduring Market Access contract:
+Required historical Evidence Archive inputs:
 
 ```text
-docs/market-access-record-spec.md
-config/market-access-governance-v1.json
+config/evidence-archive-payload-verification-batch-1.json
+docs/migration/evidence-archive-maintenance-queue-v7-pr403.json
+config/evidence-archive-maintenance-queue-v7-pr403.json
+docs/roadmap-amendments/2026-08-01-evidence-archive-payload-verification-batch-1.md
 ```
 
 ## 3. Mandatory reading and update protocol
@@ -57,9 +59,10 @@ Before every substantive change to code, canonical data, UI, workflows, infrastr
 2. read this file;
 3. read `docs/roadmap.md`;
 4. read `docs/deployment-policy.md`;
-5. read the current roadmap result;
-6. read the current result specification and private review result;
-7. read every enduring regression authority and named input required by the next separately authorized work item.
+5. read the current roadmap authority;
+6. read the current work-item specification and config;
+7. read the required Batch 1 and Queue v7 inputs;
+8. read every enduring regression authority and named input required by the work item.
 
 A non-trivial PR is not ready for implementation until its exact roadmap item and governing specification are identified.
 
@@ -87,7 +90,7 @@ Archive not recorded: 122
 Detail routes: 422
 Metadata-checked detail routes: 422
 Official public origin: https://www.stableorgone.com
-Review entry production checkpoint: 58cbd7e621794c33fedbc3e263d7f64e9b8a5099
+Review authority entry commit: c9588b092277bd14d87ce9209ba087e4752b3346
 Current production commit: dynamic; verify via deploy-production workflow and Issue #479
 Last canonical-changing implementation commit: 77e80dd3e2a62fea53ea0eabe91ef78a2d8ab1da
 Canonical hash: sha256:f386c1043ca5e83cafbd88e99746d0609aab0154ed48de1970677758a66ed5fa
@@ -105,32 +108,36 @@ Current `main` and production equality is verified dynamically by `.github/workf
 1. PR #523 bounded JPYSC implementation — complete
 2. PR #534 closeout and REVIEW GATE restoration — complete
 3. PR #535 Japan Market Access Expansion Review Batch 1 authority — complete
-4. Japan Market Access Expansion Review Batch 1 source review — complete no-go
-5. REVIEW GATE — current
-6. next-batch preparation only until a separate authority is merged
+4. PR #536 Japan Market Access Expansion Review Batch 1 no-go closeout — complete
+5. Evidence Archive Payload Verification Batch 2 review authority — active
+6. REVIEW GATE remains the canonical implementation boundary
 ```
 
-There is no active Market Access implementation authority.
+There is no active canonical implementation authority.
 
-## 6. Completed Market Access review result
+## 6. Active Evidence Archive Payload Verification Batch 2 review
 
-The bounded review used all three candidate slots:
+The review-only lane is bounded to ten current unarchived canonical Evidence identities when at least ten remain eligible.
+
+Selection must reapply the Queue v7 deterministic non-ranking semantics to current canonical Evidence, while preserving its alias, Wayback-source, and review-history suppression exclusions and additionally excluding all ten Evidence identities reviewed in Payload Verification Batch 1.
+
+Priority order remains:
 
 ```text
-RLUSD × SBI VC Trade / BITPOINT — no-go
-USDC × SBI VC Trade / BITPOINT — no-go
-JPYSC × SBI VC Trade / BITPOINT — no-go
-promotable pairs: 0
-promotable Market Access Records: 0
+reactivated tier
+regulator / court / legal
+official issuer / protocol / product
+reserve / attestation / audit
+high-quality reporting / research
+other reviewed source
+Evidence ID deterministic tie-break
 ```
 
-The reviewed FSA register dated 2026-06-24 lists one electronic-payment-instrument service provider, SBI VC Trade Co., Ltd., and handled instruments USDC, RLUSD, and JPYSC. The review found no official-register basis for a new provider or fourth handled stablecoin.
+This queue is not a ranking or safety score.
 
-The new service-intermediary regime is a future discovery path. The reviewed official page did not expose a separate public intermediary roster. That finding must not be restated as proof that zero intermediaries are registered.
+For every selected candidate, review starts from the exact canonical source URL and a dated Wayback payload. Redirect-only responses, CDX metadata alone, replacement targets, or payloads whose claim scope cannot be independently verified are insufficient. `reviewed_no_safe_change` is a valid result.
 
-RLUSD has explicit service-level evidence that BITPOINT is excluded. The review does not convert one service-level statement into four function-level `unavailable` records. USDC and JPYSC lack direct BITPOINT function-level evidence. Negative inference from a missing product/price-list entry is prohibited. VCTRADE-specific restrictions are not copied across services.
-
-The review exits with no implementation proposal and no canonical Evidence reuse for inferred BITPOINT states.
+The review authority permits no canonical `archived_url` edits. Any promotable archive result requires a new separately reviewed and merged implementation authority binding exact Evidence IDs and exact dated archive URLs.
 
 ## 7. Canonical and public safety boundary
 
@@ -157,7 +164,7 @@ not_applicable
 source_review_needed
 ```
 
-Missing evidence, a candidate row, a monitoring signal, a guide statement, a product-list omission, or a planning gap is not proof of a canonical value.
+Missing evidence, a candidate row, a monitoring signal, a guide statement, a product-list omission, an archive metadata hit, or a planning gap is not proof of a canonical value.
 
 Editorial context must not be converted automatically into asset-level availability, approval, legality, safety, ranking, or support claims.
 
@@ -175,11 +182,6 @@ buy_sell: account_internal_only
 deposit: unavailable
 withdrawal: unavailable
 external_wallet_transfer: unavailable
-```
-
-Its reviewed transition was:
-
-```text
 Evidence: 584 -> 585
 Evidence Relations: 584 -> 585
 Market Access Records: 8 -> 12
@@ -189,7 +191,7 @@ Detail routes: 422 -> 422
 Metadata-checked routes: 422 -> 422
 ```
 
-Historical closeout artifacts for PR #523/#534/#535 remain historical evidence and are not rewritten merely to equal a later docs-only production commit.
+Historical closeout artifacts for PR #523/#534/#535/#536 remain historical evidence and are not rewritten merely to equal a later docs-only production commit.
 
 ## 9. Material UI governance
 
@@ -203,7 +205,7 @@ For material UI changes:
 - horizontal overflow, clipping, overlapping text, unreadable density, essential-content loss, or broken composition are blocking;
 - automated success cannot override a known visual defect.
 
-The completed review result permits no material UI change.
+The active Evidence Archive review permits no material UI change.
 
 ## 10. Monitoring, editorial, and candidate governance
 
@@ -235,6 +237,7 @@ A change to any of the following requires a specification update in the same PR 
 - roadmap schedule when execution order materially changes;
 - canonical enum or record meaning;
 - evidence interpretation or source identity handling;
+- Evidence Archive selection, review, or promotion semantics;
 - unknown-state semantics;
 - route families or machine-readable output shape;
 - count or denominator semantics;
@@ -250,21 +253,7 @@ No implementation PR may introduce an undocumented alternative.
 
 ## 13. Pull-request traceability
 
-Every non-trivial PR body must identify:
-
-```text
-Specification references
-Roadmap item
-Scope
-Explicit non-goals
-Named inputs and prior outputs
-Canonical-data preservation
-Public-output preservation
-Validation
-Visual inspection when applicable
-Deployment classification
-Next review gate
-```
+Every non-trivial PR body must identify specification references, roadmap item, scope, explicit non-goals, named inputs and prior outputs, canonical-data preservation, public-output preservation, validation, visual inspection when applicable, deployment classification, and next review gate.
 
 A PR that cannot cite an approved work item must pause until repository authority is corrected.
 
@@ -272,18 +261,20 @@ A PR that cannot cite an approved work item must pause until repository authorit
 
 Dates in `docs/roadmap.md` are targets, not implementation permission.
 
-Evidence Archive Payload Verification Batch 2 is the next dated workstream. Until it receives separate authority, only next-batch preparation is permitted. Tier A Dossier Deepening Batch 4, Record Growth, cycle review, and later work also require their own authority.
+Evidence Archive Payload Verification Batch 2 is the current review workstream. Its review authority does not authorize canonical archive additions. Tier A Dossier Deepening Batch 4, Record Growth, cycle review, and later work require their own authority.
 
 ## 15. Historical checkpoints
 
 Do not rewrite historical checkpoint artifacts merely because current counts, UI, domain, or workstream changed. Forward authority documents describe current state while historical release-integrity baselines, completed PR specifications, archived audits, and prior production checkpoints remain immutable historical evidence unless a specific correction is required.
 
+Required compatibility anchors include PR #493 official-domain migration, PR #500 bounded MNEE Evidence/Archive maintenance, PR #517 Bison Bank growth, and PR #522 semantic authority for PR #523.
+
 ## 16. Required exit
 
-Current boundary:
+Current canonical implementation boundary:
 
 ```text
 REVIEW GATE
 ```
 
-There is no Market Access implementation proposal from Batch 1. Any future Market Access promotion requires new source evidence and a separately reviewed and merged authority that binds exact rows, sources, Evidence identities, deltas, and validators.
+The active review may produce candidate dispositions and a bounded proposal only. Any canonical archive promotion requires a new separately reviewed and merged implementation authority with exact IDs, exact archive URLs, deltas, and validators.

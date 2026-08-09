@@ -5,9 +5,9 @@ This file is the mandatory entry point for humans, AI agents, and automation wor
 ## Current authority
 
 ```text
-Repository state: Japan Market Access Expansion Review Batch 1 — complete no-go
+Repository state: Evidence Archive Payload Verification Batch 2 review authority active
 Current canonical checkpoint: sog_jpysc_market_access_pilot_3_canonical_119_checkpoint_pr523_2026_08_05
-Review entry production checkpoint: 58cbd7e621794c33fedbc3e263d7f64e9b8a5099
+Review authority entry commit: c9588b092277bd14d87ce9209ba087e4752b3346
 Current production commit: dynamic; verify via deploy-production workflow and Issue #479
 Last canonical-changing implementation commit: 77e80dd3e2a62fea53ea0eabe91ef78a2d8ab1da
 Canonical hash: sha256:f386c1043ca5e83cafbd88e99746d0609aab0154ed48de1970677758a66ed5fa
@@ -15,11 +15,11 @@ Canonical file count: 466
 Official public origin: https://www.stableorgone.com
 Legacy-host 301: complete via Pages Advanced Mode worker and strict migration gate
 Current implementation authority: REVIEW GATE
-Current review authority: none; Batch 1 completed no-go
+Current review authority: Evidence Archive Payload Verification Batch 2
 Later canonical implementation lanes authorized: no
 ```
 
-PR #523 remains the last canonical-changing Market Access implementation. PR #534 closed that checkpoint. PR #535 authorized a bounded review-only Japan Market Access expansion lane. That review is now complete with **zero promotable pairs and zero promotable Market Access Records**.
+PR #523 remains the last canonical-changing Market Access implementation. PR #534 closed that checkpoint. PR #535 authorized Japan Market Access Expansion Review Batch 1, and PR #536 closed that review no-go with zero canonical additions. The active lane is now a separately bounded Evidence Archive payload-verification review only.
 
 A fixed commit in a work-item document is an immutable entry checkpoint, not a perpetually current production claim. Current production parity must be verified dynamically from the production workflow and Issue #479.
 
@@ -62,7 +62,7 @@ PR #532 — post-PR #531 authority and schedule reconciliation
 PR #533 — shared Guide readability and research-layout remediation
 PR #534 — post-PR #523 production closeout and REVIEW GATE restoration
 PR #535 — bounded Japan Market Access Expansion Review Batch 1 authority
-Japan Market Access Expansion Review Batch 1 — complete no-go
+PR #536 — Japan Market Access Expansion Review Batch 1 no-go closeout
 ```
 
 Required historical authority anchors retained for compatibility and audit traceability:
@@ -84,15 +84,34 @@ Before every substantive continuation, read the merged current versions of:
 2. `docs/spec-governance.md`
 3. `docs/roadmap.md`
 4. `docs/deployment-policy.md`
-5. `docs/roadmap-amendments/2026-08-09-japan-market-access-expansion-review-b1-result.md`
-6. `docs/quality/japan-market-access-expansion-review-b1-result-spec.md`
-7. `data/editorial-research/japan-market-access-expansion-review-b1-2026-08-09.json`
-8. `docs/market-access-record-spec.md`
-9. `config/market-access-governance-v1.json`
-10. every named validator, source review, fixture, baseline, queue, handoff, and prior output required by the next separately authorized work item
-11. `docs/ui-v3-remediation-authority.md` before any material public UI work
+5. `docs/roadmap-amendments/2026-08-09-evidence-archive-payload-verification-batch-2-review-authority.md`
+6. `docs/quality/evidence-archive-payload-verification-batch-2-review-authority-spec.md`
+7. `config/evidence-archive-payload-verification-batch-2-review-authority.json`
+8. `config/evidence-archive-payload-verification-batch-1.json`
+9. `docs/migration/evidence-archive-maintenance-queue-v7-pr403.json`
+10. `config/evidence-archive-maintenance-queue-v7-pr403.json`
+11. every named validator, review-history contract, source review, fixture, baseline, queue, handoff, and prior output required by the active review item
+12. `docs/ui-v3-remediation-authority.md` before any material public UI work
 
-## Japan Market Access Expansion Review Batch 1 result
+## Active Evidence Archive Payload Verification Batch 2 boundary
+
+The active lane is review-only.
+
+```text
+current archive recorded: 463
+current archive not recorded: 122
+candidate target count: 10
+selection: current unarchived canonical Evidence, Queue v7 deterministic non-ranking priority
+Batch 1 reviewed set excluded: 10 Evidence identities
+manual payload review required: yes
+canonical archive additions authorized: 0
+```
+
+Queue v7 exclusions and ordering remain semantic input. The ten Batch 1 Evidence identities are excluded from Batch 2 selection. The selected candidates must be reviewed from their exact canonical source URLs against dated Wayback payloads. Redirect-only results, CDX metadata alone, replacement targets, or payloads whose claim scope cannot be independently verified are insufficient.
+
+Allowed outcomes at review stage are an exact dated archive proposal or `reviewed_no_safe_change`. No canonical `archived_url` is changed in this authority lane.
+
+## Completed Market Access Expansion Review Batch 1 result
 
 The three reviewed candidate pairs were:
 
@@ -133,16 +152,14 @@ No country-wide availability inference, future-capability backfill, lending-as-a
 
 ## Validation and next boundary
 
-The completed review preserves all canonical counts and public output. Its exit is:
+The active review must preserve every canonical count and all public output. Its exit is:
 
 ```text
 REVIEW GATE
 ```
 
-There is no implementation proposal from this review and no later canonical lane is authorized by it.
+If exact dated archive payloads are judged promotable, a new separately reviewed and merged implementation authority must bind the exact Evidence IDs, archive URLs, maximum canonical delta, and validation before any canonical edit.
 
-Market Access review may reopen only on material new source evidence such as an FSA register change, a published stablecoin intermediary relationship, BITPOINT-specific function-level evidence, or a material BITPOINT/VCTRADE integration change.
-
-Evidence Archive Payload Verification Batch 2, Tier A dossier deepening, Record Growth, new UI, and every other later lane remain planning items until separately authorized.
+Tier A dossier deepening, Record Growth, new UI, and every other later lane remain planning items until separately authorized.
 
 Issue #479 remains the deployment-history authority.

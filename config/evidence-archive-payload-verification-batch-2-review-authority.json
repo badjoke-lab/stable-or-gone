@@ -1,0 +1,104 @@
+{
+  "schema_version": "1.0",
+  "authority_id": "sog_evidence_archive_payload_verification_batch_2_review_authority_2026_08_09",
+  "status": "approved_bounded_review_only",
+  "recorded_at": "2026-08-09",
+  "entry_repository_commit": "c9588b092277bd14d87ce9209ba087e4752b3346",
+  "entry_canonical_checkpoint": {
+    "assets": 119,
+    "organizations": 109,
+    "relationships": 131,
+    "events": 194,
+    "evidence": 585,
+    "evidence_relations": 585,
+    "deployments": 186,
+    "market_access_records": 12,
+    "archive_recorded": 463,
+    "archive_not_recorded": 122,
+    "detail_routes": 422,
+    "metadata_checked_routes": 422,
+    "canonical_hash": "sha256:f386c1043ca5e83cafbd88e99746d0609aab0154ed48de1970677758a66ed5fa",
+    "canonical_file_count": 466
+  },
+  "sources": {
+    "batch_1_authority": "config/evidence-archive-payload-verification-batch-1.json",
+    "queue_v7": "docs/migration/evidence-archive-maintenance-queue-v7-pr403.json",
+    "queue_v7_config": "config/evidence-archive-maintenance-queue-v7-pr403.json",
+    "batch_1_roadmap_result": "docs/roadmap-amendments/2026-08-01-evidence-archive-payload-verification-batch-1.md"
+  },
+  "review_lane": {
+    "name": "Evidence Archive Payload Verification Batch 2",
+    "mode": "review_only",
+    "target_count": 10,
+    "selection_mode": "current_unarchived_reapply_queue_v7_priority_excluding_batch_1_reviewed",
+    "queue_v7_priority_mode": "reactivated_tier_then_priority_bucket_then_evidence_id_non_ranking",
+    "priority_order": [
+      "regulator_court_legal",
+      "official_issuer_protocol_product",
+      "reserve_attestation_audit",
+      "high_quality_reporting_research",
+      "other_reviewed_source"
+    ],
+    "batch_1_reviewed_evidence_ids": [
+      "sog_src_rai_integrations_batch_b",
+      "sog_src_rai_oracle_relayer_batch_b",
+      "sog_src_rai_ungovernance_batch_b",
+      "sog_src_rlusd_docs",
+      "sog_src_rlusd_launch_2024",
+      "sog_src_rlusd_ripple_page",
+      "sog_src_spot_about_batch_b",
+      "sog_src_spot_mint_batch_b",
+      "sog_src_spot_site_batch_b",
+      "sog_src_spot_v2_rollout_batch_b"
+    ],
+    "eligibility": {
+      "archive_not_recorded_only": true,
+      "canonical_evidence_identity_required": true,
+      "source_url_required": true,
+      "alias_identity_excluded": true,
+      "web_archive_source_url_excluded": true,
+      "reviewed_suppressed_without_signal_excluded": true,
+      "batch_1_reviewed_excluded": true
+    },
+    "manual_review_requirements": {
+      "exact_canonical_source_url": true,
+      "dated_wayback_snapshot": true,
+      "wayback_http_status_200": true,
+      "archived_payload_independently_fetched": true,
+      "claim_scope_preserved_in_payload": true,
+      "redirect_only_or_cdx_metadata_only_insufficient": true,
+      "reviewed_no_safe_change_is_valid": true
+    }
+  },
+  "allowed": [
+    "deterministic_candidate_generation",
+    "private_or_editorial_candidate_artifact",
+    "manual_source_review",
+    "manual_wayback_payload_review",
+    "payload_claim_scope_equivalence_review",
+    "reviewed_no_safe_change_disposition",
+    "bounded_implementation_proposal"
+  ],
+  "prohibited": [
+    "canonical_archived_url_change",
+    "source_url_replacement",
+    "new_evidence_identity",
+    "evidence_relation_change",
+    "canonical_asset_change",
+    "market_access_change",
+    "public_route_change",
+    "material_ui_change",
+    "automatic_archive_promotion",
+    "ranking",
+    "score",
+    "recommendation",
+    "automatic_continuation"
+  ],
+  "implementation_boundary": {
+    "current": "REVIEW_GATE",
+    "canonical_changes_allowed": false,
+    "maximum_canonical_archive_additions": 0,
+    "later_archive_additions_require_separate_merged_implementation_authority": true
+  },
+  "exit": "REVIEW_GATE"
+}
