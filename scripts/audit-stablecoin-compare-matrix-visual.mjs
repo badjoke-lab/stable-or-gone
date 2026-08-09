@@ -40,7 +40,8 @@ const assertColumnCount = async (page, count, label) => {
 };
 
 const runDesktop = async (browser) => {
-  const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
+  const context = await browser.newContext({ viewport: { width: 1440, height: 1000 }, deviceScaleFactor: 1, reducedMotion: 'reduce' });
+  const page = await context.newPage();
 
   for (const count of [2, 3, 4]) {
     const slugs = fixed.slice(0, count);
@@ -111,11 +112,12 @@ const runDesktop = async (browser) => {
     record('explicit_unknown_not_recorded_visible', false, { reason: 'No canonical comparison source contains Unknown or Not recorded.' });
   }
 
-  await page.close();
+  await context.close();
 };
 
 const runMobile = async (browser) => {
-  const page = await browser.newPage({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
+  const context = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 1, isMobile: true, hasTouch: true, reducedMotion: 'reduce' });
+  const page = await context.newPage();
 
   for (const count of [2, 4]) {
     const slugs = fixed.slice(0, count);
@@ -134,10 +136,10 @@ const runMobile = async (browser) => {
     }
   }
 
-  await page.close();
+  await context.close();
 };
 
-const browser = await chromium.launch({ headless: true });
+const browser = await chromium.launch({ headless: true, args: ['--disable-lcd-text'] });
 try {
   await runDesktop(browser);
   await runMobile(browser);
