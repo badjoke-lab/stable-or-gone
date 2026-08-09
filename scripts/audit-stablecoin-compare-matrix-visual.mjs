@@ -29,8 +29,16 @@ const pageHasOverflow = async (page) => page.evaluate(() => document.documentEle
 const captureState = async (page, name) => {
   const section = page.locator('[data-comparison-panel]');
   await section.scrollIntoViewIfNeeded();
-  await page.evaluate(() => { if (document.activeElement instanceof HTMLElement) document.activeElement.blur(); });
+  await page.evaluate(() => {
+    if (document.activeElement instanceof HTMLElement) document.activeElement.blur();
+    const skip = document.querySelector('.skip-link');
+    if (skip instanceof HTMLElement) skip.style.visibility = 'hidden';
+  });
   await section.screenshot({ path: path.join(outputDir, `${name}.png`) });
+  await page.evaluate(() => {
+    const skip = document.querySelector('.skip-link');
+    if (skip instanceof HTMLElement) skip.style.removeProperty('visibility');
+  });
 };
 
 const assertColumnCount = async (page, count, label) => {
