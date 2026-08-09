@@ -18,7 +18,7 @@ const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 const sha256 = (body) => crypto.createHash('sha256').update(body).digest('hex');
 const safe = (value) => value.replace(/[^a-z0-9._-]+/gi, '_');
 
-async function request(url, { redirect = 'follow', timeoutMs = 45000, attempts = 3 } = {}) {
+async function request(url, { redirect = 'follow', timeoutMs = 30000, attempts = 2 } = {}) {
   let error;
   for (let attempt = 1; attempt <= attempts; attempt += 1) {
     const controller = new AbortController();
@@ -28,7 +28,7 @@ async function request(url, { redirect = 'follow', timeoutMs = 45000, attempts =
         redirect,
         signal: controller.signal,
         headers: {
-          'user-agent': 'Stable-or-Gone Evidence Archive Review Retry/2.0 (+https://www.stableorgone.com)',
+          'user-agent': 'Stable-or-Gone Evidence Archive Review Retry/2.1 (+https://www.stableorgone.com)',
           accept: '*/*'
         }
       });
@@ -37,7 +37,7 @@ async function request(url, { redirect = 'follow', timeoutMs = 45000, attempts =
     } catch (caught) {
       clearTimeout(timeout);
       error = caught;
-      if (attempt < attempts) await sleep(1000 * attempt);
+      if (attempt < attempts) await sleep(600);
     }
   }
   throw error;
@@ -58,7 +58,7 @@ function toText(body, contentType) {
     .trim();
 }
 
-async function cdx(url, extra = {}) {
+async function queryCdx(url, extra = {}) {
   const params = new URLSearchParams({
     url,
     output: 'json',
@@ -89,7 +89,7 @@ function choose(rows, canonicalUrl) {
 
 async function replay(canonicalUrl, capture, dir) {
   const replayUrl = `https://web.archive.org/web/${capture.timestamp}id_/${canonicalUrl}`;
-  const response = await request(replayUrl, { redirect: 'manual', timeoutMs: 45000, attempts: 2 });
+  const response = await request(replayUrl, { redirect: 'manual' });
   const body = Buffer.from(await response.arrayBuffer());
   const contentType = response.headers.get('content-type') ?? '';
   const text = toText(body, contentType);
@@ -110,40 +110,50 @@ async function replay(canonicalUrl, capture, dir) {
   return meta;
 }
 
-const results = [];
-for (const candidate of selected) {
+async function reviewTarget(candidate) {
   const dir = path.join(outDir, safe(candidate.evidence_id));
   fs.mkdirSync(dir, { recursive: true });
   const result = { evidence_id: candidate.evidence_id, canonical_url: candidate.url, claim_scopes: candidate.claim_scopes, queries: [], captures: [], errors: [] };
-  const querySpecs = [
+  const specs = [
     { label: 'default', url: candidate.url, extra: {} },
-    { label: 'exact', url: candidate.url, extra: { matchType: 'exact' } }
+    { label: 'exact', url: candidate.url, extra: { matchType: 'exact' } },
+    ...(!candidate.url.endsWith('/') ? [{ label: 'trailing_slash_discovery_only', url: `${candidate.url}/`, extra: { matchType: 'exact' } }] : [])
   ];
-  if (!candidate.url.endsWith('/')) querySpecs.push({ label: 'trailing_slash_discovery_only', url: `${candidate.url}/`, extra: { matchType: 'exact' } });
-  const merged = [];
-  for (const spec of querySpecs) {
+  const queryResults = await Promise.all(specs.map(async (spec) => {
     try {
-      const found = await cdx(spec.url, spec.extra);
-      result.queries.push({ label: spec.label, queried_url: spec.url, endpoint: found.endpoint, row_count: found.rows.length });
-      for (const row of found.rows) if (!merged.some((known) => known.timestamp === row.timestamp && known.original === row.original)) merged.push(row);
+      return { spec, found: await queryCdx(spec.url, spec.extra), error: null };
     } catch (error) {
-      result.errors.push(`${spec.label} cdx: ${error?.message ?? String(error)}`);
+      return { spec, found: null, error: error?.message ?? String(error) };
     }
+  }));
+  const merged = [];
+  for (const item of queryResults) {
+    if (item.error) {
+      result.errors.push(`${item.spec.label} cdx: ${item.error}`);
+      continue;
+    }
+    result.queries.push({ label: item.spec.label, queried_url: item.spec.url, endpoint: item.found.endpoint, row_count: item.found.rows.length });
+    for (const row of item.found.rows) if (!merged.some((known) => known.timestamp === row.timestamp && known.original === row.original)) merged.push(row);
   }
   fs.writeFileSync(path.join(dir, 'cdx-merged.json'), `${JSON.stringify(merged, null, 2)}\n`);
   const captures = choose(merged, candidate.url);
-  for (const capture of captures) {
+  const replayResults = await Promise.all(captures.map(async (capture) => {
     try {
-      result.captures.push(await replay(candidate.url, capture, dir));
+      return { meta: await replay(candidate.url, capture, dir), error: null };
     } catch (error) {
-      result.errors.push(`replay ${capture.timestamp}: ${error?.message ?? String(error)}`);
+      return { meta: null, error: `replay ${capture.timestamp}: ${error?.message ?? String(error)}` };
     }
+  }));
+  for (const item of replayResults) {
+    if (item.meta) result.captures.push(item.meta);
+    if (item.error) result.errors.push(item.error);
   }
   fs.writeFileSync(path.join(dir, 'summary.json'), `${JSON.stringify(result, null, 2)}\n`);
   console.log(JSON.stringify({ evidence_id: result.evidence_id, queries: result.queries, captures: result.captures, errors: result.errors }));
-  results.push(result);
+  return result;
 }
 
+const results = await Promise.all(selected.map(reviewTarget));
 const summary = {
   schema_version: '1.0',
   retry_id: 'sog_evidence_archive_payload_verification_batch_2_unresolved_retry_2026_08_09',
