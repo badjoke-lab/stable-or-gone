@@ -1,1 +1,1 @@
-import './validate-evidence-archive-payload-verification-batch-2-candidates.mjs';
+import './validate-stablecoin-compare-matrix-remediation-authority.mjs';

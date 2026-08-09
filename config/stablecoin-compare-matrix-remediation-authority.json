@@ -1,0 +1,98 @@
+{
+  "schema_version": "1.0",
+  "authority_id": "sog_stablecoin_compare_matrix_remediation_2026_08_10",
+  "status": "active_after_merge",
+  "entry_main_commit": "0eb362e930fb44a78a535a05fda86e20b010aadd",
+  "public_route": "/stablecoins/",
+  "selection": {
+    "minimum_ready": 2,
+    "maximum": 4,
+    "reject_fifth": true,
+    "preserve_url_order": true
+  },
+  "required_features": [
+    "attribute_by_record_matrix",
+    "two_three_four_record_support",
+    "individual_column_removal",
+    "differences_only",
+    "explicit_unknown_and_not_recorded",
+    "bounded_horizontal_scroll_on_narrow_viewports",
+    "shared_compare_url_restoration"
+  ],
+  "required_rows": [
+    "lifecycle",
+    "issuance",
+    "asset_class",
+    "launch",
+    "reference",
+    "backing",
+    "stabilization",
+    "reserve_disclosure",
+    "redemption",
+    "organizations_control",
+    "deployments",
+    "linked_events",
+    "source_identities",
+    "evidence_relations",
+    "known_unknowns"
+  ],
+  "canonical_delta": {
+    "stable_assets": 0,
+    "organizations": 0,
+    "relationships": 0,
+    "events": 0,
+    "evidence": 0,
+    "evidence_relations": 0,
+    "reserve_reports": 0,
+    "known_unknowns": 0,
+    "regulatory_notes": 0,
+    "deployments": 0,
+    "legal_profiles": 0,
+    "reserve_components": 0,
+    "income_profiles": 0,
+    "market_access": 0,
+    "archive_recorded": 0,
+    "archive_not_recorded": 0
+  },
+  "canonical_baseline": {
+    "stable_assets": 119,
+    "evidence": 585,
+    "evidence_relations": 585,
+    "market_access": 12,
+    "archive_recorded": 463,
+    "archive_not_recorded": 122,
+    "canonical_hash": "sha256:f386c1043ca5e83cafbd88e99746d0609aab0154ed48de1970677758a66ed5fa",
+    "canonical_file_count": 466
+  },
+  "forbidden": [
+    "canonical_record_changes",
+    "schema_or_taxonomy_changes",
+    "new_public_routes",
+    "ranking",
+    "scoring",
+    "recommendation",
+    "winner_loser_language",
+    "more_than_four_selected_records",
+    "unrelated_sitewide_redesign",
+    "merge_paused_evidence_archive_review"
+  ],
+  "paused_lane": {
+    "name": "Evidence Archive Payload Verification Batch 2",
+    "stage": "MANUAL_PAYLOAD_REVIEW",
+    "draft_pr": 539,
+    "canonical_promotions_authorized": 0,
+    "resume_only_after_compare_closeout": true
+  },
+  "required_visual_acceptance": [
+    "desktop_two_selected",
+    "desktop_three_selected",
+    "desktop_four_selected",
+    "mobile_two_selected",
+    "mobile_four_selected",
+    "differences_only_off_on",
+    "column_removal",
+    "fifth_selection_rejection",
+    "shared_url_restore",
+    "explicit_unknown_not_recorded"
+  ]
+}
