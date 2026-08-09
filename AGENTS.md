@@ -5,24 +5,23 @@ This file is the mandatory entry point for humans, AI agents, and automation wor
 ## Current authority
 
 ```text
-Repository state: PR #534 merged and production-verified; Market Access review-only authority active
+Repository state: Japan Market Access Expansion Review Batch 1 — complete no-go
 Current canonical checkpoint: sog_jpysc_market_access_pilot_3_canonical_119_checkpoint_pr523_2026_08_05
-Current production commit: 8ba1ed2b4aff36aaa9545c6f3e3cdd113dbb5ed2
+Review entry production checkpoint: 58cbd7e621794c33fedbc3e263d7f64e9b8a5099
+Current production commit: dynamic; verify via deploy-production workflow and Issue #479
 Last canonical-changing implementation commit: 77e80dd3e2a62fea53ea0eabe91ef78a2d8ab1da
-Production canonical hash: sha256:f386c1043ca5e83cafbd88e99746d0609aab0154ed48de1970677758a66ed5fa
-Production canonical file count: 466
-Current production parity convergence attempt: 1
-Current production provenance convergence attempt: 3
+Canonical hash: sha256:f386c1043ca5e83cafbd88e99746d0609aab0154ed48de1970677758a66ed5fa
+Canonical file count: 466
 Official public origin: https://www.stableorgone.com
 Legacy-host 301: complete via Pages Advanced Mode worker and strict migration gate
 Current implementation authority: REVIEW GATE
-Current review authority: Japan Market Access Expansion Review Batch 1
+Current review authority: none; Batch 1 completed no-go
 Later canonical implementation lanes authorized: no
 ```
 
-PR #523 completed the bounded JPYSC Japan Market Access implementation. PR #534 then closed the production checkpoint without changing canonical data and returned implementation authority to `REVIEW GATE`. The current `8ba1ed2b...` production commit therefore has the same canonical hash and counts as the historical canonical-changing PR #523 commit `77e80dd3...`.
+PR #523 remains the last canonical-changing Market Access implementation. PR #534 closed that checkpoint. PR #535 authorized a bounded review-only Japan Market Access expansion lane. That review is now complete with **zero promotable pairs and zero promotable Market Access Records**.
 
-A new separately bounded review-only authority is now active for Japan Market Access Expansion Review Batch 1. It permits source review and candidate selection only. It does not permit canonical Market Access promotion, new Evidence, or public product changes.
+A fixed commit in a work-item document is an immutable entry checkpoint, not a perpetually current production claim. Current production parity must be verified dynamically from the production workflow and Issue #479.
 
 ## Current reviewed canonical counts
 
@@ -49,8 +48,6 @@ Metadata-checked routes: 422
 
 ## Completed current-cycle work recognized by authority
 
-The current reviewed state includes and must preserve:
-
 ```text
 PR #517 — Bison Bank EUB and USB complete-record growth checkpoint
 PRs #518–#519 — sibling-registry footer insertion and production closeout
@@ -59,14 +56,13 @@ PR #523 — bounded JPYSC Japan Market Access implementation, merged and product
 PR #524 — fixed desktop/mobile support visual audit
 PR #525 — support-option consolidation and duplicate-call cleanup
 PR #526 — complete Ledger Series project network navigation
-PR #527 — official-domain migration audit hardening
-PR #528 — Cloudflare legacy-host redirect application path
-PR #529 — Pages Advanced Mode legacy-host redirect worker
-PR #530 — strict legacy-domain migration gate finalization
+PRs #527–#530 — official-domain migration hardening and completed legacy-host 301
 PR #531 — 2026 regulation guide cluster and 119-record mark-audit repair
 PR #532 — post-PR #531 authority and schedule reconciliation
 PR #533 — shared Guide readability and research-layout remediation
 PR #534 — post-PR #523 production closeout and REVIEW GATE restoration
+PR #535 — bounded Japan Market Access Expansion Review Batch 1 authority
+Japan Market Access Expansion Review Batch 1 — complete no-go
 ```
 
 Required historical authority anchors retained for compatibility and audit traceability:
@@ -78,9 +74,7 @@ PR #517 — Bison Bank EUB and USB complete-record growth checkpoint
 PR #522 — semantic authority for the completed PR #523 JPYSC implementation
 ```
 
-Historical PR-specific checkpoints remain immutable audit evidence. Forward authority documents must describe the current production and authority state rather than re-label historical artifacts.
-
-Merged repository authority outranks chat memory, handoff prose, issue discussion, stale branch state, generated reports, and unmerged drafts.
+Historical PR-specific checkpoints remain immutable audit evidence. Merged repository authority outranks chat memory, handoff prose, issue discussion, stale branch state, generated reports, and unmerged drafts.
 
 ## Mandatory reading order
 
@@ -90,62 +84,33 @@ Before every substantive continuation, read the merged current versions of:
 2. `docs/spec-governance.md`
 3. `docs/roadmap.md`
 4. `docs/deployment-policy.md`
-5. `docs/roadmap-amendments/2026-08-09-post-pr534-market-access-review-authority.md`
-6. `docs/quality/market-access-expansion-review-authority-2026-08-09-spec.md`
-7. `docs/market-access-record-spec.md`
-8. `config/market-access-governance-v1.json`
-9. every named validator, source review, fixture, baseline, queue, handoff, and prior output required by the active review item
-10. `docs/ui-v3-remediation-authority.md` before any material public UI work
+5. `docs/roadmap-amendments/2026-08-09-japan-market-access-expansion-review-b1-result.md`
+6. `docs/quality/japan-market-access-expansion-review-b1-result-spec.md`
+7. `data/editorial-research/japan-market-access-expansion-review-b1-2026-08-09.json`
+8. `docs/market-access-record-spec.md`
+9. `config/market-access-governance-v1.json`
+10. every named validator, source review, fixture, baseline, queue, handoff, and prior output required by the next separately authorized work item
+11. `docs/ui-v3-remediation-authority.md` before any material public UI work
 
-The completed PR #523 lineage remains historical input:
+## Japan Market Access Expansion Review Batch 1 result
 
-```text
-docs/roadmap-amendments/2026-08-09-post-pr523-production-closeout.md
-docs/quality/post-pr523-production-closeout-spec.md
-config/jpysc-market-access-pilot-3-implementation-authority-pr522.json
-config/japan-market-access-pilot-3-jpysc-review-pr521.json
-data/editorial-research/japan-market-access-pilot-3-jpysc-review-pr521.json
-data/market-access-records-v1.json
-```
-
-If merged repository state changes authority, production checkpoint, counts, schedule, deployment behavior, or a blocking visual conclusion, update the governing specification and roadmap before implementation continues.
-
-## Active review boundary
-
-The active lane is:
+The three reviewed candidate pairs were:
 
 ```text
-Japan Market Access Expansion Review Batch 1
-jurisdiction: JP / Japan
-maximum asset x platform/service candidate pairs: 3
-assets: existing canonical identities only
-provider/service selection: source-led, not predetermined
-functions:
-- buy_sell
-- deposit
-- withdrawal
-- external_wallet_transfer
+RLUSD × SBI VC Trade / BITPOINT — no-go
+USDC × SBI VC Trade / BITPOINT — no-go
+JPYSC × SBI VC Trade / BITPOINT — no-go
+promotable pairs: 0
+promotable Market Access Records: 0
 ```
 
-Allowed work is limited to primary-source discovery/review, private or editorial review artifacts, function-scoped source dispositions, effective/observed date review, Evidence-identity reuse review, duplicate-URL review, and a bounded implementation proposal or no-go result.
+The FSA register reviewed for the lane listed one electronic-payment-instrument service provider, SBI VC Trade, handling USDC, RLUSD, and JPYSC. This did not support a new provider or fourth handled stablecoin.
 
-The following remain prohibited in the active review lane:
+RLUSD has explicit service-level evidence that BITPOINT is excluded, but that sentence is not expanded into four function-level `unavailable` rows. USDC and JPYSC lack direct BITPOINT function-level sources. Absence from a product/price surface is not canonical unavailability evidence, and VCTRADE-specific restrictions are not cross-service evidence.
 
-```text
-canonical Market Access additions
-new Evidence identities or Evidence Relations
-new assets, organizations, events, or deployments
-public product or material UI changes
-direct issuer mint/redemption claims
-lending, staking, or yield as Market Access v1
-country-wide availability inference
-automatic promotion
-ranking, score, recommendation, or implied safety
-```
+No canonical Evidence identity or URL is added or repurposed to manufacture BITPOINT function states.
 
 ## Completed PR #523 boundary
-
-The historical production-verified bounded JPYSC result remains:
 
 ```text
 asset: sog_st_jpysc
@@ -164,14 +129,20 @@ Archive recorded: 463
 Detail routes: 422
 ```
 
-No country-wide availability inference, future-capability backfill, lending-as-access evidence, ranking, scoring, recommendation, replacement asset, or unrelated product/UI expansion was authorized by PR #523 or PR #534.
+No country-wide availability inference, future-capability backfill, lending-as-access evidence, ranking, scoring, recommendation, replacement asset, or unrelated product/UI expansion is authorized.
 
 ## Validation and next boundary
 
-The active review authority must preserve all current canonical counts and public output. Its exit is `REVIEW GATE`.
+The completed review preserves all canonical counts and public output. Its exit is:
 
-If source review identifies promotable Market Access rows, a new separately reviewed and merged implementation authority must bind exact asset/platform/service pairs, functions, states, dates, Evidence identities, maximum deltas, and validation before canonical data may change.
+```text
+REVIEW GATE
+```
 
-Evidence Archive Payload Verification Batch 2, Tier A dossier deepening, record growth, new UI, and every other later lane remain planning items only.
+There is no implementation proposal from this review and no later canonical lane is authorized by it.
+
+Market Access review may reopen only on material new source evidence such as an FSA register change, a published stablecoin intermediary relationship, BITPOINT-specific function-level evidence, or a material BITPOINT/VCTRADE integration change.
+
+Evidence Archive Payload Verification Batch 2, Tier A dossier deepening, Record Growth, new UI, and every other later lane remain planning items until separately authorized.
 
 Issue #479 remains the deployment-history authority.

@@ -1,0 +1,185 @@
+{
+  "schema_version": "1.0",
+  "research_id": "sog_japan_market_access_expansion_review_b1_2026_08_09",
+  "status": "reviewed_internal_complete_no_go",
+  "recorded_at": "2026-08-09",
+  "information_current_through": "2026-08-09",
+  "authority_pr": 535,
+  "review_pr": null,
+  "entry_repository_commit": "58cbd7e621794c33fedbc3e263d7f64e9b8a5099",
+  "canonical_boundary": {
+    "included_in_public_counts": false,
+    "canonical_changes_allowed": false,
+    "public_changes_allowed": false,
+    "automatic_promotion": false,
+    "publication_role": "private_review_support"
+  },
+  "entry_checkpoint": {
+    "canonical_hash": "sha256:f386c1043ca5e83cafbd88e99746d0609aab0154ed48de1970677758a66ed5fa",
+    "canonical_file_count": 466,
+    "stable_assets": 119,
+    "organizations": 109,
+    "relationships": 131,
+    "events": 194,
+    "evidence": 585,
+    "evidence_relations": 585,
+    "deployments": 186,
+    "market_access_records": 12,
+    "archive_recorded": 463,
+    "archive_not_recorded": 122,
+    "detail_routes": 422,
+    "metadata_checked_routes": 422
+  },
+  "official_register_review": {
+    "source_date": "2026-06-24",
+    "registered_electronic_payment_instrument_service_providers": 1,
+    "provider": "SBI VC Trade Co., Ltd.",
+    "registration_number": "Kanto Local Finance Bureau No. 00001",
+    "handled_electronic_payment_instruments": [
+      "USDC",
+      "RLUSD",
+      "JPYSC"
+    ],
+    "disposition": "The current official register does not support a new electronic-payment-instrument provider or a fourth handled stablecoin for this Japan review batch.",
+    "scope_warning": "The register establishes registered-provider and handled-instrument scope. It does not by itself establish function-level availability for every service brand operated by the provider."
+  },
+  "service_intermediary_regime_review": {
+    "regime_effective_from": "2026-06-01",
+    "official_page_reviewed": true,
+    "public_roster_found_in_review": false,
+    "disposition": "No separate official public intermediary roster or source-backed stablecoin intermediary candidate was identified in this bounded review.",
+    "scope_warning": "This result must not be restated as proof that zero intermediaries are registered. It records only that the reviewed official page did not expose a roster and the bounded search found no promotable candidate."
+  },
+  "candidate_asset_platform_service_matrix": [
+    {
+      "asset_id": "sog_st_rlusd",
+      "asset_symbol": "RLUSD",
+      "platform": "SBI VC Trade",
+      "service": "BITPOINT",
+      "jurisdiction_code": "JP",
+      "candidate_reason": "SBI VC Trade operates BITPOINT and VCTRADE as distinct services during the 2026 transition, while its RLUSD launch explicitly states that BITPOINT is excluded.",
+      "function_review": {
+        "buy_sell": {"state": "not_promotable", "reason": "The source excludes BITPOINT from the RLUSD launch/service but does not separately bind the canonical buy/sell function state."},
+        "deposit": {"state": "not_promotable", "reason": "The source excludes BITPOINT from the RLUSD service but does not separately document a BITPOINT deposit function state."},
+        "withdrawal": {"state": "not_promotable", "reason": "The source excludes BITPOINT from the RLUSD service but does not separately document a BITPOINT withdrawal function state."},
+        "external_wallet_transfer": {"state": "not_promotable", "reason": "The source excludes BITPOINT from the RLUSD service but does not separately document a BITPOINT external-wallet-transfer function state."}
+      },
+      "reviewed_disposition": "no_go",
+      "promotion_blocker": "Service-level exclusion is not expanded into four function-level canonical unavailable claims without direct function-scoped evidence."
+    },
+    {
+      "asset_id": "sog_st_usdc",
+      "asset_symbol": "USDC",
+      "platform": "SBI VC Trade",
+      "service": "BITPOINT",
+      "jurisdiction_code": "JP",
+      "candidate_reason": "USDC is registered for SBI VC Trade and supported in VCTRADE, while BITPOINT remains a separate service during the transition.",
+      "function_review": {
+        "buy_sell": {"state": "not_promotable", "reason": "The VCTRADE USDC page does not establish a BITPOINT buy/sell state, and absence from the BITPOINT price list is not sufficient evidence of canonical unavailability."},
+        "deposit": {"state": "not_promotable", "reason": "VCTRADE deposit support cannot be generalized to BITPOINT, and no direct BITPOINT USDC deposit-state source was identified."},
+        "withdrawal": {"state": "not_promotable", "reason": "VCTRADE withdrawal support cannot be generalized to BITPOINT, and no direct BITPOINT USDC withdrawal-state source was identified."},
+        "external_wallet_transfer": {"state": "not_promotable", "reason": "No direct BITPOINT USDC external-wallet-transfer state was identified."}
+      },
+      "reviewed_disposition": "no_go",
+      "promotion_blocker": "Missing direct BITPOINT function-level source; negative inference from a product/price list is prohibited."
+    },
+    {
+      "asset_id": "sog_st_jpysc",
+      "asset_symbol": "JPYSC",
+      "platform": "SBI VC Trade",
+      "service": "BITPOINT",
+      "jurisdiction_code": "JP",
+      "candidate_reason": "JPYSC is registered for SBI VC Trade and currently offered account-internally in VCTRADE, while BITPOINT remains a separate service during the transition.",
+      "function_review": {
+        "buy_sell": {"state": "not_promotable", "reason": "The reviewed JPYSC product source is explicitly a VCTRADE page and does not establish a BITPOINT buy/sell state."},
+        "deposit": {"state": "not_promotable", "reason": "The explicit current no-deposit statement is scoped to the reviewed SBI VC Trade/VCTRADE product and cannot be copied to BITPOINT without a BITPOINT-specific source."},
+        "withdrawal": {"state": "not_promotable", "reason": "The explicit current no-withdrawal statement is scoped to the reviewed SBI VC Trade/VCTRADE product and cannot be copied to BITPOINT without a BITPOINT-specific source."},
+        "external_wallet_transfer": {"state": "not_promotable", "reason": "The VCTRADE account-internal boundary does not establish a BITPOINT external-wallet-transfer state."}
+      },
+      "reviewed_disposition": "no_go",
+      "promotion_blocker": "No BITPOINT-specific function-level JPYSC evidence was identified; VCTRADE restrictions are not cross-service evidence."
+    }
+  ],
+  "evidence_identity_reuse_review": {
+    "promotion_proposed": false,
+    "new_evidence_identities_required": 0,
+    "new_evidence_relations_required": 0,
+    "existing_relevant_evidence_ids": [
+      "sog_src_usdc_sbivc_public_launch_pr356",
+      "sog_src_rlusd_japan_launch_sbi_vc_2026",
+      "sog_src_jpysc_launch_sbi_vc_2026",
+      "sog_src_jpysc_announcement_sbi_2026",
+      "sog_src_jfsa_electronic_payment_instrument_register_pr356"
+    ],
+    "disposition": "Existing Evidence remains valid for the current VCTRADE/provider and official-register claims. None is reused to manufacture BITPOINT function states."
+  },
+  "duplicate_source_url_review": {
+    "canonical_evidence_mutation_proposed": false,
+    "new_source_urls_proposed": 0,
+    "disposition": "No canonical Evidence addition is proposed, so no duplicate URL mutation is required. Reviewed URLs remain private review support in this result."
+  },
+  "reviewed_sources": [
+    {
+      "url": "https://www.fsa.go.jp/menkyo/menkyoj/denshikessaisyudan.pdf",
+      "publisher": "Financial Services Agency of Japan",
+      "reviewed_at": "2026-08-09",
+      "role": "current registered electronic-payment-instrument provider and handled-instrument scope"
+    },
+    {
+      "url": "https://www.fsa.go.jp/common/shinsei/denanchuukai/index.html",
+      "publisher": "Financial Services Agency of Japan",
+      "reviewed_at": "2026-08-09",
+      "role": "electronic-payment-instrument and crypto-asset service intermediary regime scope"
+    },
+    {
+      "url": "https://www.sbivc.co.jp/newsview/bsqs09vn_yzv",
+      "publisher": "SBI VC Trade",
+      "reviewed_at": "2026-08-09",
+      "role": "RLUSD VCTRADE launch and explicit BITPOINT exclusion"
+    },
+    {
+      "url": "https://www.sbivc.co.jp/usdc?tab=how-to-buy",
+      "publisher": "SBI VC Trade",
+      "reviewed_at": "2026-08-09",
+      "role": "current USDC VCTRADE product scope"
+    },
+    {
+      "url": "https://www.sbivc.co.jp/jpysc",
+      "publisher": "SBI VC Trade",
+      "reviewed_at": "2026-08-09",
+      "role": "current JPYSC VCTRADE product and transfer boundary"
+    },
+    {
+      "url": "https://www.bitpoint.co.jp/chart/price-list/",
+      "publisher": "BITPOINT / SBI VC Trade",
+      "reviewed_at": "2026-08-09",
+      "role": "current BITPOINT trading-price surface; absence is reviewed only as a lead and is not treated as canonical unavailability evidence"
+    },
+    {
+      "url": "https://www.bitpoint.co.jp/news/info/info-2026062901/",
+      "publisher": "BITPOINT / SBI VC Trade",
+      "reviewed_at": "2026-08-09",
+      "role": "BITPOINT/VCTRADE service separation and planned 2026 year-end migration"
+    }
+  ],
+  "review_result": {
+    "decision": "no_go",
+    "promotable_asset_platform_service_pairs": 0,
+    "promotable_market_access_records": 0,
+    "canonical_market_access_records_before": 12,
+    "canonical_market_access_records_after": 12,
+    "canonical_evidence_before": 585,
+    "canonical_evidence_after": 585,
+    "canonical_evidence_relations_before": 585,
+    "canonical_evidence_relations_after": 585,
+    "reason": "The current official register exposes no new provider or handled stablecoin, and the only bounded same-provider/different-service candidates lack direct function-level evidence sufficient for canonical Market Access states."
+  },
+  "future_reopen_triggers": [
+    "Financial Services Agency register adds another electronic-payment-instrument service provider or handled stablecoin",
+    "a registered service intermediary is publicly identified with a stablecoin-specific service relationship",
+    "SBI VC Trade publishes BITPOINT-specific function-level USDC, RLUSD, or JPYSC support or exclusion",
+    "the planned BITPOINT-to-VCTRADE integration materially changes service-scoped availability"
+  ],
+  "next_boundary": "REVIEW_GATE",
+  "next_recommended_authority": null
+}
