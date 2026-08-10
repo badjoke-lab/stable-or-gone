@@ -36,6 +36,7 @@ console.log(JSON.stringify({
   route: '/stablecoins/',
   panel_before_register: true,
   dock_scope: 'inside_public_register_before_search_toolbar',
+  dock_position: 'fixed_bottom_while_selection_exists',
   persistent_dock: true,
   in_panel_replace: true,
   selection_bounds: [2, 4],
