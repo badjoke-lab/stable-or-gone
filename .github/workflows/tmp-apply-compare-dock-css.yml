@@ -1,0 +1,43 @@
+name: Temporary apply Compare dock CSS
+
+on:
+  push:
+    branches:
+      - agent/stablecoin-compare-discovery-navigation-remediation
+    paths:
+      - '.github/workflows/tmp-apply-compare-dock-css.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/stablecoin-compare-discovery-navigation-remediation
+          fetch-depth: 0
+      - name: Append bounded Compare dock rules
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const file = 'src/styles/public-ui.css';
+          const marker = '/* Stablecoin comparison discovery navigation remediation */';
+          let css = fs.readFileSync(file, 'utf8');
+          if (!css.includes(marker)) {
+            css += `\n${marker}\n.comparison-dock{position:fixed;top:auto;right:max(14px,calc((100vw - var(--ui-shell))/2 + 14px));bottom:14px;left:max(14px,calc((100vw - var(--ui-shell))/2 + 14px));z-index:35;display:flex;align-items:center;justify-content:space-between;gap:14px;min-height:64px;padding:8px 12px;border:1px solid var(--ui-line-strong);background:var(--ui-surface)}\n.comparison-dock[hidden]{display:none}.comparison-dock-summary,.comparison-dock-actions{display:flex;align-items:center;gap:10px}.comparison-dock-summary{min-width:0}.comparison-dock-summary span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.stablecoin-index-page[data-has-comparison="true"]{padding-bottom:88px}\n@media(max-width:700px){.comparison-dock{right:10px;bottom:10px;left:10px;min-height:72px;padding:8px 10px}.comparison-dock-summary{display:grid;gap:2px}.comparison-dock-summary span{max-width:130px}.comparison-dock-actions{margin-left:auto}.stablecoin-index-page[data-has-comparison="true"]{padding-bottom:96px}}\n`;
+            fs.writeFileSync(file, css);
+          }
+          NODE
+      - name: Commit CSS change
+        run: |
+          if git diff --quiet -- src/styles/public-ui.css; then
+            exit 0
+          fi
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add src/styles/public-ui.css
+          git commit -m "Add persistent Compare dock layout"
+          git push origin HEAD:agent/stablecoin-compare-discovery-navigation-remediation
