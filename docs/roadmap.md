@@ -1,7 +1,7 @@
 # Stable or Gone Roadmap
 
 Updated: 2026-08-10  
-Status: Evidence Archive Payload Verification Batch 2 review complete; current boundary REVIEW_GATE
+Status: Stablecoin Compare Discovery and Navigation Remediation authorized; Evidence Archive Batch 2 review preserved at REVIEW_GATE
 
 ## Current reviewed checkpoint
 
@@ -41,11 +41,32 @@ PR #538 — deterministic Batch 2 candidate selection
 PR #539 — manual Wayback payload research lineage
 PR #540/#541 — Stablecoin Compare Matrix remediation — production verified
 PR #542 — Compare closeout / Evidence review restoration — production verified
+PR #543 — clean Evidence Archive Batch 2 review result — production verified
 ```
 
-## Evidence Archive Payload Verification Batch 2 — review complete
+## Current lane — Stablecoin Compare Discovery and Navigation Remediation
 
-The exact ten PR #538 candidates have completed manual payload review.
+Direct production review found a material interaction defect not covered by the first Compare matrix repair: the matrix is positioned after the full twenty-row register and pagination, so users can select records without seeing a persistent comparison affordance and must repeatedly scroll between candidate selection and comparison.
+
+The current bounded UI authority requires:
+
+```text
+comparison panel before public-register results
+persistent Compare dock after first selection
+selected record identities visible in dock
+explicit View comparison action
+in-panel Add / replace record control
+remove then replace without register scroll
+2 / 3 / 4 record matrix preserved
+Differences only preserved
+shared compare URL restore preserved
+Unknown / Not recorded preserved
+canonical changes: 0
+```
+
+This lane is limited to `/stablecoins/` Compare interaction and dedicated validation/visual acceptance. No ranking, scoring, recommendation, new routes, schema/taxonomy changes, canonical data changes, or Evidence archive promotion is authorized.
+
+## Evidence Archive Payload Verification Batch 2 — preserved review result
 
 ```text
 reviewed: 10
@@ -53,7 +74,7 @@ dated exact archive proposals: 8
 reviewed no safe change: 2
 canonical changes: 0
 public-output changes: 0
-next boundary: REVIEW_GATE
+preserved boundary: REVIEW_GATE
 ```
 
 Proposals:
@@ -76,41 +97,34 @@ sog_src_susd_sip420_2024 — exact canonical replay remains redirect-only
 sog_src_susd_sip423_2026 — no reviewed HTTP-200 dated capture
 ```
 
-The durable review artifact records exact archive proposals, payload bytes, SHA-256 values, text markers, and probe artifact lineage.
+The eight archive proposals still require a separate reviewed and merged implementation authority.
 
-## Current boundary
+## Compare acceptance sequence
 
 ```text
-Current review stage: complete
-Canonical implementation authority: REVIEW_GATE
-Canonical archive additions authorized: 0
-Automatic continuation: prohibited
+1. merge Compare discovery/navigation authority
+2. implement only /stablecoins/ interaction changes
+3. validate zero / one / two / four selected states
+4. verify persistent dock and dock-to-matrix navigation
+5. verify remove-and-replace without register scroll
+6. verify fifth-selection rejection and URL restore
+7. verify desktop/mobile no page overflow and bounded matrix overflow
+8. direct screenshot review of changed states
+9. merge implementation
+10. verify production via deploy-production and Issue #479
+11. close temporary UI authority
+12. return to Evidence Archive REVIEW_GATE
 ```
-
-No proposed archive URL may be written into canonical Evidence under the review result alone.
-
-A later implementation authority must separately bind:
-
-- the exact eight Evidence IDs;
-- the exact eight dated archive URLs;
-- maximum archive-recorded delta `+8`;
-- maximum archive-not-recorded delta `-8`;
-- Evidence count unchanged at 585;
-- Evidence Relations unchanged at 585;
-- validators and production verification.
-
-## Compare remediation — complete
-
-PR #541 remains production-complete at merge `539a27fd5854a1c2544f4653a2161be36860a002`; production run `31326135906` and visual run `31325811381` succeeded. Compare is not the current workstream.
 
 ## Schedule
 
 ```text
 2026-08-09  Evidence Archive Batch 2 authority/candidate selection — complete
 2026-08-09  network/payload research — complete
-2026-08-10  Compare interruption / remediation — complete
-2026-08-10  clean Evidence Archive Batch 2 review result — current
-2026-08-17 to 2026-08-23  possible canonical implementation window — separate authority required
+2026-08-10  first Compare matrix remediation — complete
+2026-08-10  Evidence Archive Batch 2 clean review result — complete
+2026-08-10  Compare discovery/navigation remediation — current
+2026-08-17 to 2026-08-23  possible canonical archive implementation window — separate authority required
 2026-08-24 onward  later dossier/data-growth lanes — separate authority required
 ```
 
@@ -122,17 +136,15 @@ Schedule windows are planning targets, not permission boundaries.
 canonical archived_url mutation without implementation authority
 new Evidence / Evidence Relation from review result
 source URL normalization or replacement
-candidate-set mutation
 automatic archive promotion
 Market Access changes
 schema/taxonomy changes
 new public routes
 unreviewed public output
-silent continuation from REVIEW_GATE
+ranking / scoring / recommendation
+unrelated sitewide redesign
 ```
 
 ## Required work-start protocol
 
-Before further work, read `AGENTS.md`, `docs/spec-governance.md`, this file, `docs/deployment-policy.md`, the Batch 2 review-result amendment/spec/artifact, PR #537/#538 authority/candidate material, and Batch 1 / Queue v7 history when relevant.
-
-Any canonical archive implementation requires a separate reviewed and merged authority.
+Before further work, read `AGENTS.md`, `docs/spec-governance.md`, this file, `docs/deployment-policy.md`, the current Compare discovery/navigation amendment/spec/config, and `docs/ui-v3-remediation-authority.md`. Preserve the completed Evidence Archive Batch 2 review result unchanged while the UI interruption is active.
