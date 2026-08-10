@@ -140,17 +140,6 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'CollectionPage', na
       <p class="comparison-disclaimer">Comparison is historical registry context, not a ranking, recommendation, or investment assessment.</p>
     </section>
 
-    <aside class="comparison-dock" data-comparison-dock hidden aria-label="Comparison selection">
-      <div class="comparison-dock-summary">
-        <strong data-comparison-dock-count>0 selected</strong>
-        <span data-comparison-dock-records>Choose records from the register.</span>
-      </div>
-      <div class="comparison-dock-actions">
-        <button class="ui-button" type="button" data-view-comparison disabled>View comparison</button>
-        <button class="ui-button comparison-dock-clear" type="button" data-clear-comparison>Clear</button>
-      </div>
-    </aside>
-
     <section class="stablecoin-index-registry" aria-labelledby="stablecoin-index-heading">
       <div class="stablecoin-index-section-heading">
         <div>
@@ -159,6 +148,17 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'CollectionPage', na
         </div>
         <span class="stablecoin-index-page-size">{PAGE_SIZE} per page</span>
       </div>
+
+      <aside class="comparison-dock" data-comparison-dock hidden aria-label="Comparison selection">
+        <div class="comparison-dock-summary">
+          <strong data-comparison-dock-count>0 selected</strong>
+          <span data-comparison-dock-records>Choose records from the register.</span>
+        </div>
+        <div class="comparison-dock-actions">
+          <button class="ui-button" type="button" data-view-comparison disabled>View comparison</button>
+          <button class="ui-button comparison-dock-clear" type="button" data-clear-comparison>Clear</button>
+        </div>
+      </aside>
 
       <div class="stablecoin-index-toolbar">
         <label class="stablecoin-index-search"><span>Search</span><input class="ui-field" data-index-search type="search" name="q" placeholder="Name, symbol, alias, domain, organization" autocomplete="off" /></label>
