@@ -42,6 +42,8 @@ async function desktop(browser) {
 
   await page.goto(`${baseUrl}/stablecoins/?compare=usdt`, { waitUntil: 'networkidle' });
   await waitForSelection(page, 1);
+  await page.locator('.stablecoin-index-registry').scrollIntoViewIfNeeded();
+  await page.waitForTimeout(150);
   const one = await page.evaluate(() => {
     const dock = document.querySelector('[data-comparison-dock]');
     const view = document.querySelector('[data-view-comparison]');
@@ -54,7 +56,6 @@ async function desktop(browser) {
     };
   });
   record('one_selection_dock_discoverable', one.dockHidden === false && one.position === 'fixed' && one.viewDisabled === true && /1 record selected/.test(one.count || ''), one);
-  await page.locator('.stablecoin-index-registry').scrollIntoViewIfNeeded();
   await page.mouse.wheel(0, 900);
   await page.waitForTimeout(100);
   await screenshotViewport(page, 'desktop-one-selected-dock');
@@ -71,8 +72,8 @@ async function desktop(browser) {
   await screenshotViewport(page, 'desktop-two-selected-register-dock');
   await page.locator('[data-view-comparison]').click();
   await page.waitForTimeout(450);
-  const viewTarget = await page.locator('[data-comparison-panel]').evaluate((panel) => ({ top: panel.getBoundingClientRect().top, active: document.activeElement === panel }));
-  record('view_comparison_returns_to_matrix', viewTarget.top >= 0 && viewTarget.top < 190 && viewTarget.active, viewTarget);
+  const viewTarget = await page.locator('[data-comparison-panel]').evaluate((panel) => ({ top: panel.getBoundingClientRect().top, active: document.activeElement === panel, dockHidden: document.querySelector('[data-comparison-dock]')?.hasAttribute('hidden') }));
+  record('view_comparison_returns_to_matrix', viewTarget.top >= 0 && viewTarget.top < 190 && viewTarget.active && viewTarget.dockHidden === true, viewTarget);
   await screenshotViewport(page, 'desktop-two-selected-comparison');
 
   await page.goto(`${baseUrl}/stablecoins/?compare=usdt,usdc,dai,ust`, { waitUntil: 'networkidle' });
@@ -111,6 +112,7 @@ async function mobile(browser) {
   await page.goto(`${baseUrl}/stablecoins/?compare=usdt`, { waitUntil: 'networkidle' });
   await waitForSelection(page, 1);
   await page.locator('.stablecoin-index-registry').scrollIntoViewIfNeeded();
+  await page.waitForTimeout(150);
   await page.mouse.wheel(0, 700);
   await page.waitForTimeout(100);
   const one = await page.locator('[data-comparison-dock]').evaluate((dock) => {
@@ -124,6 +126,9 @@ async function mobile(browser) {
   await page.goto(`${baseUrl}/stablecoins/?compare=usdt,usdc,dai,ust`, { waitUntil: 'networkidle' });
   await waitForSelection(page, 4);
   await page.locator('[data-comparison-panel]').scrollIntoViewIfNeeded();
+  await page.waitForTimeout(150);
+  const dockHiddenOnMatrix = await page.locator('[data-comparison-dock]').evaluate((dock) => dock.hasAttribute('hidden'));
+  record('mobile_dock_hidden_while_comparing', dockHiddenOnMatrix, { dockHidden: dockHiddenOnMatrix });
   const matrix = await page.locator('[data-comparison-grid]').evaluate((shell) => ({ clientWidth: shell.clientWidth, scrollWidth: shell.scrollWidth }));
   record('mobile_four_matrix_bounded_scroll', matrix.scrollWidth > matrix.clientWidth && !(await overflow(page)), matrix);
   const picker = await page.locator('[data-comparison-picker]').evaluate((node) => ({ visible: Boolean(node.getClientRects().length), width: node.getBoundingClientRect().width, viewportWidth: window.innerWidth }));

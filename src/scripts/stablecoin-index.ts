@@ -28,6 +28,7 @@ if (foundRoot instanceof HTMLElement) {
   const compareAddButton = root.querySelector<HTMLButtonElement>('[data-comparison-add-button]');
   const compareAddHelp = root.querySelector<HTMLElement>('[data-comparison-add-help]');
   const compareDock = root.querySelector<HTMLElement>('[data-comparison-dock]');
+  const compareRegistry = root.querySelector<HTMLElement>('.stablecoin-index-registry');
   const compareDockCount = root.querySelector<HTMLElement>('[data-comparison-dock-count]');
   const compareDockRecords = root.querySelector<HTMLElement>('[data-comparison-dock-records]');
   const viewComparison = root.querySelector<HTMLButtonElement>('[data-view-comparison]');
@@ -81,6 +82,8 @@ if (foundRoot instanceof HTMLElement) {
   ] as const;
   let currentPage = 1;
   let selectedComparisons = new Set<string>();
+  let comparisonPanelInView = false;
+  let comparisonRegistryInView = typeof IntersectionObserver === 'undefined';
 
   const normalize = (value: unknown) => String(value ?? '').normalize('NFKC').toLocaleLowerCase().trim().replace(/\s+/g, ' ');
   const inputValue = () => search?.value ?? '';
@@ -227,10 +230,15 @@ if (foundRoot instanceof HTMLElement) {
     for (const input of compareInputs) input.checked = selectedComparisons.has(input.value);
   }
 
+  function syncComparisonDockVisibility() {
+    if (!compareDock) return;
+    compareDock.hidden = selectedComparisons.size === 0 || comparisonPanelInView || !comparisonRegistryInView;
+  }
+
   function renderComparisonNavigation(selectedSources: HTMLElement[]) {
     const count = selectedSources.length;
     root.dataset.hasComparison = String(count > 0);
-    if (compareDock) compareDock.hidden = count === 0;
+    syncComparisonDockVisibility();
     if (compareDockCount) compareDockCount.textContent = count === 1 ? '1 record selected' : `${count} records selected`;
     if (compareDockRecords) compareDockRecords.textContent = count
       ? selectedSources.map((source) => source.dataset.recordSymbol || source.dataset.recordName || source.dataset.recordSlug || 'Stablecoin').join(' · ')
@@ -482,6 +490,16 @@ if (foundRoot instanceof HTMLElement) {
     });
   });
   window.addEventListener('popstate', () => { applyState(stateFromUrl()); refresh(); });
+  if ('IntersectionObserver' in window) {
+    if (comparePanel) new IntersectionObserver(([entry]) => {
+      comparisonPanelInView = entry?.isIntersecting ?? false;
+      syncComparisonDockVisibility();
+    }, { threshold: 0.01 }).observe(comparePanel);
+    if (compareRegistry) new IntersectionObserver(([entry]) => {
+      comparisonRegistryInView = entry?.isIntersecting ?? false;
+      syncComparisonDockVisibility();
+    }, { threshold: 0.01 }).observe(compareRegistry);
+  }
 
   applyState(stateFromUrl());
   refresh('replace');
