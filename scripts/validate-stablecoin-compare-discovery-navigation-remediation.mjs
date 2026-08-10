@@ -9,10 +9,11 @@ const script = read('src/scripts/stablecoin-index.ts');
 const css = read('src/styles/public-ui.css');
 
 const panel = page.indexOf('data-comparison-panel');
-const dock = page.indexOf('data-comparison-dock');
 const registry = page.indexOf('class="stablecoin-index-registry"');
+const dock = page.indexOf('data-comparison-dock');
+const registerSearch = page.indexOf('data-index-search');
 check(panel >= 0 && registry >= 0 && panel < registry, 'comparison panel must precede public register results');
-check(dock >= 0 && registry >= 0 && dock < registry, 'comparison dock must precede public register results');
+check(registry >= 0 && dock > registry && registerSearch > dock, 'comparison dock must live at the start of the public register scroll scope');
 for (const marker of ['data-comparison-add', 'data-comparison-add-button', 'Add / replace record', 'data-view-comparison', 'data-comparison-dock-count', 'data-comparison-dock-records']) check(page.includes(marker), `page missing ${marker}`);
 for (const marker of ['renderComparisonNavigation', "classList.add('stats-v4-jump', 'masthead-row')", "classList.remove('stats-v4-jump', 'masthead-row')", 'selectedComparisons.size < 2', 'comparePanel.scrollIntoView', 'compareAddButton?.addEventListener', 'selectedComparisons.size >= 4', 'writeUrl']) check(script.includes(marker), `script missing ${marker}`);
 check(script.includes("viewComparison.textContent = count < 2 ? 'Select one more' : 'View comparison'"), 'one-selection dock state');
@@ -31,7 +32,7 @@ console.log(JSON.stringify({
   ok: true,
   route: '/stablecoins/',
   panel_before_register: true,
-  dock_before_register: true,
+  dock_scope: 'inside_public_register_before_search_toolbar',
   persistent_dock: true,
   in_panel_replace: true,
   selection_bounds: [2, 4],
