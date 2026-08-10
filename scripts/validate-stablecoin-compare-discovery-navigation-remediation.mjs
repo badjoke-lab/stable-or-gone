@@ -7,6 +7,7 @@ const check = (value, message) => { if (!value) failures.push(message); };
 const page = read('src/pages/stablecoins/index.astro');
 const script = read('src/scripts/stablecoin-index.ts');
 const css = read('src/styles/public-ui.css');
+const cssLineCount = css.trimEnd().split('\n').length;
 
 const panel = page.indexOf('data-comparison-panel');
 const registry = page.indexOf('class="stablecoin-index-registry"');
@@ -23,6 +24,7 @@ check(css.includes('/* Stablecoin comparison matrix remediation */'), 'existing 
 check(css.includes('/* Stablecoin comparison discovery navigation remediation */'), 'Compare discovery stylesheet marker missing');
 check(css.includes('.comparison-dock{position:fixed'), 'Compare dock must be fixed while selection exists');
 check(css.includes('.comparison-dock[hidden]{display:none}'), 'Compare dock hidden-state CSS missing');
+check(cssLineCount < 553, `public-ui.css must stay below 553 lines; found ${cssLineCount}`);
 check(!page.includes('style='), 'inline style introduced on stablecoin index');
 check(!page.includes('compare-navigation.css'), 'second comparison stylesheet introduced');
 
@@ -41,5 +43,6 @@ console.log(JSON.stringify({
   in_panel_replace: true,
   selection_bounds: [2, 4],
   canonical_delta: 0,
+  stylesheet_line_count: cssLineCount,
   stylesheet_mode: 'existing_single_public_ui_stylesheet_with_bounded_fixed_dock'
 }, null, 2));
