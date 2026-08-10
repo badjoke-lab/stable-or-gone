@@ -469,10 +469,17 @@ if (foundRoot instanceof HTMLElement) {
   });
   viewComparison?.addEventListener('click', () => {
     if (selectedComparisons.size < 2 || !comparePanel || comparePanel.hidden) return;
-    const targetTop = comparePanel.getBoundingClientRect().top + window.scrollY;
-    document.documentElement.scrollTop = targetTop;
-    document.body.scrollTop = targetTop;
+    const scrollingElement = document.scrollingElement;
+    const previousScrollBehavior = scrollingElement instanceof HTMLElement ? scrollingElement.style.getPropertyValue('scroll-behavior') : '';
+    const previousScrollPriority = scrollingElement instanceof HTMLElement ? scrollingElement.style.getPropertyPriority('scroll-behavior') : '';
+    if (scrollingElement instanceof HTMLElement) scrollingElement.style.setProperty('scroll-behavior', 'auto', 'important');
+    comparePanel.scrollIntoView({ block: 'start', behavior: 'auto' });
     comparePanel.focus({ preventScroll: true });
+    window.requestAnimationFrame(() => {
+      if (!(scrollingElement instanceof HTMLElement)) return;
+      if (previousScrollBehavior) scrollingElement.style.setProperty('scroll-behavior', previousScrollBehavior, previousScrollPriority);
+      else scrollingElement.style.removeProperty('scroll-behavior');
+    });
   });
   window.addEventListener('popstate', () => { applyState(stateFromUrl()); refresh(); });
 
