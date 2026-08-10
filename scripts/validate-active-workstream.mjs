@@ -1,1 +1,1 @@
-import './validate-stablecoin-compare-discovery-navigation-authority.mjs';
+import './validate-stablecoin-compare-discovery-navigation-remediation.mjs';
