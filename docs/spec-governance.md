@@ -18,20 +18,20 @@ Authority order:
 7. named audits, baselines, queues, and reviewed prior outputs
 8. conversation history and unmerged drafts
 
-Current result authority:
+Current UI authority:
+
+```text
+docs/roadmap-amendments/2026-08-10-stablecoin-compare-discovery-navigation-remediation.md
+docs/quality/stablecoin-compare-discovery-navigation-remediation-spec.md
+config/stablecoin-compare-discovery-navigation-authority.json
+```
+
+Preserved Evidence Archive result authority:
 
 ```text
 docs/roadmap-amendments/2026-08-10-evidence-archive-payload-verification-batch-2-review-result.md
 docs/quality/evidence-archive-payload-verification-batch-2-review-result-spec.md
 data/editorial-research/evidence-archive-payload-verification-batch-2-review-2026-08-09.json
-```
-
-Historical inputs remain:
-
-```text
-PR #537 — review-only authority
-PR #538 — deterministic candidate set
-PR #539 — manual network/payload research lineage
 ```
 
 ## 2. Current canonical state
@@ -61,18 +61,40 @@ Canonical hash: sha256:f386c1043ca5e83cafbd88e99746d0609aab0154ed48de1970677758a
 Canonical file count: 466
 ```
 
-There is no active canonical-record implementation authority. The repository is at `REVIEW_GATE`.
+There is no active canonical-record implementation authority. Canonical work remains at `REVIEW_GATE`.
 
-## 3. Evidence Archive Payload Verification Batch 2 — review complete
+## 3. Current material UI authority
 
-The exact ten PR #538 candidates have completed manual payload review under the PR #537 contract.
+The Stablecoin Compare Discovery and Navigation Remediation is an authorized bounded interruption limited to `/stablecoins/` Compare interaction. It exists because direct production review found a known visual/interaction defect after the first Compare matrix repair: the matrix is placed after the full register and pagination, has no persistent discovery affordance after selection, and forces a register-to-comparison scroll round trip when candidates change.
+
+Required outcome:
+
+```text
+comparison panel before public-register results
+persistent Compare dock after first selection
+selected count and selected identities in dock
+explicit View comparison action
+in-panel Add / replace record control
+remove then replace without register scroll
+2 / 3 / 4 matrix preserved
+Differences only preserved
+shared URL restore preserved
+Unknown / Not recorded preserved
+canonical delta 0
+```
+
+The archived `docs/ui-v3-remediation-authority.md` regression contract remains binding. Automated success cannot override a known visual defect.
+
+## 4. Evidence Archive Payload Verification Batch 2 — preserved review complete
+
+The exact ten PR #538 candidates completed manual payload review under the PR #537 contract and were cleanly recorded by PR #543.
 
 ```text
 reviewed: 10
 dated exact archive proposals: 8
 reviewed no safe change: 2
 canonical changes authorized: 0
-next boundary: REVIEW_GATE
+preserved boundary: REVIEW_GATE
 ```
 
 Accepted proposal IDs:
@@ -95,44 +117,41 @@ sog_src_susd_sip420_2024
 sog_src_susd_sip423_2026
 ```
 
-Review acceptance required exact canonical source URLs, dated Wayback captures, independent HTTP-200 archived-payload retrieval, payload inspection, and claim-scope/source-role preservation. CDX metadata alone, redirects, normalized replacement URLs, unrelated bodies, and unsupported snapshots are insufficient.
+No archive URL may change under the UI authority. Any archive promotion requires a separate reviewed and merged implementation authority binding the exact eight IDs and URLs, maximum archive deltas `+8/-8`, unchanged Evidence/Evidence Relation counts, validators, and production verification.
 
-The review result cannot mutate canonical `archived_url`, source URLs, Evidence identities, Evidence Relations, Market Access, routes, schema, taxonomy, or public canonical output.
+## 5. Previous Compare remediation
 
-Any archive promotion requires a separate reviewed and merged implementation authority binding the exact eight IDs, exact eight archive URLs, maximum archive deltas `+8/-8`, unchanged Evidence/Evidence Relation counts, validators, and production verification.
+PR #540/#541 completed the aligned matrix repair. Merge `539a27fd5854a1c2544f4653a2161be36860a002`; production run `31326135906` and exact-head visual run `31325811381` succeeded. The current authority does not replace those matrix semantics; it repairs discovery, placement, and candidate switching around them.
 
-## 4. Compare remediation — complete
-
-PR #540/#541 completed the bounded Stablecoin Compare Matrix repair. Merge `539a27fd5854a1c2544f4653a2161be36860a002`; production run `31326135906` succeeded; exact-head visual run `31325811381` succeeded. Further Compare work requires separate authority.
-
-## 5. Current sequence
+## 6. Current sequence
 
 ```text
 PR #523 — last canonical-changing implementation — complete
 PR #534 — REVIEW_GATE restoration — complete
 PR #535/#536 — Japan Market Access review — complete no-go
-PR #537 — Evidence Archive Batch 2 review authority — complete
-PR #538 — deterministic candidates — complete
-PR #539 — manual payload research lineage — complete research, not safe to merge as stale branch
-PR #540/#541 — Compare remediation — complete
-PR #542 — Compare closeout / Evidence review restoration — complete
-current — clean Evidence Archive Batch 2 review-result recording
-next — REVIEW_GATE
-later archive implementation — separate authority only
+PR #537/#538/#539 — Evidence Archive Batch 2 review lineage — complete research
+PR #540/#541 — first Compare matrix remediation — complete
+PR #542 — first Compare closeout — complete
+PR #543 — clean Evidence Archive Batch 2 review-result landing — complete
+current — Stablecoin Compare Discovery and Navigation Remediation authority
+next — bounded /stablecoins/ UI implementation
+then — production verification and UI closeout
+exit — preserved Evidence Archive REVIEW_GATE
 ```
 
-## 6. Canonical/public safety
+## 7. Canonical/public safety
 
 ```text
 canonical_only = true
 includes_unreviewed_candidates = false
 includes_internal_monitoring = false
 canonical implementation authority = REVIEW_GATE
+UI authority canonical delta = 0
 ```
 
 No review artifact is public canonical output.
 
-## 7. Historical anchors
+## 8. Historical anchors
 
 Preserve at minimum:
 
@@ -147,12 +166,13 @@ PR #538
 PR #540
 PR #541
 PR #542
+PR #543
 ```
 
-## 8. Mandatory reading
+## 9. Mandatory reading
 
-Before further work, read `AGENTS.md`, this file, `docs/roadmap.md`, `docs/deployment-policy.md`, the Batch 2 review-result amendment/spec/artifact, PR #537/#538 authority/candidate material, and `docs/ui-v3-remediation-authority.md` for any material public UI work.
+Before further work, read `AGENTS.md`, this file, `docs/roadmap.md`, `docs/deployment-policy.md`, the current Compare discovery/navigation amendment/spec/config, and `docs/ui-v3-remediation-authority.md`. When preserving the data lane, also read the completed Batch 2 review-result amendment/spec/artifact and PR #537/#538 history.
 
-## 9. Exit
+## 10. Exit
 
-The completed review exits to `REVIEW_GATE`. No automatic continuation is authorized. Any canonical archive mutation must be separately reviewed and merged before implementation begins.
+After exact-head visual acceptance and production verification of the bounded Compare discovery/navigation implementation, this temporary UI authority closes and control returns to the preserved Evidence Archive `REVIEW_GATE`. No automatic canonical continuation is authorized.
