@@ -469,8 +469,8 @@ if (foundRoot instanceof HTMLElement) {
   });
   viewComparison?.addEventListener('click', () => {
     if (selectedComparisons.size < 2 || !comparePanel || comparePanel.hidden) return;
-    comparePanel.scrollIntoView({ block: 'start', behavior: 'smooth' });
-    window.setTimeout(() => comparePanel.focus({ preventScroll: true }), 250);
+    comparePanel.scrollIntoView({ block: 'start', behavior: 'auto' });
+    comparePanel.focus({ preventScroll: true });
   });
   window.addEventListener('popstate', () => { applyState(stateFromUrl()); refresh(); });
 
