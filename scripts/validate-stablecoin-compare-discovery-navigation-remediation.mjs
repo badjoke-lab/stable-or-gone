@@ -15,11 +15,14 @@ const registerSearch = page.indexOf('data-index-search');
 check(panel >= 0 && registry >= 0 && panel < registry, 'comparison panel must precede public register results');
 check(registry >= 0 && dock > registry && registerSearch > dock, 'comparison dock must live at the start of the public register scroll scope');
 for (const marker of ['data-comparison-add', 'data-comparison-add-button', 'Add / replace record', 'data-view-comparison', 'data-comparison-dock-count', 'data-comparison-dock-records']) check(page.includes(marker), `page missing ${marker}`);
-for (const marker of ['renderComparisonNavigation', "classList.add('stats-v4-jump', 'masthead-row')", "classList.remove('stats-v4-jump', 'masthead-row')", 'selectedComparisons.size < 2', 'comparePanel.scrollIntoView', 'compareAddButton?.addEventListener', 'selectedComparisons.size >= 4', 'writeUrl']) check(script.includes(marker), `script missing ${marker}`);
+for (const marker of ['renderComparisonNavigation', 'selectedComparisons.size < 2', 'comparePanel.scrollIntoView', 'compareAddButton?.addEventListener', 'selectedComparisons.size >= 4', 'writeUrl']) check(script.includes(marker), `script missing ${marker}`);
 check(script.includes("viewComparison.textContent = count < 2 ? 'Select one more' : 'View comparison'"), 'one-selection dock state');
 check(script.includes('compareAdd.disabled = count >= 4'), 'four-selection add lock');
 check(script.includes("'Remove a column before adding a replacement.'") || script.includes('Remove a column before adding a replacement'), 'replacement boundary copy');
 check(css.includes('/* Stablecoin comparison matrix remediation */'), 'existing comparison stylesheet contract missing');
+check(css.includes('/* Stablecoin comparison discovery navigation remediation */'), 'Compare discovery stylesheet marker missing');
+check(css.includes('.comparison-dock{position:fixed'), 'Compare dock must be fixed while selection exists');
+check(css.includes('.comparison-dock[hidden]{display:none}'), 'Compare dock hidden-state CSS missing');
 check(!page.includes('style='), 'inline style introduced on stablecoin index');
 check(!page.includes('compare-navigation.css'), 'second comparison stylesheet introduced');
 
@@ -37,5 +40,5 @@ console.log(JSON.stringify({
   in_panel_replace: true,
   selection_bounds: [2, 4],
   canonical_delta: 0,
-  stylesheet_mode: 'existing_single_public_ui_stylesheet'
+  stylesheet_mode: 'existing_single_public_ui_stylesheet_with_bounded_fixed_dock'
 }, null, 2));

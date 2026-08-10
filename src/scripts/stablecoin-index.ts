@@ -30,7 +30,6 @@ if (foundRoot instanceof HTMLElement) {
   const compareDock = root.querySelector<HTMLElement>('[data-comparison-dock]');
   const compareDockCount = root.querySelector<HTMLElement>('[data-comparison-dock-count]');
   const compareDockRecords = root.querySelector<HTMLElement>('[data-comparison-dock-records]');
-  const compareDockActions = root.querySelector<HTMLElement>('.comparison-dock-actions');
   const viewComparison = root.querySelector<HTMLButtonElement>('[data-view-comparison]');
   const clearComparison = Array.from(root.querySelectorAll<HTMLButtonElement>('[data-clear-comparison]'));
   const compareSources = new Map(Array.from(root.querySelectorAll<HTMLElement>('[data-comparison-source]')).map((source) => [source.dataset.recordSlug ?? '', source]));
@@ -231,16 +230,7 @@ if (foundRoot instanceof HTMLElement) {
   function renderComparisonNavigation(selectedSources: HTMLElement[]) {
     const count = selectedSources.length;
     root.dataset.hasComparison = String(count > 0);
-    if (compareDock) {
-      if (count === 0) {
-        compareDock.classList.remove('stats-v4-jump', 'masthead-row');
-        compareDock.hidden = true;
-      } else {
-        compareDock.hidden = false;
-        compareDock.classList.add('stats-v4-jump', 'masthead-row');
-      }
-    }
-    compareDockActions?.classList.toggle('masthead-actions', count > 0);
+    if (compareDock) compareDock.hidden = count === 0;
     if (compareDockCount) compareDockCount.textContent = count === 1 ? '1 record selected' : `${count} records selected`;
     if (compareDockRecords) compareDockRecords.textContent = count
       ? selectedSources.map((source) => source.dataset.recordSymbol || source.dataset.recordName || source.dataset.recordSlug || 'Stablecoin').join(' · ')

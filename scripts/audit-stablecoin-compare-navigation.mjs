@@ -47,14 +47,13 @@ async function desktop(browser) {
     const view = document.querySelector('[data-view-comparison]');
     return {
       dockHidden: dock?.hasAttribute('hidden'),
-      stickyClass: dock?.classList.contains('stats-v4-jump'),
-      layoutClass: dock?.classList.contains('masthead-row'),
+      position: dock instanceof HTMLElement ? getComputedStyle(dock).position : '',
       viewDisabled: view instanceof HTMLButtonElement ? view.disabled : null,
       count: document.querySelector('[data-comparison-dock-count]')?.textContent?.trim(),
       records: document.querySelector('[data-comparison-dock-records]')?.textContent?.trim()
     };
   });
-  record('one_selection_dock_discoverable', one.dockHidden === false && one.stickyClass && one.layoutClass && one.viewDisabled === true && /1 record selected/.test(one.count || ''), one);
+  record('one_selection_dock_discoverable', one.dockHidden === false && one.position === 'fixed' && one.viewDisabled === true && /1 record selected/.test(one.count || ''), one);
   await page.locator('.stablecoin-index-registry').scrollIntoViewIfNeeded();
   await page.mouse.wheel(0, 900);
   await page.waitForTimeout(100);
@@ -66,9 +65,9 @@ async function desktop(browser) {
   await page.waitForTimeout(100);
   const sticky = await page.locator('[data-comparison-dock]').evaluate((dock) => {
     const r = dock.getBoundingClientRect();
-    return { top: r.top, bottom: r.bottom, hidden: dock.hasAttribute('hidden'), viewport: window.innerHeight };
+    return { top: r.top, bottom: r.bottom, hidden: dock.hasAttribute('hidden'), viewport: window.innerHeight, position: getComputedStyle(dock).position };
   });
-  record('dock_persists_while_browsing_register', !sticky.hidden && sticky.top >= 0 && sticky.top < 180 && sticky.bottom <= sticky.viewport, sticky);
+  record('dock_persists_while_browsing_register', !sticky.hidden && sticky.position === 'fixed' && sticky.top >= 0 && sticky.bottom <= sticky.viewport, sticky);
   await screenshotViewport(page, 'desktop-two-selected-register-dock');
   await page.locator('[data-view-comparison]').click();
   await page.waitForTimeout(450);
@@ -116,9 +115,9 @@ async function mobile(browser) {
   await page.waitForTimeout(100);
   const one = await page.locator('[data-comparison-dock]').evaluate((dock) => {
     const r = dock.getBoundingClientRect();
-    return { top: r.top, bottom: r.bottom, hidden: dock.hasAttribute('hidden'), width: r.width, viewportWidth: window.innerWidth };
+    return { top: r.top, bottom: r.bottom, hidden: dock.hasAttribute('hidden'), width: r.width, viewportWidth: window.innerWidth, position: getComputedStyle(dock).position };
   });
-  record('mobile_one_selection_sticky_dock', !one.hidden && one.top >= 0 && one.top < 170 && one.bottom <= 844 && one.width <= one.viewportWidth, one);
+  record('mobile_one_selection_sticky_dock', !one.hidden && one.position === 'fixed' && one.top >= 0 && one.bottom <= 844 && one.width <= one.viewportWidth, one);
   record('mobile_one_page_overflow', !(await overflow(page)));
   await screenshotViewport(page, 'mobile-one-selected-register-dock');
 
