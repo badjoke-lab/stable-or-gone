@@ -118,6 +118,28 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'CollectionPage', na
       </div>
     </header>
 
+    <section class="stablecoin-index-comparison" data-comparison-panel hidden tabindex="-1" aria-labelledby="comparison-heading">
+      <div class="comparison-heading">
+        <div>
+          <p class="stablecoin-index-eyebrow">Bounded comparison</p>
+          <h2 id="comparison-heading">Compare historical records</h2>
+          <p data-comparison-status aria-live="polite">Select two to four records. Unknown and not-recorded values remain explicit.</p>
+        </div>
+        <div class="comparison-actions">
+          <label class="comparison-differences-toggle"><input type="checkbox" data-comparison-differences /><span>Differences only</span></label>
+          <button class="ui-button stablecoin-index-action" type="button" data-clear-comparison>Clear comparison</button>
+        </div>
+      </div>
+      <div class="comparison-picker" data-comparison-picker>
+        <label><span>Add / replace record</span><select class="ui-field" data-comparison-add aria-describedby="comparison-add-help"><option value="">Choose a stablecoin…</option>{records.map((record) => <option value={record.slug}>{record.name}{record.symbol ? ` (${record.symbol})` : ''}</option>)}</select></label>
+        <button class="ui-button" type="button" data-comparison-add-button>Add record</button>
+        <p id="comparison-add-help" data-comparison-add-help>Remove a column, then choose another record here. No return to the register is required.</p>
+      </div>
+      <div class="comparison-alert" data-comparison-alert aria-live="assertive"></div>
+      <div class="stablecoin-index-table comparison-matrix-shell" data-comparison-grid tabindex="0" aria-label="Stablecoin comparison matrix"></div>
+      <p class="comparison-disclaimer">Comparison is historical registry context, not a ranking, recommendation, or investment assessment.</p>
+    </section>
+
     <section class="stablecoin-index-registry" aria-labelledby="stablecoin-index-heading">
       <div class="stablecoin-index-section-heading">
         <div>
@@ -169,23 +191,18 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'CollectionPage', na
       </nav>
     </section>
 
-    <section class="stablecoin-index-comparison" data-comparison-panel hidden aria-labelledby="comparison-heading">
-      <div class="comparison-heading">
-        <div>
-          <p class="stablecoin-index-eyebrow">Bounded comparison</p>
-          <h2 id="comparison-heading">Compare historical records</h2>
-          <p data-comparison-status aria-live="polite">Select two to four records. Unknown and not-recorded values remain explicit.</p>
-        </div>
-        <div class="comparison-actions">
-          <label class="comparison-differences-toggle"><input type="checkbox" data-comparison-differences /><span>Differences only</span></label>
-          <button class="ui-button stablecoin-index-action" type="button" data-clear-comparison>Clear comparison</button>
-        </div>
-      </div>
-      <div class="comparison-alert" data-comparison-alert aria-live="assertive"></div>
-      <div class="stablecoin-index-table comparison-matrix-shell" data-comparison-grid tabindex="0" aria-label="Stablecoin comparison matrix"></div>
-      <p class="comparison-disclaimer">Comparison is historical registry context, not a ranking, recommendation, or investment assessment.</p>
-    </section>
     <div hidden>{records.map((record) => <StablecoinComparisonSource record={record} />)}</div>
+
+    <aside class="comparison-dock" data-comparison-dock hidden aria-label="Comparison selection">
+      <div class="comparison-dock-summary">
+        <strong data-comparison-dock-count>0 selected</strong>
+        <span data-comparison-dock-records>Choose records from the register.</span>
+      </div>
+      <div class="comparison-dock-actions">
+        <button class="ui-button" type="button" data-view-comparison disabled>View comparison</button>
+        <button class="ui-button comparison-dock-clear" type="button" data-clear-comparison>Clear</button>
+      </div>
+    </aside>
   </div>
   <script>
     import '../../scripts/stablecoin-index';
