@@ -6,6 +6,7 @@ on:
       - agent/stablecoin-compare-discovery-navigation-remediation
     paths:
       - '.github/workflows/tmp-fix-compare-view-jump.yml'
+      - 'scripts/tmp-fix-compare-view-jump.mjs'
 
 permissions:
   contents: write
@@ -18,24 +19,12 @@ jobs:
         with:
           ref: agent/stablecoin-compare-discovery-navigation-remediation
           fetch-depth: 0
-      - name: Use direct explicit jump to comparison
+      - name: Apply direct Compare jump
+        run: node scripts/tmp-fix-compare-view-jump.mjs
+      - name: Remove temporary helpers
         run: |
-          python3 - <<'PY'
-          from pathlib import Path
-          p = Path('src/scripts/stablecoin-index.ts')
-          s = p.read_text()
-          old = """    comparePanel.scrollIntoView({ block: 'start', behavior: 'smooth' });
-    window.setTimeout(() => comparePanel.focus({ preventScroll: true }), 250);
-"""
-          new = """    comparePanel.scrollIntoView({ block: 'start', behavior: 'auto' });
-    comparePanel.focus({ preventScroll: true });
-"""
-          if old not in s:
-              raise SystemExit('expected View comparison block not found')
-          p.write_text(s.replace(old, new))
-          PY
-      - name: Remove temporary workflow
-        run: rm -f .github/workflows/tmp-fix-compare-view-jump.yml
+          rm -f .github/workflows/tmp-fix-compare-view-jump.yml
+          rm -f scripts/tmp-fix-compare-view-jump.mjs
       - name: Commit direct jump fix
         run: |
           git config user.name github-actions[bot]
