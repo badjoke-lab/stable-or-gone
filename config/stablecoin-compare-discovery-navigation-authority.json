@@ -1,0 +1,95 @@
+{
+  "schema_version": "1.0",
+  "authority_id": "sog_stablecoin_compare_discovery_navigation_remediation_2026_08_10",
+  "status": "active_after_merge",
+  "entry_main_commit": "f275fd4b2f5efe266cf053858934cd22fa87664c",
+  "public_route": "/stablecoins/",
+  "problem_statement": [
+    "comparison_result_is_below_the_full_register_and_pagination",
+    "comparison_discovery_depends_on_scrolling_to_page_bottom",
+    "candidate_replacement_requires_register_to_comparison_round_trip"
+  ],
+  "required_features": [
+    "comparison_panel_before_public_register_results",
+    "persistent_compare_dock_after_first_selection",
+    "dock_selected_count_and_selected_record_identity",
+    "dock_view_comparison_action",
+    "in_panel_add_or_replace_record_control",
+    "remove_then_replace_without_register_scroll",
+    "preserve_two_three_four_record_matrix",
+    "preserve_differences_only",
+    "preserve_shared_compare_url_restoration",
+    "preserve_explicit_unknown_and_not_recorded",
+    "preserve_mobile_bounded_horizontal_scroll"
+  ],
+  "selection": {
+    "minimum_ready": 2,
+    "maximum": 4,
+    "reject_fifth": true,
+    "preserve_url_order": true,
+    "dock_visible_from_selection_count": 1
+  },
+  "canonical_delta": {
+    "stable_assets": 0,
+    "organizations": 0,
+    "relationships": 0,
+    "events": 0,
+    "evidence": 0,
+    "evidence_relations": 0,
+    "reserve_reports": 0,
+    "known_unknowns": 0,
+    "regulatory_notes": 0,
+    "deployments": 0,
+    "legal_profiles": 0,
+    "reserve_components": 0,
+    "income_profiles": 0,
+    "market_access": 0,
+    "archive_recorded": 0,
+    "archive_not_recorded": 0
+  },
+  "canonical_baseline": {
+    "stable_assets": 119,
+    "evidence": 585,
+    "evidence_relations": 585,
+    "market_access": 12,
+    "archive_recorded": 463,
+    "archive_not_recorded": 122,
+    "canonical_hash": "sha256:f386c1043ca5e83cafbd88e99746d0609aab0154ed48de1970677758a66ed5fa",
+    "canonical_file_count": 466
+  },
+  "preserved_review_gate": {
+    "name": "Evidence Archive Payload Verification Batch 2",
+    "stage": "REVIEW_GATE",
+    "reviewed": 10,
+    "proposals": 8,
+    "no_safe_change": 2,
+    "canonical_promotions_authorized": 0,
+    "resume_after_compare_closeout": true
+  },
+  "forbidden": [
+    "canonical_record_changes",
+    "schema_or_taxonomy_changes",
+    "new_public_routes",
+    "ranking",
+    "scoring",
+    "recommendation",
+    "winner_loser_language",
+    "more_than_four_selected_records",
+    "unrelated_sitewide_redesign",
+    "automatic_scroll_to_comparison_on_checkbox_change",
+    "archive_url_implementation"
+  ],
+  "required_visual_acceptance": [
+    "desktop_dock_after_first_selection",
+    "mobile_dock_after_first_selection",
+    "comparison_panel_precedes_register_results",
+    "view_comparison_action_reaches_matrix",
+    "remove_and_replace_without_register_scroll",
+    "desktop_two_three_four_selected",
+    "mobile_two_four_selected",
+    "fifth_selection_rejection",
+    "shared_url_restore",
+    "zero_selection_dock_hidden",
+    "no_page_level_horizontal_overflow"
+  ]
+}
