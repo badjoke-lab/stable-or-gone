@@ -16,7 +16,7 @@ const registerSearch = page.indexOf('data-index-search');
 check(panel >= 0 && registry >= 0 && panel < registry, 'comparison panel must precede public register results');
 check(registry >= 0 && dock > registry && registerSearch > dock, 'comparison dock must live at the start of the public register scroll scope');
 for (const marker of ['data-comparison-add', 'data-comparison-add-button', 'Add / replace record', 'data-view-comparison', 'data-comparison-dock-count', 'data-comparison-dock-records']) check(page.includes(marker), `page missing ${marker}`);
-for (const marker of ['renderComparisonNavigation', 'selectedComparisons.size < 2', 'comparePanel.getBoundingClientRect().top + window.scrollY', 'document.documentElement.scrollTop = targetTop', 'document.body.scrollTop = targetTop', 'comparePanel.focus({ preventScroll: true })', 'compareAddButton?.addEventListener', 'selectedComparisons.size >= 4', 'writeUrl']) check(script.includes(marker), `script missing ${marker}`);
+for (const marker of ['renderComparisonNavigation', 'selectedComparisons.size < 2', 'document.scrollingElement', "style.setProperty('scroll-behavior', 'auto', 'important')", "comparePanel.scrollIntoView({ block: 'start', behavior: 'auto' })", 'comparePanel.focus({ preventScroll: true })', 'window.requestAnimationFrame', 'compareAddButton?.addEventListener', 'selectedComparisons.size >= 4', 'writeUrl']) check(script.includes(marker), `script missing ${marker}`);
 check(script.includes("viewComparison.textContent = count < 2 ? 'Select one more' : 'View comparison'"), 'one-selection dock state');
 check(script.includes('compareAdd.disabled = count >= 4'), 'four-selection add lock');
 check(script.includes("'Remove a column before adding a replacement.'") || script.includes('Remove a column before adding a replacement'), 'replacement boundary copy');
@@ -39,7 +39,7 @@ console.log(JSON.stringify({
   panel_before_register: true,
   dock_scope: 'inside_public_register_before_search_toolbar',
   dock_position: 'fixed_bottom_while_selection_exists',
-  view_navigation: 'direct_scroll_position_plus_focus',
+  view_navigation: 'temporary_important_auto_scroll_behavior_plus_focus',
   persistent_dock: true,
   in_panel_replace: true,
   selection_bounds: [2, 4],
