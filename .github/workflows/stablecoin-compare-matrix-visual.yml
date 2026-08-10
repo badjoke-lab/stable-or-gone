@@ -9,6 +9,8 @@ on:
       - 'src/styles/public-ui.css'
       - 'scripts/audit-stablecoin-compare-matrix-visual.mjs'
       - 'scripts/audit-stablecoin-compare-zero-state.mjs'
+      - 'scripts/audit-stablecoin-compare-navigation.mjs'
+      - 'scripts/validate-stablecoin-compare-discovery-navigation-remediation.mjs'
       - '.github/workflows/stablecoin-compare-matrix-visual.yml'
   workflow_dispatch:
 
@@ -31,6 +33,8 @@ jobs:
         run: npm ci --no-audit --no-fund
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
+      - name: Validate Compare discovery implementation
+        run: node scripts/validate-stablecoin-compare-discovery-navigation-remediation.mjs
       - name: Build exact PR head
         run: npm run build
       - name: Start local site
@@ -49,6 +53,8 @@ jobs:
         run: node scripts/audit-stablecoin-compare-matrix-visual.mjs
       - name: Audit zero-selection hidden state
         run: node scripts/audit-stablecoin-compare-zero-state.mjs
+      - name: Audit discovery, sticky navigation, and replacement
+        run: node scripts/audit-stablecoin-compare-navigation.mjs
       - name: Upload comparison visual acceptance artifact
         if: always()
         uses: actions/upload-artifact@v4
@@ -59,4 +65,5 @@ jobs:
           compression-level: 0
           path: |
             artifacts/stablecoin-compare-matrix/**
+            artifacts/stablecoin-compare-navigation/**
             /tmp/sog-compare-server.log
