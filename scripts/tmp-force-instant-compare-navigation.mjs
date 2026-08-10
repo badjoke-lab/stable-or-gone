@@ -1,0 +1,23 @@
+import fs from 'node:fs';
+const file = 'src/scripts/stablecoin-index.ts';
+let source = fs.readFileSync(file, 'utf8');
+const before = `    const targetTop = comparePanel.getBoundingClientRect().top + window.scrollY;
+    document.documentElement.scrollTop = targetTop;
+    document.body.scrollTop = targetTop;
+    comparePanel.focus({ preventScroll: true });
+`;
+const after = `    const scrollingElement = document.scrollingElement;
+    const previousScrollBehavior = scrollingElement instanceof HTMLElement ? scrollingElement.style.getPropertyValue('scroll-behavior') : '';
+    const previousScrollPriority = scrollingElement instanceof HTMLElement ? scrollingElement.style.getPropertyPriority('scroll-behavior') : '';
+    if (scrollingElement instanceof HTMLElement) scrollingElement.style.setProperty('scroll-behavior', 'auto', 'important');
+    comparePanel.scrollIntoView({ block: 'start', behavior: 'auto' });
+    comparePanel.focus({ preventScroll: true });
+    window.requestAnimationFrame(() => {
+      if (!(scrollingElement instanceof HTMLElement)) return;
+      if (previousScrollBehavior) scrollingElement.style.setProperty('scroll-behavior', previousScrollBehavior, previousScrollPriority);
+      else scrollingElement.style.removeProperty('scroll-behavior');
+    });
+`;
+if (!source.includes(before)) throw new Error('Expected exact Compare scroll block not found');
+source = source.replace(before, after);
+fs.writeFileSync(file, source);
