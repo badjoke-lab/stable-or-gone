@@ -5,14 +5,14 @@ This file is the mandatory entry point for humans, AI agents, and automation wor
 ## Current authority
 
 ```text
-Repository state: Evidence Archive Payload Verification Batch 2 review complete
-Current stage: REVIEW_GATE
+Repository state: Stablecoin Compare Discovery and Navigation Remediation authorized
+Current stage: AUTHORIZED_UI_REMEDIATION
+Current authority: Stablecoin Compare Discovery and Navigation Remediation
+Authority config: config/stablecoin-compare-discovery-navigation-authority.json
+Public route: /stablecoins/
 Canonical implementation authority: REVIEW_GATE
 Canonical archive additions authorized: 0
-Reviewed candidates: 10
-Dated exact archive proposals: 8
-Reviewed no safe change: 2
-Review research lineage: draft PR #539
+Preserved Evidence Archive review: 10 reviewed / 8 proposals / 2 no-safe-change
 Current canonical checkpoint: sog_jpysc_market_access_pilot_3_canonical_119_checkpoint_pr523_2026_08_05
 Current production commit: dynamic; verify via deploy-production workflow and Issue #479
 Last canonical-changing implementation commit: 77e80dd3e2a62fea53ea0eabe91ef78a2d8ab1da
@@ -21,11 +21,11 @@ Canonical file count: 466
 Official public origin: https://www.stableorgone.com
 ```
 
-Evidence Archive Payload Verification Batch 2 manual review is complete. The exact ten PR #538 candidates were reviewed using the PR #537 payload-verification contract. Eight exact dated archive URLs are proposals only; two candidates remain `reviewed_no_safe_change`. No canonical `archived_url`, Evidence, Evidence Relation, Market Access, route, schema, taxonomy, or public-output mutation is authorized by the review result.
+The Stablecoin Compare Discovery and Navigation Remediation is a bounded public-UI repair triggered by direct production review. The current comparison matrix works, but its placement after the full register/pagination and lack of persistent navigation make comparison hard to discover and force repeated scrolling when candidates change.
 
-The eight proposed archive additions require a separate reviewed and merged implementation authority. Until that authority exists, the repository remains at `REVIEW_GATE`.
+The authorized implementation must move the comparison panel ahead of the register results, add a persistent Compare dock after the first selection, add an explicit `View comparison` action, and allow `Add / replace record` directly inside the comparison area. It must preserve the existing two-to-four-column matrix, `Differences only`, URL restoration, explicit unknown/not-recorded values, fifth-selection rejection, and bounded mobile horizontal scrolling.
 
-The Stablecoin Compare Matrix Remediation is also complete: PR #540 authority, PR #541 implementation, merge `539a27fd5854a1c2544f4653a2161be36860a002`, production run `31326135906` success, visual run `31325811381` success.
+The Evidence Archive Payload Verification Batch 2 review result is preserved unchanged at `REVIEW_GATE`: ten reviewed, eight dated proposals, two no-safe-change, and zero canonical archive promotions authorized. No proposed archive URL may be implemented by this UI authority.
 
 ## Current reviewed canonical counts
 
@@ -66,6 +66,7 @@ PR #539 — manual network/payload research lineage
 PR #540 — Stablecoin Compare Matrix Remediation authority
 PR #541 — Stablecoin Compare Matrix implementation
 PR #542 — Compare closeout and Evidence review restoration
+PR #543 — clean Evidence Archive Batch 2 review-result landing
 ```
 
 Merged repository authority outranks chat memory, handoff prose, issue discussion, stale branch state, generated reports, and unmerged drafts.
@@ -78,45 +79,44 @@ Before substantive continuation, read:
 2. `docs/spec-governance.md`
 3. `docs/roadmap.md`
 4. `docs/deployment-policy.md`
-5. `docs/roadmap-amendments/2026-08-10-evidence-archive-payload-verification-batch-2-review-result.md`
-6. `docs/quality/evidence-archive-payload-verification-batch-2-review-result-spec.md`
-7. `data/editorial-research/evidence-archive-payload-verification-batch-2-review-2026-08-09.json`
-8. PR #537/#538 authority and candidate artifacts
-9. Batch 1 payload-review history and Queue v7 inputs when interpreting review semantics
-10. `docs/ui-v3-remediation-authority.md` as the enduring material-public-UI regression authority
+5. `docs/roadmap-amendments/2026-08-10-stablecoin-compare-discovery-navigation-remediation.md`
+6. `docs/quality/stablecoin-compare-discovery-navigation-remediation-spec.md`
+7. `config/stablecoin-compare-discovery-navigation-authority.json`
+8. `docs/ui-v3-remediation-authority.md`
+9. the completed Evidence Archive Batch 2 review-result amendment/spec/artifact when preserving the paused data lane
 
-## Review result
+## Stablecoin Compare Discovery and Navigation Remediation
 
 ```text
-reviewed: 10
-proposals: 8
-no safe change: 2
-canonical change authorized: false
-next boundary: REVIEW_GATE
+route: /stablecoins/
+selection ready: 2
+selection maximum: 4
+dock visible from: 1 selected
+canonical delta: 0
+archive implementation authority: 0
+exit after production verification: REVIEW_GATE
 ```
 
-Proposal Evidence IDs:
+Required product outcome:
 
 ```text
-sog_src_susd_legacy_context_batch_a
-sog_src_susd_rebuilding_2026
-sog_src_susd_roadmap_2026
-sog_src_susd_sip_status_2026
-sog_src_susd_synthetix_docs
-sog_src_susd_v3_faq_batch_a
-sog_src_terra_docs
-sog_src_tether_transparency
-```
-
-No-safe-change IDs:
-
-```text
-sog_src_susd_sip420_2024
-sog_src_susd_sip423_2026
+comparison panel before register results
+persistent Compare dock after first selection
+selected identities visible in dock
+explicit View comparison action
+in-panel Add / replace record control
+remove then replace without register scroll
+2 / 3 / 4 matrix preserved
+Differences only preserved
+shared compare URL restore preserved
+Unknown / Not recorded preserved
+mobile matrix overflow bounded to matrix shell
 ```
 
 ## Current boundary
 
-Do not write any proposed archive URL into canonical Evidence from the review result alone. A later implementation authority must bind the exact eight IDs, exact eight URLs, maximum archive deltas `+8/-8`, unchanged Evidence/Evidence Relation counts, validators, and production verification.
+Do not write any proposed archive URL into canonical Evidence. Do not alter canonical records, schema, taxonomy, routes, ranking/scoring/recommendation semantics, or unrelated sitewide UI. After the Compare discovery/navigation implementation is production-verified, this temporary UI authority must close and control returns to the preserved Evidence Archive `REVIEW_GATE`.
+
+`docs/ui-v3-remediation-authority.md` remains the enduring material-public-UI regression authority.
 
 Issue #479 remains the deployment-history authority.
