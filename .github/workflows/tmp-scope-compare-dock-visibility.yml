@@ -1,0 +1,34 @@
+name: Temporary scope Compare dock visibility
+
+on:
+  push:
+    branches:
+      - agent/stablecoin-compare-discovery-navigation-remediation
+    paths:
+      - '.github/workflows/tmp-scope-compare-dock-visibility.yml'
+      - 'scripts/tmp-scope-compare-dock-visibility.mjs'
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/stablecoin-compare-discovery-navigation-remediation
+          fetch-depth: 0
+      - name: Scope Compare dock to register browsing
+        run: node scripts/tmp-scope-compare-dock-visibility.mjs
+      - name: Remove temporary helpers
+        run: |
+          rm -f .github/workflows/tmp-scope-compare-dock-visibility.yml
+          rm -f scripts/tmp-scope-compare-dock-visibility.mjs
+      - name: Commit dock visibility scope
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add -A
+          git commit -m "Hide Compare dock while comparison is in view"
+          git push origin HEAD:agent/stablecoin-compare-discovery-navigation-remediation
