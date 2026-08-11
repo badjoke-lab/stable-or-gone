@@ -25,14 +25,33 @@ async function screenshotViewport(page, name) {
   await page.screenshot({ path: path.join(outputDir, `${name}.png`), fullPage: false });
 }
 
+async function disableSmoothScroll(page) {
+  await page.evaluate(() => {
+    const scrollingElement = document.scrollingElement;
+    if (scrollingElement instanceof HTMLElement) scrollingElement.style.setProperty('scroll-behavior', 'auto', 'important');
+    document.documentElement.style.setProperty('scroll-behavior', 'auto', 'important');
+  });
+}
+
+async function scrollRegisterMidpoint(page) {
+  await disableSmoothScroll(page);
+  await page.evaluate(() => {
+    const visibleRows = [...document.querySelectorAll('[data-registry-row]')].filter((node) => node instanceof HTMLElement && !node.hidden);
+    const target = visibleRows[Math.min(9, Math.max(0, visibleRows.length - 1))];
+    if (target instanceof HTMLElement) target.scrollIntoView({ block: 'center', behavior: 'auto' });
+  });
+  await page.waitForTimeout(80);
+}
+
 async function scrollFooterIntoViewport(page, visiblePixels) {
+  await disableSmoothScroll(page);
   await page.evaluate((pixels) => {
     const footer = document.querySelector('.site-footer');
     if (!(footer instanceof HTMLElement)) return;
     const absoluteTop = footer.getBoundingClientRect().top + window.scrollY;
     window.scrollTo(0, Math.max(0, absoluteTop - window.innerHeight + pixels));
   }, visiblePixels);
-  await page.waitForTimeout(150);
+  await page.waitForTimeout(80);
 }
 
 async function footerDockState(page) {
@@ -102,13 +121,10 @@ async function desktop(browser) {
 
   await page.goto(`${baseUrl}/stablecoins/?compare=usdt,usdc`, { waitUntil: 'networkidle' });
   await waitForSelection(page, 2);
-  await page.locator('[data-pagination]').scrollIntoViewIfNeeded();
-  await page.waitForTimeout(100);
-  const sticky = await page.locator('[data-comparison-dock]').evaluate((dock) => {
-    const r = dock.getBoundingClientRect();
-    return { top: r.top, bottom: r.bottom, hidden: dock.hasAttribute('hidden'), viewport: window.innerHeight, position: getComputedStyle(dock).position };
-  });
-  record('dock_persists_while_browsing_register', !sticky.hidden && sticky.position === 'fixed' && sticky.top >= 0 && sticky.bottom <= sticky.viewport, sticky);
+  await scrollRegisterMidpoint(page);
+  const sticky = await footerDockState(page);
+  const stickyPosition = await page.locator('[data-comparison-dock]').evaluate((dock) => getComputedStyle(dock).position);
+  record('dock_persists_while_browsing_register', Boolean(sticky?.dockVisible && !sticky?.footerVisible && stickyPosition === 'fixed' && sticky.dock.top >= 0 && sticky.dock.bottom <= 950), { ...(sticky ?? {}), position: stickyPosition });
   await screenshotViewport(page, 'desktop-two-selected-register-dock');
 
   await scrollFooterIntoViewport(page, 120);
@@ -116,8 +132,7 @@ async function desktop(browser) {
   record('desktop_footer_dock_non_overlap', Boolean(desktopFooter?.footerVisible && desktopFooter?.registryVisible && desktopFooter?.dockHidden && !desktopFooter?.overlap), desktopFooter ?? {});
   await screenshotViewport(page, 'desktop-two-selected-footer-guard');
 
-  await page.locator('.stablecoin-index-registry').scrollIntoViewIfNeeded();
-  await page.waitForTimeout(150);
+  await scrollRegisterMidpoint(page);
   await page.locator('[data-view-comparison]').click();
   await page.waitForTimeout(450);
   const viewTarget = await page.locator('[data-comparison-panel]').evaluate((panel) => ({ top: panel.getBoundingClientRect().top, active: document.activeElement === panel, dockHidden: document.querySelector('[data-comparison-dock]')?.hasAttribute('hidden') }));
