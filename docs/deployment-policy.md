@@ -11,9 +11,13 @@ Pages project: stable-or-gone
 Official public origin: https://www.stableorgone.com
 Automatic main publication: enabled
 Deployment record: Issue #479
-Current canonical work boundary: Evidence Archive Payload Verification Batch 2 REVIEW_GATE
-Last canonical-changing implementation commit: 77e80dd3e2a62fea53ea0eabe91ef78a2d8ab1da
-Canonical hash: sha256:f386c1043ca5e83cafbd88e99746d0609aab0154ed48de1970677758a66ed5fa
+Current canonical work boundary: Evidence Archive Payload Verification Batch 2
+Current stage: IMPLEMENTATION_AUTHORIZED
+Canonical archive additions authorized: exactly 8
+Post-implementation boundary: REVIEW_GATE
+Canonical Market Access promotion authorized: no
+Last canonical-changing implementation commit before this lane: 77e80dd3e2a62fea53ea0eabe91ef78a2d8ab1da
+Canonical hash before implementation: sha256:f386c1043ca5e83cafbd88e99746d0609aab0154ed48de1970677758a66ed5fa
 Canonical file count: 466
 ```
 
@@ -26,13 +30,13 @@ PR merged to main
 -> validate exact main commit
 -> build dist
 -> upload to Cloudflare Pages
--> verify deployed commit and canonical hash
+-> verify deployed commit and canonical hash/count contract
 -> verify counts/routes/metadata/machine-readable output
 -> verify legacy-host migration
 -> report result to Issue #479
 ```
 
-## Current canonical baseline
+## Current canonical baseline before Evidence Archive implementation
 
 ```text
 Stablecoins: 119
@@ -54,77 +58,37 @@ Detail routes: 422
 Metadata-checked routes: 422
 Canonical hash: sha256:f386c1043ca5e83cafbd88e99746d0609aab0154ed48de1970677758a66ed5fa
 Canonical file count: 466
-Canonical delta: 0
 ```
 
-## Russia USDT Regulation Guide deployment lane — complete
+## Evidence Archive Payload Verification Batch 2 — authorized deployment boundary
 
-The bounded Guide-only implementation authorized by PR #548 was implemented by PR #549 and is production-verified.
+One bounded implementation may add `archived_url` only to the eight existing Evidence IDs bound in `config/evidence-archive-payload-verification-batch-2-implementation-authority.json`.
+
+Expected post-implementation canonical boundary:
 
 ```text
-Authority PR: #548 — complete
-Implementation PR: #549 — complete
-Implementation/main commit: f99d9583105587625a409b959ac928de44248e7b
-Production run: 31504346502 — success
-Production job: 93822011080 — success
-Issue #479 deployment report step: success
-Material UI/CSS change: no
-Visual acceptance lane required: no
-Canonical delta: 0
+Evidence: 585 -> 585
+Evidence Relations: 585 -> 585
+Stable assets: 119 -> 119
+Market Access Records: 12 -> 12
+Archive recorded: 463 -> 471
+Archive not recorded: 122 -> 114
+Maximum archive delta: +8 / -8
 ```
 
-The accepted implementation changed exactly:
+The exact dated URLs must match the completed manual payload-review artifact. No substitute Wayback timestamp, source normalization, source replacement, new Evidence identity, relation change, Market Access change, schema/taxonomy change, public route change, material UI/CSS change, ranking, scoring, or recommendation may deploy under this authority.
 
-```text
-src/pages/guides/russia-stablecoin-rules-2026/index.astro
-src/pages/guides/global-stablecoin-regulation-2026/index.astro
-src/data/guideCatalog.ts
-```
+The two reviewed no-safe-change records remain byte-equivalent except for unrelated deterministic metadata that the existing repository pipeline may require; no `archived_url` may be added to them.
 
-The production job completed locked dependency installation, Guide publication metadata validation, official-origin validation, publishable build, Cloudflare Pages upload, deployed-production verification, deployment summary, and deployment-result reporting successfully.
+Same-count checkpoint, statistics, archive-coverage, and release-integrity artifacts may be refreshed only when the existing deterministic pipeline requires them and only to reflect these eight exact archive additions.
 
-PR #548/#549 are historical lineage after closeout and do not authorize continued material Guide edits.
+## Completed Russia USDT Regulation Guide deployment lane
+
+PR #548/#549 completed the Guide update. PR #550 closed the temporary lane and main `2825eb293f833061deb1ef8bdb628b32a93538cc` completed production run `31509169378` successfully. The Russia Guide lineage authorizes no further Guide work and produced no Market Access or Evidence identity/relation delta.
 
 ## Market Access deployment boundary
 
-No canonical Market Access promotion was authorized or deployed by the Russia legal-framework review.
-
-```text
-Market Access Records: 12 -> 12
-Evidence: 585 -> 585
-Evidence Relations: 585 -> 585
-```
-
-Market Access Record v1 requires named platform/service and function scope. A Russia-wide law or regulator statement must not be deployed as a provider-specific access row.
-
-## Stablecoin Compare remediation — complete
-
-PR #544/#545/#546 completed the Compare discovery/navigation repair and blocking dock/footer fix. PR #547 closed the lane and restored `REVIEW_GATE`.
-
-```text
-Final visual exact head: 02774d7e9f35abf7c11bbbcb2e39cb6b62172cd7
-Final visual acceptance run: 31498394285 — success
-Final production run: 31498949423 — success
-Canonical delta: 0
-```
-
-The Compare lineage authorizes no further material change.
-
-## Evidence Archive Payload Verification Batch 2 — current boundary
-
-```text
-reviewed: 10
-dated exact archive proposals: 8
-reviewed no safe change: 2
-canonical archive additions authorized: 0
-current canonical boundary: REVIEW_GATE
-separate implementation authority required: yes
-automatic promotion: prohibited
-```
-
-The Russia Guide lane neither promoted nor rejected the archive proposals. With production closeout complete, Evidence Archive Payload Verification Batch 2 is again the current canonical work boundary.
-
-Any later canonical archive implementation must first merge a separate authority binding the exact eight Evidence IDs and dated archive URLs, maximum archive delta `+8/-8`, expected canonical invariants, and rollback conditions. The review result alone is not deployment permission.
+Market Access Record v1 requires named provider/service and function scope. This Evidence Archive lane authorizes no Market Access addition or mutation.
 
 ## Official-origin contract
 
@@ -141,9 +105,7 @@ Path/query preservation, no redirect loops, and no legacy-origin leakage remain 
 
 ## Review-to-production boundary
 
-Current canonical implementation authority is `REVIEW_GATE`. No canonical archive, Market Access, asset, Evidence, Evidence Relation, schema, taxonomy, material Guide, or unrelated public change may deploy without its own reviewed and merged authority.
-
-A schedule window, completed review artifact, completed Guide authority, or chat instruction does not itself authorize a canonical mutation.
+Current implementation authority is `IMPLEMENTATION_AUTHORIZED` for exactly eight archived URLs. After that implementation is merged and production-verified, authority returns to `REVIEW_GATE`. No further canonical or public work automatically follows.
 
 ## Infrastructure boundary
 
