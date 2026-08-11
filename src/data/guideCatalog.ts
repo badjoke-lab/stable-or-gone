@@ -40,9 +40,15 @@ export const guides: GuideEntry[] = [
     summary: 'A current-through-August comparison of the United States, European Union, United Kingdom, Japan, mainland China, Hong Kong, and Russia across issuance, distribution, payments, cross-border use, and regulatory direction.',
     category: 'regulation',
     publishedAt: '2026-08-08',
-    informationCurrentThrough: '2026-08-08',
-    updatedAt: null,
-    revisions: [],
+    informationCurrentThrough: '2026-08-11',
+    updatedAt: '2026-08-11',
+    revisions: [
+      {
+        date: '2026-08-11',
+        note: 'Updated the Russia section for the 1 September 2026 regulated crypto-market framework, July implementation rules, and source-qualified treatment of USDT as one of the initial three assets identified by a Bank of Russia First Deputy Governor, without treating that set as a permanent statutory whitelist or provider-level availability claim.',
+        kind: 'update'
+      }
+    ],
     featured: true,
     theme: 'neutral',
     regionLabel: 'Global'
@@ -76,12 +82,18 @@ export const guides: GuideEntry[] = [
   {
     slug: 'russia-stablecoin-rules-2026',
     title: 'Russia’s Stablecoin Rules in 2026',
-    summary: 'How Russia distinguishes domestic settlement from investment and cross-border uses for stablecoin-like digital financial assets, and what remains under policy discussion.',
+    summary: 'How Russia’s 1 September 2026 crypto-market framework treats investor access, foreign stablecoins, organised trading, cross-border use, and the domestic cryptocurrency-payment ban.',
     category: 'regulation',
     publishedAt: '2026-08-08',
-    informationCurrentThrough: '2026-08-08',
-    updatedAt: null,
-    revisions: [],
+    informationCurrentThrough: '2026-08-11',
+    updatedAt: '2026-08-11',
+    revisions: [
+      {
+        date: '2026-08-11',
+        note: 'Updated for Russia’s July 2026 crypto-market law and implementation rules. Added source-qualified discussion of Bitcoin, Ethereum, and USDT as the initial three assets identified by the Bank of Russia’s First Deputy Governor, while preserving the distinction from a permanent statutory whitelist and provider-specific access.',
+        kind: 'update'
+      }
+    ],
     featured: true,
     theme: 'neutral',
     regionLabel: 'Russia'
