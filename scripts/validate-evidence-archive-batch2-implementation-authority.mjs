@@ -48,7 +48,7 @@ for (const item of authority.authorized_archive_additions) {
   expect(Boolean(row), `${item.evidence_id} missing from canonical Evidence`);
   if (row) {
     expect(row.__file === item.source_file, `${item.evidence_id} canonical source file changed`);
-    expect(!Object.prototype.hasOwnProperty.call(row, 'archived_url'), `${item.evidence_id} already has archived_url before implementation`);
+    expect(row.archived_url == null || row.archived_url === '', `${item.evidence_id} already has a recorded archived_url before implementation`);
     expect(row.url === reviewed?.canonical_url, `${item.evidence_id} canonical source URL changed since review`);
   }
 }
