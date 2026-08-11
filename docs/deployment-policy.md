@@ -12,16 +12,18 @@ Official public origin: https://www.stableorgone.com
 Automatic main publication: enabled
 Deployment record: Issue #479
 Current canonical work boundary: Evidence Archive Payload Verification Batch 2
-Current stage: IMPLEMENTATION_AUTHORIZED
-Canonical archive additions authorized: exactly 8
-Post-implementation boundary: REVIEW_GATE
+Current stage: REVIEW_GATE
+Canonical archive additions authorized: 0
 Canonical Market Access promotion authorized: no
-Last canonical-changing implementation commit before this lane: 77e80dd3e2a62fea53ea0eabe91ef78a2d8ab1da
-Canonical hash before implementation: sha256:f386c1043ca5e83cafbd88e99746d0609aab0154ed48de1970677758a66ed5fa
+Public Guide/UI change authorized: no
+Automatic continuation: false
+Next work requires separate reviewed authority: yes
+Current production commit: ada106dd3bf9899adc441c968fa36978ae515a5c
+Current canonical hash: sha256:4e7570b6fab88a8178a01ae280a36d98787573b376440b891491f25469458798
 Canonical file count: 466
 ```
 
-A repository merge is not itself proof of production parity.
+A repository merge is not itself proof of production parity. PR #552 is considered complete because its exact main commit was separately built, uploaded, and verified at the official origin.
 
 ## Publication rule
 
@@ -36,7 +38,7 @@ PR merged to main
 -> report result to Issue #479
 ```
 
-## Current canonical baseline before Evidence Archive implementation
+## Current production baseline
 
 ```text
 Stablecoins: 119
@@ -50,21 +52,37 @@ Known unknowns: 352
 Regulatory notes: 9
 Deployments: 186
 Legal profiles: 119
+Stable asset relationships: 5
 Reserve components: 153
 Income profiles: 119
 Market Access Records: 12
-Archive recorded / not recorded: 463 / 122
+Archive recorded: 471
+Archive not recorded: 114
+Archive recorded / not recorded: 471 / 114
 Detail routes: 422
 Metadata-checked routes: 422
-Canonical hash: sha256:f386c1043ca5e83cafbd88e99746d0609aab0154ed48de1970677758a66ed5fa
+Production commit: ada106dd3bf9899adc441c968fa36978ae515a5c
+Canonical hash: sha256:4e7570b6fab88a8178a01ae280a36d98787573b376440b891491f25469458798
 Canonical file count: 466
 ```
 
-## Evidence Archive Payload Verification Batch 2 — authorized deployment boundary
+## Completed Evidence Archive Payload Verification Batch 2 deployment lane
 
-One bounded implementation may add `archived_url` only to the eight existing Evidence IDs bound in `config/evidence-archive-payload-verification-batch-2-implementation-authority.json`.
+PR #551 authorized one bounded implementation of exactly eight reviewed dated `archived_url` values. PR #552 consumed that authority and merged as `ada106dd3bf9899adc441c968fa36978ae515a5c`.
 
-Expected post-implementation canonical boundary:
+Production verification:
+
+```text
+Production run: 31514472928 — success
+Production job: 93856057816 — success
+Production issue: #479
+Production report step: success
+Cloudflare Pages upload: success
+Deployed-production verification: success
+Canonical hash: sha256:4e7570b6fab88a8178a01ae280a36d98787573b376440b891491f25469458798
+```
+
+Accepted bounded result:
 
 ```text
 Evidence: 585 -> 585
@@ -73,14 +91,13 @@ Stable assets: 119 -> 119
 Market Access Records: 12 -> 12
 Archive recorded: 463 -> 471
 Archive not recorded: 122 -> 114
-Maximum archive delta: +8 / -8
+Exact archive additions: 8
+Reviewed no-safe-change: 2
 ```
 
-The exact dated URLs must match the completed manual payload-review artifact. No substitute Wayback timestamp, source normalization, source replacement, new Evidence identity, relation change, Market Access change, schema/taxonomy change, public route change, material UI/CSS change, ranking, scoring, or recommendation may deploy under this authority.
+No source URL replacement, source normalization, new Evidence identity, relation change, Market Access change, schema/taxonomy change, public route change, material UI/CSS change, ranking, scoring, or recommendation deployed under this lane.
 
-The two reviewed no-safe-change records remain byte-equivalent except for unrelated deterministic metadata that the existing repository pipeline may require; no `archived_url` may be added to them.
-
-Same-count checkpoint, statistics, archive-coverage, and release-integrity artifacts may be refreshed only when the existing deterministic pipeline requires them and only to reflect these eight exact archive additions.
+The PR #551 `IMPLEMENTATION_AUTHORIZED` boundary is consumed. It authorizes no further deployment.
 
 ## Completed Russia USDT Regulation Guide deployment lane
 
@@ -88,7 +105,7 @@ PR #548/#549 completed the Guide update. PR #550 closed the temporary lane and m
 
 ## Market Access deployment boundary
 
-Market Access Record v1 requires named provider/service and function scope. This Evidence Archive lane authorizes no Market Access addition or mutation.
+Market Access Record v1 requires named provider/service and function scope. No Market Access addition or mutation is currently authorized.
 
 ## Official-origin contract
 
@@ -105,7 +122,7 @@ Path/query preservation, no redirect loops, and no legacy-origin leakage remain 
 
 ## Review-to-production boundary
 
-Current implementation authority is `IMPLEMENTATION_AUTHORIZED` for exactly eight archived URLs. After that implementation is merged and production-verified, authority returns to `REVIEW_GATE`. No further canonical or public work automatically follows.
+Current stage is `REVIEW_GATE`. Canonical archive additions authorized: `0`. PR #551 and PR #552 are completed historical lineage. No Batch 3, additional archive maintenance, canonical mutation, or public material change follows automatically.
 
 ## Infrastructure boundary
 
