@@ -5,14 +5,19 @@ This file is the mandatory entry point for humans, AI agents, and automation wor
 ## Current authority
 
 ```text
-Repository state: Stablecoin Compare Discovery and Navigation Remediation authorized
-Current stage: AUTHORIZED_UI_REMEDIATION
-Current authority: Stablecoin Compare Discovery and Navigation Remediation
-Authority config: config/stablecoin-compare-discovery-navigation-authority.json
-Public route: /stablecoins/
+Repository state: Stablecoin Compare Discovery and Navigation Remediation complete
+Current stage: REVIEW_GATE
+Current closeout contract: config/post-pr546-compare-discovery-closeout.json
+Current canonical work boundary: Evidence Archive Payload Verification Batch 2
 Canonical implementation authority: REVIEW_GATE
 Canonical archive additions authorized: 0
-Preserved Evidence Archive review: 10 reviewed / 8 proposals / 2 no-safe-change
+Evidence Archive review: 10 reviewed / 8 proposals / 2 no-safe-change
+Compare authority PR: #544 — complete
+Compare primary implementation PR: #545 — complete
+Compare blocking visual fix PR: #546 — complete
+Final Compare main merge: f8ceedd55b0cc764a2bbc2747bd50f061f288b24
+Final Compare visual acceptance run: 31498394285 — success
+Final Compare production run: 31498949423 — success
 Current canonical checkpoint: sog_jpysc_market_access_pilot_3_canonical_119_checkpoint_pr523_2026_08_05
 Current production commit: dynamic; verify via deploy-production workflow and Issue #479
 Last canonical-changing implementation commit: 77e80dd3e2a62fea53ea0eabe91ef78a2d8ab1da
@@ -21,11 +26,15 @@ Canonical file count: 466
 Official public origin: https://www.stableorgone.com
 ```
 
-The Stablecoin Compare Discovery and Navigation Remediation is a bounded public-UI repair triggered by direct production review. The current comparison matrix works, but its placement after the full register/pagination and lack of persistent navigation make comparison hard to discover and force repeated scrolling when candidates change.
+The Stablecoin Compare Discovery and Navigation Remediation is complete and production-verified only after the PR #546 footer-overlap fix. PR #545 supplied the primary interaction repair, but direct review of its exact-head artifact found a blocking fixed-dock/footer overlap. PR #546 added the missing footer visibility guard and exact desktop/mobile non-overlap regression coverage without canonical changes.
 
-The authorized implementation must move the comparison panel ahead of the register results, add a persistent Compare dock after the first selection, add an explicit `View comparison` action, and allow `Add / replace record` directly inside the comparison area. It must preserve the existing two-to-four-column matrix, `Differences only`, URL restoration, explicit unknown/not-recorded values, fifth-selection rejection, and bounded mobile horizontal scrolling.
+The accepted result places the comparison panel before public-register results; keeps a fixed Compare dock discoverable while the register is being browsed after selection; hides the dock while the comparison is visible, outside register browsing scope, or whenever `.site-footer` enters the viewport; returns immediately to the comparison via `View comparison`; and keeps `Add / replace record` inside the comparison area. The 2–4 matrix, `Differences only`, shared URL restoration, explicit `Unknown` / `Not recorded`, fifth-selection rejection, and bounded mobile matrix scrolling remain intact.
 
-The Evidence Archive Payload Verification Batch 2 review result is preserved unchanged at `REVIEW_GATE`: ten reviewed, eight dated proposals, two no-safe-change, and zero canonical archive promotions authorized. No proposed archive URL may be implemented by this UI authority.
+The final exact-head visual run `31498394285` at `02774d7e9f35abf7c11bbbcb2e39cb6b62172cd7` succeeded. Artifact `9103989619` passed direct review, including desktop/mobile footer-transition screenshots. Final production run `31498949423` succeeded for main `f8ceedd55b0cc764a2bbc2747bd50f061f288b24` through Cloudflare Pages upload, deployed-production verification, and Issue #479 reporting.
+
+PR #544/#545/#546 are completed historical UI authority/implementation/fix lineage, not continuing authority. The old unmerged `agent/post-pr545-compare-discovery-closeout` branch is stale and must not be treated as authority.
+
+The current canonical work boundary is the Evidence Archive Payload Verification Batch 2 clean review result recorded by PR #543: ten reviewed, eight dated exact archive proposals, two no-safe-change, zero canonical archive promotions authorized. Any archive implementation requires a separate reviewed and merged implementation authority.
 
 ## Current reviewed canonical counts
 
@@ -63,10 +72,12 @@ PR #535/#536 — Japan Market Access Expansion Review Batch 1
 PR #537 — Evidence Archive Payload Verification Batch 2 review authority
 PR #538 — deterministic Batch 2 candidate set
 PR #539 — manual network/payload research lineage
-PR #540 — Stablecoin Compare Matrix Remediation authority
-PR #541 — Stablecoin Compare Matrix implementation
-PR #542 — Compare closeout and Evidence review restoration
+PR #540/#541 — first Stablecoin Compare matrix remediation
+PR #542 — first Compare closeout and Evidence review restoration
 PR #543 — clean Evidence Archive Batch 2 review-result landing
+PR #544 — Compare discovery/navigation remediation authority
+PR #545 — Compare discovery/navigation primary implementation
+PR #546 — blocking Compare dock/footer overlap fix and final visual closure
 ```
 
 Merged repository authority outranks chat memory, handoff prose, issue discussion, stale branch state, generated reports, and unmerged drafts.
@@ -79,43 +90,48 @@ Before substantive continuation, read:
 2. `docs/spec-governance.md`
 3. `docs/roadmap.md`
 4. `docs/deployment-policy.md`
-5. `docs/roadmap-amendments/2026-08-10-stablecoin-compare-discovery-navigation-remediation.md`
-6. `docs/quality/stablecoin-compare-discovery-navigation-remediation-spec.md`
-7. `config/stablecoin-compare-discovery-navigation-authority.json`
-8. `docs/ui-v3-remediation-authority.md`
-9. the completed Evidence Archive Batch 2 review-result amendment/spec/artifact when preserving the paused data lane
+5. `docs/roadmap-amendments/2026-08-11-post-pr546-compare-discovery-closeout.md`
+6. `docs/quality/post-pr546-compare-discovery-closeout-spec.md`
+7. `config/post-pr546-compare-discovery-closeout.json`
+8. `docs/roadmap-amendments/2026-08-10-evidence-archive-payload-verification-batch-2-review-result.md`
+9. `docs/quality/evidence-archive-payload-verification-batch-2-review-result-spec.md`
+10. `data/editorial-research/evidence-archive-payload-verification-batch-2-review-2026-08-09.json`
+11. `docs/ui-v3-remediation-authority.md`
 
-## Stablecoin Compare Discovery and Navigation Remediation
+## Completed Compare discovery/navigation result
 
 ```text
 route: /stablecoins/
+comparison panel: before register results
 selection ready: 2
 selection maximum: 4
-dock visible from: 1 selected
+register-browsing Compare dock: fixed after first selection
+matrix-visible state: dock hidden
+outside-register state: dock hidden
+footer-visible state: dock hidden
+footer overlap: desktop/mobile regression verified false
+View comparison: immediate navigation + focus
+candidate replacement: in comparison panel
+remove then replace: no register round trip
+visual acceptance exact head: 02774d7e9f35abf7c11bbbcb2e39cb6b62172cd7
+visual acceptance run: 31498394285 success
+production main: f8ceedd55b0cc764a2bbc2747bd50f061f288b24
+production run: 31498949423 success
 canonical delta: 0
-archive implementation authority: 0
-exit after production verification: REVIEW_GATE
-```
-
-Required product outcome:
-
-```text
-comparison panel before register results
-persistent Compare dock after first selection
-selected identities visible in dock
-explicit View comparison action
-in-panel Add / replace record control
-remove then replace without register scroll
-2 / 3 / 4 matrix preserved
-Differences only preserved
-shared compare URL restore preserved
-Unknown / Not recorded preserved
-mobile matrix overflow bounded to matrix shell
 ```
 
 ## Current boundary
 
-Do not write any proposed archive URL into canonical Evidence. Do not alter canonical records, schema, taxonomy, routes, ranking/scoring/recommendation semantics, or unrelated sitewide UI. After the Compare discovery/navigation implementation is production-verified, this temporary UI authority must close and control returns to the preserved Evidence Archive `REVIEW_GATE`.
+```text
+Evidence Archive Payload Verification Batch 2
+reviewed: 10
+proposals: 8
+no safe change: 2
+stage: REVIEW_GATE
+canonical archive additions authorized: 0
+```
+
+Do not write any proposed archive URL into canonical Evidence from the review result alone. Do not continue Compare material changes under PR #544/#545/#546 authority. Any canonical archive implementation or later material UI change requires its own reviewed and merged authority.
 
 `docs/ui-v3-remediation-authority.md` remains the enduring material-public-UI regression authority.
 
