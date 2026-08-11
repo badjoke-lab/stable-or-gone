@@ -6,8 +6,8 @@ import RelatedSogRecords from '../../../components/RelatedSogRecords.astro';
 import { getGuide, guideCategoryLabels } from '../../../data/guideCatalog';
 
 const guide = getGuide('russia-stablecoin-rules-2026');
-const title = 'Russia Stablecoin Rules in 2026: Domestic Limits and Cross-Border Use — Stable or Gone';
-const description = 'Russia does not define stablecoin as a legal term, but its digital financial asset framework can accommodate stablecoin-like instruments for investment and cross-border settlement while excluding domestic settlement.';
+const title = 'Russia Stablecoin Rules in 2026: Regulated Trading, USDT, and the Domestic Payment Ban — Stable or Gone';
+const description = 'Russia’s crypto-market law takes effect on 1 September 2026. The framework covers foreign stablecoins, permits regulated investment access under investor-specific rules, and keeps cryptocurrency payments inside Russia prohibited.';
 const canonicalPath = '/guides/russia-stablecoin-rules-2026/';
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -17,20 +17,21 @@ const jsonLd = {
   url: `https://www.stableorgone.com${canonicalPath}`,
   inLanguage: 'en',
   isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://www.stableorgone.com/' },
-  about: ['Russia stablecoin regulation', 'digital financial assets', 'cross-border settlement', 'ruble stablecoins'],
-  ...(guide.publishedAt ? { datePublished: guide.publishedAt } : {})
+  about: ['Russia stablecoin regulation', 'USDT Russia', 'cryptocurrency trading Russia', 'foreign stablecoins', 'domestic payment ban'],
+  ...(guide.publishedAt ? { datePublished: guide.publishedAt } : {}),
+  ...(guide.updatedAt ? { dateModified: guide.updatedAt } : {})
 };
 
 const relatedRecords = [
-  { href: '/stablecoin/usdt/', title: 'USDT', summary: 'Review the canonical record separately from any Russia-specific access or settlement claim.' },
-  { href: '/stablecoin/usdc/', title: 'USDC', summary: 'Review issuer, reserve, event, and access evidence without inferring local availability.' }
+  { href: '/stablecoin/usdt/', title: 'USDT', summary: 'Review the canonical asset separately from Russia-specific investor and platform access claims.' },
+  { href: '/stablecoin/usdc/', title: 'USDC', summary: 'Review issuer, reserve, event, and access evidence without inferring Russian availability from the country-level framework.' }
 ];
 ---
 <BaseLayout title={title} description={description} canonicalPath={canonicalPath} jsonLd={jsonLd}>
   <GuideArticleHeader
     category={guideCategoryLabels[guide.category]}
     title="Russia’s Stablecoin Rules in 2026"
-    description="Russia's framework is neither a simple stablecoin ban nor unrestricted permission. The Bank of Russia distinguishes investment and cross-border settlement from domestic settlement, while policy work continues around ruble-linked instruments."
+    description="Russia is moving cryptocurrency trading into a regulated market from 1 September 2026 while keeping cryptocurrency payments inside Russia prohibited. USDT matters because a senior Bank of Russia official identified it alongside Bitcoin and Ethereum as one of the initial three assets meeting the principles for non-qualified-investor access."
     publishedAt={guide.publishedAt}
     informationCurrentThrough={guide.informationCurrentThrough}
     updatedAt={guide.updatedAt}
@@ -38,55 +39,67 @@ const relatedRecords = [
 
   <section class="panel registry">
     <div class="bar">30-second summary</div>
-    <p><strong>Russian law does not define “stablecoin” as a legal category.</strong> The Bank of Russia says, however, that digital financial assets can be issued with stablecoin-like characteristics.</p>
-    <p>According to the Bank's 25 June 2026 consultation paper, these instruments can be used as investments and for cross-border settlements, but they are not allowed for domestic settlements. The Bank is also consulting on the development of a ruble stablecoin market.</p>
+    <p><strong>Russia’s 2026 framework is more specific than either “crypto ban” or “crypto approval.”</strong> The Bank of Russia says a new law governing cryptocurrency circulation takes effect on 1 September 2026. Non-qualified investors will be allowed to buy the most liquid cryptocurrencies after passing a test and within a ₽300,000 annual limit through one intermediary; qualified investors have broader purchase and sale access after testing.</p>
+    <p>The Bank also says the cryptocurrency requirements apply to <strong>foreign stablecoins</strong>, while cryptocurrency payments within Russia remain prohibited. Exporters and importers may use cryptocurrencies in cross-border payments under the new framework.</p>
   </section>
 
   <section class="panel registry">
-    <div class="bar">The key legal distinction</div>
+    <div class="bar">Where USDT fits</div>
+    <p>On 4 June 2026, RBC reported a direct statement from Bank of Russia First Deputy Governor Vladimir Chistyukhin that the initial three currencies meeting the principles for non-qualified-investor access were <strong>Bitcoin, Ethereum, and USDT</strong>. He said the Bank did not plan to expand that initial set during the first period of the law’s operation.</p>
+    <p><strong>This should not be read as a permanent statutory three-asset whitelist.</strong> The Bank of Russia’s later 21 July public summary states the legal rule in broader terms — the “most liquid cryptocurrencies” — and does not name the three assets. The named BTC / ETH / USDT set is therefore best treated as current implementation guidance from a senior regulator, not as proof that those are the only assets the law can ever permit.</p>
+    <p>It also does not prove that every Russian exchange, broker, or other intermediary currently offers USDT. SOG keeps country-level regulation separate from provider-specific access.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">The 1 September framework</div>
     <table>
-      <thead><tr><th>Use</th><th>Bank of Russia description</th></tr></thead>
+      <thead><tr><th>Area</th><th>Reviewed 2026 position</th></tr></thead>
       <tbody>
-        <tr><td>Investment</td><td>Stablecoin-like digital financial assets may serve as an investment option.</td></tr>
-        <tr><td>Cross-border settlement</td><td>They may serve as an instrument for cross-border settlements.</td></tr>
-        <tr><td>Domestic settlement</td><td>They are not allowed to be used for domestic settlements.</td></tr>
-        <tr><td>Ruble stablecoin development</td><td>The 2026 consultation asks how a ruble stablecoin market should develop while protecting monetary sovereignty and controlling risks.</td></tr>
+        <tr><td>Non-qualified investors</td><td>May buy the most liquid cryptocurrencies after testing, up to ₽300,000 per year through one intermediary.</td></tr>
+        <tr><td>Qualified investors</td><td>Must also pass a test, but may purchase and sell cryptocurrencies without the non-qualified-investor amount limit.</td></tr>
+        <tr><td>Foreign stablecoins</td><td>The Bank of Russia says the cryptocurrency requirements also apply to foreign stablecoins.</td></tr>
+        <tr><td>Organised trading</td><td>The framework permits cryptocurrency transactions through intermediaries and organised trading; the Bank published draft exchange and digital-depository rules in July.</td></tr>
+        <tr><td>Domestic payments</td><td>Cryptocurrency payments within Russia remain prohibited.</td></tr>
+        <tr><td>Cross-border payments</td><td>Exporters and importers may use cryptocurrencies in cross-border payments without the domestic-payment restriction.</td></tr>
       </tbody>
     </table>
   </section>
 
   <section class="panel registry">
-    <div class="bar">Why “Russia allows stablecoins” is too broad</div>
-    <p>A headline that says Russia “allows stablecoins” loses the most important part of the framework. Permission depends on the legal instrument and the use case. A token may be permitted in an investment or cross-border context while still being prohibited as a domestic settlement instrument.</p>
-    <p>SOG should therefore avoid one generic country flag and preserve the function scope: trading, transfer, redemption, payment, and settlement are not the same activity.</p>
+    <div class="bar">Why “Russia approved USDT” needs a scope label</div>
+    <p>A short headline can hide three different claims. First, the law creates regulated cryptocurrency trading access. Second, the Bank says the framework extends to foreign stablecoins. Third, a senior Bank official identified USDT as one of the initial three assets meeting the principles for non-qualified investors.</p>
+    <p>Those points support a meaningful Russia / USDT regulatory update, but they do <strong>not</strong> establish universal service availability, deposit support, withdrawal support, external-wallet transfer support, or permission to use USDT for domestic payments.</p>
   </section>
 
   <section class="panel registry">
-    <div class="bar">Ruble stablecoins and monetary sovereignty</div>
-    <p>The Bank of Russia explicitly frames the discussion around the global dominance of U.S.-dollar stablecoins and growing international interest in national stablecoins. Its consultation paper links ruble stablecoin development to monetary sovereignty as well as financial and operational risk.</p>
-    <p>This is a policy-development signal, not proof that a generally available retail ruble stablecoin has been authorised or launched. A future asset would still require its own issuer, issuance, access, and evidence records.</p>
+    <div class="bar">USDT is permitted within a risk framework, not endorsed</div>
+    <p>The same June interview that identified USDT also repeated the Bank of Russia’s risk concerns. Chistyukhin highlighted the possibility that stablecoins such as USDT could be blocked and described cryptocurrency as a high-risk instrument. The regulator’s framework is therefore a controlled-access regime, not a safety endorsement.</p>
+    <p>SOG does not convert regulatory access into a score, recommendation, or claim that an asset is safer than another stablecoin.</p>
   </section>
 
   <section class="panel registry">
-    <div class="bar">What SOG should record separately</div>
+    <div class="bar">What SOG records separately</div>
     <table>
       <tbody>
-        <tr><th>Framework</th><td>The legal and regulatory rules for stablecoin-like DFAs.</td></tr>
-        <tr><th>Asset</th><td>A named stablecoin or ruble-linked token, if one exists and meets SOG scope.</td></tr>
-        <tr><th>Provider access</th><td>Whether a named exchange, wallet, bank, or intermediary supports a specific function.</td></tr>
-        <tr><th>Cross-border use</th><td>A settlement use case should be scoped to the relevant parties, jurisdiction, and date.</td></tr>
-        <tr><th>Domestic payment</th><td>The consultation paper states stablecoin-like DFAs are not permitted for domestic settlements.</td></tr>
+        <tr><th>Country framework</th><td>The Russian legal rules governing cryptocurrency and foreign-stablecoin circulation.</td></tr>
+        <tr><th>Asset identity</th><td>USDT remains its own canonical stablecoin record; Russia’s framework does not change its lifecycle status.</td></tr>
+        <tr><th>Investor scope</th><td>Qualified and non-qualified investor rules are distinct.</td></tr>
+        <tr><th>Provider access</th><td>A named exchange, broker, bank, or intermediary requires its own function-scoped evidence before SOG creates a canonical Market Access record.</td></tr>
+        <tr><th>Payment use</th><td>Domestic payment, cross-border payment, trading, deposits, withdrawals, and wallet transfers are different functions and must not be collapsed into one flag.</td></tr>
       </tbody>
     </table>
     <p><a href="/access-regulation/">Explore canonical Access &amp; Regulation records →</a></p>
   </section>
 
   <section class="panel registry">
-    <div class="bar">Source</div>
+    <div class="bar">Sources</div>
     <ul>
-      <li><a href="https://www.cbr.ru/eng/press/event/?id=32666">Bank of Russia — Stablecoins in Russia: consultation paper, 25 June 2026</a></li>
+      <li><a href="https://cbr.ru/eng/press/event/?id=32724">Bank of Russia — Russia introduces cryptocurrency regulation, 21 July 2026</a></li>
+      <li><a href="https://www.cbr.ru/eng/press/event/?id=32732">Bank of Russia — First regulations to launch the cryptocurrency market, 27 July 2026</a></li>
+      <li><a href="https://cbr.ru/eng/press/event/?id=28215">Bank of Russia — Cryptocurrency market prospects: Bank of Russia’s proposals, 23 December 2025</a></li>
+      <li><a href="https://amp.rbc.ru/rbcnews/finances/04/06/2026/6a216e769a79478213bf0163">RBC — Interview reporting on the initial BTC / ETH / USDT set, 4 June 2026</a></li>
     </ul>
-    <p>The Bank of Russia source is the anchor for the legal-use distinctions on this page. Broader claims about specific tokens or service providers require separate evidence.</p>
+    <p>The Bank of Russia sources anchor the legal framework. The named BTC / ETH / USDT set is attributed separately to Chistyukhin’s June statement as reported by RBC.</p>
   </section>
 
   <RelatedSogRecords records={relatedRecords} />
@@ -94,6 +107,6 @@ const relatedRecords = [
 
   <section class="panel registry">
     <div class="bar">Scope and disclaimer</div>
-    <p>This guide describes the Bank of Russia's public 2026 position on stablecoin-like digital financial assets and the ruble-stablecoin policy discussion. It is not legal advice and does not establish that a named stablecoin is available to a particular user or provider in Russia.</p>
+    <p>This guide describes public Russian regulatory material current through 11 August 2026. It is not legal advice and does not establish that USDT or another cryptocurrency is available for a specific function on a particular Russian exchange, broker, bank, or other intermediary.</p>
   </section>
 </BaseLayout>
