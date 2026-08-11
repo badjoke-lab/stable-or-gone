@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0",
-  "status": "reviewed_non_growth_checkpoint",
+  "status": "reviewed_non_growth_maintenance_checkpoint",
   "checkpoint_id": "sog_stats_evidence_archive_payload_verification_batch_2_pr552_2026_08_12",
-  "checkpoint_kind": "non_growth_archive_maintenance_checkpoint",
+  "checkpoint_kind": "non_growth_maintenance_checkpoint",
   "recorded_at": "2026-08-12",
   "registry_version": "pr552-evidence-archive-batch2",
   "asset_count": 119,
