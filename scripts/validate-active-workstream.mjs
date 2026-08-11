@@ -1,1 +1,1 @@
-import './validate-stablecoin-compare-discovery-navigation-remediation.mjs';
+import './validate-post-pr546-compare-discovery-closeout.mjs';
