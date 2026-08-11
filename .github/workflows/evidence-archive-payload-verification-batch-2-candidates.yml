@@ -7,12 +7,14 @@ on:
       - 'scripts/validate-evidence-archive-payload-verification-batch-2-candidates.mjs'
       - 'data/editorial-research/evidence-archive-payload-verification-batch-2-candidates-2026-08-09.json'
       - 'config/evidence-archive-payload-verification-batch-2-review-authority.json'
+      - 'config/evidence-archive-payload-verification-batch-2-implementation-authority.json'
       - 'config/evidence-archive-payload-verification-batch-1.json'
       - 'config/evidence-source-identities.mjs'
       - 'data/evidence*.json'
       - 'docs/migration/evidence-archive-review-history-manifest-v6-pr402.json'
       - 'docs/migration/evidence-archive-review-history-audit-v6-pr402.json'
       - 'docs/migration/current-canonical-checkpoint.json'
+      - 'docs/migration/evidence-archive-payload-verification-batch-2-implementation-pr552.json'
       - '.github/workflows/evidence-archive-payload-verification-batch-2-candidates.yml'
   workflow_dispatch:
 
@@ -31,11 +33,19 @@ jobs:
       - run: npm ci --no-audit --no-fund
       - name: Validate committed Batch 2 candidate artifact
         run: node scripts/validate-evidence-archive-payload-verification-batch-2-candidates.mjs
-      - name: Generate deterministic Batch 2 candidates
+      - name: Generate deterministic Batch 2 candidates when entry state is current
         shell: bash
         run: |
           set -o pipefail
-          node scripts/build-evidence-archive-payload-verification-batch-2-candidates.mjs | tee batch-2-candidates.json
+          archive_not_recorded="$(node -e "const c=require('./docs/migration/current-canonical-checkpoint.json'); process.stdout.write(String(c.counts?.archive_not_recorded_count ?? ''))")"
+          if [ "$archive_not_recorded" = "122" ]; then
+            node scripts/build-evidence-archive-payload-verification-batch-2-candidates.mjs | tee batch-2-candidates.json
+          elif [ "$archive_not_recorded" = "114" ]; then
+            echo '{"status":"historical_post_implementation","regeneration":"skipped","archive_not_recorded":114}' | tee batch-2-candidates.json
+          else
+            echo "Unexpected archive_not_recorded_count: $archive_not_recorded" >&2
+            exit 1
+          fi
       - uses: actions/upload-artifact@v4
         if: always()
         with:
