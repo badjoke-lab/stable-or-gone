@@ -3274,6 +3274,124 @@
         }
       },
       "snapshot_sha256": "caf4a220b3a232ee3d9775113ba03866bc3109490e7a7ac8761dab1da1b23693"
+    },
+    {
+      "checkpoint_id": "sog_stats_evidence_archive_payload_verification_batch_2_pr552_2026_08_12",
+      "checkpoint_kind": "non_growth_maintenance_checkpoint",
+      "source_checkpoint_id": "sog_stats_pr523_jpysc_market_access_pilot_3_2026_08_05",
+      "canonical_checkpoint_id": "sog_evidence_archive_payload_verification_batch_2_canonical_119_checkpoint_pr552_2026_08_12",
+      "recorded_at": "2026-08-12",
+      "asset_count": 119,
+      "registry_version": "pr552-evidence-archive-batch2",
+      "input_digest_sha256": "b73bc942c20103628afa98ec5520a9cbef0c4b355063603fe193ac95f559cb0b",
+      "stats_model_sha256": "3ba2301f8ef0599eb29ca9a38ac3d70fea9c051b7b17e71aa23af3d3f26685e4",
+      "totals": {
+        "assets": 119,
+        "organizations": 109,
+        "relationships": 131,
+        "events": 194,
+        "evidence": 585,
+        "reserve_reports": 127,
+        "known_unknowns": 352,
+        "regulatory_notes": 9,
+        "deployments": 186,
+        "market_access_records": 12,
+        "legal_profiles": 119,
+        "stable_asset_relationships": 5,
+        "reserve_components": 153,
+        "income_profiles": 119
+      },
+      "lifecycle": {
+        "groups": {
+          "constrained": 16,
+          "failed": 6,
+          "historical_non_failure": 8,
+          "operating": 86,
+          "other": 3
+        },
+        "statuses": {
+          "active": 86,
+          "collapsed": 6,
+          "inactive": 2,
+          "migrated": 2,
+          "rebranded": 1,
+          "restricted": 13,
+          "terminated": 3,
+          "unknown": 3,
+          "winding_down": 3
+        },
+        "transitions": {
+          "migrations": 2,
+          "rebrands": 1,
+          "orderly_wind_downs": 3,
+          "terminations": 3,
+          "inactive_unresolved": 2,
+          "collapses": 6
+        }
+      },
+      "data_quality": {
+        "coverage": {
+          "classification": {
+            "count": 119,
+            "denominator": 119,
+            "percentage": 100
+          },
+          "reserve_redemption_profile": {
+            "count": 119,
+            "denominator": 119,
+            "percentage": 100
+          },
+          "legal_profile": {
+            "count": 119,
+            "denominator": 119,
+            "percentage": 100
+          },
+          "deployment": {
+            "count": 119,
+            "denominator": 119,
+            "percentage": 100
+          },
+          "stable_asset_relationship": {
+            "count": 8,
+            "denominator": 119,
+            "percentage": 6.72
+          },
+          "reserve_component": {
+            "count": 119,
+            "denominator": 119,
+            "percentage": 100
+          },
+          "archive_evidence": {
+            "count": 471,
+            "denominator": 585,
+            "percentage": 80.51
+          }
+        },
+        "evidence_per_asset": {
+          "average": 4.86,
+          "median": 4,
+          "distribution": {
+            "1": 3,
+            "2_4": 57,
+            "5_plus": 59
+          }
+        },
+        "known_unknowns": {
+          "total": 352,
+          "high_or_critical_count": 136,
+          "assets_with_high_or_critical": 74
+        },
+        "verification_recency": {
+          "0_30_days": 9,
+          "31_90_days": 110
+        },
+        "typed_event_details": {
+          "count": 194,
+          "denominator": 194,
+          "percentage": 100
+        }
+      },
+      "snapshot_sha256": "5d25a1dc15a67d48021b9762d4f39bc2316fca8aa9f2df076c576f2b9255f6e4"
     }
   ]
 }

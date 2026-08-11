@@ -1,19 +1,19 @@
 {
   "schema_version": "1.0",
-  "status": "reviewed_non_growth_checkpoint",
-  "checkpoint_id": "sog_stats_pr523_jpysc_market_access_pilot_3_2026_08_05",
-  "checkpoint_kind": "non_growth_normalization_checkpoint",
-  "recorded_at": "2026-08-05",
-  "registry_version": "pr523-jpysc-market-access",
+  "status": "reviewed_non_growth_maintenance_checkpoint",
+  "checkpoint_id": "sog_stats_evidence_archive_payload_verification_batch_2_pr552_2026_08_12",
+  "checkpoint_kind": "non_growth_maintenance_checkpoint",
+  "recorded_at": "2026-08-12",
+  "registry_version": "pr552-evidence-archive-batch2",
   "asset_count": 119,
-  "source_checkpoint_id": "sog_stats_pr517_record_growth_batch_5_bison_eub_usb_2026_08_03",
-  "canonical_checkpoint_id": "sog_jpysc_market_access_pilot_3_canonical_119_checkpoint_pr523_2026_08_05",
-  "previous_history_checkpoint_id": "sog_stats_pr517_record_growth_batch_5_bison_eub_usb_2026_08_03",
-  "market_access_pr": 523,
-  "source_pr": 521,
-  "authority_pr": 522,
-  "source_commit": "pr523-jpysc-market-access",
-  "captured_at": "2026-08-05",
+  "source_checkpoint_id": "sog_stats_pr523_jpysc_market_access_pilot_3_2026_08_05",
+  "canonical_checkpoint_id": "sog_evidence_archive_payload_verification_batch_2_canonical_119_checkpoint_pr552_2026_08_12",
+  "previous_history_checkpoint_id": "sog_stats_pr523_jpysc_market_access_pilot_3_2026_08_05",
+  "maintenance_pr": 552,
+  "authority_pr": 551,
+  "source_review_pr": 543,
+  "source_commit": "pr552-evidence-archive-batch2",
+  "captured_at": "2026-08-12",
   "expected_totals": {
     "assets": 119,
     "organizations": 109,
@@ -24,5 +24,5 @@
     "market_access_records": 12,
     "detail_routes": 422
   },
-  "notes": "Reviewed forward same-count statistics checkpoint for PR #523 JPYSC Market Access Pilot 3. It binds the deterministic statistics state to the PR #523 canonical checkpoint, advances Evidence from 584 to 585 and Market Access Records from 8 to 12, and preserves 119 assets and all earlier history snapshots."
+  "notes": "Reviewed same-count statistics checkpoint for PR #552 Evidence Archive Payload Verification Batch 2 implementation. It advances archive Evidence coverage to 471/585 while preserving all canonical record counts."
 }

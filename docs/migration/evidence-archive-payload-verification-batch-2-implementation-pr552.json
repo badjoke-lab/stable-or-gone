@@ -1,0 +1,69 @@
+{
+  "schema_version": "1.0",
+  "result_id": "sog_evidence_archive_payload_verification_batch_2_implementation_pr552_2026_08_12",
+  "status": "implemented_bounded_exact_archive_additions",
+  "implementation_pr": 552,
+  "authority_pr": 551,
+  "source_review_pr": 543,
+  "changed_count": 8,
+  "changed": [
+    {
+      "evidence_id": "sog_src_susd_v3_faq_batch_a",
+      "source_file": "data/evidence-batch-a.json",
+      "archived_url": "https://web.archive.org/web/20250430131854/https://docs.synthetix.io/developer-docs/v3-frequently-asked-questions-faq"
+    },
+    {
+      "evidence_id": "sog_src_susd_legacy_context_batch_a",
+      "source_file": "data/evidence-batch-a.json",
+      "archived_url": "https://web.archive.org/web/20250720161454/https://docs.synthetix.io/exchange/perps-v2-optimism/introduction-legacy"
+    },
+    {
+      "evidence_id": "sog_src_tether_transparency",
+      "source_file": "data/evidence.json",
+      "archived_url": "https://web.archive.org/web/20220712233033/https://tether.to/en/transparency/"
+    },
+    {
+      "evidence_id": "sog_src_terra_docs",
+      "source_file": "data/evidence.json",
+      "archived_url": "https://web.archive.org/web/20210903073902/https://www.terra.money/"
+    },
+    {
+      "evidence_id": "sog_src_susd_synthetix_docs",
+      "source_file": "data/evidence.json",
+      "archived_url": "https://web.archive.org/web/20251014024417/https://docs.synthetix.io/"
+    },
+    {
+      "evidence_id": "sog_src_susd_sip_status_2026",
+      "source_file": "data/evidence.json",
+      "archived_url": "https://web.archive.org/web/20251117181931/https://sips.synthetix.io/"
+    },
+    {
+      "evidence_id": "sog_src_susd_rebuilding_2026",
+      "source_file": "data/evidence.json",
+      "archived_url": "https://web.archive.org/web/20260514190950/https://blog.synthetix.io/rebuilding-susd/"
+    },
+    {
+      "evidence_id": "sog_src_susd_roadmap_2026",
+      "source_file": "data/evidence.json",
+      "archived_url": "https://web.archive.org/web/20260427180444/https://blog.synthetix.io/2026-roadmap/"
+    }
+  ],
+  "no_safe_change": [
+    "sog_src_susd_sip420_2024",
+    "sog_src_susd_sip423_2026"
+  ],
+  "canonical_counts": {
+    "assets": 119,
+    "evidence": 585,
+    "evidence_relations": 585,
+    "market_access_records": 12
+  },
+  "archive_coverage": {
+    "before_recorded": 463,
+    "before_not_recorded": 122,
+    "after_recorded": 471,
+    "after_not_recorded": 114
+  },
+  "next_boundary": "REVIEW_GATE",
+  "automatic_continuation": false
+}

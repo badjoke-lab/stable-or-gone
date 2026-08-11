@@ -3,7 +3,7 @@
 Updated: 2026-08-12  
 Status: Evidence Archive Payload Verification Batch 2 exact archive implementation authorized
 
-## Current canonical checkpoint before implementation
+## Current canonical checkpoint after bounded implementation
 
 ```text
 Canonical stable assets: 119
@@ -20,14 +20,14 @@ Legal profiles: 119
 Reserve components: 153
 Income profiles: 119
 Market Access Records: 12
-Archive recorded: 463
-Archive not recorded: 122
+Archive recorded: 471
+Archive not recorded: 114
 Detail routes: 422
 Metadata-checked routes: 422
 Official origin: https://www.stableorgone.com
-Last canonical-changing commit: 77e80dd3e2a62fea53ea0eabe91ef78a2d8ab1da
-Canonical hash: sha256:f386c1043ca5e83cafbd88e99746d0609aab0154ed48de1970677758a66ed5fa
-Canonical file count: 466
+Last canonical-changing commit before this archive lane: 77e80dd3e2a62fea53ea0eabe91ef78a2d8ab1da
+Canonical hash before implementation: sha256:f386c1043ca5e83cafbd88e99746d0609aab0154ed48de1970677758a66ed5fa
+Canonical file count before implementation: 466
 ```
 
 ## Completed current-cycle work
@@ -45,7 +45,7 @@ PR #550 — Russia Guide closeout and Evidence Archive REVIEW_GATE restoration
 
 ## Current lane — Evidence Archive Payload Verification Batch 2
 
-The completed review has now been converted into a separate exact implementation authority.
+The completed review has now been converted into a separate exact implementation authority and the implementation branch contains the bounded eight-archive post-state pending merge and production verification.
 
 ```text
 stage: IMPLEMENTATION_AUTHORIZED
@@ -99,9 +99,9 @@ Each archive URL must exactly match the completed manual payload-review artifact
 ```text
 2026-08-11  Russia USDT Regulation Guide update — complete
 2026-08-12  PR #550 Russia Guide closeout / production verification — complete
-2026-08-12  Evidence Archive Batch 2 exact implementation authority — current
-next         one bounded 8-record archived_url implementation
-then         production verification and REVIEW_GATE
+2026-08-12  Evidence Archive Batch 2 exact implementation authority — complete
+2026-08-12  bounded 8-record archived_url implementation — current PR #552
+next         merge, production verification, and REVIEW_GATE restoration
 ```
 
 Schedule windows are planning targets, not permission boundaries.
