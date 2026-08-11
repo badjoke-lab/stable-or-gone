@@ -1,7 +1,7 @@
 # Stable or Gone Roadmap
 
-Updated: 2026-08-10  
-Status: Stablecoin Compare Discovery and Navigation Remediation authorized; Evidence Archive Batch 2 review preserved at REVIEW_GATE
+Updated: 2026-08-11  
+Status: Compare discovery/navigation remediation complete after PR #546; Evidence Archive Payload Verification Batch 2 restored to REVIEW_GATE
 
 ## Current reviewed checkpoint
 
@@ -39,34 +39,52 @@ PR #535/#536 — Japan Market Access Expansion Review Batch 1 — no-go
 PR #537 — Evidence Archive Payload Verification Batch 2 review authority
 PR #538 — deterministic Batch 2 candidate selection
 PR #539 — manual Wayback payload research lineage
-PR #540/#541 — Stablecoin Compare Matrix remediation — production verified
-PR #542 — Compare closeout / Evidence review restoration — production verified
+PR #540/#541 — first Stablecoin Compare matrix remediation — production verified
+PR #542 — first Compare closeout / Evidence review restoration — production verified
 PR #543 — clean Evidence Archive Batch 2 review result — production verified
+PR #544 — Compare discovery/navigation remediation authority — complete
+PR #545 — Compare discovery/navigation primary implementation — complete
+PR #546 — blocking dock/footer overlap fix — production verified
 ```
 
-## Current lane — Stablecoin Compare Discovery and Navigation Remediation
+## Stablecoin Compare discovery/navigation — complete
 
-Direct production review found a material interaction defect not covered by the first Compare matrix repair: the matrix is positioned after the full twenty-row register and pagination, so users can select records without seeing a persistent comparison affordance and must repeatedly scroll between candidate selection and comparison.
+The placement/discovery/candidate-switching repair is closed only after the PR #546 footer-overlap correction.
 
-The current bounded UI authority requires:
+```text
+final main merge: f8ceedd55b0cc764a2bbc2747bd50f061f288b24
+final visual exact head: 02774d7e9f35abf7c11bbbcb2e39cb6b62172cd7
+final visual acceptance run: 31498394285 — success
+final production run: 31498949423 — success
+canonical delta: 0
+```
+
+Production behavior now includes:
 
 ```text
 comparison panel before public-register results
-persistent Compare dock after first selection
-selected record identities visible in dock
-explicit View comparison action
-in-panel Add / replace record control
-remove then replace without register scroll
+fixed Compare dock while browsing register after selection
+dock hidden while matrix is in view
+dock hidden outside register browsing scope
+dock hidden when footer enters viewport
+desktop/mobile footer non-overlap explicitly verified
+selected record count and identities visible in dock
+immediate View comparison navigation + focus
+in-panel Add / replace record
+remove then replace without register scroll round trip
 2 / 3 / 4 record matrix preserved
 Differences only preserved
 shared compare URL restore preserved
 Unknown / Not recorded preserved
-canonical changes: 0
+fifth selection rejected
+mobile comparison overflow bounded to matrix shell
 ```
 
-This lane is limited to `/stablecoins/` Compare interaction and dedicated validation/visual acceptance. No ranking, scoring, recommendation, new routes, schema/taxonomy changes, canonical data changes, or Evidence archive promotion is authorized.
+Direct review of the PR #545 artifact exposed the footer overlap even though the old visual workflow was green. PR #546 added the missing runtime guard and deterministic desktop/mobile footer regression states; direct review of the new changed-state artifact passed. PR #544/#545/#546 are historical completed authority/implementation/fix lineage and authorize no further material Compare change.
 
-## Evidence Archive Payload Verification Batch 2 — preserved review result
+## Current lane — Evidence Archive Payload Verification Batch 2 review complete
+
+The exact ten candidates completed manual payload review and the clean result was recorded by PR #543.
 
 ```text
 reviewed: 10
@@ -74,7 +92,7 @@ dated exact archive proposals: 8
 reviewed no safe change: 2
 canonical changes: 0
 public-output changes: 0
-preserved boundary: REVIEW_GATE
+current boundary: REVIEW_GATE
 ```
 
 Proposals:
@@ -97,24 +115,7 @@ sog_src_susd_sip420_2024 — exact canonical replay remains redirect-only
 sog_src_susd_sip423_2026 — no reviewed HTTP-200 dated capture
 ```
 
-The eight archive proposals still require a separate reviewed and merged implementation authority.
-
-## Compare acceptance sequence
-
-```text
-1. merge Compare discovery/navigation authority
-2. implement only /stablecoins/ interaction changes
-3. validate zero / one / two / four selected states
-4. verify persistent dock and dock-to-matrix navigation
-5. verify remove-and-replace without register scroll
-6. verify fifth-selection rejection and URL restore
-7. verify desktop/mobile no page overflow and bounded matrix overflow
-8. direct screenshot review of changed states
-9. merge implementation
-10. verify production via deploy-production and Issue #479
-11. close temporary UI authority
-12. return to Evidence Archive REVIEW_GATE
-```
+No proposed archive URL may be written into canonical Evidence under the review result alone. Any canonical implementation requires a separate reviewed and merged implementation authority binding the exact eight IDs/URLs, maximum archive deltas `+8/-8`, unchanged Evidence/Evidence Relation counts, validators, and production verification.
 
 ## Schedule
 
@@ -123,7 +124,7 @@ The eight archive proposals still require a separate reviewed and merged impleme
 2026-08-09  network/payload research — complete
 2026-08-10  first Compare matrix remediation — complete
 2026-08-10  Evidence Archive Batch 2 clean review result — complete
-2026-08-10  Compare discovery/navigation remediation — current
+2026-08-10 to 2026-08-11  Compare discovery/navigation remediation — complete / production verified
 2026-08-17 to 2026-08-23  possible canonical archive implementation window — separate authority required
 2026-08-24 onward  later dossier/data-growth lanes — separate authority required
 ```
@@ -142,9 +143,9 @@ schema/taxonomy changes
 new public routes
 unreviewed public output
 ranking / scoring / recommendation
-unrelated sitewide redesign
+material Compare changes without new authority
 ```
 
 ## Required work-start protocol
 
-Before further work, read `AGENTS.md`, `docs/spec-governance.md`, this file, `docs/deployment-policy.md`, the current Compare discovery/navigation amendment/spec/config, and `docs/ui-v3-remediation-authority.md`. Preserve the completed Evidence Archive Batch 2 review result unchanged while the UI interruption is active.
+Before further work, read `AGENTS.md`, `docs/spec-governance.md`, this file, `docs/deployment-policy.md`, the post-PR #546 Compare closeout amendment/spec/config, the Evidence Archive Batch 2 review-result amendment/spec/artifact, and `docs/ui-v3-remediation-authority.md`. The current data boundary is `REVIEW_GATE`; no automatic canonical continuation is authorized.

@@ -1,6 +1,6 @@
 # Stable or Gone Deployment Policy
 
-Updated: 2026-08-10
+Updated: 2026-08-11
 
 ## Status
 
@@ -55,43 +55,57 @@ Canonical hash: sha256:f386c1043ca5e83cafbd88e99746d0609aab0154ed48de1970677758a
 Canonical file count: 466
 ```
 
-## Stablecoin Compare Discovery and Navigation Remediation
+## Stablecoin Compare Discovery and Navigation Remediation — complete
 
-The current material UI authority is limited to `/stablecoins/` Compare interaction. It authorizes no canonical-data change.
+Compare remediation is complete after PR #546. PR #544 supplied bounded authority, PR #545 supplied the primary implementation, and PR #546 fixed the blocking dock/footer overlap found by direct review of the earlier visual artifact.
 
-Required production-visible behavior after implementation:
+```text
+Final main merge: f8ceedd55b0cc764a2bbc2747bd50f061f288b24
+Final visual exact head: 02774d7e9f35abf7c11bbbcb2e39cb6b62172cd7
+Final visual acceptance run: 31498394285 — success
+Final visual artifact: 9103989619
+Direct changed-state artifact review: passed
+Final production run: 31498949423 — success
+Canonical delta: 0
+```
+
+Production-visible behavior includes:
 
 ```text
 comparison panel before public-register results
-persistent Compare dock after first selection
+fixed Compare dock while browsing register after selection
+dock hidden while matrix is in view or register browsing scope is left
+dock hidden whenever the site footer enters the viewport
+desktop/mobile footer non-overlap explicitly verified
 selected identities visible in dock
-explicit View comparison action
+immediate View comparison navigation + focus
 in-panel Add / replace record control
-remove then replace without register scroll
+remove then replace without register scroll round trip
 2 / 3 / 4 aligned matrix preserved
 Differences only and shared URL restore preserved
+fifth selection rejected
 no page-level horizontal overflow
 ```
 
-Production acceptance requires the normal exact-main deploy workflow plus direct desktop/mobile visual review of changed Compare states. A green build without direct review is insufficient under `docs/ui-v3-remediation-authority.md`.
+Production run `31498949423` checked out exact main `f8ceedd55b0cc764a2bbc2747bd50f061f288b24`; Cloudflare Pages upload, deployed-production verification, deployment summary, and Issue #479 result reporting all succeeded.
 
-After production verification, the temporary Compare authority closes and control returns to the preserved Evidence Archive `REVIEW_GATE`.
+The PR #544/#545/#546 authority/implementation/fix lineage is closed. Any further material Compare change requires separate reviewed authority under `docs/ui-v3-remediation-authority.md`.
 
-## Evidence Archive Payload Verification Batch 2 review preserved
+## Evidence Archive Payload Verification Batch 2 — review complete / restored
 
 ```text
 reviewed: 10
 dated exact archive proposals: 8
 reviewed no safe change: 2
 canonical archive additions authorized: 0
-preserved boundary: REVIEW_GATE
+current boundary: REVIEW_GATE
 ```
 
-No archive proposal may be published by the Compare UI remediation. The eight archive proposals require a separate reviewed and merged implementation authority before any `archived_url` can change.
+No archive proposal may be published from the review result alone. The eight archive proposals require a separate reviewed and merged implementation authority before any `archived_url` can change.
 
 ## Previous Compare matrix remediation
 
-PR #541 merged as `539a27fd5854a1c2544f4653a2161be36860a002`; production run `31326135906` and visual run `31325811381` succeeded. The new authority preserves those matrix semantics and addresses placement/discovery/candidate switching only.
+PR #541 merged as `539a27fd5854a1c2544f4653a2161be36860a002`; production run `31326135906` and visual run `31325811381` succeeded. PR #544/#545 later repaired placement/discovery/candidate switching, and PR #546 supplied the final footer-overlap visual closure.
 
 ## Official-origin contract
 
@@ -108,7 +122,7 @@ Path/query preservation, no redirect loops, and no legacy-origin leakage remain 
 
 ## Review-to-production boundary
 
-Canonical work remains at `REVIEW_GATE`. No UI authority changes canonical data. After UI production verification, canonical control returns to the preserved Evidence Archive review gate.
+Canonical work is at Evidence Archive Payload Verification Batch 2 `REVIEW_GATE`. No UI authority changes canonical data. Any next canonical implementation requires a separate reviewed and merged authority.
 
 ## Infrastructure boundary
 
