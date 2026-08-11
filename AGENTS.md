@@ -101,6 +101,9 @@ The Russia lane is historical and authorizes no further Guide work. It created n
 ## Historical authority anchors
 
 ```text
+PR #493 — official-domain migration and production verification
+PR #500 — bounded MNEE Evidence and Archive Maintenance checkpoint
+PR #517 — Bison Bank EUB/USB complete-record growth checkpoint
 PR #523 — last canonical-changing implementation before this archive lane
 PR #534 — REVIEW_GATE restoration
 PR #535/#536 — Japan Market Access Expansion Review Batch 1 — no-go
