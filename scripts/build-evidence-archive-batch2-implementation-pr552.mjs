@@ -54,6 +54,27 @@ function applyArchives(authority) {
   return changed;
 }
 
+function assertArchivesApplied(authority) {
+  const byFile = new Map();
+  for (const item of authority.authorized_archive_additions) {
+    if (!byFile.has(item.source_file)) byFile.set(item.source_file, []);
+    byFile.get(item.source_file).push(item);
+  }
+
+  let verified = 0;
+  for (const [file, items] of byFile) {
+    const rows = read(file);
+    const rowsById = new Map(rows.map((row) => [row.id, row]));
+    for (const item of items) {
+      const row = rowsById.get(item.evidence_id);
+      if (!row) throw new Error(`${item.evidence_id}: canonical Evidence row not found in ${file}`);
+      if (row.archived_url !== item.archived_url) throw new Error(`${item.evidence_id}: implemented archived_url differs from authority`);
+      verified += 1;
+    }
+  }
+  if (verified !== 8) throw new Error(`Expected exactly eight implemented archived_url values, got ${verified}`);
+}
+
 function updateCheckpoint(base) {
   const expectedCounts = { ...(base.expected_counts ?? {}) };
   const counts = { ...(base.counts ?? {}) };
@@ -157,6 +178,19 @@ function updateStatsHistory(history) {
   return { ...history, snapshots };
 }
 
+function assertPostImplementationState(authority, checkpoint, statsCheckpoint, release, history) {
+  if (checkpoint.checkpoint_id !== canonicalCheckpointId) throw new Error('Unexpected post-implementation canonical checkpoint ID');
+  if (checkpoint.counts?.archive_index_count !== 471 || checkpoint.counts?.archive_not_recorded_count !== 114) throw new Error('Unexpected post-implementation archive checkpoint');
+  if (checkpoint.counts?.evidence !== 585 || checkpoint.counts?.evidence_relations !== 585 || checkpoint.counts?.market_access_records !== 12 || checkpoint.counts?.assets !== 119) throw new Error('Unexpected post-implementation canonical counts');
+  if (statsCheckpoint.checkpoint_id !== statsCheckpointId || statsCheckpoint.canonical_checkpoint_id !== canonicalCheckpointId) throw new Error('Unexpected post-implementation statistics checkpoint');
+  if (release.baseline_id !== releaseBaselineId || release.evidence_quality?.archive_index_count !== 471 || release.evidence_quality?.archive_not_recorded_count !== 114) throw new Error('Unexpected post-implementation release baseline');
+  const latest = history.snapshots?.at(-1);
+  if (latest?.checkpoint_id !== statsCheckpointId || latest?.canonical_checkpoint_id !== canonicalCheckpointId || latest?.data_quality?.coverage?.archive_evidence?.count !== 471) throw new Error('Unexpected post-implementation statistics history');
+  const result = read(resultPath);
+  if (result.changed_count !== 8 || result.changed?.length !== 8 || result.next_boundary !== 'REVIEW_GATE' || result.automatic_continuation !== false) throw new Error('Unexpected post-implementation result artifact');
+  assertArchivesApplied(authority);
+}
+
 function build() {
   const authority = read(authorityPath);
   assertAuthority(authority);
@@ -165,9 +199,19 @@ function build() {
   const baseRelease = read(releaseBaselinePath);
   const history = read(statsHistoryPath);
 
-  if (baseCheckpoint.counts?.archive_index_count !== 463 || baseCheckpoint.counts?.archive_not_recorded_count !== 122) {
-    throw new Error('Unexpected pre-implementation archive checkpoint');
+  const isPreImplementation = baseCheckpoint.counts?.archive_index_count === 463
+    && baseCheckpoint.counts?.archive_not_recorded_count === 122;
+  const isPostImplementation = baseCheckpoint.checkpoint_id === canonicalCheckpointId
+    && baseCheckpoint.counts?.archive_index_count === 471
+    && baseCheckpoint.counts?.archive_not_recorded_count === 114;
+
+  if (isPostImplementation) {
+    assertPostImplementationState(authority, baseCheckpoint, baseStatsCheckpoint, baseRelease, history);
+    console.log('Evidence Archive Payload Verification Batch 2 implementation outputs already applied; verified exact no-op state.');
+    return;
   }
+
+  if (!isPreImplementation) throw new Error('Unexpected pre-implementation archive checkpoint');
   if (baseCheckpoint.counts?.evidence !== 585 || baseCheckpoint.counts?.evidence_relations !== 585 || baseCheckpoint.counts?.market_access_records !== 12 || baseCheckpoint.counts?.assets !== 119) {
     throw new Error('Unexpected pre-implementation canonical counts');
   }
@@ -210,4 +254,4 @@ function build() {
 }
 
 build();
-console.log('Applied exact Evidence Archive Payload Verification Batch 2 implementation outputs.');
+console.log('Applied or verified exact Evidence Archive Payload Verification Batch 2 implementation outputs.');
