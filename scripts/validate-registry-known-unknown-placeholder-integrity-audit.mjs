@@ -14,18 +14,28 @@ const expect = (condition, message) => { if (!condition) failures.push(message);
 const isIsoDate = (value) => /^\d{4}-\d{2}-\d{2}$/.test(String(value ?? '')) && !Number.isNaN(Date.parse(`${value}T00:00:00Z`));
 const allowedStatuses = new Set(['reviewed_non_growth_maintenance_checkpoint', 'reviewed_growth_checkpoint']);
 const allowedKinds = new Set(['non_growth_review_checkpoint', 'record_growth_review_checkpoint']);
+const directReviewLineage = reviewCheckpoint.source_canonical_checkpoint_id === checkpoint.checkpoint_id;
+const maintenanceBridgeLineage = checkpoint.status === 'reviewed_non_growth_maintenance_checkpoint'
+  && checkpoint.source_checkpoint_id === reviewCheckpoint.source_canonical_checkpoint_id;
+const effectiveAuditDate = [checkpoint.recorded_at, reviewCheckpoint.recorded_at].filter(Boolean).sort().at(-1);
 
 expect(allowedStatuses.has(reviewCheckpoint.status), `${reviewCheckpointPath}: unexpected status ${reviewCheckpoint.status}`);
 expect(allowedKinds.has(reviewCheckpoint.checkpoint_kind), `${reviewCheckpointPath}: unexpected checkpoint_kind ${reviewCheckpoint.checkpoint_kind}`);
 expect(Number.isInteger(reviewCheckpoint.source_pr) && reviewCheckpoint.source_pr > 0, `${reviewCheckpointPath}: source_pr must be a positive integer`);
 expect(Number.isInteger(reviewCheckpoint.authority_pr) && reviewCheckpoint.authority_pr > 0, `${reviewCheckpointPath}: authority_pr must be a positive integer`);
 expect(typeof reviewCheckpoint.source_work_item === 'string' && reviewCheckpoint.source_work_item.length > 0, `${reviewCheckpointPath}: source_work_item missing`);
-expect(reviewCheckpoint.source_canonical_checkpoint_id === checkpoint.checkpoint_id, `${reviewCheckpointPath}: canonical checkpoint lineage mismatch`);
+expect(directReviewLineage || maintenanceBridgeLineage, `${reviewCheckpointPath}: canonical checkpoint lineage mismatch`);
 expect(reviewCheckpoint.deleted_known_unknowns === 0, `${reviewCheckpointPath}: deleted known unknowns must be zero`);
 expect(reviewCheckpoint.forced_resolutions === 0, `${reviewCheckpointPath}: forced resolutions must be zero`);
 expect(reviewCheckpoint.exit_boundary === 'REVIEW_GATE', `${reviewCheckpointPath}: exit boundary must be REVIEW_GATE`);
 expect(isIsoDate(reviewCheckpoint.recorded_at), `${reviewCheckpointPath}: recorded_at must be an ISO date`);
-expect(reviewCheckpoint.recorded_at >= checkpoint.recorded_at, `${reviewCheckpointPath}: review date cannot precede canonical checkpoint`);
+expect(isIsoDate(checkpoint.recorded_at), `${checkpointPath}: recorded_at must be an ISO date`);
+if (directReviewLineage) {
+  expect(reviewCheckpoint.recorded_at >= checkpoint.recorded_at, `${reviewCheckpointPath}: review date cannot precede directly reviewed canonical checkpoint`);
+} else if (maintenanceBridgeLineage) {
+  expect(reviewCheckpoint.recorded_at <= checkpoint.recorded_at, `${reviewCheckpointPath}: bridged review date cannot follow maintenance checkpoint`);
+  expect(Number.isInteger(checkpoint.maintenance_pr) && checkpoint.maintenance_pr > 0, `${checkpointPath}: maintenance_pr must be a positive integer for bridged review lineage`);
+}
 
 if (reviewCheckpoint.status === 'reviewed_non_growth_maintenance_checkpoint') {
   expect(reviewCheckpoint.canonical_counts_unchanged === true, `${reviewCheckpointPath}: maintenance checkpoint must preserve canonical counts`);
@@ -33,8 +43,10 @@ if (reviewCheckpoint.status === 'reviewed_non_growth_maintenance_checkpoint') {
 } else {
   expect(reviewCheckpoint.canonical_counts_unchanged === false, `${reviewCheckpointPath}: growth checkpoint must record changed canonical counts`);
   expect(Number.isInteger(reviewCheckpoint.new_canonical_records) && reviewCheckpoint.new_canonical_records > 0, `${reviewCheckpointPath}: growth checkpoint must record positive new_canonical_records`);
-  expect(reviewCheckpoint.source_pr === checkpoint.growth_pr, `${reviewCheckpointPath}: source_pr must equal canonical growth_pr`);
-  expect(reviewCheckpoint.authority_pr === checkpoint.authority_pr, `${reviewCheckpointPath}: authority_pr must equal canonical authority_pr`);
+  if (directReviewLineage) {
+    expect(reviewCheckpoint.source_pr === checkpoint.growth_pr, `${reviewCheckpointPath}: source_pr must equal canonical growth_pr`);
+    expect(reviewCheckpoint.authority_pr === checkpoint.authority_pr, `${reviewCheckpointPath}: authority_pr must equal canonical authority_pr`);
+  }
 }
 
 const countMap = {
@@ -75,7 +87,7 @@ try {
 const report = JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
 const expected = checkpoint.expected_counts ?? checkpoint.counts ?? {};
 expect(report.audit_id === `sog_registry_${checkpoint.asset_count}_known_unknown_placeholder_integrity_${checkpoint.checkpoint_id}`, `unexpected audit_id ${report.audit_id}`);
-expect(report.audit_date === reviewCheckpoint.recorded_at, `unexpected audit date ${report.audit_date}`);
+expect(report.audit_date === effectiveAuditDate, `unexpected audit date ${report.audit_date}`);
 expect(report.checkpoint_id === checkpoint.checkpoint_id, `unexpected checkpoint_id ${report.checkpoint_id}`);
 expect(report.audited_counts?.stable_assets === expected.assets, `expected ${expected.assets} assets, got ${report.audited_counts?.stable_assets}`);
 expect(report.audited_counts?.organizations === expected.organizations, `expected ${expected.organizations} organizations, got ${report.audited_counts?.organizations}`);
