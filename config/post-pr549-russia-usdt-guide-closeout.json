@@ -1,0 +1,79 @@
+{
+  "schema_version": "1.0",
+  "closeout_id": "sog_post_pr549_russia_usdt_regulation_guide_closeout_2026_08_12",
+  "status": "russia_guide_complete_review_gate_restored",
+  "recorded_at": "2026-08-12",
+  "entry_main_commit": "f99d9583105587625a409b959ac928de44248e7b",
+  "guide_lane": {
+    "authority_pr": 548,
+    "implementation_pr": 549,
+    "authority_merge_commit": "04349e7960512c865866d4f3e036b3a9f1ae9c6a",
+    "implementation_merge_commit": "f99d9583105587625a409b959ac928de44248e7b",
+    "production_run": 31504346502,
+    "production_job": 93822011080,
+    "production_result": "success",
+    "production_issue": 479,
+    "production_report_step": "success",
+    "material_ui_change": false,
+    "visual_acceptance_required": false,
+    "authorized_public_files": [
+      "src/pages/guides/russia-stablecoin-rules-2026/index.astro",
+      "src/pages/guides/global-stablecoin-regulation-2026/index.astro",
+      "src/data/guideCatalog.ts"
+    ],
+    "accepted_outcomes": [
+      "russia_guide_current_through_2026_08_11",
+      "global_regulation_guide_synchronized",
+      "guide_revision_history_recorded",
+      "btc_eth_usdt_statement_source_qualified",
+      "no_permanent_three_asset_whitelist_claim",
+      "no_universal_provider_level_usdt_availability_claim",
+      "domestic_payment_prohibition_kept_distinct_from_trading_access",
+      "watcherguru_excluded_from_public_source_list",
+      "canonical_delta_zero"
+    ]
+  },
+  "canonical_checkpoint": {
+    "assets": 119,
+    "organizations": 109,
+    "relationships": 131,
+    "events": 194,
+    "evidence": 585,
+    "evidence_relations": 585,
+    "reserve_reports": 127,
+    "known_unknowns": 352,
+    "regulatory_notes": 9,
+    "deployments": 186,
+    "legal_profiles": 119,
+    "reserve_components": 153,
+    "income_profiles": 119,
+    "market_access_records": 12,
+    "archive_recorded": 463,
+    "archive_not_recorded": 122,
+    "detail_routes": 422,
+    "metadata_checked_routes": 422,
+    "canonical_hash": "sha256:f386c1043ca5e83cafbd88e99746d0609aab0154ed48de1970677758a66ed5fa",
+    "canonical_file_count": 466,
+    "last_canonical_changing_commit": "77e80dd3e2a62fea53ea0eabe91ef78a2d8ab1da"
+  },
+  "restored_lane": {
+    "name": "Evidence Archive Payload Verification Batch 2",
+    "stage": "REVIEW_GATE",
+    "reviewed": 10,
+    "dated_exact_archive_proposals": 8,
+    "reviewed_no_safe_change": 2,
+    "canonical_archive_additions_authorized": 0,
+    "separate_implementation_authority_required": true,
+    "automatic_promotion": false
+  },
+  "forbidden": [
+    "continued_russia_guide_change_without_separate_authority",
+    "canonical_archive_promotion_without_implementation_authority",
+    "canonical_market_access_promotion_from_country_level_law",
+    "automatic_archive_promotion",
+    "canonical_record_change",
+    "schema_or_taxonomy_change",
+    "ranking_or_recommendation_change",
+    "unreviewed_public_output"
+  ]
+}

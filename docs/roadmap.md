@@ -1,7 +1,7 @@
 # Stable or Gone Roadmap
 
-Updated: 2026-08-11  
-Status: Russia USDT Regulation Guide update authorized; canonical Evidence Archive Batch 2 remains preserved at REVIEW_GATE
+Updated: 2026-08-12  
+Status: Russia USDT Regulation Guide update complete and production-verified; Evidence Archive Payload Verification Batch 2 restored at REVIEW_GATE
 
 ## Current reviewed checkpoint
 
@@ -43,13 +43,13 @@ PR #542 — first Compare closeout / Evidence review restoration
 PR #543 — clean Evidence Archive Batch 2 review result
 PR #544/#545/#546 — Compare discovery/navigation remediation and footer-overlap closure
 PR #547 — Compare closeout and REVIEW_GATE restoration
+PR #548 — Russia USDT Regulation Guide authority
+PR #549 — Russia USDT Regulation Guide implementation and production publication
 ```
 
-## Current bounded public lane — Russia USDT Regulation Guide
+## Completed public lane — Russia USDT Regulation Guide
 
-The July 2026 Russian crypto-market law and Bank of Russia implementation work materially supersede the consultation-only framing currently used in SOG's Russia Guide.
-
-The update is bounded to three existing public files:
+The July 2026 Russian crypto-market law and Bank of Russia implementation work were used to replace the prior consultation-only Guide framing. The update remained bounded to:
 
 ```text
 src/pages/guides/russia-stablecoin-rules-2026/index.astro
@@ -57,31 +57,32 @@ src/pages/guides/global-stablecoin-regulation-2026/index.astro
 src/data/guideCatalog.ts
 ```
 
-Source-reviewed claims permitted in the implementation:
+Completed production lineage:
 
 ```text
-law effective: 2026-09-01
-non-qualified investors: most liquid cryptocurrencies after testing, up to RUB 300,000/year via one intermediary
-qualified investors: broader purchase/sale access after testing
-foreign stablecoins: included in the Bank of Russia framework
-organized trading: July draft regulations published
-domestic cryptocurrency payments: prohibited
-BTC / ETH / USDT: identified by First Deputy Governor Vladimir Chistyukhin as the initial three currently meeting the principles, not a permanent statutory whitelist
+Authority PR: #548 — complete
+Implementation PR: #549 — complete
+Implementation/main commit: f99d9583105587625a409b959ac928de44248e7b
+Production run: 31504346502 — success
+Production job: 93822011080 — success
+Issue #479 report step: success
+Material UI/CSS change: no
+Canonical delta: 0
 ```
 
-Watcher.Guru is discovery only and must not appear as a public source or canonical Evidence.
+The accepted result keeps the Russia Guide current through 2026-08-11, synchronizes the global regulation comparison and timeline, source-qualifies the BTC/ETH/USDT statement, keeps domestic cryptocurrency-payment prohibition distinct from trading/investment access, avoids a permanent statutory-whitelist claim, and keeps Watcher.Guru out of the public source list.
 
 ## Market Access v1 decision
 
-No canonical Market Access promotion is authorized by this lane.
+No canonical Market Access promotion was authorized or produced by the Russia lane.
 
-`docs/market-access-record-spec.md` requires a provider-scoped analytical unit:
+`docs/market-access-record-spec.md` requires:
 
 ```text
 asset × jurisdiction × platform/service × function × access state × effective date
 ```
 
-The reviewed Russian legal framework is jurisdiction-level. It does not establish a named provider/service observation for `buy_sell`, `deposit`, `withdrawal`, `external_wallet_transfer`, `direct_issuer_mint`, or `direct_issuer_redemption`.
+Russian country-level law does not establish named provider/service observations for `buy_sell`, `deposit`, `withdrawal`, `external_wallet_transfer`, `direct_issuer_mint`, or `direct_issuer_redemption`.
 
 Therefore:
 
@@ -93,25 +94,11 @@ Stable assets: 119 -> 119
 Canonical delta: 0
 ```
 
-A later Market Access review may start only after a named regulated intermediary or organised-trading platform publishes function-scoped USDT support with an effective date.
+A later Market Access review may start only on material named-provider, function-scoped evidence with an effective date and separate authority.
 
-## Required public implementation outcome
+## Current canonical lane — Evidence Archive Payload Verification Batch 2
 
-```text
-Russia guide current through 2026-08-11
-Russia guide updated from consultation-only framing to enacted framework + July implementation rules
-BTC/ETH/USDT claim explicitly attributed and temporally qualified
-global seven-jurisdiction comparison synchronized
-2026 timeline synchronized
-guideCatalog updatedAt/revision history recorded
-no permanent-whitelist wording
-no universal USDT availability claim
-no canonical-data change
-```
-
-## Preserved canonical lane — Evidence Archive Payload Verification Batch 2
-
-The PR #543 review result remains unchanged:
+The PR #543 review result is restored as the current boundary:
 
 ```text
 reviewed: 10
@@ -121,38 +108,58 @@ canonical changes: 0
 public-output changes: 0
 stage: REVIEW_GATE
 canonical archive additions authorized: 0
+separate implementation authority required: yes
+automatic promotion: prohibited
 ```
 
-The Guide lane temporarily becomes the active public implementation authority only. It does not promote or discard the archive proposals. After Guide implementation, production verification, and closeout, Evidence Archive Payload Verification Batch 2 returns as the current canonical work boundary at `REVIEW_GATE`.
+The eight proposals remain review results only. They are not canonical `archived_url` values until a separate reviewed and merged implementation authority binds the exact IDs/URLs and allowed deltas.
 
 ## Schedule
 
 ```text
-2026-08-11  Russia USDT Regulation Guide source review / authority — active
-next         bounded Guide implementation — authorized after authority merge
-then         production verification / closeout
-then         restore Evidence Archive Payload Verification Batch 2 REVIEW_GATE
-2026-08-17 to 2026-08-23  possible archive implementation window — still separate authority required
+2026-08-11  Russia USDT Regulation Guide authority and implementation — complete
+2026-08-12  post-PR #549 production closeout / REVIEW_GATE restoration — current
+next         separate Evidence Archive Batch 2 implementation authority, only if explicitly continued
+then         bounded implementation of at most the 8 reviewed proposals, only after authority merge
+2026-08-17 to 2026-08-23  prior planning window for possible archive implementation; not permission
 ```
 
 Schedule windows are planning targets, not permission boundaries.
 
+## Next implementation shape if authorized
+
+A later Evidence Archive implementation authority should bind exactly the eight reviewed proposals from PR #543 and must specify:
+
+```text
+exact Evidence IDs and dated Wayback URLs
+maximum archive delta: +8 recorded / -8 not recorded
+Evidence identities unchanged
+Evidence Relations unchanged
+Market Access unchanged
+stable assets unchanged
+canonical hash/count expectations after deterministic mutation
+rollback path
+no automatic continuation
+```
+
+The two `reviewed_no_safe_change` Evidence identities remain unchanged unless later source evidence is separately reviewed.
+
 ## Preserved exclusions
 
 ```text
-USDT lifecycle/status change
-canonical Market Access additions or mutation
-canonical Evidence / Evidence Relation additions
-country-wide provider availability inference
-permanent BTC/ETH/USDT statutory-whitelist claim
 canonical archived_url mutation without separate implementation authority
 automatic archive promotion
+country-wide provider availability inference
+canonical Market Access additions or mutation
+canonical Evidence / Evidence Relation identity additions from the completed Russia Guide lane
+USDT lifecycle/status change
 schema/taxonomy changes
-new public routes
+new public routes without authority
 unrelated UI/CSS changes
 ranking / scoring / recommendation
+continued Russia Guide material change under PR #548/#549 authority
 ```
 
 ## Required work-start protocol
 
-Before implementation, read `AGENTS.md`, `docs/spec-governance.md`, this file, `docs/deployment-policy.md`, the Russia USDT Regulation Guide authority amendment/spec/config, `docs/market-access-record-spec.md`, the post-PR #546 Compare closeout, the completed Evidence Archive Batch 2 review result, and `docs/ui-v3-remediation-authority.md`.
+Before any next implementation, read `AGENTS.md`, `docs/spec-governance.md`, this file, `docs/deployment-policy.md`, the post-PR #549 closeout amendment/spec/config, the completed Evidence Archive Batch 2 review-result package, and the relevant enduring regression authorities. No canonical mutation may begin from the review result alone.
