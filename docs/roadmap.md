@@ -1,9 +1,9 @@
 # Stable or Gone Roadmap
 
 Updated: 2026-08-12  
-Status: Russia USDT Regulation Guide update complete and production-verified; Evidence Archive Payload Verification Batch 2 restored at REVIEW_GATE
+Status: Evidence Archive Payload Verification Batch 2 exact archive implementation authorized
 
-## Current reviewed checkpoint
+## Current canonical checkpoint before implementation
 
 ```text
 Canonical stable assets: 119
@@ -28,7 +28,6 @@ Official origin: https://www.stableorgone.com
 Last canonical-changing commit: 77e80dd3e2a62fea53ea0eabe91ef78a2d8ab1da
 Canonical hash: sha256:f386c1043ca5e83cafbd88e99746d0609aab0154ed48de1970677758a66ed5fa
 Canonical file count: 466
-Canonical delta: 0
 ```
 
 ## Completed current-cycle work
@@ -38,128 +37,100 @@ PR #523 — JPYSC canonical Market Access implementation
 PR #534 — REVIEW_GATE restoration
 PR #535/#536 — Japan Market Access Expansion Review Batch 1 — no-go
 PR #537/#538/#539 — Evidence Archive Payload Verification Batch 2 research/review lineage
-PR #540/#541 — first Stablecoin Compare matrix remediation
-PR #542 — first Compare closeout / Evidence review restoration
 PR #543 — clean Evidence Archive Batch 2 review result
-PR #544/#545/#546 — Compare discovery/navigation remediation and footer-overlap closure
-PR #547 — Compare closeout and REVIEW_GATE restoration
-PR #548 — Russia USDT Regulation Guide authority
-PR #549 — Russia USDT Regulation Guide implementation and production publication
+PR #544/#545/#546/#547 — Compare discovery/navigation remediation / closeout
+PR #548/#549 — Russia USDT Regulation Guide authority / implementation
+PR #550 — Russia Guide closeout and Evidence Archive REVIEW_GATE restoration
 ```
 
-## Completed public lane — Russia USDT Regulation Guide
+## Current lane — Evidence Archive Payload Verification Batch 2
 
-The July 2026 Russian crypto-market law and Bank of Russia implementation work were used to replace the prior consultation-only Guide framing. The update remained bounded to:
+The completed review has now been converted into a separate exact implementation authority.
 
 ```text
-src/pages/guides/russia-stablecoin-rules-2026/index.astro
-src/pages/guides/global-stablecoin-regulation-2026/index.astro
-src/data/guideCatalog.ts
+stage: IMPLEMENTATION_AUTHORIZED
+reviewed: 10
+exact dated archive additions authorized: 8
+reviewed no-safe-change: 2
+field allowed: archived_url only
+new Evidence identities: 0
+Evidence Relation changes: 0
+Market Access changes: 0
+Stable asset changes: 0
+post-implementation boundary: REVIEW_GATE
 ```
 
-Completed production lineage:
+Authorized Evidence IDs:
 
 ```text
-Authority PR: #548 — complete
-Implementation PR: #549 — complete
-Implementation/main commit: f99d9583105587625a409b959ac928de44248e7b
-Production run: 31504346502 — success
-Production job: 93822011080 — success
-Issue #479 report step: success
-Material UI/CSS change: no
-Canonical delta: 0
+sog_src_susd_legacy_context_batch_a
+sog_src_susd_rebuilding_2026
+sog_src_susd_roadmap_2026
+sog_src_susd_sip_status_2026
+sog_src_susd_synthetix_docs
+sog_src_susd_v3_faq_batch_a
+sog_src_terra_docs
+sog_src_tether_transparency
 ```
 
-The accepted result keeps the Russia Guide current through 2026-08-11, synchronizes the global regulation comparison and timeline, source-qualifies the BTC/ETH/USDT statement, keeps domestic cryptocurrency-payment prohibition distinct from trading/investment access, avoids a permanent statutory-whitelist claim, and keeps Watcher.Guru out of the public source list.
-
-## Market Access v1 decision
-
-No canonical Market Access promotion was authorized or produced by the Russia lane.
-
-`docs/market-access-record-spec.md` requires:
+Explicitly unchanged:
 
 ```text
-asset × jurisdiction × platform/service × function × access state × effective date
+sog_src_susd_sip420_2024
+sog_src_susd_sip423_2026
 ```
 
-Russian country-level law does not establish named provider/service observations for `buy_sell`, `deposit`, `withdrawal`, `external_wallet_transfer`, `direct_issuer_mint`, or `direct_issuer_redemption`.
-
-Therefore:
+Expected bounded archive coverage after the implementation:
 
 ```text
-Market Access Records: 12 -> 12
+Archive recorded: 463 -> 471
+Archive not recorded: 122 -> 114
+Maximum archive delta: +8 / -8
 Evidence: 585 -> 585
 Evidence Relations: 585 -> 585
 Stable assets: 119 -> 119
-Canonical delta: 0
+Market Access Records: 12 -> 12
 ```
 
-A later Market Access review may start only on material named-provider, function-scoped evidence with an effective date and separate authority.
-
-## Current canonical lane — Evidence Archive Payload Verification Batch 2
-
-The PR #543 review result is restored as the current boundary:
-
-```text
-reviewed: 10
-dated exact archive proposals: 8
-reviewed no safe change: 2
-canonical changes: 0
-public-output changes: 0
-stage: REVIEW_GATE
-canonical archive additions authorized: 0
-separate implementation authority required: yes
-automatic promotion: prohibited
-```
-
-The eight proposals remain review results only. They are not canonical `archived_url` values until a separate reviewed and merged implementation authority binds the exact IDs/URLs and allowed deltas.
+Each archive URL must exactly match the completed manual payload-review artifact and the current machine-readable implementation authority. No substitute timestamp, normalized URL, source replacement, or additional target is allowed.
 
 ## Schedule
 
 ```text
-2026-08-11  Russia USDT Regulation Guide authority and implementation — complete
-2026-08-12  post-PR #549 production closeout / REVIEW_GATE restoration — current
-next         separate Evidence Archive Batch 2 implementation authority, only if explicitly continued
-then         bounded implementation of at most the 8 reviewed proposals, only after authority merge
-2026-08-17 to 2026-08-23  prior planning window for possible archive implementation; not permission
+2026-08-11  Russia USDT Regulation Guide update — complete
+2026-08-12  PR #550 Russia Guide closeout / production verification — complete
+2026-08-12  Evidence Archive Batch 2 exact implementation authority — current
+next         one bounded 8-record archived_url implementation
+then         production verification and REVIEW_GATE
 ```
 
 Schedule windows are planning targets, not permission boundaries.
 
-## Next implementation shape if authorized
+## Completed Russia Guide lane
 
-A later Evidence Archive implementation authority should bind exactly the eight reviewed proposals from PR #543 and must specify:
+PR #548/#549 completed the three-file Russia/global Guide update. PR #550 closed the lane and main commit `2825eb293f833061deb1ef8bdb628b32a93538cc` completed production run `31509169378` successfully. The Guide lineage authorizes no further material Guide work and created no canonical Market Access or Evidence identity/relation change.
 
-```text
-exact Evidence IDs and dated Wayback URLs
-maximum archive delta: +8 recorded / -8 not recorded
-Evidence identities unchanged
-Evidence Relations unchanged
-Market Access unchanged
-stable assets unchanged
-canonical hash/count expectations after deterministic mutation
-rollback path
-no automatic continuation
-```
+## Market Access v1 boundary
 
-The two `reviewed_no_safe_change` Evidence identities remain unchanged unless later source evidence is separately reviewed.
+`docs/market-access-record-spec.md` requires asset × jurisdiction × platform/service × function × access state × effective date. This archive implementation authorizes no Market Access change.
 
 ## Preserved exclusions
 
 ```text
-canonical archived_url mutation without separate implementation authority
-automatic archive promotion
-country-wide provider availability inference
+any archived_url outside the exact eight authorized IDs
+source URL replacement or normalization
+modification of the two reviewed no-safe-change records
+new Evidence identities or Evidence Relations
 canonical Market Access additions or mutation
-canonical Evidence / Evidence Relation identity additions from the completed Russia Guide lane
-USDT lifecycle/status change
-schema/taxonomy changes
-new public routes without authority
-unrelated UI/CSS changes
+stable-asset change
+schema/taxonomy change
+new public route or unrelated UI/CSS change
 ranking / scoring / recommendation
-continued Russia Guide material change under PR #548/#549 authority
+automatic continuation beyond post-implementation REVIEW_GATE
 ```
+
+Same-count checkpoint/statistics/release-integrity artifacts may be refreshed only when required by the existing deterministic pipeline and only to reflect the bounded eight archive additions.
 
 ## Required work-start protocol
 
-Before any next implementation, read `AGENTS.md`, `docs/spec-governance.md`, this file, `docs/deployment-policy.md`, the post-PR #549 closeout amendment/spec/config, the completed Evidence Archive Batch 2 review-result package, and the relevant enduring regression authorities. No canonical mutation may begin from the review result alone.
+Before implementation, read `AGENTS.md`, `docs/spec-governance.md`, this file, `docs/deployment-policy.md`, the Batch 2 implementation authority amendment/spec/config, and the completed Batch 2 review-result package.
