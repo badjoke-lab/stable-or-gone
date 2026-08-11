@@ -1,1 +1,1 @@
-import './validate-post-pr546-compare-discovery-closeout.mjs';
+import './validate-russia-usdt-regulation-guide-authority.mjs';

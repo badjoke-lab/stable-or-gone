@@ -1,0 +1,74 @@
+{
+  "id": "sog_russia_usdt_regulation_guide_authority_2026_08_11",
+  "status": "public_guide_update_authorized_canonical_preserved",
+  "entry_main_commit": "6bac1ebc75bd178bfb8ca5d47460ea39c4a6e59e",
+  "date": "2026-08-11",
+  "purpose": "Authorize one bounded Russia stablecoin-regulation guide update after the July 2026 Russian crypto-market law and Bank of Russia implementation work, while preserving canonical Market Access and Evidence boundaries.",
+  "source_boundary": {
+    "primary": [
+      "https://cbr.ru/eng/press/event/?id=32724",
+      "https://www.cbr.ru/eng/press/event/?id=32732",
+      "https://cbr.ru/eng/press/event/?id=28215"
+    ],
+    "secondary_direct_interview": [
+      "https://amp.rbc.ru/rbcnews/finances/04/06/2026/6a216e769a79478213bf0163"
+    ],
+    "discovery_only_not_canonical": [
+      "https://x.com/WatcherGuru/status/2087169960627892669"
+    ]
+  },
+  "reviewed_claims": {
+    "law_effective_date": "2026-09-01",
+    "nonqualified_access": "most liquid cryptocurrencies after testing, up to RUB 300000 per year via one intermediary",
+    "qualified_access": "purchase and sale of cryptocurrencies after testing without the nonqualified amount limit",
+    "foreign_stablecoin_scope": "Bank of Russia states that cryptocurrency requirements also apply to foreign stablecoins",
+    "domestic_payment_boundary": "cryptocurrency payments within Russia remain prohibited",
+    "organized_trading": "Bank of Russia has drafted regulations for organised trading in digital currencies and digital rights",
+    "btc_eth_usdt_wording": "Bank of Russia First Deputy Governor Vladimir Chistyukhin told RBC on 2026-06-04 that Bitcoin, Ethereum and USDT are the three currencies that currently meet the initial principles for non-qualified-investor access; this is not to be rendered as a permanent statutory whitelist"
+  },
+  "authorized_public_files": [
+    "src/pages/guides/russia-stablecoin-rules-2026/index.astro",
+    "src/pages/guides/global-stablecoin-regulation-2026/index.astro",
+    "src/data/guideCatalog.ts"
+  ],
+  "required_public_outcomes": [
+    "Russia guide information current through 2026-08-11",
+    "Russia guide distinguishes enacted framework from specific-token interview commentary",
+    "USDT is identified only with source-qualified wording and not as a permanent legal whitelist",
+    "global comparison reflects the 2026-09-01 regulated trading framework and domestic-payment prohibition",
+    "revision history records the 2026-08-11 update"
+  ],
+  "market_access_v1_decision": {
+    "canonical_promotion_authorized": false,
+    "reason": "Market Access Record v1 requires a named platform/service and function-scoped evidence. The reviewed Russia-wide legal framework does not by itself establish a provider-scoped canonical access observation.",
+    "market_access_records_before": 12,
+    "market_access_records_after": 12
+  },
+  "canonical_boundary": {
+    "assets": 119,
+    "evidence": 585,
+    "evidence_relations": 585,
+    "market_access_records": 12,
+    "canonical_hash": "sha256:f386c1043ca5e83cafbd88e99746d0609aab0154ed48de1970677758a66ed5fa",
+    "canonical_file_count": 466,
+    "canonical_delta": 0
+  },
+  "prohibited": [
+    "change USDT lifecycle status",
+    "add or modify canonical Market Access Records",
+    "add canonical Evidence or Evidence Relations",
+    "state that Russia permanently whitelisted exactly BTC ETH and USDT",
+    "state that USDT is universally available to all Russian users or on all Russian exchanges",
+    "infer provider-level deposit withdrawal or external-wallet-transfer support",
+    "ranking scoring recommendation or safety framing",
+    "unrelated UI or CSS changes"
+  ],
+  "restored_after_implementation": {
+    "lane": "Evidence Archive Payload Verification Batch 2",
+    "stage": "REVIEW_GATE",
+    "reviewed": 10,
+    "dated_exact_archive_proposals": 8,
+    "reviewed_no_safe_change": 2,
+    "canonical_archive_additions_authorized": 0
+  }
+}
