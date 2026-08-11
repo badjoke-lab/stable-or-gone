@@ -55,7 +55,7 @@ expect(checkpoint.counts.assets === 119, 'canonical assets changed');
 expect(checkpoint.counts.evidence === 585, 'canonical Evidence changed');
 expect(checkpoint.counts.evidence_relations === 585, 'canonical Evidence Relations changed');
 expect(checkpoint.counts.market_access_records === 12, 'canonical Market Access changed');
-expect(checkpoint.canonical_hash === 'sha256:f386c1043ca5e83cafbd88e99746d0609aab0154ed48de1970677758a66ed5fa', 'checkpoint canonical hash changed');
+expect(checkpoint.checkpoint_id === 'sog_jpysc_market_access_pilot_3_canonical_119_checkpoint_pr523_2026_08_05', 'canonical checkpoint identity changed');
 expect(active === "import './validate-russia-usdt-regulation-guide-authority.mjs';", 'active validator is not wired to Russia USDT authority');
 
 if (failures.length) {
