@@ -29,6 +29,7 @@ if (foundRoot instanceof HTMLElement) {
   const compareAddHelp = root.querySelector<HTMLElement>('[data-comparison-add-help]');
   const compareDock = root.querySelector<HTMLElement>('[data-comparison-dock]');
   const compareRegistry = root.querySelector<HTMLElement>('.stablecoin-index-registry');
+  const compareFooter = document.querySelector<HTMLElement>('.site-footer');
   const compareDockCount = root.querySelector<HTMLElement>('[data-comparison-dock-count]');
   const compareDockRecords = root.querySelector<HTMLElement>('[data-comparison-dock-records]');
   const viewComparison = root.querySelector<HTMLButtonElement>('[data-view-comparison]');
@@ -84,6 +85,7 @@ if (foundRoot instanceof HTMLElement) {
   let selectedComparisons = new Set<string>();
   let comparisonPanelInView = false;
   let comparisonRegistryInView = typeof IntersectionObserver === 'undefined';
+  let comparisonFooterInView = false;
 
   const normalize = (value: unknown) => String(value ?? '').normalize('NFKC').toLocaleLowerCase().trim().replace(/\s+/g, ' ');
   const inputValue = () => search?.value ?? '';
@@ -232,7 +234,7 @@ if (foundRoot instanceof HTMLElement) {
 
   function syncComparisonDockVisibility() {
     if (!compareDock) return;
-    compareDock.hidden = selectedComparisons.size === 0 || comparisonPanelInView || !comparisonRegistryInView;
+    compareDock.hidden = selectedComparisons.size === 0 || comparisonPanelInView || !comparisonRegistryInView || comparisonFooterInView;
   }
 
   function renderComparisonNavigation(selectedSources: HTMLElement[]) {
@@ -499,6 +501,10 @@ if (foundRoot instanceof HTMLElement) {
       comparisonRegistryInView = entry?.isIntersecting ?? false;
       syncComparisonDockVisibility();
     }, { threshold: 0.01 }).observe(compareRegistry);
+    if (compareFooter) new IntersectionObserver(([entry]) => {
+      comparisonFooterInView = entry?.isIntersecting ?? false;
+      syncComparisonDockVisibility();
+    }, { threshold: 0.01 }).observe(compareFooter);
   }
 
   applyState(stateFromUrl());
