@@ -53,59 +53,63 @@ Detail routes: 422
 Metadata-checked routes: 422
 Canonical hash: sha256:f386c1043ca5e83cafbd88e99746d0609aab0154ed48de1970677758a66ed5fa
 Canonical file count: 466
+Canonical delta: 0
 ```
 
-## Stablecoin Compare Discovery and Navigation Remediation — complete
+## Active public deployment lane — Russia USDT Regulation Guide
 
-Compare remediation is complete after PR #546. PR #544 supplied bounded authority, PR #545 supplied the primary implementation, and PR #546 fixed the blocking dock/footer overlap found by direct review of the earlier visual artifact.
+A bounded Guide-only implementation is authorized after the Russia USDT Regulation Guide authority merges.
+
+Authorized implementation files:
 
 ```text
-Final main merge: f8ceedd55b0cc764a2bbc2747bd50f061f288b24
+src/pages/guides/russia-stablecoin-rules-2026/index.astro
+src/pages/guides/global-stablecoin-regulation-2026/index.astro
+src/data/guideCatalog.ts
+```
+
+The implementation must preserve every canonical count and hash. It must not add Market Access or Evidence records. The BTC/ETH/USDT point must be source-qualified as the initial three currently meeting the principles according to Bank of Russia First Deputy Governor Vladimir Chistyukhin, not as a permanent statutory whitelist.
+
+After merge, deployment is not complete until the exact implementation merge commit is built and uploaded to Cloudflare Pages, the public Russia and global Guide routes are verified, canonical hash/counts remain unchanged, and the result is reported to Issue #479.
+
+No screenshot/visual acceptance lane is automatically required because this is content-only and introduces no material UI/CSS change. Existing public-route/build/metadata/Guide regression checks remain binding. If the implementation causes a material presentation change or a direct production defect is found, the normal UI authority/visual-review rules apply.
+
+## Market Access deployment boundary
+
+No canonical Market Access promotion is authorized by the Russia legal-framework review.
+
+```text
+Market Access Records: 12 -> 12
+Evidence: 585 -> 585
+Evidence Relations: 585 -> 585
+```
+
+Market Access Record v1 requires named platform/service and function scope. A Russia-wide law or regulator statement must not be deployed as a provider-specific access row.
+
+## Stablecoin Compare remediation — complete
+
+PR #544/#545/#546 completed the Compare discovery/navigation repair and blocking dock/footer fix. PR #547 closed the lane and restored `REVIEW_GATE`.
+
+```text
 Final visual exact head: 02774d7e9f35abf7c11bbbcb2e39cb6b62172cd7
 Final visual acceptance run: 31498394285 — success
-Final visual artifact: 9103989619
-Direct changed-state artifact review: passed
 Final production run: 31498949423 — success
 Canonical delta: 0
 ```
 
-Production-visible behavior includes:
+The Compare lineage authorizes no further material change.
 
-```text
-comparison panel before public-register results
-fixed Compare dock while browsing register after selection
-dock hidden while matrix is in view or register browsing scope is left
-dock hidden whenever the site footer enters the viewport
-desktop/mobile footer non-overlap explicitly verified
-selected identities visible in dock
-immediate View comparison navigation + focus
-in-panel Add / replace record control
-remove then replace without register scroll round trip
-2 / 3 / 4 aligned matrix preserved
-Differences only and shared URL restore preserved
-fifth selection rejected
-no page-level horizontal overflow
-```
-
-Production run `31498949423` checked out exact main `f8ceedd55b0cc764a2bbc2747bd50f061f288b24`; Cloudflare Pages upload, deployed-production verification, deployment summary, and Issue #479 result reporting all succeeded.
-
-The PR #544/#545/#546 authority/implementation/fix lineage is closed. Any further material Compare change requires separate reviewed authority under `docs/ui-v3-remediation-authority.md`.
-
-## Evidence Archive Payload Verification Batch 2 — review complete / restored
+## Evidence Archive Payload Verification Batch 2 — preserved
 
 ```text
 reviewed: 10
 dated exact archive proposals: 8
 reviewed no safe change: 2
 canonical archive additions authorized: 0
-current boundary: REVIEW_GATE
+current canonical boundary: REVIEW_GATE
 ```
 
-No archive proposal may be published from the review result alone. The eight archive proposals require a separate reviewed and merged implementation authority before any `archived_url` can change.
-
-## Previous Compare matrix remediation
-
-PR #541 merged as `539a27fd5854a1c2544f4653a2161be36860a002`; production run `31326135906` and visual run `31325811381` succeeded. PR #544/#545 later repaired placement/discovery/candidate switching, and PR #546 supplied the final footer-overlap visual closure.
+The Guide lane neither promotes nor rejects the archive proposals. After the Guide implementation is production-verified and closed out, Evidence Archive Payload Verification Batch 2 returns as the current canonical work boundary at `REVIEW_GATE`.
 
 ## Official-origin contract
 
@@ -122,7 +126,7 @@ Path/query preservation, no redirect loops, and no legacy-origin leakage remain 
 
 ## Review-to-production boundary
 
-Canonical work is at Evidence Archive Payload Verification Batch 2 `REVIEW_GATE`. No UI authority changes canonical data. Any next canonical implementation requires a separate reviewed and merged authority.
+The Russia USDT Regulation Guide is a public content lane with Canonical delta: 0. Canonical implementation authority remains `REVIEW_GATE`. Any archive, Market Access, asset, Evidence, schema, taxonomy, or unrelated public change requires a separate reviewed and merged authority.
 
 ## Infrastructure boundary
 
