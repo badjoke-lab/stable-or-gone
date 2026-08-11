@@ -15,11 +15,11 @@ Evidence Archive review: 10 reviewed / 8 exact dated archive additions / 2 no-sa
 Canonical archive additions authorized: exactly 8
 Post-implementation boundary: REVIEW_GATE
 Canonical Market Access promotion authorized: no
-Current canonical checkpoint: sog_jpysc_market_access_pilot_3_canonical_119_checkpoint_pr523_2026_08_05
+Current canonical checkpoint: sog_evidence_archive_payload_verification_batch_2_canonical_119_checkpoint_pr552_2026_08_12
 Current production commit: dynamic; verify via deploy-production workflow and Issue #479
-Last canonical-changing implementation commit: 77e80dd3e2a62fea53ea0eabe91ef78a2d8ab1da
+Last canonical-changing implementation commit before this lane: 77e80dd3e2a62fea53ea0eabe91ef78a2d8ab1da
 Canonical hash before implementation: sha256:f386c1043ca5e83cafbd88e99746d0609aab0154ed48de1970677758a66ed5fa
-Canonical file count: 466
+Canonical file count before implementation: 466
 Official public origin: https://www.stableorgone.com
 ```
 
@@ -27,7 +27,7 @@ Merged repository authority outranks chat memory, handoff prose, issue discussio
 
 The current implementation authority exists only because PR #543 completed manual payload review for the exact ten Batch 2 candidates and accepted eight dated exact archive proposals. The two `reviewed_no_safe_change` identities remain excluded.
 
-## Current canonical counts before implementation
+## Current canonical counts after bounded implementation
 
 ```text
 Canonical stable assets: 119
@@ -44,8 +44,8 @@ Legal profiles: 119
 Reserve components: 153
 Income profiles: 119
 Market Access Records: 12
-Archive recorded: 463
-Archive not recorded: 122
+Archive recorded: 471
+Archive not recorded: 114
 Detail routes: 422
 Metadata-checked routes: 422
 ```
