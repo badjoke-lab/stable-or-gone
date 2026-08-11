@@ -1,9 +1,9 @@
 {
   "schema_version": "1.0",
   "status": "current",
-  "baseline_id": "sog_release_integrity_pr523_119_assets_2026_08_05",
-  "recorded_at": "2026-08-05",
-  "source_checkpoint_commit": "pr523-jpysc-market-access",
+  "baseline_id": "sog_release_integrity_pr552_119_assets_2026_08_12",
+  "recorded_at": "2026-08-12",
+  "source_checkpoint_commit": "pr552-evidence-archive-batch2",
   "registry_parity_baseline": "docs/migration/registry-v3-parity-baseline.json",
   "expected_v2_counts": {
     "stablecoins": 119,
@@ -74,18 +74,18 @@
     "runtime_generation_required": true
   },
   "evidence_quality": {
-    "archive_index_count": 463,
-    "archive_not_recorded_count": 122,
+    "archive_index_count": 471,
+    "archive_not_recorded_count": 114,
     "archive_partition_complete": true,
-    "new_evidence_records": 1,
+    "new_evidence_records": 0,
     "source_replacements": 0,
     "all_new_evidence_primary": true
   },
   "validator": "scripts/validate-counts-manifest-version-provenance-integrity.mjs",
   "audit_report": "docs/audits/counts-manifest-version-provenance-integrity-100-assets.md",
-  "source_pr": 523,
-  "source_commit": "pr523-jpysc-market-access",
-  "captured_at": "2026-08-05",
+  "source_pr": 552,
+  "source_commit": "pr552-evidence-archive-batch2",
+  "captured_at": "2026-08-12",
   "expected_market_access_records": 12,
   "expected_detail_routes": 422
 }

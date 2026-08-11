@@ -11,7 +11,8 @@
     "accessed_at": "2026-06-01",
     "reliability": "high",
     "claim_scope": "reserve",
-    "notes": "USDT transparency and reserve reference."
+    "notes": "USDT transparency and reserve reference.",
+    "archived_url": "https://web.archive.org/web/20220712233033/https://tether.to/en/transparency/"
   },
   {
     "id": "sog_src_tether_assurance_opinions",
@@ -213,7 +214,8 @@
     "accessed_at": "2026-06-01",
     "reliability": "medium",
     "claim_scope": "entity",
-    "notes": "Seed source."
+    "notes": "Seed source.",
+    "archived_url": "https://web.archive.org/web/20210903073902/https://www.terra.money/"
   },
   {
     "id": "sog_src_ust_sec_2023_32",
@@ -534,7 +536,8 @@
     "accessed_at": "2026-06-02",
     "reliability": "medium",
     "claim_scope": "entity_collateral_redemption",
-    "notes": "Seed source."
+    "notes": "Seed source.",
+    "archived_url": "https://web.archive.org/web/20251014024417/https://docs.synthetix.io/"
   },
   {
     "id": "sog_src_susd_sip423_2026",
@@ -596,7 +599,8 @@
       "vote_pending",
       "approved",
       "implemented"
-    ]
+    ],
+    "archived_url": "https://web.archive.org/web/20251117181931/https://sips.synthetix.io/"
   },
   {
     "id": "sog_src_susd_sip420_2024",
@@ -657,7 +661,8 @@
       "minting_deprecation",
       "repeg_plan",
       "420_pool"
-    ]
+    ],
+    "archived_url": "https://web.archive.org/web/20260514190950/https://blog.synthetix.io/rebuilding-susd/"
   },
   {
     "id": "sog_src_susd_roadmap_2026",
@@ -687,7 +692,8 @@
       "repeg_plan",
       "buybacks",
       "collateral_transition"
-    ]
+    ],
+    "archived_url": "https://web.archive.org/web/20260427180444/https://blog.synthetix.io/2026-roadmap/"
   },
   {
     "id": "sog_src_susd_metamask_market_2026_06_18",
