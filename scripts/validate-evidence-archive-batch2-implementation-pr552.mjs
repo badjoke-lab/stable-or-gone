@@ -59,6 +59,8 @@ expect(checkpoint.counts?.archive_index_count === 471, 'archive recorded count m
 expect(checkpoint.counts?.archive_not_recorded_count === 114, 'archive not-recorded count must be 114');
 expect(checkpoint.record_boundary?.next_boundary === 'REVIEW_GATE' && checkpoint.record_boundary?.automatic_continuation === false, 'post-implementation REVIEW_GATE boundary changed');
 
+expect(statsCheckpoint.status === 'reviewed_non_growth_maintenance_checkpoint', 'stats checkpoint status must be reviewed non-growth maintenance');
+expect(statsCheckpoint.checkpoint_kind === 'non_growth_maintenance_checkpoint', 'stats checkpoint kind must be non-growth maintenance');
 expect(statsCheckpoint.checkpoint_id === 'sog_stats_evidence_archive_payload_verification_batch_2_pr552_2026_08_12', 'stats checkpoint ID changed');
 expect(statsCheckpoint.canonical_checkpoint_id === checkpoint.checkpoint_id, 'stats/canonical checkpoint binding changed');
 expect(statsCheckpoint.expected_totals?.assets === 119 && statsCheckpoint.expected_totals?.evidence === 585 && statsCheckpoint.expected_totals?.market_access_records === 12, 'stats checkpoint counts changed');
@@ -72,6 +74,7 @@ expect(release.evidence_quality?.archive_not_recorded_count === 114, 'release ar
 
 const latest = history.snapshots?.at(-1);
 expect(latest?.checkpoint_id === statsCheckpoint.checkpoint_id, 'latest statistics snapshot is not PR552 checkpoint');
+expect(latest?.checkpoint_kind === 'non_growth_maintenance_checkpoint', 'latest statistics snapshot kind changed');
 expect(latest?.canonical_checkpoint_id === checkpoint.checkpoint_id, 'latest statistics snapshot canonical binding changed');
 expect(latest?.totals?.assets === 119 && latest?.totals?.evidence === 585 && latest?.totals?.market_access_records === 12, 'latest statistics totals changed');
 expect(latest?.data_quality?.coverage?.archive_evidence?.count === 471, 'latest statistics archive coverage changed');
