@@ -21,26 +21,21 @@ Authority order:
 Current repository boundary:
 
 ```text
-Current stage: IMPLEMENTATION_AUTHORIZED
-Current authority: docs/roadmap-amendments/2026-08-12-evidence-archive-batch2-implementation-authority.md
-Current quality spec: docs/quality/evidence-archive-batch2-implementation-authority-spec.md
-Current machine-readable contract: config/evidence-archive-payload-verification-batch-2-implementation-authority.json
+Current stage: REVIEW_GATE
+Current closeout: docs/roadmap-amendments/2026-08-12-post-pr552-evidence-archive-batch2-closeout.md
+Current quality spec: docs/quality/post-pr552-evidence-archive-batch2-closeout-spec.md
+Current machine-readable contract: config/post-pr552-evidence-archive-batch2-closeout.json
 Current canonical work boundary: Evidence Archive Payload Verification Batch 2
-Canonical archive additions authorized: exactly 8
+Canonical archive additions authorized: 0
 Canonical Market Access promotion authorized: false
-Post-implementation boundary: REVIEW_GATE
+Public Guide/UI change authorized: false
+Automatic continuation: false
+Next work requires separate reviewed authority: true
 ```
 
-The completed Batch 2 review package remains the source for the exact eight archive URLs:
+PR #551's `IMPLEMENTATION_AUTHORIZED` contract and PR #552's implementation are completed historical lineage. They do not remain continuing authority.
 
-```text
-data/editorial-research/evidence-archive-payload-verification-batch-2-review-2026-08-09.json
-reviewed: 10
-dated exact archive proposals: 8
-reviewed no-safe-change: 2
-```
-
-## 2. Current canonical state before implementation
+## 2. Current canonical state
 
 ```text
 Stable assets: 119
@@ -54,24 +49,25 @@ Known unknowns: 352
 Regulatory notes: 9
 Deployments: 186
 Legal profiles: 119
+Stable asset relationships: 5
 Reserve components: 153
 Income profiles: 119
 Market Access Records: 12
-Archive recorded: 463
-Archive not recorded: 122
+Archive recorded: 471
+Archive not recorded: 114
 Detail routes: 422
 Metadata-checked routes: 422
 Official public origin: https://www.stableorgone.com
-Last canonical-changing commit: 77e80dd3e2a62fea53ea0eabe91ef78a2d8ab1da
-Canonical hash: sha256:f386c1043ca5e83cafbd88e99746d0609aab0154ed48de1970677758a66ed5fa
+Current production commit: ada106dd3bf9899adc441c968fa36978ae515a5c
+Canonical hash: sha256:4e7570b6fab88a8178a01ae280a36d98787573b376440b891491f25469458798
 Canonical file count: 466
 ```
 
-## 3. Exact Evidence Archive implementation authority
+## 3. Completed Evidence Archive Batch 2 implementation
 
-Only `archived_url` may be added, and only to the eight Evidence identities bound in `config/evidence-archive-payload-verification-batch-2-implementation-authority.json`.
+The completed Batch 2 review package recorded ten reviewed identities: eight exact dated archive proposals and two reviewed no-safe-change outcomes. PR #551 converted those eight exact URLs into a bounded implementation authority. PR #552 consumed that authority and production run `31514472928` verified main commit `ada106dd3bf9899adc441c968fa36978ae515a5c` at the official origin.
 
-Expected bounded result:
+Accepted bounded result:
 
 ```text
 Evidence: 585 -> 585
@@ -80,21 +76,17 @@ Stable assets: 119 -> 119
 Market Access Records: 12 -> 12
 Archive recorded: 463 -> 471
 Archive not recorded: 122 -> 114
-Maximum archive delta: +8 / -8
+Exact archived_url additions: 8
+Reviewed no-safe-change outcomes preserved: 2
 ```
 
-The following two reviewed outcomes remain unchanged and outside implementation authority:
+No source URL replacement, source normalization, Evidence identity/relation change, asset change, Market Access change, schema/taxonomy change, public route change, material UI/CSS change, ranking, scoring, or recommendation occurred under that implementation.
 
-```text
-sog_src_susd_sip420_2024
-sog_src_susd_sip423_2026
-```
-
-No source URL replacement, source normalization, Evidence identity/relation change, asset change, Market Access change, schema/taxonomy change, public route change, material UI/CSS change, ranking, scoring, or recommendation is authorized.
-
-Same-count checkpoint/statistics/release-integrity artifacts may change only as deterministic consequences of these eight exact archive additions and existing repository validation requirements.
+No further archive addition is authorized from PR #551 or PR #552.
 
 ## 4. Historical completed lanes
+
+PR #551 authorized and PR #552 implemented the exact Evidence Archive Payload Verification Batch 2 archive maintenance. PR #552 merged as `ada106dd3bf9899adc441c968fa36978ae515a5c`; production run `31514472928` / job `93856057816` succeeded. This lineage is complete.
 
 PR #548/#549 completed the Russia USDT Regulation Guide update. PR #550 closed the temporary Guide authority, restored the Evidence Archive boundary, and merged as `2825eb293f833061deb1ef8bdb628b32a93538cc`; production run `31509169378` succeeded. The Russia Guide lineage authorizes no further Guide work.
 
@@ -108,7 +100,7 @@ The canonical analytical unit remains:
 asset × jurisdiction × platform/service × function × access state × effective date
 ```
 
-This Evidence Archive implementation authorizes no Market Access additions or mutation.
+No Market Access addition or mutation is currently authorized.
 
 ## 6. Current sequence
 
@@ -117,9 +109,11 @@ PR #537/#538/#539 — Evidence Archive Batch 2 review lineage — complete
 PR #543 — clean Batch 2 review result — complete
 PR #548/#549 — Russia Guide authority / implementation — complete
 PR #550 — Russia Guide closeout / REVIEW_GATE restoration — complete
-current — Evidence Archive Batch 2 exact implementation authority
-next — one bounded 8-record archived_url implementation
-then — production verification and REVIEW_GATE
+PR #551 — Evidence Archive Batch 2 exact implementation authority — complete
+PR #552 — bounded eight-record archived_url implementation — complete
+production run 31514472928 — success
+current — REVIEW_GATE
+next — separate reviewed authority required before any new material work
 ```
 
 ## 7. Canonical/public safety
@@ -127,8 +121,8 @@ then — production verification and REVIEW_GATE
 ```text
 canonical_only = true
 includes_unreviewed_candidates = false
-canonical implementation authority = IMPLEMENTATION_AUTHORIZED
-canonical archive additions authorized = 8
+current stage = REVIEW_GATE
+canonical archive additions authorized = 0
 canonical Market Access promotion authorized = false
 public Guide/UI change authorized = false
 automatic continuation = false
@@ -136,8 +130,8 @@ automatic continuation = false
 
 ## 8. Mandatory reading
 
-Before implementation, read `AGENTS.md`, this file, `docs/roadmap.md`, `docs/deployment-policy.md`, the Batch 2 implementation authority amendment/spec/config, the completed Batch 2 review-result package, and `docs/market-access-record-spec.md`.
+Before substantive continuation, read `AGENTS.md`, this file, `docs/roadmap.md`, `docs/deployment-policy.md`, the post-PR552 closeout amendment/spec/contract, `docs/market-access-record-spec.md`, and `docs/ui-v3-remediation-authority.md`.
 
 ## 9. Exit
 
-After the exact eight reviewed archive additions merge and production verification succeeds, return to `REVIEW_GATE`. No Batch 3 or further canonical mutation is automatically authorized.
+Current exit is `REVIEW_GATE`. No Batch 3 or further canonical/public mutation is automatically authorized. A future work item requires a separate reviewed authority.
