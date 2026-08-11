@@ -25,6 +25,46 @@ async function screenshotViewport(page, name) {
   await page.screenshot({ path: path.join(outputDir, `${name}.png`), fullPage: false });
 }
 
+async function scrollFooterIntoViewport(page, visiblePixels) {
+  await page.evaluate((pixels) => {
+    const footer = document.querySelector('.site-footer');
+    if (!(footer instanceof HTMLElement)) return;
+    const absoluteTop = footer.getBoundingClientRect().top + window.scrollY;
+    window.scrollTo(0, Math.max(0, absoluteTop - window.innerHeight + pixels));
+  }, visiblePixels);
+  await page.waitForTimeout(150);
+}
+
+async function footerDockState(page) {
+  return page.evaluate(() => {
+    const dock = document.querySelector('[data-comparison-dock]');
+    const footer = document.querySelector('.site-footer');
+    const registry = document.querySelector('.stablecoin-index-registry');
+    if (!(dock instanceof HTMLElement) || !(footer instanceof HTMLElement) || !(registry instanceof HTMLElement)) return null;
+    const dockRect = dock.getBoundingClientRect();
+    const footerRect = footer.getBoundingClientRect();
+    const registryRect = registry.getBoundingClientRect();
+    const dockVisible = !dock.hasAttribute('hidden') && dockRect.width > 0 && dockRect.height > 0;
+    const footerVisible = footerRect.bottom > 0 && footerRect.top < window.innerHeight;
+    const registryVisible = registryRect.bottom > 0 && registryRect.top < window.innerHeight;
+    const overlap = dockVisible
+      && dockRect.left < footerRect.right
+      && dockRect.right > footerRect.left
+      && dockRect.top < footerRect.bottom
+      && dockRect.bottom > footerRect.top;
+    return {
+      dockHidden: dock.hasAttribute('hidden'),
+      dockVisible,
+      footerVisible,
+      registryVisible,
+      overlap,
+      dock: { top: dockRect.top, bottom: dockRect.bottom, left: dockRect.left, right: dockRect.right },
+      footer: { top: footerRect.top, bottom: footerRect.bottom, left: footerRect.left, right: footerRect.right },
+      registry: { top: registryRect.top, bottom: registryRect.bottom }
+    };
+  });
+}
+
 async function desktop(browser) {
   const context = await browser.newContext({ viewport: { width: 1440, height: 950 }, reducedMotion: 'reduce' });
   const page = await context.newPage();
@@ -70,6 +110,14 @@ async function desktop(browser) {
   });
   record('dock_persists_while_browsing_register', !sticky.hidden && sticky.position === 'fixed' && sticky.top >= 0 && sticky.bottom <= sticky.viewport, sticky);
   await screenshotViewport(page, 'desktop-two-selected-register-dock');
+
+  await scrollFooterIntoViewport(page, 120);
+  const desktopFooter = await footerDockState(page);
+  record('desktop_footer_dock_non_overlap', Boolean(desktopFooter?.footerVisible && desktopFooter?.registryVisible && desktopFooter?.dockHidden && !desktopFooter?.overlap), desktopFooter ?? {});
+  await screenshotViewport(page, 'desktop-two-selected-footer-guard');
+
+  await page.locator('.stablecoin-index-registry').scrollIntoViewIfNeeded();
+  await page.waitForTimeout(150);
   await page.locator('[data-view-comparison]').click();
   await page.waitForTimeout(450);
   const viewTarget = await page.locator('[data-comparison-panel]').evaluate((panel) => ({ top: panel.getBoundingClientRect().top, active: document.activeElement === panel, dockHidden: document.querySelector('[data-comparison-dock]')?.hasAttribute('hidden') }));
@@ -122,6 +170,14 @@ async function mobile(browser) {
   record('mobile_one_selection_sticky_dock', !one.hidden && one.position === 'fixed' && one.top >= 0 && one.bottom <= 844 && one.width <= one.viewportWidth, one);
   record('mobile_one_page_overflow', !(await overflow(page)));
   await screenshotViewport(page, 'mobile-one-selected-register-dock');
+
+  await page.goto(`${baseUrl}/stablecoins/?compare=usdt,usdc`, { waitUntil: 'networkidle' });
+  await waitForSelection(page, 2);
+  await scrollFooterIntoViewport(page, 96);
+  const mobileFooter = await footerDockState(page);
+  record('mobile_footer_dock_non_overlap', Boolean(mobileFooter?.footerVisible && mobileFooter?.registryVisible && mobileFooter?.dockHidden && !mobileFooter?.overlap), mobileFooter ?? {});
+  record('mobile_footer_page_overflow', !(await overflow(page)));
+  await screenshotViewport(page, 'mobile-two-selected-footer-guard');
 
   await page.goto(`${baseUrl}/stablecoins/?compare=usdt,usdc,dai,ust`, { waitUntil: 'networkidle' });
   await waitForSelection(page, 4);
