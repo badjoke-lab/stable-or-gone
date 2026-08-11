@@ -16,6 +16,8 @@ const resultPath = 'docs/migration/evidence-archive-payload-verification-batch-2
 const canonicalCheckpointId = 'sog_evidence_archive_payload_verification_batch_2_canonical_119_checkpoint_pr552_2026_08_12';
 const statsCheckpointId = 'sog_stats_evidence_archive_payload_verification_batch_2_pr552_2026_08_12';
 const releaseBaselineId = 'sog_release_integrity_pr552_119_assets_2026_08_12';
+const statsCheckpointStatus = 'reviewed_non_growth_maintenance_checkpoint';
+const statsCheckpointKind = 'non_growth_maintenance_checkpoint';
 
 function assertAuthority(authority) {
   if (authority.status !== 'approved_bounded_implementation') throw new Error('Batch 2 implementation authority is not approved');
@@ -123,9 +125,9 @@ function updateCheckpoint(base) {
 function updateStatsCheckpoint(base) {
   return {
     schema_version: '1.0',
-    status: 'reviewed_non_growth_checkpoint',
+    status: statsCheckpointStatus,
     checkpoint_id: statsCheckpointId,
-    checkpoint_kind: 'non_growth_archive_maintenance_checkpoint',
+    checkpoint_kind: statsCheckpointKind,
     recorded_at: '2026-08-12',
     registry_version: 'pr552-evidence-archive-batch2',
     asset_count: 119,
@@ -183,12 +185,28 @@ function assertPostImplementationState(authority, checkpoint, statsCheckpoint, r
   if (checkpoint.counts?.archive_index_count !== 471 || checkpoint.counts?.archive_not_recorded_count !== 114) throw new Error('Unexpected post-implementation archive checkpoint');
   if (checkpoint.counts?.evidence !== 585 || checkpoint.counts?.evidence_relations !== 585 || checkpoint.counts?.market_access_records !== 12 || checkpoint.counts?.assets !== 119) throw new Error('Unexpected post-implementation canonical counts');
   if (statsCheckpoint.checkpoint_id !== statsCheckpointId || statsCheckpoint.canonical_checkpoint_id !== canonicalCheckpointId) throw new Error('Unexpected post-implementation statistics checkpoint');
+  if (statsCheckpoint.status !== statsCheckpointStatus || statsCheckpoint.checkpoint_kind !== statsCheckpointKind) throw new Error('Unexpected post-implementation statistics checkpoint type');
   if (release.baseline_id !== releaseBaselineId || release.evidence_quality?.archive_index_count !== 471 || release.evidence_quality?.archive_not_recorded_count !== 114) throw new Error('Unexpected post-implementation release baseline');
   const latest = history.snapshots?.at(-1);
-  if (latest?.checkpoint_id !== statsCheckpointId || latest?.canonical_checkpoint_id !== canonicalCheckpointId || latest?.data_quality?.coverage?.archive_evidence?.count !== 471) throw new Error('Unexpected post-implementation statistics history');
+  if (latest?.checkpoint_id !== statsCheckpointId || latest?.canonical_checkpoint_id !== canonicalCheckpointId || latest?.checkpoint_kind !== statsCheckpointKind || latest?.data_quality?.coverage?.archive_evidence?.count !== 471) throw new Error('Unexpected post-implementation statistics history');
   const result = read(resultPath);
   if (result.changed_count !== 8 || result.changed?.length !== 8 || result.next_boundary !== 'REVIEW_GATE' || result.automatic_continuation !== false) throw new Error('Unexpected post-implementation result artifact');
   assertArchivesApplied(authority);
+}
+
+function normalizePostImplementationStatsCheckpoint(statsCheckpoint, history) {
+  if (statsCheckpoint.status === statsCheckpointStatus && statsCheckpoint.checkpoint_kind === statsCheckpointKind) {
+    return { statsCheckpoint, history };
+  }
+  const normalized = {
+    ...statsCheckpoint,
+    status: statsCheckpointStatus,
+    checkpoint_kind: statsCheckpointKind
+  };
+  write(statsCheckpointPath, normalized);
+  const nextHistory = updateStatsHistory(history);
+  write(statsHistoryPath, nextHistory);
+  return { statsCheckpoint: normalized, history: nextHistory };
 }
 
 function build() {
@@ -206,8 +224,9 @@ function build() {
     && baseCheckpoint.counts?.archive_not_recorded_count === 114;
 
   if (isPostImplementation) {
-    assertPostImplementationState(authority, baseCheckpoint, baseStatsCheckpoint, baseRelease, history);
-    console.log('Evidence Archive Payload Verification Batch 2 implementation outputs already applied; verified exact no-op state.');
+    const normalized = normalizePostImplementationStatsCheckpoint(baseStatsCheckpoint, history);
+    assertPostImplementationState(authority, baseCheckpoint, normalized.statsCheckpoint, baseRelease, normalized.history);
+    console.log('Evidence Archive Payload Verification Batch 2 implementation outputs already applied; verified exact post-state.');
     return;
   }
 
