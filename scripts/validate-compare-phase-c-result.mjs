@@ -72,19 +72,24 @@ for (const requiredText of ['Hide matching rows', 'Nothing to hide', 'mnee', 'us
   if (!amendment.toLowerCase().includes(requiredText.toLowerCase())) throw new Error(`Phase C roadmap amendment missing ${requiredText}.`);
 }
 
+const entryRequired = [
+  'MAINTENANCE_AUTHORITY_PHASE_D_NEXT',
+  'config/compare-logo-maintenance-authority.json',
+  'docs/quality/compare-logo-maintenance-spec.md',
+  'docs/quality/stablecoin-logo-disposition-operating-spec.md',
+  'config/compare-phase-c-implementation-result.json',
+  'docs/quality/compare-phase-c-review-result-spec.md',
+  'docs/roadmap-amendments/2026-08-12-compare-phase-c-review-result.md',
+  'mnee', 'usdgo', 'usr', canonicalHash
+];
 for (const entryPath of entryPaths) {
   const text = fs.readFileSync(entryPath, 'utf8');
-  for (const requiredText of [
-    'MAINTENANCE_AUTHORITY_PHASE_D_NEXT',
-    'config/compare-phase-c-implementation-result.json',
-    'docs/quality/compare-phase-c-review-result-spec.md',
-    'docs/roadmap-amendments/2026-08-12-compare-phase-c-review-result.md',
-    'mnee', 'usdgo', 'usr', canonicalHash
-  ]) {
-    if (!text.includes(requiredText)) throw new Error(`${entryPath} must cite Phase C result boundary: missing ${requiredText}.`);
+  for (const requiredText of entryRequired) if (!text.includes(requiredText)) throw new Error(`${entryPath} missing current Phase C/Phase D authority marker: ${requiredText}.`);
+  if (!text.includes('Phase D') || !(text.includes('NEXT') || text.includes('next'))) throw new Error(`${entryPath} must establish Phase D as next after Phase C.`);
+  if (!text.toLowerCase().includes('automatic continuation')) throw new Error(`${entryPath} must preserve the automatic-continuation boundary.`);
+  if (!(text.toLowerCase().includes('automatic continuation beyond closeout: false') || text.toLowerCase().includes('no automatic continuation'))) {
+    throw new Error(`${entryPath} must explicitly disable automatic continuation.`);
   }
-  if (!/Phase D[\s\S]{0,180}(NEXT|next)/.test(text)) throw new Error(`${entryPath} must establish Phase D as next after Phase C.`);
-  if (!/automatic continuation[^\n]*(false|no)/i.test(text)) throw new Error(`${entryPath} must preserve no automatic continuation.`);
 }
 
 console.log('Phase C Compare feedback and mark implementation result: pass');
