@@ -35,6 +35,8 @@ jobs:
         run: npm run validate:baseline
       - name: Validate active workstream
         run: npm run validate:active-workstream
+      - name: Audit Stablecoin logo disposition coverage
+        run: node scripts/audit-stablecoin-logo-coverage.mjs
       - name: Validate organization and relationship integrity audit
         run: node scripts/validate-registry-organization-relationship-audit.mjs
       - name: Validate reserve redemption backing audit
