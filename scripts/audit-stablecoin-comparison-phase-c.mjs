@@ -11,11 +11,7 @@ const normalize = (value) => String(value ?? '').normalize('NFKC').toLocaleLower
 function comparisonStats(records) {
   const keys = Object.keys(records[0]?.values ?? {});
   const differing = keys.filter((key) => new Set(records.map((record) => normalize(record.values[key]))).size > 1);
-  return {
-    total: keys.length,
-    differing: differing.length,
-    matching: keys.length - differing.length
-  };
+  return { total: keys.length, differing: differing.length, matching: keys.length - differing.length };
 }
 
 function findPair(records, predicate) {
@@ -61,8 +57,7 @@ try {
   if (records.some((record) => Object.keys(record.values).length !== 15)) throw new Error('Every comparison source must expose exactly 15 aligned attributes.');
 
   const matchingCase = findPair(records, (stats) => stats.matching > 0 && stats.differing > 0);
-  const allDifferentCase = findPair(records, (stats) => stats.matching === 0)
-    || findTriple(records, (stats) => stats.matching === 0);
+  const allDifferentCase = findPair(records, (stats) => stats.matching === 0) || findTriple(records, (stats) => stats.matching === 0);
   const directRecord = records.find((record) => record.markKind === 'logo');
   const fallbackRecord = records.find((record) => record.markKind === 'fallback');
 
@@ -82,27 +77,19 @@ try {
   const feedback = page.locator('[data-comparison-feedback]');
   const rowLocator = page.locator('[data-comparison-row]');
 
-  if ((await page.locator('.comparison-differences-toggle').innerText()).trim() !== 'Hide matching rows') {
-    throw new Error('Compare matching-row control must be labeled “Hide matching rows”.');
-  }
+  if ((await page.locator('.comparison-differences-toggle').innerText()).trim() !== 'Hide matching rows') throw new Error('Compare matching-row control must be labeled “Hide matching rows”.');
 
   const fullRowCount = await rowLocator.count();
   if (fullRowCount !== matchingCase.stats.total) throw new Error(`Expected ${matchingCase.stats.total} full rows, found ${fullRowCount}.`);
   const initialFeedback = (await feedback.innerText()).trim();
-  if (!initialFeedback.includes(`${matchingCase.stats.differing} differing attribute`)
-    || !initialFeedback.includes(`${matchingCase.stats.matching} matching attribute`)
-    || !initialFeedback.endsWith('shown.')) {
-    throw new Error(`Unexpected matching-case initial feedback: ${initialFeedback}`);
-  }
+  if (!initialFeedback.includes(`${matchingCase.stats.differing} differing attribute`) || !initialFeedback.includes(`${matchingCase.stats.matching} matching attribute`) || !initialFeedback.endsWith('shown.')) throw new Error(`Unexpected matching-case initial feedback: ${initialFeedback}`);
 
   await matchingToggle.check();
   await page.waitForFunction((expected) => document.querySelectorAll('[data-comparison-row]').length === expected, matchingCase.stats.differing);
   const reducedRowCount = await rowLocator.count();
   const hiddenFeedback = (await feedback.innerText()).trim();
   if (reducedRowCount !== matchingCase.stats.differing) throw new Error('Hide matching rows did not reduce the matrix to differing attributes.');
-  if (!hiddenFeedback.includes(`${matchingCase.stats.matching} matching attribute`) || !hiddenFeedback.endsWith('hidden.')) {
-    throw new Error(`Matching hidden-count feedback is missing: ${hiddenFeedback}`);
-  }
+  if (!hiddenFeedback.includes(`${matchingCase.stats.matching} matching attribute`) || !hiddenFeedback.endsWith('hidden.')) throw new Error(`Matching hidden-count feedback is missing: ${hiddenFeedback}`);
 
   await matchingToggle.uncheck();
   await page.waitForFunction((expected) => document.querySelectorAll('[data-comparison-row]').length === expected, matchingCase.stats.total);
@@ -117,31 +104,35 @@ try {
   const allDifferentRowsAfter = await page.locator('[data-comparison-row]').count();
   const noOpFeedback = (await page.locator('[data-comparison-feedback]').innerText()).trim();
   if (allDifferentRowsAfter !== allDifferentRowsBefore) throw new Error('All-different no-op selection unexpectedly changed row count.');
-  if (!noOpFeedback.includes('All displayed attributes already differ. Nothing to hide.')) {
-    throw new Error(`Explicit all-different no-op feedback is missing: ${noOpFeedback}`);
-  }
+  if (!noOpFeedback.includes('All displayed attributes already differ. Nothing to hide.')) throw new Error(`Explicit all-different no-op feedback is missing: ${noOpFeedback}`);
 
   const markSelection = [directRecord, fallbackRecord];
   await page.setViewportSize({ width: 1440, height: 1200 });
   await page.goto(compareUrl(markSelection), { waitUntil: 'networkidle' });
   await waitForComparison(markSelection.length);
   const desktopMarkKinds = await page.locator('[data-comparison-header-mark]').evaluateAll((marks) => marks.map((mark) => mark.getAttribute('data-mark-kind')));
-  if (!desktopMarkKinds.includes('logo') || !desktopMarkKinds.includes('fallback')) {
-    throw new Error(`Compare headers must preserve direct and fallback mark semantics, got ${desktopMarkKinds.join(', ')}.`);
-  }
+  if (!desktopMarkKinds.includes('logo') || !desktopMarkKinds.includes('fallback')) throw new Error(`Compare headers must preserve direct and fallback mark semantics, got ${desktopMarkKinds.join(', ')}.`);
   await page.locator('[data-comparison-panel]').screenshot({ path: path.join(artifactDir, 'compare-desktop-direct-fallback.png') });
 
   await page.setViewportSize({ width: 390, height: 1000 });
   await page.goto(compareUrl(markSelection), { waitUntil: 'networkidle' });
   await waitForComparison(markSelection.length);
   const mobileMarkKinds = await page.locator('[data-comparison-header-mark]').evaluateAll((marks) => marks.map((mark) => mark.getAttribute('data-mark-kind')));
-  if (!mobileMarkKinds.includes('logo') || !mobileMarkKinds.includes('fallback')) {
-    throw new Error(`Mobile Compare headers lost direct/fallback mark semantics, got ${mobileMarkKinds.join(', ')}.`);
-  }
+  if (!mobileMarkKinds.includes('logo') || !mobileMarkKinds.includes('fallback')) throw new Error(`Mobile Compare headers lost direct/fallback mark semantics, got ${mobileMarkKinds.join(', ')}.`);
   const matrixShell = page.locator('[data-comparison-grid]');
   const horizontalGeometry = await matrixShell.evaluate((element) => ({ clientWidth: element.clientWidth, scrollWidth: element.scrollWidth }));
   if (horizontalGeometry.scrollWidth <= horizontalGeometry.clientWidth) throw new Error('Mobile comparison matrix must remain horizontally scrollable and bounded.');
-  await page.locator('[data-comparison-panel]').screenshot({ path: path.join(artifactDir, 'compare-mobile-direct-fallback.png') });
+
+  await matrixShell.evaluate((element) => { element.scrollLeft = 0; });
+  await page.locator('[data-comparison-panel]').screenshot({ path: path.join(artifactDir, 'compare-mobile-direct.png') });
+  const leftScroll = await matrixShell.evaluate((element) => element.scrollLeft);
+
+  const rightScroll = await matrixShell.evaluate((element) => {
+    element.scrollLeft = element.scrollWidth - element.clientWidth;
+    return element.scrollLeft;
+  });
+  if (rightScroll <= leftScroll) throw new Error('Mobile comparison matrix did not scroll to expose the fallback record column.');
+  await page.locator('[data-comparison-panel]').screenshot({ path: path.join(artifactDir, 'compare-mobile-fallback.png') });
 
   const result = {
     ok: true,
@@ -170,7 +161,9 @@ try {
       desktop_mark_kinds: desktopMarkKinds,
       mobile_mark_kinds: mobileMarkKinds,
       mobile_matrix_client_width: horizontalGeometry.clientWidth,
-      mobile_matrix_scroll_width: horizontalGeometry.scrollWidth
+      mobile_matrix_scroll_width: horizontalGeometry.scrollWidth,
+      mobile_direct_artifact_scroll_left: leftScroll,
+      mobile_fallback_artifact_scroll_left: rightScroll
     }
   };
 
