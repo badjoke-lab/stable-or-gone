@@ -14,36 +14,71 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - name: Capture exact approved first-party assets
+      - name: Capture reviewed and current first-party assets
         shell: bash
         run: |
           set -euo pipefail
           mkdir -p phase-d-logo-assets
+
           curl --fail --location --retry 3 --silent --show-error \
             'https://www.mnee.io/mnee.svg' \
             -o phase-d-logo-assets/mnee.svg
           curl --fail --location --retry 3 --silent --show-error \
-            'https://cdn.prod.website-files.com/649e7e19aca422fdfb636e26/698e17498a40c5465d610e87_Layer_1.svg' \
-            -o phase-d-logo-assets/usdgo.svg
-          curl --fail --location --retry 3 --silent --show-error \
             'https://framerusercontent.com/images/jr6pCURt19DV9uNMz7A80qtO8c.png?height=256&width=256' \
             -o phase-d-logo-assets/usr.png
-          test -s phase-d-logo-assets/mnee.svg
-          test -s phase-d-logo-assets/usdgo.svg
-          test -s phase-d-logo-assets/usr.png
+
+          # Phase-B USDGO candidate. Kept in the artifact for comparison only;
+          # direct inspection showed that this is a product illustration, not a compact mark.
+          curl --fail --location --retry 3 --silent --show-error \
+            'https://cdn.prod.website-files.com/649e7e19aca422fdfb636e26/698e17498a40c5465d610e87_Layer_1.svg' \
+            -o phase-d-logo-assets/usdgo-phase-b-candidate.svg
+
+          # Current first-party USDGO site and OSL listing imagery for corrective review.
+          curl --fail --location --retry 3 --silent --show-error \
+            'https://static.usdgo.com/static/image/1.ffeae1b8.png' \
+            -o phase-d-logo-assets/usdgo-site-1.png
+          curl --fail --location --retry 3 --silent --show-error \
+            'https://static.usdgo.com/static/image/2.c25caf67.png' \
+            -o phase-d-logo-assets/usdgo-site-2.png
+          curl --fail --location --retry 3 --silent --show-error \
+            'https://images.ctfassets.net/s9n78lc7gxyk/3ee6W7VBgY6mJhWyJ7LZil/ef3177ad09be6751df03af466dcfd19c/Trading_Pairs_USDGO__eng_.png' \
+            -o phase-d-logo-assets/usdgo-osl-listing.png
+          curl --fail --location --retry 3 --silent --show-error \
+            'https://www.usdgo.com/' \
+            -o phase-d-logo-assets/usdgo-home.html
+
+          for file in \
+            mnee.svg \
+            usr.png \
+            usdgo-phase-b-candidate.svg \
+            usdgo-site-1.png \
+            usdgo-site-2.png \
+            usdgo-osl-listing.png \
+            usdgo-home.html; do
+            test -s "phase-d-logo-assets/$file"
+          done
+
           file phase-d-logo-assets/* | tee phase-d-logo-assets/file-types.txt
-          sha256sum phase-d-logo-assets/mnee.svg phase-d-logo-assets/usdgo.svg phase-d-logo-assets/usr.png | tee phase-d-logo-assets/sha256.txt
-          wc -c phase-d-logo-assets/mnee.svg phase-d-logo-assets/usdgo.svg phase-d-logo-assets/usr.png | tee phase-d-logo-assets/sizes.txt
+          sha256sum phase-d-logo-assets/* | tee phase-d-logo-assets/sha256.txt
+          wc -c phase-d-logo-assets/* | tee phase-d-logo-assets/sizes.txt
+          grep -Eo 'https://static\.usdgo\.com[^"'"'"'<> ]+|/static/[^"'"'"'<> ]+\.(png|svg|webp)' phase-d-logo-assets/usdgo-home.html \
+            | sort -u \
+            > phase-d-logo-assets/usdgo-home-assets.txt || true
+
           cat > phase-d-logo-assets/source-urls.txt <<'EOF'
           mnee.svg https://www.mnee.io/mnee.svg
-          usdgo.svg https://cdn.prod.website-files.com/649e7e19aca422fdfb636e26/698e17498a40c5465d610e87_Layer_1.svg
           usr.png https://framerusercontent.com/images/jr6pCURt19DV9uNMz7A80qtO8c.png?height=256&width=256
+          usdgo-phase-b-candidate.svg https://cdn.prod.website-files.com/649e7e19aca422fdfb636e26/698e17498a40c5465d610e87_Layer_1.svg
+          usdgo-site-1.png https://static.usdgo.com/static/image/1.ffeae1b8.png
+          usdgo-site-2.png https://static.usdgo.com/static/image/2.c25caf67.png
+          usdgo-osl-listing.png https://images.ctfassets.net/s9n78lc7gxyk/3ee6W7VBgY6mJhWyJ7LZil/ef3177ad09be6751df03af466dcfd19c/Trading_Pairs_USDGO__eng_.png
+          usdgo-home.html https://www.usdgo.com/
           EOF
 
-      - name: Upload exact source assets
+      - name: Upload source review artifact
         uses: actions/upload-artifact@v4
         with:
-          name: phase-d-approved-logo-source-assets-${{ github.run_id }}
+          name: phase-d-logo-source-review-${{ github.run_id }}
           if-no-files-found: error
           retention-days: 14
           compression-level: 0
