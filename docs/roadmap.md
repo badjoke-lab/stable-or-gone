@@ -6,6 +6,7 @@ Status: Compare feedback and Stablecoin logo maintenance lane active; Phase C Co
 ## Current canonical checkpoint
 
 ```text
+Current stage: MAINTENANCE_AUTHORITY_PHASE_D_NEXT
 Canonical stable assets: 119
 Organizations: 109
 Relationships: 131
@@ -30,6 +31,8 @@ Phase B production run: 31566866583 — success
 Canonical hash: sha256:4e7570b6fab88a8178a01ae280a36d98787573b376440b891491f25469458798
 Canonical file count: 466
 Canonical delta authorized by current lane: 0
+Phase D next: true
+Automatic continuation beyond closeout: false
 ```
 
 ## Current Stablecoin logo checkpoint
@@ -58,6 +61,8 @@ Binding reviewed packages:
 
 ```text
 config/compare-logo-maintenance-authority.json
+docs/quality/compare-logo-maintenance-spec.md
+docs/quality/stablecoin-logo-disposition-operating-spec.md
 data/editorial-research/compare-logo-fallback-reaudit-2026-08-12.json
 docs/quality/compare-logo-fallback-reaudit-review-result-spec.md
 docs/roadmap-amendments/2026-08-12-compare-logo-fallback-reaudit-review-result.md
