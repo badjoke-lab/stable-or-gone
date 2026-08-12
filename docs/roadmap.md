@@ -1,7 +1,7 @@
 # Stable or Gone Roadmap
 
 Updated: 2026-08-12  
-Status: Compare feedback and Stablecoin logo maintenance lane active; Phase B fallback re-audit complete after review-result merge; Phase C is next
+Status: Compare feedback and Stablecoin logo maintenance lane active; Phase C Compare remediation completes with the current implementation/review merge; Phase D is next after merge
 
 ## Current canonical checkpoint
 
@@ -25,8 +25,8 @@ Archive not recorded: 114
 Detail routes: 422
 Metadata-checked routes: 422
 Official origin: https://www.stableorgone.com
-Current maintenance-authority production commit before Phase B result: e7d38ba55ce1a2a15a2316dac733f696b9742a17
-Current maintenance-authority production run: 31556728267 — success
+Phase C entry main: dc1f2925f6dbd40c50267a2de2b4f85e2fe580b5
+Phase B production run: 31566866583 — success
 Canonical hash: sha256:4e7570b6fab88a8178a01ae280a36d98787573b376440b891491f25469458798
 Canonical file count: 466
 Canonical delta authorized by current lane: 0
@@ -34,7 +34,7 @@ Canonical delta authorized by current lane: 0
 
 ## Current Stablecoin logo checkpoint
 
-Current public display remains unchanged by Phase B:
+Phase B and Phase C preserve the current public partition:
 
 ```text
 Canonical stablecoins: 119
@@ -42,7 +42,7 @@ Current public direct Stablecoin/product logos: 98
 Current public neutral fallbacks: 21
 ```
 
-Phase B has now reviewed all 21 fallbacks:
+Phase B reviewed all 21 fallbacks:
 
 ```text
 reviewed: 21 / 21
@@ -52,139 +52,53 @@ Phase-D-approved direct-logo slugs: mnee, usdgo, usr
 expected display partition after successful Phase D import: 101 direct / 18 fallback
 ```
 
-The reviewed `101 / 18` partition is not current public state. No logo files, mappings, display-policy counts, or README counts change in Phase B.
+The reviewed `101 / 18` partition is not current public state. Phase C imports no new logo asset and does not change display policy.
 
-Binding Phase B result:
-
-```text
-data/editorial-research/compare-logo-fallback-reaudit-2026-08-12.json
-docs/quality/compare-logo-fallback-reaudit-review-result-spec.md
-docs/roadmap-amendments/2026-08-12-compare-logo-fallback-reaudit-review-result.md
-```
-
-## Current work item — Phase C Compare implementation
-
-Parent authority remains:
+Binding reviewed packages:
 
 ```text
 config/compare-logo-maintenance-authority.json
-docs/roadmap-amendments/2026-08-12-compare-logo-maintenance-authority.md
-docs/quality/compare-logo-maintenance-spec.md
-docs/quality/stablecoin-logo-disposition-operating-spec.md
-docs/ui-v3-remediation-authority.md
+data/editorial-research/compare-logo-fallback-reaudit-2026-08-12.json
+docs/quality/compare-logo-fallback-reaudit-review-result-spec.md
+docs/roadmap-amendments/2026-08-12-compare-logo-fallback-reaudit-review-result.md
+config/compare-phase-c-implementation-result.json
+docs/quality/compare-phase-c-review-result-spec.md
+docs/roadmap-amendments/2026-08-12-compare-phase-c-review-result.md
 ```
 
-The immediately preceding reviewed result is the Phase B package above. Phase C must cite both parent authority and Phase B result.
+## Completed Phase C — Compare implementation
 
-Current Phase C outcomes:
+Phase C addresses only the bounded Compare defects authorized by PR #554 and the Phase B gate.
+
+Accepted result after the current implementation/review merge:
 
 ```text
-1. matching-row Compare control gives visible effect/no-op feedback
-2. Compare record headers show the same audited Stablecoin mark system used elsewhere
-3. deterministic blocking interaction tests cover row reduction, no-op, and restore
-4. mobile/desktop behavior preserves existing Compare acceptance constraints
+control label: Hide matching rows
+differing attribute count: visible
+matching attribute count: visible as shown/hidden
+all-different no-op: All displayed attributes already differ. Nothing to hide.
+Compare marks: cloned pre-rendered StablecoinMark output
+Compare-only logo mapping: none
+remote runtime logo fetch: none
+new logo asset import: 0
+canonical delta: 0
 ```
 
-Phase C does not import the three newly approved logos and does not implement the permanent growth gate. Those are Phase D work.
+Browser authority remains `.github/workflows/stablecoin-compare-matrix-visual.yml`. It must retain the existing 2–4 selection, zero-state, discovery/navigation and replacement audits and additionally prove:
 
-## Schedule and phase gates
+1. a deterministic matching-row selection reduces visible rows when the control is enabled;
+2. disabling the control restores the full aligned row set;
+3. a deterministic all-different selection produces explicit no-op feedback without changing row count;
+4. direct and neutral-fallback Stablecoin marks render in Compare on desktop and mobile;
+5. mobile comparison remains bounded and horizontally scrollable.
 
-```text
-2026-08-12  Phase A — authority/specification/schedule merge — complete in PR #554
-2026-08-12  Phase B — re-audit exact 21 neutral fallbacks — complete after current review-result merge
-next        Phase C — implement Compare matching-row feedback and Compare Stablecoin marks
-then        Phase D — import only mnee/usdgo/usr and implement permanent future growth logo gate
-then        Phase E — direct desktop/mobile artifact review, all-record mark validation, production verification, closeout
-closeout    restore repository REVIEW_GATE; no automatic continuation
-```
+Phase C evidence is emitted under `artifacts/screenshots/compare-phase-c/`.
 
-Schedule order is binding. Phase D cannot be collapsed into Phase C; each later phase must cite the immediately preceding reviewed result.
+## Current work item — Phase D logo import and permanent growth gate
 
-## Phase B — completed review result
+Phase D may begin only after Phase C merges with exact-head CI and Compare visual acceptance successful.
 
-The exact 21-record population was re-audited under the asset-specific mark and local provenance rules.
-
-Accepted direct-logo outcomes:
-
-```text
-mnee   — official_product_mark
-usdgo  — official_product_mark
-usr    — token_logo
-```
-
-The following remain neutral fallbacks and must not be promoted by Phase D from this review:
-
-```text
-acala-ausd
-avalon-usda
-bison-bank-eub
-bison-bank-usb
-brz
-chfau
-coins-phpc
-dynamic-set-dollar
-eurau
-gbpq
-plnq
-poundtoken
-sekau
-sofiusd
-usdh
-usdy
-usk
-vchf
-```
-
-Detailed source/provenance basis is stored in the machine-readable review result. Phase B itself changes no public rendering.
-
-## Phase C — Compare implementation requirements
-
-The comparison control must mean only:
-
-```text
-hide a row when all selected records have the same normalized displayed value for that attribute
-```
-
-Preferred control label:
-
-```text
-Hide matching rows
-```
-
-Required feedback:
-
-```text
-differing attribute count
-matching rows hidden count
-explicit “nothing to hide” state when all displayed rows already differ
-```
-
-Blocking test coverage must include:
-
-1. one deterministic selection where enabling the control reduces visible rows;
-2. one deterministic all-different selection where row count remains unchanged but explicit no-op feedback appears;
-3. disabling the control restores the full row set.
-
-Compare headers must render the same audited mark result as the register/dossiers. Reuse `StablecoinMark` / `stablecoinLogo` semantics; do not create a Compare-only logo table and do not fetch remote images at runtime.
-
-Phase C must preserve:
-
-```text
-2–4 selected records
-fifth-selection rejection
-URL selection order and history restoration
-explicit Unknown / Not recorded states
-existing section/row alignment
-fixed Compare dock/footer non-overlap
-bounded mobile horizontal matrix scroll
-no page-level horizontal overflow
-```
-
-## Phase D — logo import and permanent growth gate
-
-Phase D remains blocked until Phase C has a reviewed implementation result.
-
-The only direct-logo promotions authorized by the completed Phase B review are:
+The only direct-logo promotions authorized by Phase B are:
 
 ```text
 mnee
@@ -192,21 +106,34 @@ usdgo
 usr
 ```
 
-When eligible, Phase D must:
+Phase D must:
 
 ```text
-vendor accepted images locally
-record source/provenance/license information
-update canonical-slug-first logo mapping
-update display policy and reviewed decisions
-synchronize public stablecoin-logo README counts
+reconfirm the reviewed source/provenance basis before import
+vendor only the accepted local image assets
+record applicable source/provenance/license metadata
+update canonical-slug-first logo mapping and display policy
+synchronize reviewed logo decisions and public stablecoin-logo README counts
 preserve the other 18 baseline fallbacks
-make new canonical stablecoin growth require logo disposition before merge
-make canonical stablecoin data additions trigger logo coverage validation
+make every future canonical stablecoin require a reviewed logo disposition before merge
+make canonical stablecoin additions trigger blocking logo coverage validation
 make logo decision count equal canonical stablecoin count as a blocking invariant
 ```
 
-Every future stablecoin growth PR must cite `docs/quality/stablecoin-logo-disposition-operating-spec.md` and include `logo disposition` in its complete-record requirement.
+Every future stablecoin growth PR must cite `docs/quality/stablecoin-logo-disposition-operating-spec.md`. A neutral fallback is a valid reviewed outcome; omitted logo review is not.
+
+## Schedule and phase gates
+
+```text
+2026-08-12  Phase A — authority/specification/schedule merge — complete in PR #554
+2026-08-12  Phase B — exact 21-fallback re-audit — complete in PR #555
+2026-08-12  Phase C — Compare feedback + Compare Stablecoin marks — complete after PR #556 merge
+next        Phase D — import only mnee/usdgo/usr + permanent future record-growth logo gate
+then        Phase E — direct desktop/mobile artifact review, all-record mark validation, production verification, closeout
+closeout    restore repository REVIEW_GATE; no automatic continuation
+```
+
+Schedule order is binding. Phase D cannot be collapsed into Phase E and no later stage may skip its immediately preceding reviewed result.
 
 ## Phase E — acceptance and closeout
 
@@ -221,6 +148,7 @@ neutral-fallback Compare mobile artifact
 matching-row removal state
 all-different explicit no-op state
 all-record Stablecoin mark coverage/catalog validation
+permanent new-record logo gate validation
 no page-level overflow / clipping / footer overlap regression
 direct changed-state artifact inspection
 exact-main production verification
@@ -230,7 +158,7 @@ Automated workflow success alone does not close a known visual defect.
 
 ## Completed Evidence Archive Payload Verification Batch 2
 
-Evidence Archive Batch 2 is no longer a pending implementation lane. PR #551 authorized the eight exact dated archive additions, PR #552 implemented them, production run `31514472928` succeeded, and PR #553 restored `REVIEW_GATE`.
+PR #551 authorized eight reviewed dated archive additions, PR #552 implemented them, production run `31514472928` succeeded, and PR #553 restored `REVIEW_GATE` before the current maintenance lane.
 
 ```text
 Archive recorded: 463 -> 471
@@ -258,10 +186,11 @@ PR #544/#545/#546/#547 — Compare discovery/navigation remediation / closeout
 PR #548/#549/#550 — Russia USDT Regulation Guide authority / implementation / closeout
 PR #551/#552/#553 — Evidence Archive Batch 2 implementation authority / implementation / closeout
 PR #554 — Compare feedback / Stablecoin logo maintenance authority
-Production run 31556728267 — PR #554 maintenance-authority publication verified
+PR #555 — Phase B 21-fallback reviewed result
+PR #556 — Phase C Compare feedback / Stablecoin mark implementation and review result
 ```
 
-PR #544–#547 are historical Compare authority and do not authorize the current material Compare change.
+PR #544–#547 are historical Compare authority and do not authorize Phase D logo import or record-growth work.
 
 ## Preserved exclusions
 
@@ -277,14 +206,14 @@ ranking / scoring / recommendation
 generated substitute brand artwork
 issuer/project mark presented as token logo without reviewed asset-specific attribution
 remote runtime logo fetching
-Phase-D logo imports during Phase C
+logo promotion outside mnee/usdgo/usr without separately reviewed evidence
 unrelated sitewide redesign
 automatic continuation beyond maintenance closeout
 ```
 
 ## Required work-start protocol
 
-Before Phase C, read and cite:
+Before Phase D, read and cite:
 
 ```text
 AGENTS.md
@@ -298,7 +227,10 @@ config/compare-logo-maintenance-authority.json
 docs/roadmap-amendments/2026-08-12-compare-logo-fallback-reaudit-review-result.md
 docs/quality/compare-logo-fallback-reaudit-review-result-spec.md
 data/editorial-research/compare-logo-fallback-reaudit-2026-08-12.json
+docs/roadmap-amendments/2026-08-12-compare-phase-c-review-result.md
+docs/quality/compare-phase-c-review-result-spec.md
+config/compare-phase-c-implementation-result.json
 docs/ui-v3-remediation-authority.md
 ```
 
-Then read the immediately preceding reviewed result for any later phase. No implementation should proceed from chat memory alone.
+No implementation proceeds from chat memory alone. The immediately preceding merged reviewed result controls the next phase.
