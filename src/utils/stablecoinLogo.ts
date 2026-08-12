@@ -92,8 +92,6 @@ const LOGOS_BY_SLUG: Readonly<Record<string, string>> = {
   'usds': '/stablecoin-logos/usds.svg',
   'usdt': '/stablecoin-logos/usdt.svg',
   'usdtb': '/stablecoin-logos/usdtb.svg',
-  'usdy': '/stablecoin-logos/usdy.svg',
-  'usk': '/stablecoin-logos/usk.svg',
   'usr': '/stablecoin-logos/usr.png',
   'ust': '/stablecoin-logos/ust.png',
   'usyc': '/stablecoin-logos/usyc.png',
