@@ -51,6 +51,18 @@ Detail routes: 422
 Metadata-checked routes: 422
 ```
 
+## Historical non-UI acceptance checkpoints
+
+These are retained baseline lineage, not standing implementation authority:
+
+```text
+PR #493 — migrated SOG to https://www.stableorgone.com as the single official production origin
+PR #500 — deepened the bounded MNEE Evidence/archive/control review without forcing unsupported unknowns closed
+PR #517 — added complete canonical Bison Bank EUB/USB records and established the 119-asset / 186-deployment checkpoint lineage
+```
+
+They remain referenced by workstream-independent release validation. Their presence does not authorize reopening those scopes.
+
 ## Current Stablecoin mark contract
 
 The completed Compare/logo maintenance lane leaves this accepted public state:
