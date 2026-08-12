@@ -5,9 +5,15 @@ import './validate-compare-logo-maintenance-authority.mjs';
 const reviewPath = 'data/editorial-research/compare-logo-fallback-reaudit-2026-08-12.json';
 const resultSpecPath = 'docs/quality/compare-logo-fallback-reaudit-review-result-spec.md';
 const amendmentPath = 'docs/roadmap-amendments/2026-08-12-compare-logo-fallback-reaudit-review-result.md';
+const activePath = 'scripts/validate-active-workstream.mjs';
 
-for (const path of [reviewPath, resultSpecPath, amendmentPath]) {
+for (const path of [reviewPath, resultSpecPath, amendmentPath, activePath]) {
   if (!fs.existsSync(path)) throw new Error(`Missing Phase B review artifact: ${path}`);
+}
+
+const active = fs.readFileSync(activePath, 'utf8').trim();
+if (active !== "import './validate-compare-logo-fallback-reaudit-result.mjs';") {
+  throw new Error('Active workstream must point exactly to the Phase B reviewed-result validator.');
 }
 
 const review = JSON.parse(fs.readFileSync(reviewPath, 'utf8'));
@@ -85,6 +91,9 @@ for (const record of review.records) {
     if (!record.source_asset_url || !record.proposed_asset_path) {
       throw new Error(`Direct-logo outcome ${record.slug} requires a pinned source asset and proposed local path.`);
     }
+    if (record.asset_path !== null) {
+      throw new Error(`Phase B must not claim an imported local asset for ${record.slug}.`);
+    }
   } else if (record.source_asset_url !== null || record.asset_path !== null) {
     throw new Error(`Neutral fallback ${record.slug} must keep source_asset_url and asset_path null in this review result.`);
   }
@@ -101,6 +110,9 @@ if (review.review_result?.display_policy_changed_in_this_review !== false || rev
 }
 if (review.phase_gate?.phase_c_compare_implementation_may_begin !== true || review.phase_gate?.phase_d_logo_import_may_begin_before_phase_c_close !== false) {
   throw new Error('Phase gate must authorize Phase C next while keeping Phase D closed.');
+}
+if (JSON.stringify([...(review.phase_gate?.phase_d_allowed_direct_logo_slugs ?? [])].sort()) !== JSON.stringify([...expectedDirect].sort())) {
+  throw new Error('Phase D allow-list must contain exactly MNEE, USDGO, and USR.');
 }
 
 const canonical = review.canonical_boundary ?? {};
