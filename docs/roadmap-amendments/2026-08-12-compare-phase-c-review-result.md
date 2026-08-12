@@ -13,6 +13,7 @@ Phase C result: `config/compare-phase-c-implementation-result.json`
 Phase C implements the two Compare defects authorized after Phase B:
 
 - matching-row behavior is now exposed as `Hide matching rows` with differing/matching counts and explicit no-op feedback;
+- the all-different no-op state must visibly report `All displayed attributes already differ. Nothing to hide.`;
 - Compare headers reuse the existing audited `StablecoinMark` output rather than maintaining a separate logo map.
 
 The dedicated browser audit is integrated into the existing `Stablecoin compare matrix visual acceptance` workflow so the old 2–4 record, zero-state, discovery/navigation and replacement checks remain authoritative alongside the new Phase C checks.
@@ -25,7 +26,7 @@ The Phase C implementation PR may merge only after the exact reviewed head shows
 - active-workstream validation success;
 - existing Compare visual/navigation acceptance success;
 - Phase C row-reduction test success;
-- Phase C all-different no-op test success;
+- Phase C all-different no-op test success with `Nothing to hide` visible;
 - toggle-off restoration success;
 - direct/fallback Compare marks present on desktop and mobile;
 - bounded mobile matrix scrolling preserved.
