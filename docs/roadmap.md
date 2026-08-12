@@ -15,6 +15,7 @@ Relationships: 131
 Events: 194
 Evidence: 585
 Evidence Relations: 585
+Deployments: 186
 Market Access Records: 12
 Archive recorded: 471
 Archive not recorded: 114
