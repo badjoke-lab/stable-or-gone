@@ -2,7 +2,7 @@
 
 These SVG and PNG assets are vendored locally so public pages never depend on an external image host.
 
-Public display coverage is fixed at **98 direct Stablecoin/product logos of 117 canonical records (83.76%)**. The remaining **19 records use the shared neutral monogram fallback**.
+Public display coverage is fixed at **101 direct Stablecoin/product logos of 119 canonical records (84.87%)**. The remaining **18 records use the shared neutral monogram fallback**.
 
 A project, issuer, or third-party directory mark is not displayed as though it were the Stablecoin's own logo. Those researched marks remain classified in the research ledger, while `config/stablecoin-logo-display-policy.json` is the rendering source of truth.
 
@@ -129,6 +129,51 @@ License notice: `LICENSE-money-on-chain-gpl3.txt`. `dollar-on-chain.svg` is the 
 dollar-on-chain.svg
 ```
 
+### Phase D first-party Stablecoin/product marks
+
+Phase B re-audited the 21 neutral fallbacks. Phase D then directly inspected the proposed artwork before import and promoted only the three already-approved slugs below. No additional Stablecoin was promoted.
+
+#### MNEE
+
+```text
+local path:        /stablecoin-logos/mnee.svg
+source page:       https://www.mnee.io/
+source asset:      https://www.mnee.io/mnee.svg
+source class:      official_product_page_asset
+SHA-256:           ddee8994d9b3ac38835ed5f99d01a6f029cc8a997c9096d2b9ee4f9e49808911
+transformation:    none; vendored without artwork changes
+```
+
+The official MNEE product page labels the asset as `MNEE Logo`. No separate open redistribution license was identified during review. The file is retained unmodified for product identification; underlying rights remain with the owner.
+
+#### USDGO
+
+```text
+local path:        /stablecoin-logos/usdgo.svg
+source page:       https://www.usdgo.com/
+source asset:      inline SVG in the first-party USDGO homepage header
+source class:      official_product_homepage_inline_svg
+SHA-256:           e75fc78d2b70dd3da4725aed2b1ed3e4f6201c7299a22f737154557b92ce4a84
+transformation:    extracted inline SVG without artwork changes
+```
+
+The Phase B research result pointed to an Anchorage Digital image labelled for USDGO. Direct Phase D artifact inspection showed that image was a product illustration, not a compact Stablecoin mark, so it was **not** imported. The current first-party USDGO homepage instead renders a compact USDGO SVG in its header; the same visual identity is present in OSL's official USDGO listing artwork. The allow-list was not expanded: the correction remained within the already-approved `usdgo` slug. No separate open redistribution license was identified during review; underlying rights remain with the owner.
+
+#### Resolv USD / USR
+
+```text
+local path:        /stablecoin-logos/usr.png
+source page:       https://resolv.xyz/brand-kit
+source asset:      https://framerusercontent.com/images/jr6pCURt19DV9uNMz7A80qtO8c.png?height=256&width=256
+source class:      official_brand_kit_token_asset
+SHA-256:           56279ebd60697a49d0c8fa62179a40eb7ba07b26d756729645d331de2addbf16
+transformation:    none; vendored without artwork changes
+```
+
+Resolv's official Brand Kit provides a dedicated USR asset separately from RLP, stUSR, wstUSR, RESOLV, and stRESOLV. No separate open-source or redistribution license was identified in the reviewed Brand Kit material; the file is retained unmodified for token identification and underlying rights remain with the owner.
+
+The previous `usdgo.png` issuer mark and `usr.svg` generic Resolv project mark were removed after their product/token-specific replacements were accepted, preventing obsolete research artwork from remaining as orphan display assets.
+
 ## Resolution rules
 
 1. Exact canonical SOG slug is checked first.
@@ -139,15 +184,19 @@ dollar-on-chain.svg
 6. The adjacent record name and full symbol remain authoritative; marks are decorative and hidden from assistive technology.
 7. No remote runtime fetching is used.
 8. A file is not added merely because its filename resembles a symbol. The image must be attributable to the same asset represented by the canonical SOG record.
+9. Every canonical Stablecoin must have exactly one reviewed logo disposition before merge; a neutral fallback is valid, an omitted review is not.
 
-The Stablecoins index, home preview, and dossiers therefore render **98 direct logos and 19 neutral fallbacks** with identical geometry. The mixed-mark and all-record catalog gates verify desktop and mobile rendering.
+The Stablecoins index, home preview, dossiers, and Compare therefore render **101 direct logos and 18 neutral fallbacks** through the same resolver and mark component. The mixed-mark and all-record catalog gates verify desktop and mobile rendering.
 
 ## Corpus-wide disposition closure
 
-All 117 canonical Stablecoin records have a final display disposition:
+All **119 canonical Stablecoin records** have a final display disposition:
 
-- 98 direct Stablecoin/product logos;
-- 19 neutral fallbacks where research found only project, issuer, or directory-level artwork, including MNEE pending a separately reviewed product-specific mark.
+- **101** direct Stablecoin/product logos;
+- **18** neutral fallbacks where the current reviewed evidence does not support a display-safe Stablecoin/product-specific mark.
 
-Research ledger: `config/stablecoin-logo-decisions.json`.
-Public display policy: `config/stablecoin-logo-display-policy.json`.
+The permanent core CI gate runs `scripts/audit-stablecoin-logo-coverage.mjs` on every pull request, including data-only canonical growth. It requires the decision count to equal the canonical Stablecoin count, requires every canonical slug to have a disposition, verifies direct assets and resolver mappings, and rejects orphan logo files or an unlisted fallback.
+
+Research ledger: `config/stablecoin-logo-decisions.json` plus the bounded additions ledger where applicable.  
+Public display policy: `config/stablecoin-logo-display-policy.json`.  
+Permanent operating specification: `docs/quality/stablecoin-logo-disposition-operating-spec.md`.
