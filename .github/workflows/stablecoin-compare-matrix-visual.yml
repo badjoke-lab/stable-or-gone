@@ -19,6 +19,7 @@ on:
       - 'scripts/audit-stablecoin-compare-zero-state.mjs'
       - 'scripts/audit-stablecoin-compare-navigation.mjs'
       - 'scripts/audit-stablecoin-comparison-phase-c.mjs'
+      - 'scripts/validate-stablecoin-compare-discovery-navigation-authority.mjs'
       - 'scripts/validate-stablecoin-compare-discovery-navigation-remediation.mjs'
       - 'scripts/validate-compare-logo-fallback-reaudit-result.mjs'
       - 'scripts/validate-compare-phase-c-result.mjs'
