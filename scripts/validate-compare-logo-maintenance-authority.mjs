@@ -16,7 +16,6 @@ const agents = read('AGENTS.md');
 const governance = read('docs/spec-governance.md');
 const roadmap = read('docs/roadmap.md');
 const deployment = read('docs/deployment-policy.md');
-const active = read('scripts/validate-active-workstream.mjs').trim();
 
 requireValue(authority.authority_id === 'sog_compare_feedback_logo_maintenance_2026_08_12', 'unexpected authority id');
 requireValue(authority.status === 'active_after_merge', 'authority must be active_after_merge');
@@ -86,11 +85,8 @@ for (const [name, text] of [
   requireValue(text.includes('sha256:4e7570b6fab88a8178a01ae280a36d98787573b376440b891491f25469458798'), `${name} must preserve the post-PR552 canonical hash`);
 }
 
-const validActiveTargets = new Set([
-  "import './validate-compare-logo-maintenance-authority.mjs';",
-  "import './validate-compare-logo-fallback-reaudit-result.mjs';"
-]);
-requireValue(validActiveTargets.has(active), 'validate-active-workstream must point to the authority validator or a reviewed child-phase validator');
+// Current active-workstream progression is intentionally validated only by the current child-phase validator.
+// This parent validator stays composable for Phase B, Phase C, Phase D and closeout descendants.
 
 if (failures.length) {
   console.error(JSON.stringify({ ok: false, failures }, null, 2));
@@ -111,6 +107,5 @@ console.log(JSON.stringify({
     direct_logos: fallback.baseline_direct_logo_records,
     neutral_fallbacks: fallback.baseline_neutral_fallback_records
   },
-  entry_review_gate: authority.entry_review_gate,
-  active_validator: active
+  entry_review_gate: authority.entry_review_gate
 }, null, 2));
