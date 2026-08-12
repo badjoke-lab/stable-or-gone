@@ -12,10 +12,6 @@ const displayPolicy = json('config/stablecoin-logo-display-policy.json');
 const amendment = read('docs/roadmap-amendments/2026-08-12-compare-logo-maintenance-authority.md');
 const quality = read('docs/quality/compare-logo-maintenance-spec.md');
 const operating = read('docs/quality/stablecoin-logo-disposition-operating-spec.md');
-const agents = read('AGENTS.md');
-const governance = read('docs/spec-governance.md');
-const roadmap = read('docs/roadmap.md');
-const deployment = read('docs/deployment-policy.md');
 
 requireValue(authority.authority_id === 'sog_compare_feedback_logo_maintenance_2026_08_12', 'unexpected authority id');
 requireValue(authority.status === 'active_after_merge', 'authority must be active_after_merge');
@@ -73,20 +69,7 @@ requireValue(/StablecoinMark/.test(quality) && /stablecoinLogo/.test(quality), '
 requireValue(/every new canonical stablecoin/i.test(operating), 'operating spec must apply to every new canonical stablecoin');
 requireValue(/must not merge/i.test(operating), 'operating spec must define blocking merge gates');
 
-for (const [name, text] of [
-  ['AGENTS.md', agents],
-  ['docs/spec-governance.md', governance],
-  ['docs/roadmap.md', roadmap],
-  ['docs/deployment-policy.md', deployment]
-]) {
-  requireValue(text.includes('config/compare-logo-maintenance-authority.json'), `${name} must cite the active Compare/logo authority`);
-  requireValue(text.includes('docs/quality/compare-logo-maintenance-spec.md'), `${name} must cite the Compare/logo quality spec`);
-  requireValue(text.includes('docs/quality/stablecoin-logo-disposition-operating-spec.md'), `${name} must cite the permanent logo disposition spec`);
-  requireValue(text.includes('sha256:4e7570b6fab88a8178a01ae280a36d98787573b376440b891491f25469458798'), `${name} must preserve the post-PR552 canonical hash`);
-}
-
-// Current active-workstream progression is intentionally validated only by the current child-phase validator.
-// This parent validator stays composable for Phase B, Phase C, Phase D and closeout descendants.
+// Forward repository pointers are validated by the current child-phase validator, not by this immutable parent package validator.
 
 if (failures.length) {
   console.error(JSON.stringify({ ok: false, failures }, null, 2));
