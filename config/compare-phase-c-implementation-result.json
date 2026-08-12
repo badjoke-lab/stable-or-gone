@@ -1,0 +1,76 @@
+{
+  "result_id": "sog_compare_phase_c_implementation_2026_08_12",
+  "parent_authority_id": "sog_compare_feedback_logo_maintenance_2026_08_12",
+  "phase_b_review_result": "data/editorial-research/compare-logo-fallback-reaudit-2026-08-12.json",
+  "phase": "C",
+  "status": "complete_after_merge",
+  "entry_main_commit": "dc1f2925f6dbd40c50267a2de2b4f85e2fe580b5",
+  "public_route": "/stablecoins/",
+  "implementation": {
+    "matching_row_control_label": "Hide matching rows",
+    "matching_row_semantics": "hide_rows_where_all_selected_records_have_matching_normalized_display_values",
+    "feedback": [
+      "show_differing_attribute_count",
+      "show_matching_attribute_count_as_shown_when_disabled",
+      "show_matching_hidden_count_when_enabled",
+      "show_explicit_nothing_to_hide_message_when_enabled_and_no_matching_rows_exist"
+    ],
+    "no_op_message": "All displayed attributes already differ. Nothing to hide.",
+    "mark_display": "clone_pre_rendered_existing_StablecoinMark_output_from_comparison_source",
+    "remote_runtime_image_fetch": false,
+    "compare_only_logo_mapping": false,
+    "implementation_files": [
+      "src/components/StablecoinComparisonSource.astro",
+      "src/pages/stablecoins/index.astro",
+      "src/scripts/stablecoin-comparison-phase-c.ts"
+    ]
+  },
+  "browser_acceptance": {
+    "workflow": ".github/workflows/stablecoin-compare-matrix-visual.yml",
+    "audit_script": "scripts/audit-stablecoin-comparison-phase-c.mjs",
+    "required_cases": [
+      "matching_row_toggle_reduces_visible_row_count",
+      "all_different_toggle_is_visible_noop_with_explicit_feedback",
+      "toggle_off_restores_full_row_count",
+      "desktop_compare_headers_include_direct_and_neutral_fallback_marks",
+      "mobile_direct_mark_is_visually_captured",
+      "mobile_neutral_fallback_mark_is_visually_captured_after_horizontal_scroll",
+      "mobile_matrix_remains_bounded_and_horizontally_scrollable"
+    ],
+    "artifact_paths": [
+      "artifacts/screenshots/compare-phase-c/compare-phase-c-audit.json",
+      "artifacts/screenshots/compare-phase-c/compare-desktop-direct-fallback.png",
+      "artifacts/screenshots/compare-phase-c/compare-mobile-direct.png",
+      "artifacts/screenshots/compare-phase-c/compare-mobile-fallback.png"
+    ]
+  },
+  "public_logo_boundary": {
+    "canonical_records": 119,
+    "direct_logo_records": 98,
+    "neutral_fallback_records": 21,
+    "phase_c_imported_assets": false,
+    "phase_c_changed_display_policy": false,
+    "phase_d_allowed_direct_logo_slugs": ["mnee", "usdgo", "usr"],
+    "phase_d_expected_partition_after_successful_import": {
+      "direct_logo_records": 101,
+      "neutral_fallback_records": 18
+    }
+  },
+  "canonical_boundary": {
+    "stable_assets": 119,
+    "evidence": 585,
+    "evidence_relations": 585,
+    "market_access_records": 12,
+    "archive_recorded": 471,
+    "archive_not_recorded": 114,
+    "canonical_hash": "sha256:4e7570b6fab88a8178a01ae280a36d98787573b376440b891491f25469458798",
+    "canonical_file_count": 466,
+    "canonical_delta": 0
+  },
+  "phase_gate": {
+    "phase_d_becomes_next_after_phase_c_merge": true,
+    "phase_d_scope": "import_only_phase_b_approved_mnee_usdgo_usr_and_implement_permanent_future_record_growth_logo_gate",
+    "phase_e_may_begin_before_phase_d_close": false,
+    "automatic_continuation_beyond_closeout": false
+  }
+}

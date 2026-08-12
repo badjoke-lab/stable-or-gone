@@ -19,25 +19,26 @@ Authority order:
 8. named audits, baselines, queues, and reviewed prior outputs
 9. conversation history and unmerged drafts
 
-Current repository boundary after the Phase B review-result merge:
+Current repository boundary after the Phase C implementation/review merge:
 
 ```text
-Current stage: MAINTENANCE_AUTHORITY_PHASE_C_NEXT
+Current stage: MAINTENANCE_AUTHORITY_PHASE_D_NEXT
 Parent authority: docs/roadmap-amendments/2026-08-12-compare-logo-maintenance-authority.md
-Current roadmap amendment: docs/roadmap-amendments/2026-08-12-compare-logo-fallback-reaudit-review-result.md
-Current reviewed result spec: docs/quality/compare-logo-fallback-reaudit-review-result-spec.md
-Current reviewed result data: data/editorial-research/compare-logo-fallback-reaudit-2026-08-12.json
+Current roadmap amendment: docs/roadmap-amendments/2026-08-12-compare-phase-c-review-result.md
+Current reviewed result spec: docs/quality/compare-phase-c-review-result-spec.md
+Current implementation result: config/compare-phase-c-implementation-result.json
+Phase B reviewed result: data/editorial-research/compare-logo-fallback-reaudit-2026-08-12.json
 Parent implementation spec: docs/quality/compare-logo-maintenance-spec.md
 Permanent logo operating spec: docs/quality/stablecoin-logo-disposition-operating-spec.md
-Current public maintenance boundary: Phase C Compare feedback / Compare marks
+Current public maintenance boundary: Phase D reviewed logo imports + permanent future record-growth logo gate
 Canonical delta authorized: 0
 Canonical archive additions authorized: 0
 Canonical Market Access promotion authorized: false
-Phase D logo imports authorized now: false
+Phase D direct-logo allow-list: mnee, usdgo, usr
 Automatic continuation beyond closeout: false
 ```
 
-The maintenance authority starts from the post-PR552/PR553 canonical checkpoint and PR #554 authority. It does not revive or roll back the pre-archive canonical checkpoint.
+The maintenance authority starts from the post-PR552/PR553 canonical checkpoint and PR #554 authority. It does not revive or roll back an older canonical checkpoint.
 
 ## 2. Current canonical state
 
@@ -62,8 +63,8 @@ Archive not recorded: 114
 Detail routes: 422
 Metadata-checked routes: 422
 Official public origin: https://www.stableorgone.com
-Maintenance-authority production commit before Phase B result: e7d38ba55ce1a2a15a2316dac733f696b9742a17
-Maintenance-authority production run: 31556728267 — success
+Phase C entry main: dc1f2925f6dbd40c50267a2de2b4f85e2fe580b5
+Phase B production run: 31566866583 — success
 Canonical hash: sha256:4e7570b6fab88a8178a01ae280a36d98787573b376440b891491f25469458798
 Canonical file count: 466
 Canonical delta authorized by current lane: 0
@@ -100,8 +101,6 @@ Neutral fallbacks: 21
 
 ## 4. Phase B fallback re-audit — reviewed complete
 
-The exact 21-record population frozen by the parent authority has completed fresh review.
-
 Binding result:
 
 ```text
@@ -116,50 +115,56 @@ Accepted reviewed partition:
 reviewed: 21 / 21
 direct_logo: 3
 neutral_fallback: 18
-approved direct-logo slugs for later Phase D: mnee, usdgo, usr
+approved direct-logo slugs for Phase D: mnee, usdgo, usr
 current public display partition changed by Phase B: no
 expected partition after successful Phase D import: 101 direct / 18 fallback
 ```
 
-Phase B is review-only. It does not vendor image files, mutate the display policy, change the public logo README, or modify canonical data.
-
 Only `mnee`, `usdgo`, and `usr` may be promoted from this Phase B result. The other 18 reviewed records remain neutral fallbacks unless a separately reviewed evidence change reopens them.
 
-Phase B closes the research gate for Phase C only. It does not open Phase D before Phase C has its own reviewed implementation result.
+## 5. Phase C Compare implementation — complete after current merge
 
-## 5. Phase C — current next implementation boundary
-
-The matching-row control may hide a row only when every selected record has the same normalized displayed value for that attribute.
-
-Required UI behavior:
+Binding Phase C result:
 
 ```text
-preferred label: Hide matching rows
-report differing attribute count
-report matching-hidden count when enabled
-explicitly report when there are no matching rows to hide
-disabling restores the complete comparison rows
+config/compare-phase-c-implementation-result.json
+docs/quality/compare-phase-c-review-result-spec.md
+docs/roadmap-amendments/2026-08-12-compare-phase-c-review-result.md
 ```
 
-Blocking coverage must include:
+Accepted behavior:
 
-1. a deterministic row-removal case;
-2. an all-different no-op case with explicit feedback;
-3. restoration when disabled.
+```text
+matching-row label: Hide matching rows
+show differing attribute count
+show matching attributes as shown when disabled
+show matching-hidden count when enabled
+all-different no-op: All displayed attributes already differ. Nothing to hide.
+toggle off restores complete aligned rows
+Compare mark source: existing pre-rendered StablecoinMark output
+Compare-only logo map: none
+remote runtime image fetch: none
+Phase C logo imports: 0
+Phase C canonical delta: 0
+```
 
-Compare must reuse the existing `StablecoinMark` / `stablecoinLogo` semantics. A selected record therefore receives the same audited direct Stablecoin/product logo or neutral monogram fallback as elsewhere in the product.
+The browser authority remains `.github/workflows/stablecoin-compare-matrix-visual.yml`. It must preserve the existing 2–4 selection, zero-state, URL/discovery/navigation, replacement and matrix behavior while proving the Phase C row-reduction/no-op/restore and direct/fallback desktop/mobile mark cases.
 
-No independent Compare-only logo map, symbol guessing beyond the audited allow-list, generated substitute brand artwork, or remote runtime logo fetching is authorized.
+Phase C does not change `98 direct / 21 fallback` and does not import the Phase-B-approved assets.
 
-Phase C must not import the three Phase-B-approved assets and must not alter display-policy direct/fallback counts. Those changes belong to Phase D.
+## 6. Phase D — current next implementation boundary
 
-## 6. Permanent future growth rule
+Phase D may act only on the exact Phase B direct-logo allow-list:
 
-`docs/quality/stablecoin-logo-disposition-operating-spec.md` is the permanent operating specification for future canonical Stablecoin additions.
+```text
+mnee
+usdgo
+usr
+```
 
-Every future work item that can add a canonical Stablecoin must cite it and include a logo disposition in the complete-record requirement. A neutral fallback is a valid reviewed result; omission of a reviewed disposition is not.
+Before promotion, the reviewed source/provenance basis must still satisfy the permanent operating specification. Phase D must vendor or reuse only acceptable local product-specific assets, record source/provenance/license handling, update the canonical-slug-first resolver/display policy and reviewed decisions, synchronize the public logo inventory, and preserve the other 18 reviewed fallbacks.
 
-Phase D must implement permanent merge gates ensuring:
+Phase D must also implement permanent blocking merge gates ensuring:
 
 ```text
 logo decision count equals canonical stablecoin count
@@ -169,13 +174,15 @@ fallbacks are explicit in display policy
 canonical stablecoin data changes trigger logo coverage validation
 ```
 
+A neutral fallback is a valid reviewed result. Omission of a reviewed disposition is not.
+
 ## 7. Required sequence for the maintenance lane
 
 ```text
 Phase A  authority/specification/schedule merge — complete in PR #554
-Phase B  fresh reviewed result for exact 21 neutral fallbacks — complete after current review-result merge
-Phase C  Compare matching-row feedback + Compare mark display — NEXT
-Phase D  import only mnee/usdgo/usr + permanent future growth logo gate — BLOCKED until Phase C review
+Phase B  fresh reviewed result for exact 21 neutral fallbacks — complete in PR #555
+Phase C  Compare matching-row feedback + Compare mark display — complete after PR #556 merge
+Phase D  import only mnee/usdgo/usr + permanent future growth logo gate — NEXT
 Phase E  direct desktop/mobile artifact review + production verification + closeout — BLOCKED until Phase D
 closeout  restore repository REVIEW_GATE; no automatic continuation
 ```
@@ -184,9 +191,7 @@ A later phase must cite the immediately preceding reviewed result. No phase may 
 
 ## 8. Completed Evidence Archive Batch 2 implementation
 
-The completed Batch 2 review package recorded ten reviewed identities: eight exact dated archive proposals and two reviewed no-safe-change outcomes. PR #551 converted those eight exact URLs into a bounded implementation authority. PR #552 consumed that authority and production run `31514472928` verified main commit `ada106dd3bf9899adc441c968fa36978ae515a5c` at the official origin. PR #553 restored `REVIEW_GATE`.
-
-Accepted bounded result:
+PR #551 authorized eight reviewed dated archive additions. PR #552 consumed that authority and production run `31514472928` verified main commit `ada106dd3bf9899adc441c968fa36978ae515a5c`. PR #553 restored `REVIEW_GATE`.
 
 ```text
 Evidence: 585 -> 585
@@ -199,17 +204,17 @@ Exact archived_url additions: 8
 Reviewed no-safe-change outcomes preserved: 2
 ```
 
-No further archive addition is authorized from PR #551/#552/#553.
+No further archive addition is authorized from that lineage.
 
 ## 9. Historical completed lanes
 
-PR #544/#545/#546/#547 completed the Stablecoin Compare discovery/navigation remediation and closeout. That lineage authorizes no new material Compare work.
+PR #544/#545/#546/#547 completed the prior Stablecoin Compare discovery/navigation remediation and authorize no later logo import.
 
-PR #548/#549 completed the Russia USDT Regulation Guide update and PR #550 closed it. That lineage authorizes no further Guide work.
+PR #548/#549/#550 completed the Russia USDT Regulation Guide update and authorize no further Guide work.
 
-PR #551/#552/#553 completed Evidence Archive Payload Verification Batch 2 implementation and closeout. That lineage authorizes no further archive mutation.
+PR #551/#552/#553 completed Evidence Archive Payload Verification Batch 2 implementation and closeout.
 
-PR #554 established the current Compare feedback / Stablecoin logo maintenance authority and schedule. Production run `31556728267` verified the merged authority state.
+PR #554 established the current Compare feedback / Stablecoin logo maintenance authority. PR #555 completed Phase B. PR #556 is the Phase C Compare implementation/review result.
 
 ## 10. Market Access Record v1 boundary
 
@@ -226,12 +231,13 @@ No Market Access addition or mutation is authorized by the current maintenance l
 ```text
 canonical_only = true
 includes_unreviewed_candidates = false
-current stage = MAINTENANCE_AUTHORITY_PHASE_C_NEXT
+current stage = MAINTENANCE_AUTHORITY_PHASE_D_NEXT
 canonical delta authorized = 0
 canonical archive additions authorized = 0
 canonical Market Access promotion authorized = false
 new public route families authorized = false
-Phase-D logo imports authorized during Phase C = false
+Phase D direct-logo allow-list = mnee, usdgo, usr
+logo promotion outside that allow-list without reviewed evidence = false
 ranking / scoring / recommendation authorized = false
 automatic continuation = false
 ```
@@ -240,7 +246,7 @@ Logo display assets/configuration and Compare presentation are public-presentati
 
 ## 12. Mandatory reading
 
-Before substantive Phase C work, read:
+Before substantive Phase D work, read:
 
 ```text
 AGENTS.md
@@ -254,14 +260,13 @@ config/compare-logo-maintenance-authority.json
 docs/roadmap-amendments/2026-08-12-compare-logo-fallback-reaudit-review-result.md
 docs/quality/compare-logo-fallback-reaudit-review-result-spec.md
 data/editorial-research/compare-logo-fallback-reaudit-2026-08-12.json
+docs/roadmap-amendments/2026-08-12-compare-phase-c-review-result.md
+docs/quality/compare-phase-c-review-result-spec.md
+config/compare-phase-c-implementation-result.json
 docs/ui-v3-remediation-authority.md
 config/stablecoin-logo-display-policy.json
 config/stablecoin-logo-decisions.json
 config/stablecoin-logo-decisions-additions.json
 ```
 
-Then read the immediately preceding reviewed result for every later phase. The post-PR552 closeout remains the canonical entry-state reference.
-
-## 13. Exit
-
-The maintenance lane closes only after Phase C, Phase D, and Phase E complete in sequence, accepted changed-state artifacts are directly reviewed at desktop/mobile, exact-main production is verified, and a closeout restores a fresh repository `REVIEW_GATE`.
+No implementation proceeds from chat memory alone.

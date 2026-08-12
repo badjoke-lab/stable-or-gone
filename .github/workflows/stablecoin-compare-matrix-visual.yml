@@ -3,14 +3,28 @@ name: Stablecoin compare matrix visual acceptance
 on:
   pull_request:
     paths:
+      - 'AGENTS.md'
+      - 'docs/spec-governance.md'
+      - 'docs/roadmap.md'
+      - 'docs/deployment-policy.md'
+      - 'docs/roadmap-amendments/2026-08-12-compare-phase-c-review-result.md'
+      - 'docs/quality/compare-phase-c-review-result-spec.md'
+      - 'config/compare-phase-c-implementation-result.json'
       - 'src/pages/stablecoins/index.astro'
       - 'src/components/StablecoinComparisonSource.astro'
       - 'src/scripts/stablecoin-index.ts'
+      - 'src/scripts/stablecoin-comparison-phase-c.ts'
       - 'src/styles/public-ui.css'
       - 'scripts/audit-stablecoin-compare-matrix-visual.mjs'
       - 'scripts/audit-stablecoin-compare-zero-state.mjs'
       - 'scripts/audit-stablecoin-compare-navigation.mjs'
+      - 'scripts/audit-stablecoin-comparison-phase-c.mjs'
+      - 'scripts/validate-stablecoin-compare-discovery-navigation-authority.mjs'
       - 'scripts/validate-stablecoin-compare-discovery-navigation-remediation.mjs'
+      - 'scripts/validate-compare-logo-maintenance-authority.mjs'
+      - 'scripts/validate-compare-logo-fallback-reaudit-result.mjs'
+      - 'scripts/validate-compare-phase-c-result.mjs'
+      - 'scripts/validate-active-workstream.mjs'
       - '.github/workflows/stablecoin-compare-matrix-visual.yml'
   workflow_dispatch:
 
@@ -35,6 +49,8 @@ jobs:
         run: npx playwright install --with-deps chromium
       - name: Validate Compare discovery implementation
         run: node scripts/validate-stablecoin-compare-discovery-navigation-remediation.mjs
+      - name: Validate Phase C result boundary
+        run: node scripts/validate-compare-phase-c-result.mjs
       - name: Build exact PR head
         run: npm run build
       - name: Start local site
@@ -55,6 +71,8 @@ jobs:
         run: node scripts/audit-stablecoin-compare-zero-state.mjs
       - name: Audit discovery, sticky navigation, and replacement
         run: node scripts/audit-stablecoin-compare-navigation.mjs
+      - name: Audit Phase C matching-row feedback and Stablecoin marks
+        run: node scripts/audit-stablecoin-comparison-phase-c.mjs
       - name: Upload comparison visual acceptance artifact
         if: always()
         uses: actions/upload-artifact@v4
@@ -66,4 +84,5 @@ jobs:
           path: |
             artifacts/stablecoin-compare-matrix/**
             artifacts/stablecoin-compare-navigation/**
+            artifacts/screenshots/compare-phase-c/**
             /tmp/sog-compare-server.log

@@ -124,9 +124,10 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'CollectionPage', na
           <p class="stablecoin-index-eyebrow">Bounded comparison</p>
           <h2 id="comparison-heading">Compare historical records</h2>
           <p data-comparison-status aria-live="polite">Select two to four records. Unknown and not-recorded values remain explicit.</p>
+          <p data-comparison-feedback aria-live="polite">Difference counts appear after two records are selected.</p>
         </div>
         <div class="comparison-actions">
-          <label class="comparison-differences-toggle"><input type="checkbox" data-comparison-differences /><span>Differences only</span></label>
+          <label class="comparison-differences-toggle"><input type="checkbox" data-comparison-differences /><span>Hide matching rows</span></label>
           <button class="ui-button stablecoin-index-action" type="button" data-clear-comparison>Clear comparison</button>
         </div>
       </div>
@@ -206,5 +207,6 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'CollectionPage', na
   </div>
   <script>
     import '../../scripts/stablecoin-index';
+    import '../../scripts/stablecoin-comparison-phase-c';
   </script>
 </BaseLayout>

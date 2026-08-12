@@ -1,1 +1,1 @@
-import './validate-compare-logo-fallback-reaudit-result.mjs';
+import './validate-compare-phase-c-result.mjs';

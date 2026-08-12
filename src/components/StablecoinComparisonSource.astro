@@ -1,4 +1,5 @@
 ---
+import StablecoinMark from './StablecoinMark.astro';
 import { formatIssuanceLabel, formatLifecycleLabel } from '../utils/publicTaxonomy';
 const { record } = Astro.props;
 const deploymentLabel = `${record.deploymentCount} recorded deployment${record.deploymentCount === 1 ? '' : 's'}`;
@@ -13,6 +14,9 @@ const eventLabel = `${record.eventCount} linked event${record.eventCount === 1 ?
   data-record-href={`/stablecoin/${record.slug}/`}
   hidden
 >
+  <span data-comparison-source-mark>
+    <StablecoinMark slug={record.slug} symbol={record.symbol || ''} name={record.name} size="small" />
+  </span>
   <span data-compare-value="lifecycle">{formatLifecycleLabel(record.lifecycle)}</span>
   <span data-compare-value="issuance">{formatIssuanceLabel(record.issuance)}</span>
   <span data-compare-value="asset_class">{record.assetClassLabel}</span>
