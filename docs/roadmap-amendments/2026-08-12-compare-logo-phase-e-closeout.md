@@ -28,6 +28,8 @@ Direct logos: 101
 Neutral fallbacks: 18
 Broken images: 0
 Empty frames: 0
+Canonical hash: sha256:4e7570b6fab88a8178a01ae280a36d98787573b376440b891491f25469458798
+Canonical file count: 466
 Canonical delta: 0
 ```
 
