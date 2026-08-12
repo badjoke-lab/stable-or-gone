@@ -1,1 +1,1 @@
-import './validate-compare-logo-maintenance-authority.mjs';
+import './validate-compare-logo-fallback-reaudit-result.mjs';
