@@ -1,0 +1,117 @@
+{
+  "schema_version": "1.0",
+  "closeout_id": "sog_compare_logo_phase_e_closeout_2026_08_12",
+  "status": "complete_after_merge",
+  "repository_stage_after_merge": "REVIEW_GATE",
+  "parent_authority_id": "sog_compare_feedback_logo_maintenance_2026_08_12",
+  "preceding_phase_result": "config/compare-logo-phase-d-implementation-result.json",
+  "phase": "E",
+  "verified_main_commit": "bb72108ea53d96a69db42d5c8e97df47033be44e",
+  "official_public_origin": "https://www.stableorgone.com",
+  "production_verification": {
+    "workflow": "Deploy production",
+    "run_id": 31585897410,
+    "job_id": 94079531335,
+    "conclusion": "success",
+    "verified_steps": [
+      "Checkout deployed commit",
+      "Record deterministic source context",
+      "Validate official public origin",
+      "Build publishable site",
+      "Upload prebuilt site to Cloudflare Pages",
+      "Verify deployed production",
+      "Write deployment summary",
+      "Report deployment result"
+    ]
+  },
+  "exact_main_visual_verification": {
+    "workflow": "Capture representative public page screenshots",
+    "run_id": 31585897478,
+    "job_id": 94079532861,
+    "conclusion": "success",
+    "all_record_catalog_artifact_id": 9137201390,
+    "desktop_artifact_id": 9137202214,
+    "mobile_artifact_id": 9137203165,
+    "audit_artifact_id": 9137200745,
+    "catalog_cards": 119,
+    "catalog_direct_logos": 101,
+    "catalog_neutral_fallbacks": 18,
+    "broken_images": 0,
+    "empty_frames": 0,
+    "failures": 0,
+    "layout_geometry": "pass",
+    "desktop_readability": "pass",
+    "mobile_readability": "pass",
+    "desktop_color_system": "pass",
+    "mobile_color_system": "pass"
+  },
+  "phase_e_targeted_visual_regression": {
+    "script": "scripts/capture-stablecoin-mark-mix.mjs",
+    "required_devices": ["desktop", "mobile"],
+    "required_targets": [
+      { "slug": "mnee", "expected_kind": "logo" },
+      { "slug": "usdgo", "expected_kind": "logo" },
+      { "slug": "usr", "expected_kind": "logo" },
+      { "slug": "acala-ausd", "expected_kind": "fallback" }
+    ],
+    "required_checks": [
+      "target visible",
+      "expected mark kind",
+      "no broken image",
+      "square mark",
+      "uniform visible mark dimensions",
+      "no page-level horizontal overflow"
+    ],
+    "merge_rule": "closeout PR and post-merge exact-main capture must pass the targeted regression before the lane is considered fully closed"
+  },
+  "display_result": {
+    "canonical_stablecoins": 119,
+    "reviewed_dispositions": 119,
+    "direct_logo_records": 101,
+    "neutral_fallback_records": 18,
+    "promoted_slugs": ["mnee", "usdgo", "usr"],
+    "additional_promotions": 0,
+    "remote_runtime_image_fetch": false,
+    "orphan_logo_assets": 0
+  },
+  "canonical_boundary": {
+    "stable_assets": 119,
+    "evidence": 585,
+    "evidence_relations": 585,
+    "market_access_records": 12,
+    "archive_recorded": 471,
+    "archive_not_recorded": 114,
+    "canonical_hash": "sha256:4e7570b6fab88a8178a01ae280a36d98787573b376440b891491f25469458798",
+    "canonical_file_count": 466,
+    "canonical_delta": 0
+  },
+  "compare_regression_requirement": {
+    "workflow": "Stablecoin compare matrix visual acceptance",
+    "required_on_closeout_pr": true,
+    "accepted_behaviors": [
+      "2-4 record comparison states",
+      "zero-selection hidden state",
+      "discovery, sticky navigation, and replacement",
+      "Hide matching rows feedback",
+      "direct and fallback Compare marks",
+      "bounded mobile comparison scrolling"
+    ]
+  },
+  "permanent_operating_rules_preserved": {
+    "core_logo_coverage_ci_gate": true,
+    "future_record_logo_disposition_required": true,
+    "neutral_fallback_valid": true,
+    "missing_disposition_valid": false,
+    "legacy_host_redirect_contract_unchanged": true,
+    "ui_v3_regression_authority_unchanged": true
+  },
+  "closeout_boundary": {
+    "canonical_work_authorized_after_merge": false,
+    "additional_logo_promotions_authorized": false,
+    "archive_work_authorized": false,
+    "market_access_work_authorized": false,
+    "unrelated_ui_work_authorized": false,
+    "automatic_continuation": false,
+    "new_work_requires_fresh_reviewed_authority": true
+  }
+}
