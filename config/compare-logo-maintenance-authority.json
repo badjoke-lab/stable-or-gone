@@ -1,0 +1,159 @@
+{
+  "schema_version": "1.0",
+  "authority_id": "sog_compare_feedback_logo_maintenance_2026_08_12",
+  "status": "active_after_merge",
+  "entry_main_commit": "e28e60beeea07a0a6dfd7af217d2c3b9ac616bbd",
+  "public_route": "/stablecoins/",
+  "purpose": "Authorize a bounded maintenance lane for Compare differences feedback, Compare mark display, corpus-wide fallback-logo re-audit, and permanent logo-disposition gates for future canonical stablecoin additions.",
+  "problem_statement": [
+    "differences_only_can_produce_no_visible_change_without_explaining_that_all_displayed_rows_already_differ",
+    "compare_record_headers_do_not_render_the_existing_stablecoin_mark_system",
+    "current_logo_display_policy_is_98_direct_logos_and_21_neutral_fallbacks_across_119_canonical_records",
+    "the_three_canonical_assets_added_after_the_116_record_logo_closure_are_all_neutral_fallbacks",
+    "bison_eub_and_bison_usb_entered_the_canonical_registry_without_a_token_specific_logo_disposition_being_recorded_in_the_growth_pr",
+    "new_canonical_asset_growth_does_not_have_a_permanent_blocking_logo_disposition_requirement"
+  ],
+  "required_workstreams": {
+    "compare_difference_feedback": {
+      "required": true,
+      "semantics": "hide_rows_where_all_selected_records_have_matching_normalized_display_values",
+      "preferred_label": "Hide matching rows",
+      "required_feedback": [
+        "show_differing_attribute_count",
+        "show_matching_hidden_count_when_enabled",
+        "show_explicit_nothing_to_hide_message_when_enabled_and_no_matching_rows_exist"
+      ],
+      "required_tests": [
+        "toggle_changes_row_count_for_a_selection_with_matching_rows",
+        "toggle_noop_state_reports_nothing_to_hide_for_a_selection_where_all_rows_differ",
+        "toggle_off_restores_full_comparison_rows"
+      ]
+    },
+    "compare_mark_display": {
+      "required": true,
+      "rule": "Selected Compare columns must render the same audited Stablecoin mark output used by the register and dossiers.",
+      "implementation_constraint": "Reuse StablecoinMark output and stablecoinLogo resolver semantics; do not introduce an independent Compare-only logo mapping or remote runtime image fetching.",
+      "required_visual_acceptance": [
+        "desktop_compare_direct_logo",
+        "desktop_compare_neutral_fallback",
+        "mobile_compare_direct_logo",
+        "mobile_compare_neutral_fallback"
+      ]
+    },
+    "fallback_logo_reaudit": {
+      "required": true,
+      "baseline_canonical_records": 119,
+      "baseline_direct_logo_records": 98,
+      "baseline_neutral_fallback_records": 21,
+      "fallback_slugs": [
+        "acala-ausd",
+        "avalon-usda",
+        "bison-bank-eub",
+        "bison-bank-usb",
+        "brz",
+        "chfau",
+        "coins-phpc",
+        "dynamic-set-dollar",
+        "eurau",
+        "gbpq",
+        "mnee",
+        "plnq",
+        "poundtoken",
+        "sekau",
+        "sofiusd",
+        "usdgo",
+        "usdh",
+        "usdy",
+        "usk",
+        "usr",
+        "vchf"
+      ],
+      "priority_rechecks": [
+        "mnee",
+        "bison-bank-eub",
+        "bison-bank-usb"
+      ],
+      "acceptance_rule": "Promote only a mark attributable to the stablecoin itself or its specific product. Issuer, protocol/project, or generic directory marks remain research evidence and do not become token logos without asset-specific attribution.",
+      "asset_rule": "Accepted assets must be vendored locally with recorded provenance and applicable license/source metadata. Remote runtime fetching remains prohibited.",
+      "result_rule": "Every one of the 21 baseline fallback records must receive a fresh reviewed disposition: direct_logo or neutral_fallback, with explicit evidence and rationale.",
+      "count_rule": "Direct-logo and fallback counts may change only as a result of the 21 reviewed dispositions; canonical registry counts remain unchanged."
+    },
+    "future_record_growth_logo_gate": {
+      "required": true,
+      "permanent": true,
+      "rule": "Every new canonical stablecoin addition must include a reviewed logo disposition before merge.",
+      "required_fields": [
+        "canonical_slug",
+        "canonical_name",
+        "symbol",
+        "decision",
+        "mark_type",
+        "source_page",
+        "source_asset_url_or_explicit_null",
+        "source_class",
+        "identity_basis",
+        "evidence_or_reason_for_fallback",
+        "asset_path_or_explicit_null",
+        "transformation_or_none"
+      ],
+      "blocking_validation": [
+        "logo_decision_count_matches_canonical_stablecoin_count",
+        "new_canonical_stablecoin_slugs_have_logo_dispositions",
+        "accepted_logo_assets_exist_locally_and_are_mapped_by_slug",
+        "neutral_fallbacks_are_explicitly_listed_in_display_policy",
+        "canonical_stablecoin_data_changes_trigger_logo_coverage_validation"
+      ]
+    }
+  },
+  "implementation_sequence": [
+    "authority_and_schedule_merge",
+    "twenty_one_fallback_record_reaudit_result",
+    "compare_difference_feedback_and_mark_display_implementation",
+    "eligible_logo_imports_and_permanent_record_growth_logo_gate_implementation",
+    "direct_desktop_mobile_artifact_review_and_closeout",
+    "restore_repository_review_gate"
+  ],
+  "canonical_baseline": {
+    "stable_assets": 119,
+    "organizations": 109,
+    "relationships": 131,
+    "events": 194,
+    "evidence": 585,
+    "evidence_relations": 585,
+    "reserve_reports": 127,
+    "known_unknowns": 352,
+    "regulatory_notes": 9,
+    "deployments": 186,
+    "legal_profiles": 119,
+    "reserve_components": 153,
+    "income_profiles": 119,
+    "market_access": 12,
+    "archive_recorded": 471,
+    "archive_not_recorded": 114,
+    "canonical_hash": "sha256:4e7570b6fab88a8178a01ae280a36d98787573b376440b891491f25469458798",
+    "canonical_file_count": 466
+  },
+  "canonical_delta_authorized": 0,
+  "entry_review_gate": {
+    "stage": "REVIEW_GATE",
+    "source_closeout": "config/post-pr552-evidence-archive-batch2-closeout.json",
+    "automatic_continuation": false,
+    "next_work_requires_separate_reviewed_authority": true
+  },
+  "forbidden": [
+    "canonical_stablecoin_additions_or_deletions",
+    "canonical_evidence_or_evidence_relation_changes",
+    "canonical_archive_url_changes",
+    "market_access_promotion",
+    "schema_or_taxonomy_changes",
+    "new_public_routes",
+    "ranking",
+    "scoring",
+    "recommendation",
+    "generated_substitute_brand_artwork",
+    "issuer_or_project_mark_presented_as_a_token_logo_without_asset_specific_attribution",
+    "remote_runtime_logo_fetching",
+    "unrelated_sitewide_redesign",
+    "automatic_continuation_beyond_closeout"
+  ]
+}
