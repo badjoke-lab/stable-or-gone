@@ -1,1 +1,1 @@
-import './validate-post-pr552-evidence-archive-batch2-closeout.mjs';
+import './validate-compare-logo-maintenance-authority.mjs';
