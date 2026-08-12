@@ -33,13 +33,15 @@
       "all_different_toggle_is_visible_noop_with_explicit_feedback",
       "toggle_off_restores_full_row_count",
       "desktop_compare_headers_include_direct_and_neutral_fallback_marks",
-      "mobile_compare_headers_include_direct_and_neutral_fallback_marks",
+      "mobile_direct_mark_is_visually_captured",
+      "mobile_neutral_fallback_mark_is_visually_captured_after_horizontal_scroll",
       "mobile_matrix_remains_bounded_and_horizontally_scrollable"
     ],
     "artifact_paths": [
       "artifacts/screenshots/compare-phase-c/compare-phase-c-audit.json",
       "artifacts/screenshots/compare-phase-c/compare-desktop-direct-fallback.png",
-      "artifacts/screenshots/compare-phase-c/compare-mobile-direct-fallback.png"
+      "artifacts/screenshots/compare-phase-c/compare-mobile-direct.png",
+      "artifacts/screenshots/compare-phase-c/compare-mobile-fallback.png"
     ]
   },
   "public_logo_boundary": {
