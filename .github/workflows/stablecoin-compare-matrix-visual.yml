@@ -3,6 +3,13 @@ name: Stablecoin compare matrix visual acceptance
 on:
   pull_request:
     paths:
+      - 'AGENTS.md'
+      - 'docs/spec-governance.md'
+      - 'docs/roadmap.md'
+      - 'docs/deployment-policy.md'
+      - 'docs/roadmap-amendments/2026-08-12-compare-phase-c-review-result.md'
+      - 'docs/quality/compare-phase-c-review-result-spec.md'
+      - 'config/compare-phase-c-implementation-result.json'
       - 'src/pages/stablecoins/index.astro'
       - 'src/components/StablecoinComparisonSource.astro'
       - 'src/scripts/stablecoin-index.ts'
@@ -13,6 +20,9 @@ on:
       - 'scripts/audit-stablecoin-compare-navigation.mjs'
       - 'scripts/audit-stablecoin-comparison-phase-c.mjs'
       - 'scripts/validate-stablecoin-compare-discovery-navigation-remediation.mjs'
+      - 'scripts/validate-compare-logo-fallback-reaudit-result.mjs'
+      - 'scripts/validate-compare-phase-c-result.mjs'
+      - 'scripts/validate-active-workstream.mjs'
       - '.github/workflows/stablecoin-compare-matrix-visual.yml'
   workflow_dispatch:
 
@@ -37,6 +47,8 @@ jobs:
         run: npx playwright install --with-deps chromium
       - name: Validate Compare discovery implementation
         run: node scripts/validate-stablecoin-compare-discovery-navigation-remediation.mjs
+      - name: Validate Phase C result boundary
+        run: node scripts/validate-compare-phase-c-result.mjs
       - name: Build exact PR head
         run: npm run build
       - name: Start local site
