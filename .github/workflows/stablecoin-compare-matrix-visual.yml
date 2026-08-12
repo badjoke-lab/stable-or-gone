@@ -6,10 +6,12 @@ on:
       - 'src/pages/stablecoins/index.astro'
       - 'src/components/StablecoinComparisonSource.astro'
       - 'src/scripts/stablecoin-index.ts'
+      - 'src/scripts/stablecoin-comparison-phase-c.ts'
       - 'src/styles/public-ui.css'
       - 'scripts/audit-stablecoin-compare-matrix-visual.mjs'
       - 'scripts/audit-stablecoin-compare-zero-state.mjs'
       - 'scripts/audit-stablecoin-compare-navigation.mjs'
+      - 'scripts/audit-stablecoin-comparison-phase-c.mjs'
       - 'scripts/validate-stablecoin-compare-discovery-navigation-remediation.mjs'
       - '.github/workflows/stablecoin-compare-matrix-visual.yml'
   workflow_dispatch:
@@ -55,6 +57,8 @@ jobs:
         run: node scripts/audit-stablecoin-compare-zero-state.mjs
       - name: Audit discovery, sticky navigation, and replacement
         run: node scripts/audit-stablecoin-compare-navigation.mjs
+      - name: Audit Phase C matching-row feedback and Stablecoin marks
+        run: node scripts/audit-stablecoin-comparison-phase-c.mjs
       - name: Upload comparison visual acceptance artifact
         if: always()
         uses: actions/upload-artifact@v4
@@ -66,4 +70,5 @@ jobs:
           path: |
             artifacts/stablecoin-compare-matrix/**
             artifacts/stablecoin-compare-navigation/**
+            artifacts/screenshots/compare-phase-c/**
             /tmp/sog-compare-server.log
