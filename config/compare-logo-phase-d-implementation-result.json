@@ -1,0 +1,101 @@
+{
+  "schema_version": "1.0",
+  "result_id": "sog_compare_logo_phase_d_implementation_2026_08_12",
+  "parent_authority": "config/compare-logo-maintenance-authority.json",
+  "parent_authority_id": "sog_compare_feedback_logo_maintenance_2026_08_12",
+  "preceding_phase_result": "config/compare-phase-c-implementation-result.json",
+  "entry_main_commit": "c24b9ea9f98573a949c91bd512ef1413311226c6",
+  "phase": "D",
+  "status": "complete_after_merge",
+  "canonical_boundary": {
+    "stable_assets": 119,
+    "evidence": 585,
+    "evidence_relations": 585,
+    "market_access_records": 12,
+    "archive_recorded": 471,
+    "archive_not_recorded": 114,
+    "canonical_hash": "sha256:4e7570b6fab88a8178a01ae280a36d98787573b376440b891491f25469458798",
+    "canonical_file_count": 466,
+    "canonical_delta": 0
+  },
+  "display_result": {
+    "canonical_stablecoins": 119,
+    "reviewed_dispositions": 119,
+    "direct_logo_records": 101,
+    "neutral_fallback_records": 18,
+    "promoted_slugs": [
+      "mnee",
+      "usdgo",
+      "usr"
+    ],
+    "other_phase_b_fallbacks_preserved": true,
+    "remote_runtime_image_fetch": false,
+    "compare_only_logo_mapping": false
+  },
+  "imported_assets": [
+    {
+      "slug": "mnee",
+      "mark_type": "official_product_mark",
+      "local_path": "/stablecoin-logos/mnee.svg",
+      "source_page": "https://www.mnee.io/",
+      "source_asset_url": "https://www.mnee.io/mnee.svg",
+      "source_class": "official_product_page_asset",
+      "sha256": "ddee8994d9b3ac38835ed5f99d01a6f029cc8a997c9096d2b9ee4f9e49808911",
+      "transformation": "vendored_without_artwork_changes",
+      "license_review": "No separate open redistribution license was identified in the reviewed first-party material; the unmodified product mark is retained for identification and underlying rights remain with the owner."
+    },
+    {
+      "slug": "usdgo",
+      "mark_type": "official_product_mark",
+      "local_path": "/stablecoin-logos/usdgo.svg",
+      "source_page": "https://www.usdgo.com/",
+      "source_asset_url": "https://www.usdgo.com/",
+      "source_class": "official_product_homepage_inline_svg",
+      "sha256": "e75fc78d2b70dd3da4725aed2b1ed3e4f6201c7299a22f737154557b92ce4a84",
+      "transformation": "extracted_inline_svg_without_artwork_changes",
+      "license_review": "No separate open redistribution license was identified in the reviewed first-party material; the unmodified product mark is retained for identification and underlying rights remain with the owner."
+    },
+    {
+      "slug": "usr",
+      "mark_type": "token_logo",
+      "local_path": "/stablecoin-logos/usr.png",
+      "source_page": "https://resolv.xyz/brand-kit",
+      "source_asset_url": "https://framerusercontent.com/images/jr6pCURt19DV9uNMz7A80qtO8c.png?height=256&width=256",
+      "source_class": "official_brand_kit_token_asset",
+      "sha256": "56279ebd60697a49d0c8fa62179a40eb7ba07b26d756729645d331de2addbf16",
+      "transformation": "vendored_without_artwork_changes",
+      "license_review": "No separate open-source or redistribution license was identified in the reviewed Brand Kit material; the unmodified token asset is retained for identification and underlying rights remain with the owner."
+    }
+  ],
+  "source_review_correction": {
+    "slug": "usdgo",
+    "phase_b_candidate_url": "https://cdn.prod.website-files.com/649e7e19aca422fdfb636e26/698e17498a40c5465d610e87_Layer_1.svg",
+    "phase_b_candidate_sha256": "58ed2806ed2f174a3db10d2ff4a856fd31332fdbbc238f8bf83c22b1891d7a88",
+    "phase_d_review_result": "rejected_as_product_illustration_not_compact_mark",
+    "replacement_scope": "same_already_approved_usdgo_slug_only",
+    "replacement_basis": "The current first-party USDGO homepage renders a compact inline SVG as its header logo; the same visual identity appears in OSL official USDGO listing artwork.",
+    "allow_list_expanded": false
+  },
+  "superseded_assets_removed": [
+    "/stablecoin-logos/usdgo.png",
+    "/stablecoin-logos/usr.svg"
+  ],
+  "permanent_growth_gate": {
+    "core_ci_workflow": ".github/workflows/ci.yml",
+    "blocking_audit": "scripts/audit-stablecoin-logo-coverage.mjs",
+    "runs_on_every_pull_request": true,
+    "data_only_growth_can_bypass": false,
+    "decision_count_must_equal_canonical_count": true,
+    "every_canonical_slug_requires_reviewed_disposition": true,
+    "direct_assets_must_exist_locally": true,
+    "fallbacks_must_be_explicit": true,
+    "orphan_logo_assets_rejected": true
+  },
+  "phase_gate": {
+    "phase_d_complete_after_merge": true,
+    "phase_e_becomes_next_after_phase_d_merge": true,
+    "additional_logo_promotions_authorized": false,
+    "canonical_growth_authorized": false,
+    "automatic_continuation_after_closeout": false
+  }
+}
