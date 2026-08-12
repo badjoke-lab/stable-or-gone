@@ -1,1 +1,1 @@
-import './validate-compare-phase-c-result.mjs';
+import './validate-compare-logo-phase-d-result.mjs';
