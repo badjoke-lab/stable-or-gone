@@ -125,7 +125,8 @@ try {
   for (const required of ['119 canonical Stablecoin records', '101', '18', 'mnee.svg', 'usdgo.svg', 'usr.png', 'ddee8994', 'e75fc78', '56279ebd', 'permanent core CI gate']) {
     if (!readme.toLowerCase().includes(required.toLowerCase())) throw new Error(`Stablecoin logo README missing Phase D marker: ${required}`);
   }
-  if (!readme.includes('product illustration') || !readme.includes('not imported')) throw new Error('README must preserve the USDGO Phase-B candidate rejection rationale.');
+  const normalizedReadme = readme.replace(/\*\*/g, '');
+  if (!normalizedReadme.includes('product illustration') || !normalizedReadme.includes('not imported')) throw new Error('README must preserve the USDGO Phase-B candidate rejection rationale.');
 
   if (result.source_review_correction?.slug !== 'usdgo' || result.source_review_correction?.phase_d_review_result !== 'rejected_as_product_illustration_not_compact_mark' || result.source_review_correction?.allow_list_expanded !== false) {
     throw new Error('Phase D USDGO source correction record changed.');
