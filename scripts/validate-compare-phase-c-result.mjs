@@ -12,8 +12,9 @@ const enhancementPath = 'src/scripts/stablecoin-comparison-phase-c.ts';
 const auditPath = 'scripts/audit-stablecoin-comparison-phase-c.mjs';
 const workflowPath = '.github/workflows/stablecoin-compare-matrix-visual.yml';
 const displayPolicyPath = 'config/stablecoin-logo-display-policy.json';
+const entryPaths = ['AGENTS.md', 'docs/spec-governance.md', 'docs/roadmap.md', 'docs/deployment-policy.md'];
 
-for (const file of [resultPath, resultSpecPath, amendmentPath, activePath, sourcePath, pagePath, enhancementPath, auditPath, workflowPath, displayPolicyPath]) {
+for (const file of [resultPath, resultSpecPath, amendmentPath, activePath, sourcePath, pagePath, enhancementPath, auditPath, workflowPath, displayPolicyPath, ...entryPaths]) {
   if (!fs.existsSync(file)) throw new Error(`Missing Phase C artifact: ${file}`);
 }
 
@@ -28,6 +29,7 @@ const resultSpec = fs.readFileSync(resultSpecPath, 'utf8');
 const amendment = fs.readFileSync(amendmentPath, 'utf8');
 const active = fs.readFileSync(activePath, 'utf8').trim();
 const expectedDirect = ['mnee', 'usdgo', 'usr'];
+const canonicalHash = 'sha256:4e7570b6fab88a8178a01ae280a36d98787573b376440b891491f25469458798';
 
 if (active !== "import './validate-compare-phase-c-result.mjs';") throw new Error('Active workstream must point exactly to the Phase C result validator.');
 if (result.result_id !== 'sog_compare_phase_c_implementation_2026_08_12') throw new Error('Unexpected Phase C result id.');
@@ -58,7 +60,7 @@ const expectedCanonical = {
   market_access_records: 12,
   archive_recorded: 471,
   archive_not_recorded: 114,
-  canonical_hash: 'sha256:4e7570b6fab88a8178a01ae280a36d98787573b376440b891491f25469458798',
+  canonical_hash: canonicalHash,
   canonical_file_count: 466,
   canonical_delta: 0
 };
@@ -68,6 +70,21 @@ if (result.phase_gate?.phase_d_becomes_next_after_phase_c_merge !== true || resu
 for (const requiredText of ['Hide matching rows', 'Nothing to hide', 'mnee', 'usdgo', 'usr', 'Phase D', 'canonical delta']) {
   if (!resultSpec.toLowerCase().includes(requiredText.toLowerCase())) throw new Error(`Phase C result spec missing ${requiredText}.`);
   if (!amendment.toLowerCase().includes(requiredText.toLowerCase())) throw new Error(`Phase C roadmap amendment missing ${requiredText}.`);
+}
+
+for (const entryPath of entryPaths) {
+  const text = fs.readFileSync(entryPath, 'utf8');
+  for (const requiredText of [
+    'MAINTENANCE_AUTHORITY_PHASE_D_NEXT',
+    'config/compare-phase-c-implementation-result.json',
+    'docs/quality/compare-phase-c-review-result-spec.md',
+    'docs/roadmap-amendments/2026-08-12-compare-phase-c-review-result.md',
+    'mnee', 'usdgo', 'usr', canonicalHash
+  ]) {
+    if (!text.includes(requiredText)) throw new Error(`${entryPath} must cite Phase C result boundary: missing ${requiredText}.`);
+  }
+  if (!/Phase D[\s\S]{0,180}(NEXT|next)/.test(text)) throw new Error(`${entryPath} must establish Phase D as next after Phase C.`);
+  if (!/automatic continuation[^\n]*(false|no)/i.test(text)) throw new Error(`${entryPath} must preserve no automatic continuation.`);
 }
 
 console.log('Phase C Compare feedback and mark implementation result: pass');
