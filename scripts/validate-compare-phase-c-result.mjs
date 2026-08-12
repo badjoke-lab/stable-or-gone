@@ -48,7 +48,7 @@ try {
   if (!audit.includes('matchingCase') || !audit.includes('allDifferentCase') || !audit.includes('restoredRowCount') || !audit.includes("markKind === 'logo'") || !audit.includes("markKind === 'fallback'")) throw new Error('Phase C browser audit lost a required deterministic case.');
   if (!workflow.includes('Audit Phase C matching-row feedback and Stablecoin marks') || !workflow.includes('audit-stablecoin-comparison-phase-c.mjs')) throw new Error('Compare visual workflow lost the Phase C browser audit.');
 
-  if (result.public_logo_boundary?.public_direct_logo_records !== 98 || result.public_logo_boundary?.public_neutral_fallback_records !== 21) throw new Error('Historical Phase C 98 / 21 public baseline changed.');
+  if (result.public_logo_boundary?.direct_logo_records !== 98 || result.public_logo_boundary?.neutral_fallback_records !== 21) throw new Error('Historical Phase C 98 / 21 public baseline changed.');
   if (result.public_logo_boundary?.phase_c_imported_assets !== false || result.public_logo_boundary?.phase_c_changed_display_policy !== false) throw new Error('Phase C historical boundary must remain import-free.');
   if (JSON.stringify([...(result.public_logo_boundary?.phase_d_allowed_direct_logo_slugs ?? [])].sort()) !== JSON.stringify([...expectedDirect].sort())) throw new Error('Historical Phase D allow-list changed.');
 
