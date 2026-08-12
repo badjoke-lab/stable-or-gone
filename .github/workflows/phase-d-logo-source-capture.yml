@@ -1,0 +1,50 @@
+name: Capture Phase D approved logo source assets
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/phase-d-logo-source-capture.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Capture exact approved first-party assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p phase-d-logo-assets
+          curl --fail --location --retry 3 --silent --show-error \
+            'https://www.mnee.io/mnee.svg' \
+            -o phase-d-logo-assets/mnee.svg
+          curl --fail --location --retry 3 --silent --show-error \
+            'https://cdn.prod.website-files.com/649e7e19aca422fdfb636e26/698e17498a40c5465d610e87_Layer_1.svg' \
+            -o phase-d-logo-assets/usdgo.svg
+          curl --fail --location --retry 3 --silent --show-error \
+            'https://framerusercontent.com/images/jr6pCURt19DV9uNMz7A80qtO8c.png?height=256&width=256' \
+            -o phase-d-logo-assets/usr.png
+          test -s phase-d-logo-assets/mnee.svg
+          test -s phase-d-logo-assets/usdgo.svg
+          test -s phase-d-logo-assets/usr.png
+          file phase-d-logo-assets/* | tee phase-d-logo-assets/file-types.txt
+          sha256sum phase-d-logo-assets/mnee.svg phase-d-logo-assets/usdgo.svg phase-d-logo-assets/usr.png | tee phase-d-logo-assets/sha256.txt
+          wc -c phase-d-logo-assets/mnee.svg phase-d-logo-assets/usdgo.svg phase-d-logo-assets/usr.png | tee phase-d-logo-assets/sizes.txt
+          cat > phase-d-logo-assets/source-urls.txt <<'EOF'
+          mnee.svg https://www.mnee.io/mnee.svg
+          usdgo.svg https://cdn.prod.website-files.com/649e7e19aca422fdfb636e26/698e17498a40c5465d610e87_Layer_1.svg
+          usr.png https://framerusercontent.com/images/jr6pCURt19DV9uNMz7A80qtO8c.png?height=256&width=256
+          EOF
+
+      - name: Upload exact source assets
+        uses: actions/upload-artifact@v4
+        with:
+          name: phase-d-approved-logo-source-assets-${{ github.run_id }}
+          if-no-files-found: error
+          retention-days: 14
+          compression-level: 0
+          path: phase-d-logo-assets/**
