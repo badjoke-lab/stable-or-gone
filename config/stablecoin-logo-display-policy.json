@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0",
   "canonical_records": 119,
-  "direct_logo_records": 98,
-  "neutral_fallback_records": 21,
+  "direct_logo_records": 101,
+  "neutral_fallback_records": 18,
   "display_logo_mark_types": [
     "token_logo",
     "official_product_mark",
@@ -24,16 +24,13 @@
     "dynamic-set-dollar",
     "eurau",
     "gbpq",
-    "mnee",
     "plnq",
     "poundtoken",
     "sekau",
     "sofiusd",
-    "usdgo",
     "usdh",
     "usdy",
     "usk",
-    "usr",
     "vchf"
   ],
   "rule": "Only a mark attributable to the Stablecoin or its specific product is displayed as a logo. Issuer, project, and directory marks remain research evidence and render as the neutral monogram fallback."

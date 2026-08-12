@@ -8,7 +8,6 @@ const failures = [];
 const requireValue = (ok, message) => { if (!ok) failures.push(message); };
 
 const authority = json('config/compare-logo-maintenance-authority.json');
-const displayPolicy = json('config/stablecoin-logo-display-policy.json');
 const amendment = read('docs/roadmap-amendments/2026-08-12-compare-logo-maintenance-authority.md');
 const quality = read('docs/quality/compare-logo-maintenance-spec.md');
 const operating = read('docs/quality/stablecoin-logo-disposition-operating-spec.md');
@@ -29,14 +28,10 @@ requireValue(authority.entry_review_gate?.automatic_continuation === false, 'ent
 
 const fallback = authority.required_workstreams?.fallback_logo_reaudit;
 requireValue(fallback?.baseline_canonical_records === 119, 'logo baseline canonical record count must be 119');
-requireValue(fallback?.baseline_direct_logo_records === 98, 'direct logo baseline must be 98');
-requireValue(fallback?.baseline_neutral_fallback_records === 21, 'fallback baseline must be 21');
-requireValue(Array.isArray(fallback?.fallback_slugs) && fallback.fallback_slugs.length === 21, 'authority must freeze exactly 21 fallback slugs');
-requireValue(new Set(fallback?.fallback_slugs ?? []).size === 21, 'fallback slugs must be unique');
-requireValue(displayPolicy.canonical_records === 119, 'display policy canonical records must be 119 at entry');
-requireValue(displayPolicy.direct_logo_records === 98, 'display policy direct logos must be 98 at entry');
-requireValue(displayPolicy.neutral_fallback_records === 21, 'display policy fallbacks must be 21 at entry');
-requireValue(JSON.stringify([...(displayPolicy.neutral_fallback_slugs ?? [])].sort()) === JSON.stringify([...(fallback?.fallback_slugs ?? [])].sort()), 'authority fallback population must exactly match current display policy');
+requireValue(fallback?.baseline_direct_logo_records === 98, 'authority entry direct-logo baseline must remain 98');
+requireValue(fallback?.baseline_neutral_fallback_records === 21, 'authority entry fallback baseline must remain 21');
+requireValue(Array.isArray(fallback?.fallback_slugs) && fallback.fallback_slugs.length === 21, 'authority must freeze exactly 21 entry fallback slugs');
+requireValue(new Set(fallback?.fallback_slugs ?? []).size === 21, 'entry fallback slugs must be unique');
 
 const differences = authority.required_workstreams?.compare_difference_feedback;
 requireValue(differences?.required === true, 'Compare difference feedback must be required');
@@ -59,7 +54,7 @@ for (const [name, text] of [
   ['quality spec', quality],
   ['logo operating spec', operating]
 ]) {
-  requireValue(/119/.test(text) && /98/.test(text) && /21/.test(text), `${name} must bind the 119 / 98 / 21 logo baseline`);
+  requireValue(/119/.test(text) && /98/.test(text) && /21/.test(text), `${name} must preserve the historical 119 / 98 / 21 authority-entry baseline`);
 }
 
 requireValue(/471/.test(amendment) && /114/.test(amendment) && amendment.includes('4e7570b6fab88a8178a01ae280a36d98787573b376440b891491f25469458798'), 'roadmap amendment must bind the post-PR552 canonical baseline');
@@ -69,7 +64,8 @@ requireValue(/StablecoinMark/.test(quality) && /stablecoinLogo/.test(quality), '
 requireValue(/every new canonical stablecoin/i.test(operating), 'operating spec must apply to every new canonical stablecoin');
 requireValue(/must not merge/i.test(operating), 'operating spec must define blocking merge gates');
 
-// Forward repository pointers are validated by the current child-phase validator, not by this immutable parent package validator.
+// This parent validator intentionally validates the immutable authority-entry baseline.
+// Current child-phase display policy and forward governance are validated by the current child result validator.
 
 if (failures.length) {
   console.error(JSON.stringify({ ok: false, failures }, null, 2));
@@ -85,7 +81,7 @@ console.log(JSON.stringify({
     archive_not_recorded: authority.canonical_baseline.archive_not_recorded,
     canonical_hash: authority.canonical_baseline.canonical_hash
   },
-  logo_baseline: {
+  historical_logo_entry_baseline: {
     canonical_records: fallback.baseline_canonical_records,
     direct_logos: fallback.baseline_direct_logo_records,
     neutral_fallbacks: fallback.baseline_neutral_fallback_records
