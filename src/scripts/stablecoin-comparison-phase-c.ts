@@ -6,6 +6,8 @@ if (comparisonRoot) {
   const feedback = comparisonRoot.querySelector<HTMLElement>('[data-comparison-feedback]');
   const sources = Array.from(comparisonRoot.querySelectorAll<HTMLElement>('[data-comparison-source]'));
   const sourceByHref = new Map(sources.map((source) => [source.dataset.recordHref ?? '', source] as const));
+  const mobileFeedback = window.matchMedia('(max-width: 640px)');
+  const nothingToHide = 'All displayed attributes already differ. Nothing to hide.';
   const normalize = (value: unknown) => String(value ?? '').normalize('NFKC').toLocaleLowerCase().trim().replace(/\s+/g, ' ');
 
   const sourceForHeader = (header: Element) => {
@@ -36,6 +38,22 @@ if (comparisonRoot) {
     }
   }
 
+  function setFeedbackLines(lines: string[]) {
+    if (!feedback) return;
+    const visibleLines = lines.filter(Boolean);
+    if (!mobileFeedback.matches || visibleLines.length < 2) {
+      feedback.textContent = visibleLines.join(' ');
+      return;
+    }
+
+    const fragment = document.createDocumentFragment();
+    visibleLines.forEach((line, index) => {
+      if (index > 0) fragment.append(document.createElement('br'));
+      fragment.append(document.createTextNode(line));
+    });
+    feedback.replaceChildren(fragment);
+  }
+
   function updateDifferenceFeedback() {
     if (!feedback || !grid) return;
     const headers = Array.from(grid.querySelectorAll<HTMLElement>('.comparison-record-header'));
@@ -58,13 +76,19 @@ if (comparisonRoot) {
     const matchingLabel = `${matchingCount} matching attribute${matchingCount === 1 ? '' : 's'}`;
 
     if (toggle?.checked) {
-      feedback.textContent = matchingCount === 0
-        ? `${differingLabel}. All displayed attributes already differ. Nothing to hide.`
-        : `${differingLabel}. ${matchingLabel} hidden.`;
+      if (matchingCount === 0) {
+        setFeedbackLines([
+          `${differingLabel}.`,
+          nothingToHide.replace(' Nothing to hide.', ''),
+          'Nothing to hide.'
+        ]);
+      } else {
+        setFeedbackLines([`${differingLabel}.`, `${matchingLabel} hidden.`]);
+      }
       return;
     }
 
-    feedback.textContent = `${differingLabel}. ${matchingLabel} shown.`;
+    setFeedbackLines([`${differingLabel}.`, `${matchingLabel} shown.`]);
   }
 
   function synchronizeComparisonEnhancements() {
@@ -80,5 +104,6 @@ if (comparisonRoot) {
   toggle?.addEventListener('change', () => queueMicrotask(synchronizeComparisonEnhancements));
   comparisonRoot.addEventListener('change', () => queueMicrotask(synchronizeComparisonEnhancements));
   window.addEventListener('popstate', () => queueMicrotask(synchronizeComparisonEnhancements));
+  mobileFeedback.addEventListener('change', () => queueMicrotask(synchronizeComparisonEnhancements));
   queueMicrotask(synchronizeComparisonEnhancements);
 }
