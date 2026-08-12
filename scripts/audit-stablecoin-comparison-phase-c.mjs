@@ -7,6 +7,7 @@ const artifactDir = path.join(process.cwd(), 'artifacts', 'screenshots', 'compar
 fs.mkdirSync(artifactDir, { recursive: true });
 
 const normalize = (value) => String(value ?? '').normalize('NFKC').toLocaleLowerCase().trim().replace(/\s+/g, ' ');
+const compactText = (value) => String(value ?? '').trim().replace(/\s+/g, ' ');
 
 function comparisonStats(records) {
   const keys = Object.keys(records[0]?.values ?? {});
@@ -70,6 +71,19 @@ try {
     await page.waitForSelector('[data-comparison-panel]:not([hidden])');
     await page.waitForFunction((expected) => document.querySelectorAll('[data-comparison-header-mark]').length === expected, selectionLength);
   };
+  const feedbackGeometry = async () => page.locator('[data-comparison-feedback]').evaluate((element) => {
+    const rect = element.getBoundingClientRect();
+    const style = getComputedStyle(element);
+    return {
+      clientWidth: element.clientWidth,
+      scrollWidth: element.scrollWidth,
+      clientHeight: element.clientHeight,
+      scrollHeight: element.scrollHeight,
+      lineHeight: Number.parseFloat(style.lineHeight),
+      visibleWithinViewport: rect.left >= -1 && rect.right <= window.innerWidth + 1,
+      text: element.innerText.trim().replace(/\s+/g, ' ')
+    };
+  });
 
   await page.goto(compareUrl(matchingCase.selection), { waitUntil: 'networkidle' });
   await waitForComparison(matchingCase.selection.length);
@@ -81,13 +95,13 @@ try {
 
   const fullRowCount = await rowLocator.count();
   if (fullRowCount !== matchingCase.stats.total) throw new Error(`Expected ${matchingCase.stats.total} full rows, found ${fullRowCount}.`);
-  const initialFeedback = (await feedback.innerText()).trim();
+  const initialFeedback = compactText(await feedback.innerText());
   if (!initialFeedback.includes(`${matchingCase.stats.differing} differing attribute`) || !initialFeedback.includes(`${matchingCase.stats.matching} matching attribute`) || !initialFeedback.endsWith('shown.')) throw new Error(`Unexpected matching-case initial feedback: ${initialFeedback}`);
 
   await matchingToggle.check();
   await page.waitForFunction((expected) => document.querySelectorAll('[data-comparison-row]').length === expected, matchingCase.stats.differing);
   const reducedRowCount = await rowLocator.count();
-  const hiddenFeedback = (await feedback.innerText()).trim();
+  const hiddenFeedback = compactText(await feedback.innerText());
   if (reducedRowCount !== matchingCase.stats.differing) throw new Error('Hide matching rows did not reduce the matrix to differing attributes.');
   if (!hiddenFeedback.includes(`${matchingCase.stats.matching} matching attribute`) || !hiddenFeedback.endsWith('hidden.')) throw new Error(`Matching hidden-count feedback is missing: ${hiddenFeedback}`);
 
@@ -102,7 +116,7 @@ try {
   await page.locator('[data-comparison-differences]').check();
   await page.waitForFunction(() => document.querySelector('[data-comparison-feedback]')?.textContent?.includes('Nothing to hide.'));
   const allDifferentRowsAfter = await page.locator('[data-comparison-row]').count();
-  const noOpFeedback = (await page.locator('[data-comparison-feedback]').innerText()).trim();
+  const noOpFeedback = compactText(await page.locator('[data-comparison-feedback]').innerText());
   if (allDifferentRowsAfter !== allDifferentRowsBefore) throw new Error('All-different no-op selection unexpectedly changed row count.');
   if (!noOpFeedback.includes('All displayed attributes already differ. Nothing to hide.')) throw new Error(`Explicit all-different no-op feedback is missing: ${noOpFeedback}`);
 
@@ -115,6 +129,33 @@ try {
   await page.locator('[data-comparison-panel]').screenshot({ path: path.join(artifactDir, 'compare-desktop-direct-fallback.png') });
 
   await page.setViewportSize({ width: 390, height: 1000 });
+  await page.goto(compareUrl(matchingCase.selection), { waitUntil: 'networkidle' });
+  await waitForComparison(matchingCase.selection.length);
+  const mobileMatchingFeedback = await feedbackGeometry();
+  if (!mobileMatchingFeedback.visibleWithinViewport || mobileMatchingFeedback.scrollWidth > mobileMatchingFeedback.clientWidth + 1) {
+    throw new Error(`Mobile matching-row feedback is clipped: ${JSON.stringify(mobileMatchingFeedback)}`);
+  }
+  if (mobileMatchingFeedback.clientHeight <= mobileMatchingFeedback.lineHeight * 1.5) {
+    throw new Error(`Mobile matching-row feedback must visibly wrap instead of truncating: ${JSON.stringify(mobileMatchingFeedback)}`);
+  }
+  await page.locator('[data-comparison-panel]').screenshot({ path: path.join(artifactDir, 'compare-mobile-feedback.png') });
+
+  await page.goto(compareUrl(allDifferentCase.selection), { waitUntil: 'networkidle' });
+  await waitForComparison(allDifferentCase.selection.length);
+  await page.locator('[data-comparison-differences]').check();
+  await page.waitForFunction(() => document.querySelector('[data-comparison-feedback]')?.textContent?.includes('Nothing to hide.'));
+  const mobileNoOpFeedback = await feedbackGeometry();
+  if (mobileNoOpFeedback.text !== `${allDifferentCase.stats.differing} differing attributes. All displayed attributes already differ. Nothing to hide.`) {
+    throw new Error(`Mobile no-op feedback lost required wording: ${mobileNoOpFeedback.text}`);
+  }
+  if (!mobileNoOpFeedback.visibleWithinViewport || mobileNoOpFeedback.scrollWidth > mobileNoOpFeedback.clientWidth + 1) {
+    throw new Error(`Mobile no-op feedback is clipped: ${JSON.stringify(mobileNoOpFeedback)}`);
+  }
+  if (mobileNoOpFeedback.clientHeight <= mobileNoOpFeedback.lineHeight * 2.5) {
+    throw new Error(`Mobile no-op feedback must visibly occupy multiple lines: ${JSON.stringify(mobileNoOpFeedback)}`);
+  }
+  await page.locator('[data-comparison-panel]').screenshot({ path: path.join(artifactDir, 'compare-mobile-noop.png') });
+
   await page.goto(compareUrl(markSelection), { waitUntil: 'networkidle' });
   await waitForComparison(markSelection.length);
   const mobileMarkKinds = await page.locator('[data-comparison-header-mark]').evaluateAll((marks) => marks.map((mark) => mark.getAttribute('data-mark-kind')));
@@ -154,6 +195,10 @@ try {
       row_count_before: allDifferentRowsBefore,
       row_count_after: allDifferentRowsAfter,
       feedback: noOpFeedback
+    },
+    mobile_feedback: {
+      matching: mobileMatchingFeedback,
+      all_different_noop: mobileNoOpFeedback
     },
     mark_case: {
       direct_slug: directRecord.slug,
