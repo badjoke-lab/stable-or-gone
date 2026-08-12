@@ -31,14 +31,16 @@ The mark implementation must not create a Compare-only logo map or fetch remote 
 2. the same selection restores the full aligned row set when the control is disabled;
 3. a deterministic all-different selection keeps the same row count and visibly reports `Nothing to hide`;
 4. Compare headers preserve both a direct-logo mark and a neutral-fallback mark on desktop;
-5. the same direct/fallback semantics remain present on mobile;
-6. the mobile comparison matrix remains bounded and horizontally scrollable.
+5. mobile left-position evidence visibly captures the direct-logo record;
+6. mobile right-position evidence, after bounded horizontal scrolling, visibly captures the neutral-fallback record;
+7. the mobile comparison matrix remains bounded and horizontally scrollable.
 
 The Phase C audit emits:
 
 - `artifacts/screenshots/compare-phase-c/compare-phase-c-audit.json`
 - `artifacts/screenshots/compare-phase-c/compare-desktop-direct-fallback.png`
-- `artifacts/screenshots/compare-phase-c/compare-mobile-direct-fallback.png`
+- `artifacts/screenshots/compare-phase-c/compare-mobile-direct.png`
+- `artifacts/screenshots/compare-phase-c/compare-mobile-fallback.png`
 
 Existing Compare audits for 2–4 selections, zero-selection state, URL/navigation behavior, replacement, and matrix geometry remain part of the same workflow and must continue to pass.
 
