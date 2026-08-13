@@ -92,7 +92,20 @@ jobs:
           SOG_BUILD_BRANCH: main
           SOG_BUILD_TIMESTAMP: ${{ steps.source.outputs.timestamp }}
           SOURCE_DATE_EPOCH: ${{ steps.source.outputs.epoch }}
+          PUBLIC_GA_MEASUREMENT_ID: ${{ vars.PUBLIC_GA_MEASUREMENT_ID || secrets.PUBLIC_GA_MEASUREMENT_ID }}
         run: npm run build
+
+      - name: Verify GA4 static-build output
+        id: ga4
+        env:
+          PUBLIC_GA_MEASUREMENT_ID: ${{ vars.PUBLIC_GA_MEASUREMENT_ID || secrets.PUBLIC_GA_MEASUREMENT_ID }}
+        run: |
+          node scripts/verify-ga4-build-output.mjs
+          if [ -n "$PUBLIC_GA_MEASUREMENT_ID" ]; then
+            echo "configured=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "configured=false" >> "$GITHUB_OUTPUT"
+          fi
 
       - name: Upload prebuilt site to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
@@ -135,12 +148,18 @@ jobs:
         env:
           SOURCE_SHA: ${{ steps.source.outputs.sha }}
           EVENT_NAME: ${{ github.event_name }}
+          GA4_CONFIGURED: ${{ steps.ga4.outputs.configured }}
         run: |
           echo "## Production deployment complete" >> "$GITHUB_STEP_SUMMARY"
           echo "- Trigger: $EVENT_NAME" >> "$GITHUB_STEP_SUMMARY"
           echo "- Source commit: $SOURCE_SHA" >> "$GITHUB_STEP_SUMMARY"
           echo "- Pages project: stable-or-gone" >> "$GITHUB_STEP_SUMMARY"
           echo "- Public origin: $SOG_BASE_URL/" >> "$GITHUB_STEP_SUMMARY"
+          if [ "$GA4_CONFIGURED" = "true" ]; then
+            echo "- GA4 static-build injection: configured and verified" >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "- GA4 static-build injection: not configured in the production environment" >> "$GITHUB_STEP_SUMMARY"
+          fi
           echo "- UK guide publication: passed" >> "$GITHUB_STEP_SUMMARY"
 
       - name: Report deployment result
