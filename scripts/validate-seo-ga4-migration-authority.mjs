@@ -4,6 +4,8 @@ const authority = JSON.parse(fs.readFileSync('config/seo-ga4-migration-authority
 const quality = fs.readFileSync('docs/quality/seo-ga4-migration-audit-spec.md', 'utf8');
 const amendment = fs.readFileSync('docs/roadmap-amendments/2026-08-14-seo-ga4-migration-audit-authority.md', 'utf8');
 const origin = fs.readFileSync('config/public-origin.mjs', 'utf8');
+const deployWorkflow = fs.readFileSync('.github/workflows/deploy-production.yml', 'utf8');
+const gaVerifier = fs.readFileSync('scripts/verify-ga4-build-output.mjs', 'utf8');
 const expectedLegacyOrigin = ['https://sog', 'badjoke-lab.com'].join('.');
 const failures = [];
 const check = (value, message) => { if (!value) failures.push(message); };
@@ -26,6 +28,12 @@ check(origin.includes('https://www.stableorgone.com'), 'public origin source');
 check(quality.includes('PUBLIC_GA_MEASUREMENT_ID'), 'quality GA4 variable');
 check(quality.includes('301 https://www.stableorgone.com'), 'quality redirect contract');
 check(amendment.includes('Phase A') && amendment.includes('Phase D'), 'roadmap phases');
+check(deployWorkflow.includes('PUBLIC_GA_MEASUREMENT_ID:'), 'production workflow must pass GA4 configuration to the build');
+check(deployWorkflow.includes('node scripts/verify-ga4-build-output.mjs'), 'production workflow must verify GA4 build output');
+check(deployWorkflow.includes('configured and verified'), 'production summary must report verified GA4 configuration');
+check(deployWorkflow.includes('not configured in the production environment'), 'production summary must report absent GA4 configuration');
+check(gaVerifier.includes('ga4_measurement_id_not_configured'), 'GA4 verifier must preserve explicit unconfigured result');
+check(!gaVerifier.includes('console.log(measurementId)'), 'GA4 verifier must not print measurement id directly');
 
 if (failures.length) {
   console.error(JSON.stringify({ ok: false, failures }, null, 2));
