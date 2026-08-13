@@ -1,1 +1,1 @@
-import './validate-compare-logo-phase-e-closeout.mjs';
+import './validate-seo-ga4-migration-authority.mjs';
