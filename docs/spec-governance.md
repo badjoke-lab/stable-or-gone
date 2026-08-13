@@ -1,7 +1,7 @@
 # Stable or Gone Specification Governance
 
 Status: canonical governance specification  
-Updated: 2026-08-12
+Updated: 2026-08-14
 
 ## 1. Authority rule
 
@@ -22,21 +22,23 @@ Authority order:
 ## 2. Current repository boundary
 
 ```text
-Current stage: REVIEW_GATE
-Active implementation authority: none
-Current closeout contract: config/compare-logo-phase-e-closeout.json
-Current closeout spec: docs/quality/compare-logo-phase-e-closeout-spec.md
-Current roadmap amendment: docs/roadmap-amendments/2026-08-12-compare-logo-phase-e-closeout.md
+Current stage: SEO_GA4_MIGRATION_AUDIT_AUTHORITY
+Active implementation authority: config/seo-ga4-migration-authority.json
+Current quality spec: docs/quality/seo-ga4-migration-audit-spec.md
+Current roadmap amendment: docs/roadmap-amendments/2026-08-14-seo-ga4-migration-audit-authority.md
+Entry main commit: 3c715fa77d9e92d52d7646f6e6e944a43d7f5ea9
 Canonical delta authorized: 0
 Canonical archive additions authorized: 0
 Canonical Market Access promotion authorized: false
 Additional direct-logo promotions authorized: false
 New public route family authorized: false
 Ranking / scoring / recommendation authorized: false
+DNS / Cloudflare account mutation authorized: false
+New GA4 property / Measurement ID creation authorized: false
 Automatic continuation: false
 ```
 
-No substantive implementation may begin from `REVIEW_GATE` without a fresh reviewed authority.
+This is a bounded maintenance authority. It permits only official-origin/redirect/SEO artifact verification plus repair of existing GA4 build-time wiring and validation. It does not reopen canonical data, archive, Market Access, logo, route-family, DNS, or unrelated UI work.
 
 ## 3. Current canonical state
 
@@ -66,29 +68,29 @@ Canonical file count: 466
 Canonical delta authorized: 0
 ```
 
-## 4. Completed Compare / Stablecoin logo maintenance lane
+## 4. Current SEO / analytics authority
 
-The lane established by PR #554 is closed after Phase E:
-
-```text
-PR #554 — Phase A authority/specification/schedule
-PR #555 — Phase B exact 21-fallback reviewed result
-PR #556 — Phase C Compare matching-row feedback + Compare marks
-PR #557 — Phase D mnee/usdgo/usr import + permanent future-growth gate
-Phase E closeout — exact-main verification + targeted visual regression + REVIEW_GATE restoration
-```
-
-Binding historical packages remain available for audit:
+Binding package:
 
 ```text
-config/compare-logo-maintenance-authority.json
-data/editorial-research/compare-logo-fallback-reaudit-2026-08-12.json
-config/compare-phase-c-implementation-result.json
-config/compare-logo-phase-d-implementation-result.json
-config/compare-logo-phase-e-closeout.json
+config/seo-ga4-migration-authority.json
+docs/quality/seo-ga4-migration-audit-spec.md
+docs/roadmap-amendments/2026-08-14-seo-ga4-migration-audit-authority.md
 ```
 
-Historical lineage does not authorize new work merely because it remains in repository history.
+Required sequence:
+
+```text
+Phase A — authority/specification/schedule merge
+Phase B — repository + live origin/redirect/analytics audit
+Phase C — bounded GA4 production-build wiring/validation if required
+Phase D — exact-main production verification
+Closeout — restore REVIEW_GATE; no automatic continuation
+```
+
+The official public origin remains `https://www.stableorgone.com`. The legacy host remains migration-only and must preserve path/query through a 301 redirect. The GA4 lane must reuse the existing SOG analytics identity through `PUBLIC_GA_MEASUREMENT_ID`; creating, guessing, or hardcoding a new Measurement ID is forbidden.
+
+Google Search Console ownership, Change of Address, and sitemap submission are account-side state. Repository evidence can establish public prerequisites but must not be represented as proof that those Google-account operations are complete.
 
 ## 5. Accepted Stablecoin mark state
 
@@ -101,114 +103,42 @@ Last reviewed promotions: mnee, usdgo, usr
 Remote runtime image fetching: false
 ```
 
-No additional promotion is authorized at the current gate.
+No additional promotion is authorized by the SEO/GA4 lane.
 
-Imported asset identities remain pinned by the Phase D result. The USDGO Phase B Anchorage illustration was rejected during Phase D; the accepted `usdgo.svg` is the compact first-party homepage mark.
+## 6. Permanent future-growth logo rule
 
-## 6. Phase E verification record
+`docs/quality/stablecoin-logo-disposition-operating-spec.md` remains binding. Core CI must continue to block canonical stablecoin growth that lacks an explicit reviewed logo disposition. A neutral fallback is valid; missing disposition is not.
 
-Exact Phase D merged main:
+## 7. Enduring Compare regression contract
 
-```text
-bb72108ea53d96a69db42d5c8e97df47033be44e
-```
+Accepted Compare behavior remains binding: matching-row feedback, 2–4 selection behavior, URL/history restoration, explicit unknown states, StablecoinMark reuse, and bounded mobile scrolling must not regress. This lane does not authorize Compare changes.
 
-Verified production:
+## 8. Current work-start and closeout rule
 
-```text
-Deploy production run: 31585897410
-Job: 94079531335
-Conclusion: success
-Official origin: https://www.stableorgone.com
-```
+Continuation must read the current authority package and remain inside its explicit boundaries. Any work outside that package requires a separate reviewed authority.
 
-Verified exact-main visual/all-record run:
+The current lane must close by restoring:
 
 ```text
-Capture representative public page screenshots: 31585897478
-Job: 94079532861
-Conclusion: success
-Catalog: 119 cards / 101 direct / 18 fallback
-Broken images: 0
-Empty frames: 0
+Current stage: REVIEW_GATE
+Active implementation authority: none
+Automatic continuation: false
 ```
 
-The Phase E closeout additionally strengthens browser regression coverage so `mnee`, `usdgo`, `usr`, and a preserved `acala-ausd` fallback are each checked on desktop and mobile. This is audit tooling, not a product-display change.
-
-## 7. Permanent future-growth logo rule
-
-The permanent operating specification remains:
-
-```text
-docs/quality/stablecoin-logo-disposition-operating-spec.md
-```
-
-Core CI runs:
-
-```text
-node scripts/audit-stablecoin-logo-coverage.mjs
-```
-
-on every pull request without data-path exclusions.
-
-Required invariants:
-
-```text
-reviewed decision count equals canonical Stablecoin count
-every canonical slug has exactly one reviewed disposition
-direct-logo assets exist locally and resolve consistently
-fallbacks are explicit in display policy
-resolver direct set equals reviewed direct set
-orphan logo assets are rejected
-```
-
-A neutral fallback is a valid result. Missing reviewed disposition is not.
-
-## 8. Enduring Compare regression contract
-
-Accepted Phase C behavior remains binding as a regression contract:
-
-```text
-Hide matching rows
-differing attribute count visible
-matching shown/hidden count visible
-All displayed attributes already differ. Nothing to hide.
-toggle off restores complete aligned rows
-Compare mark source is existing pre-rendered StablecoinMark output
-Compare-only logo map: none
-remote runtime image fetch: none
-```
-
-The existing Compare visual workflow remains the enforcement path for 2–4 selection, zero state, discovery/navigation/replacement, matching-row feedback, direct/fallback marks, and bounded mobile scrolling.
-
-## 9. Work-start rule from REVIEW_GATE
-
-A fresh authority must explicitly define:
-
-- scope and exclusions;
-- canonical/public boundary;
-- entry main and relevant baselines;
-- required evidence/research inputs;
-- implementation sequence;
-- automated and direct visual acceptance artifacts where applicable;
-- production verification requirements;
-- closeout behavior and whether continuation is allowed.
-
-A schedule window, chat instruction, historical PR, prior research output, or available asset does not itself create authority.
-
-## 10. Canonical/public safety
+## 9. Canonical/public safety
 
 ```text
 canonical_only = true
 includes_unreviewed_candidates = false
-Current stage: REVIEW_GATE
 canonical delta authorized = 0
 canonical archive additions authorized = 0
 canonical Market Access promotion authorized = false
 additional logo promotions authorized = false
 new public route families authorized = false
 ranking / scoring / recommendation authorized = false
-Automatic continuation: false
+DNS / Cloudflare account mutation authorized = false
+new GA4 property / Measurement ID creation authorized = false
+Automatic continuation = false
 ```
 
 `docs/ui-v3-remediation-authority.md` remains the enduring material-public-UI regression authority. Issue #479 remains the deployment-history authority.
