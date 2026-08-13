@@ -1,0 +1,83 @@
+{
+  "schema_version": "1.0",
+  "authority_id": "sog_seo_ga4_migration_audit_2026_08_14",
+  "status": "active_after_merge",
+  "entry_main_commit": "3c715fa77d9e92d52d7646f6e6e944a43d7f5ea9",
+  "official_public_origin": "https://www.stableorgone.com",
+  "legacy_public_origin": "https://sog.badjoke-lab.com",
+  "purpose": "Authorize a bounded verification and repair lane for the completed custom-domain migration, search metadata consistency, legacy-host redirect behavior, and production GA4 build wiring without changing canonical registry data, public product behavior, DNS, or analytics identity.",
+  "scope": [
+    "audit_official_origin_consumers_for_legacy_or_pages_dev_leakage",
+    "verify_canonical_og_jsonld_robots_sitemap_machine_readable_origin_consistency",
+    "verify_legacy_host_redirect_contract_with_path_and_query_preservation",
+    "verify_bare_domain_and_http_canonicalization_when_observable",
+    "audit_existing_ga4_static_build_injection_path",
+    "wire_existing_public_ga_measurement_id_environment_value_into_production_build_if_missing",
+    "add_post_build_ga4_presence_validation_without_logging_secret_values",
+    "record_google_search_console_account_side_actions_required_for_the_domain_move"
+  ],
+  "implementation_sequence": [
+    "authority_specification_and_schedule_merge",
+    "fresh_live_and_repository_origin_audit",
+    "bounded_ga4_build_wiring_and_validation_if_required",
+    "ci_review",
+    "production_exact_main_verification",
+    "closeout_and_restore_review_gate"
+  ],
+  "canonical_boundary": {
+    "stable_assets": 119,
+    "organizations": 109,
+    "relationships": 131,
+    "events": 194,
+    "evidence": 585,
+    "evidence_relations": 585,
+    "deployments": 186,
+    "market_access": 12,
+    "canonical_hash": "sha256:4e7570b6fab88a8178a01ae280a36d98787573b376440b891491f25469458798",
+    "canonical_file_count": 466,
+    "canonical_delta_authorized": 0
+  },
+  "ga4_boundary": {
+    "reuse_existing_sog_ga4_property_and_stream": true,
+    "create_new_measurement_id_authorized": false,
+    "guess_or_hardcode_measurement_id_authorized": false,
+    "allowed_build_variable_name": "PUBLIC_GA_MEASUREMENT_ID",
+    "secret_values_must_not_be_logged": true
+  },
+  "gsc_boundary": {
+    "repository_can_verify_public_artifacts": true,
+    "google_account_mutation_authorized_by_repo": false,
+    "required_account_side_target": "stableorgone.com domain property",
+    "legacy_property_should_be_retained_for_migration_observation": true
+  },
+  "required_acceptance": [
+    "official_origin_is_www_stableorgone_com_everywhere_generated_by_the_repository",
+    "no_legacy_origin_or_pages_dev_origin_leakage_in_public_build_outputs_except_explicit_migration_code_or_documentation",
+    "legacy_host_redirect_is_301_and_preserves_path_and_query_when_live_verification_is_available",
+    "production_build_receives_existing_public_ga_measurement_id_when_configured",
+    "configured_ga4_id_results_in_gtag_loader_and_config_call_in_built_html",
+    "no_measurement_id_value_is_printed_by_validation_or_workflow_logs",
+    "all_existing_ci_and_domain_migration_audits_pass",
+    "exact_main_production_deploy_succeeds"
+  ],
+  "forbidden": [
+    "canonical_registry_mutation",
+    "archive_or_market_access_mutation",
+    "stablecoin_addition_or_deletion",
+    "schema_or_taxonomy_change",
+    "new_public_route_family",
+    "ranking_scoring_or_recommendation",
+    "unrelated_ui_or_css_change",
+    "dns_or_cloudflare_account_change",
+    "legacy_redirect_contract_replacement_without_separate_infrastructure_authority",
+    "new_ga4_property_or_measurement_id_creation",
+    "measurement_id_guessing_or_hardcoding",
+    "automatic_continuation_beyond_closeout"
+  ],
+  "closeout": {
+    "restore_stage": "REVIEW_GATE",
+    "automatic_continuation": false,
+    "production_verification_required": true,
+    "deployment_record_issue": 479
+  }
+}
