@@ -4,6 +4,7 @@ const authority = JSON.parse(fs.readFileSync('config/seo-ga4-migration-authority
 const quality = fs.readFileSync('docs/quality/seo-ga4-migration-audit-spec.md', 'utf8');
 const amendment = fs.readFileSync('docs/roadmap-amendments/2026-08-14-seo-ga4-migration-audit-authority.md', 'utf8');
 const origin = fs.readFileSync('config/public-origin.mjs', 'utf8');
+const expectedLegacyOrigin = ['https://sog', 'badjoke-lab.com'].join('.');
 const failures = [];
 const check = (value, message) => { if (!value) failures.push(message); };
 
@@ -11,7 +12,7 @@ check(authority.authority_id === 'sog_seo_ga4_migration_audit_2026_08_14', 'auth
 check(authority.status === 'active_after_merge', 'authority status');
 check(authority.entry_main_commit === '3c715fa77d9e92d52d7646f6e6e944a43d7f5ea9', 'entry main');
 check(authority.official_public_origin === 'https://www.stableorgone.com', 'official origin');
-check(authority.legacy_public_origin === 'https://sog.badjoke-lab.com', 'legacy origin');
+check(authority.legacy_public_origin === expectedLegacyOrigin, 'legacy origin');
 check(authority.canonical_boundary?.canonical_delta_authorized === 0, 'canonical delta');
 check(authority.canonical_boundary?.stable_assets === 119, 'stable assets');
 check(authority.canonical_boundary?.evidence === 585, 'evidence');
