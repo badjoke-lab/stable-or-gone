@@ -1,14 +1,16 @@
 # Stable or Gone Roadmap
 
-Updated: 2026-08-12  
-Status: REVIEW_GATE after Compare / Stablecoin logo maintenance Phase E closeout
+Updated: 2026-08-14  
+Status: SEO / GA4 custom-domain migration audit authority active after merge
 
 ## Current repository checkpoint
 
 ```text
-Current stage: REVIEW_GATE
-Active implementation authority: none
-Current closeout contract: config/compare-logo-phase-e-closeout.json
+Current stage: SEO_GA4_MIGRATION_AUDIT_AUTHORITY
+Active implementation authority: config/seo-ga4-migration-authority.json
+Current quality spec: docs/quality/seo-ga4-migration-audit-spec.md
+Current roadmap amendment: docs/roadmap-amendments/2026-08-14-seo-ga4-migration-audit-authority.md
+Entry main commit: 3c715fa77d9e92d52d7646f6e6e944a43d7f5ea9
 Canonical stable assets: 119
 Organizations: 109
 Relationships: 131
@@ -20,12 +22,53 @@ Market Access Records: 12
 Archive recorded: 471
 Archive not recorded: 114
 Official origin: https://www.stableorgone.com
+Legacy origin: https://sog.badjoke-lab.com
 Canonical hash: sha256:4e7570b6fab88a8178a01ae280a36d98787573b376440b891491f25469458798
 Canonical file count: 466
 Canonical delta authorized: 0
 Additional logo promotions authorized: 0
+DNS / Cloudflare account mutation authorized: no
+New GA4 property / Measurement ID creation authorized: no
 Automatic continuation: false
 ```
+
+## Current work schedule
+
+```text
+2026-08-14  Phase A — authority/specification/schedule merge
+2026-08-14  Phase B — repository + live origin/redirect/analytics audit
+then        Phase C — bounded GA4 production-build wiring/validation if required
+then        Phase D — exact-main production verification
+closeout    restore repository REVIEW_GATE; no automatic continuation
+```
+
+The lane exists to finish verification of the already-completed custom-domain migration and to ensure the existing SOG GA4 identity can be injected into Astro's static production build when configured.
+
+## Required results
+
+- `https://www.stableorgone.com` remains the only generated official public origin.
+- canonical, OGP, JSON-LD, robots, sitemap, version/manifest, llms/ai, and internal origin consumers must agree.
+- `https://sog.badjoke-lab.com/<path>?<query>` remains a 301 migration surface preserving path/query.
+- `pages.dev` must not become a generated public canonical origin.
+- the production build must receive the existing `PUBLIC_GA_MEASUREMENT_ID` value when configured.
+- no new GA4 property or Measurement ID may be created, guessed, or hardcoded under this lane.
+- Google Search Console account operations must not be claimed complete without direct account evidence.
+
+## Canonical and product boundary
+
+```text
+canonical work: not authorized
+archive work: not authorized
+Market Access work: not authorized
+additional logo promotion: not authorized
+new route family: not authorized
+ranking/scoring/recommendation: not authorized
+unrelated UI/CSS redesign: not authorized
+DNS / Cloudflare account mutation: not authorized
+new analytics identity creation: not authorized
+```
+
+Canonical counts/hash remain frozen throughout this lane.
 
 ## Current Stablecoin mark checkpoint
 
@@ -38,89 +81,24 @@ Last reviewed promotions: mnee, usdgo, usr
 Remote runtime image fetching: no
 ```
 
-The public display state is accepted. The maintenance authority that produced it is closed.
-
-## Completed Compare / Stablecoin logo maintenance schedule
-
-```text
-2026-08-12  Phase A — authority/specification/schedule — PR #554 — complete
-2026-08-12  Phase B — exact 21-fallback re-audit — PR #555 — complete
-2026-08-12  Phase C — Compare feedback + Compare Stablecoin marks — PR #556 — complete
-2026-08-12  Phase D — mnee/usdgo/usr import + permanent growth gate — PR #557 — complete
-2026-08-12  Phase E — exact-main verification + targeted mark regression + closeout — complete after closeout merge
-closeout    repository restored to REVIEW_GATE; no automatic continuation
-```
-
-Historical phases cannot be reopened by chat instruction alone.
-
-## Phase E accepted evidence
-
-```text
-Phase D merged main: bb72108ea53d96a69db42d5c8e97df47033be44e
-Production run: 31585897410 — success
-Production job: 94079531335 — success
-Exact-main screenshot run: 31585897478 — success
-Exact-main screenshot job: 94079532861 — success
-All-record mark catalog: 119 / 119
-Direct / fallback partition: 101 / 18
-Broken images: 0
-Empty frames: 0
-Canonical delta: 0
-```
-
-Phase E also extends the existing screenshot regression to pin these states on desktop and mobile:
-
-```text
-mnee       -> direct logo
-usdgo      -> direct logo
-usr        -> direct logo
-acala-ausd -> neutral fallback
-```
-
-This is verification tooling only and does not change product rendering.
+This accepted display state is outside the current implementation scope and must not regress.
 
 ## Permanent rules retained
 
-The following continue after closeout:
+The following continue unchanged:
 
 - `docs/quality/stablecoin-logo-disposition-operating-spec.md`;
 - core CI Stablecoin logo coverage audit on every PR;
 - one reviewed logo disposition per canonical Stablecoin;
 - explicit neutral fallback when no product/token-specific mark is approved;
 - no runtime remote logo fetching;
-- accepted Phase C Compare interaction behavior;
+- accepted Compare interaction behavior;
 - material-public-UI regression review under `docs/ui-v3-remediation-authority.md`;
 - official-origin and legacy-host deployment contracts.
 
-## REVIEW_GATE schedule rule
+## Closeout rule
 
-There is no automatic next phase.
-
-Before new work can start, a fresh reviewed authority must state:
-
-```text
-scope
-entry main / baseline
-canonical versus presentation boundary
-research/evidence prerequisites
-implementation sequence
-CI and visual acceptance requirements
-production verification requirements
-closeout and continuation rules
-```
-
-Until such authority merges, the current schedule is:
-
-```text
-next implementation: none
-canonical work: not authorized
-archive work: not authorized
-Market Access work: not authorized
-additional logo promotion: not authorized
-new route family: not authorized
-ranking/scoring/recommendation: not authorized
-Automatic continuation: false
-```
+This lane has no automatic next phase. After exact-main production verification, a closeout must restore `REVIEW_GATE` with active implementation authority `none`. Any unresolved Google-account-side GSC or GA4 setting must be reported explicitly rather than converted into assumed completion.
 
 ## Historical completed lanes
 
@@ -128,8 +106,7 @@ Automatic continuation: false
 PR #544/#545/#546/#547 — Compare discovery/navigation remediation / closeout
 PR #548/#549/#550 — Russia USDT Guide authority / implementation / closeout
 PR #551/#552/#553 — Evidence Archive Batch 2 implementation / closeout
-PR #554/#555/#556/#557 — Compare feedback / Stablecoin logo maintenance Phases A-D
-Phase E closeout — verification and REVIEW_GATE restoration
+PR #554/#555/#556/#557/#558 — Compare feedback / Stablecoin logo maintenance / closeout
 ```
 
 Historical lineage remains useful for audit and regression context, not as standing implementation authority.
