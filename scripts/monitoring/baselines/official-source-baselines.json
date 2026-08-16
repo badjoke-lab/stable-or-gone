@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "baseline_set_id": "sog_official_source_baselines_v1",
   "normalization_version": "sog_official_source_normalization_v2",
-  "updated_at": "2026-07-17T00:00:00.000Z",
+  "updated_at": "2026-08-16T14:52:00.000Z",
   "baselines": [
     {"source_id":"tether-transparency","source_url":"https://tether.to/en/transparency/","status":"pending_initial_acceptance","accepted_final_url":null,"body_sha256":null,"normalized_content_sha256":null,"content_type":null,"etag":null,"last_modified":null,"accepted_observed_at":null,"accepted_repository_commit":null,"accepted_review_reference":null},
     {"source_id":"circle-transparency","source_url":"https://www.circle.com/transparency","status":"pending_initial_acceptance","accepted_final_url":null,"body_sha256":null,"normalized_content_sha256":null,"content_type":null,"etag":null,"last_modified":null,"accepted_observed_at":null,"accepted_repository_commit":null,"accepted_review_reference":null},
@@ -44,7 +44,8 @@
     {"source_id":"gemini-eea-account-closure","source_url":"https://support.gemini.com/hc/en-gb","status":"pending_initial_acceptance","accepted_final_url":null,"body_sha256":null,"normalized_content_sha256":null,"content_type":null,"etag":null,"last_modified":null,"accepted_observed_at":null,"accepted_repository_commit":null,"accepted_review_reference":null},
     {"source_id":"esma-mica-interim-register-hub","source_url":"https://www.esma.europa.eu/esmas-activities/digital-finance-and-innovation/markets-crypto-assets-regulation-mica","status":"pending_initial_acceptance","accepted_final_url":null,"body_sha256":null,"normalized_content_sha256":null,"content_type":null,"etag":null,"last_modified":null,"accepted_observed_at":null,"accepted_repository_commit":null,"accepted_review_reference":null},
     {"source_id":"open-standard-open-usd","source_url":"https://joinopenstandard.com/","status":"pending_initial_acceptance","accepted_final_url":null,"body_sha256":null,"normalized_content_sha256":null,"content_type":null,"etag":null,"last_modified":null,"accepted_observed_at":null,"accepted_repository_commit":null,"accepted_review_reference":null},
-    {"source_id":"visa-stablecoin-platform","source_url":"https://www.visa.com/en-us/solutions/stablecoins","status":"pending_initial_acceptance","accepted_final_url":null,"body_sha256":null,"normalized_content_sha256":null,"content_type":null,"etag":null,"last_modified":null,"accepted_observed_at":null,"accepted_repository_commit":null,"accepted_review_reference":null}
+    {"source_id":"visa-stablecoin-platform","source_url":"https://www.visa.com/en-us/solutions/stablecoins","status":"pending_initial_acceptance","accepted_final_url":null,"body_sha256":null,"normalized_content_sha256":null,"content_type":null,"etag":null,"last_modified":null,"accepted_observed_at":null,"accepted_repository_commit":null,"accepted_review_reference":null},
+    {"source_id":"samsung-wallet-stablecoin-support","source_url":"https://insights.samsung.com/2026/07/15/announcing-the-next-galaxy-unpacked-event-watch-the-livestream-on-july-22/","status":"pending_initial_acceptance","accepted_final_url":null,"body_sha256":null,"normalized_content_sha256":null,"content_type":null,"etag":null,"last_modified":null,"accepted_observed_at":null,"accepted_repository_commit":null,"accepted_review_reference":null}
   ],
   "policy": {"human_review_required":true,"monitoring_write_allowed":false,"canonical_evidence":false,"public_output":false,"automatic_pull_request":false,"production_publication":false}
 }
