@@ -67,4 +67,4 @@ if (errors.length) {
   errors.forEach((error) => console.error(`- ${error}`));
   process.exit(1);
 }
-console.log('Current monitoring validation passed for the 100-asset, 39-source boundary with bounded daily and weekly read-only schedules.');
+console.log('Current monitoring validation passed for the current 42-source boundary with bounded daily and weekly read-only schedules.');
