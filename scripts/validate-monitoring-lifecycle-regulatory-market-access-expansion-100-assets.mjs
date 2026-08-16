@@ -32,14 +32,14 @@ check(snapshot.coverage?.registered_asset_reach_count === 23, 'historical regist
 check(snapshot.coverage?.uncovered_asset_count === 77, 'historical uncovered asset count must be 77');
 check(snapshot.coverage?.covered_organization_count === 18, 'historical covered organization count must be 18');
 check(snapshot.coverage?.accepted_asset_reach_count === 0, 'historical accepted asset reach must remain zero');
-check(snapshot.coverage?.multi_family_asset_count === 17, 'historical multi-family asset count must be 17');
+check(snapshot.coverage?.multi_family_asset_count === 17, 'historical multi-family asset count must remain 17');
 
 const expectedCurrent = checkpoint.expected_counts ?? {};
 check(current.checkpoint_id === checkpoint.checkpoint_id, `current observation checkpoint must be ${checkpoint.checkpoint_id}`);
 check(current.canonical_counts?.stablecoins === checkpoint.asset_count, `current observation stablecoin count must be ${checkpoint.asset_count}`);
 check(current.canonical_counts?.organizations === expectedCurrent.organizations, `current observation organization count must be ${expectedCurrent.organizations}`);
-check(current.canonical_counts?.relationships === expectedCurrent.relationships, `current observation relationship count must be ${expectedCurrent.relationships}`);
-check(current.coverage?.registered_asset_reach_count === 23, 'current registered asset reach must remain 23 because new subjects are noncanonical');
+check(current.canonical_counts?.relationships === expectedCurrent.relationships, `current observation relationships must be ${expectedCurrent.relationships}`);
+check(current.coverage?.registered_asset_reach_count === 23, 'current registered asset reach must remain 23 because Samsung Wallet is noncanonical');
 check(current.coverage?.uncovered_asset_count === checkpoint.asset_count - 23, `current uncovered asset count must be ${checkpoint.asset_count - 23}`);
 check(current.coverage?.covered_organization_count === 18, 'current covered organization count must remain 18');
 check(current.coverage?.accepted_asset_reach_count === 0, 'current accepted asset reach must remain zero');
@@ -51,10 +51,10 @@ check(snapshot.source_baseline_sync?.source_baseline_id_parity === true, 'PR #32
 check(snapshot.source_baseline_sync?.pending_initial_acceptance === 39, 'all 39 historical baselines must remain pending');
 check(snapshot.source_baseline_sync?.accepted === 0, 'historical accepted baseline count must remain zero');
 check(snapshot.source_baseline_sync?.missing === 0, 'historical missing baseline count must remain zero');
-check(current.source_baseline_sync?.source_count === 41, 'current source count must be 41');
-check(current.source_baseline_sync?.baseline_count === 41, 'current baseline count must be 41');
+check(current.source_baseline_sync?.source_count === 42, 'current source count must be 42');
+check(current.source_baseline_sync?.baseline_count === 42, 'current baseline count must be 42');
 check(current.source_baseline_sync?.source_baseline_id_parity === true, 'current source/baseline ID parity must be true');
-check(current.source_baseline_sync?.pending_initial_acceptance === 41, 'all 41 current baselines must remain pending');
+check(current.source_baseline_sync?.pending_initial_acceptance === 42, 'all 42 current baselines must remain pending');
 check(current.source_baseline_sync?.accepted === 0, 'current accepted baseline count must remain zero');
 check(current.source_baseline_sync?.missing === 0, 'current missing baseline count must remain zero');
 
@@ -67,12 +67,12 @@ const historicalScopedCoverage = {
   scoped_region_count: 4,
 };
 const currentScopedCoverage = {
-  platform_policy_source_count: 3,
+  platform_policy_source_count: 4,
   platform_service_state_source_count: 2,
   regulatory_register_source_count: 1,
-  market_access_schema_capable_source_count: 7,
-  scoped_platform_count: 6,
-  scoped_region_count: 6,
+  market_access_schema_capable_source_count: 8,
+  scoped_platform_count: 7,
+  scoped_region_count: 7,
 };
 check(isDeepStrictEqual(snapshot.scoped_coverage, historicalScopedCoverage), 'PR #323 historical scoped coverage summary mismatch');
 check(isDeepStrictEqual(current.scoped_coverage, currentScopedCoverage), 'current scoped coverage summary mismatch');
@@ -91,7 +91,7 @@ const currentSourceFamilyCounts = {
   redemption_terms: 12,
   issuer_lifecycle: 9,
   regulatory: 9,
-  platform_policy: 3,
+  platform_policy: 4,
   platform_service_state: 2,
   regulatory_register: 1,
 };
@@ -122,7 +122,7 @@ const approvedHistoricalSourceIds = [
 ];
 const sourceById = new Map(sources.map((row) => [row.source_id, row]));
 const baselineById = new Map((baselineSet.baselines ?? []).map((row) => [row.source_id, row]));
-for (const sourceId of [...approvedHistoricalSourceIds, 'open-standard-open-usd', 'visa-stablecoin-platform']) {
+for (const sourceId of [...approvedHistoricalSourceIds, 'open-standard-open-usd', 'visa-stablecoin-platform', 'samsung-wallet-stablecoin-support']) {
   const source = sourceById.get(sourceId);
   const baseline = baselineById.get(sourceId);
   check(Boolean(source), `${sourceId}: approved source missing`);
@@ -142,6 +142,10 @@ check(sourceById.get('esma-mica-interim-register-hub')?.affected_stablecoin_ids?
 check(sourceById.get('esma-mica-interim-register-hub')?.affected_organization_ids?.length === 0, 'ESMA register source must not gain fake organization targets');
 check(sourceById.get('open-standard-open-usd')?.monitoring_scope?.canonical_record === false, 'Open USD monitoring subject became canonical');
 check(sourceById.get('visa-stablecoin-platform')?.monitoring_scope?.canonical_record === false, 'VSP monitoring subject became canonical');
+check(sourceById.get('samsung-wallet-stablecoin-support')?.monitoring_scope?.subject_kind === 'consumer_wallet_stablecoin_support', 'Samsung Wallet subject kind changed');
+check(sourceById.get('samsung-wallet-stablecoin-support')?.monitoring_scope?.launch_state === 'announced_prelaunch', 'Samsung Wallet launch state changed');
+check(sourceById.get('samsung-wallet-stablecoin-support')?.monitoring_scope?.canonical_record === false, 'Samsung Wallet monitoring subject became canonical');
+check(sourceById.get('samsung-wallet-stablecoin-support')?.affected_stablecoin_ids?.length === 0, 'Samsung Wallet monitoring must not invent a supported stablecoin target');
 
 for (const field of [
   'asset_sync_sha256',
