@@ -11,7 +11,7 @@ const failures = [];
 const check = (condition, message) => { if (!condition) failures.push(message); };
 
 const partition = validateScheduledSourcePartition({ root });
-check(partition.daily.selected_source_count === 6, `daily source count must be 6, found ${partition.daily.selected_source_count}`);
+check(partition.daily.selected_source_count === 7, `daily source count must be 7, found ${partition.daily.selected_source_count}`);
 check(partition.weekly.selected_source_count === 35, `weekly source count must be 35, found ${partition.weekly.selected_source_count}`);
 check(partition.overlap.length === 0, `daily/weekly overlap must be zero: ${partition.overlap.join(', ')}`);
 check(partition.union_matches_all_sources === true, 'daily/weekly union must equal all enabled sources');
@@ -24,6 +24,7 @@ check(JSON.stringify(partition.daily.selected_source_ids) === JSON.stringify([
   'gemini-eea-account-closure',
   'kraken-eea-stablecoin-offerings',
   'open-standard-open-usd',
+  'samsung-wallet-stablecoin-support',
   'visa-stablecoin-platform'
 ]), 'daily source membership mismatch');
 check(partition.weekly.selected_source_ids.includes('esma-mica-interim-register-hub'), 'weekly group must include ESMA register source');
@@ -132,7 +133,7 @@ async function runScheduledFixture(group) {
     const files = fs.readdirSync(result.run_directory).sort();
     if (group === 'daily') {
       check(result.manifest.schedule_group === 'daily', 'daily manifest schedule_group mismatch');
-      check(result.manifest.official_source_selection_count === 6, 'daily manifest source selection count must be 6');
+      check(result.manifest.official_source_selection_count === 7, 'daily manifest source selection count must be 7');
       check(result.manifest.news_discovery_item_count === 120, 'daily manifest news item count must be 120');
       check(result.manifest.article_stale_finding_count === 0, 'daily manifest stale finding count must be zero');
       check(files.includes('news-discovery.json'), 'daily scheduled output missing news-discovery.json');

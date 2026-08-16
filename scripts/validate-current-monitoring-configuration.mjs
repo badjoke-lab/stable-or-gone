@@ -24,10 +24,10 @@ const expected = checkpoint.expected_counts ?? {};
 fail(stablecoins.length === checkpoint.asset_count, `canonical monitoring boundary must match current checkpoint asset count ${checkpoint.asset_count}, found ${stablecoins.length}`);
 fail(organizations.length === expected.organizations, `canonical monitoring boundary must match current checkpoint organizations ${expected.organizations}, found ${organizations.length}`);
 fail(relationships.length === expected.relationships, `canonical monitoring boundary must match current checkpoint relationships ${expected.relationships}, found ${relationships.length}`);
-fail(sources.length === 41, `current monitoring configuration must contain 41 sources, found ${sources.length}`);
-fail(baselineSet.baselines?.length === 41, `current monitoring configuration must contain 41 baselines, found ${baselineSet.baselines?.length ?? 0}`);
-fail(new Set(sourceIds).size === 41, 'monitoring source IDs must be unique');
-fail(new Set(baselineIds).size === 41, 'monitoring baseline IDs must be unique');
+fail(sources.length === 42, `current monitoring configuration must contain 42 sources, found ${sources.length}`);
+fail(baselineSet.baselines?.length === 42, `current monitoring configuration must contain 42 baselines, found ${baselineSet.baselines?.length ?? 0}`);
+fail(new Set(sourceIds).size === 42, 'monitoring source IDs must be unique');
+fail(new Set(baselineIds).size === 42, 'monitoring baseline IDs must be unique');
 fail(JSON.stringify([...sourceIds].sort()) === JSON.stringify([...baselineIds].sort()), 'source and baseline IDs must match exactly');
 
 const canonicalIndex = {
@@ -43,14 +43,16 @@ for (const row of baselineSet.baselines ?? []) {
 }
 for (const token of ['workflow_dispatch:','contents: read','actions/upload-artifact']) fail(workflow.includes(token), `workflow missing ${token}`);
 for (const token of ['schedule:','contents: write','pull-requests: write','wrangler','CLOUDFLARE_']) fail(!workflow.includes(token), `workflow contains prohibited ${token}`);
-fail(sources.filter((row) => row.monitoring_scope?.kind === 'platform_policy').length === 3, 'current configuration must contain three platform-policy sources');
+fail(sources.filter((row) => row.monitoring_scope?.kind === 'platform_policy').length === 4, 'current configuration must contain four platform-policy sources');
 fail(sources.filter((row) => row.monitoring_scope?.kind === 'platform_service_state').length === 3, 'current configuration must contain three platform service-state scopes');
 fail(sources.filter((row) => row.monitoring_scope?.kind === 'regulatory_register').length === 1, 'current configuration must contain one regulatory-register source');
 const openUsd = sources.find((row) => row.source_id === 'open-standard-open-usd');
 const vsp = sources.find((row) => row.source_id === 'visa-stablecoin-platform');
+const samsungWallet = sources.find((row) => row.source_id === 'samsung-wallet-stablecoin-support');
 fail(openUsd?.monitoring_scope?.subject_kind === 'prelaunch_stablecoin' && openUsd?.monitoring_scope?.canonical_record === false, 'Open USD private pre-launch scope changed');
 fail(vsp?.monitoring_scope?.subject_kind === 'stablecoin_infrastructure' && vsp?.monitoring_scope?.canonical_record === false, 'VSP private infrastructure scope changed');
-fail((openUsd?.affected_stablecoin_ids ?? []).length === 0 && (vsp?.affected_stablecoin_ids ?? []).length === 0, 'noncanonical monitoring subjects gained canonical asset IDs');
+fail(samsungWallet?.monitoring_scope?.subject_kind === 'consumer_wallet_stablecoin_support' && samsungWallet?.monitoring_scope?.launch_state === 'announced_prelaunch' && samsungWallet?.monitoring_scope?.canonical_record === false, 'Samsung Wallet future stablecoin scope changed');
+fail((openUsd?.affected_stablecoin_ids ?? []).length === 0 && (vsp?.affected_stablecoin_ids ?? []).length === 0 && (samsungWallet?.affected_stablecoin_ids ?? []).length === 0, 'noncanonical monitoring subjects gained canonical asset IDs');
 fail(baselineSet.policy?.monitoring_write_allowed === false, 'monitoring write must remain disabled');
 fail(baselineSet.policy?.canonical_evidence === false, 'monitoring baseline data must not become canonical evidence');
 fail(baselineSet.policy?.public_output === false, 'monitoring public output must remain disabled');
@@ -62,4 +64,4 @@ if (failures.length) {
   failures.forEach((message) => console.error(`- ${message}`));
   process.exit(1);
 }
-console.log(`Current monitoring configuration valid: 41 pending sources synchronized against current checkpoint ${checkpoint.checkpoint_id} with ${stablecoins.length} canonical assets, ${organizations.length} organizations, and ${relationships.length} relationships.`);
+console.log(`Current monitoring configuration valid: 42 pending sources synchronized against current checkpoint ${checkpoint.checkpoint_id} with ${stablecoins.length} canonical assets, ${organizations.length} organizations, and ${relationships.length} relationships.`);

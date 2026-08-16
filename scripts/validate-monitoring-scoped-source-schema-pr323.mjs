@@ -8,8 +8,8 @@ const check = (condition, message) => { if (!condition) failures.push(message); 
 const sources = loadOfficialSources(root);
 const baselineSet = loadOfficialSourceBaselines(root);
 
-check(sources.length === 41, `current scoped source count must be 41, found ${sources.length}`);
-check(baselineSet.baselines?.length === 41, `current scoped baseline count must be 41, found ${baselineSet.baselines?.length ?? 0}`);
+check(sources.length === 42, `current scoped source count must be 42, found ${sources.length}`);
+check(baselineSet.baselines?.length === 42, `current scoped baseline count must be 42, found ${baselineSet.baselines?.length ?? 0}`);
 check((baselineSet.baselines ?? []).every((row) => row.status === 'pending_initial_acceptance'), 'all current baselines must remain pending');
 check((baselineSet.baselines ?? []).every((row) => [
   'accepted_final_url','body_sha256','normalized_content_sha256','content_type','etag','last_modified',
@@ -96,10 +96,16 @@ try {
 
 const openUsd = sources.find((row) => row.source_id === 'open-standard-open-usd');
 const vsp = sources.find((row) => row.source_id === 'visa-stablecoin-platform');
+const samsungWallet = sources.find((row) => row.source_id === 'samsung-wallet-stablecoin-support');
 check(openUsd?.monitoring_scope?.subject_kind === 'prelaunch_stablecoin', 'Open USD subject-kind scope missing');
 check(openUsd?.monitoring_scope?.canonical_record === false, 'Open USD scope became canonical');
 check(vsp?.monitoring_scope?.subject_kind === 'stablecoin_infrastructure', 'VSP subject-kind scope missing');
 check(vsp?.monitoring_scope?.canonical_record === false, 'VSP scope became canonical');
+check(samsungWallet?.monitoring_scope?.kind === 'platform_policy', 'Samsung Wallet scope kind mismatch');
+check(samsungWallet?.monitoring_scope?.subject_kind === 'consumer_wallet_stablecoin_support', 'Samsung Wallet subject-kind scope missing');
+check(samsungWallet?.monitoring_scope?.launch_state === 'announced_prelaunch', 'Samsung Wallet launch state must remain announced_prelaunch');
+check(samsungWallet?.monitoring_scope?.canonical_record === false, 'Samsung Wallet scope became canonical');
+check(samsungWallet?.affected_stablecoin_ids?.length === 0, 'Samsung Wallet source must not invent a supported stablecoin target');
 
 const schema = fs.readFileSync('docs/quality/monitoring-official-source-schema.md', 'utf8');
 for (const marker of [
@@ -119,4 +125,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log('Current scoped source schema valid: 41 pending sources preserve platform, region, function, register, pre-launch, and infrastructure scope without canonical writes.');
+console.log('Current scoped source schema valid: 42 pending sources preserve platform, region, function, register, pre-launch, infrastructure, and consumer-wallet support scope without canonical writes.');
