@@ -5,10 +5,10 @@ This file is the mandatory entry point for humans, AI agents, and automation wor
 ## Current authority
 
 ```text
-Repository state: REVIEW_GATE
-Current stage: REVIEW_GATE
-Active implementation authority: none
-Current closeout contract: config/seo-ga4-migration-closeout.json
+Repository state: LEDGER_SERIES_PHASE3
+Current stage: LEDGER_SERIES_PHASE3
+Active implementation authority: config/ledger-series-phase3-authority.json
+Previous closeout contract: config/seo-ga4-migration-closeout.json
 Automatic continuation: false
 Official public origin: https://www.stableorgone.com
 Legacy migration origin: https://sog.badjoke-lab.com
@@ -18,7 +18,11 @@ Canonical delta authorized: 0
 Canonical archive additions authorized: 0
 Canonical Market Access promotion authorized: no
 Additional logo promotions authorized: no
-New public route family authorized: no
+New unrelated public route family authorized: no
+Deterministic per-asset machine-readable JSON authorized: yes
+Existing search/filter extension authorized: yes
+Existing Compare extension authorized: yes
+Existing Stats extension authorized: yes
 Ranking / scoring / recommendation authorized: no
 DNS / Cloudflare account mutation authorized: no
 New GA4 property / Measurement ID creation authorized: no
@@ -26,7 +30,7 @@ New GA4 property / Measurement ID creation authorized: no
 
 Merged repository authority outranks chat memory, handoff prose, issue discussion, stale branch state, generated reports, and unmerged drafts.
 
-No new implementation begins from this gate without a fresh reviewed authority.
+Substantive work in this stage must stay within `config/ledger-series-phase3-authority.json`. Schema or canonical mutation requires a separate reviewed authority.
 
 ## Current canonical counts
 
@@ -50,6 +54,31 @@ Archive not recorded: 114
 Detail routes: 422
 Metadata-checked routes: 422
 ```
+
+## Active Ledger Series Phase 3 lane
+
+The reviewed Phase 3 authority is:
+
+```text
+config/ledger-series-phase3-authority.json
+docs/roadmap-amendments/2026-08-17-ledger-series-phase3-authority.md
+```
+
+Required implementation order:
+
+```text
+authority/specification activation
+-> representative lifecycle + public-surface audit
+-> schema/canonical decision gate
+-> deterministic per-asset JSON if missing
+-> structured-filter gap closure
+-> Compare lifecycle/outcome gap closure
+-> Stats lifecycle/quality gap closure
+-> exact-main production verification
+-> Phase 3 closeout and REVIEW_GATE restoration
+```
+
+Do not rebuild existing surfaces that already satisfy the requirement. Preserve explicit `Unknown` / `Not recorded` states. Do not infer recovery, compensation, redemption, migration, regulatory or final-outcome values that canonical data does not support.
 
 ## Completed SEO / GA4 migration audit
 
@@ -88,6 +117,7 @@ PR #493 — migrated SOG to https://www.stableorgone.com as the single official 
 PR #500 — deepened the bounded MNEE Evidence/archive/control review without forcing unsupported unknowns closed
 PR #517 — added complete canonical Bison Bank EUB/USB records and established the 119-asset / 186-deployment checkpoint lineage
 PR #565 — recorded SEO / GA4 migration exact-main acceptance evidence
+PR #567 — authorized Ledger Series Phase 3 lifecycle strengthening
 ```
 
 ## Current Stablecoin mark contract
@@ -130,17 +160,17 @@ remote runtime fetch: none
 
 Do not regress 2–4 selection, fifth-selection rejection, URL order/history restoration, explicit `Unknown` / `Not recorded`, bounded mobile matrix scrolling, or accepted Compare dock/footer behavior.
 
-## Required work-start protocol from REVIEW_GATE
+## Required work-start protocol during LEDGER_SERIES_PHASE3
 
-Before substantive new work:
+Before each substantive Phase 3 work item:
 
-1. Read `AGENTS.md`, `docs/spec-governance.md`, `docs/roadmap.md`, and `docs/deployment-policy.md`.
+1. Read `AGENTS.md`, `docs/spec-governance.md`, `docs/roadmap.md`, `docs/deployment-policy.md`, and `config/ledger-series-phase3-authority.json`.
 2. Confirm current main, canonical counts/hash, open PRs, and current production state.
-3. Read the relevant permanent operating specifications and enduring regression authorities.
-4. Create a fresh reviewed authority that states scope, canonical/public boundary, acceptance artifacts, and closeout behavior.
-5. Do not infer authority from chat instructions, historical PRs, stale branches, or old roadmap amendments.
+3. Audit the existing implementation before adding a parallel surface.
+4. Keep canonical/schema changes out of this authority. If they become necessary, stop and create a separate reviewed authority.
+5. For material public changes, require PR CI green, merge, and exact-main production verification.
 
-## Preserved exclusions at REVIEW_GATE
+## Preserved exclusions during LEDGER_SERIES_PHASE3
 
 No current authority exists for:
 
@@ -151,13 +181,13 @@ new Evidence identities or Evidence Relations
 stable-asset additions/deletions
 schema/taxonomy change
 additional logo promotion
-new public route family
+new unrelated public route family
 ranking / scoring / recommendation
 unrelated sitewide redesign
 DNS / Cloudflare account mutation
 new GA4 property or Measurement ID creation
 measurement ID guessing or hardcoding
-automatic continuation
+automatic continuation beyond Phase 3 closeout
 ```
 
 `docs/ui-v3-remediation-authority.md` remains the enduring material-public-UI regression authority. Issue #479 remains the deployment-history authority.
