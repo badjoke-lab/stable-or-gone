@@ -8,6 +8,14 @@ fs.mkdirSync(artifactDir, { recursive: true });
 
 const normalize = (value) => String(value ?? '').normalize('NFKC').toLocaleLowerCase().trim().replace(/\s+/g, ' ');
 const compactText = (value) => String(value ?? '').trim().replace(/\s+/g, ' ');
+const phase3LifecycleKeys = [
+  'depeg_recovery_state',
+  'recovery_dates',
+  'failure_mechanisms',
+  'regulatory_history',
+  'redemption_change_history',
+  'migration_termination_history'
+];
 
 function comparisonStats(records) {
   const keys = Object.keys(records[0]?.values ?? {});
@@ -55,7 +63,15 @@ try {
   })));
 
   if (records.length !== 119) throw new Error(`Expected 119 comparison sources, found ${records.length}.`);
-  if (records.some((record) => Object.keys(record.values).length !== 15)) throw new Error('Every comparison source must expose exactly 15 aligned attributes.');
+  const alignedKeys = Object.keys(records[0]?.values ?? {}).sort();
+  if (alignedKeys.length !== 21) throw new Error(`Expected 21 aligned comparison attributes after Phase 3, found ${alignedKeys.length}.`);
+  for (const key of phase3LifecycleKeys) {
+    if (!alignedKeys.includes(key)) throw new Error(`Phase 3 comparison attribute missing from aligned source contract: ${key}.`);
+  }
+  const alignedKeySignature = JSON.stringify(alignedKeys);
+  if (records.some((record) => JSON.stringify(Object.keys(record.values).sort()) !== alignedKeySignature)) {
+    throw new Error('Every comparison source must expose the same 21 aligned attributes.');
+  }
 
   const matchingCase = findPair(records, (stats) => stats.matching > 0 && stats.differing > 0);
   const allDifferentCase = findPair(records, (stats) => stats.matching === 0) || findTriple(records, (stats) => stats.matching === 0);
@@ -180,6 +196,7 @@ try {
     audited_at: new Date().toISOString(),
     canonical_comparison_sources: records.length,
     aligned_attributes: matchingCase.stats.total,
+    phase3_lifecycle_attributes: phase3LifecycleKeys,
     matching_row_case: {
       slugs: matchingCase.selection.map((record) => record.slug),
       differing_attributes: matchingCase.stats.differing,
