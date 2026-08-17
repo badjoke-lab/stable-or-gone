@@ -1,9 +1,54 @@
 ---
 import StablecoinMark from './StablecoinMark.astro';
+import { getEvents } from '../lib/data/registry';
+import { formatPublicLabel } from '../utils/displayLabels';
+import { resolveEventTaxonomy } from '../utils/eventTaxonomy';
 import { formatIssuanceLabel, formatLifecycleLabel } from '../utils/publicTaxonomy';
+
 const { record } = Astro.props;
 const deploymentLabel = `${record.deploymentCount} recorded deployment${record.deploymentCount === 1 ? '' : 's'}`;
 const eventLabel = `${record.eventCount} linked event${record.eventCount === 1 ? '' : 's'}`;
+const linkedEvents = getEvents().filter((event) => event.stablecoin_id === record.id || (event.subject_stablecoin_ids ?? []).includes(record.id));
+const linkedEventTaxonomies = linkedEvents.map((event) => ({ event, taxonomy: resolveEventTaxonomy(event) }));
+const unique = <T,>(values: T[]) => [...new Set(values)];
+const recorded = (values: string[]) => values.length ? values.join(' · ') : 'Not recorded';
+const compactEventHistory = (entries: typeof linkedEventTaxonomies, labeler: (entry: typeof linkedEventTaxonomies[number]) => string) => {
+  if (!entries.length) return 'Not recorded';
+  const labels = unique(entries.map(labeler).filter(Boolean));
+  const shown = labels.slice(0, 3);
+  const more = labels.length - shown.length;
+  return `${entries.length} recorded${shown.length ? ` · ${shown.join(' · ')}` : ''}${more > 0 ? ` · +${more} more` : ''}`;
+};
+
+const depegEntries = linkedEventTaxonomies.filter(({ taxonomy }) => taxonomy.detail_kind === 'depeg' || taxonomy.public_category === 'depeg');
+const depegRecoverySummary = recorded(unique(depegEntries
+  .filter(({ taxonomy }) => taxonomy.recovery_category !== 'not_applicable')
+  .map(({ taxonomy }) => taxonomy.recovery_label)));
+const recoveryDateSummary = recorded(unique(depegEntries
+  .map(({ event }) => event.depeg_detail?.recovery_date ?? event.recovery_date ?? '')
+  .filter(Boolean))
+  .sort());
+const failureMechanismSummary = recorded(unique(linkedEvents
+  .map((event) => event.failure_mechanism ?? '')
+  .filter(Boolean))
+  .sort()
+  .map((value) => formatPublicLabel(value)));
+
+const regulatoryEntries = linkedEventTaxonomies.filter(({ taxonomy }) => taxonomy.detail_kind === 'regulatory' || taxonomy.public_category === 'regulatory');
+const regulatoryHistorySummary = compactEventHistory(regulatoryEntries, ({ event, taxonomy }) => {
+  const authority = event.regulatory_detail?.authority ?? '';
+  const action = event.regulatory_detail?.action_type ? formatPublicLabel(event.regulatory_detail.action_type) : '';
+  return [authority, action].filter(Boolean).join(' — ') || event.title || taxonomy.canonical_subtype_label;
+});
+const redemptionEntries = linkedEventTaxonomies.filter(({ taxonomy }) => taxonomy.detail_kind === 'redemption_change' || taxonomy.public_category === 'redemption');
+const redemptionHistorySummary = compactEventHistory(redemptionEntries, ({ event, taxonomy }) => event.title || taxonomy.canonical_subtype_label);
+const migrationTerminationEntries = linkedEventTaxonomies.filter(({ taxonomy }) =>
+  taxonomy.detail_kind === 'migration'
+  || taxonomy.public_category === 'migration'
+  || taxonomy.public_category === 'wind_down'
+  || taxonomy.canonical_status_effect === 'terminated'
+);
+const migrationTerminationHistorySummary = compactEventHistory(migrationTerminationEntries, ({ event, taxonomy }) => event.title || taxonomy.canonical_subtype_label);
 ---
 <div
   class="comparison-source"
@@ -27,6 +72,12 @@ const eventLabel = `${record.eventCount} linked event${record.eventCount === 1 ?
   <span data-compare-value="reserve_disclosure">{record.reserveSummary}</span>
   <span data-compare-value="redemption">{record.redemptionSummary}</span>
   <span data-compare-value="organizations_control">{record.organizationSummary}</span>
+  <span data-compare-value="depeg_recovery_state">{depegRecoverySummary}</span>
+  <span data-compare-value="recovery_dates">{recoveryDateSummary}</span>
+  <span data-compare-value="failure_mechanisms">{failureMechanismSummary}</span>
+  <span data-compare-value="regulatory_history">{regulatoryHistorySummary}</span>
+  <span data-compare-value="redemption_change_history">{redemptionHistorySummary}</span>
+  <span data-compare-value="migration_termination_history">{migrationTerminationHistorySummary}</span>
   <span data-compare-value="deployments">{deploymentLabel}</span>
   <span data-compare-value="linked_events">{eventLabel}</span>
   <span data-compare-value="source_identities">{record.sourceIdentityCount}</span>

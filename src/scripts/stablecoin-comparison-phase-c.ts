@@ -9,11 +9,21 @@ if (comparisonRoot) {
   const mobileFeedback = window.matchMedia('(max-width: 640px)');
   const nothingToHide = 'All displayed attributes already differ. Nothing to hide.';
   const normalize = (value: unknown) => String(value ?? '').normalize('NFKC').toLocaleLowerCase().trim().replace(/\s+/g, ' ');
+  const lifecycleRows = [
+    { key: 'depeg_recovery_state', label: 'Depeg recovery state' },
+    { key: 'recovery_dates', label: 'Recovery date' },
+    { key: 'failure_mechanisms', label: 'Failure mechanism' },
+    { key: 'regulatory_history', label: 'Regulatory history' },
+    { key: 'redemption_change_history', label: 'Redemption-change history' },
+    { key: 'migration_termination_history', label: 'Migration / termination history' }
+  ] as const;
 
   const sourceForHeader = (header: Element) => {
     const href = header.querySelector<HTMLAnchorElement>('.comparison-column-identity a')?.getAttribute('href') ?? '';
     return sourceByHref.get(href);
   };
+
+  const comparisonValue = (source: HTMLElement, key: string) => source.querySelector<HTMLElement>(`[data-compare-value="${key}"]`)?.textContent?.trim() || 'Not recorded';
 
   function injectAuditedMarks() {
     if (!grid) return;
@@ -35,6 +45,75 @@ if (comparisonRoot) {
       identityRow.className = 'stablecoin-dossier-heading-identity comparison-column-identity-row';
       identityRow.append(mark, identity);
       column.prepend(identityRow);
+    }
+  }
+
+  function injectLifecycleAftermathRows() {
+    if (!grid) return;
+    const table = grid.querySelector<HTMLTableElement>('[data-comparison-table]');
+    const body = table?.querySelector<HTMLTableSectionElement>('tbody');
+    const headers = Array.from(grid.querySelectorAll<HTMLElement>('.comparison-record-header'));
+    const selectedSources = headers.map(sourceForHeader).filter((source): source is HTMLElement => Boolean(source));
+    if (!table || !body || selectedSources.length === 0) return;
+
+    const prepared = lifecycleRows.map((row) => {
+      const values = selectedSources.map((source) => comparisonValue(source, row.key));
+      const different = new Set(values.map(normalize)).size > 1;
+      return { ...row, values, different };
+    }).filter((row) => !(toggle?.checked ?? false) || row.different);
+
+    const signature = JSON.stringify({
+      selected: selectedSources.map((source) => source.dataset.recordSlug ?? ''),
+      values: prepared.map((row) => [row.key, row.values, row.different]),
+      differencesOnly: toggle?.checked ?? false
+    });
+    if (table.dataset.phase3LifecycleSignature === signature) return;
+    table.dataset.phase3LifecycleSignature = signature;
+
+    body.querySelectorAll('[data-phase3-lifecycle-row], [data-phase3-lifecycle-section]').forEach((node) => node.remove());
+    if (prepared.length === 0) return;
+
+    const marker = Array.from(body.querySelectorAll<HTMLElement>('[data-comparison-section]'))
+      .find((row) => row.dataset.comparisonSection === 'Historical record depth') ?? null;
+    const insert = (node: Node) => marker ? body.insertBefore(node, marker) : body.append(node);
+
+    const sectionRow = document.createElement('tr');
+    sectionRow.className = 'comparison-section-row';
+    sectionRow.dataset.comparisonSection = 'Recorded event lifecycle';
+    sectionRow.dataset.phase3LifecycleSection = '';
+    const sectionLabelCell = document.createElement('th');
+    sectionLabelCell.scope = 'rowgroup';
+    sectionLabelCell.className = 'comparison-attribute-column comparison-section-label';
+    sectionLabelCell.textContent = 'Recorded event lifecycle';
+    const sectionFillCell = document.createElement('td');
+    sectionFillCell.colSpan = selectedSources.length;
+    sectionFillCell.className = 'comparison-section-fill';
+    sectionFillCell.setAttribute('aria-hidden', 'true');
+    sectionRow.append(sectionLabelCell, sectionFillCell);
+    insert(sectionRow);
+
+    for (const row of prepared) {
+      const tableRow = document.createElement('tr');
+      tableRow.dataset.comparisonRow = row.key;
+      tableRow.dataset.different = String(row.different);
+      tableRow.dataset.phase3LifecycleRow = '';
+
+      const labelCell = document.createElement('th');
+      labelCell.scope = 'row';
+      labelCell.className = 'comparison-attribute-column';
+      labelCell.textContent = row.label;
+      tableRow.append(labelCell);
+
+      for (const value of row.values) {
+        const valueCell = document.createElement('td');
+        valueCell.textContent = value;
+        valueCell.dataset.comparisonValue = value;
+        const normalized = normalize(value);
+        if (normalized === 'unknown') valueCell.dataset.valueState = 'unknown';
+        else if (normalized === 'not recorded') valueCell.dataset.valueState = 'not-recorded';
+        tableRow.append(valueCell);
+      }
+      insert(tableRow);
     }
   }
 
@@ -68,7 +147,7 @@ if (comparisonRoot) {
       .map((value) => value.dataset.compareValue ?? '')
       .filter(Boolean);
     const differingCount = keys.filter((key) => {
-      const values = selectedSources.map((source) => source.querySelector<HTMLElement>(`[data-compare-value="${key}"]`)?.textContent?.trim() || 'Not recorded');
+      const values = selectedSources.map((source) => comparisonValue(source, key));
       return new Set(values.map(normalize)).size > 1;
     }).length;
     const matchingCount = keys.length - differingCount;
@@ -93,6 +172,7 @@ if (comparisonRoot) {
 
   function synchronizeComparisonEnhancements() {
     injectAuditedMarks();
+    injectLifecycleAftermathRows();
     updateDifferenceFeedback();
   }
 
