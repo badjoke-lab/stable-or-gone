@@ -1,16 +1,14 @@
 # Stable or Gone Roadmap
 
-Updated: 2026-08-14  
-Status: SEO / GA4 custom-domain migration audit authority active after merge
+Updated: 2026-08-17  
+Status: REVIEW_GATE
 
 ## Current repository checkpoint
 
 ```text
-Current stage: SEO_GA4_MIGRATION_AUDIT_AUTHORITY
-Active implementation authority: config/seo-ga4-migration-authority.json
-Current quality spec: docs/quality/seo-ga4-migration-audit-spec.md
-Current roadmap amendment: docs/roadmap-amendments/2026-08-14-seo-ga4-migration-audit-authority.md
-Entry main commit: 3c715fa77d9e92d52d7646f6e6e944a43d7f5ea9
+Current stage: REVIEW_GATE
+Active implementation authority: none
+Current closeout contract: config/seo-ga4-migration-closeout.json
 Canonical stable assets: 119
 Organizations: 109
 Relationships: 131
@@ -32,29 +30,38 @@ New GA4 property / Measurement ID creation authorized: no
 Automatic continuation: false
 ```
 
-## Current work schedule
+## Completed SEO / GA4 migration lane
 
 ```text
-2026-08-14  Phase A — authority/specification/schedule merge
-2026-08-14  Phase B — repository + live origin/redirect/analytics audit
-then        Phase C — bounded GA4 production-build wiring/validation if required
-then        Phase D — exact-main production verification
-closeout    restore repository REVIEW_GATE; no automatic continuation
+Phase A — authority/specification/schedule merge: complete
+Phase B — repository + live origin/redirect/analytics audit: complete
+Phase C — bounded GA4 production-build wiring/validation: complete
+Phase D — exact-main production verification: complete
+Closeout — restore repository REVIEW_GATE: current closeout
 ```
 
-The lane exists to finish verification of the already-completed custom-domain migration and to ensure the existing SOG GA4 identity can be injected into Astro's static production build when configured.
+Accepted exact-main evidence:
 
-## Required results
+```text
+Verified main: 9277d04ca7e463e3a965473b82a7c15ef117a5fb
+Production run: 32035190608 — success
+Production job: 95403850881 — success
+Official-origin validation: success
+GA4 static-build verification: success
+Cloudflare Pages upload: success
+Deployed-production verification: success
+Canonical delta: 0
+```
 
-- `https://www.stableorgone.com` remains the only generated official public origin.
-- canonical, OGP, JSON-LD, robots, sitemap, version/manifest, llms/ai, and internal origin consumers must agree.
+The enduring migration contract remains:
+
+- `https://www.stableorgone.com` is the official public origin.
 - `https://sog.badjoke-lab.com/<path>?<query>` remains a 301 migration surface preserving path/query.
 - `pages.dev` must not become a generated public canonical origin.
-- the production build must receive the existing `PUBLIC_GA_MEASUREMENT_ID` value when configured.
-- no new GA4 property or Measurement ID may be created, guessed, or hardcoded under this lane.
-- Google Search Console account operations must not be claimed complete without direct account evidence.
+- GA4 uses the existing `PUBLIC_GA_MEASUREMENT_ID` build variable only; no new or guessed Measurement ID is authorized.
+- Google Search Console and GA4 account-side state is not proven by repository evidence alone.
 
-## Canonical and product boundary
+## REVIEW_GATE boundary
 
 ```text
 canonical work: not authorized
@@ -66,9 +73,10 @@ ranking/scoring/recommendation: not authorized
 unrelated UI/CSS redesign: not authorized
 DNS / Cloudflare account mutation: not authorized
 new analytics identity creation: not authorized
+automatic continuation: false
 ```
 
-Canonical counts/hash remain frozen throughout this lane.
+A fresh reviewed authority is required before new implementation begins.
 
 ## Current Stablecoin mark checkpoint
 
@@ -80,8 +88,6 @@ Neutral fallbacks: 18
 Last reviewed promotions: mnee, usdgo, usr
 Remote runtime image fetching: no
 ```
-
-This accepted display state is outside the current implementation scope and must not regress.
 
 ## Permanent rules retained
 
@@ -96,10 +102,6 @@ The following continue unchanged:
 - material-public-UI regression review under `docs/ui-v3-remediation-authority.md`;
 - official-origin and legacy-host deployment contracts.
 
-## Closeout rule
-
-This lane has no automatic next phase. After exact-main production verification, a closeout must restore `REVIEW_GATE` with active implementation authority `none`. Any unresolved Google-account-side GSC or GA4 setting must be reported explicitly rather than converted into assumed completion.
-
 ## Historical completed lanes
 
 ```text
@@ -107,6 +109,7 @@ PR #544/#545/#546/#547 — Compare discovery/navigation remediation / closeout
 PR #548/#549/#550 — Russia USDT Guide authority / implementation / closeout
 PR #551/#552/#553 — Evidence Archive Batch 2 implementation / closeout
 PR #554/#555/#556/#557/#558 — Compare feedback / Stablecoin logo maintenance / closeout
+PR #565 — SEO / GA4 migration exact-main evidence
 ```
 
 Historical lineage remains useful for audit and regression context, not as standing implementation authority.

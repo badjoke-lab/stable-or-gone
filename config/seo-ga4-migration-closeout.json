@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0",
+  "closeout_id": "sog_seo_ga4_migration_closeout_2026_08_17",
+  "status": "complete_after_merge",
+  "repository_stage_after_merge": "REVIEW_GATE",
+  "active_implementation_authority_after_merge": null,
+  "parent_authority": "config/seo-ga4-migration-authority.json",
+  "verified_main_commit": "9277d04ca7e463e3a965473b82a7c15ef117a5fb",
+  "production_run_id": 32035190608,
+  "production_job_id": 95403850881,
+  "production_result": "success",
+  "official_public_origin": "https://www.stableorgone.com",
+  "canonical_delta": 0,
+  "automatic_continuation": false,
+  "unverified_account_side_items": [
+    "google_search_console_domain_property_state",
+    "google_search_console_change_of_address_state",
+    "google_search_console_sitemap_submission_state",
+    "ga4_account_administration_outside_existing_build_variable"
+  ],
+  "next_work_rule": "A fresh reviewed authority is required before any new canonical, archive, Market Access, route-family, UI, analytics-identity, DNS, or infrastructure work begins."
+}
