@@ -19,6 +19,7 @@ on:
       - 'scripts/audit-stablecoin-compare-zero-state.mjs'
       - 'scripts/audit-stablecoin-compare-navigation.mjs'
       - 'scripts/audit-stablecoin-comparison-phase-c.mjs'
+      - 'scripts/validate-stablecoin-compare-lifecycle.mjs'
       - 'scripts/validate-stablecoin-compare-discovery-navigation-authority.mjs'
       - 'scripts/validate-stablecoin-compare-discovery-navigation-remediation.mjs'
       - 'scripts/validate-compare-logo-maintenance-authority.mjs'
@@ -53,6 +54,8 @@ jobs:
         run: node scripts/validate-compare-phase-c-result.mjs
       - name: Build exact PR head
         run: npm run build
+      - name: Validate Phase 3 Compare lifecycle projection
+        run: node scripts/validate-stablecoin-compare-lifecycle.mjs
       - name: Start local site
         run: |
           python3 -m http.server 4173 --directory dist > /tmp/sog-compare-server.log 2>&1 &
