@@ -35,8 +35,18 @@ if (foundRoot instanceof HTMLElement) {
   const viewComparison = root.querySelector<HTMLButtonElement>('[data-view-comparison]');
   const clearComparison = Array.from(root.querySelectorAll<HTMLButtonElement>('[data-clear-comparison]'));
   const compareSources = new Map(Array.from(root.querySelectorAll<HTMLElement>('[data-comparison-source]')).map((source) => [source.dataset.recordSlug ?? '', source]));
-  const groups = ['lifecycle', 'issuance', 'asset_class', 'reference', 'backing', 'stabilization'] as const;
-  const dataAttribute = { lifecycle: 'data-lifecycle', issuance: 'data-issuance', asset_class: 'data-asset-class', reference: 'data-reference', backing: 'data-backing', stabilization: 'data-stabilization' } as const;
+  const groups = ['lifecycle', 'issuance', 'asset_class', 'reference', 'backing', 'stabilization', 'event_lifecycle', 'depeg_recovery'] as const;
+  const dataAttribute = {
+    lifecycle: 'data-lifecycle',
+    issuance: 'data-issuance',
+    asset_class: 'data-asset-class',
+    reference: 'data-reference',
+    backing: 'data-backing',
+    stabilization: 'data-stabilization',
+    event_lifecycle: 'data-event-lifecycle',
+    depeg_recovery: 'data-depeg-recovery'
+  } as const;
+  const multiValueGroups = new Set<(typeof groups)[number]>(['event_lifecycle', 'depeg_recovery']);
   const parameterOrder = ['q', ...groups, 'sort', 'page', 'compare'];
   const defaultSort = 'name_asc';
   const validSorts = new Set(['name_asc', 'name_desc', 'lifecycle_then_name', 'launch_oldest', 'launch_newest', 'evidence_most']);
@@ -142,8 +152,12 @@ if (foundRoot instanceof HTMLElement) {
     if (normalize(inputValue()) && !normalize(element.dataset.search).includes(normalize(inputValue()))) return false;
     for (const group of groups) {
       const selected = selectedFor(group);
+      if (!selected.length) continue;
       const current = element.getAttribute(dataAttribute[group]) ?? '';
-      if (selected.length && !selected.includes(current)) return false;
+      if (multiValueGroups.has(group)) {
+        const currentValues = new Set(current.split(',').filter(Boolean));
+        if (!selected.some((value) => currentValues.has(value))) return false;
+      } else if (!selected.includes(current)) return false;
     }
     return true;
   }
