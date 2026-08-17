@@ -22,21 +22,25 @@ Authority order:
 ## 2. Current repository boundary
 
 ```text
-Current stage: REVIEW_GATE
-Active implementation authority: none
-Current closeout contract: config/seo-ga4-migration-closeout.json
+Current stage: LEDGER_SERIES_PHASE3
+Active implementation authority: config/ledger-series-phase3-authority.json
+Previous closeout contract: config/seo-ga4-migration-closeout.json
 Canonical delta authorized: 0
 Canonical archive additions authorized: 0
 Canonical Market Access promotion authorized: false
 Additional direct-logo promotions authorized: false
-New public route family authorized: false
+New unrelated public route family authorized: false
+Deterministic per-asset machine-readable JSON authorized: true
+Existing search/filter extension authorized: true
+Existing Compare extension authorized: true
+Existing Stats extension authorized: true
 Ranking / scoring / recommendation authorized: false
 DNS / Cloudflare account mutation authorized: false
 New GA4 property / Measurement ID creation authorized: false
-Automatic continuation: false
+Automatic continuation beyond closeout: false
 ```
 
-No new implementation begins from this gate without a fresh reviewed authority.
+All Phase 3 implementation must remain inside `config/ledger-series-phase3-authority.json`. Any required schema or canonical mutation requires a separate reviewed authority.
 
 ## 3. Current canonical state
 
@@ -66,9 +70,33 @@ Canonical file count: 466
 Canonical delta authorized: 0
 ```
 
-## 4. Completed SEO / GA4 migration audit
+## 4. Active Ledger Series Phase 3 authority
 
-The bounded authority package is now historical lineage:
+The current reviewed implementation authority is:
+
+```text
+config/ledger-series-phase3-authority.json
+docs/roadmap-amendments/2026-08-17-ledger-series-phase3-authority.md
+```
+
+Required sequence:
+
+```text
+representative lifecycle + surface audit
+-> schema/canonical decision gate
+-> deterministic per-asset JSON if missing
+-> structured-filter gap closure
+-> Compare lifecycle/outcome gap closure
+-> Stats lifecycle/quality gap closure
+-> exact-main production verification
+-> Phase 3 closeout to REVIEW_GATE
+```
+
+Existing surfaces must be audited before implementation. If a requirement is already satisfied, record it as implemented rather than creating a duplicate feature.
+
+## 5. Completed SEO / GA4 migration audit
+
+The bounded authority package is historical lineage:
 
 ```text
 config/seo-ga4-migration-authority.json
@@ -94,7 +122,7 @@ The official public origin remains `https://www.stableorgone.com`. The legacy ho
 
 Google Search Console ownership, Change of Address, sitemap submission, and GA4 account administration outside the existing build variable are account-side state and are not proven by repository evidence alone.
 
-## 5. Accepted Stablecoin mark state
+## 6. Accepted Stablecoin mark state
 
 ```text
 Canonical Stablecoins: 119
@@ -105,24 +133,25 @@ Last reviewed promotions: mnee, usdgo, usr
 Remote runtime image fetching: false
 ```
 
-## 6. Permanent future-growth logo rule
+## 7. Permanent future-growth logo rule
 
 `docs/quality/stablecoin-logo-disposition-operating-spec.md` remains binding. Core CI must continue to block canonical stablecoin growth that lacks an explicit reviewed logo disposition. A neutral fallback is valid; missing disposition is not.
 
-## 7. Enduring Compare regression contract
+## 8. Enduring Compare regression contract
 
 Accepted Compare behavior remains binding: matching-row feedback, 2–4 selection behavior, URL/history restoration, explicit unknown states, StablecoinMark reuse, and bounded mobile scrolling must not regress.
 
-## 8. Work-start rule from REVIEW_GATE
+## 9. Work-start rule during LEDGER_SERIES_PHASE3
 
-Before any new implementation:
+Before each substantive work item:
 
 1. Confirm current main, canonical counts/hash, open PRs, and production state.
-2. Read the relevant permanent operating specifications and enduring regression authorities.
-3. Create a fresh reviewed authority with explicit scope, canonical/public boundary, acceptance artifacts, and closeout behavior.
-4. Do not infer authority from chat instructions, historical PRs, old roadmap amendments, or stale branches.
+2. Read the Phase 3 authority and relevant permanent operating specifications / regression authorities.
+3. Audit the existing public/data surface before implementation.
+4. Stop for separate reviewed authority if schema or canonical mutation is required.
+5. For material public changes, require PR CI green, merge, and exact-main production verification.
 
-## 9. Canonical/public safety
+## 10. Canonical/public safety
 
 ```text
 canonical_only = true
@@ -131,11 +160,11 @@ canonical delta authorized = 0
 canonical archive additions authorized = 0
 canonical Market Access promotion authorized = false
 additional logo promotions authorized = false
-new public route families authorized = false
+new unrelated public route families authorized = false
 ranking / scoring / recommendation authorized = false
 DNS / Cloudflare account mutation authorized = false
 new GA4 property / Measurement ID creation authorized = false
-Automatic continuation = false
+Automatic continuation beyond Phase 3 closeout = false
 ```
 
 `docs/ui-v3-remediation-authority.md` remains the enduring material-public-UI regression authority. Issue #479 remains the deployment-history authority.
