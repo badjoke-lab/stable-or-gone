@@ -5,6 +5,7 @@ import StablecoinIndexCard from '../../components/StablecoinIndexCard.astro';
 import StablecoinComparisonSource from '../../components/StablecoinComparisonSource.astro';
 import { formatPublicLabel } from '../../utils/displayLabels';
 import { formatIssuanceLabel, formatLifecycleLabel } from '../../utils/publicTaxonomy';
+import { getPublicEventCategoryFilterOptions, getRecoveryFilterOptions, resolveEventTaxonomy } from '../../utils/eventTaxonomy';
 import { getReferenceFilterOptions, resolveReferenceTarget } from '../../utils/referenceTarget';
 import { getPublicBackingModelFilterOptions, resolveBackingModel } from '../../utils/backingModel';
 import { resolvePrimaryRelationshipForStablecoin } from '../../utils/primaryDisplayRelationship';
@@ -22,6 +23,13 @@ const evidenceRelations = getCanonicalEvidenceRelations();
 const organizationById = new Map(organizations.map((organization) => [organization.id, organization] as const));
 const unique = <T,>(values: T[]) => [...new Set(values)];
 const label = (value?: string | null, fallback = 'Not recorded') => value ? formatPublicLabel(value) : fallback;
+const phase3EventCategories = new Set(['depeg', 'regulatory', 'redemption', 'migration', 'failure', 'wind_down']);
+const detailLifecycleCategory = (detailKind: string) => ({
+  depeg: 'depeg',
+  regulatory: 'regulatory',
+  redemption_change: 'redemption',
+  migration: 'migration'
+} as Record<string, string>)[detailKind];
 const recordDomain = (coin: unknown) => {
   const candidate = coin as { official_domain?: string; official_url?: string };
   if (candidate.official_domain) return candidate.official_domain;
@@ -43,6 +51,19 @@ const records = stablecoins.map((coin) => {
   const linkedRelations = evidenceRelations.filter((relation) => relation.stablecoin_ids.includes(coin.id));
   const sourceIdentityCount = new Set(linkedRelations.map((relation) => relation.evidence_id)).size;
   const linkedEvents = events.filter((event) => event.stablecoin_id === coin.id || (event.subject_stablecoin_ids ?? []).includes(coin.id));
+  const linkedEventTaxonomies = linkedEvents.map((event) => ({ event, taxonomy: resolveEventTaxonomy(event) }));
+  const eventLifecycleCategories = unique(linkedEventTaxonomies
+    .flatMap(({ taxonomy }) => {
+      const detailCategory = detailLifecycleCategory(taxonomy.detail_kind);
+      return detailCategory ? [taxonomy.public_category, detailCategory] : [taxonomy.public_category];
+    })
+    .filter((value) => phase3EventCategories.has(value)))
+    .sort();
+  const depegRecoveryCategories = unique(linkedEventTaxonomies
+    .filter(({ taxonomy }) => taxonomy.detail_kind === 'depeg' || taxonomy.public_category === 'depeg')
+    .map(({ taxonomy }) => taxonomy.recovery_category)
+    .filter((value) => value !== 'not_applicable'))
+    .sort();
   const linkedUnknowns = knownUnknowns.filter((item) => item.stablecoin_id === coin.id);
   const linkedDeployments = deployments.filter((deployment) => deployment.stablecoin_id === coin.id);
   const officialDomain = recordDomain(coin);
@@ -67,6 +88,8 @@ const records = stablecoins.map((coin) => {
     backingLabel: backing.public_label,
     stabilization,
     stabilizationLabel: label(stabilization),
+    eventLifecycleCategories,
+    depegRecoveryCategories,
     launchDate: coin.launch_date ?? '',
     reviewedAt: coin.last_verified_at ?? '',
     primaryOrganizationName: primaryOrganization?.name ?? 'No primary organization recorded',
@@ -92,16 +115,24 @@ const assetClassOptions = unique(records.map((record) => record.assetClass)).sor
 const referenceOptions = getReferenceFilterOptions().map((item) => option(item.value, item.public_label));
 const backingOptions = getPublicBackingModelFilterOptions().map((item) => option(item.value, item.public_label));
 const stabilizationOptions = unique(records.map((record) => record.stabilization)).sort().map((value) => option(value));
+const eventLifecycleOptions = getPublicEventCategoryFilterOptions()
+  .filter((item) => phase3EventCategories.has(item.value))
+  .map((item) => option(item.value, item.public_label));
+const depegRecoveryOptions = getRecoveryFilterOptions()
+  .filter((item) => item.value !== 'not_applicable')
+  .map((item) => option(item.value, item.public_label));
 const filters = [
   { id: 'lifecycle', label: 'Lifecycle', options: lifecycleOptions },
   { id: 'issuance', label: 'Issuance', options: issuanceOptions },
   { id: 'asset_class', label: 'Asset class', options: assetClassOptions },
   { id: 'reference', label: 'Reference', options: referenceOptions },
   { id: 'backing', label: 'Backing', options: backingOptions },
-  { id: 'stabilization', label: 'Stabilization', options: stabilizationOptions }
+  { id: 'stabilization', label: 'Stabilization', options: stabilizationOptions },
+  { id: 'event_lifecycle', label: 'Event lifecycle', options: eventLifecycleOptions },
+  { id: 'depeg_recovery', label: 'Depeg recovery', options: depegRecoveryOptions }
 ];
 const title = 'Stablecoin Register — Stable or Gone';
-const description = 'Search and filter canonical stablecoin records by lifecycle, issuance, reference target, model, organization, evidence, and review context.';
+const description = 'Search and filter canonical stablecoin records by lifecycle, event history, depeg recovery, issuance, reference target, model, organization, evidence, and review context.';
 const jsonLd = { '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'Stablecoin Register', url: 'https://www.stableorgone.com/stablecoins/', description, isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://www.stableorgone.com/' } };
 ---
 <BaseLayout title={title} description={description} canonicalPath="/stablecoins/" jsonLd={jsonLd}>
@@ -110,7 +141,7 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'CollectionPage', na
       <div>
         <p class="stablecoin-index-eyebrow">Register / Stable assets</p>
         <h1>Stablecoin register</h1>
-        <p>Canonical stable-asset records with lifecycle, issuance, reference target, primary organization, backing model, evidence context, and review date kept as separate facts.</p>
+        <p>Canonical stable-asset records with current lifecycle, recorded event history, depeg recovery, issuance, reference target, primary organization, backing model, evidence context, and review date kept as separate facts.</p>
       </div>
       <div class="stablecoin-register-count" aria-label={`${records.length} canonical stablecoin records`}>
         <strong>{records.length}</strong>
@@ -145,7 +176,7 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'CollectionPage', na
       <div class="stablecoin-index-section-heading">
         <div>
           <h2 id="stablecoin-index-heading">Public register</h2>
-          <p>Search, filter, sort, and share the current register state. Twenty records are shown per page; all matching records remain available.</p>
+          <p>Search, filter, sort, and share the current register state. Event filters reflect recorded canonical events; an absent event value is not proof that an event never occurred.</p>
         </div>
         <span class="stablecoin-index-page-size">{PAGE_SIZE} per page</span>
       </div>

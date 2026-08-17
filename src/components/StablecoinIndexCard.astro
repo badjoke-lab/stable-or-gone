@@ -12,6 +12,8 @@ const data = {
   'data-reference': record.referenceCategory,
   'data-backing': record.backingCategory,
   'data-stabilization': record.stabilization,
+  'data-event-lifecycle': record.eventLifecycleCategories.join(','),
+  'data-depeg-recovery': record.depegRecoveryCategories.join(','),
   'data-launch-date': record.launchDate,
   'data-evidence-count': String(record.sourceIdentityCount)
 };

@@ -39,6 +39,11 @@ jobs:
         run: |
           set -o pipefail
           node scripts/validate-stablecoin-record-json.mjs 2>&1 | tee stablecoin-record-json.log
+      - name: Verify Phase 3 lifecycle filters
+        shell: bash
+        run: |
+          set -o pipefail
+          node scripts/validate-stablecoin-lifecycle-filters.mjs 2>&1 | tee stablecoin-lifecycle-filters.log
       - name: Upload public output diagnostics
         if: always()
         uses: actions/upload-artifact@v4
@@ -49,6 +54,7 @@ jobs:
             build-site.log
             public-consistency.log
             stablecoin-record-json.log
+            stablecoin-lifecycle-filters.log
             data/generated/primary-display-relationship-audit.json
             data/generated/primary-display-relationship-validation.json
             data/generated/value-state-migration.json
