@@ -54,6 +54,7 @@ export function GET() {
     public_files: {
       version: '/version.json',
       manifest: '/data/manifest.json',
+      stablecoin_record_template: '/data/stablecoin/{slug}.json',
       stats: '/data/stats.json',
       stats_history: '/data/stats-history.json',
       comparison: '/data/comparison.json',
@@ -63,6 +64,18 @@ export function GET() {
       maintenance_log: '/data/maintenance-log.json',
       llms: '/llms.txt',
       ai: '/ai.txt',
+    },
+    record_dossiers: {
+      stablecoin: {
+        route_template: '/data/stablecoin/{slug}.json',
+        html_route_template: '/stablecoin/{slug}/',
+        record_count: getRecordCounts().primary_records,
+        source_boundary: 'reviewed_canonical_registry_only',
+        canonical_only: true,
+        includes_unreviewed_candidates: false,
+        preserves_unknown_values: true,
+        includes_related_canonical_records: true,
+      },
     },
     derived_statistics: {
       page: '/stats/',
