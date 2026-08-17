@@ -5,7 +5,7 @@ const htmlPath = path.resolve('dist/stablecoins/index.html');
 if (!fs.existsSync(htmlPath)) throw new Error(`Missing built Stablecoin register: ${htmlPath}`);
 const html = fs.readFileSync(htmlPath, 'utf8');
 
-const sourceMarker = 'class="comparison-source"';
+const sourceAttribute = 'data-comparison-source';
 const requiredKeys = [
   'depeg_recovery_state',
   'recovery_dates',
@@ -19,10 +19,18 @@ function sourceBlock(slug) {
   const slugMarker = `data-record-slug="${slug}"`;
   const slugIndex = html.indexOf(slugMarker);
   if (slugIndex < 0) throw new Error(`${slug}: comparison source missing`);
-  const start = html.lastIndexOf(sourceMarker, slugIndex);
-  if (start < 0) throw new Error(`${slug}: comparison source start missing`);
-  const next = html.indexOf(sourceMarker, slugIndex + slugMarker.length);
-  return html.slice(start, next < 0 ? html.length : next);
+
+  const start = html.lastIndexOf('<div', slugIndex);
+  if (start < 0) throw new Error(`${slug}: comparison source opening div missing`);
+  const openingTagEnd = html.indexOf('>', start);
+  if (openingTagEnd < 0) throw new Error(`${slug}: comparison source opening tag incomplete`);
+  const openingTag = html.slice(start, openingTagEnd + 1);
+  if (!openingTag.includes(sourceAttribute)) throw new Error(`${slug}: comparison source attribute missing from opening tag`);
+
+  const nextSourceAttribute = html.indexOf(sourceAttribute, openingTagEnd + 1);
+  if (nextSourceAttribute < 0) return html.slice(start);
+  const nextStart = html.lastIndexOf('<div', nextSourceAttribute);
+  return html.slice(start, nextStart > start ? nextStart : html.length);
 }
 
 function valueFor(slug, key) {
