@@ -15,22 +15,26 @@ const requiredKeys = [
   'migration_termination_history'
 ];
 
+function comparisonSourceTags() {
+  const tags = [];
+  const pattern = /<div\b[^>]*>/g;
+  for (const match of html.matchAll(pattern)) {
+    const tag = match[0];
+    if (!tag.includes(sourceAttribute)) continue;
+    tags.push({ start: match.index, tag });
+  }
+  return tags;
+}
+
+const sources = comparisonSourceTags();
+
 function sourceBlock(slug) {
   const slugMarker = `data-record-slug="${slug}"`;
-  const slugIndex = html.indexOf(slugMarker);
-  if (slugIndex < 0) throw new Error(`${slug}: comparison source missing`);
-
-  const start = html.lastIndexOf('<div', slugIndex);
-  if (start < 0) throw new Error(`${slug}: comparison source opening div missing`);
-  const openingTagEnd = html.indexOf('>', start);
-  if (openingTagEnd < 0) throw new Error(`${slug}: comparison source opening tag incomplete`);
-  const openingTag = html.slice(start, openingTagEnd + 1);
-  if (!openingTag.includes(sourceAttribute)) throw new Error(`${slug}: comparison source attribute missing from opening tag`);
-
-  const nextSourceAttribute = html.indexOf(sourceAttribute, openingTagEnd + 1);
-  if (nextSourceAttribute < 0) return html.slice(start);
-  const nextStart = html.lastIndexOf('<div', nextSourceAttribute);
-  return html.slice(start, nextStart > start ? nextStart : html.length);
+  const index = sources.findIndex(({ tag }) => tag.includes(slugMarker));
+  if (index < 0) throw new Error(`${slug}: comparison source missing`);
+  const start = sources[index].start;
+  const end = sources[index + 1]?.start ?? html.length;
+  return html.slice(start, end);
 }
 
 function valueFor(slug, key) {
@@ -44,6 +48,8 @@ function valueFor(slug, key) {
 function assert(condition, message) {
   if (!condition) throw new Error(message);
 }
+
+assert(sources.length >= 119, `Expected at least 119 comparison sources, found ${sources.length}`);
 
 for (const slug of ['usdc', 'ust', 'busd', 'usdt', 'dai']) {
   for (const key of requiredKeys) valueFor(slug, key);
