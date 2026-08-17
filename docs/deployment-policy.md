@@ -1,6 +1,6 @@
 # Stable or Gone Deployment Policy
 
-Updated: 2026-08-14
+Updated: 2026-08-17
 
 ## Status
 
@@ -12,11 +12,9 @@ Official public origin: https://www.stableorgone.com
 Legacy migration origin: https://sog.badjoke-lab.com
 Automatic main publication: enabled
 Deployment record: Issue #479
-Current stage: SEO_GA4_MIGRATION_AUDIT_AUTHORITY
-Active implementation authority: config/seo-ga4-migration-authority.json
-Current quality spec: docs/quality/seo-ga4-migration-audit-spec.md
-Current roadmap amendment: docs/roadmap-amendments/2026-08-14-seo-ga4-migration-audit-authority.md
-Entry main commit: 3c715fa77d9e92d52d7646f6e6e944a43d7f5ea9
+Current stage: REVIEW_GATE
+Active implementation authority: none
+Current closeout contract: config/seo-ga4-migration-closeout.json
 Canonical delta authorized: 0
 Canonical archive additions authorized: 0
 Canonical Market Access promotion authorized: no
@@ -70,23 +68,32 @@ Canonical hash: sha256:4e7570b6fab88a8178a01ae280a36d98787573b376440b891491f2546
 Canonical file count: 466
 ```
 
-## Current SEO / GA4 deployment lane
+## Completed SEO / GA4 deployment lane
 
-This authority verifies the already-completed domain move and may repair only the production build wiring needed for the existing SOG GA4 identity.
+Accepted exact-main deployment evidence:
 
-Required deployment invariants:
+```text
+Verified main: 9277d04ca7e463e3a965473b82a7c15ef117a5fb
+Production run: 32035190608 — success
+Production job: 95403850881 — success
+Official-origin validation: success
+GA4 static-build verification: success
+Cloudflare Pages upload: success
+Deployed-production verification: success
+Canonical delta: 0
+```
+
+The enduring deployment invariants remain:
 
 ```text
 Official origin: https://www.stableorgone.com
 Legacy host: https://sog.badjoke-lab.com
 Legacy behavior: 301 path/query-preserving redirect
 GA4 build variable: PUBLIC_GA_MEASUREMENT_ID
-New GA4 identity creation: forbidden
-Canonical delta: 0
-DNS / Cloudflare account mutation: forbidden
+New GA4 identity creation: forbidden without separate authority
 ```
 
-The workflow may consume an existing GitHub Actions environment variable or secret named `PUBLIC_GA_MEASUREMENT_ID`. It must not log the configured value. If no value is configured, the deployment/audit must report the missing account-side configuration rather than inventing a Measurement ID.
+The workflow may consume an existing GitHub Actions environment variable or secret named `PUBLIC_GA_MEASUREMENT_ID`. It must not log the configured value. If no value is configured, deployment/audit must report the missing account-side configuration rather than inventing a Measurement ID.
 
 ## Official-origin contract
 
@@ -99,30 +106,20 @@ https://sog.badjoke-lab.com/<path>?<query>
 -> 301 https://www.stableorgone.com/<path>?<query>
 ```
 
-Path/query preservation, no redirect loops, and no legacy-origin leakage remain mandatory. Live checks must distinguish an audit-environment network failure from a verified production redirect failure.
+Path/query preservation, no redirect loops, and no legacy-origin leakage remain mandatory.
 
 ## Google account boundary
 
-Search Console ownership, Change of Address, and sitemap submission are not proven by a successful repository deployment. They require direct Google-account evidence. The target state is the `stableorgone.com` Domain property with the legacy property retained during migration observation.
-
-GA4 must reuse the existing SOG property / web stream. This repository authority does not create or authorize a new Measurement ID.
+Search Console ownership, Change of Address, sitemap submission, and GA4 account administration outside the existing build variable are not proven by repository deployment. They require direct account evidence.
 
 ## Permanent future record-growth deployment gate
 
-Core CI continues to run `node scripts/audit-stablecoin-logo-coverage.mjs` on every pull request. Canonical Stablecoin growth must continue to satisfy `docs/quality/stablecoin-logo-disposition-operating-spec.md`; this SEO/GA4 lane does not weaken that gate.
+Core CI continues to run `node scripts/audit-stablecoin-logo-coverage.mjs` on every pull request. Canonical Stablecoin growth must continue to satisfy `docs/quality/stablecoin-logo-disposition-operating-spec.md`.
 
 ## Infrastructure boundary
 
 Separate reviewed authority remains required for DNS/domain changes, redirect implementation replacement, Cloudflare account changes, destructive schema migrations, mass deletion, major route removal, or emergency rollback.
 
-## Closeout
+## REVIEW_GATE
 
-After exact-main production verification, the repository must return to:
-
-```text
-Current stage: REVIEW_GATE
-Active implementation authority: none
-Automatic continuation: false
-```
-
-Any unresolved GSC/GA4 account-side action must remain explicitly unresolved at closeout.
+No new implementation is authorized after this closeout. A fresh reviewed authority is required before canonical, archive, Market Access, route-family, UI, DNS, analytics-identity, or other substantive implementation work begins.
