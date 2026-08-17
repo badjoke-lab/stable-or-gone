@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { loadStatsInput } from './stats/load-stats-input.mjs';
+import { buildEventLifecycleQuality } from './stats/build-event-lifecycle-quality.mjs';
 import { buildStatsModel } from './stats/build-stats-model.mjs';
 
 export function generateStats(options = {}) {
@@ -9,7 +10,9 @@ export function generateStats(options = {}) {
   const input = loadStatsInput(root);
   const generatedAt = options.generatedAt ?? process.env.SOG_STATS_GENERATED_AT ?? `${input.checkpoint.recorded_at}T00:00:00.000Z`;
   const registryVersion = options.registryVersion ?? process.env.SOG_STATS_REGISTRY_VERSION ?? input.checkpoint.source_commit;
-  return buildStatsModel(input, { generatedAt, registryVersion });
+  const stats = buildStatsModel(input, { generatedAt, registryVersion });
+  stats.events.lifecycle_quality = buildEventLifecycleQuality(input);
+  return stats;
 }
 
 export function writeStats(stats, options = {}) {
