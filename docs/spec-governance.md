@@ -1,7 +1,7 @@
 # Stable or Gone Specification Governance
 
 Status: canonical governance specification  
-Updated: 2026-08-14
+Updated: 2026-08-17
 
 ## 1. Authority rule
 
@@ -22,11 +22,9 @@ Authority order:
 ## 2. Current repository boundary
 
 ```text
-Current stage: SEO_GA4_MIGRATION_AUDIT_AUTHORITY
-Active implementation authority: config/seo-ga4-migration-authority.json
-Current quality spec: docs/quality/seo-ga4-migration-audit-spec.md
-Current roadmap amendment: docs/roadmap-amendments/2026-08-14-seo-ga4-migration-audit-authority.md
-Entry main commit: 3c715fa77d9e92d52d7646f6e6e944a43d7f5ea9
+Current stage: REVIEW_GATE
+Active implementation authority: none
+Current closeout contract: config/seo-ga4-migration-closeout.json
 Canonical delta authorized: 0
 Canonical archive additions authorized: 0
 Canonical Market Access promotion authorized: false
@@ -38,7 +36,7 @@ New GA4 property / Measurement ID creation authorized: false
 Automatic continuation: false
 ```
 
-This is a bounded maintenance authority. It permits only official-origin/redirect/SEO artifact verification plus repair of existing GA4 build-time wiring and validation. It does not reopen canonical data, archive, Market Access, logo, route-family, DNS, or unrelated UI work.
+No new implementation begins from this gate without a fresh reviewed authority.
 
 ## 3. Current canonical state
 
@@ -68,29 +66,33 @@ Canonical file count: 466
 Canonical delta authorized: 0
 ```
 
-## 4. Current SEO / analytics authority
+## 4. Completed SEO / GA4 migration audit
 
-Binding package:
+The bounded authority package is now historical lineage:
 
 ```text
 config/seo-ga4-migration-authority.json
 docs/quality/seo-ga4-migration-audit-spec.md
 docs/roadmap-amendments/2026-08-14-seo-ga4-migration-audit-authority.md
+config/seo-ga4-migration-closeout.json
 ```
 
-Required sequence:
+Accepted exact-main evidence:
 
 ```text
-Phase A — authority/specification/schedule merge
-Phase B — repository + live origin/redirect/analytics audit
-Phase C — bounded GA4 production-build wiring/validation if required
-Phase D — exact-main production verification
-Closeout — restore REVIEW_GATE; no automatic continuation
+Verified main: 9277d04ca7e463e3a965473b82a7c15ef117a5fb
+Production run: 32035190608 — success
+Production job: 95403850881 — success
+Official-origin validation: success
+GA4 static-build verification: success
+Cloudflare Pages upload: success
+Deployed-production verification: success
+Canonical delta: 0
 ```
 
-The official public origin remains `https://www.stableorgone.com`. The legacy host remains migration-only and must preserve path/query through a 301 redirect. The GA4 lane must reuse the existing SOG analytics identity through `PUBLIC_GA_MEASUREMENT_ID`; creating, guessing, or hardcoding a new Measurement ID is forbidden.
+The official public origin remains `https://www.stableorgone.com`. The legacy host remains migration-only and must preserve path/query through a 301 redirect. GA4 must reuse the existing SOG analytics identity through `PUBLIC_GA_MEASUREMENT_ID`; creating, guessing, or hardcoding a new Measurement ID remains forbidden without separate authority.
 
-Google Search Console ownership, Change of Address, and sitemap submission are account-side state. Repository evidence can establish public prerequisites but must not be represented as proof that those Google-account operations are complete.
+Google Search Console ownership, Change of Address, sitemap submission, and GA4 account administration outside the existing build variable are account-side state and are not proven by repository evidence alone.
 
 ## 5. Accepted Stablecoin mark state
 
@@ -103,27 +105,22 @@ Last reviewed promotions: mnee, usdgo, usr
 Remote runtime image fetching: false
 ```
 
-No additional promotion is authorized by the SEO/GA4 lane.
-
 ## 6. Permanent future-growth logo rule
 
 `docs/quality/stablecoin-logo-disposition-operating-spec.md` remains binding. Core CI must continue to block canonical stablecoin growth that lacks an explicit reviewed logo disposition. A neutral fallback is valid; missing disposition is not.
 
 ## 7. Enduring Compare regression contract
 
-Accepted Compare behavior remains binding: matching-row feedback, 2–4 selection behavior, URL/history restoration, explicit unknown states, StablecoinMark reuse, and bounded mobile scrolling must not regress. This lane does not authorize Compare changes.
+Accepted Compare behavior remains binding: matching-row feedback, 2–4 selection behavior, URL/history restoration, explicit unknown states, StablecoinMark reuse, and bounded mobile scrolling must not regress.
 
-## 8. Current work-start and closeout rule
+## 8. Work-start rule from REVIEW_GATE
 
-Continuation must read the current authority package and remain inside its explicit boundaries. Any work outside that package requires a separate reviewed authority.
+Before any new implementation:
 
-The current lane must close by restoring:
-
-```text
-Current stage: REVIEW_GATE
-Active implementation authority: none
-Automatic continuation: false
-```
+1. Confirm current main, canonical counts/hash, open PRs, and production state.
+2. Read the relevant permanent operating specifications and enduring regression authorities.
+3. Create a fresh reviewed authority with explicit scope, canonical/public boundary, acceptance artifacts, and closeout behavior.
+4. Do not infer authority from chat instructions, historical PRs, old roadmap amendments, or stale branches.
 
 ## 9. Canonical/public safety
 
