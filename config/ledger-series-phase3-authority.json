@@ -1,0 +1,110 @@
+{
+  "schema_version": "1.0",
+  "authority_id": "sog_ledger_series_phase3_2026_08_17",
+  "status": "active_after_merge",
+  "entry_main_commit": "a90e57de5ac6624c48f90f985285256a2645218a",
+  "official_public_origin": "https://www.stableorgone.com",
+  "purpose": "Authorize the bounded Ledger Series Phase 3 SOG lifecycle-strengthening lane: audit existing depeg/regulatory/redemption/compensation/migration/discontinuation representation, then close only verified deterministic public-surface gaps without changing canonical records or schema unless a separate reviewed authority is merged.",
+  "mandatory_references": [
+    "AGENTS.md",
+    "docs/spec-governance.md",
+    "docs/roadmap.md",
+    "docs/deployment-policy.md",
+    "docs/ai-era-registry-spec.md",
+    "docs/ai-era-execution-schedule.md"
+  ],
+  "scope": [
+    "audit_representative_assets_for_post_depeg_regulatory_redemption_compensation_migration_discontinuation_and_last_verification_coverage",
+    "inventory_existing_search_filter_compare_stats_and_machine_readable_surfaces_before_implementation",
+    "add_deterministic_per_asset_machine_readable_json_derived_only_from_reviewed_canonical_records_if_missing",
+    "strengthen_existing_structured_search_and_filters_only_for_dimensions_already_supported_by_canonical_data",
+    "extend_existing_compare_surfaces_with_supported_lifecycle_and_outcome_fields_without_regressing_enduring_compare_behavior",
+    "extend_existing_stats_with_deterministic_depeg_recovery_regulation_migration_and_coverage_quality_views",
+    "add_validation_and_regression_checks_for_each_public_surface_change",
+    "run_exact_main_production_verification_for_material_public_changes",
+    "synchronize_authority_status_and_phase_completion_documentation"
+  ],
+  "implementation_sequence": [
+    "authority_specification_and_schedule_activation",
+    "representative_lifecycle_and_surface_gap_audit",
+    "schema_and_canonical_gap_decision_gate",
+    "deterministic_per_asset_json_if_missing",
+    "structured_filter_gap_closure",
+    "compare_lifecycle_outcome_gap_closure",
+    "stats_lifecycle_quality_gap_closure",
+    "production_exact_main_verification",
+    "phase3_closeout_and_restore_review_gate"
+  ],
+  "canonical_boundary": {
+    "stable_assets": 119,
+    "organizations": 109,
+    "relationships": 131,
+    "events": 194,
+    "evidence": 585,
+    "evidence_relations": 585,
+    "reserve_reports": 127,
+    "known_unknowns": 352,
+    "regulatory_notes": 9,
+    "deployments": 186,
+    "legal_profiles": 119,
+    "reserve_components": 153,
+    "income_profiles": 119,
+    "market_access": 12,
+    "canonical_hash": "sha256:4e7570b6fab88a8178a01ae280a36d98787573b376440b891491f25469458798",
+    "canonical_file_count": 466,
+    "canonical_delta_authorized": 0,
+    "schema_or_taxonomy_change_authorized": false,
+    "archive_additions_authorized": 0,
+    "market_access_promotion_authorized": false,
+    "stable_asset_addition_or_deletion_authorized": false
+  },
+  "public_surface_boundary": {
+    "per_asset_machine_readable_json_authorized": true,
+    "existing_search_filter_extension_authorized": true,
+    "existing_compare_extension_authorized": true,
+    "existing_stats_extension_authorized": true,
+    "new_unrelated_html_route_family_authorized": false,
+    "unrelated_ui_or_css_redesign_authorized": false,
+    "ranking_scoring_or_recommendation_authorized": false,
+    "natural_language_or_chatbot_surface_authorized": false
+  },
+  "decision_gates": {
+    "if_schema_change_is_required": "stop_and_create_separate_reviewed_authority",
+    "if_canonical_record_mutation_is_required": "stop_and_create_separate_reviewed_authority_or_bounded_followup_batch",
+    "if_existing_surface_already_satisfies_requirement": "record_as_implemented_and_do_not_rebuild",
+    "unknown_values": "preserve_unknown_and_do_not_infer"
+  },
+  "required_acceptance": [
+    "representative_audit_distinguishes_implemented_partial_missing_and_not_required",
+    "no_duplicate_parallel_feature_is_created_when_existing_surface_satisfies_the_requirement",
+    "per_asset_json_if_added_is_deterministic_canonical_only_and_provenance_preserving",
+    "filters_if_changed_use_existing_canonical_semantics_only",
+    "compare_changes_preserve_2_to_4_selection_url_history_unknown_states_mobile_scroll_and_hide_matching_rows_contract",
+    "stats_if_changed_are_deterministic_and_include_no_ranking_or_recommendation",
+    "all_relevant_ci_validation_integrity_and_visual_gates_pass",
+    "material_public_changes_pass_exact_main_production_verification",
+    "canonical_hash_and_file_count_remain_unchanged_through_public_surface_stages"
+  ],
+  "forbidden": [
+    "canonical_registry_mutation_without_separate_reviewed_authority",
+    "schema_or_taxonomy_change_without_separate_reviewed_authority",
+    "archive_or_market_access_mutation",
+    "stablecoin_addition_or_deletion",
+    "new_evidence_identity_or_evidence_relation",
+    "additional_logo_promotion",
+    "ranking_scoring_or_recommendation",
+    "ai_generated_canonical_classification",
+    "prompt_button_or_chatbot_first_product",
+    "unrelated_sitewide_redesign",
+    "dns_or_cloudflare_account_change",
+    "new_ga4_property_or_measurement_id_creation",
+    "measurement_id_guessing_or_hardcoding",
+    "automatic_continuation_beyond_closeout"
+  ],
+  "closeout": {
+    "restore_stage": "REVIEW_GATE",
+    "automatic_continuation": false,
+    "production_verification_required_for_material_public_changes": true,
+    "deployment_record_issue": 479
+  }
+}
