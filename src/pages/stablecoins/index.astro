@@ -24,6 +24,12 @@ const organizationById = new Map(organizations.map((organization) => [organizati
 const unique = <T,>(values: T[]) => [...new Set(values)];
 const label = (value?: string | null, fallback = 'Not recorded') => value ? formatPublicLabel(value) : fallback;
 const phase3EventCategories = new Set(['depeg', 'regulatory', 'redemption', 'migration', 'failure', 'wind_down']);
+const detailLifecycleCategory = (detailKind: string) => ({
+  depeg: 'depeg',
+  regulatory: 'regulatory',
+  redemption_change: 'redemption',
+  migration: 'migration'
+} as Record<string, string>)[detailKind];
 const recordDomain = (coin: unknown) => {
   const candidate = coin as { official_domain?: string; official_url?: string };
   if (candidate.official_domain) return candidate.official_domain;
@@ -47,11 +53,14 @@ const records = stablecoins.map((coin) => {
   const linkedEvents = events.filter((event) => event.stablecoin_id === coin.id || (event.subject_stablecoin_ids ?? []).includes(coin.id));
   const linkedEventTaxonomies = linkedEvents.map((event) => ({ event, taxonomy: resolveEventTaxonomy(event) }));
   const eventLifecycleCategories = unique(linkedEventTaxonomies
-    .map(({ taxonomy }) => taxonomy.public_category)
+    .flatMap(({ taxonomy }) => {
+      const detailCategory = detailLifecycleCategory(taxonomy.detail_kind);
+      return detailCategory ? [taxonomy.public_category, detailCategory] : [taxonomy.public_category];
+    })
     .filter((value) => phase3EventCategories.has(value)))
     .sort();
   const depegRecoveryCategories = unique(linkedEventTaxonomies
-    .filter(({ event, taxonomy }) => event.event_detail_kind === 'depeg' || taxonomy.public_category === 'depeg')
+    .filter(({ taxonomy }) => taxonomy.detail_kind === 'depeg' || taxonomy.public_category === 'depeg')
     .map(({ taxonomy }) => taxonomy.recovery_category)
     .filter((value) => value !== 'not_applicable'))
     .sort();
