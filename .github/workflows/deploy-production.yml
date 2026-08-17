@@ -128,6 +128,7 @@ jobs:
         run: |
           set -o pipefail
           npm run check:production 2>&1 | tee production-smoke.log
+          node scripts/check-production-stablecoin-record-json.mjs 2>&1 | tee -a production-smoke.log
 
       - name: Verify UK guide publication
         run: |
@@ -160,6 +161,7 @@ jobs:
           else
             echo "- GA4 static-build injection: not configured in the production environment" >> "$GITHUB_STEP_SUMMARY"
           fi
+          echo "- Stablecoin record JSON verification: passed for all canonical records" >> "$GITHUB_STEP_SUMMARY"
           echo "- UK guide publication: passed" >> "$GITHUB_STEP_SUMMARY"
 
       - name: Report deployment result
