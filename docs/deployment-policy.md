@@ -12,16 +12,16 @@ Official public origin: https://www.stableorgone.com
 Legacy migration origin: https://sog.badjoke-lab.com
 Automatic main publication: enabled
 Deployment record: Issue #479
-Current stage: REVIEW_GATE
-Active implementation authority: none
-Current closeout contract: config/seo-ga4-migration-closeout.json
+Current stage: LEDGER_SERIES_PHASE3
+Active implementation authority: config/ledger-series-phase3-authority.json
+Previous closeout contract: config/seo-ga4-migration-closeout.json
 Canonical delta authorized: 0
 Canonical archive additions authorized: 0
 Canonical Market Access promotion authorized: no
 Additional direct-logo promotions authorized: no
 DNS / Cloudflare account mutation authorized: no
 New GA4 property / Measurement ID creation authorized: no
-Automatic continuation: false
+Automatic continuation beyond closeout: false
 Current canonical hash: sha256:4e7570b6fab88a8178a01ae280a36d98787573b376440b891491f25469458798
 Canonical file count: 466
 ```
@@ -67,6 +67,14 @@ Metadata-checked routes: 422
 Canonical hash: sha256:4e7570b6fab88a8178a01ae280a36d98787573b376440b891491f25469458798
 Canonical file count: 466
 ```
+
+## Active Ledger Series Phase 3 deployment boundary
+
+The current implementation authority is `config/ledger-series-phase3-authority.json`.
+
+Material public changes authorized by that authority must follow the full publication rule above. The lane permits deterministic per-asset machine-readable JSON if missing, and bounded extensions to existing search/filter, Compare and Stats surfaces. It does not authorize canonical/schema mutation, unrelated route families, ranking/scoring/recommendations, DNS/Cloudflare account changes, or new analytics identity creation.
+
+At Phase 3 closeout, exact-main production verification is mandatory before the repository returns to `REVIEW_GATE`.
 
 ## Completed SEO / GA4 deployment lane
 
@@ -118,8 +126,8 @@ Core CI continues to run `node scripts/audit-stablecoin-logo-coverage.mjs` on ev
 
 ## Infrastructure boundary
 
-Separate reviewed authority remains required for DNS/domain changes, redirect implementation replacement, Cloudflare account changes, destructive schema migrations, mass deletion, major route removal, or emergency rollback.
+Separate reviewed authority remains required for DNS/domain changes, redirect implementation replacement, Cloudflare account changes, destructive schema migrations, mass deletion, major route removal, emergency rollback, or canonical/schema mutation outside the active Phase 3 authority.
 
-## REVIEW_GATE
+## Phase 3 closeout
 
-No new implementation is authorized after this closeout. A fresh reviewed authority is required before canonical, archive, Market Access, route-family, UI, DNS, analytics-identity, or other substantive implementation work begins.
+After all Phase 3 acceptance criteria and exact-main production verification pass, a reviewed closeout must restore `REVIEW_GATE`. No automatic continuation beyond that closeout is authorized.
