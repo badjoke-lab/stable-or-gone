@@ -1,0 +1,121 @@
+{
+  "schema_version": "1.0",
+  "authority_id": "sog_lifecycle_followup_batches_2026_08_19",
+  "status": "active_after_merge",
+  "entry_main_commit": "3f93b5d09f283d0524d4ec0377c160e26fe080e4",
+  "official_public_origin": "https://www.stableorgone.com",
+  "purpose": "Authorize bounded reviewed lifecycle follow-up batches after Ledger Series Phase 3. The lane may investigate and strengthen evidence-backed lifecycle history for existing canonical stable assets and may research Issue #559 StaX as a candidate, but candidate research alone does not authorize canonical addition.",
+  "mandatory_references": [
+    "AGENTS.md",
+    "docs/spec-governance.md",
+    "docs/roadmap.md",
+    "docs/deployment-policy.md",
+    "docs/ai-era-registry-spec.md",
+    "docs/ai-era-execution-schedule.md",
+    "docs/quality/stablecoin-logo-disposition-operating-spec.md"
+  ],
+  "scope": [
+    "audit_existing_canonical_assets_for_evidence_backed_lifecycle_followup",
+    "research_current_or_recent_depeg_regulatory_redemption_recovery_compensation_migration_discontinuation_and_last_verification_changes",
+    "prepare_reviewed_canonical_event_evidence_or_supported_entity_field_updates_for_existing_assets",
+    "investigate_issue_559_stax_without_treating_the_watchlist_as_evidence",
+    "perform_duplicate_alias_migration_and_scope_checks_before_any_candidate_addition_proposal",
+    "preserve_explicit_unknown_states_when_sources_do_not_support_a_stronger_conclusion",
+    "run_normal_ci_validation_and_exact_main_production_verification_for_material_public_changes",
+    "close_out_to_review_gate_after_the_bounded_followup_lane"
+  ],
+  "implementation_sequence": [
+    "authority_merge_and_activation",
+    "current_canonical_and_open_issue_audit",
+    "bounded_followup_candidate_selection",
+    "source_and_duplicate_review",
+    "reviewed_batch_prs_for_supported_existing_asset_changes",
+    "separate_authority_gate_if_a_new_stable_asset_addition_is_justified",
+    "exact_main_production_verification_for_material_public_changes",
+    "documentation_status_synchronization_and_restore_review_gate"
+  ],
+  "canonical_boundary": {
+    "entry_stable_assets": 119,
+    "entry_organizations": 109,
+    "entry_relationships": 131,
+    "entry_events": 194,
+    "entry_evidence": 585,
+    "entry_evidence_relations": 585,
+    "entry_deployments": 186,
+    "entry_market_access_records": 12,
+    "entry_canonical_hash": "sha256:4e7570b6fab88a8178a01ae280a36d98787573b376440b891491f25469458798",
+    "entry_canonical_file_count": 466,
+    "existing_asset_lifecycle_mutation_authorized": true,
+    "new_stable_asset_addition_authorized": false,
+    "stable_asset_deletion_authorized": false,
+    "schema_or_taxonomy_change_authorized": false,
+    "market_access_mutation_authorized": false,
+    "archive_program_expansion_authorized": false
+  },
+  "candidate_boundary": {
+    "issue_559_stax_research_authorized": true,
+    "candidate_discovery_is_evidence": false,
+    "canonical_addition_requires_separate_reviewed_authority": true,
+    "required_before_addition_proposal": [
+      "exact_official_name_and_ticker",
+      "issuer_or_responsible_entity",
+      "chains_and_contracts",
+      "mint_redeem_mechanism",
+      "reserve_or_collateral_model",
+      "redemption_rights_and_restrictions",
+      "launch_date",
+      "current_status",
+      "official_sources",
+      "independent_evidence_where_available",
+      "duplicate_alias_migration_check"
+    ]
+  },
+  "public_surface_boundary": {
+    "new_route_family_authorized": false,
+    "new_search_filter_extension_authorized": false,
+    "new_compare_extension_authorized": false,
+    "new_stats_extension_authorized": false,
+    "unrelated_ui_or_css_redesign_authorized": false,
+    "ranking_scoring_or_recommendation_authorized": false,
+    "natural_language_filter_translation_authorized": false
+  },
+  "decision_gates": {
+    "unsupported_terminal_or_recovery_state": "preserve_unknown_or_existing_conservative_state",
+    "schema_change_required": "stop_and_create_separate_reviewed_authority",
+    "new_stable_asset_addition_justified": "stop_and_create_separate_reviewed_authority_before_canonical_addition",
+    "market_access_or_archive_program_change_required": "stop_and_create_separate_reviewed_authority"
+  },
+  "required_acceptance": [
+    "each canonical lifecycle change is source_backed_and_reviewed",
+    "no candidate watchlist or monitoring signal is published directly",
+    "duplicate_alias_and_migration_checks_pass",
+    "status_and_outcome_changes_do_not_exceed_source_support",
+    "event_and_evidence_relations_remain_consistent",
+    "permanent_logo_gate_remains_satisfied",
+    "all_relevant_ci_and_validation_gates_pass",
+    "material_public_changes_receive_exact_main_production_verification"
+  ],
+  "forbidden": [
+    "automatic_candidate_publication",
+    "new_stable_asset_addition_without_separate_reviewed_authority",
+    "stable_asset_deletion",
+    "schema_or_taxonomy_change",
+    "unsupported_dead_failed_recovered_or_redeemable_classification",
+    "market_access_mutation",
+    "archive_program_expansion",
+    "additional_logo_promotion_unrelated_to_required_new_record_gate",
+    "new_route_family",
+    "new_search_filter_compare_or_stats_expansion",
+    "ranking_scoring_or_recommendation",
+    "dns_or_cloudflare_account_change",
+    "new_ga4_property_or_measurement_id_creation",
+    "measurement_id_guessing_or_hardcoding",
+    "automatic_continuation_beyond_closeout"
+  ],
+  "closeout": {
+    "restore_stage": "REVIEW_GATE",
+    "automatic_continuation": false,
+    "deployment_record_issue": 479,
+    "production_verification_required_for_material_public_changes": true
+  }
+}
