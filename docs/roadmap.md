@@ -1,14 +1,14 @@
 # Stable or Gone Roadmap
 
-Updated: 2026-08-17  
-Status: LEDGER_SERIES_PHASE3
+Updated: 2026-08-19  
+Status: REVIEW_GATE
 
 ## Current repository checkpoint
 
 ```text
-Current stage: LEDGER_SERIES_PHASE3
-Active implementation authority: config/ledger-series-phase3-authority.json
-Previous closeout contract: config/seo-ga4-migration-closeout.json
+Current stage: REVIEW_GATE
+Active implementation authority: none
+Current closeout contract: config/ledger-series-phase3-closeout.json
 Canonical stable assets: 119
 Organizations: 109
 Relationships: 131
@@ -27,32 +27,33 @@ Canonical delta authorized: 0
 Additional logo promotions authorized: 0
 DNS / Cloudflare account mutation authorized: no
 New GA4 property / Measurement ID creation authorized: no
-Automatic continuation beyond closeout: false
+Automatic continuation: false
 ```
 
-## Active Ledger Series Phase 3 lane
+## Completed Ledger Series Phase 3 lane
 
-Authority:
+Authority and closeout lineage:
 
 ```text
 config/ledger-series-phase3-authority.json
 docs/roadmap-amendments/2026-08-17-ledger-series-phase3-authority.md
+config/ledger-series-phase3-closeout.json
 ```
 
-Execution order:
+Execution result:
 
 ```text
-Stage 1 — representative lifecycle + current-surface audit
-Stage 2 — schema/canonical decision gate
-Stage 3 — deterministic per-asset JSON if missing
-Stage 4 — structured-filter gap closure
-Stage 5 — Compare lifecycle/outcome gap closure
-Stage 6 — Stats lifecycle/quality gap closure
-Stage 7 — exact-main production verification
-Stage 8 — Phase 3 closeout and REVIEW_GATE restoration
+Stage 1 — representative lifecycle + current-surface audit: complete
+Stage 2 — schema/canonical decision gate: complete; no mutation required
+Stage 3 — deterministic per-asset JSON: complete
+Stage 4 — structured-filter lifecycle/depeg-recovery gap closure: complete
+Stage 5 — existing Compare lifecycle/outcome gap closure: complete
+Stage 6 — existing Stats lifecycle/quality gap closure: complete
+Stage 7 — exact-main production cross-surface verification: complete
+Stage 8 — documentation/status synchronization and REVIEW_GATE restoration: complete after closeout merge
 ```
 
-The lifecycle target is:
+The accepted lifecycle target is now represented through reviewed canonical data and deterministic public projections:
 
 ```text
 launch
@@ -63,9 +64,23 @@ launch
 -> current / final state
 ```
 
-Existing public surfaces must be audited before new implementation. Already-satisfied requirements are recorded as implemented and are not rebuilt.
+Accepted exact-main public evidence:
 
-Canonical/schema mutation is not authorized in this lane. If a real representation gap requires either, work stops for a separate reviewed authority.
+```text
+Verified main: 6cac1ef858d35e2a8c015142f29011e4aff33fdc
+Production run: 32153641423 — success
+Production job: 95765437402 — success
+Stablecoin dossiers verified: 119
+Phase 3 cross-surface verification: success
+Canonical delta: 0
+Schema/taxonomy delta: 0
+```
+
+The production lifecycle-quality checkpoint reported 11 depeg events, 6 regulatory events, 6 redemption-change events, and 42 migration/termination events. These are registry coverage measurements derived from reviewed canonical events, not market or safety rankings.
+
+The same verified main passed the strict domain migration gate with 15/15 legacy redirects, migration complete, and zero official-origin failures.
+
+Phase 3 public behavior is now an enduring regression contract. It does not provide standing authority for further lifecycle, filter, Compare, Stats, or machine-readable expansion.
 
 ## Completed SEO / GA4 migration lane
 
@@ -98,24 +113,25 @@ The enduring migration contract remains:
 - GA4 uses the existing `PUBLIC_GA_MEASUREMENT_ID` build variable only; no new or guessed Measurement ID is authorized.
 - Google Search Console and GA4 account-side state is not proven by repository evidence alone.
 
-## Phase 3 boundary
+## REVIEW_GATE boundary
 
 ```text
 canonical work: not authorized
 archive work: not authorized
 Market Access work: not authorized
 additional logo promotion: not authorized
+new Evidence identities/relations: not authorized
 new unrelated route family: not authorized
-deterministic per-asset JSON: authorized if missing
-existing search/filter extension: authorized
-existing Compare extension: authorized
-existing Stats extension: authorized
+new lifecycle/search/filter expansion: not authorized
+new Compare or Stats expansion: not authorized
 ranking/scoring/recommendation: not authorized
 unrelated UI/CSS redesign: not authorized
 DNS / Cloudflare account mutation: not authorized
 new analytics identity creation: not authorized
-automatic continuation beyond closeout: false
+automatic continuation: false
 ```
+
+A fresh reviewed authority is required before any substantive new implementation begins.
 
 ## Current Stablecoin mark checkpoint
 
@@ -132,12 +148,14 @@ Remote runtime image fetching: no
 
 The following continue unchanged:
 
+- `docs/ai-era-registry-spec.md` and `docs/ai-era-execution-schedule.md` must be read before new substantive work;
 - `docs/quality/stablecoin-logo-disposition-operating-spec.md`;
 - core CI Stablecoin logo coverage audit on every PR;
 - one reviewed logo disposition per canonical Stablecoin;
 - explicit neutral fallback when no product/token-specific mark is approved;
 - no runtime remote logo fetching;
 - accepted Compare interaction behavior;
+- accepted Phase 3 machine-readable/filter/Compare/Stats contracts;
 - material-public-UI regression review under `docs/ui-v3-remediation-authority.md`;
 - official-origin and legacy-host deployment contracts.
 
@@ -150,6 +168,10 @@ PR #551/#552/#553 — Evidence Archive Batch 2 implementation / closeout
 PR #554/#555/#556/#557/#558 — Compare feedback / Stablecoin logo maintenance / closeout
 PR #565/#566 — SEO / GA4 migration exact-main evidence / closeout
 PR #567 — Ledger Series Phase 3 authority
+PR #571 — Phase 3 structured lifecycle/depeg-recovery filters
+PR #572 — Phase 3 Compare lifecycle aftermath extension
+PR #573 — Phase 3 lifecycle-quality Stats
+PR #574 — Phase 3 exact-main production cross-surface verification
 ```
 
 Historical lineage remains useful for audit and regression context, not as standing implementation authority.
