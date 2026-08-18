@@ -5,10 +5,10 @@ This file is the mandatory entry point for humans, AI agents, and automation wor
 ## Current authority
 
 ```text
-Repository state: LEDGER_SERIES_PHASE3
-Current stage: LEDGER_SERIES_PHASE3
-Active implementation authority: config/ledger-series-phase3-authority.json
-Previous closeout contract: config/seo-ga4-migration-closeout.json
+Repository state: REVIEW_GATE
+Current stage: REVIEW_GATE
+Active implementation authority: none
+Current closeout contract: config/ledger-series-phase3-closeout.json
 Automatic continuation: false
 Official public origin: https://www.stableorgone.com
 Legacy migration origin: https://sog.badjoke-lab.com
@@ -19,10 +19,6 @@ Canonical archive additions authorized: 0
 Canonical Market Access promotion authorized: no
 Additional logo promotions authorized: no
 New unrelated public route family authorized: no
-Deterministic per-asset machine-readable JSON authorized: yes
-Existing search/filter extension authorized: yes
-Existing Compare extension authorized: yes
-Existing Stats extension authorized: yes
 Ranking / scoring / recommendation authorized: no
 DNS / Cloudflare account mutation authorized: no
 New GA4 property / Measurement ID creation authorized: no
@@ -30,7 +26,7 @@ New GA4 property / Measurement ID creation authorized: no
 
 Merged repository authority outranks chat memory, handoff prose, issue discussion, stale branch state, generated reports, and unmerged drafts.
 
-Substantive work in this stage must stay within `config/ledger-series-phase3-authority.json`. Schema or canonical mutation requires a separate reviewed authority.
+No new implementation begins from this gate without a fresh reviewed authority.
 
 ## Current canonical counts
 
@@ -55,34 +51,41 @@ Detail routes: 422
 Metadata-checked routes: 422
 ```
 
-## Active Ledger Series Phase 3 lane
+## Completed Ledger Series Phase 3 lane
 
-The reviewed Phase 3 authority is:
+The reviewed Phase 3 authority is historical lineage after closeout:
 
 ```text
 config/ledger-series-phase3-authority.json
 docs/roadmap-amendments/2026-08-17-ledger-series-phase3-authority.md
+config/ledger-series-phase3-closeout.json
 ```
 
-Required implementation order:
+Accepted result:
 
 ```text
-authority/specification activation
--> representative lifecycle + public-surface audit
--> schema/canonical decision gate
--> deterministic per-asset JSON if missing
--> structured-filter gap closure
--> Compare lifecycle/outcome gap closure
--> Stats lifecycle/quality gap closure
--> exact-main production verification
--> Phase 3 closeout and REVIEW_GATE restoration
+Representative lifecycle + public-surface audit: complete
+Schema/canonical decision gate: pass without mutation
+Deterministic per-asset JSON: complete
+Structured-filter lifecycle gap closure: complete
+Compare lifecycle/outcome gap closure: complete
+Stats lifecycle/quality gap closure: complete
+Exact-main production cross-surface verification: complete
+Verified main: 6cac1ef858d35e2a8c015142f29011e4aff33fdc
+Production run: 32153641423 — success
+Production job: 95765437402 — success
+Stablecoin dossiers verified: 119
+Canonical delta: 0
+Schema/taxonomy delta: 0
 ```
 
-Do not rebuild existing surfaces that already satisfy the requirement. Preserve explicit `Unknown` / `Not recorded` states. Do not infer recovery, compensation, redemption, migration, regulatory or final-outcome values that canonical data does not support.
+The enduring public result includes deterministic per-asset JSON, lifecycle/depeg-recovery filtering, lifecycle aftermath fields in the existing Compare product, lifecycle-quality Stats, and exact-main production verification. These are regression contracts, not standing authority for further expansion.
+
+Issue #479 records the deployment evidence. The same verified main also passed the strict domain migration gate with 15/15 legacy redirects and zero official-origin failures.
 
 ## Completed SEO / GA4 migration audit
 
-The bounded SEO / GA4 migration audit is closed. Accepted repository-side evidence:
+The earlier bounded SEO / GA4 migration audit remains historical lineage:
 
 ```text
 Closeout contract: config/seo-ga4-migration-closeout.json
@@ -108,18 +111,6 @@ Create / guess / hardcode a Measurement ID: no
 
 Google Search Console ownership, Change of Address, sitemap submission, and GA4 account administration outside the existing build variable remain account-side state and are not proven by repository evidence alone.
 
-## Historical non-UI acceptance checkpoints
-
-These remain baseline lineage, not standing authority outside their accepted regression contracts:
-
-```text
-PR #493 — migrated SOG to https://www.stableorgone.com as the single official production origin
-PR #500 — deepened the bounded MNEE Evidence/archive/control review without forcing unsupported unknowns closed
-PR #517 — added complete canonical Bison Bank EUB/USB records and established the 119-asset / 186-deployment checkpoint lineage
-PR #565 — recorded SEO / GA4 migration exact-main acceptance evidence
-PR #567 — authorized Ledger Series Phase 3 lifecycle strengthening
-```
-
 ## Current Stablecoin mark contract
 
 ```text
@@ -134,19 +125,13 @@ Canonical delta: 0
 
 ## Permanent future record-growth logo gate
 
-Core `.github/workflows/ci.yml` runs:
-
-```text
-node scripts/audit-stablecoin-logo-coverage.mjs
-```
-
-on every pull request without data-path exclusions. Every future canonical Stablecoin addition must satisfy `docs/quality/stablecoin-logo-disposition-operating-spec.md`.
+Core `.github/workflows/ci.yml` runs `node scripts/audit-stablecoin-logo-coverage.mjs` on every pull request without data-path exclusions. Every future canonical Stablecoin addition must satisfy `docs/quality/stablecoin-logo-disposition-operating-spec.md`.
 
 A neutral fallback is valid. Missing disposition is not.
 
-## Enduring Compare behavior
+## Enduring Compare and Phase 3 public behavior
 
-The accepted Compare behavior remains a regression contract:
+Accepted Compare behavior remains a regression contract:
 
 ```text
 control: Hide matching rows
@@ -160,17 +145,19 @@ remote runtime fetch: none
 
 Do not regress 2–4 selection, fifth-selection rejection, URL order/history restoration, explicit `Unknown` / `Not recorded`, bounded mobile matrix scrolling, or accepted Compare dock/footer behavior.
 
-## Required work-start protocol during LEDGER_SERIES_PHASE3
+Do not regress the reviewed Phase 3 deterministic per-asset JSON, Event lifecycle / Depeg recovery filters, six lifecycle Compare fields, lifecycle-quality Stats, or production cross-surface verifier without a separately reviewed change.
 
-Before each substantive Phase 3 work item:
+## Required work-start protocol from REVIEW_GATE
 
-1. Read `AGENTS.md`, `docs/spec-governance.md`, `docs/roadmap.md`, `docs/deployment-policy.md`, and `config/ledger-series-phase3-authority.json`.
+Before substantive new work:
+
+1. Read `AGENTS.md`, `docs/spec-governance.md`, `docs/roadmap.md`, `docs/deployment-policy.md`, `docs/ai-era-registry-spec.md`, and `docs/ai-era-execution-schedule.md`.
 2. Confirm current main, canonical counts/hash, open PRs, and current production state.
-3. Audit the existing implementation before adding a parallel surface.
-4. Keep canonical/schema changes out of this authority. If they become necessary, stop and create a separate reviewed authority.
-5. For material public changes, require PR CI green, merge, and exact-main production verification.
+3. Read the relevant permanent operating specifications and enduring regression authorities.
+4. Create a fresh reviewed authority that states scope, canonical/public boundary, acceptance artifacts, and closeout behavior.
+5. Do not infer authority from chat instructions, historical PRs, stale branches, or old roadmap amendments.
 
-## Preserved exclusions during LEDGER_SERIES_PHASE3
+## Preserved exclusions at REVIEW_GATE
 
 No current authority exists for:
 
@@ -184,10 +171,11 @@ additional logo promotion
 new unrelated public route family
 ranking / scoring / recommendation
 unrelated sitewide redesign
+new lifecycle/search/Compare/Stats expansion
 DNS / Cloudflare account mutation
 new GA4 property or Measurement ID creation
 measurement ID guessing or hardcoding
-automatic continuation beyond Phase 3 closeout
+automatic continuation beyond the current closeout
 ```
 
 `docs/ui-v3-remediation-authority.md` remains the enduring material-public-UI regression authority. Issue #479 remains the deployment-history authority.
