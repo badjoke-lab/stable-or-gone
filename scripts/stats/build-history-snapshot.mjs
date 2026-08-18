@@ -1,11 +1,13 @@
 import crypto from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
+import { isDeepStrictEqual } from 'node:util';
 import { pathToFileURL } from 'node:url';
 import { generateStats } from '../build-stats.mjs';
 
 const sha256 = (value) => crypto.createHash('sha256').update(value).digest('hex');
 const historyCheckpointPath = 'docs/migration/current-stats-history-checkpoint.json';
+const historyPath = 'data/stats-history.json';
 
 function countsOnly(distribution = {}) {
   return Object.fromEntries(Object.entries(distribution).map(([key, row]) => [key, row.count]));
@@ -15,6 +17,20 @@ function loadHistoryCheckpoint(root) {
   const absolute = path.join(root, historyCheckpointPath);
   if (!fs.existsSync(absolute)) return null;
   return JSON.parse(fs.readFileSync(absolute, 'utf8'));
+}
+
+function loadReviewedHistorySnapshot(root, checkpointId) {
+  const absolute = path.join(root, historyPath);
+  if (!checkpointId || !fs.existsSync(absolute)) return null;
+  const history = JSON.parse(fs.readFileSync(absolute, 'utf8'));
+  return (Array.isArray(history.snapshots) ? history.snapshots : []).find((snapshot) => snapshot.checkpoint_id === checkpointId) ?? null;
+}
+
+function stableHistoryProjection(snapshot) {
+  const projected = structuredClone(snapshot);
+  delete projected.stats_model_sha256;
+  delete projected.snapshot_sha256;
+  return projected;
 }
 
 export function buildHistorySnapshot(stats, options = {}) {
@@ -66,7 +82,14 @@ export function buildHistorySnapshot(stats, options = {}) {
 export function generateCurrentHistorySnapshot(options = {}) {
   const root = options.root ?? process.cwd();
   const historyCheckpoint = loadHistoryCheckpoint(root);
-  return buildHistorySnapshot(generateStats(options), { historyCheckpoint });
+  const generated = buildHistorySnapshot(generateStats(options), { historyCheckpoint });
+  const reviewed = loadReviewedHistorySnapshot(root, generated.checkpoint_id);
+
+  if (reviewed && isDeepStrictEqual(stableHistoryProjection(reviewed), stableHistoryProjection(generated))) {
+    return reviewed;
+  }
+
+  return generated;
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {

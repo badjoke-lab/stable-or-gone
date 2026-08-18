@@ -60,6 +60,22 @@ const eventYears = Object.entries((stats.events?.by_year ?? {}) as Record<string
 const recentEventYears = eventYears.slice(-12);
 const maxEventYear = Math.max(1, ...recentEventYears.map((row) => row.total));
 const eventTypes = compactRows(distribution(stats.events?.by_type), 7);
+const depegRecoveryRows = distribution(stats.events?.depeg_outcomes);
+const typedLifecycleRows = compactRows(distribution(stats.events?.detail_kind), 8);
+const lifecycleQuality = stats.events?.lifecycle_quality ?? {};
+const lifecycleCoveragePanels = [
+  ['Depeg events', lifecycleQuality.depeg],
+  ['Regulatory events', lifecycleQuality.regulatory],
+  ['Redemption changes', lifecycleQuality.redemption_change],
+  ['Migration / termination', lifecycleQuality.migration_or_termination]
+].map(([label, value]) => ({
+  label: String(label),
+  eventCount: Number((value as any)?.event_count ?? 0),
+  assetCount: Number((value as any)?.asset_coverage?.count ?? 0),
+  assetDenominator: Number((value as any)?.asset_coverage?.denominator ?? stats.totals?.assets ?? 0),
+  assetPercentage: Number((value as any)?.asset_coverage?.percentage ?? 0)
+}));
+const depegRecoveryCoverage = lifecycleQuality.depeg?.recovery_state_recorded ?? {};
 
 const failurePanels = [
   ['Leading stabilization mechanism', stats.failures?.by_stabilization_mechanism],
@@ -245,6 +261,32 @@ const description = 'A concise analytical view of the Stable or Gone canonical r
           </div>
         </section>
       </div>
+
+      <div class="stats-v4-section-heading">
+        <div><p class="stats-kicker">Recorded event lifecycle</p><h3>What happened after stress or policy change</h3></div>
+        <p>These counts summarize reviewed canonical event records only. Missing event coverage means “not recorded in the canonical registry”, not proof that an event never occurred.</p>
+      </div>
+      <dl class="stats-v4-mini-kpis">
+        {lifecycleCoveragePanels.map((item) => (
+          <div>
+            <dt>{item.label}</dt>
+            <dd>{item.eventCount}</dd>
+            <small>{item.assetCount} / {item.assetDenominator} assets · {item.assetPercentage}%</small>
+          </div>
+        ))}
+      </dl>
+      <div class="stats-v4-split">
+        <section class="stats-v4-panel">
+          <h3>Depeg recovery status</h3>
+          <p>{depegRecoveryRows.map((row) => `${row.label}: ${row.count} (${row.percentage}%)`).join(' · ')}</p>
+          <p>{depegRecoveryCoverage.count ?? 0} / {depegRecoveryCoverage.denominator ?? 0} recorded depeg events have an explicit recovery-state value ({depegRecoveryCoverage.percentage ?? 0}%).</p>
+        </section>
+        <section class="stats-v4-panel">
+          <h3>Typed lifecycle-event kinds</h3>
+          <p>{typedLifecycleRows.map((row) => `${row.label}: ${row.count} (${row.percentage}%)`).join(' · ')}</p>
+        </section>
+      </div>
+
       <div class="stats-v4-failure-summary">
         <div class="stats-v4-failure-count"><span>Canonical failed assets</span><strong>{stats.failures?.count ?? 0}</strong></div>
         {failurePanels.map((item) => (

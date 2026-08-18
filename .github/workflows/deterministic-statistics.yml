@@ -32,6 +32,8 @@ jobs:
         run: node scripts/build-stats.mjs
       - name: Validate statistics
         run: SOG_STATS_VALIDATE_OUTPUT=artifacts/stats-current.json node scripts/validate-stats.mjs
+      - name: Validate Phase 3 lifecycle quality statistics
+        run: node scripts/validate-phase3-stats-lifecycle.mjs
       - name: Upload generated statistics
         if: always()
         uses: actions/upload-artifact@v4
