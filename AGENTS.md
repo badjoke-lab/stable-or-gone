@@ -111,6 +111,18 @@ Create / guess / hardcode a Measurement ID: no
 
 Google Search Console ownership, Change of Address, sitemap submission, and GA4 account administration outside the existing build variable remain account-side state and are not proven by repository evidence alone.
 
+## Historical non-UI acceptance checkpoints
+
+These remain baseline lineage, not standing authority outside their accepted regression contracts:
+
+```text
+PR #493 — migrated SOG to https://www.stableorgone.com as the single official production origin
+PR #500 — deepened the bounded MNEE Evidence/archive/control review without forcing unsupported unknowns closed
+PR #517 — added complete canonical Bison Bank EUB/USB records and established the 119-asset / 186-deployment checkpoint lineage
+PR #565 — recorded SEO / GA4 migration exact-main acceptance evidence
+PR #567 — authorized Ledger Series Phase 3 lifecycle strengthening
+```
+
 ## Current Stablecoin mark contract
 
 ```text
