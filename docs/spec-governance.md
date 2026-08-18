@@ -1,7 +1,7 @@
 # Stable or Gone Specification Governance
 
 Status: canonical governance specification  
-Updated: 2026-08-17
+Updated: 2026-08-19
 
 ## 1. Authority rule
 
@@ -22,25 +22,24 @@ Authority order:
 ## 2. Current repository boundary
 
 ```text
-Current stage: LEDGER_SERIES_PHASE3
-Active implementation authority: config/ledger-series-phase3-authority.json
-Previous closeout contract: config/seo-ga4-migration-closeout.json
+Current stage: REVIEW_GATE
+Active implementation authority: none
+Current closeout contract: config/ledger-series-phase3-closeout.json
 Canonical delta authorized: 0
 Canonical archive additions authorized: 0
 Canonical Market Access promotion authorized: false
 Additional direct-logo promotions authorized: false
 New unrelated public route family authorized: false
-Deterministic per-asset machine-readable JSON authorized: true
-Existing search/filter extension authorized: true
-Existing Compare extension authorized: true
-Existing Stats extension authorized: true
+New lifecycle/search/filter expansion authorized: false
+New Compare expansion authorized: false
+New Stats expansion authorized: false
 Ranking / scoring / recommendation authorized: false
 DNS / Cloudflare account mutation authorized: false
 New GA4 property / Measurement ID creation authorized: false
-Automatic continuation beyond closeout: false
+Automatic continuation: false
 ```
 
-All Phase 3 implementation must remain inside `config/ledger-series-phase3-authority.json`. Any required schema or canonical mutation requires a separate reviewed authority.
+No substantive new implementation is authorized from REVIEW_GATE. A fresh reviewed authority is required before work begins.
 
 ## 3. Current canonical state
 
@@ -70,29 +69,42 @@ Canonical file count: 466
 Canonical delta authorized: 0
 ```
 
-## 4. Active Ledger Series Phase 3 authority
+## 4. Completed Ledger Series Phase 3 authority
 
-The current reviewed implementation authority is:
+The reviewed implementation authority and closeout are historical lineage:
 
 ```text
 config/ledger-series-phase3-authority.json
 docs/roadmap-amendments/2026-08-17-ledger-series-phase3-authority.md
+config/ledger-series-phase3-closeout.json
 ```
 
-Required sequence:
+Accepted sequence:
 
 ```text
-representative lifecycle + surface audit
--> schema/canonical decision gate
--> deterministic per-asset JSON if missing
--> structured-filter gap closure
--> Compare lifecycle/outcome gap closure
--> Stats lifecycle/quality gap closure
--> exact-main production verification
--> Phase 3 closeout to REVIEW_GATE
+representative lifecycle + surface audit: complete
+-> schema/canonical decision gate: pass without mutation
+-> deterministic per-asset JSON: complete
+-> structured-filter gap closure: complete
+-> Compare lifecycle/outcome gap closure: complete
+-> Stats lifecycle/quality gap closure: complete
+-> exact-main production verification: complete
+-> Phase 3 closeout to REVIEW_GATE: complete after closeout merge
 ```
 
-Existing surfaces must be audited before implementation. If a requirement is already satisfied, record it as implemented rather than creating a duplicate feature.
+Accepted exact-main evidence:
+
+```text
+Verified main: 6cac1ef858d35e2a8c015142f29011e4aff33fdc
+Production run: 32153641423 — success
+Production job: 95765437402 — success
+Stablecoin dossiers verified: 119
+Phase 3 cross-surface verification: success
+Canonical delta: 0
+Schema/taxonomy delta: 0
+```
+
+The accepted Phase 3 machine-readable, filter, Compare, Stats, and production-verification behavior is an enduring regression contract. It is not standing authority for additional product expansion.
 
 ## 5. Completed SEO / GA4 migration audit
 
@@ -137,21 +149,23 @@ Remote runtime image fetching: false
 
 `docs/quality/stablecoin-logo-disposition-operating-spec.md` remains binding. Core CI must continue to block canonical stablecoin growth that lacks an explicit reviewed logo disposition. A neutral fallback is valid; missing disposition is not.
 
-## 8. Enduring Compare regression contract
+## 8. Enduring Compare and Phase 3 regression contracts
 
 Accepted Compare behavior remains binding: matching-row feedback, 2–4 selection behavior, URL/history restoration, explicit unknown states, StablecoinMark reuse, and bounded mobile scrolling must not regress.
 
-## 9. Work-start rule during LEDGER_SERIES_PHASE3
+The reviewed Phase 3 per-asset JSON, Event lifecycle / Depeg recovery filters, lifecycle Compare fields, lifecycle-quality Stats, and production cross-surface verifier also remain binding regression contracts unless a future reviewed authority explicitly changes them.
 
-Before each substantive work item:
+## 9. Work-start rule from REVIEW_GATE
+
+Before substantive new work:
 
 1. Confirm current main, canonical counts/hash, open PRs, and production state.
-2. Read the Phase 3 authority and relevant permanent operating specifications / regression authorities.
-3. Audit the existing public/data surface before implementation.
-4. Stop for separate reviewed authority if schema or canonical mutation is required.
-5. For material public changes, require PR CI green, merge, and exact-main production verification.
+2. Read `docs/ai-era-registry-spec.md`, `docs/ai-era-execution-schedule.md`, the permanent operating specifications, and enduring regression authorities relevant to the proposed work.
+3. Audit the existing public/data surface before proposing a parallel implementation.
+4. Create and merge a fresh reviewed authority defining scope, canonical/public boundaries, acceptance evidence, and closeout behavior.
+5. Do not infer authority from historical Phase 3 permissions, chat instructions, old PRs, or stale branches.
 
-## 10. Canonical/public safety
+## 10. Canonical/public safety at REVIEW_GATE
 
 ```text
 canonical_only = true
@@ -161,10 +175,11 @@ canonical archive additions authorized = 0
 canonical Market Access promotion authorized = false
 additional logo promotions authorized = false
 new unrelated public route families authorized = false
+new lifecycle/search/filter/Compare/Stats expansion authorized = false
 ranking / scoring / recommendation authorized = false
 DNS / Cloudflare account mutation authorized = false
 new GA4 property / Measurement ID creation authorized = false
-Automatic continuation beyond Phase 3 closeout = false
+Automatic continuation = false
 ```
 
 `docs/ui-v3-remediation-authority.md` remains the enduring material-public-UI regression authority. Issue #479 remains the deployment-history authority.

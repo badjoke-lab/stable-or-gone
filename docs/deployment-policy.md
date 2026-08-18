@@ -1,6 +1,6 @@
 # Stable or Gone Deployment Policy
 
-Updated: 2026-08-17
+Updated: 2026-08-19
 
 ## Status
 
@@ -12,16 +12,16 @@ Official public origin: https://www.stableorgone.com
 Legacy migration origin: https://sog.badjoke-lab.com
 Automatic main publication: enabled
 Deployment record: Issue #479
-Current stage: LEDGER_SERIES_PHASE3
-Active implementation authority: config/ledger-series-phase3-authority.json
-Previous closeout contract: config/seo-ga4-migration-closeout.json
+Current stage: REVIEW_GATE
+Active implementation authority: none
+Current closeout contract: config/ledger-series-phase3-closeout.json
 Canonical delta authorized: 0
 Canonical archive additions authorized: 0
 Canonical Market Access promotion authorized: no
 Additional direct-logo promotions authorized: no
 DNS / Cloudflare account mutation authorized: no
 New GA4 property / Measurement ID creation authorized: no
-Automatic continuation beyond closeout: false
+Automatic continuation: false
 Current canonical hash: sha256:4e7570b6fab88a8178a01ae280a36d98787573b376440b891491f25469458798
 Canonical file count: 466
 ```
@@ -37,6 +37,8 @@ PR merged to main
 -> upload to Cloudflare Pages
 -> verify deployed commit and canonical hash/count contract
 -> verify counts/routes/metadata/machine-readable output
+-> verify stablecoin dossier output
+-> verify Phase 3 public cross-surface contracts
 -> verify legacy-host migration
 -> verify analytics build output when configured
 -> report result to Issue #479
@@ -68,13 +70,34 @@ Canonical hash: sha256:4e7570b6fab88a8178a01ae280a36d98787573b376440b891491f2546
 Canonical file count: 466
 ```
 
-## Active Ledger Series Phase 3 deployment boundary
+## Completed Ledger Series Phase 3 deployment lane
 
-The current implementation authority is `config/ledger-series-phase3-authority.json`.
+Accepted exact-main production evidence:
 
-Material public changes authorized by that authority must follow the full publication rule above. The lane permits deterministic per-asset machine-readable JSON if missing, and bounded extensions to existing search/filter, Compare and Stats surfaces. It does not authorize canonical/schema mutation, unrelated route families, ranking/scoring/recommendations, DNS/Cloudflare account changes, or new analytics identity creation.
+```text
+Verified main: 6cac1ef858d35e2a8c015142f29011e4aff33fdc
+Production run: 32153641423 — success
+Production job: 95765437402 — success
+Cloudflare Pages upload: success
+Stablecoin dossiers: 119 verified
+Phase 3 cross-surface verification: success
+Canonical delta: 0
+Schema/taxonomy delta: 0
+```
 
-At Phase 3 closeout, exact-main production verification is mandatory before the repository returns to `REVIEW_GATE`.
+The Phase 3 verifier checks the same deployed commit across deterministic per-asset JSON, structured lifecycle/depeg-recovery filters, lifecycle Compare fields, and lifecycle-quality Stats. On the accepted run it reported 11 depeg events, 6 regulatory events, 6 redemption-change events, and 42 migration/termination events from reviewed canonical data.
+
+The same main commit passed the strict domain migration production gate:
+
+```text
+Run: 32153782421
+Strict mode: true
+Legacy redirects: 15 / 15
+Migration complete: true
+Official-origin failures: 0
+```
+
+These checks are now enduring deployment regression contracts. They do not authorize new Phase 3 expansion from REVIEW_GATE.
 
 ## Completed SEO / GA4 deployment lane
 
@@ -126,8 +149,8 @@ Core CI continues to run `node scripts/audit-stablecoin-logo-coverage.mjs` on ev
 
 ## Infrastructure boundary
 
-Separate reviewed authority remains required for DNS/domain changes, redirect implementation replacement, Cloudflare account changes, destructive schema migrations, mass deletion, major route removal, emergency rollback, or canonical/schema mutation outside the active Phase 3 authority.
+Separate reviewed authority remains required for DNS/domain changes, redirect implementation replacement, Cloudflare account changes, destructive schema migrations, mass deletion, major route removal, emergency rollback, canonical/schema mutation, or new lifecycle/search/Compare/Stats expansion.
 
-## Phase 3 closeout
+## REVIEW_GATE
 
-After all Phase 3 acceptance criteria and exact-main production verification pass, a reviewed closeout must restore `REVIEW_GATE`. No automatic continuation beyond that closeout is authorized.
+No new implementation is authorized after the Ledger Series Phase 3 closeout. A fresh reviewed authority is required before canonical, archive, Market Access, route-family, UI, lifecycle, DNS, analytics-identity, or other substantive implementation work begins.
