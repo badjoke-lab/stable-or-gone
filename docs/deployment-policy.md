@@ -1,6 +1,6 @@
 # Stable or Gone Deployment Policy
 
-Updated: 2026-08-19
+Updated: 2026-08-20
 
 ## Status
 
@@ -14,7 +14,7 @@ Automatic main publication: enabled
 Deployment record: Issue #479
 Current stage: REVIEW_GATE
 Active implementation authority: none
-Current closeout contract: config/ledger-series-phase3-closeout.json
+Current closeout contract: config/ledger-series-phase9-closeout.json
 Canonical delta authorized: 0
 Canonical archive additions authorized: 0
 Canonical Market Access promotion authorized: no
@@ -39,6 +39,7 @@ PR merged to main
 -> verify counts/routes/metadata/machine-readable output
 -> verify stablecoin dossier output
 -> verify Phase 3 public cross-surface contracts
+-> verify Ledger Series adapter contract when changed
 -> verify legacy-host migration
 -> verify analytics build output when configured
 -> report result to Issue #479
@@ -69,6 +70,34 @@ Metadata-checked routes: 422
 Canonical hash: sha256:4e7570b6fab88a8178a01ae280a36d98787573b376440b891491f25469458798
 Canonical file count: 466
 ```
+
+## Completed cross-registry Ledger Series Phase 9 adapter deployment lane
+
+Accepted exact-main production evidence:
+
+```text
+Verified main: bd84caf11e2decd0250260bbfe2551e42b6a955f
+Production run: 32325360838 — success
+Production job: 96295386599 — success
+Series records: 119
+Published Series JSON: 121
+Production Series equality: 121 / 121
+Global keys unique: 119 / 119
+Representative human routes: success
+Canonical delta: 0
+Schema/taxonomy delta: 0
+UI/Search/Compare/Stats behavior delta: 0
+```
+
+The accepted Series deployment exposes only the official-origin canonical projection:
+
+```text
+/data/series/registry.json
+/data/series/index.json
+/data/series/records/{slug}.json
+```
+
+All 119 envelopes preserve the native reviewed stablecoin dossier losslessly. Typed Series relationships are intentionally not inferred during Stage 3. The legacy host remains migration-only and is not a Series canonical origin. These deployment properties are regression contracts, not standing authority for further Series expansion.
 
 ## Completed Ledger Series Phase 3 deployment lane
 
@@ -128,7 +157,7 @@ The workflow may consume an existing GitHub Actions environment variable or secr
 
 ## Official-origin contract
 
-The only official public origin is `https://www.stableorgone.com`. Canonical/hreflang, OGP/Twitter, JSON-LD, version/manifest, llms/ai, robots, sitemap, and production verification must use the official origin. `config/public-origin.mjs` remains the repository source for origin consumers.
+The only official public origin is `https://www.stableorgone.com`. Canonical/hreflang, OGP/Twitter, JSON-LD, version/manifest, llms/ai, robots, sitemap, production verification, and Series canonical URLs must use the official origin. `config/public-origin.mjs` remains the repository source for origin consumers.
 
 ## Legacy-host migration
 
@@ -149,8 +178,8 @@ Core CI continues to run `node scripts/audit-stablecoin-logo-coverage.mjs` on ev
 
 ## Infrastructure boundary
 
-Separate reviewed authority remains required for DNS/domain changes, redirect implementation replacement, Cloudflare account changes, destructive schema migrations, mass deletion, major route removal, emergency rollback, canonical/schema mutation, or new lifecycle/search/Compare/Stats expansion.
+Separate reviewed authority remains required for DNS/domain changes, redirect implementation replacement, Cloudflare account changes, destructive schema migrations, mass deletion, major route removal, emergency rollback, canonical/schema mutation, new lifecycle/search/Compare/Stats expansion, or Series expansion/typed relationship promotion.
 
 ## REVIEW_GATE
 
-No new implementation is authorized after the Ledger Series Phase 3 closeout. A fresh reviewed authority is required before canonical, archive, Market Access, route-family, UI, lifecycle, DNS, analytics-identity, or other substantive implementation work begins.
+No new implementation is authorized after the Ledger Series Phase 9 adapter closeout. A fresh reviewed authority is required before canonical, archive, Market Access, route-family, UI, lifecycle, Series, DNS, analytics-identity, or other substantive implementation work begins.
