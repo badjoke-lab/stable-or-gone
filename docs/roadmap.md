@@ -1,6 +1,6 @@
 # Stable or Gone Roadmap
 
-Updated: 2026-08-19  
+Updated: 2026-08-20  
 Status: REVIEW_GATE
 
 ## Current repository checkpoint
@@ -8,7 +8,7 @@ Status: REVIEW_GATE
 ```text
 Current stage: REVIEW_GATE
 Active implementation authority: none
-Current closeout contract: config/ledger-series-phase3-closeout.json
+Current closeout contract: config/ledger-series-phase9-closeout.json
 Canonical stable assets: 119
 Organizations: 109
 Relationships: 131
@@ -29,6 +29,46 @@ DNS / Cloudflare account mutation authorized: no
 New GA4 property / Measurement ID creation authorized: no
 Automatic continuation: false
 ```
+
+## Completed cross-registry Ledger Series Phase 9 adapter lane
+
+Authority and closeout lineage:
+
+```text
+config/ledger-series-phase9-authority.json
+docs/roadmap-amendments/2026-08-20-ledger-series-phase9-authority.md
+config/ledger-series-phase9-closeout.json
+```
+
+Execution result:
+
+```text
+Authority from REVIEW_GATE: complete
+Native machine-contract audit: complete
+Series descriptor/index: complete
+119 stablecoin Series envelopes: complete
+Lossless native-dossier parity validation: complete
+Existing SOG regression gates: complete
+Exact-main production Series verification: complete
+Documentation/status synchronization and REVIEW_GATE restoration: complete after closeout merge
+```
+
+Accepted exact-main public evidence:
+
+```text
+Verified main: bd84caf11e2decd0250260bbfe2551e42b6a955f
+Production run: 32325360838 — success
+Production job: 96295386599 — success
+Series records: 119
+Series JSON production equality: 121 / 121
+Global keys unique: 119 / 119
+Representative human routes: success
+Canonical delta: 0
+Schema/taxonomy delta: 0
+UI/Search/Compare/Stats behavior delta: 0
+```
+
+The Series adapter is an additive canonical-only machine projection over the existing native stablecoin dossiers. It preserves native records, related records, events, evidence, provenance, unknowns, and verification fields without reinterpretation. Typed Series relationship inference remains deferred and is not authorized from REVIEW_GATE.
 
 ## Completed Ledger Series Phase 3 lane
 
@@ -124,6 +164,7 @@ new Evidence identities/relations: not authorized
 new unrelated route family: not authorized
 new lifecycle/search/filter expansion: not authorized
 new Compare or Stats expansion: not authorized
+new Series expansion / typed relationship promotion: not authorized
 ranking/scoring/recommendation: not authorized
 unrelated UI/CSS redesign: not authorized
 DNS / Cloudflare account mutation: not authorized
@@ -156,6 +197,7 @@ The following continue unchanged:
 - no runtime remote logo fetching;
 - accepted Compare interaction behavior;
 - accepted Phase 3 machine-readable/filter/Compare/Stats contracts;
+- accepted Phase 9 `/data/series/` descriptor/index/119-envelope contract;
 - material-public-UI regression review under `docs/ui-v3-remediation-authority.md`;
 - official-origin and legacy-host deployment contracts.
 
@@ -172,6 +214,9 @@ PR #571 — Phase 3 structured lifecycle/depeg-recovery filters
 PR #572 — Phase 3 Compare lifecycle aftermath extension
 PR #573 — Phase 3 lifecycle-quality Stats
 PR #574 — Phase 3 exact-main production cross-surface verification
+PR #578 — cross-registry Ledger Series Phase 9 adapter authority
+PR #579 — Phase 9 SOG Series adapter implementation
+PR #580 — Phase 9 exact-main production verifier, closed without merge after acceptance
 ```
 
 Historical lineage remains useful for audit and regression context, not as standing implementation authority.
