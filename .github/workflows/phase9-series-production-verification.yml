@@ -44,74 +44,79 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          node <<'NODE'
+          node --input-type=commonjs <<'NODE'
           const fs = require('fs');
           const path = require('path');
           const assert = require('assert/strict');
 
-          const origin = 'https://www.stableorgone.com';
-          const expectedCommit = 'bd84caf11e2decd0250260bbfe2551e42b6a955f';
-          const dist = path.resolve('dist');
+          (async () => {
+            const origin = 'https://www.stableorgone.com';
+            const expectedCommit = 'bd84caf11e2decd0250260bbfe2551e42b6a955f';
+            const dist = path.resolve('dist');
 
-          const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-          const readJson = (rel) => JSON.parse(fs.readFileSync(path.join(dist, rel), 'utf8'));
-          const listSeries = () => {
-            const recordsDir = path.join(dist, 'data', 'series', 'records');
-            const records = fs.readdirSync(recordsDir)
-              .filter((name) => name.endsWith('.json'))
-              .sort()
-              .map((name) => `data/series/records/${name}`);
-            return ['data/series/registry.json', 'data/series/index.json', ...records];
-          };
-          async function fetchJson(rel, attempts = 5) {
-            let last;
-            for (let i = 1; i <= attempts; i++) {
-              try {
-                const response = await fetch(`${origin}/${rel}`, { headers: { 'cache-control': 'no-cache' } });
-                if (!response.ok) throw new Error(`${response.status} ${response.statusText}`);
-                return await response.json();
-              } catch (error) {
-                last = error;
-                if (i < attempts) await sleep(4000);
+            const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+            const readJson = (rel) => JSON.parse(fs.readFileSync(path.join(dist, rel), 'utf8'));
+            const listSeries = () => {
+              const recordsDir = path.join(dist, 'data', 'series', 'records');
+              const records = fs.readdirSync(recordsDir)
+                .filter((name) => name.endsWith('.json'))
+                .sort()
+                .map((name) => `data/series/records/${name}`);
+              return ['data/series/registry.json', 'data/series/index.json', ...records];
+            };
+            async function fetchJson(rel, attempts = 5) {
+              let last;
+              for (let i = 1; i <= attempts; i++) {
+                try {
+                  const response = await fetch(`${origin}/${rel}`, { headers: { 'cache-control': 'no-cache' } });
+                  if (!response.ok) throw new Error(`${response.status} ${response.statusText}`);
+                  return await response.json();
+                } catch (error) {
+                  last = error;
+                  if (i < attempts) await sleep(4000);
+                }
               }
+              throw new Error(`${rel}: ${last?.message || last}`);
             }
-            throw new Error(`${rel}: ${last?.message || last}`);
-          }
 
-          let productionDescriptor;
-          for (let attempt = 1; attempt <= 18; attempt++) {
-            try {
-              productionDescriptor = await fetchJson('data/series/registry.json', 1);
-              if (productionDescriptor?.verification?.build?.commit === expectedCommit) break;
-            } catch {}
-            productionDescriptor = null;
-            await sleep(5000);
-          }
-          if (!productionDescriptor) throw new Error('production descriptor did not converge to exact merged main');
+            let productionDescriptor;
+            for (let attempt = 1; attempt <= 18; attempt++) {
+              try {
+                productionDescriptor = await fetchJson('data/series/registry.json', 1);
+                if (productionDescriptor?.verification?.build?.commit === expectedCommit) break;
+              } catch {}
+              productionDescriptor = null;
+              await sleep(5000);
+            }
+            if (!productionDescriptor) throw new Error('production descriptor did not converge to exact merged main');
 
-          const localDescriptor = readJson('data/series/registry.json');
-          assert.deepStrictEqual(productionDescriptor, localDescriptor, 'production descriptor differs from exact-main build');
-          assert.equal(productionDescriptor.record_counts.primary_records, 119);
-          assert.equal(productionDescriptor.record_counts.series_records, 119);
-          assert.equal(productionDescriptor.routes.search, '/stablecoins/');
-          assert.equal(productionDescriptor.routes.compare, '/compare/');
-          assert.equal(productionDescriptor.routes.stats, '/stats/');
+            const localDescriptor = readJson('data/series/registry.json');
+            assert.deepStrictEqual(productionDescriptor, localDescriptor, 'production descriptor differs from exact-main build');
+            assert.equal(productionDescriptor.record_counts.primary_records, 119);
+            assert.equal(productionDescriptor.record_counts.series_records, 119);
+            assert.equal(productionDescriptor.routes.search, '/stablecoins/');
+            assert.equal(productionDescriptor.routes.compare, '/compare/');
+            assert.equal(productionDescriptor.routes.stats, '/stats/');
 
-          const files = listSeries();
-          assert.equal(files.length, 121, `expected 121 Series JSON files, found ${files.length}`);
-          for (const rel of files.slice(1)) {
-            const local = readJson(rel);
-            const remote = await fetchJson(rel);
-            assert.deepStrictEqual(remote, local, `${rel}: production differs from exact-main build`);
-          }
+            const files = listSeries();
+            assert.equal(files.length, 121, `expected 121 Series JSON files, found ${files.length}`);
+            for (const rel of files.slice(1)) {
+              const local = readJson(rel);
+              const remote = await fetchJson(rel);
+              assert.deepStrictEqual(remote, local, `${rel}: production differs from exact-main build`);
+            }
 
-          const index = readJson('data/series/index.json');
-          assert.equal(index.records.length, 119);
-          assert.equal(new Set(index.records.map((row) => row.global_record_key)).size, 119);
+            const index = readJson('data/series/index.json');
+            assert.equal(index.records.length, 119);
+            assert.equal(new Set(index.records.map((row) => row.global_record_key)).size, 119);
 
-          console.log(`SOG Series production equality passed for ${files.length} JSON files.`);
-          console.log(`Exact merged main: ${expectedCommit}`);
-          console.log(`Series records: ${index.records.length}`);
+            console.log(`SOG Series production equality passed for ${files.length} JSON files.`);
+            console.log(`Exact merged main: ${expectedCommit}`);
+            console.log(`Series records: ${index.records.length}`);
+          })().catch((error) => {
+            console.error(error);
+            process.exit(1);
+          });
           NODE
 
       - name: Verify representative human routes
