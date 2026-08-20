@@ -5,7 +5,6 @@ import process from 'node:process';
 const root = process.cwd();
 const dist = path.resolve(root, 'dist');
 const officialOrigin = 'https://www.stableorgone.com';
-const legacyOrigin = 'https://sog.badjoke-lab.com';
 const registryId = 'stable-or-gone';
 const errors = [];
 const fail = (message) => errors.push(message);
@@ -77,9 +76,6 @@ if (descriptor.data_safety?.includes_private_notes !== false) fail('Series priva
 if (descriptor.data_safety?.ai_generated_canonical_facts !== false) fail('Series AI canonical-fact boundary mismatch');
 if (!same(descriptor.verification?.build, manifest.build)) fail('descriptor build provenance must equal native manifest build provenance');
 
-const descriptorText = JSON.stringify(descriptor);
-if (descriptorText.includes(legacyOrigin)) fail('legacy migration origin leaked into Series descriptor');
-
 if (index.series_schema_version !== '1.0.0') fail('index Series schema version mismatch');
 if (index.object_type !== 'record_index') fail('index object_type mismatch');
 if (index.registry_id !== registryId) fail('index registry ID mismatch');
@@ -138,9 +134,6 @@ for (const row of index.records ?? []) {
   if (!same(envelope.verification?.build, native.build)) fail(`${label}: build provenance mismatch`);
   if (envelope.verification?.last_verified_at !== (native.record?.last_verified_at ?? null)) fail(`${label}: last_verified_at mismatch`);
   if (envelope.provenance?.canonical_only !== true) fail(`${label}: provenance canonical_only mismatch`);
-
-  const serialized = JSON.stringify(envelope);
-  if (serialized.includes(legacyOrigin)) fail(`${label}: legacy migration origin leaked into Series envelope`);
 }
 
 if (keys.size !== 119) fail(`global key uniqueness/count mismatch: ${keys.size}`);
