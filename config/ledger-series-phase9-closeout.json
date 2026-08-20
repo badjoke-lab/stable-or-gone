@@ -1,0 +1,71 @@
+{
+  "schema_version": "1.0",
+  "closeout_id": "sog_ledger_series_phase9_adapter_closeout_2026_08_20",
+  "status": "complete_after_merge",
+  "repository_stage_after_merge": "REVIEW_GATE",
+  "active_implementation_authority_after_merge": null,
+  "parent_authority": "config/ledger-series-phase9-authority.json",
+  "authority_pr": 578,
+  "implementation_pr": 579,
+  "production_verifier_pr": 580,
+  "verified_main_commit": "bd84caf11e2decd0250260bbfe2551e42b6a955f",
+  "production_run_id": 32325360838,
+  "production_job_id": 96295386599,
+  "production_result": "success",
+  "official_public_origin": "https://www.stableorgone.com",
+  "canonical_hash": "sha256:4e7570b6fab88a8178a01ae280a36d98787573b376440b891491f25469458798",
+  "canonical_file_count": 466,
+  "canonical_delta": 0,
+  "schema_taxonomy_delta": 0,
+  "ui_delta": 0,
+  "search_compare_stats_delta": 0,
+  "series_adapter": {
+    "schema_version": "1.0.0",
+    "primary_records": 119,
+    "series_records": 119,
+    "published_json_files": 121,
+    "descriptor": "/data/series/registry.json",
+    "index": "/data/series/index.json",
+    "record_template": "/data/series/records/{slug}.json",
+    "native_dossier_template": "/data/stablecoin/{slug}.json",
+    "search_route": "/stablecoins/",
+    "compare_route": "/compare/",
+    "stats_route": "/stats/",
+    "global_keys_unique": true,
+    "native_dossiers_preserved_losslessly": true,
+    "typed_series_relationships_emitted": false
+  },
+  "premerge_evidence": {
+    "series_ci_run": 32324849496,
+    "core_ci_run": 32324849720,
+    "domain_migration_run": 32324849579,
+    "series_ci_result": "success",
+    "core_ci_result": "success",
+    "domain_migration_result": "success"
+  },
+  "production_verification": {
+    "descriptor_converged_to_verified_main": true,
+    "series_json_exact_equality": "121/121",
+    "global_keys_unique": "119/119",
+    "representative_human_routes": [
+      "/stablecoins/",
+      "/compare/",
+      "/stats/",
+      "/stablecoin/usdt/",
+      "/stablecoin/ust/"
+    ],
+    "representative_human_routes_result": "success"
+  },
+  "results": [
+    "fresh_reviewed_authority_merged_before_adapter_implementation",
+    "native_machine_contract_reused_without_parallel_canonical_logic",
+    "series_descriptor_index_and_119_record_envelopes_completed",
+    "lossless_native_dossier_mapping_validated",
+    "typed_series_relationship_inference_deferred",
+    "existing_phase3_and_domain_migration_regressions_remained_green",
+    "exact_main_production_series_verification_completed",
+    "canonical_hash_file_count_and_record_counts_unchanged"
+  ],
+  "automatic_continuation": false,
+  "next_work_rule": "A fresh reviewed authority is required before any new canonical, archive, Market Access, route-family, UI, lifecycle, analytics-identity, DNS, infrastructure, or Series expansion begins."
+}
