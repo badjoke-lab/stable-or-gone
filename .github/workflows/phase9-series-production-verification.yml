@@ -1,0 +1,124 @@
+name: Verify SOG Phase 9 Series Production
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/phase9-series-production-verification.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  verify-production:
+    if: github.head_ref == 'agent/phase9-series-production-verification'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact merged main
+        uses: actions/checkout@v7
+        with:
+          ref: bd84caf11e2decd0250260bbfe2551e42b6a955f
+          fetch-depth: 1
+
+      - name: Setup Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: 22
+
+      - name: Install locked dependencies
+        run: npm ci
+
+      - name: Build and validate exact merged main
+        shell: bash
+        run: |
+          set -euo pipefail
+          SOURCE_TIMESTAMP="$(git show -s --format=%cI HEAD)"
+          SOURCE_EPOCH="$(git show -s --format=%ct HEAD)"
+          SOG_BUILD_COMMIT="bd84caf11e2decd0250260bbfe2551e42b6a955f" \
+          SOG_BUILD_BRANCH="main" \
+          SOG_BUILD_TIMESTAMP="$SOURCE_TIMESTAMP" \
+          SOURCE_DATE_EPOCH="$SOURCE_EPOCH" \
+          npm run build
+          node scripts/validate-ledger-series-phase9-adapter.mjs
+
+      - name: Verify complete Series layer on production
+        shell: bash
+        run: |
+          set -euo pipefail
+          node <<'NODE'
+          const fs = require('fs');
+          const path = require('path');
+          const assert = require('assert/strict');
+
+          const origin = 'https://www.stableorgone.com';
+          const expectedCommit = 'bd84caf11e2decd0250260bbfe2551e42b6a955f';
+          const dist = path.resolve('dist');
+
+          const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+          const readJson = (rel) => JSON.parse(fs.readFileSync(path.join(dist, rel), 'utf8'));
+          const listSeries = () => {
+            const recordsDir = path.join(dist, 'data', 'series', 'records');
+            const records = fs.readdirSync(recordsDir)
+              .filter((name) => name.endsWith('.json'))
+              .sort()
+              .map((name) => `data/series/records/${name}`);
+            return ['data/series/registry.json', 'data/series/index.json', ...records];
+          };
+          async function fetchJson(rel, attempts = 5) {
+            let last;
+            for (let i = 1; i <= attempts; i++) {
+              try {
+                const response = await fetch(`${origin}/${rel}`, { headers: { 'cache-control': 'no-cache' } });
+                if (!response.ok) throw new Error(`${response.status} ${response.statusText}`);
+                return await response.json();
+              } catch (error) {
+                last = error;
+                if (i < attempts) await sleep(4000);
+              }
+            }
+            throw new Error(`${rel}: ${last?.message || last}`);
+          }
+
+          let productionDescriptor;
+          for (let attempt = 1; attempt <= 18; attempt++) {
+            try {
+              productionDescriptor = await fetchJson('data/series/registry.json', 1);
+              if (productionDescriptor?.verification?.build?.commit === expectedCommit) break;
+            } catch {}
+            productionDescriptor = null;
+            await sleep(5000);
+          }
+          if (!productionDescriptor) throw new Error('production descriptor did not converge to exact merged main');
+
+          const localDescriptor = readJson('data/series/registry.json');
+          assert.deepStrictEqual(productionDescriptor, localDescriptor, 'production descriptor differs from exact-main build');
+          assert.equal(productionDescriptor.record_counts.primary_records, 119);
+          assert.equal(productionDescriptor.record_counts.series_records, 119);
+          assert.equal(productionDescriptor.routes.search, '/stablecoins/');
+          assert.equal(productionDescriptor.routes.compare, '/compare/');
+          assert.equal(productionDescriptor.routes.stats, '/stats/');
+
+          const files = listSeries();
+          assert.equal(files.length, 121, `expected 121 Series JSON files, found ${files.length}`);
+          for (const rel of files.slice(1)) {
+            const local = readJson(rel);
+            const remote = await fetchJson(rel);
+            assert.deepStrictEqual(remote, local, `${rel}: production differs from exact-main build`);
+          }
+
+          const index = readJson('data/series/index.json');
+          assert.equal(index.records.length, 119);
+          assert.equal(new Set(index.records.map((row) => row.global_record_key)).size, 119);
+
+          console.log(`SOG Series production equality passed for ${files.length} JSON files.`);
+          console.log(`Exact merged main: ${expectedCommit}`);
+          console.log(`Series records: ${index.records.length}`);
+          NODE
+
+      - name: Verify representative human routes
+        shell: bash
+        run: |
+          set -euo pipefail
+          for path in /stablecoins/ /compare/ /stats/ /stablecoin/usdt/ /stablecoin/ust/; do
+            curl --fail --silent --show-error --location --retry 4 --retry-delay 3 --output /dev/null "https://www.stableorgone.com${path}"
+            echo "PASS ${path}"
+          done
