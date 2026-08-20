@@ -1,7 +1,7 @@
 # Stable or Gone Specification Governance
 
 Status: canonical governance specification  
-Updated: 2026-08-19
+Updated: 2026-08-20
 
 ## 1. Authority rule
 
@@ -24,7 +24,7 @@ Authority order:
 ```text
 Current stage: REVIEW_GATE
 Active implementation authority: none
-Current closeout contract: config/ledger-series-phase3-closeout.json
+Current closeout contract: config/ledger-series-phase9-closeout.json
 Canonical delta authorized: 0
 Canonical archive additions authorized: 0
 Canonical Market Access promotion authorized: false
@@ -33,6 +33,7 @@ New unrelated public route family authorized: false
 New lifecycle/search/filter expansion authorized: false
 New Compare expansion authorized: false
 New Stats expansion authorized: false
+New Series expansion / typed relationship promotion authorized: false
 Ranking / scoring / recommendation authorized: false
 DNS / Cloudflare account mutation authorized: false
 New GA4 property / Measurement ID creation authorized: false
@@ -69,7 +70,46 @@ Canonical file count: 466
 Canonical delta authorized: 0
 ```
 
-## 4. Completed Ledger Series Phase 3 authority
+## 4. Completed cross-registry Ledger Series Phase 9 adapter authority
+
+The reviewed implementation authority and closeout are historical lineage:
+
+```text
+config/ledger-series-phase9-authority.json
+docs/roadmap-amendments/2026-08-20-ledger-series-phase9-authority.md
+config/ledger-series-phase9-closeout.json
+```
+
+Accepted sequence:
+
+```text
+fresh authority from REVIEW_GATE: complete
+-> native machine contract confirmation: complete
+-> Series descriptor/index/119 envelopes: complete
+-> deterministic Series validation and existing regression gates: complete
+-> exact-head merge: complete
+-> exact-main production verification: complete
+-> closeout to REVIEW_GATE: complete after closeout merge
+```
+
+Accepted exact-main evidence:
+
+```text
+Verified main: bd84caf11e2decd0250260bbfe2551e42b6a955f
+Production run: 32325360838 — success
+Production job: 96295386599 — success
+Series records: 119
+Series JSON production equality: 121 / 121
+Global keys unique: 119 / 119
+Representative human routes: success
+Canonical delta: 0
+Schema/taxonomy delta: 0
+UI/Search/Compare/Stats behavior delta: 0
+```
+
+The accepted `/data/series/` layer is an additive canonical-only projection over the existing reviewed native dossiers. It does not replace the native SOG data model, does not authorize canonical mutation, and does not infer typed Series relationships during Stage 3. This behavior is an enduring regression contract, not standing authority for further Series expansion.
+
+## 5. Completed Ledger Series Phase 3 authority
 
 The reviewed implementation authority and closeout are historical lineage:
 
@@ -106,7 +146,7 @@ Schema/taxonomy delta: 0
 
 The accepted Phase 3 machine-readable, filter, Compare, Stats, and production-verification behavior is an enduring regression contract. It is not standing authority for additional product expansion.
 
-## 5. Completed SEO / GA4 migration audit
+## 6. Completed SEO / GA4 migration audit
 
 The bounded authority package is historical lineage:
 
@@ -134,7 +174,7 @@ The official public origin remains `https://www.stableorgone.com`. The legacy ho
 
 Google Search Console ownership, Change of Address, sitemap submission, and GA4 account administration outside the existing build variable are account-side state and are not proven by repository evidence alone.
 
-## 6. Accepted Stablecoin mark state
+## 7. Accepted Stablecoin mark state
 
 ```text
 Canonical Stablecoins: 119
@@ -145,17 +185,19 @@ Last reviewed promotions: mnee, usdgo, usr
 Remote runtime image fetching: false
 ```
 
-## 7. Permanent future-growth logo rule
+## 8. Permanent future-growth logo rule
 
 `docs/quality/stablecoin-logo-disposition-operating-spec.md` remains binding. Core CI must continue to block canonical stablecoin growth that lacks an explicit reviewed logo disposition. A neutral fallback is valid; missing disposition is not.
 
-## 8. Enduring Compare and Phase 3 regression contracts
+## 9. Enduring Compare, Phase 3, and Series regression contracts
 
 Accepted Compare behavior remains binding: matching-row feedback, 2–4 selection behavior, URL/history restoration, explicit unknown states, StablecoinMark reuse, and bounded mobile scrolling must not regress.
 
 The reviewed Phase 3 per-asset JSON, Event lifecycle / Depeg recovery filters, lifecycle Compare fields, lifecycle-quality Stats, and production cross-surface verifier also remain binding regression contracts unless a future reviewed authority explicitly changes them.
 
-## 9. Work-start rule from REVIEW_GATE
+The accepted Series descriptor, index, and 119 stablecoin envelopes must remain canonical-only, official-origin-only, lossless over the native dossier, and free of inferred typed Series relationships unless a future reviewed authority explicitly changes that contract.
+
+## 10. Work-start rule from REVIEW_GATE
 
 Before substantive new work:
 
@@ -163,9 +205,9 @@ Before substantive new work:
 2. Read `docs/ai-era-registry-spec.md`, `docs/ai-era-execution-schedule.md`, the permanent operating specifications, and enduring regression authorities relevant to the proposed work.
 3. Audit the existing public/data surface before proposing a parallel implementation.
 4. Create and merge a fresh reviewed authority defining scope, canonical/public boundaries, acceptance evidence, and closeout behavior.
-5. Do not infer authority from historical Phase 3 permissions, chat instructions, old PRs, or stale branches.
+5. Do not infer authority from historical Phase 3 or Phase 9 permissions, chat instructions, old PRs, or stale branches.
 
-## 10. Canonical/public safety at REVIEW_GATE
+## 11. Canonical/public safety at REVIEW_GATE
 
 ```text
 canonical_only = true
@@ -176,6 +218,7 @@ canonical Market Access promotion authorized = false
 additional logo promotions authorized = false
 new unrelated public route families authorized = false
 new lifecycle/search/filter/Compare/Stats expansion authorized = false
+new Series expansion / typed relationship promotion authorized = false
 ranking / scoring / recommendation authorized = false
 DNS / Cloudflare account mutation authorized = false
 new GA4 property / Measurement ID creation authorized = false
