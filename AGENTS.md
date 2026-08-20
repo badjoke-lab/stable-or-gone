@@ -8,7 +8,7 @@ This file is the mandatory entry point for humans, AI agents, and automation wor
 Repository state: REVIEW_GATE
 Current stage: REVIEW_GATE
 Active implementation authority: none
-Current closeout contract: config/ledger-series-phase3-closeout.json
+Current closeout contract: config/ledger-series-phase9-closeout.json
 Automatic continuation: false
 Official public origin: https://www.stableorgone.com
 Legacy migration origin: https://sog.badjoke-lab.com
@@ -50,6 +50,39 @@ Archive not recorded: 114
 Detail routes: 422
 Metadata-checked routes: 422
 ```
+
+## Completed cross-registry Ledger Series Phase 9 adapter lane
+
+The reviewed SOG adapter authority is historical lineage after closeout:
+
+```text
+config/ledger-series-phase9-authority.json
+docs/roadmap-amendments/2026-08-20-ledger-series-phase9-authority.md
+config/ledger-series-phase9-closeout.json
+```
+
+Accepted result:
+
+```text
+Authority PR: #578 — merged before implementation
+Implementation PR: #579 — merged
+Production verifier PR: #580 — closed without merge after acceptance
+Verified main: bd84caf11e2decd0250260bbfe2551e42b6a955f
+Production run: 32325360838 — success
+Production job: 96295386599 — success
+Series descriptor/index: complete
+Series record envelopes: 119 / 119
+Series JSON production equality: 121 / 121
+Global keys unique: 119 / 119
+Representative human routes: success
+Canonical delta: 0
+Schema/taxonomy delta: 0
+UI/Search/Compare/Stats behavior delta: 0
+```
+
+The enduring Phase 9 result is a canonical-only `/data/series/` projection over the existing 119 reviewed native stablecoin dossiers. Native dossier facts, events, evidence, provenance, unknowns, and canonical hash remain authoritative. Stage 3 emits no inferred typed Series relationships. Future relationship promotion or Series expansion requires separate reviewed authority.
+
+Issue #479 records the production evidence. Cross-registry coordination evidence is also recorded in `badjoke-lab/historical-exchange-index#780`.
 
 ## Completed Ledger Series Phase 3 lane
 
@@ -121,6 +154,8 @@ PR #500 — deepened the bounded MNEE Evidence/archive/control review without fo
 PR #517 — added complete canonical Bison Bank EUB/USB records and established the 119-asset / 186-deployment checkpoint lineage
 PR #565 — recorded SEO / GA4 migration exact-main acceptance evidence
 PR #567 — authorized Ledger Series Phase 3 lifecycle strengthening
+PR #578 — authorized the cross-registry Ledger Series Phase 9 SOG adapter
+PR #579 — implemented the Phase 9 SOG Series adapter
 ```
 
 ## Current Stablecoin mark contract
@@ -141,7 +176,7 @@ Core `.github/workflows/ci.yml` runs `node scripts/audit-stablecoin-logo-coverag
 
 A neutral fallback is valid. Missing disposition is not.
 
-## Enduring Compare and Phase 3 public behavior
+## Enduring Compare, Phase 3, and Series adapter behavior
 
 Accepted Compare behavior remains a regression contract:
 
@@ -158,6 +193,8 @@ remote runtime fetch: none
 Do not regress 2–4 selection, fifth-selection rejection, URL order/history restoration, explicit `Unknown` / `Not recorded`, bounded mobile matrix scrolling, or accepted Compare dock/footer behavior.
 
 Do not regress the reviewed Phase 3 deterministic per-asset JSON, Event lifecycle / Depeg recovery filters, six lifecycle Compare fields, lifecycle-quality Stats, or production cross-surface verifier without a separately reviewed change.
+
+Do not regress the accepted `/data/series/registry.json`, `/data/series/index.json`, or 119 `/data/series/records/{slug}.json` envelopes. Series outputs must remain canonical-only, official-origin-only, lossless over the native dossier, and free of inferred typed relationships unless a future reviewed authority explicitly changes that contract.
 
 ## Required work-start protocol from REVIEW_GATE
 
@@ -181,6 +218,7 @@ stable-asset additions/deletions
 schema/taxonomy change
 additional logo promotion
 new unrelated public route family
+Series expansion or typed relationship promotion
 ranking / scoring / recommendation
 unrelated sitewide redesign
 new lifecycle/search/Compare/Stats expansion
