@@ -92,13 +92,13 @@ jobs:
           SOG_BUILD_BRANCH: main
           SOG_BUILD_TIMESTAMP: ${{ steps.source.outputs.timestamp }}
           SOURCE_DATE_EPOCH: ${{ steps.source.outputs.epoch }}
-          PUBLIC_GA_MEASUREMENT_ID: ${{ vars.PUBLIC_GA_MEASUREMENT_ID || secrets.PUBLIC_GA_MEASUREMENT_ID }}
+          PUBLIC_GA_MEASUREMENT_ID: G-L27LGVRN22
         run: npm run build
 
       - name: Verify GA4 static-build output
         id: ga4
         env:
-          PUBLIC_GA_MEASUREMENT_ID: ${{ vars.PUBLIC_GA_MEASUREMENT_ID || secrets.PUBLIC_GA_MEASUREMENT_ID }}
+          PUBLIC_GA_MEASUREMENT_ID: G-L27LGVRN22
         run: |
           node scripts/verify-ga4-build-output.mjs
           if [ -n "$PUBLIC_GA_MEASUREMENT_ID" ]; then
