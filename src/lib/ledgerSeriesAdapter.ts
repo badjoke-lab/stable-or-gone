@@ -1,3 +1,4 @@
+import { createHash } from 'node:crypto';
 import { getStablecoins } from './data/registry';
 import { getStablecoinRecordDossier } from './stablecoinRecordData';
 import { DATA_SAFETY, PROJECT, getBuildMetadata } from './machine-readable';
@@ -8,9 +9,32 @@ export const LEDGER_SERIES_REGISTRY_ID = 'stable-or-gone';
 
 const recordPath = (slug: string) => `/data/series/records/${slug}.json`;
 const absolute = (route: string) => `${PROJECT.canonicalOrigin}${route}`;
+const REVIEWED_RELATIONSHIP = [
+  'predecessor_of',
+  'stable-or-gone:stablecoin:sog_st_sai',
+  'stable-or-gone:stablecoin:sog_st_dai',
+] as const;
 
 function sortedStablecoins() {
   return [...getStablecoins()].sort((left, right) => left.id.localeCompare(right.id));
+}
+
+function parseGlobalKey(globalKey: string) {
+  const parts = globalKey.split(':');
+  if (parts.length !== 3 || parts.some((part) => !part)) {
+    throw new Error(`Invalid Ledger Series global key: ${globalKey}`);
+  }
+  return {
+    registry_id: parts[0],
+    native_record_type: parts[1],
+    native_record_id: parts[2],
+  };
+}
+
+function relationshipId(relationType: string, sourceGlobalKey: string, targetGlobalKey: string) {
+  return `series_rel_${createHash('sha256')
+    .update(`${relationType}\n${sourceGlobalKey}\n${targetGlobalKey}`, 'utf8')
+    .digest('hex')}`;
 }
 
 export function getLedgerSeriesRecordEnvelope(slug: string) {
@@ -71,7 +95,7 @@ export function getLedgerSeriesRecordEnvelope(slug: string) {
       },
       native_manifest: absolute('/data/manifest.json'),
       native_record: dossier.self_url,
-      relationship_boundary: 'native stable-asset and organization relationships are preserved inside current_state.native.related but are not promoted to typed Series relationships during Stage 3',
+      relationship_boundary: 'native relationships remain preserved inside current_state.native.related; the single reviewed Stage 5 typed relationship is published only as a standalone relationship_record',
     },
   };
 }
@@ -112,9 +136,36 @@ export function getLedgerSeriesIndex() {
   };
 }
 
+export function getLedgerSeriesRelationships() {
+  const index = getLedgerSeriesIndex();
+  const availableKeys = new Set(index.records.map((row) => row.global_record_key));
+  const [relationType, sourceGlobalKey, targetGlobalKey] = REVIEWED_RELATIONSHIP;
+  if (!availableKeys.has(sourceGlobalKey) || !availableKeys.has(targetGlobalKey)) {
+    throw new Error('Reviewed SOG Stage 5 relationship endpoint is missing from the Stage 3 Series index');
+  }
+  if (sourceGlobalKey === targetGlobalKey) {
+    throw new Error('Reviewed SOG Stage 5 relationship must not be a self-loop');
+  }
+
+  return [{
+    series_schema_version: LEDGER_SERIES_SCHEMA_VERSION,
+    object_type: 'relationship_record',
+    id: relationshipId(relationType, sourceGlobalKey, targetGlobalKey),
+    relation_type: relationType,
+    source: parseGlobalKey(sourceGlobalKey),
+    target: parseGlobalKey(targetGlobalKey),
+    direction: 'directed',
+    provenance: {
+      basis: 'native_reviewed_relationship',
+      native_evidence_refs: [],
+    },
+  }];
+}
+
 export function getLedgerSeriesRegistryDescriptor() {
   const build = getBuildMetadata();
   const recordCount = getStablecoins().length;
+  const relationshipCount = getLedgerSeriesRelationships().length;
 
   return {
     series_schema_version: LEDGER_SERIES_SCHEMA_VERSION,
@@ -137,6 +188,7 @@ export function getLedgerSeriesRegistryDescriptor() {
     record_counts: {
       primary_records: recordCount,
       series_records: recordCount,
+      relationships: relationshipCount,
     },
     record_types: [
       {
@@ -148,6 +200,7 @@ export function getLedgerSeriesRegistryDescriptor() {
     routes: {
       descriptor: '/data/series/registry.json',
       index: '/data/series/index.json',
+      relationships: '/data/series/relationships.json',
       record_template: '/data/series/records/{slug}.json',
       search: '/stablecoins/',
       compare: '/compare/',
