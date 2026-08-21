@@ -1,0 +1,28 @@
+name: Phase 9 Stage 5 Production Verification
+
+on:
+  pull_request:
+    paths:
+      - 'scripts/verify-stage5-production.mjs'
+      - '.github/workflows/phase9-stage5-production-verification.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-production:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Verify deployed Stage 5 relationship transport
+        env:
+          SOG_PRODUCTION_ORIGIN: https://www.stableorgone.com
+          SOG_STAGE5_PRODUCTION_ATTEMPTS: '20'
+          SOG_STAGE5_PRODUCTION_DELAY_MS: '15000'
+        run: node scripts/verify-stage5-production.mjs
