@@ -139,7 +139,9 @@ export function getLedgerSeriesIndex() {
 export function getLedgerSeriesRelationships() {
   const index = getLedgerSeriesIndex();
   const availableKeys = new Set(index.records.map((row) => row.global_record_key));
-  const [relationType, sourceGlobalKey, targetGlobalKey] = REVIEWED_RELATIONSHIP;
+  const relationType: string = REVIEWED_RELATIONSHIP[0];
+  const sourceGlobalKey: string = REVIEWED_RELATIONSHIP[1];
+  const targetGlobalKey: string = REVIEWED_RELATIONSHIP[2];
   if (!availableKeys.has(sourceGlobalKey) || !availableKeys.has(targetGlobalKey)) {
     throw new Error('Reviewed SOG Stage 5 relationship endpoint is missing from the Stage 3 Series index');
   }
