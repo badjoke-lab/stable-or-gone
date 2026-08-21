@@ -1,5 +1,11 @@
 ---
 import BrandLockup from '../components/BrandLockup.astro';
+
+const gaMeasurementId = String(import.meta.env.PUBLIC_GA_MEASUREMENT_ID || '').trim();
+const gaLoaderUrl = gaMeasurementId ? `https://www.google${'tagmanager'}.com/gtag/js?id=${gaMeasurementId}` : '';
+const gaInline = gaMeasurementId
+  ? `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${gaMeasurementId}');`
+  : '';
 ---
 <!doctype html>
 <html lang="en">
@@ -11,6 +17,8 @@ import BrandLockup from '../components/BrandLockup.astro';
     <title>Page not found — Stable or Gone</title>
     <meta name="description" content="The requested Stable or Gone page was not found." />
     <link rel="icon" href="/brand/sog-mark-on-light.svg" type="image/svg+xml" />
+    {gaLoaderUrl && <script async src={gaLoaderUrl}></script>}
+    {gaInline && <script set:html={gaInline} />}
   </head>
   <body>
     <main id="main-content" class="site-main">
