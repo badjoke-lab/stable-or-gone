@@ -1,0 +1,105 @@
+{
+  "schema_version": "1.0",
+  "authority_id": "sog_ledger_series_phase9_stage5_relationship_2026_08_21",
+  "status": "active_after_merge",
+  "entry_main_commit": "010689ef4e5a77f415091693d71b01e3e6c3f392",
+  "official_public_origin": "https://www.stableorgone.com",
+  "purpose": "Authorize one bounded SOG implementation of the cross-registry Ledger Series Phase 9 Stage 5 relationship layer already reviewed and authorized in badjoke-lab/historical-exchange-index Issue #780 / PRs #791 and #792. SOG may publish exactly one reviewed same-registry Series relationship_record, SAI predecessor_of DAI, without changing canonical data, schema/taxonomy, native dossier semantics, Search, Compare, Stats, UI, DNS, analytics identity, or deployment policy.",
+  "mandatory_references": [
+    "AGENTS.md",
+    "docs/spec-governance.md",
+    "docs/roadmap.md",
+    "docs/deployment-policy.md",
+    "docs/ai-era-registry-spec.md",
+    "docs/ai-era-execution-schedule.md",
+    "config/ledger-series-phase9-closeout.json",
+    "config/ledger-series-phase9-authority.json"
+  ],
+  "coordination": {
+    "issue": "badjoke-lab/historical-exchange-index#780",
+    "audit_pr": 791,
+    "audit_merge": "562419348b48bd7d3ab7e521c8a654e0cbe15413",
+    "publication_authority_pr": 792,
+    "publication_authority_merge": "6b4925d894908de6b043269405af794b60031f54"
+  },
+  "canonical_boundary": {
+    "stable_assets": 119,
+    "organizations": 109,
+    "relationships": 131,
+    "events": 194,
+    "evidence": 585,
+    "evidence_relations": 585,
+    "stable_asset_relationships": 5,
+    "canonical_hash": "sha256:4e7570b6fab88a8178a01ae280a36d98787573b376440b891491f25469458798",
+    "canonical_file_count": 466,
+    "canonical_delta_authorized": 0,
+    "schema_or_taxonomy_change_authorized": false
+  },
+  "series_relationship_contract": {
+    "schema_version": "1.0.0",
+    "object_type": "relationship_record",
+    "transport_path": "/data/series/relationships.json",
+    "record_envelope_relationship_arrays_remain_empty": true,
+    "descriptor_route": "/data/series/relationships.json",
+    "descriptor_relationship_count": 1,
+    "descriptor_relationship_capability": "adapter",
+    "direction": "directed",
+    "provenance_basis": "native_reviewed_relationship",
+    "id_algorithm": "series_rel_ + lowercase hex SHA-256 of UTF-8 relation_type + newline + source_global_record_key + newline + target_global_record_key"
+  },
+  "finite_allowlist": [
+    [
+      "predecessor_of",
+      "stable-or-gone:stablecoin:sog_st_sai",
+      "stable-or-gone:stablecoin:sog_st_dai"
+    ]
+  ],
+  "native_support": {
+    "relationship_id": "sog_ar_sai_predecessor_dai",
+    "reviewed_field": "current_state.native.related.stable_asset_relationships",
+    "mapping": "SAI predecessor_of DAI"
+  },
+  "scope": [
+    "emit_exactly_one_allowlisted_series_relationship_record",
+    "add_or_extend_deterministic_series_relationship_generation_and_validation",
+    "advertise_the_relationship_route_exact_count_and_adapter_capability_in_the_existing_series_descriptor",
+    "preserve_the_existing_119_series_record_envelopes_and_native_dossiers_without_typed_relationship_mutation",
+    "run_existing_sog_integrity_reproducible_build_phase3_domain_and_series_regression_gates",
+    "run_exact_main_production_verification_after_merge",
+    "record_acceptance_in_issue_479_and_cross_registry_issue_780",
+    "restore_review_gate_after_closeout"
+  ],
+  "forbidden": [
+    "canonical_registry_mutation",
+    "schema_or_taxonomy_change",
+    "additional_stable_asset_relationship_promotion",
+    "dynamic_relationship_discovery",
+    "yield_wrapper_or_redeemable_relationship_weakening_into_series_v1_types",
+    "cross_registry_relationship_publication",
+    "record_envelope_typed_relationship_mutation",
+    "search_filter_compare_stats_or_ui_expansion",
+    "new_html_route_family",
+    "dns_or_cloudflare_account_change",
+    "new_ga4_property_or_measurement_id_creation",
+    "automatic_continuation_beyond_closeout"
+  ],
+  "required_acceptance": [
+    "authority_is_merged_before_substantive_relationship_implementation",
+    "canonical_hash_file_count_and_record_counts_remain_unchanged",
+    "generated_relationship_count_is_exactly_one",
+    "generated_relationship_matches_the_finite_allowlist_exactly",
+    "both_endpoints_resolve_to_existing_stage3_series_record_global_keys",
+    "relationship_id_matches_the_deterministic_sha256_contract",
+    "existing_record_envelope_relationship_arrays_remain_empty",
+    "all_relevant_ci_integrity_reproducible_build_phase3_domain_and_series_gates_pass",
+    "exact_main_production_verification_passes_on_https://www.stableorgone.com",
+    "legacy_sog_host_remains_migration_only"
+  ],
+  "closeout": {
+    "restore_stage": "REVIEW_GATE",
+    "automatic_continuation": false,
+    "production_verification_required": true,
+    "deployment_record_issue": 479,
+    "cross_registry_coordination_issue": "badjoke-lab/historical-exchange-index#780"
+  }
+}
