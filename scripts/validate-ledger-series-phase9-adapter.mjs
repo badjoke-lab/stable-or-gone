@@ -1,3 +1,4 @@
+import { createHash } from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
@@ -6,6 +7,7 @@ const root = process.cwd();
 const dist = path.resolve(root, 'dist');
 const officialOrigin = 'https://www.stableorgone.com';
 const registryId = 'stable-or-gone';
+const authorityPath = path.join(root, 'config', 'ledger-series-phase9-stage5-relationship-authority.json');
 const errors = [];
 const fail = (message) => errors.push(message);
 
@@ -19,6 +21,19 @@ function readJson(relativePath) {
     return JSON.parse(fs.readFileSync(target, 'utf8'));
   } catch (error) {
     fail(`${relativePath}: invalid JSON: ${error.message}`);
+    return null;
+  }
+}
+
+function readAuthority() {
+  if (!fs.existsSync(authorityPath)) {
+    fail('Stage 5 relationship authority missing');
+    return null;
+  }
+  try {
+    return JSON.parse(fs.readFileSync(authorityPath, 'utf8'));
+  } catch (error) {
+    fail(`Stage 5 relationship authority invalid JSON: ${error.message}`);
     return null;
   }
 }
@@ -43,19 +58,38 @@ function listJsonFiles(dir) {
     .sort();
 }
 
+function endpointGlobalKey(endpoint) {
+  return `${endpoint?.registry_id}:${endpoint?.native_record_type}:${endpoint?.native_record_id}`;
+}
+
+function expectedRelationshipId(relationType, sourceGlobalKey, targetGlobalKey) {
+  return `series_rel_${createHash('sha256')
+    .update(`${relationType}\n${sourceGlobalKey}\n${targetGlobalKey}`, 'utf8')
+    .digest('hex')}`;
+}
+
 const manifest = readJson('data/manifest.json');
 const descriptor = readJson('data/series/registry.json');
 const index = readJson('data/series/index.json');
+const relationships = readJson('data/series/relationships.json');
+const authority = readAuthority();
 
-if (!manifest || !descriptor || !index) {
-  console.error('SOG Ledger Series Phase 9 adapter validation could not start because required output is missing.');
+if (!manifest || !descriptor || !index || !relationships || !authority) {
+  console.error('SOG Ledger Series Phase 9 adapter validation could not start because required output or authority is missing.');
   process.exit(1);
 }
+
+if (authority.authority_id !== 'sog_ledger_series_phase9_stage5_relationship_2026_08_21') fail('unexpected Stage 5 authority id');
+if (authority.canonical_boundary?.canonical_delta_authorized !== 0) fail('Stage 5 authority must authorize zero canonical delta');
+if (authority.canonical_boundary?.stable_assets !== 119) fail('Stage 5 authority stable asset count mismatch');
+if (authority.canonical_boundary?.canonical_hash !== 'sha256:4e7570b6fab88a8178a01ae280a36d98787573b376440b891491f25469458798') fail('Stage 5 authority canonical hash mismatch');
+if (!Array.isArray(authority.finite_allowlist) || authority.finite_allowlist.length !== 1) fail('Stage 5 authority must contain exactly one relationship tuple');
 
 if (manifest.project_id !== registryId) fail(`native manifest project_id mismatch: ${manifest.project_id}`);
 if (manifest.canonical_origin !== officialOrigin) fail(`native manifest origin mismatch: ${manifest.canonical_origin}`);
 if (manifest.data_safety?.canonical_only !== true) fail('native manifest is not canonical_only');
 if (manifest.record_counts?.primary_records !== 119) fail(`native primary record count must remain 119, found ${manifest.record_counts?.primary_records}`);
+if (manifest.build?.canonical_data_hash !== authority.canonical_boundary?.canonical_hash) fail(`canonical hash drift: ${manifest.build?.canonical_data_hash}`);
 
 if (descriptor.series_schema_version !== '1.0.0') fail('Series schema version mismatch');
 if (descriptor.object_type !== 'registry_descriptor') fail('descriptor object_type mismatch');
@@ -63,12 +97,15 @@ if (descriptor.registry?.id !== registryId) fail('descriptor registry ID mismatc
 if (descriptor.registry?.origin !== officialOrigin) fail('descriptor official origin mismatch');
 if (descriptor.canonical_only !== true) fail('descriptor canonical_only mismatch');
 if (descriptor.record_counts?.primary_records !== 119 || descriptor.record_counts?.series_records !== 119) fail('descriptor record counts must be 119/119');
+if (descriptor.record_counts?.relationships !== 1) fail('descriptor relationship count must be exactly 1');
 if (descriptor.routes?.descriptor !== '/data/series/registry.json') fail('descriptor route mismatch');
 if (descriptor.routes?.index !== '/data/series/index.json') fail('index route mismatch');
+if (descriptor.routes?.relationships !== '/data/series/relationships.json') fail('relationship route mismatch');
 if (descriptor.routes?.record_template !== '/data/series/records/{slug}.json') fail('record template mismatch');
 if (descriptor.routes?.search !== '/stablecoins/') fail('search route mismatch');
 if (descriptor.routes?.compare !== '/compare/') fail('compare route mismatch');
 if (descriptor.routes?.stats !== '/stats/') fail('stats route mismatch');
+if (descriptor.capabilities?.relationships !== 'adapter') fail('relationship capability mismatch');
 if (descriptor.data_safety?.canonical_only !== true) fail('Series data safety canonical_only mismatch');
 if (descriptor.data_safety?.includes_unreviewed_candidates !== false) fail('Series candidate boundary mismatch');
 if (descriptor.data_safety?.includes_internal_monitoring !== false) fail('Series monitoring boundary mismatch');
@@ -130,7 +167,7 @@ for (const row of index.records ?? []) {
   if (!same(envelope.events?.records ?? [], native.related?.events ?? [])) fail(`${label}: events mismatch`);
   if (!same(envelope.evidence?.records ?? [], native.related?.evidence ?? [])) fail(`${label}: evidence mismatch`);
   if (!same(envelope.evidence?.relations ?? [], native.related?.evidence_relations ?? [])) fail(`${label}: evidence relations mismatch`);
-  if (!Array.isArray(envelope.relationships) || envelope.relationships.length !== 0) fail(`${label}: typed Series relationships must remain empty during Stage 3`);
+  if (!Array.isArray(envelope.relationships) || envelope.relationships.length !== 0) fail(`${label}: record-envelope relationships must remain empty during Stage 5 publication`);
   if (!same(envelope.verification?.build, native.build)) fail(`${label}: build provenance mismatch`);
   if (envelope.verification?.last_verified_at !== (native.record?.last_verified_at ?? null)) fail(`${label}: last_verified_at mismatch`);
   if (envelope.provenance?.canonical_only !== true) fail(`${label}: provenance canonical_only mismatch`);
@@ -139,12 +176,45 @@ for (const row of index.records ?? []) {
 if (keys.size !== 119) fail(`global key uniqueness/count mismatch: ${keys.size}`);
 if (nativeIds.size !== 119) fail(`native ID uniqueness/count mismatch: ${nativeIds.size}`);
 
+const expectedTuples = authority.finite_allowlist.map(([type, source, target]) => `${type}\n${source}\n${target}`);
+const expectedTupleSet = new Set(expectedTuples);
+if (expectedTupleSet.size !== 1) fail('Stage 5 authority must resolve to one unique tuple');
+if (!Array.isArray(relationships) || relationships.length !== 1) fail(`relationship transport must contain exactly one row, found ${Array.isArray(relationships) ? relationships.length : 'non-array'}`);
+
+const actualTupleSet = new Set();
+const ids = new Set();
+for (const [relationshipIndex, relationship] of (relationships ?? []).entries()) {
+  const label = `relationship ${relationshipIndex + 1}`;
+  if (relationship.series_schema_version !== '1.0.0') fail(`${label}: schema version mismatch`);
+  if (relationship.object_type !== 'relationship_record') fail(`${label}: object_type mismatch`);
+  if (relationship.relation_type !== 'predecessor_of') fail(`${label}: only predecessor_of is authorized`);
+  if (relationship.direction !== 'directed') fail(`${label}: direction mismatch`);
+  if (relationship.provenance?.basis !== 'native_reviewed_relationship') fail(`${label}: provenance basis mismatch`);
+  if (!Array.isArray(relationship.provenance?.native_evidence_refs)) fail(`${label}: native_evidence_refs must be an array`);
+
+  const source = endpointGlobalKey(relationship.source);
+  const target = endpointGlobalKey(relationship.target);
+  if (!keys.has(source)) fail(`${label}: source endpoint missing from Stage 3 index`);
+  if (!keys.has(target)) fail(`${label}: target endpoint missing from Stage 3 index`);
+  if (source === target) fail(`${label}: self-loop is not authorized`);
+  const tuple = `${relationship.relation_type}\n${source}\n${target}`;
+  if (!expectedTupleSet.has(tuple)) fail(`${label}: tuple outside finite allowlist`);
+  if (actualTupleSet.has(tuple)) fail(`${label}: duplicate tuple`);
+  actualTupleSet.add(tuple);
+
+  const expectedId = expectedRelationshipId(relationship.relation_type, source, target);
+  if (relationship.id !== expectedId) fail(`${label}: deterministic ID mismatch`);
+  if (ids.has(relationship.id)) fail(`${label}: duplicate ID`);
+  ids.add(relationship.id);
+}
+if (actualTupleSet.size !== expectedTupleSet.size || [...expectedTupleSet].some((tuple) => !actualTupleSet.has(tuple))) fail('generated relationship set does not exactly equal reviewed allowlist');
+
 if (errors.length) {
   console.error(`SOG Ledger Series Phase 9 adapter validation failed with ${errors.length} error(s):`);
   for (const error of errors) console.error(`- ${error}`);
   process.exit(1);
 }
 
-console.log('SOG Ledger Series Phase 9 adapter validation passed: 119 canonical stablecoin envelopes.');
+console.log('SOG Ledger Series Phase 9 adapter validation passed: 119 canonical stablecoin envelopes, 1 reviewed relationship.');
 console.log(`Build commit: ${manifest.build?.commit ?? 'unknown'}`);
 console.log(`Canonical hash: ${manifest.build?.canonical_data_hash ?? 'unknown'}`);
