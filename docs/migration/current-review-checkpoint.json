@@ -1,18 +1,18 @@
 {
   "schema_version": "1.0",
-  "status": "reviewed_growth_checkpoint",
-  "checkpoint_id": "sog_pr523_jpysc_market_access_pilot_3_review_2026_08_05",
-  "checkpoint_kind": "record_growth_review_checkpoint",
-  "recorded_at": "2026-08-05",
-  "source_pr": 523,
-  "authority_pr": 522,
-  "source_audit_pr": 521,
-  "source_work_item": "jpysc_market_access_pilot_3_implementation",
-  "source_review": "docs/migration/japan-market-access-pilot-3-jpysc-review-pr521-handoff.json",
-  "source_canonical_checkpoint_id": "sog_jpysc_market_access_pilot_3_canonical_119_checkpoint_pr523_2026_08_05",
+  "status": "reviewed_non_growth_maintenance_checkpoint",
+  "checkpoint_id": "sog_pr593_mnee_june_2026_attestation_boundary_review_2026_08_22",
+  "checkpoint_kind": "non_growth_review_checkpoint",
+  "recorded_at": "2026-08-22",
+  "source_pr": 593,
+  "authority_pr": 589,
+  "source_audit_pr": 588,
+  "source_work_item": "mnee_june_2026_attestation_boundary_implementation",
+  "source_review": "docs/research/2026-08-21-mnee-lifecycle-followup-review.md",
+  "source_canonical_checkpoint_id": "sog_pr593_mnee_june_2026_attestation_boundary_119_2026_08_22",
   "source_growth_checkpoint_id": "sog_jpysc_market_access_pilot_3_canonical_119_checkpoint_pr523_2026_08_05",
-  "stats_checkpoint_id": "sog_stats_pr523_jpysc_market_access_pilot_3_2026_08_05",
-  "canonical_counts_unchanged": false,
+  "stats_checkpoint_id": "sog_stats_pr593_mnee_june_2026_attestation_boundary_2026_08_22",
+  "canonical_counts_unchanged": true,
   "counts": {
     "assets": 119,
     "organizations": 109,
@@ -24,10 +24,12 @@
     "detail_routes": 422
   },
   "reviewed_stablecoin_ids": [
-    "sog_st_jpysc"
+    "sog_st_mnee"
   ],
-  "reviewed_known_unknown_ids": [],
-  "new_canonical_records": 1,
+  "reviewed_known_unknown_ids": [
+    "sog_ku_mnee_latest_attestation_pr498"
+  ],
+  "new_canonical_records": 0,
   "deleted_known_unknowns": 0,
   "forced_resolutions": 0,
   "exit_boundary": "REVIEW_GATE"
