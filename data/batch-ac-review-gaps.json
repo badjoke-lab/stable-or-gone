@@ -4,9 +4,9 @@
     "stablecoin_id": "sog_st_mnee",
     "issuer_id": "sog_issuer_mnee_limited",
     "topic": "latest_attestation_report_body_and_archive",
-    "description": "The official transparency index now lists monthly reports through June 2026, but the exact June 2026 report-body figures, signed report-specific URL, snapshot dates, assurance wording, and a preserved report-specific archive were not independently retrievable in the 2026-08-22 follow-up implementation review.",
+    "description": "The official transparency index now lists monthly reports through June 2026, but the exact June 2026 report-body figures, signed report-specific URL, snapshot dates, assurance wording, and a preserved report-specific archive were not independently retrievable in the 2026-08-21 follow-up implementation review.",
     "severity": "high",
-    "last_checked_at": "2026-08-22",
+    "last_checked_at": "2026-08-21",
     "notes": "The June 2026 index entry is verified. Do not infer reserve amount, liabilities, excess, snapshot dates, report opinion, publication date, or a July 2026 report from cadence or the index page."
   },
   {
