@@ -4,7 +4,7 @@
     "stablecoin_id": "sog_st_mnee",
     "issuer_id": "sog_issuer_mnee_limited",
     "report_date": "2025-05-09",
-    "period_covered": "Monthly reserve-attestation program announced in May 2025; current transparency index reviewed through May 2026 on 2026-08-01",
+    "period_covered": "Monthly reserve-attestation program announced in May 2025; current transparency index reviewed through June 2026 on 2026-08-22",
     "publisher": "MNEE Limited and Wolf & Company, P.C.",
     "report_type": "issuer_attestation_program_and_current_report_index",
     "asset_categories": [
@@ -14,7 +14,7 @@
     "url": "https://www.mnee.io/news/mnee-expands-transparency-with-monthly-third-party-reserve-attestations-audited-by-wolf-company-p-c",
     "archived_url": "https://web.archive.org/web/*/https://www.mnee.io/news/mnee-expands-transparency-with-monthly-third-party-reserve-attestations-audited-by-wolf-company-p-c",
     "confidence": "high",
-    "notes": "The issuer announcement states that Wolf & Company performs monthly examinations using month-end and random intra-month snapshot dates and that reserves use U.S. Treasury bills with duration no longer than 90 days and U.S. cash held by a qualified custodian. The current transparency index lists May 2026, but the exact latest report-body figures, signed report-specific URL, snapshot dates, and report-specific archive were not independently preserved. The current custodian name and latest category allocation remain unknown."
+    "notes": "The issuer announcement states that Wolf & Company performs monthly examinations using month-end and random intra-month snapshot dates and that reserves use U.S. Treasury bills with duration no longer than 90 days and U.S. cash held by a qualified custodian. The current transparency index lists June 2026, but the exact June 2026 report-body figures, signed report-specific URL, snapshot dates, assurance wording, and report-specific archive were not independently preserved. The current custodian name and latest category allocation remain unknown. No July 2026 attestation is established by the reviewed source."
   },
   {
     "id": "sog_rr_bison_eub_whitepaper_framework_pr517",
