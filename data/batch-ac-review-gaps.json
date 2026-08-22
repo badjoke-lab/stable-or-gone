@@ -4,10 +4,10 @@
     "stablecoin_id": "sog_st_mnee",
     "issuer_id": "sog_issuer_mnee_limited",
     "topic": "latest_attestation_report_body_and_archive",
-    "description": "The official transparency index still lists monthly reports through May 2026, but the exact May 2026 report-body figures, signed report-specific URL, snapshot dates, and a preserved report-specific archive were not independently retrievable in the 2026-08-01 maintenance review.",
+    "description": "The official transparency index now lists monthly reports through June 2026, but the exact June 2026 report-body figures, signed report-specific URL, snapshot dates, assurance wording, and a preserved report-specific archive were not independently retrievable in the 2026-08-21 follow-up implementation review.",
     "severity": "high",
-    "last_checked_at": "2026-08-01",
-    "notes": "The index entry is verified. Do not infer reserve amount, liabilities, excess, snapshot dates, or report opinion from the index page."
+    "last_checked_at": "2026-08-21",
+    "notes": "The June 2026 index entry is verified. Do not infer reserve amount, liabilities, excess, snapshot dates, report opinion, publication date, or a July 2026 report from cadence or the index page."
   },
   {
     "id": "sog_ku_mnee_reserve_custodian_pr498",
@@ -127,7 +127,7 @@
     "description": "The issuer describes par issuance and redemption and a conservative high-quality and liquid investment framework, but the reviewed sources do not establish current USB reserve categories, amounts, shares, custodian identity, liabilities, excess reserves, or a token-specific audit or attestation opinion.",
     "severity": "high",
     "last_checked_at": "2026-08-03",
-    "notes": "Bison Bank's issuer-level Deloitte audit statement is not USB-specific reserve assurance."
+    "notes": "Bison Bank's issuer-level Deloitte audit statement is not USB reserve assurance."
   },
   {
     "id": "sog_ku_bison_usb_access_fees_pr517",

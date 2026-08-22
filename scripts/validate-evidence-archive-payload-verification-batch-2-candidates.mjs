@@ -17,26 +17,23 @@ const expect = (condition, message) => { if (!condition) failures.push(message);
 const archiveNotRecorded = checkpoint.counts?.archive_not_recorded_count;
 const isCandidateEntryState = archiveNotRecorded === 122;
 const isImplementedState = archiveNotRecorded === 114
-  && checkpoint.checkpoint_id === 'sog_evidence_archive_payload_verification_batch_2_canonical_119_checkpoint_pr552_2026_08_12';
+  && fs.existsSync(path.join(root, implementationAuthorityPath))
+  && fs.existsSync(path.join(root, implementationResultPath));
 
 if (isCandidateEntryState) {
   const generated = buildBatch2ArchiveCandidates();
   expect(JSON.stringify(artifact) === JSON.stringify(generated), 'committed candidate artifact does not match deterministic regeneration');
 } else if (isImplementedState) {
-  expect(fs.existsSync(path.join(root, implementationAuthorityPath)), 'implementation authority missing in post-implementation state');
-  expect(fs.existsSync(path.join(root, implementationResultPath)), 'implementation result missing in post-implementation state');
-  if (fs.existsSync(path.join(root, implementationAuthorityPath)) && fs.existsSync(path.join(root, implementationResultPath))) {
-    const implementationAuthority = readJson(implementationAuthorityPath);
-    const implementationResult = readJson(implementationResultPath);
-    const expectedIds = new Set([
-      ...(implementationAuthority.authorized_archive_additions ?? []).map((row) => row.evidence_id),
-      ...(implementationAuthority.no_safe_change ?? [])
-    ]);
-    expect(expectedIds.size === 10, 'implementation lineage does not preserve the ten reviewed Batch 2 identities');
-    expect(artifact.selected_evidence_ids.every((id) => expectedIds.has(id)), 'historical candidate artifact identity is outside implemented/reviewed Batch 2 scope');
-    expect(implementationResult.changed_count === 8, 'post-implementation result does not record eight archive additions');
-    expect(implementationResult.next_boundary === 'REVIEW_GATE', 'post-implementation result does not return to REVIEW_GATE');
-  }
+  const implementationAuthority = readJson(implementationAuthorityPath);
+  const implementationResult = readJson(implementationResultPath);
+  const expectedIds = new Set([
+    ...(implementationAuthority.authorized_archive_additions ?? []).map((row) => row.evidence_id),
+    ...(implementationAuthority.no_safe_change ?? [])
+  ]);
+  expect(expectedIds.size === 10, 'implementation lineage does not preserve the ten reviewed Batch 2 identities');
+  expect(artifact.selected_evidence_ids.every((id) => expectedIds.has(id)), 'historical candidate artifact identity is outside implemented/reviewed Batch 2 scope');
+  expect(implementationResult.changed_count === 8, 'post-implementation result does not record eight archive additions');
+  expect(implementationResult.next_boundary === 'REVIEW_GATE', 'post-implementation result does not return to REVIEW_GATE');
 } else {
   expect(false, `unexpected current archive-not-recorded state ${archiveNotRecorded}`);
 }

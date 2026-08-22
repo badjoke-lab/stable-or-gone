@@ -7,6 +7,12 @@ export const architectureGroups = Object.freeze([
   'discovery'
 ]);
 
+export const publicProjectNetworkIdentity = Object.freeze({
+  id: 'sog',
+  name: 'Stable or Gone',
+  url: 'https://www.stableorgone.com/'
+});
+
 export const globalNavigationGroups = Object.freeze([
   Object.freeze({
     id: 'registry',

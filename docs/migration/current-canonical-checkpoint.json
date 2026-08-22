@@ -1,17 +1,18 @@
 {
   "schema_version": "1.0",
   "status": "reviewed_non_growth_maintenance_checkpoint",
-  "checkpoint_id": "sog_evidence_archive_payload_verification_batch_2_canonical_119_checkpoint_pr552_2026_08_12",
-  "checkpoint_kind": "non_growth_archive_maintenance_checkpoint",
-  "recorded_at": "2026-08-12",
-  "captured_at": "2026-08-12",
-  "source_commit": "pr552-evidence-archive-batch2",
+  "checkpoint_id": "sog_pr593_mnee_june_2026_attestation_boundary_119_2026_08_22",
+  "checkpoint_kind": "non_growth_maintenance_checkpoint",
+  "recorded_at": "2026-08-22",
+  "captured_at": "2026-08-22",
+  "source_commit": "pr593-mnee-june-2026-attestation-boundary",
   "asset_count": 119,
-  "source_checkpoint_id": "sog_jpysc_market_access_pilot_3_canonical_119_checkpoint_pr523_2026_08_05",
-  "previous_checkpoint_id": "sog_jpysc_market_access_pilot_3_canonical_119_checkpoint_pr523_2026_08_05",
-  "maintenance_pr": 552,
-  "authority_pr": 551,
-  "source_review_pr": 543,
+  "source_checkpoint_id": "sog_evidence_archive_payload_verification_batch_2_canonical_119_checkpoint_pr552_2026_08_12",
+  "previous_checkpoint_id": "sog_evidence_archive_payload_verification_batch_2_canonical_119_checkpoint_pr552_2026_08_12",
+  "maintenance_pr": 593,
+  "source_pr": 593,
+  "authority_pr": 589,
+  "source_review_pr": 588,
   "expected_counts": {
     "assets": 119,
     "organizations": 109,
@@ -50,24 +51,47 @@
     "metadata_checked_routes": 422
   },
   "maintenance_outcome": {
-    "archived_url_additions": 8,
-    "source_url_changes": 0,
-    "new_evidence_records": 0,
-    "evidence_relation_changes": 0,
-    "asset_changes": 0,
-    "market_access_changes": 0,
-    "archive_recorded_before": 463,
-    "archive_recorded_after": 471,
-    "archive_not_recorded_before": 122,
-    "archive_not_recorded_after": 114
+    "stable_asset_changes": 0,
+    "organization_changes": 0,
+    "event_changes": 0,
+    "evidence_record_changes": 0,
+    "reserve_report_count_change": 0,
+    "known_unknown_count_change": 0,
+    "updated_reserve_report_ids": [
+      "sog_rr_mnee_attestation_program_pr498"
+    ],
+    "updated_known_unknown_ids": [
+      "sog_ku_mnee_latest_attestation_pr498"
+    ]
   },
   "record_boundary": {
-    "exact_reviewed_archive_additions_only": true,
-    "reviewed_no_safe_change_preserved": true,
+    "june_2026_attestation_index_existence_only": true,
+    "report_body_values_not_inferred": true,
+    "canonical_counts_unchanged": true,
     "automatic_continuation": false,
     "next_boundary": "REVIEW_GATE"
   },
   "release_integrity_baseline_id": "sog_release_integrity_pr552_119_assets_2026_08_12",
   "reproducible_build_baseline_id": "sog_reproducible_build_pr317_2026_07_06",
-  "notes": "Current deterministic canonical checkpoint after PR #552 Evidence Archive Payload Verification Batch 2 implementation. Exactly eight payload-reviewed dated archived_url values were added to existing Evidence records. Evidence identities, Evidence Relations, stable assets, Market Access Records, source URLs, schema, taxonomy, routes, and material UI remain unchanged. Archive coverage advances from 463/585 to 471/585 and the lane returns to REVIEW_GATE after production verification."
+  "notes": "Reviewed non-growth maintenance checkpoint for PR #593. The existing MNEE attestation-program reserve-report boundary advances from the May 2026 transparency-index position to June 2026, and the existing latest-attestation known-unknown is narrowed to the unresolved June 2026 report body. No canonical record counts change and no unsupported report figures, snapshot dates, signed report URL, custodian identity, allocation, publication date, or July 2026 report are inferred.",
+  "scope": {
+    "description": "Bounded MNEE June 2026 attestation-period implementation authorized by PR #589 after source review PR #588.",
+    "reviewed_assets": ["MNEE"],
+    "canonical_assets_added": 0,
+    "canonical_organizations_added": 0,
+    "canonical_events_added": 0,
+    "canonical_evidence_added": 0,
+    "canonical_deployments_added": 0,
+    "canonical_reserve_reports_added": 0,
+    "canonical_known_unknowns_added": 0,
+    "known_unknowns_deleted": 0,
+    "non_growth_maintenance_only": true,
+    "review_gate_after_pr593": true
+  },
+  "source_review": "docs/research/2026-08-21-mnee-lifecycle-followup-review.md",
+  "public_origin": "https://www.stableorgone.com/",
+  "canonical_only": true,
+  "includes_unreviewed_candidates": false,
+  "includes_internal_monitoring": false,
+  "includes_private_notes": false
 }
