@@ -1,0 +1,35 @@
+{
+  "authority_id": "sog_stage6_current_production_checker_correction_2026_08_23",
+  "status": "authorized",
+  "scope": "verifier_only",
+  "trigger": {
+    "hei_issue": 780,
+    "hei_run": 32620749266,
+    "failure": "SOG Stage 5 production verifier rejected the reviewed current canonical hash after PR #593 because it still required the historical Stage 5 canonical hash"
+  },
+  "historical_stage5": {
+    "authority_id": "sog_ledger_series_phase9_stage5_relationship_2026_08_21",
+    "canonical_hash": "sha256:4e7570b6fab88a8178a01ae280a36d98787573b376440b891491f25469458798",
+    "immutable": true
+  },
+  "current_reviewed_production": {
+    "source_main": "e8663a8289033a3a6af7cb19fb31683b2545e61c",
+    "canonical_hash": "sha256:bba93c1e3f0ea1b050cd395455327b70fb7c1920d37b18c300949bb49df53965",
+    "primary_records": 119,
+    "relationships": 1
+  },
+  "authorized_changes": [
+    "update only the Stage 5 production verifier so historical authority integrity and current-production canonical equality are checked separately",
+    "preserve the reviewed SAI predecessor_of DAI tuple and deterministic relationship id checks",
+    "preserve 119 record and empty record-envelope relationship-array checks"
+  ],
+  "not_authorized": [
+    "canonical data mutation",
+    "relationship mutation",
+    "schema or UI mutation",
+    "production or deployment mutation",
+    "DNS or Cloudflare mutation",
+    "automatic retry of HEI Stage 6"
+  ],
+  "exit": "return_to_review_gate_after_checker_ci_and_read_only_proof"
+}
