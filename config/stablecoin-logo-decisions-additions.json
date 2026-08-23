@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-08-08T05:55:00.000Z",
+  "generated_at": "2026-08-23T16:15:00.000Z",
   "purpose": "Append-only decisions for canonical stablecoins added after the 117-record logo research closure pass.",
   "records": [
     {
@@ -29,6 +29,20 @@
       "source_class": "official_product_page_no_token_specific_local_mark_recorded",
       "identity_basis": "canonical slug, stablecoin name, symbol, issuer, and PR #517 first-party source review",
       "evidence": "No token-specific local logo decision was recorded when USB entered the canonical registry; retain the neutral monogram fallback rather than substituting the Bison Bank issuer mark.",
+      "transformation": "none"
+    },
+    {
+      "slug": "jpyr",
+      "name": "JPYR",
+      "symbol": "JPYR",
+      "decision": "neutral_fallback",
+      "mark_type": "official_project_mark",
+      "asset_path": null,
+      "source_page": "https://izakaya.tech/",
+      "source_asset_url": null,
+      "source_class": "affiliated_project_material_no_reviewed_token_specific_local_mark",
+      "identity_basis": "canonical JPYR slug, symbol, Ethereum deployment, and affiliated source review",
+      "evidence": "No independently reviewed token-specific local JPYR logo asset is established in this intake. Retain the neutral monogram fallback rather than substituting IZAKA-YA or another project/issuer mark.",
       "transformation": "none"
     }
   ]
