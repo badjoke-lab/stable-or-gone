@@ -14,13 +14,26 @@ const stablecoinOverrideRows = [
 const stablecoinOverrideById = new Map(stablecoinOverrideRows.map((row) => [row.id, row]));
 const stablecoins = stablecoinBaseRows.map((row) => ({ ...row, ...(stablecoinOverrideById.get(row.id) ?? {}) }));`;
 
+const launchQueueAnchor = "const launchQueue = readJson('data/quality/launch-date-unresolved.json');";
+const launchQueueReplacement = `
+const launchQueueBase = readJson('data/quality/launch-date-unresolved.json');
+const launchQueueGrowthFiles = fs.readdirSync(absolute('data/quality'))
+  .filter((name) => /^launch-date-unresolved-growth-pr\\d+\\.json$/.test(name))
+  .sort();
+const launchQueueGrowthRecords = launchQueueGrowthFiles.flatMap((name) => readJson(\`data/quality/\${name}\`).records ?? []);
+const launchQueue = { ...launchQueueBase, records: [...(launchQueueBase.records ?? []), ...launchQueueGrowthRecords] };`;
+
 const terminalCoverageAnchor = "if (terminalLegacyStatuses.has(coin.status) && terminalEvents.length === 0) terminalAssetsWithoutBoundaryEvent.push(coin.id);";
 const terminalCoverageReplacement = "if (['terminated', 'collapsed', 'migrated', 'rebranded'].includes(classification.lifecycle_status) && terminalEvents.length === 0) terminalAssetsWithoutBoundaryEvent.push(coin.id);";
 
 if (!source.includes(stablecoinAnchor)) throw new Error('stablecoin audit anchor missing');
+if (!source.includes(launchQueueAnchor)) throw new Error('launch queue audit anchor missing');
 if (!source.includes(terminalCoverageAnchor)) throw new Error('terminal coverage audit anchor missing');
 
-source = source.replace(stablecoinAnchor, stablecoinReplacement).replace(terminalCoverageAnchor, terminalCoverageReplacement);
+source = source
+  .replace(stablecoinAnchor, stablecoinReplacement)
+  .replace(launchQueueAnchor, launchQueueReplacement)
+  .replace(terminalCoverageAnchor, terminalCoverageReplacement);
 fs.writeFileSync(to, source);
 try {
   await import(to.href);
