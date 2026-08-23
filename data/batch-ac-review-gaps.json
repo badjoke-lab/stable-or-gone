@@ -148,5 +148,55 @@
     "severity": "high",
     "last_checked_at": "2026-08-03",
     "notes": "Control capability does not prove a particular current role assignment or use event."
+  },
+  {
+    "id": "sog_ku_jpyr_legal_issuer_20260823",
+    "stablecoin_id": "sog_st_jpyr",
+    "issuer_id": "sog_org_jpyr_organization",
+    "topic": "legal_issuer_and_redemption_obligor",
+    "description": "Affiliated public material names a JPYR Organization, but reviewed sources do not establish the exact incorporated legal issuer, jurisdiction, holder legal claim, direct redemption obligor, or bankruptcy priority.",
+    "severity": "high",
+    "last_checked_at": "2026-08-23",
+    "notes": "Do not convert the descriptive organization name into a verified legal-issuer finding without primary legal documentation."
+  },
+  {
+    "id": "sog_ku_jpyr_backing_conflict_20260823",
+    "stablecoin_id": "sog_st_jpyr",
+    "issuer_id": "sog_org_jpyr_organization",
+    "topic": "backing_model_and_independent_reserve_assurance",
+    "description": "IZAKA-YA-affiliated material gives materially inconsistent descriptions of JPYR backing, including simple yen-reserve language and a separate description of collateral deposited to an Ethereum DeFi platform. No complete independently reviewable reserve series, liabilities matching, custodian statement, or assurance opinion was identified in the reviewed record.",
+    "severity": "high",
+    "last_checked_at": "2026-08-23",
+    "notes": "SOG preserves the conflict rather than choosing the more favorable claim."
+  },
+  {
+    "id": "sog_ku_jpyr_redemption_20260823",
+    "stablecoin_id": "sog_st_jpyr",
+    "issuer_id": "sog_org_jpyr_organization",
+    "topic": "direct_redemption_right_and_terms",
+    "description": "Reviewed public material does not establish who can redeem JPYR directly, whether redemption at par is a contractual holder right, minimums, fees, settlement timing, eligible jurisdictions, or the settlement counterparty.",
+    "severity": "high",
+    "last_checked_at": "2026-08-23",
+    "notes": "Wallet swap availability or secondary-market purchase routes are not equivalent to direct issuer redemption."
+  },
+  {
+    "id": "sog_ku_jpyr_controls_and_audit_20260823",
+    "stablecoin_id": "sog_st_jpyr",
+    "issuer_id": "sog_org_jpyr_organization",
+    "topic": "smart_contract_controls_audit_and_current_roles",
+    "description": "Affiliated material states that JPYR includes mint, burn and transfer-stop functionality and also states that the contract had not received a formal third-party audit as of June 2026. Current administrator addresses, role assignments, upgradeability, pause/freeze operational state, mint policy and burn policy remain unestablished in the reviewed record.",
+    "severity": "high",
+    "last_checked_at": "2026-08-23",
+    "notes": "Capability claims do not prove current role holders or use history."
+  },
+  {
+    "id": "sog_ku_jpyr_regulatory_liquidity_20260823",
+    "stablecoin_id": "sog_st_jpyr",
+    "issuer_id": "sog_org_jpyr_organization",
+    "topic": "regulatory_status_and_market_liquidity",
+    "description": "IZAKA-YA-affiliated material states that JPYR was not registered with Japan's FSA as of June 2026 and describes liquidity as limited. The reviewed record does not contain an independent regulator finding establishing the legal classification of JPYR itself or a normalized current liquidity series.",
+    "severity": "high",
+    "last_checked_at": "2026-08-23",
+    "notes": "Record the first-party registration statement and liquidity warning without converting them into an unverified fraud or illegality finding."
   }
 ]
