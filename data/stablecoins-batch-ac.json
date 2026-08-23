@@ -4,10 +4,7 @@
     "slug": "mnee",
     "name": "MNEE",
     "symbol": "MNEE",
-    "aliases": [
-      "MNEE",
-      "MNEE USD Stablecoin"
-    ],
+    "aliases": ["MNEE", "MNEE USD Stablecoin"],
     "status": "active",
     "issuer_id": "sog_issuer_mnee_limited",
     "peg_asset": "USD",
@@ -32,11 +29,7 @@
     "slug": "bison-bank-eub",
     "name": "Bison Bank Electronic Money Token — Euro",
     "symbol": "EUB",
-    "aliases": [
-      "EUB",
-      "Bison Bank EUB",
-      "Bison Electronic Money Token Euro"
-    ],
+    "aliases": ["EUB", "Bison Bank EUB", "Bison Electronic Money Token Euro"],
     "status": "limited",
     "issuer_id": "sog_issuer_bison_bank",
     "peg_asset": "EUR",
@@ -61,11 +54,7 @@
     "slug": "bison-bank-usb",
     "name": "Bison Bank Electronic Money Token — US Dollar",
     "symbol": "USB",
-    "aliases": [
-      "USB",
-      "Bison Bank USB",
-      "Bison Electronic Money Token US Dollar"
-    ],
+    "aliases": ["USB", "Bison Bank USB", "Bison Electronic Money Token US Dollar"],
     "status": "limited",
     "issuer_id": "sog_issuer_bison_bank",
     "peg_asset": "USD",
@@ -84,5 +73,30 @@
     "confidence": "high",
     "last_verified_at": "2026-08-03",
     "notes": "PR #517 complete-record promotion. The official public launch date is 2026-05-06; the whitepaper states an offer start date of 2026-04-10. Exact first mint, circulating supply, Solana mint address, reserve allocation, custodian, token-specific assurance, fees, minimums, and current control-role assignments remain explicit known unknowns."
+  },
+  {
+    "id": "sog_st_jpyr",
+    "slug": "jpyr",
+    "name": "JPYR",
+    "symbol": "JPYR",
+    "aliases": ["JPYR Token"],
+    "status": "active",
+    "issuer_id": "sog_org_jpyr_organization",
+    "peg_asset": "JPY",
+    "collateral_model": "unclear_conflicting_public_backing_descriptions",
+    "reserve_disclosure_status": "issuer_claims_only_conflicting_no_independent_assurance_identified",
+    "redemption_status": "unknown",
+    "who_can_redeem": "No reviewed public source establishes a direct holder redemption right, eligible redemption counterparty, or legal redemption obligor.",
+    "retail_redemption": "unknown",
+    "institutional_redemption": "unknown",
+    "minimum_redemption": "unknown",
+    "redemption_region_notes": "The reviewed public material does not establish a direct issuer redemption channel or jurisdiction-specific redemption eligibility.",
+    "redemption_notes": "Operator/editorial material describes a one-yen target and backing or collateral concepts, but no reviewed source establishes the complete legal redemption mechanism, obligor, settlement terms, fees, minimums, or holder priority.",
+    "launch_date": null,
+    "discontinued_date": null,
+    "summary": "Ethereum ERC-20 token targeting 1 JPY per JPYR. Reviewed IZAKA-YA-affiliated public material identifies a JPYR Organization and publishes the Ethereum contract, but gives materially inconsistent descriptions of backing and does not establish an independently reviewed reserve series or direct holder redemption right.",
+    "confidence": "medium",
+    "last_verified_at": "2026-08-23",
+    "notes": "Canonical inclusion and active status are not safety endorsements. Reviewed operator/editorial material itself states that JPYR was not registered with Japan's FSA as of June 2026, that the smart contract had not received a formal third-party audit, and that liquidity was limited. Those statements are preserved as first-party claims and concern indicators, not independent regulatory or security findings."
   }
 ]
