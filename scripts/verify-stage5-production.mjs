@@ -6,7 +6,8 @@ const origin = (process.env.SOG_PRODUCTION_ORIGIN ?? 'https://www.stableorgone.c
 const attempts = Math.max(1, Number(process.env.SOG_STAGE5_PRODUCTION_ATTEMPTS ?? 20));
 const delayMs = Math.max(0, Number(process.env.SOG_STAGE5_PRODUCTION_DELAY_MS ?? 15000));
 const timeoutMs = Math.max(1000, Number(process.env.SOG_STAGE5_PRODUCTION_TIMEOUT_MS ?? 30000));
-const expectedCanonicalHash = 'sha256:4e7570b6fab88a8178a01ae280a36d98787573b376440b891491f25469458798';
+const historicalStage5CanonicalHash = 'sha256:4e7570b6fab88a8178a01ae280a36d98787573b376440b891491f25469458798';
+const currentReviewedCanonicalHash = 'sha256:bba93c1e3f0ea1b050cd395455327b70fb7c1920d37b18c300949bb49df53965';
 const expectedTuple = ['predecessor_of', 'stable-or-gone:stablecoin:sog_st_sai', 'stable-or-gone:stablecoin:sog_st_dai'];
 const endpointKey = (endpoint) => `${endpoint?.registry_id}:${endpoint?.native_record_type}:${endpoint?.native_record_id}`;
 const relationshipId = (type, source, target) => `series_rel_${createHash('sha256').update(`${type}\n${source}\n${target}`, 'utf8').digest('hex')}`;
@@ -27,7 +28,7 @@ async function verifyOnce() {
   const errors = [];
   const fail = (message) => errors.push(message);
   if (authority.authority_id !== 'sog_ledger_series_phase9_stage5_relationship_2026_08_21') fail('unexpected Stage 5 authority');
-  if (authority.canonical_boundary?.canonical_hash !== expectedCanonicalHash) fail('authority canonical hash mismatch');
+  if (authority.canonical_boundary?.canonical_hash !== historicalStage5CanonicalHash) fail('historical Stage 5 authority canonical hash mismatch');
   if (!Array.isArray(authority.finite_allowlist) || authority.finite_allowlist.length !== 1) fail('authority allowlist must contain exactly one tuple');
   if (JSON.stringify(authority.finite_allowlist[0]) !== JSON.stringify(expectedTuple)) fail('authority allowlist tuple mismatch');
 
@@ -40,7 +41,7 @@ async function verifyOnce() {
 
   if (manifest?.project_id !== 'stable-or-gone') fail('manifest project id mismatch');
   if (manifest?.record_counts?.primary_records !== 119) fail(`manifest primary record count must be 119, found ${manifest?.record_counts?.primary_records}`);
-  if (manifest?.build?.canonical_data_hash !== expectedCanonicalHash) fail(`canonical hash mismatch: ${manifest?.build?.canonical_data_hash}`);
+  if (manifest?.build?.canonical_data_hash !== currentReviewedCanonicalHash) fail(`current production canonical hash mismatch: ${manifest?.build?.canonical_data_hash}`);
   if (manifest?.data_safety?.canonical_only !== true) fail('manifest canonical_only boundary mismatch');
 
   if (descriptor?.registry?.id !== 'stable-or-gone') fail('descriptor registry id mismatch');
@@ -84,7 +85,7 @@ let lastError;
 for (let attempt = 1; attempt <= attempts; attempt += 1) {
   try {
     await verifyOnce();
-    console.log(`SOG Stage 5 production verification passed on attempt ${attempt}: 119 Series records, canonical hash locked, 1 reviewed SAI predecessor_of DAI relationship.`);
+    console.log(`SOG Stage 5 production verification passed on attempt ${attempt}: historical Stage 5 authority preserved, current reviewed canonical hash matched, 119 Series records, 1 reviewed SAI predecessor_of DAI relationship.`);
     process.exit(0);
   } catch (error) {
     lastError = error;
