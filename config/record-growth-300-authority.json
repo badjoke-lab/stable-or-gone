@@ -1,0 +1,112 @@
+{
+  "schema_version": "1.0",
+  "authority_id": "sog_record_growth_300_2026_08_23",
+  "status": "active_after_merge",
+  "entry_main_commit": "d26d50eba858b3528fdd5713814068ab55956913",
+  "official_public_origin": "https://www.stableorgone.com",
+  "purpose": "Authorize reviewed canonical growth from 119 to exactly 300 stable assets without weakening SOG evidence, lifecycle, provenance, unknown-value, logo, machine-readable, deployment, or regression contracts.",
+  "mandatory_references": [
+    "AGENTS.md",
+    "docs/spec-governance.md",
+    "docs/roadmap.md",
+    "docs/deployment-policy.md",
+    "docs/ai-era-registry-spec.md",
+    "docs/ai-era-execution-schedule.md",
+    "docs/quality/stablecoin-logo-disposition-operating-spec.md"
+  ],
+  "entry_counts": {
+    "stable_assets": 119,
+    "organizations": 109,
+    "relationships": 131,
+    "events": 194,
+    "evidence": 585,
+    "evidence_relations": 585,
+    "deployments": 186,
+    "legal_profiles": 119,
+    "income_profiles": 119,
+    "target_stable_assets": 300,
+    "required_net_new_stable_assets": 181
+  },
+  "scope": [
+    "research_and_review_exactly_181_net_new_in_scope_stable_assets",
+    "promote_only_assets_with_source_backed_identity_issuer_or_operator_stabilization_model_and_lifecycle_state",
+    "add_source_backed_launch_or_initial_availability_event_for_each_promoted_asset_when_supported",
+    "add_additional_material_lifecycle_events_for_depeg_regulatory_redemption_migration_discontinuation_or_failure_when_supported",
+    "add_evidence_and_evidence_relations_for_every_promoted_fact_scope",
+    "add_organization_deployment_legal_reserve_income_unknown_and_relationship_records_when_required_by_existing_schema_and_supported_by_evidence",
+    "preserve_explicit_unknowns_instead_of_inference",
+    "satisfy_one_reviewed_logo_disposition_per_new_canonical_stable_asset_with_neutral_fallback_permitted",
+    "extend_existing_machine_readable_series_and_native_dossier_outputs_deterministically_to_the_new_canonical_count",
+    "update_counts_hashes_stats_and_generated_outputs_only from reviewed canonical data",
+    "run_all_existing_ci_regression_and_exact_main_production_verification_gates"
+  ],
+  "batching": {
+    "allowed": true,
+    "preferred_batch_size": 20,
+    "final_batch_may_be_smaller": true,
+    "every_batch_must_be_independently_reviewable": true,
+    "no_placeholder_only_batch": true,
+    "no_count_only_batch": true
+  },
+  "acceptance_per_asset": [
+    "unique canonical identity and slug with duplicate and lineage review",
+    "issuer or controlling organization identified when source-backed, otherwise explicit unknown",
+    "stabilization or backing model recorded at the level supported by evidence",
+    "current or final lifecycle status supported by reviewed evidence",
+    "at least one canonical Evidence identity and Evidence Relation supporting inclusion",
+    "launch or earliest supported lifecycle event recorded when evidence supports a date or bounded date",
+    "material later lifecycle events recorded where found during review",
+    "deployment and chain representations are not split into separate canonical assets without lineage justification",
+    "aliases rebrands wrapped forms migrations and successor relationships are reviewed before deciding canonical identity",
+    "logo disposition present",
+    "native dossier and Series envelope validate"
+  ],
+  "source_quality": {
+    "primary_sources_preferred": true,
+    "official_issuer_protocol_regulator_exchange_or_auditor_sources_preferred_by_claim_scope": true,
+    "secondary_sources_may_support_discovery_or_context_but_do_not_replace_available_primary_evidence": true,
+    "unsupported_market_cap_or_directory_listing_alone_is_insufficient_for_promotion": true,
+    "unknown_values_must_not_be_filled_by_inference": true
+  },
+  "public_boundary": {
+    "canonical_stable_asset_growth_authorized": true,
+    "target_stable_assets": 300,
+    "new_evidence_authorized": true,
+    "new_events_authorized": true,
+    "new_organizations_relationships_deployments_and_profiles_authorized_when_required_by_promoted_assets": true,
+    "schema_or_taxonomy_change_authorized": false,
+    "ranking_scoring_or_recommendation_authorized": false,
+    "unrelated_ui_redesign_authorized": false,
+    "dns_cloudflare_or_analytics_identity_change_authorized": false,
+    "automatic_candidate_promotion_authorized": false
+  },
+  "forbidden": [
+    "placeholder_assets",
+    "promotion_from_name_or_ticker_only",
+    "promotion_from_market_directory_presence_only",
+    "invented_dates_issuers_backing_models_redemption_terms_or_statuses",
+    "splitting_chain_deployments_into_separate_assets_without_lineage_review",
+    "silently converting unknowns into asserted facts",
+    "removing existing canonical evidence to offset growth",
+    "ranking_scoring_recommendation_or_investment_language",
+    "unrelated_schema_taxonomy_ui_dns_cloudflare_or_ga4_changes",
+    "automatic_continuation_after_300_closeout"
+  ],
+  "required_acceptance": [
+    "authority_merged_before_first_canonical_growth_commit",
+    "canonical_stable_asset_count_equals_exactly_300_after_final_growth_batch",
+    "all_181_net_new_assets satisfy per-asset acceptance requirements",
+    "events_evidence_and_evidence_relations_are_not_reduced_to_placeholder coverage",
+    "all existing data validators and logo coverage audit pass",
+    "native dossier and Series outputs cover exactly 300 stable assets",
+    "existing search_compare_stats_phase3_domain_and_series regression contracts remain green",
+    "exact_main_production_verification passes after the final merge",
+    "roadmap_spec governance and AGENTS status are synchronized at closeout"
+  ],
+  "closeout": {
+    "restore_stage": "REVIEW_GATE",
+    "automatic_continuation": false,
+    "production_verification_required": true,
+    "deployment_record_issue": 479
+  }
+}
