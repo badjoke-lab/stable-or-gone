@@ -2,83 +2,37 @@
   {
     "id": "sog_ev_mnee_launch_pr498",
     "title": "MNEE launches on the 1Sat Ordinals protocol",
-    "subject_stablecoin_ids": [
-      "sog_st_mnee"
-    ],
-    "subject_organization_ids": [
-      "sog_issuer_mnee_limited"
-    ],
-    "evidence_ids": [
-      "sog_src_mnee_launch_pr498",
-      "sog_src_mnee_terms_pr498",
-      "sog_src_mnee_docs_pr498",
-      "sog_src_mnee_sdk_pr498"
-    ],
+    "subject_stablecoin_ids": ["sog_st_mnee"],
+    "subject_organization_ids": ["sog_issuer_mnee_limited"],
+    "evidence_ids": ["sog_src_mnee_launch_pr498", "sog_src_mnee_terms_pr498", "sog_src_mnee_docs_pr498", "sog_src_mnee_sdk_pr498"],
     "event_detail_kind": "launch",
-    "launch_detail": {
-      "summary": "Official launch of MNEE on 1Sat Ordinals with issuer reserve backing and restricted direct issuance and redemption.",
-      "status": "active",
-      "resolution_date": null,
-      "affected_deployment_ids": [
-        "sog_dep_mnee_1sat_pr498"
-      ],
-      "related_organization_ids": [
-        "sog_issuer_mnee_limited"
-      ]
-    }
+    "launch_detail": {"summary":"Official launch of MNEE on 1Sat Ordinals with issuer reserve backing and restricted direct issuance and redemption.","status":"active","resolution_date":null,"affected_deployment_ids":["sog_dep_mnee_1sat_pr498"],"related_organization_ids":["sog_issuer_mnee_limited"]}
   },
   {
     "id": "sog_ev_bison_eub_launch_pr517",
     "title": "Bison Bank launches the EUB euro electronic-money token",
-    "subject_stablecoin_ids": [
-      "sog_st_bison_eub"
-    ],
-    "subject_organization_ids": [
-      "sog_issuer_bison_bank"
-    ],
-    "evidence_ids": [
-      "sog_src_bison_emt_launch_pr517",
-      "sog_src_bison_eub_product_pr517",
-      "sog_src_bison_eub_whitepaper_pr517"
-    ],
+    "subject_stablecoin_ids": ["sog_st_bison_eub"],
+    "subject_organization_ids": ["sog_issuer_bison_bank"],
+    "evidence_ids": ["sog_src_bison_emt_launch_pr517", "sog_src_bison_eub_product_pr517", "sog_src_bison_eub_whitepaper_pr517"],
     "event_detail_kind": "launch",
-    "launch_detail": {
-      "summary": "Official launch of EUB for approved institutional partners with restricted issuance, redemption, and allowlisted Solana Token-2022 transfers.",
-      "status": "restricted",
-      "resolution_date": null,
-      "affected_deployment_ids": [
-        "sog_dep_bison_eub_solana_pr517"
-      ],
-      "related_organization_ids": [
-        "sog_issuer_bison_bank"
-      ]
-    }
+    "launch_detail": {"summary":"Official launch of EUB for approved institutional partners with restricted issuance, redemption, and allowlisted Solana Token-2022 transfers.","status":"restricted","resolution_date":null,"affected_deployment_ids":["sog_dep_bison_eub_solana_pr517"],"related_organization_ids":["sog_issuer_bison_bank"]}
   },
   {
     "id": "sog_ev_bison_usb_launch_pr517",
     "title": "Bison Bank launches the USB U.S.-dollar electronic-money token",
-    "subject_stablecoin_ids": [
-      "sog_st_bison_usb"
-    ],
-    "subject_organization_ids": [
-      "sog_issuer_bison_bank"
-    ],
-    "evidence_ids": [
-      "sog_src_bison_emt_launch_pr517",
-      "sog_src_bison_usb_product_pr517",
-      "sog_src_bison_usb_whitepaper_pr517"
-    ],
+    "subject_stablecoin_ids": ["sog_st_bison_usb"],
+    "subject_organization_ids": ["sog_issuer_bison_bank"],
+    "evidence_ids": ["sog_src_bison_emt_launch_pr517", "sog_src_bison_usb_product_pr517", "sog_src_bison_usb_whitepaper_pr517"],
     "event_detail_kind": "launch",
-    "launch_detail": {
-      "summary": "Official launch of USB for approved institutional partners with restricted issuance, redemption, and allowlisted Solana Token-2022 transfers.",
-      "status": "restricted",
-      "resolution_date": null,
-      "affected_deployment_ids": [
-        "sog_dep_bison_usb_solana_pr517"
-      ],
-      "related_organization_ids": [
-        "sog_issuer_bison_bank"
-      ]
-    }
+    "launch_detail": {"summary":"Official launch of USB for approved institutional partners with restricted issuance, redemption, and allowlisted Solana Token-2022 transfers.","status":"restricted","resolution_date":null,"affected_deployment_ids":["sog_dep_bison_usb_solana_pr517"],"related_organization_ids":["sog_issuer_bison_bank"]}
+  },
+  {
+    "id": "sog_ev_jpyr_ethereum_documented_20260517",
+    "title": "JPYR Ethereum deployment documented",
+    "subject_stablecoin_ids": ["sog_st_jpyr"],
+    "subject_organization_ids": ["sog_org_jpyr_organization"],
+    "evidence_ids": ["sog_src_jpyr_metamask_20260823", "sog_src_jpyr_potential_20260823"],
+    "event_detail_kind": "launch",
+    "launch_detail": {"summary":"Public documentation identifies JPYR as an Ethereum stable asset and establishes the reviewed deployment identity. This event records deployment documentation, not a safety or reserve endorsement.","status":"active","resolution_date":null,"affected_deployment_ids":["sog_dep_jpyr_ethereum_20260823"],"related_organization_ids":["sog_org_jpyr_organization"]}
   }
 ]
