@@ -45,6 +45,6 @@
     "bankruptcy_remoteness":"unknown",
     "licensed_or_regulated_as":[],
     "notes":"JPYR is recorded without inferring that an affiliated brand or service operator is the legal token issuer. Holder claim, reserve ownership, reserve segregation, bankruptcy treatment, direct redemption rights and regulatory characterization remain unresolved in the reviewed record.",
-    "evidence_ids":["sog_src_jpyr_potential_20260823","sog_src_jpyr_metamask_20260823","sog_src_jpyr_stablecoins_20260823"]
+    "evidence_ids":["sog_src_jpyr_potential_20260823","sog_src_jpyr_metamask_20260823"]
   }
 ]
