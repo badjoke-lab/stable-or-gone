@@ -24,5 +24,18 @@
     "confidence": "high",
     "last_verified_at": "2026-08-03",
     "notes": "PR #517 shared issuer record. Bison Bank is recorded as the legal issuer, issuance and redemption counterparty, and operator of the approved-partner workflow for EUB and USB. Issuer-level audit statements are not treated as token-specific reserve assurance."
+  },
+  {
+    "id": "sog_org_jpyr_organization",
+    "slug": "jpyr-organization",
+    "name": "JPYR Organization",
+    "organization_type": "other",
+    "legacy_issuer_type": "organization",
+    "jurisdiction": "Unknown",
+    "official_url": "https://izakaya.tech/cryptocurrency/jpyr-potential/",
+    "summary": "Name used in IZAKA-YA-affiliated public material for the organization described as issuing JPYR. The reviewed public record does not establish the exact legal entity, incorporation jurisdiction, or legal redemption obligor behind that name.",
+    "confidence": "low",
+    "last_verified_at": "2026-08-23",
+    "notes": "Do not treat this descriptive organization label as proof of a separately incorporated legal issuer. Legal identity, jurisdiction, reserve manager, redemption obligor, and formal regulatory status require stronger primary documentation."
   }
 ]
