@@ -1,0 +1,95 @@
+{
+  "schema_version": "1.0",
+  "review_id": "sog_growth_300_batch_01_usr_2026_08_23",
+  "status": "reviewed_ready_for_full_record_implementation",
+  "reviewed_at": "2026-08-23",
+  "authority": "config/record-growth-300-authority.json",
+  "canonical_baseline": 119,
+  "candidate": {
+    "proposed_id": "sog_st_usr_resolv",
+    "slug": "resolv-usr",
+    "name": "Resolv USD",
+    "symbol": "USR",
+    "issuer_or_operator": "RDAL / Resolv",
+    "reference_asset": "USD",
+    "duplicate_review": {
+      "canonical_id_collision": false,
+      "symbol_collision_reviewed": true,
+      "notes": "Repository search found no existing sog_st_usr canonical identity. Candidate is Resolv USD and must not be confused with unrelated historical USDN/USR-like symbols or stUSR/wstUSR derivative identities."
+    }
+  },
+  "reviewed_facts": {
+    "current_product": "Resolv documentation identifies USR as its stablecoin and describes active mint and redemption operations.",
+    "issuer_legal_scope": "Resolv Terms of Service state that RDAL issues and redeems USR and holds the Resolv Collateral Pool backing issued USR.",
+    "peg_and_redemption": "USR is denominated in USD on a 1-to-1 basis; current protocol documentation describes minting and redemption against supported liquid collateral, with redemption within 24 hours and instant in selected cases.",
+    "backing_model": "Current Resolv documentation describes USR as fully collateralized by ETH, BTC, and USD-neutral assets allocated across DeFi strategies, with an additional RLP protection layer.",
+    "yield_identity_boundary": "USR itself is described as non-yield-bearing; stUSR and wstUSR are separate staking/receipt identities and must not be merged into the canonical USR stable-asset identity.",
+    "deployment_identity": "Official Resolv smart-contract documentation publishes exact USR token addresses for Ethereum, Base, BNB Chain, Berachain, HyperEVM, Soneium, TAC, and Arbitrum.",
+    "launch_evidence": "Resolv's 2024-08-14 official launch-era publication states that Resolv launched USR and was moving toward broader public adoption. Exact first mint timestamp remains separate from the dated publication and must not be inferred.",
+    "material_incident": "Resolv's current official site identifies a March 22, 2026 security incident involving unauthorized USR minting, states that the collateral pool remained intact with no underlying asset loss, and links an April 4, 2026 postmortem covering attack vector, containment, and recovery."
+  },
+  "primary_sources": [
+    {
+      "claim_scope": ["identity", "current_product", "mint", "redeem", "collateral_model"],
+      "url": "https://docs.resolv.xyz/",
+      "publisher": "Resolv"
+    },
+    {
+      "claim_scope": ["identity", "peg", "redemption", "non_yield_usr", "protection_layer"],
+      "url": "https://docs.resolv.xyz/litepaper/overview/usr",
+      "publisher": "Resolv"
+    },
+    {
+      "claim_scope": ["legal_issuer", "legal_redemption_counterparty", "collateral_pool_claim"],
+      "url": "https://docs.resolv.xyz/litepaper/legal/terms-of-service",
+      "publisher": "Resolv"
+    },
+    {
+      "claim_scope": ["deployment_addresses", "network_lineage"],
+      "url": "https://docs.resolv.xyz/litepaper/resources/smart-contracts",
+      "publisher": "Resolv"
+    },
+    {
+      "claim_scope": ["launch_context", "dated_launch_statement"],
+      "url": "https://resolv.xyz/blog/resolv-launches-blueprint-nft-here-s-how-to-claim-yours",
+      "publisher": "Resolv"
+    },
+    {
+      "claim_scope": ["current_incident_notice", "incident_date", "collateral_loss_statement", "postmortem_presence"],
+      "url": "https://resolv.xyz/",
+      "publisher": "Resolv"
+    }
+  ],
+  "known_unknowns_to_preserve": [
+    "exact first on-chain mint timestamp and first circulating supply of USR",
+    "complete legal identity and jurisdictional registration details for RDAL beyond the reviewed terms text",
+    "historical collateral allocation at launch and at every later material date",
+    "complete March 22 2026 incident transaction set, unauthorized minted amount, recovery amount, and final user-loss accounting until postmortem payload is normalized into canonical event evidence",
+    "current per-jurisdiction access restrictions and whitelist eligibility",
+    "all current mint and redemption limits beyond the reviewed public protocol documentation",
+    "whether every published cross-chain address represents native issuance or a canonical bridged representation; each network must retain its documented canonicality without inference"
+  ],
+  "required_full_record_layers": [
+    "stable_asset",
+    "organization",
+    "organization_relationship",
+    "classification",
+    "reserve_redemption_profile",
+    "launch_event",
+    "security_incident_event",
+    "event_details",
+    "evidence",
+    "evidence_relations",
+    "reserve_context",
+    "known_unknowns",
+    "deployments",
+    "legal_profile",
+    "reserve_components",
+    "income_profile",
+    "candidate_promotion_mapping",
+    "logo_disposition",
+    "native_dossier_and_series_projection"
+  ],
+  "promotion_decision": "ready_for_full_record_implementation",
+  "automatic_promotion": false
+}
