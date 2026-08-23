@@ -2,20 +2,13 @@
   {
     "id": "sog_st_mnee",
     "reserve_profile": {
-      "backing_types": [
-        "cash",
-        "government_securities"
-      ],
+      "backing_types": ["cash", "government_securities"],
       "summary": "Issuer materials describe 1:1 backing using U.S. cash held by a qualified custodian and U.S. Treasury bills with stated duration no longer than 90 days. Current custodian identity and latest category amounts or shares are not published in the reviewed sources, and the terms place reserve composition at MNEE's discretion.",
       "disclosure_status": "monthly_attestation_index_report_body_not_preserved",
       "as_of_date": null,
       "latest_report_id": "sog_rr_mnee_attestation_program_pr498",
       "confidence": "high",
-      "evidence_ids": [
-        "sog_src_mnee_terms_pr498",
-        "sog_src_mnee_transparency_pr498",
-        "sog_src_mnee_attestation_program_pr498"
-      ]
+      "evidence_ids": ["sog_src_mnee_terms_pr498", "sog_src_mnee_transparency_pr498", "sog_src_mnee_attestation_program_pr498"]
     },
     "redemption_profile": {
       "status": "eligible_customers_only",
@@ -26,37 +19,23 @@
       "minimum_amount_text": "USD 100,000 equivalent for fiat redemption under the reviewed terms.",
       "fee_text": "Greater of USD 5,000 or 0.5% of the redemption amount under the reviewed terms.",
       "settlement_time_text": "not stated in the reviewed public source",
-      "jurisdiction_restrictions": [
-        "sanctions_screening_applies",
-        "pep_and_watchlist_screening_applies",
-        "prohibited_jurisdiction_screening_applies",
-        "enhanced_due_diligence_for_higher_risk_cases",
-        "complete_current_inventory_not_recorded"
-      ],
+      "jurisdiction_restrictions": ["sanctions_screening_applies", "pep_and_watchlist_screening_applies", "prohibited_jurisdiction_screening_applies", "enhanced_due_diligence_for_higher_risk_cases", "complete_current_inventory_not_recorded"],
       "redemption_url": "https://www.mnee.io/terms",
       "as_of_date": "2026-08-01",
       "confidence": "high",
-      "evidence_ids": [
-        "sog_src_mnee_terms_pr498"
-      ]
+      "evidence_ids": ["sog_src_mnee_terms_pr498"]
     }
   },
   {
     "id": "sog_st_bison_eub",
     "reserve_profile": {
-      "backing_types": [
-        "other"
-      ],
+      "backing_types": ["other"],
       "summary": "Bison Bank describes EUB as issued and redeemed at par against euro fiat proceeds managed under a conservative high-quality and liquid investment strategy. The reviewed public sources do not establish current token-specific reserve categories, amounts, shares, custodian identity, liabilities, excess reserves, or a token-specific assurance opinion.",
       "disclosure_status": "micar_whitepaper_framework_no_token_specific_attestation",
       "as_of_date": "2026-03-12",
       "latest_report_id": "sog_rr_bison_eub_whitepaper_framework_pr517",
       "confidence": "high",
-      "evidence_ids": [
-        "sog_src_bison_emt_launch_pr517",
-        "sog_src_bison_eub_product_pr517",
-        "sog_src_bison_eub_whitepaper_pr517"
-      ]
+      "evidence_ids": ["sog_src_bison_emt_launch_pr517", "sog_src_bison_eub_product_pr517", "sog_src_bison_eub_whitepaper_pr517"]
     },
     "redemption_profile": {
       "status": "institutional_only",
@@ -67,38 +46,23 @@
       "minimum_amount_text": "not stated in the reviewed public sources",
       "fee_text": "not stated in the reviewed public sources",
       "settlement_time_text": "Within two Lisbon business days after required compliance checks and transfer of EUB under the reviewed whitepaper terms.",
-      "jurisdiction_restrictions": [
-        "institutional_partner_approval_required",
-        "bison_bank_relationship_required",
-        "aml_kyc_screening_applies",
-        "approved_wallet_allowlist_required",
-        "complete_current_partner_and_jurisdiction_inventory_not_recorded"
-      ],
+      "jurisdiction_restrictions": ["institutional_partner_approval_required", "bison_bank_relationship_required", "aml_kyc_screening_applies", "approved_wallet_allowlist_required", "complete_current_partner_and_jurisdiction_inventory_not_recorded"],
       "redemption_url": "https://bisonbank.com/eub/",
       "as_of_date": "2026-08-03",
       "confidence": "high",
-      "evidence_ids": [
-        "sog_src_bison_eub_product_pr517",
-        "sog_src_bison_eub_whitepaper_pr517"
-      ]
+      "evidence_ids": ["sog_src_bison_eub_product_pr517", "sog_src_bison_eub_whitepaper_pr517"]
     }
   },
   {
     "id": "sog_st_bison_usb",
     "reserve_profile": {
-      "backing_types": [
-        "other"
-      ],
+      "backing_types": ["other"],
       "summary": "Bison Bank describes USB as issued and redeemed at par against U.S.-dollar fiat proceeds managed under a conservative high-quality and liquid investment strategy. The reviewed public sources do not establish current token-specific reserve categories, amounts, shares, custodian identity, liabilities, excess reserves, or a token-specific assurance opinion.",
       "disclosure_status": "micar_whitepaper_framework_no_token_specific_attestation",
       "as_of_date": "2026-03-12",
       "latest_report_id": "sog_rr_bison_usb_whitepaper_framework_pr517",
       "confidence": "high",
-      "evidence_ids": [
-        "sog_src_bison_emt_launch_pr517",
-        "sog_src_bison_usb_product_pr517",
-        "sog_src_bison_usb_whitepaper_pr517"
-      ]
+      "evidence_ids": ["sog_src_bison_emt_launch_pr517", "sog_src_bison_usb_product_pr517", "sog_src_bison_usb_whitepaper_pr517"]
     },
     "redemption_profile": {
       "status": "institutional_only",
@@ -109,20 +73,37 @@
       "minimum_amount_text": "not stated in the reviewed public sources",
       "fee_text": "not stated in the reviewed public sources",
       "settlement_time_text": "Within two Lisbon business days after required compliance checks and transfer of USB under the reviewed whitepaper terms.",
-      "jurisdiction_restrictions": [
-        "institutional_partner_approval_required",
-        "bison_bank_relationship_required",
-        "aml_kyc_screening_applies",
-        "approved_wallet_allowlist_required",
-        "complete_current_partner_and_jurisdiction_inventory_not_recorded"
-      ],
+      "jurisdiction_restrictions": ["institutional_partner_approval_required", "bison_bank_relationship_required", "aml_kyc_screening_applies", "approved_wallet_allowlist_required", "complete_current_partner_and_jurisdiction_inventory_not_recorded"],
       "redemption_url": "https://bisonbank.com/usb/",
       "as_of_date": "2026-08-03",
       "confidence": "high",
-      "evidence_ids": [
-        "sog_src_bison_usb_product_pr517",
-        "sog_src_bison_usb_whitepaper_pr517"
-      ]
+      "evidence_ids": ["sog_src_bison_usb_product_pr517", "sog_src_bison_usb_whitepaper_pr517"]
+    }
+  },
+  {
+    "id": "sog_st_jpyr",
+    "reserve_profile": {
+      "backing_types": ["unknown"],
+      "summary": "Reviewed public materials do not establish a single consistent backing model for JPYR. Descriptions conflict between reserve-like framing and crypto/DeFi collateral framing, and no independent token-specific reserve assurance is established in the reviewed record.",
+      "disclosure_status": "conflicting_public_descriptions_no_independent_reserve_assurance",
+      "as_of_date": null,
+      "latest_report_id": null,
+      "confidence": "medium",
+      "evidence_ids": ["sog_src_jpyr_potential_20260823", "sog_src_jpyr_stablecoins_20260823"]
+    },
+    "redemption_profile": {
+      "status": "unknown",
+      "settlement_asset": "unknown",
+      "eligible_parties": "not established in the reviewed public record",
+      "retail_access": "A direct JPY fiat-redemption right, redemption obligor, eligibility rules, fees, minimums, and settlement timing are not established in the reviewed public record.",
+      "institutional_access": "not established in the reviewed public record",
+      "minimum_amount_text": "unknown",
+      "fee_text": "unknown",
+      "settlement_time_text": "unknown",
+      "jurisdiction_restrictions": ["complete_current_redemption_and_jurisdiction_terms_not_established"],
+      "as_of_date": null,
+      "confidence": "medium",
+      "evidence_ids": ["sog_src_jpyr_potential_20260823", "sog_src_jpyr_metamask_20260823"]
     }
   }
 ]
