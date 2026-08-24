@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "status": "reviewed_growth_checkpoint",
   "checkpoint_id": "sog_stats_jpyr_canonical_120_2026_08_23",
-  "checkpoint_kind": "canonical_growth_checkpoint",
+  "checkpoint_kind": "controlled_growth_checkpoint",
   "recorded_at": "2026-08-23",
   "registry_version": "pr598-jpyr-material-concerns",
   "asset_count": 120,
@@ -23,5 +23,5 @@
     "market_access_records": 12,
     "detail_routes": 423
   },
-  "notes": "Reviewed statistics-history pointer for JPYR canonical growth. Historical snapshots remain immutable; this pointer advances the current canonical source to the 120-asset JPYR checkpoint."
+  "notes": "Reviewed statistics-history pointer for JPYR controlled growth. Historical snapshots remain immutable; this pointer advances the current canonical source to the 120-asset JPYR checkpoint."
 }
