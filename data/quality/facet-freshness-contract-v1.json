@@ -2,8 +2,8 @@
   "schema_version": "1.0",
   "contract_id": "sog_facet_freshness_contract_pr342_v1",
   "status": "canonical_internal_derivation_contract",
-  "as_of_date": "2026-08-22",
-  "review_checkpoint_id": "2026-08-22-pr593-mnee-june-2026-attestation-boundary",
+  "as_of_date": "2026-08-23",
+  "review_checkpoint_id": "2026-08-23-pr598-jpyr-material-concerns",
   "comparison_contract_id": "sog_comparison_readiness_contract_pr336_v1",
   "market_access_governance_id": "sog_market_access_governance_v1_pr341",
   "freshness_states": [
@@ -246,9 +246,9 @@
     }
   ],
   "output_contract": {
-    "asset_count": 119,
+    "asset_count": 120,
     "dimension_count": 19,
-    "cell_count": 2261,
+    "cell_count": 2280,
     "per_asset_per_dimension_required": true,
     "single_composite_score_forbidden": true,
     "public_output": false,

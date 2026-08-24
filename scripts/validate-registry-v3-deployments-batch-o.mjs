@@ -1,15 +1,20 @@
 import fs from 'node:fs';
+import path from 'node:path';
 
-const path = new URL('./validate-registry-v3-deployments.mjs', import.meta.url);
-let source = fs.readFileSync(path, 'utf8');
+const scriptPath = new URL('./validate-registry-v3-deployments.mjs', import.meta.url);
+let source = fs.readFileSync(scriptPath, 'utf8');
 const anchor = 'const baseline = readJson(baselinePath) ?? {};';
 if (!source.includes(anchor)) throw new Error('deployment baseline anchor missing');
 const replacement = `
 const baselineBase = readJson(baselinePath) ?? {};
 const baselineGroups = { ...(baselineBase.data_groups ?? {}) };
 const minimumCounts = { ...(baselineBase.minimum_counts ?? {}) };
-for (const suffix of ['o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'za', 'zb', 'zc', 'zd']) {
-  const overlayPath = \`docs/migration/registry-v2-baseline-batch-\${suffix}.json\`;
+const migrationDir = path.join(root, 'docs/migration');
+const overlayPaths = fs.readdirSync(migrationDir)
+  .filter((name) => /^registry-v2-baseline-batch-[a-z]+\\.json$/i.test(name))
+  .sort()
+  .map((name) => \`docs/migration/\${name}\`);
+for (const overlayPath of overlayPaths) {
   const overlay = readJson(overlayPath) ?? {};
   for (const [name, value] of Object.entries(overlay.minimum_counts ?? {})) {
     if (Number.isFinite(value) && Number.isFinite(minimumCounts[name])) minimumCounts[name] = Math.max(minimumCounts[name], value);
