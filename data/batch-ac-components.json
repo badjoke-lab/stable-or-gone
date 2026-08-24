@@ -13,10 +13,7 @@
     "custodian_organization_id": null,
     "as_of_date": null,
     "confidence": "medium_high",
-    "evidence_ids": [
-      "sog_src_mnee_attestation_program_pr498",
-      "sog_src_mnee_terms_pr498"
-    ],
+    "evidence_ids": ["sog_src_mnee_attestation_program_pr498", "sog_src_mnee_terms_pr498"],
     "notes": "The 2026-08-01 maintenance review did not establish the current custodian identity, latest amount, or latest reserve share. The terms state reserve composition is controlled at MNEE's discretion."
   },
   {
@@ -33,10 +30,7 @@
     "custodian_organization_id": null,
     "as_of_date": null,
     "confidence": "medium_high",
-    "evidence_ids": [
-      "sog_src_mnee_attestation_program_pr498",
-      "sog_src_mnee_docs_pr498"
-    ],
+    "evidence_ids": ["sog_src_mnee_attestation_program_pr498", "sog_src_mnee_docs_pr498"],
     "notes": "The 2026-08-01 maintenance review did not establish the latest maturity distribution, custodian, amount, or reserve share."
   },
   {
@@ -53,10 +47,7 @@
     "custodian_organization_id": null,
     "as_of_date": null,
     "confidence": "medium_high",
-    "evidence_ids": [
-      "sog_src_bison_eub_product_pr517",
-      "sog_src_bison_eub_whitepaper_pr517"
-    ],
+    "evidence_ids": ["sog_src_bison_eub_product_pr517", "sog_src_bison_eub_whitepaper_pr517"],
     "notes": "This component preserves the issuer's general reserve-management claim without inventing cash, deposit, security, maturity, amount, share, or custodian facts. It is not a token-specific attestation component."
   },
   {
@@ -73,10 +64,24 @@
     "custodian_organization_id": null,
     "as_of_date": null,
     "confidence": "medium_high",
-    "evidence_ids": [
-      "sog_src_bison_usb_product_pr517",
-      "sog_src_bison_usb_whitepaper_pr517"
-    ],
+    "evidence_ids": ["sog_src_bison_usb_product_pr517", "sog_src_bison_usb_whitepaper_pr517"],
     "notes": "This component preserves the issuer's general reserve-management claim without inventing cash, deposit, security, maturity, amount, share, or custodian facts. It is not a token-specific attestation component."
+  },
+  {
+    "id": "sog_rc_jpyr_unresolved_backing_20260823",
+    "stablecoin_id": "sog_st_jpyr",
+    "reserve_report_id": null,
+    "asset_category": "unknown",
+    "asset_label": "Backing composition unresolved: reviewed public descriptions are inconsistent and no independently assured token-specific reserve composition is established",
+    "share_percent": null,
+    "amount_text": null,
+    "currency": "JPY",
+    "liquidity_class": "unknown",
+    "maturity_bucket": "unknown",
+    "custodian_organization_id": null,
+    "as_of_date": null,
+    "confidence": "medium",
+    "evidence_ids": ["sog_src_jpyr_potential_20260823", "sog_src_jpyr_metamask_20260823"],
+    "notes": "This explicit unknown component exists to preserve the unresolved reserve boundary. It does not infer cash, deposits, crypto collateral, custody, allocation, or assurance facts that the reviewed evidence does not establish."
   }
 ]

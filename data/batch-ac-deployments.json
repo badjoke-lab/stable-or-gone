@@ -7,15 +7,9 @@
     "token_standard": "1Sat Ordinals / BSV-21",
     "contract_address": "ae59f3b898ec61acbdb6cc7a245fabeded0c094bf046f35206a3aec60ef88127_0",
     "status": "active",
-    "control_event_ids": [
-      "sog_ev_mnee_launch_pr498"
-    ],
+    "control_event_ids": ["sog_ev_mnee_launch_pr498"],
     "notes": "Issuer-native 1Sat Ordinals deployment. The exact mainnet token ID is published in the official @mnee/ts-sdk 1.2.0 package. The 2026-08-01 maintenance review did not establish current mint, freeze, blacklist, pause, recovery, or authority configuration for this deployment.",
-    "evidence_ids": [
-      "sog_src_mnee_launch_pr498",
-      "sog_src_mnee_docs_pr498",
-      "sog_src_mnee_sdk_pr498"
-    ],
+    "evidence_ids": ["sog_src_mnee_launch_pr498", "sog_src_mnee_docs_pr498", "sog_src_mnee_sdk_pr498"],
     "canonicality": "issuer_native",
     "origin_deployment_id": null,
     "bridge_operator_organization_id": null,
@@ -33,12 +27,7 @@
     "status": "active",
     "control_event_ids": [],
     "notes": "Issuer-supported ERC-20 deployment behind a TransparentUpgradeableProxy. Explorer records show the initial implementation upgrade on 2024-03-21 and a later upgrade on 2025-09-15; the active verified source is labelled MNEEv2 and includes PausableUpgradeable. This records upgradeability and a pause-capable code surface only. Current admin and role-holder addresses, operational pause or freeze state, post-upgrade mint, burn, redeem, or rescue permissions, and first public Ethereum issuance date remain unresolved.",
-    "evidence_ids": [
-      "sog_src_mnee_docs_pr498",
-      "sog_src_mnee_faq_pr498",
-      "sog_src_mnee_terms_pr498",
-      "sog_src_mnee_ethereum_pr498"
-    ],
+    "evidence_ids": ["sog_src_mnee_docs_pr498", "sog_src_mnee_faq_pr498", "sog_src_mnee_terms_pr498", "sog_src_mnee_ethereum_pr498"],
     "canonicality": "issuer_native",
     "origin_deployment_id": null,
     "bridge_operator_organization_id": null,
@@ -54,14 +43,9 @@
     "token_standard": "Solana Token-2022",
     "contract_address": null,
     "status": "active",
-    "control_event_ids": [
-      "sog_ev_bison_eub_launch_pr517"
-    ],
+    "control_event_ids": ["sog_ev_bison_eub_launch_pr517"],
     "notes": "Issuer-native Solana Token-2022 deployment restricted to approved wallets. The reviewed official EUB whitepaper records the digital-token identifier field as not applicable, and no exact mint received the required second authoritative or direct on-chain confirmation. Current mint, permanent delegate, transfer-hook, allowlist, freeze, block, recall, and administrative role addresses and operational states remain unresolved.",
-    "evidence_ids": [
-      "sog_src_bison_eub_product_pr517",
-      "sog_src_bison_eub_whitepaper_pr517"
-    ],
+    "evidence_ids": ["sog_src_bison_eub_product_pr517", "sog_src_bison_eub_whitepaper_pr517"],
     "canonicality": "issuer_native",
     "origin_deployment_id": null,
     "bridge_operator_organization_id": null,
@@ -77,19 +61,32 @@
     "token_standard": "Solana Token-2022",
     "contract_address": null,
     "status": "active",
-    "control_event_ids": [
-      "sog_ev_bison_usb_launch_pr517"
-    ],
+    "control_event_ids": ["sog_ev_bison_usb_launch_pr517"],
     "notes": "Issuer-native Solana Token-2022 deployment restricted to approved wallets. The reviewed official USB whitepaper records the digital-token identifier field as not applicable, and no exact mint received the required second authoritative or direct on-chain confirmation. Current mint, permanent delegate, transfer-hook, allowlist, freeze, block, recall, and administrative role addresses and operational states remain unresolved.",
-    "evidence_ids": [
-      "sog_src_bison_usb_product_pr517",
-      "sog_src_bison_usb_whitepaper_pr517"
-    ],
+    "evidence_ids": ["sog_src_bison_usb_product_pr517", "sog_src_bison_usb_whitepaper_pr517"],
     "canonicality": "issuer_native",
     "origin_deployment_id": null,
     "bridge_operator_organization_id": null,
     "mint_authority_type": "issuer_controlled_allowlist_and_current_roles_unverified",
     "contract_version": "Solana Token-2022; exact mint identity not published in reviewed official sources",
+    "is_primary": true
+  },
+  {
+    "id": "sog_dep_jpyr_ethereum_20260823",
+    "stablecoin_id": "sog_st_jpyr",
+    "chain": "Ethereum",
+    "deployment_type": "erc20",
+    "token_standard": "ERC-20",
+    "contract_address": "0xAf5D2cf39F2d4E2F5900D6cf37ab3596866347e4",
+    "status": "active",
+    "control_event_ids": ["sog_ev_jpyr_ethereum_documented_20260517"],
+    "notes": "Ethereum contract identity is published by an IZAKA-YA-affiliated MetaMask guide and corroborated by Etherscan. Affiliated material states that mint, burn and transfer-stop functionality exists and also states that no formal third-party audit had been completed as of June 2026. Current role-holder addresses, upgradeability, pause/freeze state, mint policy, burn policy and first on-chain issuance date remain unresolved.",
+    "evidence_ids": ["sog_src_jpyr_metamask_20260823", "sog_src_jpyr_potential_20260823", "sog_src_jpyr_etherscan_20260823"],
+    "canonicality": "issuer_native",
+    "origin_deployment_id": null,
+    "bridge_operator_organization_id": null,
+    "mint_authority_type": "issuer_claimed_current_roles_unverified",
+    "contract_version": "ERC-20; exact administrative role configuration and audit status require independent review",
     "is_primary": true
   }
 ]

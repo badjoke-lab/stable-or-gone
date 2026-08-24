@@ -1,0 +1,32 @@
+---
+import { formatPublicLabel } from '../utils/displayLabels';
+
+const { coin, reserveReports = [], openQuestions = [], regulatoryNotes = [], issuerControlEvents = [] } = Astro.props;
+const redemption = coin.redemption_profile ?? {};
+const concerns = [];
+
+if (reserveReports.length === 0) concerns.push({ label: 'Reserve verification', state: 'Not independently evidenced in the registry', tone: 'unknown' });
+if (!redemption.status || redemption.status === 'unknown') concerns.push({ label: 'Redemption clarity', state: 'Unresolved', tone: 'unknown' });
+if (openQuestions.length > 0) concerns.push({ label: 'Material known unknowns', state: `${openQuestions.length} open`, tone: 'warning' });
+if (regulatoryNotes.length > 0) concerns.push({ label: 'Regulatory record', state: `${regulatoryNotes.length} reviewed note${regulatoryNotes.length === 1 ? '' : 's'}`, tone: 'warning' });
+if (issuerControlEvents.length > 0) concerns.push({ label: 'Issuer-control actions', state: `${issuerControlEvents.length} recorded`, tone: 'warning' });
+
+const yieldProfile = coin.yield_or_rebase_profile;
+if (yieldProfile && yieldProfile.mode && !['none', 'not_applicable'].includes(String(yieldProfile.mode))) {
+  concerns.push({ label: 'Yield / incentive mechanics', state: formatPublicLabel(yieldProfile.mode), tone: 'warning' });
+}
+---
+<section class="stablecoin-dossier-section stablecoin-material-concerns" id="material-concerns" aria-labelledby="material-concerns-heading">
+  <div class="stablecoin-section-heading">
+    <p>Material concerns</p>
+    <h2 id="material-concerns-heading">What the reviewed record does not let you assume</h2>
+    <span>Active status and verified evidence are not safety endorsements. Unknown means the reviewed record does not support a stronger conclusion.</span>
+  </div>
+  {concerns.length > 0 ? (
+    <dl class="stablecoin-mechanism-ledger">
+      {concerns.map((item) => <div data-concern-tone={item.tone}><dt>{item.label}</dt><dd>{item.state}</dd></div>)}
+    </dl>
+  ) : (
+    <p>No material concern flag is currently derived from these fields. This is not a safety rating or recommendation.</p>
+  )}
+</section>

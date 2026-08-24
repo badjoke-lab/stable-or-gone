@@ -35,6 +35,7 @@ const v2 = loadRegistryV2Baseline(root);
 const v3base = read('docs/migration/registry-v3-foundation.json');
 const yieldBase = read('docs/migration/registry-v3-income-profiles.json');
 const quality = read('docs/migration/registry-v3-baseline.json');
+const currentCheckpoint = read('docs/migration/current-canonical-checkpoint.json');
 const v3 = {
   ...v3base,
   data_groups: {
@@ -65,6 +66,32 @@ const expected = { ...quality.expected_counts };
 for (const [key, value] of Object.entries(v2.minimum_counts ?? {})) {
   if (Object.hasOwn(counts, key)) expected[key] = value;
 }
+
+const currentExpected = { ...(currentCheckpoint.counts ?? {}), ...(currentCheckpoint.expected_counts ?? {}) };
+const checkpointToStatsKey = {
+  assets: 'stablecoins',
+  organizations: 'organizations',
+  relationships: 'relationships',
+  events: 'events',
+  evidence: 'evidence',
+  evidence_relations: 'evidence_relations',
+  reserve_reports: 'reserve_reports',
+  known_unknowns: 'known_unknowns',
+  regulatory_notes: 'regulatory_notes',
+  deployments: 'deployments',
+  legal_profiles: 'legal_profiles',
+  stable_asset_relationships: 'stable_asset_relationships',
+  reserve_components: 'reserve_components',
+  income_profiles: 'income_profiles'
+};
+for (const [checkpointKey, statsKey] of Object.entries(checkpointToStatsKey)) {
+  if (Object.hasOwn(currentExpected, checkpointKey) && Object.hasOwn(counts, statsKey)) {
+    expected[statsKey] = currentExpected[checkpointKey];
+  }
+}
+if (Object.hasOwn(currentExpected, 'assets') && Object.hasOwn(counts, 'profiles')) expected.profiles = currentExpected.assets;
+if (Object.hasOwn(currentExpected, 'assets') && Object.hasOwn(counts, 'classifications')) expected.classifications = currentExpected.assets;
+
 expected.legal_profiles = count(v3.data_groups.legal_profiles);
 expected.stable_asset_relationships = count(v3.data_groups.stable_asset_relationships);
 expected.reserve_components = count(v3.data_groups.reserve_components);

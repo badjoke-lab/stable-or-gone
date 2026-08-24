@@ -7,10 +7,7 @@
     "start_date": "2025-03-03",
     "end_date": null,
     "status": "active",
-    "evidence_ids": [
-      "sog_src_mnee_launch_pr498",
-      "sog_src_mnee_terms_pr498"
-    ],
+    "evidence_ids": ["sog_src_mnee_launch_pr498", "sog_src_mnee_terms_pr498"],
     "notes": "MNEE Limited is recorded as the legal issuer and direct issuance/redemption counterparty under the reviewed terms."
   },
   {
@@ -21,11 +18,7 @@
     "start_date": "2026-05-06",
     "end_date": null,
     "status": "active",
-    "evidence_ids": [
-      "sog_src_bison_emt_launch_pr517",
-      "sog_src_bison_eub_product_pr517",
-      "sog_src_bison_eub_whitepaper_pr517"
-    ],
+    "evidence_ids": ["sog_src_bison_emt_launch_pr517", "sog_src_bison_eub_product_pr517", "sog_src_bison_eub_whitepaper_pr517"],
     "notes": "Bison Bank, S.A. is recorded as EUB's legal issuer, direct issuance and redemption counterparty, and operator of the approved institutional-partner workflow."
   },
   {
@@ -36,11 +29,18 @@
     "start_date": "2026-05-06",
     "end_date": null,
     "status": "active",
-    "evidence_ids": [
-      "sog_src_bison_emt_launch_pr517",
-      "sog_src_bison_usb_product_pr517",
-      "sog_src_bison_usb_whitepaper_pr517"
-    ],
+    "evidence_ids": ["sog_src_bison_emt_launch_pr517", "sog_src_bison_usb_product_pr517", "sog_src_bison_usb_whitepaper_pr517"],
     "notes": "Bison Bank, S.A. is recorded as USB's legal issuer, direct issuance and redemption counterparty, and operator of the approved institutional-partner workflow."
+  },
+  {
+    "id": "sog_rel_jpyr_jpyr_org_20260823",
+    "stablecoin_id": "sog_st_jpyr",
+    "organization_id": "sog_org_jpyr_organization",
+    "role": "brand_owner",
+    "start_date": null,
+    "end_date": null,
+    "status": "active",
+    "evidence_ids": ["sog_src_jpyr_potential_20260823"],
+    "notes": "IZAKA-YA-affiliated material names JPYR Organization as the issuing organization. The relationship is intentionally not classified as legal_issuer because exact legal identity and legal redemption obligations are not established by reviewed primary documentation."
   }
 ]

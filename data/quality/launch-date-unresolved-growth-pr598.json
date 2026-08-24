@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0",
+  "review_pr": 598,
+  "records": [
+    {
+      "stablecoin_id": "sog_st_jpyr",
+      "category": "C",
+      "best_known_range": "Ethereum contract documented by 2026-05-17; original first issuance and public launch day unresolved",
+      "reason_code": "documented_contract_not_original_launch_boundary",
+      "review_note": "Reviewed IZAKA-YA material documents an Ethereum JPYR contract and later product operation, but does not establish the original first token issuance, first mint, first redeemable-service day, or first public availability boundary. No day is inferred from documentation or later campaign dates.",
+      "last_reviewed": "2026-08-23",
+      "reviewed_sources": [
+        "https://izakaya.tech/wallet-exchange/metamask-jpyr-izky-guide/",
+        "https://izakaya.tech/cryptocurrency/jpyr-potential/"
+      ]
+    }
+  ]
+}

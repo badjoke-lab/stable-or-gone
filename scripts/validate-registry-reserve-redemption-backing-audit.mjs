@@ -13,7 +13,7 @@ const checkpoint = JSON.parse(fs.readFileSync('docs/migration/current-canonical-
 const expectedCounts = checkpoint.expected_counts ?? {};
 const failures = [];
 const expect = (condition, message) => { if (!condition) failures.push(message); };
-const expectedApplicabilityQueueAssets = 12;
+const expectedApplicabilityQueueAssets = 13;
 const expectedCoveredAssets = checkpoint.asset_count - expectedApplicabilityQueueAssets;
 const expectedNoDateRows = 80;
 const expectedRedemptionSourceReviewNeededFields = 9;
@@ -50,7 +50,7 @@ expect(JSON.stringify(report.review_queues?.lifecycle_redemption_warnings ?? [])
 expect((report.review_queues?.issuer_redemption_mechanism_warnings ?? []).length === 0, 'issuer-redemption mechanism conflicts remain');
 expect((report.review_queues?.unbacked_disclosure_warnings ?? []).length === 0, 'unbacked disclosure conflicts remain');
 expect((report.review_queues?.redemption_source_review_needed_fields ?? []).length === expectedRedemptionSourceReviewNeededFields, `redemption source-review-needed queue changed: expected ${expectedRedemptionSourceReviewNeededFields}`);
-expect(JSON.stringify(report.review_queues?.reserve_source_status_unresolved ?? []) === JSON.stringify(['sog_st_eurt', 'sog_st_husd']), 'reserve source-status unresolved queue changed');
+expect(JSON.stringify(report.review_queues?.reserve_source_status_unresolved ?? []) === JSON.stringify(['sog_st_eurt', 'sog_st_husd', 'sog_st_jpyr']), 'reserve source-status unresolved queue changed');
 expect(report.result === 'pass_with_review_queues', `unexpected result ${report.result}`);
 
 if (failures.length) {

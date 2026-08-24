@@ -3,88 +3,56 @@
     "id": "sog_st_mnee",
     "lifecycle_status": "active",
     "issuance_status": "restricted",
-    "peg_reference": {
-      "kind": "fiat",
-      "asset": "USD",
-      "target_value": 1,
-      "notes": "MNEE targets one U.S. dollar through issuer reserve backing and verified-customer redemption."
-    },
-    "backing_types": [
-      "cash",
-      "government_securities"
-    ],
+    "peg_reference": {"kind": "fiat", "asset": "USD", "target_value": 1, "notes": "MNEE targets one U.S. dollar through issuer reserve backing and verified-customer redemption."},
+    "backing_types": ["cash", "government_securities"],
     "stabilization_mechanism": "issuer_redemption",
     "governance_model": "centralized",
     "asset_class": "stablecoin",
     "reference_target": "fiat",
     "redemption_or_exit_model": "issuer_redemption",
-    "yield_or_rebase_profile": {
-      "mode": "none",
-      "accrual_target": "none",
-      "yield_source": "none",
-      "accrual_mechanism": "none",
-      "rate_type": "none",
-      "rate_source": null,
-      "notes": "MNEE terms state that the token is not designed to create returns for holders."
-    },
+    "yield_or_rebase_profile": {"mode": "none", "accrual_target": "none", "yield_source": "none", "accrual_mechanism": "none", "rate_type": "none", "rate_source": null, "notes": "MNEE terms state that the token is not designed to create returns for holders."},
     "classification_notes": "Fiat-backed, centrally issued USD stablecoin with restricted direct issuance and redemption and no issuer-native holder yield."
   },
   {
     "id": "sog_st_bison_eub",
     "lifecycle_status": "restricted",
     "issuance_status": "restricted",
-    "peg_reference": {
-      "kind": "fiat",
-      "asset": "EUR",
-      "target_value": 1,
-      "notes": "EUB targets one euro through Bison Bank issuance and redemption at par for approved institutional partners."
-    },
-    "backing_types": [
-      "other"
-    ],
+    "peg_reference": {"kind": "fiat", "asset": "EUR", "target_value": 1, "notes": "EUB targets one euro through Bison Bank issuance and redemption at par for approved institutional partners."},
+    "backing_types": ["other"],
     "stabilization_mechanism": "issuer_redemption",
     "governance_model": "centralized",
     "asset_class": "stablecoin",
     "reference_target": "fiat",
     "redemption_or_exit_model": "issuer_redemption",
-    "yield_or_rebase_profile": {
-      "mode": "none",
-      "accrual_target": "none",
-      "yield_source": "none",
-      "accrual_mechanism": "none",
-      "rate_type": "none",
-      "rate_source": null,
-      "notes": "The EUB whitepaper states that holders receive no interest or other remuneration merely by holding EUB."
-    },
+    "yield_or_rebase_profile": {"mode": "none", "accrual_target": "none", "yield_source": "none", "accrual_mechanism": "none", "rate_type": "none", "rate_source": null, "notes": "The EUB whitepaper states that holders receive no interest or other remuneration merely by holding EUB."},
     "classification_notes": "Centrally issued euro electronic-money token with institutional-only access, allowlisted transfers, issuer redemption at par, and reserve composition retained as unknown beyond the issuer's high-quality and liquid investment framework."
   },
   {
     "id": "sog_st_bison_usb",
     "lifecycle_status": "restricted",
     "issuance_status": "restricted",
-    "peg_reference": {
-      "kind": "fiat",
-      "asset": "USD",
-      "target_value": 1,
-      "notes": "USB targets one U.S. dollar through Bison Bank issuance and redemption at par for approved institutional partners."
-    },
-    "backing_types": [
-      "other"
-    ],
+    "peg_reference": {"kind": "fiat", "asset": "USD", "target_value": 1, "notes": "USB targets one U.S. dollar through Bison Bank issuance and redemption at par for approved institutional partners."},
+    "backing_types": ["other"],
     "stabilization_mechanism": "issuer_redemption",
     "governance_model": "centralized",
     "asset_class": "stablecoin",
     "reference_target": "fiat",
     "redemption_or_exit_model": "issuer_redemption",
-    "yield_or_rebase_profile": {
-      "mode": "none",
-      "accrual_target": "none",
-      "yield_source": "none",
-      "accrual_mechanism": "none",
-      "rate_type": "none",
-      "rate_source": null,
-      "notes": "The USB whitepaper states that holders receive no interest or other remuneration merely by holding USB."
-    },
+    "yield_or_rebase_profile": {"mode": "none", "accrual_target": "none", "yield_source": "none", "accrual_mechanism": "none", "rate_type": "none", "rate_source": null, "notes": "The USB whitepaper states that holders receive no interest or other remuneration merely by holding USB."},
     "classification_notes": "Centrally issued U.S.-dollar electronic-money token with institutional-only access, allowlisted transfers, issuer redemption at par, and reserve composition retained as unknown beyond the issuer's high-quality and liquid investment framework."
+  },
+  {
+    "id": "sog_st_jpyr",
+    "lifecycle_status": "active",
+    "issuance_status": "unknown",
+    "peg_reference": {"kind": "fiat", "asset": "JPY", "target_value": 1, "notes": "JPYR-affiliated public material describes a target of approximately one Japanese yen per JPYR."},
+    "backing_types": ["unknown"],
+    "stabilization_mechanism": "unknown",
+    "governance_model": "centralized",
+    "asset_class": "stablecoin",
+    "reference_target": "fiat",
+    "redemption_or_exit_model": "unknown",
+    "yield_or_rebase_profile": {"mode": "none", "accrual_target": "none", "yield_source": "none", "accrual_mechanism": "none", "rate_type": "none", "rate_source": null, "notes": "No reviewed source establishes issuer-native automatic yield on JPYR itself. Separate IZAKA-YA lending promotions involving JPYR are external lending-product terms and must not be collapsed into the token's native mechanics."},
+    "classification_notes": "JPY-referenced ERC-20 stablecoin classification. Public backing descriptions are materially inconsistent, direct redemption is unresolved, and no independent reserve-assurance series was identified in the reviewed record."
   }
 ]

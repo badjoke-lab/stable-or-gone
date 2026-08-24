@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0",
-  "canonical_records": 119,
+  "canonical_records": 120,
   "direct_logo_records": 101,
-  "neutral_fallback_records": 18,
+  "neutral_fallback_records": 19,
   "display_logo_mark_types": [
     "token_logo",
     "official_product_mark",
@@ -24,6 +24,7 @@
     "dynamic-set-dollar",
     "eurau",
     "gbpq",
+    "jpyr",
     "plnq",
     "poundtoken",
     "sekau",

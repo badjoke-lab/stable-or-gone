@@ -40,5 +40,19 @@
     "source_count": 3,
     "event_status_effect": "restricted",
     "notes": "The canonical launch date follows the official 2026-05-06 public launch article. The whitepaper's 2026-04-10 offer start date is retained as context and not substituted for the first verified public launch statement or an unknown first on-chain mint date."
+  },
+  {
+    "id": "sog_ev_jpyr_ethereum_documented_20260517",
+    "stablecoin_id": "sog_st_jpyr",
+    "issuer_id": "sog_org_jpyr_organization",
+    "event_type": "other",
+    "event_date": "2026-05-17",
+    "title": "IZAKA-YA-affiliated guide publishes the JPYR Ethereum contract",
+    "description": "An IZAKA-YA-affiliated MetaMask guide identified JPYR as an Ethereum token and published contract address 0xAf5D2cf39F2d4E2F5900D6cf37ab3596866347e4. This event records public deployment documentation, not the unknown original token launch date.",
+    "impact_level": "medium",
+    "confidence": "high",
+    "source_count": 2,
+    "event_status_effect": "active",
+    "notes": "Do not substitute this documentation date for first mint, first circulation, or launch. Explorer evidence corroborates the contract identity but not reserve backing or redemption rights."
   }
 ]
