@@ -3513,7 +3513,7 @@
     },
     {
       "checkpoint_id": "sog_stats_jpyr_canonical_120_2026_08_23",
-      "checkpoint_kind": "canonical_growth_checkpoint",
+      "checkpoint_kind": "controlled_growth_checkpoint",
       "source_checkpoint_id": "sog_stats_pr593_mnee_june_2026_attestation_boundary_2026_08_22",
       "canonical_checkpoint_id": "sog_jpyr_canonical_120_2026_08_23",
       "recorded_at": "2026-08-23",
