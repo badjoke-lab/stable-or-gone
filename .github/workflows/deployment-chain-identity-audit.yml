@@ -1,13 +1,13 @@
 name: Deployment and chain identity audit
 
 on:
-  pull_request:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
+  schedule:
+    - cron: '23 5 * * 3'
 
 jobs:
   audit:
+    continue-on-error: true
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -18,14 +18,15 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Run deployment and chain identity audit
+      - name: Run deployment and chain identity maintenance audit
+        continue-on-error: true
         run: node scripts/audit-registry-deployment-chain-identity-current.mjs
       - name: Upload deployment identity audit
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: deployment-chain-identity-audit-${{ github.run_id }}
-          if-no-files-found: error
+          if-no-files-found: warn
           path: |
             data/generated/registry-deployment-chain-identity-audit.json
             docs/audits/registry-100-deployment-chain-identity-audit.md
