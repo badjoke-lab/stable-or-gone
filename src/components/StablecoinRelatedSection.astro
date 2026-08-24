@@ -1,10 +1,24 @@
 ---
 import RelatedGuides from './RelatedGuides.astro';
 const { relatedGuides, primaryOrganization, primaryOrganizationTaxonomy, eventCount } = Astro.props;
+const isJpyr = Astro.url.pathname === '/stablecoin/jpyr/';
+const crossRegistryLinks = isJpyr ? [
+  { href: 'https://cya.badjoke-lab.com/platform/izaka-ya/', title: 'Crypto Yield Archive — IZAKA-YA', note: 'Lending / yield platform record for the IZAKA-YA service.' },
+  { href: 'https://wlr.badjoke-lab.com/wallet/izaka-ya-wallet/', title: 'Wallet Lifecycle Registry — IZAKA-YA Wallet', note: 'Wallet and custody lifecycle record for the IZAKA-YA wallet service.' },
+  { href: 'https://hei.badjoke-lab.com/exchange/izaka-ya/', title: 'Historical Exchange Index — IZAKA-YA', note: 'Exchange / hybrid-service record for IZAKA-YA.' },
+] : [];
 ---
 <section class="stablecoin-dossier-section stablecoin-more" id="more">
   <div class="stablecoin-section-heading"><p>Related records and corrections</p><h2>Corrections and further reading</h2><span>Open connected records, methodology, machine-readable data, or report a correction.</span></div>
   <RelatedGuides guides={relatedGuides} />
+  {crossRegistryLinks.length > 0 && (
+    <>
+      <p class="stablecoin-related-boundary">These are separate public registry records concerning the same IZAKA-YA / JPYR product ecosystem. The links do not assert common legal ownership, issuer status, custody, or safety.</p>
+      <ul class="stablecoin-further-reading" aria-label="Related registry records">
+        {crossRegistryLinks.map((item) => <li><a href={item.href} target="_blank" rel="noreferrer"><strong>{item.title}</strong><span>{item.note}</span></a></li>)}
+      </ul>
+    </>
+  )}
   <ul class="stablecoin-further-reading" aria-label="Corrections and further reading">
     <li><a href="/stablecoins/"><strong>All stablecoins</strong><span>Compare this record with the rest of the archive.</span></a></li>
     {primaryOrganization && <li><a href={`/issuer/${primaryOrganization.slug}/`}><strong>{primaryOrganization.name}</strong><span>{primaryOrganizationTaxonomy?.jurisdiction_label ?? 'Open the connected organization record.'}</span></a></li>}
