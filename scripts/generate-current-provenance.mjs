@@ -89,6 +89,8 @@ for (const [checkpointKey, statsKey] of Object.entries(checkpointToStatsKey)) {
     expected[statsKey] = currentExpected[checkpointKey];
   }
 }
+if (Object.hasOwn(currentExpected, 'assets') && Object.hasOwn(counts, 'profiles')) expected.profiles = currentExpected.assets;
+if (Object.hasOwn(currentExpected, 'assets') && Object.hasOwn(counts, 'classifications')) expected.classifications = currentExpected.assets;
 
 expected.legal_profiles = count(v3.data_groups.legal_profiles);
 expected.stable_asset_relationships = count(v3.data_groups.stable_asset_relationships);
