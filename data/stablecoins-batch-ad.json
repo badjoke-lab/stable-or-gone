@@ -1,0 +1,27 @@
+[
+  {
+    "id": "sog_st_ausd_agora",
+    "slug": "agora-ausd",
+    "name": "AUSD",
+    "symbol": "AUSD",
+    "aliases": ["Agora AUSD", "Agora Digital Dollar"],
+    "status": "active",
+    "issuer_id": "sog_issuer_agora_bermuda",
+    "peg_asset": "USD",
+    "collateral_model": "fiat_reserve_backed",
+    "reserve_disclosure_status": "monthly_reserve_reporting_and_audit_context",
+    "redemption_status": "eligible_customers_only",
+    "who_can_redeem": "Verified customers that satisfy Agora onboarding and eligibility requirements may mint and redeem directly with an Agora entity under the published terms.",
+    "retail_redemption": "market_based_unless_verified_customer",
+    "institutional_redemption": "verified_customer_direct",
+    "minimum_redemption": "not_stated_in_reviewed_public_source",
+    "redemption_region_notes": "Direct minting and redemption depend on verified-customer status, jurisdiction, compliance eligibility, supported settlement rails, and current Agora terms.",
+    "redemption_notes": "Agora describes AUSD as redeemable at par and fully reserved. Direct issuer redemption is not treated as universally available to every holder because the published terms require verified-customer status.",
+    "launch_date": null,
+    "discontinued_date": null,
+    "summary": "U.S.-dollar stablecoin issued by Agora Bermuda Limited, described by Agora as fully reserved and redeemable at par with reserves including short-term U.S. Treasuries, overnight repo, cash, and other liquid assets.",
+    "confidence": "high",
+    "last_verified_at": "2026-08-25",
+    "notes": "Record Growth 119→300 Batch AD. Exact first mint and complete historical deployment chronology remain explicit known unknowns."
+  }
+]
