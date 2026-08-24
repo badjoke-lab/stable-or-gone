@@ -1,0 +1,13 @@
+[
+  {
+    "id": "sog_rel_ausd_agora_bermuda_20260825",
+    "stablecoin_id": "sog_st_ausd_agora",
+    "organization_id": "sog_issuer_agora_bermuda",
+    "role": "legal_issuer",
+    "start_date": null,
+    "end_date": null,
+    "status": "active",
+    "evidence_ids": ["sog_src_ausd_product_20260825", "sog_src_ausd_terms_20260825"],
+    "notes": "Agora Bermuda Limited is recorded as AUSD's legal issuer. Exact first issuance date remains unresolved."
+  }
+]
