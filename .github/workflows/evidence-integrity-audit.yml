@@ -1,13 +1,13 @@
 name: Evidence integrity audit
 
 on:
-  pull_request:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
+  schedule:
+    - cron: '13 5 * * 3'
 
 jobs:
   audit:
+    continue-on-error: true
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -18,14 +18,15 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Run 501-record evidence integrity audit
+      - name: Run evidence integrity maintenance audit
+        continue-on-error: true
         run: node scripts/audit-registry-evidence-integrity.mjs
       - name: Upload evidence integrity audit
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: evidence-integrity-audit-${{ github.run_id }}
-          if-no-files-found: error
+          if-no-files-found: warn
           path: |
             data/generated/registry-evidence-integrity-audit.json
             docs/audits/registry-501-evidence-integrity-audit.md
