@@ -1,34 +1,38 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "scan_id": "sog_record_growth_300_candidate_scan_01_2026_08_25",
-  "status": "source_backed_candidates_pending_direct_canonical_scan",
+  "status": "corrected_after_direct_canonical_checks",
   "authority": "config/record-growth-300-authority.json",
   "canonical_baseline": 119,
   "target": 300,
   "required_net_new": 181,
   "notes": [
-    "This file is research/staging only and does not promote any asset automatically.",
-    "Repository code search found no current references for the candidate symbols below, but authority requires direct scans of all canonical stable-asset groups before promotion.",
-    "Candidates were selected only where current issuer/operator primary-source material supports identity and stable-asset function."
+    "Research/staging only; no automatic promotion.",
+    "Repository code search was insufficient and produced false negatives. Direct canonical batch reads are authoritative.",
+    "PLNQ and GBPQ were removed from the net-new pool after direct canonical reads found sog_st_plnq and sog_st_gbpq in data/stablecoins-batch-ab.json.",
+    "AUSD is promoted to full-layer research priority. EURQ and USDQ remain pending direct canonical batch confirmation before any implementation."
   ],
   "candidates": [
     {
       "name": "AUSD",
       "symbol": "AUSD",
-      "issuer_or_operator": "Agora Bermuda Limited / Agora Finance",
+      "issuer_or_operator": "Agora Bermuda Limited / Agora",
       "reference_asset": "USD",
       "candidate_type": "stablecoin",
-      "preliminary_duplicate_search": "no repository code-search hit for AUSD",
+      "duplicate_status": "no_collision_found_in_reviewed_direct_batches_so_far",
       "source_backed_facts": [
-        "Agora describes AUSD as a fully reserved digital dollar pegged 1:1 to USD and redeemable at par.",
+        "Agora describes AUSD as fully reserved, pegged 1:1 to USD and redeemable at par.",
         "Agora states reserves include short-term U.S. Treasuries, overnight repo, cash and other liquid assets.",
-        "Agora identifies Agora Bermuda Limited as the issuer and states it is licensed by the Bermuda Monetary Authority."
+        "Agora identifies Agora Bermuda Limited as issuer and states that it is licensed by the Bermuda Monetary Authority.",
+        "Agora publishes monthly reserve reports and identifies Grant Thornton LLP as the independent attestation provider."
       ],
       "primary_sources": [
         "https://www.agora.finance/product/ausd",
-        "https://www.agora.finance/"
+        "https://www.agora.finance/",
+        "https://docs.agora.finance/developer/transparency",
+        "https://static.agora.finance/termsofuse.pdf"
       ],
-      "next_action": "direct_canonical_identity_lineage_scan_then_full_layer_research"
+      "next_action": "full_layer_source_review_and_canonical_implementation"
     },
     {
       "name": "EURQ",
@@ -36,17 +40,13 @@
       "issuer_or_operator": "Quantoz Payments B.V.",
       "reference_asset": "EUR",
       "candidate_type": "stablecoin",
-      "preliminary_duplicate_search": "no repository code-search hit for EURQ",
-      "source_backed_facts": [
-        "Quantoz identifies EURQ as a euro stablecoin issued under its European regulated e-money framework.",
-        "Quantoz states reserves are safeguarded with Tier 1 institutions.",
-        "Quantoz Terms identify EURQ among the electronic money tokens it issues and redeems."
-      ],
+      "duplicate_status": "pending_direct_canonical_confirmation",
       "primary_sources": [
         "https://www.quantoz.com/products/eurq-usdq",
-        "https://www.quantoz.com/q-emt-terms"
+        "https://www.quantoz.com/q-emt-terms",
+        "https://www.quantoz.com/transparency"
       ],
-      "next_action": "direct_canonical_identity_lineage_scan_then_full_layer_research"
+      "next_action": "continue_direct_canonical_batch_scan_before_promotion"
     },
     {
       "name": "USDQ",
@@ -54,59 +54,39 @@
       "issuer_or_operator": "Quantoz Payments B.V.",
       "reference_asset": "USD",
       "candidate_type": "stablecoin",
-      "preliminary_duplicate_search": "no repository code-search hit for USDQ",
-      "source_backed_facts": [
-        "Quantoz identifies USDQ as a USD stablecoin issued under its European regulated e-money framework.",
-        "Quantoz states reserves are safeguarded with Tier 1 institutions.",
-        "Quantoz Terms identify USDQ among the electronic money tokens it issues and redeems."
-      ],
+      "duplicate_status": "pending_direct_canonical_confirmation",
       "primary_sources": [
         "https://www.quantoz.com/products/eurq-usdq",
-        "https://www.quantoz.com/q-emt-terms"
-      ],
-      "next_action": "direct_canonical_identity_lineage_scan_then_full_layer_research"
-    },
-    {
-      "name": "GBPQ",
-      "symbol": "GBPQ",
-      "issuer_or_operator": "Quantoz Payments B.V.",
-      "reference_asset": "GBP",
-      "candidate_type": "stablecoin",
-      "preliminary_duplicate_search": "no repository code-search hit for GBPQ",
-      "source_backed_facts": [
-        "Quantoz Terms identify GBPQ as an electronic money token issued and redeemed by Quantoz Payments B.V.",
-        "Quantoz marketing communications document GBPQ availability in April 2026."
-      ],
-      "primary_sources": [
         "https://www.quantoz.com/q-emt-terms",
-        "https://www.quantoz.com/marketing-communications"
+        "https://www.quantoz.com/transparency"
       ],
-      "next_action": "direct_canonical_identity_lineage_scan_then_full_layer_research"
-    },
+      "next_action": "continue_direct_canonical_batch_scan_before_promotion"
+    }
+  ],
+  "duplicates_removed": [
     {
-      "name": "PLNQ",
+      "name": "Quantoz PLNQ",
       "symbol": "PLNQ",
-      "issuer_or_operator": "Quantoz Payments B.V.",
-      "reference_asset": "PLN",
-      "candidate_type": "stablecoin",
-      "preliminary_duplicate_search": "no repository code-search hit for PLNQ",
-      "source_backed_facts": [
-        "Quantoz Terms identify PLNQ as an electronic money token issued and redeemed by Quantoz Payments B.V.",
-        "Quantoz publishes an Ethereum token identifier for PLNQ and documents April 2026 availability."
-      ],
-      "primary_sources": [
-        "https://www.quantoz.com/q-emt-terms",
-        "https://www.quantoz.com/marketing-communications"
-      ],
-      "next_action": "direct_canonical_identity_lineage_scan_then_full_layer_research"
+      "canonical_id": "sog_st_plnq",
+      "canonical_slug": "plnq",
+      "canonical_file": "data/stablecoins-batch-ab.json",
+      "decision": "exclude_from_net_new_growth"
+    },
+    {
+      "name": "Quantoz GBPQ",
+      "symbol": "GBPQ",
+      "canonical_id": "sog_st_gbpq",
+      "canonical_slug": "gbpq",
+      "canonical_file": "data/stablecoins-batch-ab.json",
+      "decision": "exclude_from_net_new_growth"
     }
   ],
   "promotion_blockers": [
-    "direct scan of all canonical stable-asset groups for identity, alias, symbol, domain, issuer and lineage collisions",
-    "full organization and relationship review",
+    "complete direct canonical identity and lineage scan",
+    "organization and relationship review",
     "launch or earliest supported lifecycle event normalization",
     "evidence identities and evidence relations",
-    "reserve/redemption, legal, income, deployment and known-unknown layers required by current schema",
+    "reserve/redemption, legal, income, deployment and known-unknown layers",
     "logo disposition and native dossier/Series projection validation"
   ]
 }
