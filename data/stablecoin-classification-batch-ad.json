@@ -1,0 +1,16 @@
+[
+  {
+    "id": "sog_st_ausd_agora",
+    "lifecycle_status": "active",
+    "issuance_status": "restricted",
+    "peg_reference": {"kind": "fiat", "asset": "USD", "target_value": 1, "notes": "Agora describes AUSD as a digital dollar redeemable at par for eligible verified customers."},
+    "backing_types": ["cash", "government_securities"],
+    "stabilization_mechanism": "issuer_redemption",
+    "governance_model": "centralized",
+    "asset_class": "stablecoin",
+    "reference_target": "fiat",
+    "redemption_or_exit_model": "issuer_redemption",
+    "yield_or_rebase_profile": {"mode": "none", "accrual_target": "none", "yield_source": "none", "accrual_mechanism": "none", "rate_type": "none", "rate_source": null, "notes": "No reviewed source establishes issuer-native automatic yield or rebase on base AUSD."},
+    "classification_notes": "Centrally issued, fiat-reserve-backed U.S.-dollar stablecoin with direct mint/redeem access limited by verified-customer eligibility."
+  }
+]
