@@ -10,6 +10,8 @@
   "source_checkpoint_id": "sog_pr593_mnee_june_2026_attestation_boundary_119_2026_08_22",
   "previous_checkpoint_id": "sog_pr593_mnee_june_2026_attestation_boundary_119_2026_08_22",
   "source_pr": 598,
+  "growth_pr": 598,
+  "authority_pr": 597,
   "expected_counts": {
     "assets": 120,
     "organizations": 110,
