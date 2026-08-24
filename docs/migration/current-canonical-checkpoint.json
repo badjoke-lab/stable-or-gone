@@ -23,9 +23,9 @@
     "known_unknowns": 357,
     "regulatory_notes": 9,
     "deployments": 187,
-    "legal_profiles": 119,
+    "legal_profiles": 120,
     "stable_asset_relationships": 5,
-    "reserve_components": 153,
+    "reserve_components": 154,
     "income_profiles": 120
   },
   "counts": {
@@ -40,9 +40,9 @@
     "regulatory_notes": 9,
     "deployments": 187,
     "market_access_records": 12,
-    "legal_profiles": 119,
+    "legal_profiles": 120,
     "stable_asset_relationships": 5,
-    "reserve_components": 153,
+    "reserve_components": 154,
     "income_profiles": 120,
     "archive_index_count": 475,
     "archive_not_recorded_count": 114,
