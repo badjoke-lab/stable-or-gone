@@ -1,0 +1,32 @@
+name: Normalize JPYR stats history checkpoint kind
+on:
+  push:
+    branches: [agent/jpyr-material-concerns]
+    paths: [.github/workflows/fix-jpyr-stats-kind.yml]
+permissions:
+  contents: write
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/jpyr-material-concerns
+      - name: Normalize checkpoint kind and remove helper
+        shell: bash
+        run: |
+          node <<'NODE'
+          const fs = require('fs');
+          const p = 'data/stats-history.json';
+          const h = JSON.parse(fs.readFileSync(p,'utf8'));
+          const row = h.snapshots.find(x => x.checkpoint_id === 'sog_stats_jpyr_canonical_120_2026_08_23');
+          if (!row) throw new Error('JPYR history checkpoint missing');
+          row.checkpoint_kind = 'controlled_growth_checkpoint';
+          fs.writeFileSync(p, JSON.stringify(h,null,2)+'\n');
+          NODE
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git rm .github/workflows/fix-jpyr-stats-kind.yml
+          git add data/stats-history.json
+          git commit -m "Normalize JPYR stats history checkpoint kind"
+          git push origin HEAD:agent/jpyr-material-concerns
