@@ -13,5 +13,20 @@
     "confidence": "high",
     "last_verified_at": "2026-07-31",
     "notes": "PR #498 legacy issuer compatibility row. The canonical organization record preserves the reviewed licence and operating context."
+  },
+  {
+    "id": "sog_org_jpyr_organization",
+    "slug": "jpyr-organization",
+    "name": "JPYR Organization",
+    "issuer_type": "organization",
+    "jurisdiction": "Unknown",
+    "related_stablecoins": [
+      "jpyr"
+    ],
+    "official_url": "https://izakaya.tech/cryptocurrency/jpyr-potential/",
+    "summary": "Compatibility row for the descriptive JPYR Organization label used in IZAKA-YA-affiliated public material; exact legal issuer identity remains unresolved.",
+    "confidence": "low",
+    "last_verified_at": "2026-08-23",
+    "notes": "Legacy issuer compatibility only. Do not treat this row as proof of a separately incorporated legal issuer, jurisdiction, redemption obligor, reserve manager, or regulatory status."
   }
 ]
