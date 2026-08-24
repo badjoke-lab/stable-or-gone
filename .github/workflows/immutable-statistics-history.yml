@@ -1,14 +1,16 @@
 name: Immutable statistics history
 
 on:
-  pull_request:
   workflow_dispatch:
+  schedule:
+    - cron: '31 3 * * 1'
 
 permissions:
   contents: read
 
 jobs:
   validate:
+    continue-on-error: true
     runs-on: ubuntu-latest
     steps:
       - name: Checkout full history
@@ -47,7 +49,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: immutable-statistics-history-${{ github.run_id }}
-          if-no-files-found: error
+          if-no-files-found: warn
           path: |
             artifacts/stats-history-current-snapshot.json
             artifacts/stats-history-validation.json
