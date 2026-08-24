@@ -1,0 +1,32 @@
+[
+  {
+    "id": "sog_ku_ausd_first_mint_20260825",
+    "stablecoin_id": "sog_st_ausd_agora",
+    "issuer_id": "sog_issuer_agora_bermuda",
+    "topic": "first_mint_launch_and_initial_circulation",
+    "description": "Reviewed sources establish current AUSD identity and operation but do not establish the exact first on-chain mint timestamp, first public circulation timestamp, or an issuer-confirmed launch day suitable for canonical launch_date.",
+    "severity": "medium",
+    "last_checked_at": "2026-08-25",
+    "notes": "Do not substitute current product documentation dates or contract deployment dates for the unresolved launch boundary."
+  },
+  {
+    "id": "sog_ku_ausd_deployments_controls_20260825",
+    "stablecoin_id": "sog_st_ausd_agora",
+    "issuer_id": "sog_issuer_agora_bermuda",
+    "topic": "complete_deployment_lineage_and_control_authorities",
+    "description": "Agora documents AUSD across multiple blockchains, but the complete current chain-by-chain canonical contract inventory, historical deployment chronology, bridge/native issuance lineage, admin addresses, pause/freeze authorities, upgrade controls, and current role assignments have not yet been normalized from reviewed primary deployment documentation.",
+    "severity": "high",
+    "last_checked_at": "2026-08-25",
+    "notes": "Do not split chain representations into separate stable assets or publish unverified contract identifiers."
+  },
+  {
+    "id": "sog_ku_ausd_access_limits_reserve_history_20260825",
+    "stablecoin_id": "sog_st_ausd_agora",
+    "issuer_id": "sog_issuer_agora_bermuda",
+    "topic": "current_access_limits_and_historical_reserve_allocation",
+    "description": "Verified-customer direct mint and redemption requirements are established, but the complete current country-by-country eligibility inventory, all operational minimums and fees, settlement timing, and token-specific reserve allocation at every historical reporting date have not been normalized into canonical records.",
+    "severity": "medium",
+    "last_checked_at": "2026-08-25",
+    "notes": "Current public reserve categories and service-provider roles are recorded without inventing omitted historical amounts or access terms."
+  }
+]
