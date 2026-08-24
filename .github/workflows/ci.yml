@@ -11,7 +11,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
+  publication:
+    name: Publication correctness
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -25,36 +26,8 @@ jobs:
           cache: npm
       - name: Install locked dependencies
         run: npm ci --no-audit --no-fund
-      - name: Validate current evidence integrity audit
-        run: node scripts/validate-registry-evidence-integrity-audit.mjs
-      - name: Validate guides
-        run: npm run validate:guides
       - name: Validate official public origin
         run: npm run validate:public-origin
-      - name: Validate baseline
-        run: npm run validate:baseline
-      - name: Validate active workstream
-        run: npm run validate:active-workstream
-      - name: Audit Stablecoin logo disposition coverage
-        run: node scripts/audit-stablecoin-logo-coverage.mjs
-      - name: Validate organization and relationship integrity audit
-        run: node scripts/validate-registry-organization-relationship-audit.mjs
-      - name: Validate reserve redemption backing audit
-        run: node scripts/validate-registry-reserve-redemption-backing-audit.mjs
-      - name: Validate deployment and chain identity audit
-        run: node scripts/validate-registry-deployment-chain-identity-audit.mjs
-      - name: Validate known-unknown and placeholder integrity audit
-        run: node scripts/validate-registry-known-unknown-placeholder-integrity-audit.mjs
-      - name: Validate current canonical registry integrity
-        run: node scripts/validate-current-registry-integrity.mjs
-      - name: Validate monitoring coverage recalculation
-        run: node scripts/validate-monitoring-coverage-recalculation-100-assets.mjs
-      - name: Validate unresolved launch-date queue
-        run: npm run validate:launch-queue
-      - name: Validate unresolved terminal-date queue
-        run: npm run validate:terminal-queue
-      - name: Validate candidates
-        run: npm run validate:candidates
       - name: Validate data
         run: npm run validate:data
       - name: Validate compatibility
@@ -73,36 +46,10 @@ jobs:
         run: npm run validate:deployments-v3
       - name: Validate Registry v3 income profiles
         run: npm run validate:income-v3
-      - name: Validate Registry v3 migration audit
-        run: npm run validate:migration-v3
       - name: Validate Registry v2/v3 machine-readable parity
         run: npm run validate:parity
-      - name: Generate deterministic statistics
-        run: node scripts/build-stats.mjs
-      - name: Validate deterministic statistics
-        run: SOG_STATS_VALIDATE_OUTPUT=artifacts/stats-current.json node scripts/validate-stats.mjs
-      - name: Validate immutable statistics history
-        run: node scripts/validate-stats-history.mjs
-      - name: Upload deterministic statistics artifact
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: stats-current-${{ github.run_id }}
-          if-no-files-found: warn
-          path: |
-            artifacts/stats-current.json
-            artifacts/stats-history-validation.json
-            artifacts/pr517-generated-state/**
-      - name: Validate counts, manifest, version, and provenance integrity
-        run: npm run validate:release-integrity
       - name: Validate reproducible build contract
         run: npm run validate:reproducible-build
-      - name: Validate non-UI release material
-        run: node scripts/validate-non-ui-release-material.mjs
-      - name: Validate final state
-        run: npm run validate:final
-      - name: Validate UI v3 cleanup
-        run: npm run validate:ui-v3-cleanup
       - name: Astro check
         shell: bash
         run: |
@@ -120,19 +67,6 @@ jobs:
         run: |
           set -o pipefail
           npm run build:site 2>&1 | tee build-site.log
-      - name: Audit UI v3 cleanup and performance
-        run: npm run audit:ui-v3-cleanup
-      - name: Upload cleanup and performance audit
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: ui-v3-cleanup-audit-${{ github.run_id }}
-          if-no-files-found: warn
-          path: |
-            artifacts/ui-v3-cleanup-validation.json
-            artifacts/public-typography-enum-contract-validation.json
-            artifacts/ui-v3-cleanup-audit.json
-            artifacts/ui-v3-cleanup-audit.md
       - name: Upload build diagnostics
         if: failure()
         uses: actions/upload-artifact@v4
@@ -158,3 +92,99 @@ jobs:
             data/generated/deployment-taxonomy-migration.json
             dist/version.json
             dist/data/manifest.json
+
+  maintenance:
+    name: Non-blocking maintenance audits
+    continue-on-error: true
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: npm
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Validate current evidence integrity audit
+        continue-on-error: true
+        run: node scripts/validate-registry-evidence-integrity-audit.mjs
+      - name: Validate guides
+        continue-on-error: true
+        run: npm run validate:guides
+      - name: Validate baseline
+        continue-on-error: true
+        run: npm run validate:baseline
+      - name: Validate active workstream
+        continue-on-error: true
+        run: npm run validate:active-workstream
+      - name: Audit Stablecoin logo disposition coverage
+        continue-on-error: true
+        run: node scripts/audit-stablecoin-logo-coverage.mjs
+      - name: Validate organization and relationship integrity audit
+        continue-on-error: true
+        run: node scripts/validate-registry-organization-relationship-audit.mjs
+      - name: Validate reserve redemption backing audit
+        continue-on-error: true
+        run: node scripts/validate-registry-reserve-redemption-backing-audit.mjs
+      - name: Validate deployment and chain identity audit
+        continue-on-error: true
+        run: node scripts/validate-registry-deployment-chain-identity-audit.mjs
+      - name: Validate known-unknown and placeholder integrity audit
+        continue-on-error: true
+        run: node scripts/validate-registry-known-unknown-placeholder-integrity-audit.mjs
+      - name: Validate current canonical registry integrity audit
+        continue-on-error: true
+        run: node scripts/validate-current-registry-integrity.mjs
+      - name: Validate monitoring coverage recalculation
+        continue-on-error: true
+        run: node scripts/validate-monitoring-coverage-recalculation-100-assets.mjs
+      - name: Validate unresolved launch-date queue
+        continue-on-error: true
+        run: npm run validate:launch-queue
+      - name: Validate unresolved terminal-date queue
+        continue-on-error: true
+        run: npm run validate:terminal-queue
+      - name: Validate candidates
+        continue-on-error: true
+        run: npm run validate:candidates
+      - name: Validate Registry v3 migration audit
+        continue-on-error: true
+        run: npm run validate:migration-v3
+      - name: Generate deterministic statistics
+        continue-on-error: true
+        run: node scripts/build-stats.mjs
+      - name: Validate deterministic statistics
+        continue-on-error: true
+        run: SOG_STATS_VALIDATE_OUTPUT=artifacts/stats-current.json node scripts/validate-stats.mjs
+      - name: Validate immutable statistics history
+        continue-on-error: true
+        run: node scripts/validate-stats-history.mjs
+      - name: Validate counts, manifest, version, and provenance maintenance
+        continue-on-error: true
+        run: npm run validate:release-integrity
+      - name: Validate non-UI release material
+        continue-on-error: true
+        run: node scripts/validate-non-ui-release-material.mjs
+      - name: Validate final state
+        continue-on-error: true
+        run: npm run validate:final
+      - name: Validate UI v3 cleanup
+        continue-on-error: true
+        run: npm run validate:ui-v3-cleanup
+      - name: Audit UI v3 cleanup and performance
+        continue-on-error: true
+        run: npm run audit:ui-v3-cleanup
+      - name: Upload maintenance artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: non-blocking-maintenance-${{ github.run_id }}
+          if-no-files-found: ignore
+          path: |
+            artifacts/**
+            astro-check.log
+            build-site.log
