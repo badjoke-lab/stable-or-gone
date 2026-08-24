@@ -1,0 +1,16 @@
+[
+  {
+    "id": "sog_ev_ausd_product_documented_20260825",
+    "stablecoin_id": "sog_st_ausd_agora",
+    "issuer_id": "sog_issuer_agora_bermuda",
+    "event_type": "other",
+    "event_date": "2026-08-25",
+    "title": "Agora product materials document AUSD as an active fully reserved digital dollar",
+    "description": "Current Agora product and legal materials identify AUSD, Agora Bermuda Limited as issuer, par redemption for eligible verified customers, and a reserve model including short-term U.S. Treasuries, overnight repo, cash, and other liquid assets.",
+    "impact_level": "medium",
+    "confidence": "high",
+    "source_count": 3,
+    "event_status_effect": "active",
+    "notes": "This is a current-state documentation event and is not substituted for the unresolved original first-mint or launch date."
+  }
+]
