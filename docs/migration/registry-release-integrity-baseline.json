@@ -1,51 +1,51 @@
 {
   "schema_version": "1.0",
   "status": "current",
-  "baseline_id": "sog_release_integrity_pr552_119_assets_2026_08_12",
-  "recorded_at": "2026-08-12",
-  "source_checkpoint_commit": "pr552-evidence-archive-batch2",
+  "baseline_id": "sog_release_integrity_pr598_120_assets_2026_08_23",
+  "recorded_at": "2026-08-23",
+  "source_checkpoint_commit": "agent/jpyr-material-concerns",
   "registry_parity_baseline": "docs/migration/registry-v3-parity-baseline.json",
   "expected_v2_counts": {
-    "stablecoins": 119,
-    "organizations": 109,
-    "relationships": 131,
-    "classifications": 119,
-    "profiles": 119,
-    "events": 194,
-    "event_details": 194,
-    "evidence": 585,
-    "evidence_relations": 585,
+    "stablecoins": 120,
+    "organizations": 110,
+    "relationships": 132,
+    "classifications": 120,
+    "profiles": 120,
+    "events": 195,
+    "event_details": 195,
+    "evidence": 589,
+    "evidence_relations": 589,
     "reserve_reports": 127,
-    "known_unknowns": 352,
+    "known_unknowns": 357,
     "regulatory_notes": 9,
-    "deployments": 186
+    "deployments": 187
   },
   "expected_v3_counts": {
-    "legal_profiles": 119,
+    "legal_profiles": 120,
     "stable_asset_relationships": 5,
-    "reserve_components": 153,
-    "income_profiles": 119
+    "reserve_components": 154,
+    "income_profiles": 120
   },
   "expected_public_record_counts": {
-    "primary_records": 119,
-    "events": 194,
-    "evidence": 585
+    "primary_records": 120,
+    "events": 195,
+    "evidence": 589
   },
   "expected_public_breakdown_counts": {
-    "stablecoins": 119,
-    "organizations": 109,
-    "relationships": 131,
-    "evidence_relations": 585,
+    "stablecoins": 120,
+    "organizations": 110,
+    "relationships": 132,
+    "evidence_relations": 589,
     "reserve_reports": 127,
-    "known_unknowns": 352,
+    "known_unknowns": 357,
     "regulatory_notes": 9,
-    "deployments": 186
+    "deployments": 187
   },
   "expected_route_counts": {
-    "stablecoin_detail": 119,
-    "organization_detail": 109,
-    "event_detail": 194,
-    "total_detail": 422,
+    "stablecoin_detail": 120,
+    "organization_detail": 110,
+    "event_detail": 195,
+    "total_detail": 425,
     "declared_main_routes": 13
   },
   "machine_readable_contract": {
@@ -74,18 +74,18 @@
     "runtime_generation_required": true
   },
   "evidence_quality": {
-    "archive_index_count": 471,
+    "archive_index_count": 475,
     "archive_not_recorded_count": 114,
     "archive_partition_complete": true,
-    "new_evidence_records": 0,
+    "new_evidence_records": 4,
     "source_replacements": 0,
     "all_new_evidence_primary": true
   },
   "validator": "scripts/validate-counts-manifest-version-provenance-integrity.mjs",
   "audit_report": "docs/audits/counts-manifest-version-provenance-integrity-100-assets.md",
-  "source_pr": 552,
-  "source_commit": "pr552-evidence-archive-batch2",
-  "captured_at": "2026-08-12",
+  "source_pr": 598,
+  "source_commit": "agent/jpyr-material-concerns",
+  "captured_at": "2026-08-23",
   "expected_market_access_records": 12,
-  "expected_detail_routes": 422
+  "expected_detail_routes": 425
 }
