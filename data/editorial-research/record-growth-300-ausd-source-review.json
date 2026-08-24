@@ -1,0 +1,85 @@
+{
+  "schema_version": "1.0",
+  "review_id": "sog_growth_300_ausd_2026_08_25",
+  "status": "reviewed_ready_for_direct_identity_scan_and_full_record_implementation",
+  "reviewed_at": "2026-08-25",
+  "authority": "config/record-growth-300-authority.json",
+  "canonical_baseline": 119,
+  "candidate": {
+    "proposed_id": "sog_st_ausd_agora",
+    "slug": "agora-ausd",
+    "name": "AUSD",
+    "symbol": "AUSD",
+    "issuer_or_operator": "Agora Bermuda Limited / Agora",
+    "reference_asset": "USD",
+    "candidate_type": "stablecoin",
+    "automatic_promotion": false
+  },
+  "reviewed_facts": {
+    "identity": "Agora identifies AUSD as its institutional-grade digital dollar.",
+    "issuer": "Agora states that AUSD is issued by Agora Bermuda Limited, regulated and licensed by the Bermuda Monetary Authority for digital-asset business activities in and from Bermuda.",
+    "peg": "Agora states 1 AUSD equals 1 US dollar and describes AUSD as redeemable at par.",
+    "backing": "Agora describes AUSD as fully reserved, with reserves including short-term U.S. Treasuries, overnight repo, cash and other liquid assets.",
+    "reserve_management": "Agora identifies VanEck as reserve manager and State Street as custodian.",
+    "assurance": "Agora identifies Grant Thornton LLP as financial statement auditor and publishes monthly reserve reports/attestation material.",
+    "redemption_boundary": "Agora's published terms state that direct minting and redemption with an Agora entity require verified-customer status; public statements about par redemption must not be interpreted as unrestricted direct redemption for every holder.",
+    "multi_chain_boundary": "Agora documents AUSD as operating across multiple blockchains. Each deployment must be normalized as a deployment of one canonical AUSD identity rather than split into separate stable assets without lineage evidence."
+  },
+  "primary_sources": [
+    {
+      "claim_scope": ["identity", "peg", "redemption", "backing", "reserve_manager", "custodian", "auditor"],
+      "url": "https://www.agora.finance/product/ausd",
+      "publisher": "Agora"
+    },
+    {
+      "claim_scope": ["current_product", "fully_reserved", "reserve_composition"],
+      "url": "https://www.agora.finance/",
+      "publisher": "Agora"
+    },
+    {
+      "claim_scope": ["monthly_reserve_reporting", "attestation_program"],
+      "url": "https://docs.agora.finance/developer/transparency",
+      "publisher": "Agora"
+    },
+    {
+      "claim_scope": ["direct_mint_redeem_eligibility", "reserve_terms", "redemption_conditions"],
+      "url": "https://static.agora.finance/termsofuse.pdf",
+      "publisher": "Agora"
+    }
+  ],
+  "required_full_record_layers": [
+    "stable_asset",
+    "organization",
+    "organization_relationship",
+    "classification",
+    "reserve_redemption_profile",
+    "launch_or_earliest_supported_event",
+    "evidence",
+    "evidence_relations",
+    "reserve_context",
+    "known_unknowns",
+    "deployments",
+    "legal_profile",
+    "reserve_components",
+    "income_profile",
+    "candidate_promotion_mapping",
+    "logo_disposition",
+    "native_dossier_and_series_projection"
+  ],
+  "known_unknowns_to_preserve": [
+    "exact first mint timestamp unless established by reviewed primary evidence",
+    "complete chain-by-chain historical deployment chronology",
+    "complete current customer eligibility by jurisdiction",
+    "all current mint and redemption limits and settlement timing beyond published terms",
+    "token-specific reserve allocation at every historical reporting date unless normalized from the attestation series",
+    "all contract admin, pause, freeze, upgrade and bridge control authorities until exact deployment documents are reviewed"
+  ],
+  "promotion_blockers": [
+    "complete direct scan of all canonical stablecoin files for AUSD/Agora identity, alias, issuer and lineage collision",
+    "normalize exact deployment identifiers from official contract documentation",
+    "create canonical organization and relationship rows without duplicating an existing Agora organization if one exists",
+    "create evidence identities and evidence relations",
+    "complete logo disposition and native dossier/Series validation"
+  ],
+  "decision": "continue_to_full_record_implementation_if_direct_identity_scan_remains_clear"
+}
