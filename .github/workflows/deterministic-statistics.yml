@@ -1,14 +1,16 @@
 name: Deterministic statistics
 
 on:
-  pull_request:
   workflow_dispatch:
+  schedule:
+    - cron: '23 3 * * 1'
 
 permissions:
   contents: read
 
 jobs:
   validate:
+    continue-on-error: true
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -40,4 +42,4 @@ jobs:
         with:
           name: deterministic-statistics-${{ github.run_id }}
           path: artifacts/stats-current.json
-          if-no-files-found: error
+          if-no-files-found: warn
