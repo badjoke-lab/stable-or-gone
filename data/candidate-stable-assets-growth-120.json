@@ -1,0 +1,19 @@
+[
+  {
+    "candidate_id": "sog_cand_000120",
+    "proposed_record_id": "sog_st_jpyr",
+    "slug": "jpyr",
+    "name": "JPYR",
+    "symbol": "JPYR",
+    "aliases": ["JPYR"],
+    "candidate_type": "stablecoin",
+    "asset_class": "stablecoin",
+    "reference_kind": "fiat",
+    "reference_label": "JPY",
+    "priority": "P0",
+    "status": "promoted",
+    "target_batch": "batch_032",
+    "notes": "Reviewed and promoted in PR #598 under issue #597. Canonical inclusion records the JPY reference claim and material uncertainties around backing, legal issuer identity, direct redemption, controls, audit status, regulatory characterization, liquidity and external yield promotion; it is not an endorsement or safety rating. Original day-level launch boundary remains unresolved.",
+    "source_candidate_id": "sog_cand_jpyr_pr598"
+  }
+]
