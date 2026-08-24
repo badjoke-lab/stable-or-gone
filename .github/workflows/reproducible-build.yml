@@ -12,8 +12,8 @@ jobs:
     env:
       SOG_BUILD_COMMIT: ${{ github.event.pull_request.head.sha || github.sha }}
       SOG_BUILD_BRANCH: reproducible-audit
-      SOG_BUILD_TIMESTAMP: 2026-07-06T00:00:00.000Z
-      SOURCE_DATE_EPOCH: "1783296000"
+      SOG_BUILD_TIMESTAMP: 2026-08-23T00:00:00.000Z
+      SOURCE_DATE_EPOCH: "1787443200"
     steps:
       - name: Checkout
         uses: actions/checkout@v4
