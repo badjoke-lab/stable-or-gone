@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "status": "reviewed_growth_checkpoint",
   "checkpoint_id": "sog_pr598_jpyr_material_concerns_review_2026_08_23",
-  "checkpoint_kind": "growth_review_checkpoint",
+  "checkpoint_kind": "record_growth_review_checkpoint",
   "recorded_at": "2026-08-23",
   "source_pr": 598,
   "authority_pr": 597,
@@ -23,9 +23,7 @@
     "deployments": 187,
     "detail_routes": 423
   },
-  "reviewed_stablecoin_ids": [
-    "sog_st_jpyr"
-  ],
+  "reviewed_stablecoin_ids": ["sog_st_jpyr"],
   "reviewed_known_unknown_ids": [],
   "new_canonical_records": 1,
   "deleted_known_unknowns": 0,
