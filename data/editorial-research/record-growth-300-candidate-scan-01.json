@@ -1,92 +1,18 @@
 {
-  "schema_version": "1.1",
-  "scan_id": "sog_record_growth_300_candidate_scan_01_2026_08_25",
-  "status": "corrected_after_direct_canonical_checks",
-  "authority": "config/record-growth-300-authority.json",
-  "canonical_baseline": 119,
-  "target": 300,
-  "required_net_new": 181,
-  "notes": [
-    "Research/staging only; no automatic promotion.",
-    "Repository code search was insufficient and produced false negatives. Direct canonical batch reads are authoritative.",
-    "PLNQ and GBPQ were removed from the net-new pool after direct canonical reads found sog_st_plnq and sog_st_gbpq in data/stablecoins-batch-ab.json.",
-    "AUSD is promoted to full-layer research priority. EURQ and USDQ remain pending direct canonical batch confirmation before any implementation."
+  "schema_version":"1.2",
+  "scan_id":"sog_record_growth_300_candidate_scan_01_2026_08_25",
+  "status":"closed_after_direct_canonical_validation",
+  "authority":"config/record-growth-300-authority.json",
+  "canonical_baseline":119,
+  "target":300,
+  "required_net_new":181,
+  "finding":"The initial scan produced false negatives because repository code search was not an adequate canonical duplicate check.",
+  "duplicates_removed":[
+    {"name":"Agora AUSD","symbol":"AUSD","canonical_id":"sog_st_agoraausd","canonical_slug":"agora-ausd","canonical_file":"data/stablecoins-batch-f.json","decision":"exclude_from_net_new_growth"},
+    {"name":"Quantoz USDQ","symbol":"USDQ","canonical_id":"sog_st_usdq","canonical_slug":"usdq","canonical_file":"data/stablecoins-batch-f.json","decision":"exclude_from_net_new_growth"},
+    {"name":"Quantoz PLNQ","symbol":"PLNQ","canonical_id":"sog_st_plnq","canonical_slug":"plnq","canonical_file":"data/stablecoins-batch-ab.json","decision":"exclude_from_net_new_growth"},
+    {"name":"Quantoz GBPQ","symbol":"GBPQ","canonical_id":"sog_st_gbpq","canonical_slug":"gbpq","canonical_file":"data/stablecoins-batch-ab.json","decision":"exclude_from_net_new_growth"}
   ],
-  "candidates": [
-    {
-      "name": "AUSD",
-      "symbol": "AUSD",
-      "issuer_or_operator": "Agora Bermuda Limited / Agora",
-      "reference_asset": "USD",
-      "candidate_type": "stablecoin",
-      "duplicate_status": "no_collision_found_in_reviewed_direct_batches_so_far",
-      "source_backed_facts": [
-        "Agora describes AUSD as fully reserved, pegged 1:1 to USD and redeemable at par.",
-        "Agora states reserves include short-term U.S. Treasuries, overnight repo, cash and other liquid assets.",
-        "Agora identifies Agora Bermuda Limited as issuer and states that it is licensed by the Bermuda Monetary Authority.",
-        "Agora publishes monthly reserve reports and identifies Grant Thornton LLP as the independent attestation provider."
-      ],
-      "primary_sources": [
-        "https://www.agora.finance/product/ausd",
-        "https://www.agora.finance/",
-        "https://docs.agora.finance/developer/transparency",
-        "https://static.agora.finance/termsofuse.pdf"
-      ],
-      "next_action": "full_layer_source_review_and_canonical_implementation"
-    },
-    {
-      "name": "EURQ",
-      "symbol": "EURQ",
-      "issuer_or_operator": "Quantoz Payments B.V.",
-      "reference_asset": "EUR",
-      "candidate_type": "stablecoin",
-      "duplicate_status": "pending_direct_canonical_confirmation",
-      "primary_sources": [
-        "https://www.quantoz.com/products/eurq-usdq",
-        "https://www.quantoz.com/q-emt-terms",
-        "https://www.quantoz.com/transparency"
-      ],
-      "next_action": "continue_direct_canonical_batch_scan_before_promotion"
-    },
-    {
-      "name": "USDQ",
-      "symbol": "USDQ",
-      "issuer_or_operator": "Quantoz Payments B.V.",
-      "reference_asset": "USD",
-      "candidate_type": "stablecoin",
-      "duplicate_status": "pending_direct_canonical_confirmation",
-      "primary_sources": [
-        "https://www.quantoz.com/products/eurq-usdq",
-        "https://www.quantoz.com/q-emt-terms",
-        "https://www.quantoz.com/transparency"
-      ],
-      "next_action": "continue_direct_canonical_batch_scan_before_promotion"
-    }
-  ],
-  "duplicates_removed": [
-    {
-      "name": "Quantoz PLNQ",
-      "symbol": "PLNQ",
-      "canonical_id": "sog_st_plnq",
-      "canonical_slug": "plnq",
-      "canonical_file": "data/stablecoins-batch-ab.json",
-      "decision": "exclude_from_net_new_growth"
-    },
-    {
-      "name": "Quantoz GBPQ",
-      "symbol": "GBPQ",
-      "canonical_id": "sog_st_gbpq",
-      "canonical_slug": "gbpq",
-      "canonical_file": "data/stablecoins-batch-ab.json",
-      "decision": "exclude_from_net_new_growth"
-    }
-  ],
-  "promotion_blockers": [
-    "complete direct canonical identity and lineage scan",
-    "organization and relationship review",
-    "launch or earliest supported lifecycle event normalization",
-    "evidence identities and evidence relations",
-    "reserve/redemption, legal, income, deployment and known-unknown layers",
-    "logo disposition and native dossier/Series projection validation"
-  ]
+  "remaining_candidate_checks":[{"name":"Quantoz EURQ","symbol":"EURQ","status":"requires_direct_canonical_group_scan_before_any_growth_use"}],
+  "next_rule":"Build the next candidate universe only after direct comparison against all baseline stablecoin data groups and promoted candidate controls; code-search absence is never sufficient for net-new status."
 }
