@@ -1,0 +1,15 @@
+[
+  {
+    "id": "sog_issuer_anchorage_digital_bank",
+    "slug": "anchorage-digital-bank",
+    "name": "Anchorage Digital Bank, N.A.",
+    "organization_type": "federally_chartered_bank",
+    "legacy_issuer_type": "bank",
+    "jurisdiction": "United States",
+    "official_url": "https://www.anchorage.com/",
+    "summary": "Federally chartered digital-asset bank that issues USA₮ and other covered stablecoins under U.S. federal banking supervision.",
+    "confidence": "high",
+    "last_verified_at": "2026-08-25",
+    "notes": "USA₮ issuer role is established by both Tether and Anchorage. Tether remains a separate brand and collaboration organization."
+  }
+]
