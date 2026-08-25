@@ -1,0 +1,19 @@
+[
+  {
+    "candidate_id":"sog_cand_000121",
+    "proposed_record_id":"sog_st_ausd_agora",
+    "slug":"agora-ausd",
+    "name":"AUSD",
+    "symbol":"AUSD",
+    "aliases":["Agora AUSD","Agora Dollar"],
+    "candidate_type":"stablecoin",
+    "asset_class":"stablecoin",
+    "reference_kind":"fiat",
+    "reference_label":"USD",
+    "priority":"P0",
+    "status":"promoted",
+    "target_batch":"batch_033",
+    "notes":"Reviewed on PR #601 from current Agora primary sources. Canonical record preserves verified-customer redemption boundaries, current multichain contract identities, reserve categories without invented allocations, and the Injective network wind-down as a scoped lifecycle event.",
+    "source_candidate_id":"sog_growth_300_ausd_2026_08_25"
+  }
+]
