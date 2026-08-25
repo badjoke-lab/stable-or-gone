@@ -1,32 +1,32 @@
 [
   {
-    "id": "sog_ku_ausd_first_mint_20260825",
-    "stablecoin_id": "sog_st_ausd_agora",
-    "issuer_id": "sog_issuer_agora_bermuda",
-    "topic": "first_mint_launch_and_initial_circulation",
-    "description": "Reviewed sources establish current AUSD identity and operation but do not establish the exact first on-chain mint timestamp, first public circulation timestamp, or an issuer-confirmed launch day suitable for canonical launch_date.",
+    "id": "sog_ku_usat_reserve_allocation_20260825",
+    "stablecoin_id": "sog_st_usat",
+    "issuer_id": "sog_issuer_anchorage_digital_bank",
+    "topic": "current_reserve_asset_allocation",
+    "description": "Anchorage establishes the covered-stablecoin reserve trust, at-least-1:1 reserve obligation and monthly USA₮ attestations, but this normalized record does not yet preserve report-specific asset categories, amounts, shares, maturities or custodial counterparties for the latest attestation body.",
     "severity": "medium",
     "last_checked_at": "2026-08-25",
-    "notes": "Do not substitute current product documentation dates or contract deployment dates for the unresolved launch boundary."
+    "notes": "Do not infer specific cash, Treasury, repo or money-market-fund shares without normalizing the relevant USA₮ attestation report."
   },
   {
-    "id": "sog_ku_ausd_deployments_controls_20260825",
-    "stablecoin_id": "sog_st_ausd_agora",
-    "issuer_id": "sog_issuer_agora_bermuda",
-    "topic": "complete_deployment_lineage_and_control_authorities",
-    "description": "Agora documents AUSD across multiple blockchains, but the complete current chain-by-chain canonical contract inventory, historical deployment chronology, bridge/native issuance lineage, admin addresses, pause/freeze authorities, upgrade controls, and current role assignments have not yet been normalized from reviewed primary deployment documentation.",
+    "id": "sog_ku_usat_contract_controls_20260825",
+    "stablecoin_id": "sog_st_usat",
+    "issuer_id": "sog_issuer_anchorage_digital_bank",
+    "topic": "ethereum_contract_control_authorities",
+    "description": "The official Ethereum contract identity is established, but current admin, upgrade, pause, freeze, mint, burn, blacklist and recovery role-holder addresses and operational states have not been normalized from authoritative technical material.",
     "severity": "high",
     "last_checked_at": "2026-08-25",
-    "notes": "Do not split chain representations into separate stable assets or publish unverified contract identifiers."
+    "notes": "Contract identity is not treated as proof of current administrative role assignments."
   },
   {
-    "id": "sog_ku_ausd_access_limits_reserve_history_20260825",
-    "stablecoin_id": "sog_st_ausd_agora",
-    "issuer_id": "sog_issuer_agora_bermuda",
-    "topic": "current_access_limits_and_historical_reserve_allocation",
-    "description": "Verified-customer direct mint and redemption requirements are established, but the complete current country-by-country eligibility inventory, all operational minimums and fees, settlement timing, and token-specific reserve allocation at every historical reporting date have not been normalized into canonical records.",
+    "id": "sog_ku_usat_redemption_limits_20260825",
+    "stablecoin_id": "sog_st_usat",
+    "issuer_id": "sog_issuer_anchorage_digital_bank",
+    "topic": "direct_redemption_operational_limits",
+    "description": "Anchorage establishes client-only direct issuance and 1:1 redemption, but exact current minimums, fees, settlement timing, eligible-account categories and complete jurisdictional availability are not normalized in the public record.",
     "severity": "medium",
     "last_checked_at": "2026-08-25",
-    "notes": "Current public reserve categories and service-provider roles are recorded without inventing omitted historical amounts or access terms."
+    "notes": "Secondary-market availability must not be conflated with unrestricted direct bank redemption."
   }
 ]
