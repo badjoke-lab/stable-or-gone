@@ -1,4 +1,17 @@
 [
-  {"id":"sog_ev_ausd_product_documented_20260825","title":"Agora product materials document AUSD as an active fully reserved digital dollar","subject_stablecoin_ids":["sog_st_ausd_agora"],"subject_organization_ids":["sog_issuer_agora_bermuda"],"evidence_ids":["sog_src_ausd_product_20260825","sog_src_ausd_terms_20260825","sog_src_ausd_transparency_20260825"],"event_detail_kind":"other"},
-  {"id":"sog_ev_ausd_injective_winddown_20260403","title":"Agora stops new AUSD issuance on Injective and begins network wind-down","subject_stablecoin_ids":["sog_st_ausd_agora"],"subject_organization_ids":["sog_issuer_agora_bermuda"],"evidence_ids":["sog_src_ausd_injective_winddown_20260403"],"event_detail_kind":"other"}
+  {
+    "id": "sog_ev_usat_launch_20260127",
+    "title": "USA₮ officially launches under Anchorage Digital Bank issuance",
+    "subject_stablecoin_ids": ["sog_st_usat"],
+    "subject_organization_ids": ["sog_issuer_anchorage_digital_bank", "sog_issuer_tether"],
+    "evidence_ids": ["sog_src_usat_tether_launch_20260127", "sog_src_usat_anchorage_launch_20260127", "sog_src_usat_reserves_20260825", "sog_src_usat_terms_20260825", "sog_src_usat_tether_wdk_20260825"],
+    "event_detail_kind": "launch",
+    "launch_detail": {
+      "summary": "Formal market launch of USA₮ as a U.S.-dollar-backed stablecoin issued by Anchorage Digital Bank, N.A. in collaboration with Tether.",
+      "status": "active",
+      "resolution_date": null,
+      "affected_deployment_ids": ["sog_dep_usat_ethereum_20260825"],
+      "related_organization_ids": ["sog_issuer_anchorage_digital_bank", "sog_issuer_tether"]
+    }
+  }
 ]
