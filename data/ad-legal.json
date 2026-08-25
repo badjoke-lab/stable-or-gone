@@ -1,0 +1,24 @@
+[
+  {
+    "id": "sog_st_usat",
+    "classifications": [
+      {
+        "classification": "fiat_backed_stablecoin",
+        "jurisdiction": "United States",
+        "effective_from": "2026-01-27",
+        "effective_to": null,
+        "authority_or_basis": "Anchorage Digital Bank covered-stablecoin terms and issuer launch materials; USA₮ is issued by Anchorage Digital Bank, N.A. under U.S. federal banking supervision.",
+        "confidence": "high",
+        "evidence_ids": ["sog_src_usat_anchorage_launch_20260127", "sog_src_usat_terms_20260825"]
+      }
+    ],
+    "holder_claim_type": "direct_claim_on_issuer_for_eligible_bank_clients",
+    "claim_against_organization_ids": ["sog_issuer_anchorage_digital_bank"],
+    "reserve_ownership": "covered_stablecoin_reserve_trust",
+    "reserve_segregation": "south_dakota_express_trust",
+    "bankruptcy_remoteness": "not_fully_established_in_reviewed_record",
+    "licensed_or_regulated_as": ["U.S. federally chartered bank", "covered stablecoin issuer under federal banking supervision"],
+    "notes": "Anchorage terms state covered-stablecoin reserves are held in a South Dakota express trust and maintained at least 1:1. Direct issuance is limited to Anchorage clients. This record does not infer FDIC insurance, government backing, universal direct redemption for every secondary-market holder, or complete insolvency treatment beyond the reviewed terms.",
+    "evidence_ids": ["sog_src_usat_tether_launch_20260127", "sog_src_usat_anchorage_launch_20260127", "sog_src_usat_terms_20260825"]
+  }
+]
