@@ -1,0 +1,133 @@
+{
+  "schema_version": "1.0",
+  "scan_id": "sog_record_growth_300_candidate_scan_02_2026_08_25",
+  "status": "research_candidates_pending_direct_full_baseline_identity_scan",
+  "authority": "config/record-growth-300-authority.json",
+  "canonical_baseline": 119,
+  "target": 300,
+  "required_net_new": 181,
+  "method": [
+    "Start from issuer-confirmed launched stablecoins not present in the current 120-row candidate-control history by exact-name/symbol search.",
+    "Do not promote from search absence alone. Before canonical implementation, compare each candidate against every stablecoin data group in the active Registry v2 baseline plus aliases, issuer identities and lineage relationships.",
+    "Planned or announced tokens are excluded unless launch/issuance is confirmed by an issuer-controlled source."
+  ],
+  "candidates": [
+    {
+      "name": "USA₮",
+      "symbol": "USAT",
+      "proposed_record_id": "sog_st_usat",
+      "slug": "usat",
+      "reference_asset": "USD",
+      "issuer": "Anchorage Digital Bank, N.A.",
+      "brand_operator": "Tether",
+      "launch_date": "2026-01-27",
+      "source_backed_facts": [
+        "Tether announced the official market launch on 2026-01-27.",
+        "Tether identifies Anchorage Digital Bank, N.A. as issuer.",
+        "Anchorage lists USA₮ among its issued stablecoins and states its stablecoins are redeemable 1:1 for U.S. dollars on its platform with monthly reserve attestations."
+      ],
+      "primary_sources": [
+        "https://tether.io/news/tether-announces-the-launch-of-usat-the-federally-regulated-dollar-backed-stablecoin-made-in-america/",
+        "https://www.anchorage.com/platform/transparency-stablecoin-reserves"
+      ],
+      "duplicate_status": "no_exact_repo_search_hit; direct_full_baseline_scan_required",
+      "next_action": "direct_full_baseline_identity_scan_then_full_layer_review"
+    },
+    {
+      "name": "EURO eXchange Token",
+      "symbol": "EURXT",
+      "proposed_record_id": "sog_st_eurxt",
+      "slug": "eurxt",
+      "reference_asset": "EUR",
+      "issuer": "CACEIS Bank",
+      "brand_operator": "Crédit Agricole / CACEIS",
+      "launch_date": "2026-07-01",
+      "source_backed_facts": [
+        "Crédit Agricole and CACEIS announced the EURXT launch on 2026-07-01.",
+        "CACEIS identifies EURXT as an ERC-20 electronic money token issued on Ethereum and pegged 1:1 to euro.",
+        "The issuer whitepaper identifies CACEIS Bank as issuer and gives a public-offer/admission start date of 2026-06-01; the canonical launch boundary must distinguish that from the 2026-07-01 product launch announcement."
+      ],
+      "primary_sources": [
+        "https://www.caceis.com/nl/persbericht/credit-agricole-launches-eurxt-its-euro-denominated-stablecoin",
+        "https://www.caceis.com/fileadmin/images/landing/eurxt/CACEIS_BANK__EURO_STABLECOIN_EURXT_Livre_Blanc_VF_03_04_2026.pdf"
+      ],
+      "duplicate_status": "no_exact_repo_search_hit; direct_full_baseline_scan_required",
+      "next_action": "direct_full_baseline_identity_scan_then_full_layer_review"
+    },
+    {
+      "name": "SoFiUSD",
+      "symbol": "SoFiUSD",
+      "proposed_record_id": "sog_st_sofiusd",
+      "slug": "sofiusd",
+      "reference_asset": "USD",
+      "issuer": "SoFi Bank, N.A.",
+      "brand_operator": "SoFi",
+      "launch_date": "2025-12-18",
+      "source_backed_facts": [
+        "SoFi announced the launch on 2025-12-18.",
+        "SoFi identifies SoFi Bank, N.A. as issuer.",
+        "SoFi states SoFiUSD is fully reserved 1:1 by cash and operates on a public permissionless blockchain."
+      ],
+      "primary_sources": [
+        "https://investors.sofi.com/news/news-details/2025/SoFi-Launches-Fully-Reserved-Stablecoin-to-Power-Financial-Infrastructure-for-Banks-Fintechs-and-Enterprise-Partners/default.aspx"
+      ],
+      "duplicate_status": "no_exact_repo_search_hit; direct_full_baseline_scan_required",
+      "next_action": "direct_full_baseline_identity_scan_then_full_layer_review"
+    },
+    {
+      "name": "USDGO",
+      "symbol": "USDGO",
+      "proposed_record_id": "sog_st_usdgo",
+      "slug": "usdgo",
+      "reference_asset": "USD",
+      "issuer": "Anchorage Digital Bank, N.A.",
+      "brand_operator": "OSL Group",
+      "launch_date": "2026-02-10",
+      "source_backed_facts": [
+        "OSL announced the official launch on 2026-02-10.",
+        "OSL and Anchorage identify Anchorage Digital Bank, N.A. as issuer and OSL as branding/distribution operator.",
+        "The initial issuance was US$50 million on Solana; OSL later reported circulating supply above US$500 million in June 2026."
+      ],
+      "primary_sources": [
+        "https://www.osl.com/hk-en/press-release/osl-group-officially-launches-regulated-enterprise-stablecoin-usdgo",
+        "https://www.anchorage.com/insights/usdgo-officially-launches-under-federal-oversight",
+        "https://www.osl.com/hk-en/press-release/usdgo-stablecoin-circulation-surpasses-500-million-osl-group"
+      ],
+      "duplicate_status": "no_exact_repo_search_hit; direct_full_baseline_scan_required",
+      "next_action": "direct_full_baseline_identity_scan_then_full_layer_review"
+    },
+    {
+      "name": "U.S. Dollar Payment Token",
+      "symbol": "USDPT",
+      "proposed_record_id": "sog_st_usdpt",
+      "slug": "usdpt",
+      "reference_asset": "USD",
+      "issuer": "Anchorage Digital Bank, N.A.",
+      "brand_operator": "Western Union",
+      "launch_date": "2026-05-04",
+      "source_backed_facts": [
+        "Western Union announced the launch on 2026-05-04.",
+        "Western Union and Anchorage identify Anchorage Digital Bank, N.A. as issuer and Solana as the launch network.",
+        "Western Union states USDPT is fully backed by U.S. dollars; Anchorage publishes monthly USDPT reserve attestations."
+      ],
+      "primary_sources": [
+        "https://ir.westernunion.com/news/archived-press-releases/press-release-details/2026/Western-Union-Launches-USDPT-on-Solana-Advancing-Regulated-Digital-Infrastructure-for-Global-Payments/default.aspx",
+        "https://www.anchorage.com/insights/western-union-launches-usdpt-a-federally-regulated-digital-dollar",
+        "https://www.anchorage.com/platform/usdpt-reserve-attestations-anchorage-digital"
+      ],
+      "duplicate_status": "no_exact_repo_search_hit; direct_full_baseline_scan_required",
+      "next_action": "direct_full_baseline_identity_scan_then_full_layer_review"
+    }
+  ],
+  "excluded_from_this_scan": [
+    {
+      "name": "XrymaCoin",
+      "symbol": "XREUR",
+      "reason": "Issuer announcement states circulation begins 2026-09-03, which is future-dated as of this review; not yet a launched canonical candidate."
+    },
+    {
+      "name": "Qivalis euro stablecoin",
+      "reason": "Consortium materials describe a future second-half-2026 issuance; no launched token identity is yet established in the reviewed source."
+    }
+  ]
+}
