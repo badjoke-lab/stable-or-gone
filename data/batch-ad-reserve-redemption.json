@@ -1,29 +1,29 @@
 [
   {
-    "id": "sog_st_ausd_agora",
+    "id": "sog_st_usat",
     "reserve_profile": {
-      "backing_types": ["cash", "government_securities"],
-      "summary": "Agora describes AUSD as fully reserved, with reserves including short-term U.S. Treasuries, overnight repurchase agreements, cash, and other liquid assets. Agora identifies VanEck as reserve manager, State Street as custodian, and Grant Thornton LLP as auditor. Historical token-specific allocation percentages are not inferred where not normalized from reviewed reports.",
-      "disclosure_status": "monthly_reserve_reporting_and_audit_context",
+      "backing_types": ["other"],
+      "summary": "Anchorage Digital Bank states that covered stablecoins are backed at least 1:1 by a Covered Stablecoin Reserve held in a South Dakota express trust. USA₮ reserve holdings are disclosed monthly with third-party attestations. Exact current reserve asset-category allocation is not inferred here.",
+      "disclosure_status": "monthly_third_party_attestation",
       "as_of_date": "2026-08-25",
-      "latest_report_id": null,
+      "latest_report_id": "sog_rr_usat_attestation_program_20260825",
       "confidence": "high",
-      "evidence_ids": ["sog_src_ausd_product_20260825", "sog_src_ausd_transparency_20260825"]
+      "evidence_ids": ["sog_src_usat_reserves_20260825", "sog_src_usat_terms_20260825"]
     },
     "redemption_profile": {
-      "status": "eligible_customers_only",
+      "status": "eligible_clients_only",
       "settlement_asset": "USD fiat",
-      "eligible_parties": "Verified customers satisfying Agora onboarding, compliance, jurisdiction, and current terms.",
-      "retail_access": "No unrestricted direct issuer redemption right is asserted for every holder; direct access is subject to verified-customer eligibility.",
-      "institutional_access": "Available to eligible verified customers under Agora terms.",
-      "minimum_amount_text": "not stated in the reviewed public source",
-      "fee_text": "not stated in the reviewed public source",
-      "settlement_time_text": "not stated in the reviewed public source",
-      "jurisdiction_restrictions": ["verified_customer_status_required", "compliance_screening_applies", "jurisdiction_and_product_terms_apply", "complete_current_eligibility_inventory_not_recorded"],
-      "redemption_url": "https://static.agora.finance/termsofuse.pdf",
+      "eligible_parties": "Anchorage Digital Bank clients eligible under the bank's covered-stablecoin and account terms.",
+      "retail_access": "No unrestricted direct issuer redemption is asserted for every secondary-market holder.",
+      "institutional_access": "Eligible Anchorage Digital Bank clients may redeem 1:1 for U.S. dollars on the bank platform.",
+      "minimum_amount_text": "not normalized from reviewed public terms",
+      "fee_text": "not normalized from reviewed public terms",
+      "settlement_time_text": "not normalized from reviewed public terms",
+      "jurisdiction_restrictions": ["bank_client_status_required", "compliance_and_risk_controls_apply", "supported_blockchain_terms_apply"],
+      "redemption_url": "https://www.anchorage.com/anchorage-digital-bank-n-a-covered-stablecoin-terms",
       "as_of_date": "2026-08-25",
       "confidence": "high",
-      "evidence_ids": ["sog_src_ausd_product_20260825", "sog_src_ausd_terms_20260825"]
+      "evidence_ids": ["sog_src_usat_reserves_20260825", "sog_src_usat_terms_20260825"]
     }
   }
 ]
