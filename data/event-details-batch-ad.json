@@ -1,17 +1,4 @@
 [
-  {
-    "id": "sog_ev_ausd_product_documented_20260825",
-    "title": "Agora product materials document AUSD as an active fully reserved digital dollar",
-    "subject_stablecoin_ids": ["sog_st_ausd_agora"],
-    "subject_organization_ids": ["sog_issuer_agora_bermuda"],
-    "evidence_ids": ["sog_src_ausd_product_20260825", "sog_src_ausd_terms_20260825", "sog_src_ausd_transparency_20260825"],
-    "event_detail_kind": "launch",
-    "launch_detail": {
-      "summary": "Current Agora materials establish active AUSD identity, issuer, reserve model, and verified-customer redemption. The record deliberately does not infer the unresolved original launch date.",
-      "status": "active",
-      "resolution_date": null,
-      "affected_deployment_ids": [],
-      "related_organization_ids": ["sog_issuer_agora_bermuda"]
-    }
-  }
+  {"id":"sog_ev_ausd_product_documented_20260825","title":"Agora product materials document AUSD as an active fully reserved digital dollar","subject_stablecoin_ids":["sog_st_ausd_agora"],"subject_organization_ids":["sog_issuer_agora_bermuda"],"evidence_ids":["sog_src_ausd_product_20260825","sog_src_ausd_terms_20260825","sog_src_ausd_transparency_20260825"],"event_detail_kind":"other"},
+  {"id":"sog_ev_ausd_injective_winddown_20260403","title":"Agora stops new AUSD issuance on Injective and begins network wind-down","subject_stablecoin_ids":["sog_st_ausd_agora"],"subject_organization_ids":["sog_issuer_agora_bermuda"],"evidence_ids":["sog_src_ausd_injective_winddown_20260403"],"event_detail_kind":"other"}
 ]
