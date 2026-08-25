@@ -1,12 +1,12 @@
 [
   {
-    "id": "sog_st_ausd_agora",
+    "id": "sog_st_usat",
     "availability": "none",
     "source": "none",
     "accrual": "none",
     "rate": "none",
     "related_asset_ids": [],
-    "evidence_ids": ["sog_src_ausd_product_20260825", "sog_src_ausd_terms_20260825"],
-    "notes": "No reviewed source establishes issuer-native automatic yield, rebase, or reserve-income pass-through to holders of base AUSD. Reserve investment income is not recorded as a holder income right."
+    "evidence_ids": ["sog_src_usat_terms_20260825"],
+    "notes": "No reviewed source establishes issuer-native holder yield or rebase on USA₮. Anchorage terms state reserve income beyond the amount needed to maintain required reserves constitutes fiduciary compensation to the bank, not a holder yield right."
   }
 ]
