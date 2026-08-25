@@ -1,0 +1,19 @@
+[
+  {
+    "id": "sog_rc_usat_covered_reserve_trust_20260825",
+    "stablecoin_id": "sog_st_usat",
+    "reserve_report_id": "sog_rr_usat_attestation_program_20260825",
+    "asset_category": "other",
+    "asset_label": "Covered Stablecoin Reserve held in a South Dakota express trust; current token-specific asset-category allocation is not normalized here",
+    "share_percent": null,
+    "amount_text": null,
+    "currency": "USD",
+    "liquidity_class": "unknown",
+    "maturity_bucket": "unknown",
+    "custodian_organization_id": null,
+    "as_of_date": null,
+    "confidence": "high",
+    "evidence_ids": ["sog_src_usat_terms_20260825", "sog_src_usat_reserves_20260825"],
+    "notes": "The trust and at-least-1:1 reserve obligation are established by Anchorage terms. This row deliberately avoids inventing token-specific cash, Treasury, repo, maturity, custodian, amount or share details not normalized from the reviewed report bodies."
+  }
+]
