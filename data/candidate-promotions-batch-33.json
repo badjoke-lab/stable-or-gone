@@ -1,0 +1,22 @@
+[
+  {
+    "candidate_id": "sog_cand_000121",
+    "stablecoin_id": "sog_st_usat",
+    "symbol": "USAT",
+    "reviewed_disposition": "promoted_complete_record",
+    "source_pr": 601,
+    "authority_pr": 601,
+    "implementation_pr": 601,
+    "recorded_at": "2026-08-25",
+    "complete_record": true,
+    "replacement_candidate_used": false,
+    "canonical_asset_increment": 1,
+    "public_surface_change": false,
+    "market_access_change": false,
+    "notes": "USA₮ promoted after candidate-control collision validation and primary-source review. Record includes Anchorage Digital Bank issuer identity, Tether brand relationship, 2026-01-27 launch event, monthly reserve-attestation program, covered-stablecoin reserve trust and client-only direct redemption boundaries, Ethereum deployment identity, legal profile, income boundary and explicit known unknowns.",
+    "status": "promoted",
+    "promotion_pr": 601,
+    "promoted_record_id": "sog_st_usat",
+    "source_candidate_id": "sog_record_growth_300_candidate_scan_02_2026_08_25"
+  }
+]
