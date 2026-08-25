@@ -1,0 +1,27 @@
+[
+  {
+    "id": "sog_st_usat",
+    "slug": "usat",
+    "name": "USA₮",
+    "symbol": "USAT",
+    "aliases": ["USA₮", "USAT", "Tether USA₮"],
+    "status": "active",
+    "issuer_id": "sog_issuer_anchorage_digital_bank",
+    "peg_asset": "USD",
+    "collateral_model": "federally_regulated_covered_stablecoin_reserve_trust",
+    "reserve_disclosure_status": "monthly_third_party_attestation",
+    "redemption_status": "issuer_platform_eligible_client_redemption",
+    "who_can_redeem": "Anchorage Digital Bank clients may redeem covered stablecoins 1:1 for U.S. dollars on the bank platform, subject to client eligibility, compliance, supported-chain and account terms.",
+    "retail_redemption": "market_based_unless_eligible_bank_client",
+    "institutional_redemption": "eligible_bank_client_direct",
+    "minimum_redemption": "not_normalized_from_reviewed_public_terms",
+    "redemption_region_notes": "Direct issuance and redemption are subject to Anchorage Digital Bank client status, federal banking compliance, supported blockchain availability and current covered-stablecoin terms.",
+    "redemption_notes": "USA₮ is issued by Anchorage Digital Bank, N.A.; Tether supports the product and brand but is not the issuer.",
+    "launch_date": "2026-01-27",
+    "discontinued_date": null,
+    "summary": "U.S.-dollar stablecoin issued by Anchorage Digital Bank, N.A. in collaboration with Tether under a U.S. federal banking framework, with a covered-stablecoin reserve trust and monthly third-party reserve attestations.",
+    "confidence": "high",
+    "last_verified_at": "2026-08-25",
+    "notes": "Record Growth 119→300 Batch AD. Launch day is issuer/brand-announced. Ethereum contract identity is recorded separately; complete future multi-chain history remains subject to ongoing review."
+  }
+]
