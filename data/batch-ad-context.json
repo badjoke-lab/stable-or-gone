@@ -1,0 +1,16 @@
+[
+  {
+    "id": "sog_rr_usat_attestation_program_20260825",
+    "stablecoin_id": "sog_st_usat",
+    "issuer_id": "sog_issuer_anchorage_digital_bank",
+    "report_date": "2026-08-25",
+    "period_covered": "Current USA₮ monthly reserve-attestation program reviewed on 2026-08-25; report-specific monthly balances and category allocations are not normalized in this record",
+    "publisher": "Anchorage Digital Bank, N.A.",
+    "report_type": "issuer_monthly_reserve_attestation_program",
+    "asset_categories": ["other"],
+    "url": "https://www.anchorage.com/platform/usat-reserve-attestations",
+    "archived_url": "https://web.archive.org/web/*/https://www.anchorage.com/platform/usat-reserve-attestations",
+    "confidence": "high",
+    "notes": "Anchorage states USA₮ reserves are fully disclosed monthly and attested by a Big Four independent accounting firm under AICPA attestation standards. Exact current reserve-category allocation and report-specific amounts are not inferred here."
+  }
+]
