@@ -1,16 +1,4 @@
 [
-  {
-    "id": "sog_ev_ausd_product_documented_20260825",
-    "stablecoin_id": "sog_st_ausd_agora",
-    "issuer_id": "sog_issuer_agora_bermuda",
-    "event_type": "other",
-    "event_date": "2026-08-25",
-    "title": "Agora product materials document AUSD as an active fully reserved digital dollar",
-    "description": "Current Agora product and legal materials identify AUSD, Agora Bermuda Limited as issuer, par redemption for eligible verified customers, and a reserve model including short-term U.S. Treasuries, overnight repo, cash, and other liquid assets.",
-    "impact_level": "medium",
-    "confidence": "high",
-    "source_count": 3,
-    "event_status_effect": "active",
-    "notes": "This is a current-state documentation event and is not substituted for the unresolved original first-mint or launch date."
-  }
+  {"id":"sog_ev_ausd_product_documented_20260825","stablecoin_id":"sog_st_ausd_agora","issuer_id":"sog_issuer_agora_bermuda","event_type":"other","event_date":"2026-08-25","title":"Agora product materials document AUSD as an active fully reserved digital dollar","description":"Current Agora product and legal materials identify AUSD, Agora Bermuda Limited as issuer, par redemption for eligible verified customers, and a reserve model including short-term U.S. Treasuries, overnight repo, cash, and other liquid assets.","impact_level":"medium","confidence":"high","source_count":3,"event_status_effect":"active","notes":"This is a current-state documentation event and is not substituted for the unresolved original first-mint or launch date."},
+  {"id":"sog_ev_ausd_injective_winddown_20260403","stablecoin_id":"sog_st_ausd_agora","issuer_id":"sog_issuer_agora_bermuda","event_type":"deployment_change","event_date":"2026-04-03","title":"Agora stops new AUSD issuance on Injective and begins network wind-down","description":"Agora announced that no new AUSD would be minted on Injective from April 3, 2026, while redemptions would remain available through September 28, 2026; residual claims after that date would still be honored subject to enhanced verification and possible fees.","impact_level":"high","confidence":"high","source_count":1,"event_status_effect":"active","notes":"This event is network-scoped. It does not imply AUSD-wide discontinuation; current Agora deployment documentation continues to list multiple active mainnets."}
 ]
