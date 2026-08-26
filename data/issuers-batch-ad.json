@@ -1,0 +1,17 @@
+[
+  {
+    "id": "sog_issuer_caceis_bank",
+    "slug": "caceis-bank",
+    "name": "CACEIS Bank",
+    "issuer_type": "bank",
+    "jurisdiction": "France / European Union",
+    "related_stablecoins": [
+      "eurxt"
+    ],
+    "official_url": "https://www.caceis.com/",
+    "summary": "European asset-servicing bank and issuer of EURXT.",
+    "confidence": "high",
+    "last_verified_at": "2026-08-26",
+    "notes": "Batch 33 legacy issuer compatibility row. Canonical organization and relationship records preserve the reviewed EURXT issuer role."
+  }
+]
