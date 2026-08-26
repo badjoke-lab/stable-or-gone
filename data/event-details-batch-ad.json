@@ -1,6 +1,4 @@
 [
   {"id":"sog_ev_eurxt_launch_20260701","title":"CACEIS launches EURXT as a euro-denominated electronic-money token","subject_stablecoin_ids":["sog_st_eurxt"],"subject_organization_ids":["sog_issuer_caceis_bank"],"evidence_ids":["sog_src_eurxt_launch_20260701"],"event_detail_kind":"launch"},
-  {"id":"sog_ev_sofiusd_launch_20251218","title":"SoFi Bank launches SoFiUSD","subject_stablecoin_ids":["sog_st_sofiusd"],"subject_organization_ids":["sog_issuer_sofi_bank"],"evidence_ids":["sog_src_sofiusd_launch_20251218"],"event_detail_kind":"launch"},
-  {"id":"sog_ev_usdgo_launch_20260210","title":"OSL and Anchorage launch USDGO","subject_stablecoin_ids":["sog_st_usdgo"],"subject_organization_ids":["sog_issuer_anchorage_digital_bank"],"evidence_ids":["sog_src_usdgo_launch_20260210","sog_src_usdgo_anchorage_2026"],"event_detail_kind":"launch"},
   {"id":"sog_ev_usdpt_launch_20260504","title":"Western Union launches USDPT on Solana","subject_stablecoin_ids":["sog_st_usdpt"],"subject_organization_ids":["sog_issuer_anchorage_digital_bank"],"evidence_ids":["sog_src_usdpt_launch_20260504"],"event_detail_kind":"launch"}
 ]
