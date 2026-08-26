@@ -1,0 +1,36 @@
+[
+  {
+    "id": "sog_rc_eurxt_eur_backing_20260701",
+    "stablecoin_id": "sog_st_eurxt",
+    "reserve_report_id": null,
+    "asset_category": "other",
+    "asset_label": "Euro-denominated fiat backing described by CACEIS as 1:1 backing; exact current reserve asset composition is not specified in the reviewed launch source",
+    "share_percent": null,
+    "amount_text": null,
+    "currency": "EUR",
+    "liquidity_class": "unknown",
+    "maturity_bucket": "unknown",
+    "custodian_organization_id": null,
+    "as_of_date": "2026-07-01",
+    "confidence": "medium_high",
+    "evidence_ids": ["sog_src_eurxt_launch_20260701"],
+    "notes": "This component preserves the issuer's 1:1 fiat-backing claim without inventing cash/deposit/security allocation, custodian, maturity or assurance facts not established by the reviewed source."
+  },
+  {
+    "id": "sog_rc_usdpt_usd_backing_20260504",
+    "stablecoin_id": "sog_st_usdpt",
+    "reserve_report_id": null,
+    "asset_category": "other",
+    "asset_label": "U.S.-dollar reserve backing with a published reserve-attestation program; exact current asset allocation is not specified in the reviewed record",
+    "share_percent": null,
+    "amount_text": null,
+    "currency": "USD",
+    "liquidity_class": "unknown",
+    "maturity_bucket": "unknown",
+    "custodian_organization_id": null,
+    "as_of_date": null,
+    "confidence": "medium_high",
+    "evidence_ids": ["sog_src_usdpt_launch_20260504", "sog_src_usdpt_attestations_2026"],
+    "notes": "The component records full-dollar backing and the existence of reserve attestations without inferring an unsupported cash/Treasury split, maturity profile, custodian or reserve share."
+  }
+]
