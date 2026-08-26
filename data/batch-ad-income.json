@@ -1,0 +1,22 @@
+[
+  {
+    "id": "sog_st_eurxt",
+    "availability": "none",
+    "source": "none",
+    "accrual": "none",
+    "rate": "none",
+    "related_asset_ids": [],
+    "evidence_ids": ["sog_src_eurxt_launch_20260701"],
+    "notes": "No issuer-native holder yield, rebase, reserve-income pass-through, or other holding return is established in the reviewed EURXT launch material."
+  },
+  {
+    "id": "sog_st_usdpt",
+    "availability": "none",
+    "source": "none",
+    "accrual": "none",
+    "rate": "none",
+    "related_asset_ids": [],
+    "evidence_ids": ["sog_src_usdpt_launch_20260504", "sog_src_usdpt_attestations_2026"],
+    "notes": "No issuer-native holder yield, rebase, reserve-income pass-through, or other holding return is established in the reviewed USDPT launch and reserve-attestation materials."
+  }
+]
