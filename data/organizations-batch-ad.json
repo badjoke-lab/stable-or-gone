@@ -1,0 +1,4 @@
+[
+  {"id":"sog_issuer_caceis_bank","slug":"caceis-bank","name":"CACEIS Bank","organization_type":"bank","legacy_issuer_type":"bank","jurisdiction":"France / European Union","official_url":"https://www.caceis.com/","summary":"European asset-servicing bank and issuer of EURXT.","confidence":"high","last_verified_at":"2026-08-26","notes":"EURXT issuer role is established by CACEIS launch materials."},
+  {"id":"sog_issuer_sofi_bank","slug":"sofi-bank","name":"SoFi Bank, N.A.","organization_type":"national_bank","legacy_issuer_type":"bank","jurisdiction":"United States","official_url":"https://www.sofi.com/","summary":"U.S. nationally chartered bank and issuer of SoFiUSD.","confidence":"high","last_verified_at":"2026-08-26","notes":"SoFiUSD issuer role is established by SoFi launch and product materials."}
+]
