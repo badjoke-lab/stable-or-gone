@@ -90,13 +90,13 @@
     "retail_redemption": "unknown",
     "institutional_redemption": "unknown",
     "minimum_redemption": "unknown",
-    "redemption_region_notes": "The reviewed public material does not establish a direct issuer redemption channel or jurisdiction-specific redemption eligibility.",
-    "redemption_notes": "Operator/editorial material describes a one-yen target and backing or collateral concepts, but no reviewed source establishes the complete legal redemption mechanism, obligor, settlement terms, fees, minimums, or holder priority.",
+    "redemption_region_notes": "The reviewed public material does not establish a direct issuer redemption channel or jurisdiction-specific redemption eligibility. A previously documented IZAKA-YA/CryptoPanda transaction route was terminated by CryptoPanda on 2026-08-25; this is an access/off-ramp deterioration signal and is not treated as proof that JPYR itself lost its peg or became non-redeemable.",
+    "redemption_notes": "Operator/editorial material describes a one-yen target and backing or collateral concepts, but no reviewed source establishes the complete legal redemption mechanism, obligor, settlement terms, fees, minimums, or holder priority. The 2026-08-24 IZAKA-YA account-level withdrawal restrictions and the 2026-08-25 CryptoPanda integration termination affect a documented ecosystem access route but do not establish a direct JPYR issuer redemption failure.",
     "launch_date": null,
     "discontinued_date": null,
-    "summary": "Ethereum ERC-20 token targeting 1 JPY per JPYR. Reviewed IZAKA-YA-affiliated public material identifies a JPYR Organization and publishes the Ethereum contract, but gives materially inconsistent descriptions of backing and does not establish an independently reviewed reserve series or direct holder redemption right.",
+    "summary": "Ethereum ERC-20 token targeting 1 JPY per JPYR. Reviewed IZAKA-YA-affiliated public material identifies a JPYR Organization and publishes the Ethereum contract, but gives materially inconsistent descriptions of backing and does not establish an independently reviewed reserve series or direct holder redemption right. In August 2026, IZAKA-YA disclosed account-level withdrawal restrictions and CryptoPanda ended its IZAKA-YA wallet integration, creating an additional access/off-ramp concern without establishing a JPYR depeg or issuer redemption failure.",
     "confidence": "medium",
-    "last_verified_at": "2026-08-23",
-    "notes": "Canonical inclusion and active status are not safety endorsements. Reviewed operator/editorial material itself states that JPYR was not registered with Japan's FSA as of June 2026, that the smart contract had not received a formal third-party audit, and that liquidity was limited. Those statements are preserved as first-party claims and concern indicators, not independent regulatory or security findings."
+    "last_verified_at": "2026-08-27",
+    "notes": "Canonical inclusion and active status are not safety endorsements. Reviewed operator/editorial material itself states that JPYR was not registered with Japan's FSA as of June 2026, that the smart contract had not received a formal third-party audit, and that liquidity was limited. On 2026-08-24 IZAKA-YA disclosed temporary transfer/withdrawal restrictions for some accounts; on 2026-08-25 CryptoPanda terminated its IZAKA-YA partnership and disabled IZAKA-YA-wallet-connected transactions; on 2026-08-27 IZAKA-YA stated that there was no universal withdrawal halt and that individually reviewed transfers were being processed. SOG preserves these as ecosystem access and counterparty-route facts and does not infer depeg, reserve impairment, universal withdrawal failure, or direct issuer redemption failure from them."
   }
 ]
