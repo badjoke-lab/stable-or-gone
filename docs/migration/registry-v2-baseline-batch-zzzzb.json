@@ -1,0 +1,12 @@
+{
+  "batch_id": "jpyr_access_followup_20260827",
+  "captured_at": "2026-08-27",
+  "minimum_counts": {
+    "events": 198,
+    "event_details": 198,
+    "evidence": 595,
+    "evidence_relations": 595
+  },
+  "data_group_additions": {},
+  "notes": "Count-only baseline advance for the reviewed JPYR ecosystem-access follow-up rebased on the 122-asset batch AD checkpoint. The event and evidence rows are appended to already-registered batch-ac files; this overlay adds no new data-group paths."
+}
