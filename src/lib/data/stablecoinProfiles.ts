@@ -3,6 +3,27 @@ import relationshipsBatchZData from '../../../data/relationships-batch-z.json';
 import organizationsPr364Data from '../../../data/organizations-pr364-tier-a-batch-4.json';
 import relationshipsPr364Data from '../../../data/relationships-pr364-tier-a-batch-4.json';
 
+import stablecoinsBatchACData from '../../../data/stablecoins-batch-ac.json';
+import stablecoinsBatchADData from '../../../data/stablecoins-batch-ad.json';
+import stablecoinClassificationBatchACData from '../../../data/stablecoin-classification-batch-ac.json';
+import stablecoinClassificationBatchADData from '../../../data/stablecoin-classification-batch-ad.json';
+import organizationsBatchACData from '../../../data/organizations-batch-ac.json';
+import organizationsBatchADData from '../../../data/organizations-batch-ad.json';
+import relationshipsBatchACData from '../../../data/relationships-batch-ac.json';
+import relationshipsBatchADData from '../../../data/relationships-batch-ad.json';
+import eventsBatchACData from '../../../data/events-batch-ac.json';
+import eventsBatchADData from '../../../data/events-batch-ad.json';
+import eventDetailsBatchACData from '../../../data/event-details-batch-ac.json';
+import eventDetailsBatchADData from '../../../data/event-details-batch-ad.json';
+import evidenceBatchACData from '../../../data/evidence-batch-ac.json';
+import evidenceBatchADData from '../../../data/evidence-batch-ad.json';
+import reserveContextBatchACData from '../../../data/batch-ac-context.json';
+import reserveContextBatchADData from '../../../data/batch-ad-context.json';
+import reviewGapsBatchACData from '../../../data/batch-ac-review-gaps.json';
+import reviewGapsBatchADData from '../../../data/batch-ad-review-gaps.json';
+import deploymentsBatchACData from '../../../data/batch-ac-deployments.json';
+import deploymentsBatchADData from '../../../data/batch-ad-deployments.json';
+
 type IdentifiedRow = { id: string; [key: string]: unknown };
 
 const appendUniqueRows = (target: IdentifiedRow[], additions: IdentifiedRow[]) => {
@@ -16,6 +37,22 @@ const appendUniqueRows = (target: IdentifiedRow[], additions: IdentifiedRow[]) =
 
 appendUniqueRows(organizationsBatchZData as IdentifiedRow[], organizationsPr364Data as IdentifiedRow[]);
 appendUniqueRows(relationshipsBatchZData as IdentifiedRow[], relationshipsPr364Data as IdentifiedRow[]);
+
+// The public registry runtime still enumerates batches through AC. Keep that stable
+// loader surface while projecting reviewed batch AD rows into the final AC arrays.
+// This mirrors the existing PR364 compatibility append above and avoids a second,
+// divergent public data path: every runtime consumer of registry.ts sees the same
+// reviewed EURXT / USDPT records that the canonical baseline and validators see.
+appendUniqueRows(stablecoinsBatchACData as IdentifiedRow[], stablecoinsBatchADData as IdentifiedRow[]);
+appendUniqueRows(stablecoinClassificationBatchACData as IdentifiedRow[], stablecoinClassificationBatchADData as IdentifiedRow[]);
+appendUniqueRows(organizationsBatchACData as IdentifiedRow[], organizationsBatchADData as IdentifiedRow[]);
+appendUniqueRows(relationshipsBatchACData as IdentifiedRow[], relationshipsBatchADData as IdentifiedRow[]);
+appendUniqueRows(eventsBatchACData as IdentifiedRow[], eventsBatchADData as IdentifiedRow[]);
+appendUniqueRows(eventDetailsBatchACData as IdentifiedRow[], eventDetailsBatchADData as IdentifiedRow[]);
+appendUniqueRows(evidenceBatchACData as IdentifiedRow[], evidenceBatchADData as IdentifiedRow[]);
+appendUniqueRows(reserveContextBatchACData as IdentifiedRow[], reserveContextBatchADData as IdentifiedRow[]);
+appendUniqueRows(reviewGapsBatchACData as IdentifiedRow[], reviewGapsBatchADData as IdentifiedRow[]);
+appendUniqueRows(deploymentsBatchACData as IdentifiedRow[], deploymentsBatchADData as IdentifiedRow[]);
 
 export { getCurrentProfiles as getStablecoinProfiles, getCurrentProfile as getStablecoinProfile } from './currentProfiles';
 export type { CurrentProfile as StablecoinProfileV2 } from './currentProfiles';
@@ -49,5 +86,6 @@ batch-x-reserve-redemption.json
 batch-y-reserve-redemption.json
 stablecoin-profiles-pr354-tier-a-batch-1.json
 stablecoin-profiles-pr355-tier-a-batch-2.json
+batch-ad-reserve-redemption.json
 `;
 void profileLoaderInventory;
