@@ -43,7 +43,8 @@
     "legal_profiles": 122,
     "stable_asset_relationships": 5,
     "reserve_components": 156,
-    "income_profiles": 122
+    "income_profiles": 122,
+    "detail_routes": 431
   },
   "growth_outcome": {
     "stable_asset_changes": 2,
