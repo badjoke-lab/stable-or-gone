@@ -1,0 +1,46 @@
+[
+  {
+    "id": "sog_st_eurxt",
+    "classifications": [
+      {
+        "classification": "e_money_token",
+        "jurisdiction": "European Union",
+        "effective_from": "2026-07-01",
+        "effective_to": null,
+        "authority_or_basis": "CACEIS launch announcement identifies EURXT as a euro-denominated electronic money token issued by CACEIS Bank and backed 1:1 by euro-denominated fiat assets.",
+        "confidence": "high",
+        "evidence_ids": ["sog_src_eurxt_launch_20260701"]
+      }
+    ],
+    "holder_claim_type": "direct_claim_on_issuer",
+    "claim_against_organization_ids": ["sog_issuer_caceis_bank"],
+    "reserve_ownership": "issuer_owned",
+    "reserve_segregation": "unclear",
+    "bankruptcy_remoteness": "not_established",
+    "licensed_or_regulated_as": ["European Union electronic money token issuer"],
+    "notes": "The reviewed launch material establishes CACEIS Bank as issuer, EMT status and 1:1 euro backing. It does not establish token-specific reserve segregation or bankruptcy remoteness, so those fields remain unresolved.",
+    "evidence_ids": ["sog_src_eurxt_launch_20260701"]
+  },
+  {
+    "id": "sog_st_usdpt",
+    "classifications": [
+      {
+        "classification": "fiat_backed_stablecoin",
+        "jurisdiction": "United States",
+        "effective_from": "2026-05-04",
+        "effective_to": null,
+        "authority_or_basis": "Western Union launch announcement identifies USDPT as a U.S.-dollar-backed stablecoin issued by Anchorage Digital Bank.",
+        "confidence": "high",
+        "evidence_ids": ["sog_src_usdpt_launch_20260504"]
+      }
+    ],
+    "holder_claim_type": "unknown",
+    "claim_against_organization_ids": ["sog_issuer_anchorage_digital_bank"],
+    "reserve_ownership": "unknown",
+    "reserve_segregation": "unclear",
+    "bankruptcy_remoteness": "not_established",
+    "licensed_or_regulated_as": ["U.S. federally chartered bank-issued stablecoin"],
+    "notes": "Reviewed materials establish Anchorage Digital Bank as issuer, full U.S.-dollar backing and a reserve-attestation program. They do not establish the complete holder-claim, reserve-ownership, segregation or bankruptcy-remoteness terms used by this registry, so those boundaries remain explicit.",
+    "evidence_ids": ["sog_src_usdpt_launch_20260504", "sog_src_usdpt_attestations_2026"]
+  }
+]

@@ -1,0 +1,3 @@
+[
+  {"id":"sog_issuer_caceis_bank","slug":"caceis-bank","name":"CACEIS Bank","organization_type":"bank","legacy_issuer_type":"bank","jurisdiction":"France / European Union","official_url":"https://www.caceis.com/","summary":"European asset-servicing bank and issuer of EURXT.","confidence":"high","last_verified_at":"2026-08-26","notes":"EURXT issuer role is established by CACEIS launch materials."}
+]
