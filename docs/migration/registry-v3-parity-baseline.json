@@ -1,11 +1,11 @@
 {
   "schema_version": "3.0-parity-baseline",
   "status": "current",
-  "baseline_id": "sog_registry_v3_parity_batch_ad_122_assets_2026_08_27",
+  "baseline_id": "sog_registry_v3_parity_pr606_122_assets_2026_08_27",
   "recorded_at": "2026-08-27",
-  "data_checkpoint_commit": "agent/record-growth-300-clean-20260825",
-  "source_baseline_id": "sog_registry_v3_parity_pr598_120_assets_2026_08_23",
-  "canonical_checkpoint_id": "sog_record_growth_batch_ad_122_2026_08_27",
+  "data_checkpoint_commit": "fast-track/jpyr-izakaya-20260827",
+  "source_baseline_id": "sog_registry_v3_parity_batch_ad_122_assets_2026_08_27",
+  "canonical_checkpoint_id": "sog_jpyr_access_maintenance_122_2026_08_27",
   "v2_composed_baseline": "docs/migration/registry-v2-baseline.json",
   "v3_foundation": "docs/migration/registry-v3-foundation.json",
   "v3_income_profiles": "docs/migration/registry-v3-income-profiles.json",
@@ -15,10 +15,10 @@
     "relationships": 134,
     "classifications": 122,
     "profiles": 122,
-    "events": 197,
-    "event_details": 197,
-    "evidence": 592,
-    "evidence_relations": 592,
+    "events": 198,
+    "event_details": 198,
+    "evidence": 595,
+    "evidence_relations": 595,
     "reserve_reports": 129,
     "known_unknowns": 359,
     "regulatory_notes": 9,
@@ -52,5 +52,5 @@
   },
   "audit_report": "docs/audits/registry-v2-v3-machine-readable-parity-100-assets.md",
   "validator": "scripts/validate-registry-v2-v3-machine-readable-parity.mjs",
-  "notes": "Current parity baseline advances to 122 assets for reviewed EURXT and USDPT canonical growth while preserving explicit uncertainty and non-endorsement semantics."
+  "notes": "Current parity baseline preserves the reviewed 122-asset batch AD corpus and adds the JPYR ecosystem-access maintenance event and evidence without changing asset coverage."
 }
