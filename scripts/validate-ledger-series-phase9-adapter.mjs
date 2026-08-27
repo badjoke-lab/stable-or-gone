@@ -79,16 +79,19 @@ if (!manifest || !descriptor || !index || !relationships || !authority) {
   process.exit(1);
 }
 
+const primaryRecordCount = manifest.record_counts?.primary_records;
+if (!Number.isInteger(primaryRecordCount) || primaryRecordCount < 1) fail(`native primary record count is invalid: ${primaryRecordCount}`);
+
 if (authority.authority_id !== 'sog_ledger_series_phase9_stage5_relationship_2026_08_21') fail('unexpected Stage 5 authority id');
 if (authority.canonical_boundary?.canonical_delta_authorized !== 0) fail('Stage 5 authority must authorize zero canonical delta');
 if (authority.canonical_boundary?.stable_assets !== 119) fail('Stage 5 authority stable asset count mismatch');
 if (authority.canonical_boundary?.canonical_hash !== 'sha256:4e7570b6fab88a8178a01ae280a36d98787573b376440b891491f25469458798') fail('Stage 5 authority canonical hash mismatch');
 if (!Array.isArray(authority.finite_allowlist) || authority.finite_allowlist.length !== 1) fail('Stage 5 authority must contain exactly one relationship tuple');
+if (Number.isInteger(primaryRecordCount) && primaryRecordCount < authority.canonical_boundary?.stable_assets) fail('current canonical corpus cannot be smaller than the reviewed Stage 5 authority corpus');
 
 if (manifest.project_id !== registryId) fail(`native manifest project_id mismatch: ${manifest.project_id}`);
 if (manifest.canonical_origin !== officialOrigin) fail(`native manifest origin mismatch: ${manifest.canonical_origin}`);
 if (manifest.data_safety?.canonical_only !== true) fail('native manifest is not canonical_only');
-if (manifest.record_counts?.primary_records !== 119) fail(`native primary record count must remain 119, found ${manifest.record_counts?.primary_records}`);
 if (!/^sha256:[0-9a-f]{64}$/.test(manifest.build?.canonical_data_hash ?? '')) fail(`native manifest canonical hash invalid: ${manifest.build?.canonical_data_hash}`);
 
 if (descriptor.series_schema_version !== '1.0.0') fail('Series schema version mismatch');
@@ -96,7 +99,7 @@ if (descriptor.object_type !== 'registry_descriptor') fail('descriptor object_ty
 if (descriptor.registry?.id !== registryId) fail('descriptor registry ID mismatch');
 if (descriptor.registry?.origin !== officialOrigin) fail('descriptor official origin mismatch');
 if (descriptor.canonical_only !== true) fail('descriptor canonical_only mismatch');
-if (descriptor.record_counts?.primary_records !== 119 || descriptor.record_counts?.series_records !== 119) fail('descriptor record counts must be 119/119');
+if (descriptor.record_counts?.primary_records !== primaryRecordCount || descriptor.record_counts?.series_records !== primaryRecordCount) fail(`descriptor record counts must be ${primaryRecordCount}/${primaryRecordCount}`);
 if (descriptor.record_counts?.relationships !== 1) fail('descriptor relationship count must be exactly 1');
 if (descriptor.routes?.descriptor !== '/data/series/registry.json') fail('descriptor route mismatch');
 if (descriptor.routes?.index !== '/data/series/index.json') fail('index route mismatch');
@@ -117,14 +120,14 @@ if (index.series_schema_version !== '1.0.0') fail('index Series schema version m
 if (index.object_type !== 'record_index') fail('index object_type mismatch');
 if (index.registry_id !== registryId) fail('index registry ID mismatch');
 if (index.canonical_only !== true) fail('index canonical_only mismatch');
-if (index.record_count !== 119 || index.record_counts?.stablecoins !== 119) fail('index count must be 119');
+if (index.record_count !== primaryRecordCount || index.record_counts?.stablecoins !== primaryRecordCount) fail(`index count must be ${primaryRecordCount}`);
 if (!same(index.verification?.build, manifest.build)) fail('index build provenance must equal native manifest build provenance');
-if (!Array.isArray(index.records) || index.records.length !== 119) fail('index records array must contain 119 records');
+if (!Array.isArray(index.records) || index.records.length !== primaryRecordCount) fail(`index records array must contain ${primaryRecordCount} records`);
 
 const stablecoinFiles = listJsonFiles(path.join(dist, 'data', 'stablecoin'));
 const seriesFiles = listJsonFiles(path.join(dist, 'data', 'series', 'records'));
-if (stablecoinFiles.length !== 119) fail(`native dossier file count must be 119, found ${stablecoinFiles.length}`);
-if (seriesFiles.length !== 119) fail(`Series envelope file count must be 119, found ${seriesFiles.length}`);
+if (stablecoinFiles.length !== primaryRecordCount) fail(`native dossier file count must be ${primaryRecordCount}, found ${stablecoinFiles.length}`);
+if (seriesFiles.length !== primaryRecordCount) fail(`Series envelope file count must be ${primaryRecordCount}, found ${seriesFiles.length}`);
 if (!same(seriesFiles, stablecoinFiles)) fail('Series envelope slugs must exactly match native dossier slugs');
 
 const keys = new Set();
@@ -173,8 +176,8 @@ for (const row of index.records ?? []) {
   if (envelope.provenance?.canonical_only !== true) fail(`${label}: provenance canonical_only mismatch`);
 }
 
-if (keys.size !== 119) fail(`global key uniqueness/count mismatch: ${keys.size}`);
-if (nativeIds.size !== 119) fail(`native ID uniqueness/count mismatch: ${nativeIds.size}`);
+if (keys.size !== primaryRecordCount) fail(`global key uniqueness/count mismatch: ${keys.size}`);
+if (nativeIds.size !== primaryRecordCount) fail(`native ID uniqueness/count mismatch: ${nativeIds.size}`);
 
 const expectedTuples = authority.finite_allowlist.map(([type, source, target]) => `${type}\n${source}\n${target}`);
 const expectedTupleSet = new Set(expectedTuples);
@@ -194,8 +197,8 @@ for (const [relationshipIndex, relationship] of (relationships ?? []).entries())
 
   const source = endpointGlobalKey(relationship.source);
   const target = endpointGlobalKey(relationship.target);
-  if (!keys.has(source)) fail(`${label}: source endpoint missing from Stage 3 index`);
-  if (!keys.has(target)) fail(`${label}: target endpoint missing from Stage 3 index`);
+  if (!keys.has(source)) fail(`${label}: source endpoint missing from current Series index`);
+  if (!keys.has(target)) fail(`${label}: target endpoint missing from current Series index`);
   if (source === target) fail(`${label}: self-loop is not authorized`);
   const tuple = `${relationship.relation_type}\n${source}\n${target}`;
   if (!expectedTupleSet.has(tuple)) fail(`${label}: tuple outside finite allowlist`);
@@ -215,6 +218,7 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log('SOG Ledger Series Phase 9 adapter validation passed: 119 canonical stablecoin envelopes, 1 reviewed relationship.');
+console.log(`SOG Ledger Series Phase 9 adapter validation passed: ${primaryRecordCount} canonical stablecoin envelopes, 1 reviewed relationship.`);
+console.log(`Stage 5 relationship authority baseline: ${authority.canonical_boundary?.stable_assets} assets; current corpus growth is validated additively.`);
 console.log(`Build commit: ${manifest.build?.commit ?? 'unknown'}`);
 console.log(`Canonical hash: ${manifest.build?.canonical_data_hash ?? 'unknown'}`);

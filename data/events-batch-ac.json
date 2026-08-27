@@ -54,5 +54,19 @@
     "source_count": 2,
     "event_status_effect": "active",
     "notes": "Do not substitute this documentation date for first mint, first circulation, or launch. Explorer evidence corroborates the contract identity but not reserve backing or redemption rights."
+  },
+  {
+    "id": "sog_ev_jpyr_access_route_deterioration_20260825",
+    "stablecoin_id": "sog_st_jpyr",
+    "issuer_id": "sog_org_jpyr_organization",
+    "event_type": "other",
+    "event_date": "2026-08-25",
+    "title": "JPYR-linked IZAKA-YA ecosystem lost its CryptoPanda wallet integration route",
+    "description": "CryptoPanda announced termination of its partnership with IZAKA-YA and disabled transactions through IZAKA-YA wallet connections. The change followed IZAKA-YA's 2026-08-24 disclosure of temporary transfer and withdrawal restrictions for some accounts and affected a previously documented route used in JPYR-linked campaigns and transactions.",
+    "impact_level": "high",
+    "confidence": "high",
+    "source_count": 2,
+    "event_status_effect": "active",
+    "notes": "This is an ecosystem access/off-ramp deterioration event. It does not establish that JPYR itself depegged, that its reserves became impaired, that a direct issuer redemption channel failed, or that all IZAKA-YA withdrawals were blocked. IZAKA-YA stated on 2026-08-27 that there was no platform-wide halt and that individually reviewed transfers were being processed."
   }
 ]

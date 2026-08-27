@@ -34,5 +34,13 @@
     "evidence_ids": ["sog_src_jpyr_metamask_20260823", "sog_src_jpyr_potential_20260823"],
     "event_detail_kind": "launch",
     "launch_detail": {"summary":"Public documentation identifies JPYR as an Ethereum stable asset and establishes the reviewed deployment identity. This event records deployment documentation, not a safety or reserve endorsement.","status":"active","resolution_date":null,"affected_deployment_ids":["sog_dep_jpyr_ethereum_20260823"],"related_organization_ids":["sog_org_jpyr_organization"]}
+  },
+  {
+    "id": "sog_ev_jpyr_access_route_deterioration_20260825",
+    "title": "JPYR-linked IZAKA-YA ecosystem lost its CryptoPanda wallet integration route",
+    "subject_stablecoin_ids": ["sog_st_jpyr"],
+    "subject_organization_ids": ["sog_org_jpyr_organization"],
+    "evidence_ids": ["sog_src_jpyr_izakaya_withdrawals_20260824", "sog_src_jpyr_cryptopanda_termination_20260825", "sog_src_jpyr_izakaya_followup_20260827"],
+    "event_detail_kind": "other"
   }
 ]
