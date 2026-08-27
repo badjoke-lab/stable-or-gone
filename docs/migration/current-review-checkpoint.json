@@ -20,7 +20,8 @@
     "evidence": 595,
     "reserve_reports": 129,
     "known_unknowns": 359,
-    "deployments": 189
+    "deployments": 189,
+    "detail_routes": 431
   },
   "reviewed_stablecoin_ids": ["sog_st_eurxt", "sog_st_usdpt", "sog_st_jpyr"],
   "reviewed_known_unknown_ids": [],
