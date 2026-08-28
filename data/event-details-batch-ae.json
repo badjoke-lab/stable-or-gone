@@ -1,0 +1,4 @@
+[
+  {"id":"sog_ev_usd1_launch_20250328","title":"BitGo establishes USD1 launch infrastructure and reserve model","subject_stablecoin_ids":["sog_st_usd1"],"subject_organization_ids":["sog_issuer_bitgo"],"evidence_ids":["sog_src_usd1_bitgo_20250328","sog_src_usd1_terms_2026"],"event_detail_kind":"launch"},
+  {"id":"sog_ev_jpyc_launch_20251027","title":"JPYC Inc. begins JPYC issuance and redemption through JPYC EX","subject_stablecoin_ids":["sog_st_jpyc"],"subject_organization_ids":["sog_issuer_jpyc_inc"],"evidence_ids":["sog_src_jpyc_launch_20251024","sog_src_jpyc_contracts_20251028"],"event_detail_kind":"launch"}
+]
