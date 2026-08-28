@@ -1,0 +1,4 @@
+[
+  {"id":"sog_st_usd1","availability":"none","source":"none","accrual":"none","rate":"none","related_asset_ids":[],"evidence_ids":["sog_src_usd1_bitgo_20250328","sog_src_usd1_terms_2026"],"notes":"No issuer-native holder yield, rebase, reserve-income pass-through or other holding return is established in the reviewed USD1 issuance and terms materials."},
+  {"id":"sog_st_jpyc","availability":"none","source":"none","accrual":"none","rate":"none","related_asset_ids":[],"evidence_ids":["sog_src_jpyc_launch_20251024"],"notes":"No issuer-native holder yield, rebase, reserve-income pass-through or other holding return is established in the reviewed JPYC launch material."}
+]
