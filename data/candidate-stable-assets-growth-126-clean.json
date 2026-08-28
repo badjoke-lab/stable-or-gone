@@ -1,0 +1,36 @@
+[
+  {
+    "candidate_id": "sog_cand_000123",
+    "proposed_record_id": "sog_st_usat",
+    "slug": "usat",
+    "name": "USA₮",
+    "symbol": "USAT",
+    "aliases": ["USAT", "USA₮", "Tether USA₮"],
+    "candidate_type": "stablecoin",
+    "asset_class": "stablecoin",
+    "reference_kind": "fiat",
+    "reference_label": "USD",
+    "priority": "P0",
+    "status": "reviewed_candidate",
+    "target_batch": "batch_034",
+    "promoted_record_id": null,
+    "notes": "Clean replacement candidate for invalid duplicate intake USD1/JPYC. Tether announced the official launch of USA₮ on 2026-01-27 and identifies Anchorage Digital Bank, N.A. as issuer. Full-layer canonical promotion still requires repository duplicate validation, deployment/address verification, reserve/redemption normalization, evidence records, and CI."
+  },
+  {
+    "candidate_id": "sog_cand_000124",
+    "proposed_record_id": "sog_st_hkdap",
+    "slug": "hkdap",
+    "name": "HKD At Par",
+    "symbol": "HKDAP",
+    "aliases": ["HKDAP", "HKD At Par"],
+    "candidate_type": "stablecoin",
+    "asset_class": "stablecoin",
+    "reference_kind": "fiat",
+    "reference_label": "HKD",
+    "priority": "P0",
+    "status": "reviewed_candidate",
+    "target_batch": "batch_034",
+    "promoted_record_id": null,
+    "notes": "Clean replacement candidate for invalid duplicate intake USD1/JPYC. Anchorpoint states HKDAP is an HKMA-licensed HKD-backed stablecoin, redeemable 1:1 for HKD, with Beta Access institutional rollout beginning 2026-08-12 and reserves held in a legally segregated trust structure. Full-layer canonical promotion still requires repository duplicate validation, deployment/address verification, normalized legal/reserve/redemption records, evidence records, and CI."
+  }
+]
