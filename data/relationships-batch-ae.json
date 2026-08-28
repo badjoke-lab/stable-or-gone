@@ -1,0 +1,4 @@
+[
+  {"id":"sog_rel_usd1_bitgo_20250328","stablecoin_id":"sog_st_usd1","organization_id":"sog_issuer_bitgo","role":"legal_issuer","start_date":"2025-03-28","end_date":null,"status":"active","evidence_ids":["sog_src_usd1_bitgo_20250328","sog_src_usd1_terms_2026"],"notes":"BitGo primary materials establish the USD1 issuance and redemption role."},
+  {"id":"sog_rel_jpyc_jpycinc_20251027","stablecoin_id":"sog_st_jpyc","organization_id":"sog_issuer_jpyc_inc","role":"legal_issuer","start_date":"2025-10-27","end_date":null,"status":"active","evidence_ids":["sog_src_jpyc_launch_20251024"],"notes":"JPYC Inc. is the registered funds-transfer business and issuer of JPYC."}
+]
