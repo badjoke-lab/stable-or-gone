@@ -1,41 +1,41 @@
 {
   "schema_version": "3.0-parity-baseline",
   "status": "current",
-  "baseline_id": "sog_registry_v3_parity_pr606_122_assets_2026_08_27",
-  "recorded_at": "2026-08-27",
-  "data_checkpoint_commit": "fast-track/jpyr-izakaya-20260827",
-  "source_baseline_id": "sog_registry_v3_parity_batch_ad_122_assets_2026_08_27",
-  "canonical_checkpoint_id": "sog_jpyr_access_maintenance_122_2026_08_27",
+  "baseline_id": "sog_registry_v3_parity_batch_ae_124_assets_2026_08_28",
+  "recorded_at": "2026-08-28",
+  "data_checkpoint_commit": "agent/record-growth-batch-034-usd1-jpyc-v2",
+  "source_baseline_id": "sog_registry_v3_parity_pr606_122_assets_2026_08_27",
+  "canonical_checkpoint_id": "sog_batch_ae_canonical_124_2026_08_28",
   "v2_composed_baseline": "docs/migration/registry-v2-baseline.json",
   "v3_foundation": "docs/migration/registry-v3-foundation.json",
   "v3_income_profiles": "docs/migration/registry-v3-income-profiles.json",
   "expected_v2_counts": {
-    "stablecoins": 122,
-    "organizations": 111,
-    "relationships": 134,
-    "classifications": 122,
-    "profiles": 122,
-    "events": 198,
-    "event_details": 198,
-    "evidence": 595,
-    "evidence_relations": 595,
-    "reserve_reports": 129,
-    "known_unknowns": 359,
+    "stablecoins": 124,
+    "organizations": 113,
+    "relationships": 136,
+    "classifications": 124,
+    "profiles": 124,
+    "events": 200,
+    "event_details": 200,
+    "evidence": 601,
+    "evidence_relations": 601,
+    "reserve_reports": 131,
+    "known_unknowns": 361,
     "regulatory_notes": 9,
-    "deployments": 189
+    "deployments": 197
   },
   "expected_v3_counts": {
-    "legal_profiles": 122,
+    "legal_profiles": 124,
     "stable_asset_relationships": 5,
-    "reserve_components": 156,
-    "income_profiles": 122,
-    "deployment_view": 189
+    "reserve_components": 158,
+    "income_profiles": 124,
+    "deployment_view": 197
   },
   "expected_v3_coverage": {
-    "legal_profiles": 122,
-    "income_profiles": 122,
-    "reserve_component_assets": 122,
-    "deployment_view_assets": 122
+    "legal_profiles": 124,
+    "income_profiles": 124,
+    "reserve_component_assets": 124,
+    "deployment_view_assets": 124
   },
   "machine_readable_contract": {
     "schema_version": "1.0.0",
@@ -52,5 +52,5 @@
   },
   "audit_report": "docs/audits/registry-v2-v3-machine-readable-parity-100-assets.md",
   "validator": "scripts/validate-registry-v2-v3-machine-readable-parity.mjs",
-  "notes": "Current parity baseline preserves the reviewed 122-asset batch AD corpus and adds the JPYR ecosystem-access maintenance event and evidence without changing asset coverage."
+  "notes": "Current parity baseline advances to 124 assets for reviewed USD1 and JPYC canonical growth while preserving the JPYR ecosystem-access maintenance rows and explicit uncertainty/non-endorsement semantics."
 }
