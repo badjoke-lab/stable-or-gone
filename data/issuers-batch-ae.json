@@ -1,0 +1,4 @@
+[
+  {"id":"sog_issuer_bitgo","slug":"bitgo","name":"BitGo","issuer_type":"financial_institution","jurisdiction":"United States","related_stablecoins":["usd1"],"official_url":"https://www.bitgo.com/","summary":"USD1 issuer and redemption infrastructure provider.","confidence":"high","last_verified_at":"2026-08-28","notes":"Batch 34 legacy issuer compatibility row; canonical relationship records preserve the reviewed USD1 issuer role."},
+  {"id":"sog_issuer_jpyc_inc","slug":"jpyc-inc","name":"JPYC Inc.","issuer_type":"fund_transfer_business","jurisdiction":"Japan","related_stablecoins":["jpyc"],"official_url":"https://corporate.jpyc.co.jp/","summary":"Japanese registered funds-transfer business and JPYC issuer.","confidence":"high","last_verified_at":"2026-08-28","notes":"Batch 34 legacy issuer compatibility row; canonical relationship records preserve the reviewed JPYC issuer role."}
+]
