@@ -113,4 +113,14 @@ export function getStableAssetRelationships():StableAssetRelationshipV3[] { retu
 export function getStableAssetRelationshipsFor(stablecoinId:string):StableAssetRelationshipV3[] { return getStableAssetRelationships().filter((row)=>row.from_asset_id===stablecoinId||row.to_asset_id===stablecoinId); }
 export function getReserveComponents():ReserveComponentV3[] { return reserveComponents.map((row)=>({...row,evidence_ids:[...row.evidence_ids]})); }
 export function getReserveComponentsFor(stablecoinId:string):ReserveComponentV3[] { return getReserveComponents().filter((row)=>row.stablecoin_id===stablecoinId); }
-export function getDeploymentsV3():DeploymentV3View[] { return getDeployments().map((row)=>{ const deployment=row as DeploymentRow&DeploymentV3Fields; return {...deployment,canonicality:deployment.canonicality??'unknown',control_event_ids:[...(deployment.control_event_ids??[])],evidence_ids:[...(deployment.evidence_ids??[])]}; }); }
+export function getDeploymentsV3(): DeploymentV3View[] {
+  return getDeployments().map((row) => {
+    const deployment = row as DeploymentRow & DeploymentV3Fields;
+    return {
+      ...deployment,
+      canonicality: deployment.canonicality ?? 'unknown',
+      control_event_ids: [...(deployment.control_event_ids ?? [])],
+      evidence_ids: [...(deployment.evidence_ids ?? [])],
+    };
+  });
+}
