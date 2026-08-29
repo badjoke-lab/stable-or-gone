@@ -1,39 +1,13 @@
-# Batch 034 research — USA₮ / HKDAP
+# Batch 034 research — HKDAP / MGUSD
 
-Status: reviewed candidate research; not canonical promotion.
+Status: reviewed candidate research; canonical promotion pending full CI.
 Baseline: 122 canonical stable assets.
 
-## USA₮ / USAT
+## Duplicate rejection — USA₮ / USAT
 
-Candidate id: `sog_cand_000123`
-Proposed record id: `sog_st_usat`
+USA₮ was initially selected as `sog_cand_000123`, then rejected after the canonical loaders exposed an existing record in `data/stablecoins-batch-p.json` (`sog_st_usat`) and existing issuer relationship `sog_rel_usat_issuer_batch_p`.
 
-Reviewed primary material:
-
-- Tether USA₮ launch announcement, 2026-01-27: https://usat.io/news/tether-announces-the-launch-of-usat-the-federally-regulated-dollar-backed-stablecoin-made-in-america/
-- USA₮ product site: https://usat.io/
-
-Supported facts:
-
-- official launch date: 2026-01-27
-- reference asset: USD
-- issuer: Anchorage Digital Bank, N.A.
-- Tether Operations is explicitly not the issuer
-- product is described as dollar-backed / backed in full by liquid reserves
-- product site states 1 USA₮ is redeemable for 1 USD
-- status at reviewed date: active
-
-Independent deployment corroboration candidate (not yet accepted as primary issuer evidence):
-
-- Ethereum address reported by multiple exchange/explorer surfaces: `0x07041776f5007ACa2A54844F50503a18A72A8b68`
-
-Do not infer yet:
-
-- unrestricted direct redemption eligibility for every holder
-- exact reserve allocation percentages
-- reserve segregation / bankruptcy remoteness
-- complete mint/burn/admin-role inventory
-- additional chain deployments
+The duplicate validator and primary-display relationship audit correctly surfaced the conflict. Batch 034 does not add a second USA₮ record and does not weaken duplicate validation.
 
 ## HKD At Par / HKDAP
 
@@ -57,24 +31,46 @@ Supported facts:
 - reserve structure: high-quality liquid reserve assets held in a trust structure legally segregated from Anchorpoint operational assets, per issuer disclosure
 - Beta Access institutional rollout began 2026-08-12
 - transparency page reports live circulation, issuance and redemption during Beta Access
-- status at reviewed date: active / limited-access Beta phase; canonical status decision must follow existing SOG lifecycle rules
+- status at reviewed date: active / limited-access Beta phase
 
-Deployment lead requiring primary-address confirmation before canonical insertion:
+Do not infer:
 
-- Ethereum mainnet is identified in rollout/test materials; exact canonical token proxy must be confirmed from issuer-controlled material before promotion.
-
-Do not infer yet:
-
-- full retail availability during Beta Access
-- audited reserve attestation availability before Full Launch
-- exact reserve asset allocation beyond disclosed eligible/high-quality liquid assets
+- unrestricted retail availability during Beta Access
+- audited reserve attestations before Full Launch
+- exact reserve asset allocation beyond the issuer disclosure
 - bankruptcy remoteness beyond the disclosed trust segregation structure
-- additional chain deployments
+- exact canonical token proxy until confirmed by issuer-controlled material
 
-## Duplicate gate
+## MGUSD
 
-Repository code search on 2026-08-29 returned no exact `USAT/USA₮` or `HKDAP/HKD At Par` canonical matches. This is a candidate-stage signal only; promotion still requires validator-backed id/slug/domain duplicate checks against the full canonical loaders.
+Candidate id: `sog_cand_000125`
+Proposed record id: `sog_st_mgusd`
+
+Reviewed primary material:
+
+- MoneyGram launch announcement, 2026-06-02: https://www.prnewswire.com/news-releases/moneygram-launches-mgusd-a-stablecoin-to-power-its-own-global-network-302787799.html
+- MoneyGram newsroom index: https://corporate.moneygram.com/news-categories/press-release
+
+Supported facts:
+
+- official launch date: 2026-06-02
+- reference asset: USD
+- issuer: Bridge, a Stripe company, described by MoneyGram as the regulated, GENIUS Act-ready issuer
+- launch network: Stellar
+- M0 provides mint/burn smart-contract infrastructure
+- Fireblocks provides wallet infrastructure
+- launched in the U.S. market with plans to scale globally
+- MoneyGram states customers can hold a stable dollar-denominated balance and convert into local currency through supported MoneyGram services
+
+Do not infer:
+
+- reserve composition or allocation
+- reserve ownership, segregation or assurance history
+- unrestricted direct issuer redemption
+- holder claim structure
+- exact Stellar asset identifier
+- current issuer/control role assignments beyond the reviewed launch disclosure
 
 ## Promotion gate
 
-Neither candidate is promoted by this research file. Promotion requires all existing SOG growth gates, including entity, organization, classification/legal, lifecycle event, evidence, reserve/redemption profile, deployment where verified, income profile, relationship wiring where applicable, generated/runtime parity, count/baseline updates, and green CI.
+Batch 034 targets HKDAP and MGUSD only. Promotion requires the existing SOG gates: canonical entity and issuer relationship, classification/legal profile, lifecycle event, primary evidence, reserve/redemption state including explicit unknowns, verified deployment scope, income profile, known-unknowns, runtime parity, baseline/checkpoint updates, deterministic generated outputs and green CI.
