@@ -1,0 +1,4 @@
+[
+  {"id":"sog_ev_usat_launch_20260127","title":"USA₮ launches with Anchorage Digital Bank as issuer","subject_stablecoin_ids":["sog_st_usat"],"subject_organization_ids":["sog_issuer_anchorage_digital_bank"],"evidence_ids":["sog_src_usat_launch_20260127","sog_src_usat_product_20260829"],"event_detail_kind":"launch"},
+  {"id":"sog_ev_hkdap_beta_launch_20260812","title":"Anchorpoint begins HKDAP Beta Access rollout","subject_stablecoin_ids":["sog_st_hkdap"],"subject_organization_ids":["sog_issuer_anchorpoint_financial_limited"],"evidence_ids":["sog_src_hkdap_product_20260829","sog_src_hkdap_transparency_20260829","sog_src_hkdap_whitepaper_20260829"],"event_detail_kind":"launch"}
+]
