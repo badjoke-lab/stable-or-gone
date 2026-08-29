@@ -1,19 +1,19 @@
 {
   "schema_version": "3.0-parity-baseline",
   "status": "current",
-  "baseline_id": "sog_registry_v3_parity_batch_034_124_assets_2026_08_29",
-  "recorded_at": "2026-08-29",
-  "data_checkpoint_commit": "agent/record-growth-batch-034-usat-hkdap",
-  "source_baseline_id": "sog_registry_v3_parity_pr606_122_assets_2026_08_27",
-  "canonical_checkpoint_id": "sog_batch_034_canonical_124_2026_08_29",
+  "baseline_id": "sog_registry_v3_parity_batch_035_129_assets_2026_08_30",
+  "recorded_at": "2026-08-30",
+  "data_checkpoint_commit": "agent/record-growth-batch-035",
+  "source_baseline_id": "sog_registry_v3_parity_batch_034_124_assets_2026_08_29",
+  "canonical_checkpoint_id": "sog_batch_035_canonical_129_2026_08_30",
   "v2_composed_baseline": "docs/migration/registry-v2-baseline.json",
   "v3_foundation": "docs/migration/registry-v3-foundation.json",
   "v3_income_profiles": "docs/migration/registry-v3-income-profiles.json",
-  "expected_v2_counts": {"stablecoins":124,"organizations":112,"relationships":136,"classifications":124,"profiles":124,"events":200,"event_details":200,"evidence":599,"evidence_relations":599,"reserve_reports":130,"known_unknowns":361,"regulatory_notes":9,"deployments":190},
-  "expected_v3_counts": {"legal_profiles":124,"stable_asset_relationships":5,"reserve_components":158,"income_profiles":124,"deployment_view":190},
-  "expected_v3_coverage": {"legal_profiles":124,"income_profiles":124,"reserve_component_assets":124,"deployment_view_assets":123},
+  "expected_v2_counts": {"stablecoins":129,"organizations":115,"relationships":141,"classifications":129,"profiles":129,"events":204,"event_details":204,"evidence":604,"evidence_relations":604,"reserve_reports":131,"known_unknowns":366,"regulatory_notes":9,"deployments":191},
+  "expected_v3_counts": {"legal_profiles":129,"stable_asset_relationships":5,"reserve_components":163,"income_profiles":129,"deployment_view":191},
+  "expected_v3_coverage": {"legal_profiles":129,"income_profiles":129,"reserve_component_assets":129,"deployment_view_assets":124},
   "machine_readable_contract": {"schema_version":"1.0.0","data_schema_version":"sog_registry_v2","compatibility_mode":"v2_public_contract_with_additive_v3_summary","registry_v3_summary":true,"summary_locations":["version.data.registry_v3","manifest.registry_v3"],"data_safety":{"canonical_only":true,"includes_unreviewed_candidates":false,"includes_internal_monitoring":false,"includes_private_notes":false}},
   "audit_report": "docs/audits/registry-v2-v3-machine-readable-parity-100-assets.md",
   "validator": "scripts/validate-registry-v2-v3-machine-readable-parity.mjs",
-  "notes": "Batch 034 parity baseline advances canonical coverage to 124 assets with HKDAP and MGUSD. Deployment coverage is 123 assets because reviewed HKDAP sources in this batch do not establish a canonical chain or token identifier; no deployment is fabricated to satisfy coverage."
+  "notes": "Batch 035 parity baseline advances canonical coverage to 129 assets with FIDD, MainUSD, Falcon fUSD, FRNT and USDsui. Deployment coverage is 124 assets because only USDsui has a deployment established in the reviewed batch-035 source set; no chain or token identifiers are fabricated for FIDD, MainUSD, Falcon fUSD or FRNT."
 }
