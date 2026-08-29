@@ -1,3 +1,4 @@
 [
-  {"id":"sog_ev_hkdap_beta_launch_20260812","title":"Anchorpoint begins HKDAP Beta Access rollout","subject_stablecoin_ids":["sog_st_hkdap"],"subject_organization_ids":["sog_issuer_anchorpoint_financial_limited"],"evidence_ids":["sog_src_hkdap_product_20260829","sog_src_hkdap_transparency_20260829","sog_src_hkdap_whitepaper_20260829"],"event_detail_kind":"launch"}
+  {"id":"sog_ev_hkdap_beta_launch_20260812","title":"Anchorpoint begins HKDAP Beta Access rollout","subject_stablecoin_ids":["sog_st_hkdap"],"subject_organization_ids":["sog_issuer_anchorpoint_financial_limited"],"evidence_ids":["sog_src_hkdap_product_20260829","sog_src_hkdap_transparency_20260829","sog_src_hkdap_whitepaper_20260829"],"event_detail_kind":"launch"},
+  {"id":"sog_ev_mgusd_launch_20260602","title":"MoneyGram launches MGUSD on Stellar","subject_stablecoin_ids":["sog_st_mgusd"],"subject_organization_ids":["sog_issuer_bridge"],"evidence_ids":["sog_src_mgusd_moneygram_launch_20260602"],"event_detail_kind":"launch"}
 ]
