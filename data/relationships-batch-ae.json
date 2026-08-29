@@ -1,4 +1,3 @@
 [
-  {"id":"sog_rel_usat_anchorage_20260127","stablecoin_id":"sog_st_usat","organization_id":"sog_issuer_anchorage_digital_bank","role":"legal_issuer","start_date":"2026-01-27","end_date":null,"status":"active","evidence_ids":["sog_src_usat_launch_20260127","sog_src_usat_product_20260829"],"notes":"USA₮ primary materials identify Anchorage Digital Bank, N.A. as issuer and explicitly state that Tether Operations is not the issuer."},
   {"id":"sog_rel_hkdap_anchorpoint_20260812","stablecoin_id":"sog_st_hkdap","organization_id":"sog_issuer_anchorpoint_financial_limited","role":"legal_issuer","start_date":"2026-08-12","end_date":null,"status":"active","evidence_ids":["sog_src_hkdap_product_20260829","sog_src_hkdap_transparency_20260829"],"notes":"Anchorpoint Financial Limited is the HKMA-licensed issuer of HKDAP during Beta Access."}
 ]
