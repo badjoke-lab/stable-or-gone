@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0",
+  "batch_id": "batch_035",
+  "created_at": "2026-08-30",
+  "base_canonical_assets": 124,
+  "prescreen_target": 20,
+  "promotion_target": 10,
+  "promotion_minimum": 5,
+  "policy": {
+    "canonical_duplicates_rejected": true,
+    "planned_but_not_launched_assets_not_promoted": true,
+    "primary_source_required_before_promotion": true,
+    "unknowns_not_inferred": true
+  },
+  "candidates": [
+    {"name":"Fidelity Digital Dollar","symbol":"FIDD","proposed_record_id":"sog_st_fidd","disposition":"advance_primary_review","source":"https://newsroom.fidelity.com/pressreleases/fidelity-investments--to-expand-digital-asset-investment-lineup-with-stablecoin-launch--fidelity-dig/s/3b55e2d1-1dba-4120-9528-1e07e632f3f4","reason":"Official Fidelity launch source establishes launch, issuer and 1:1 purchase/redemption availability."},
+    {"name":"Gaia GUSD","symbol":"GUSD","proposed_record_id":"sog_st_gaia_gusd","disposition":"advance_primary_review","source":"https://www.prnewswire.com/news-releases/gaia-interactive-inc-launches-regulated-stablecoin-gusd-for-global-payments-powered-by-bridge-302743123.html","reason":"Gaia launch announcement identifies USD backing and Bridge issuance infrastructure; issuer/legal/reserve details still require bounded review."},
+    {"name":"MainUSD","symbol":"MainUSD","proposed_record_id":"sog_st_mainusd","disposition":"advance_primary_review","source":"https://www.globenewswire.com/news-release/2026/06/23/3316196/0/en/mosta-launches-mainusd-its-own-usd-stablecoin-for-instant-cross-border-settlement.html","reason":"Launch announcement identifies Brale as issuer and says MainUSD is available to eligible US businesses."},
+    {"name":"Falcon fUSD","symbol":"fUSD","proposed_record_id":"sog_st_falcon_fusd","disposition":"advance_primary_review","source":"https://falcon.finance/news/falcon-finance-and-anchorage-digital-bank-launch-fusd-a-genius-ready-stablecoin-with-rewards-on-ceffu","reason":"Falcon primary source states launch, Anchorage Digital Bank issuance, reserve supervision, monthly Deloitte attestations and separate Falcon rewards."},
+    {"name":"Frontier Stable Token","symbol":"FRNT","proposed_record_id":"sog_st_frnt","disposition":"advance_primary_review","source":"https://content.govdelivery.com/accounts/WYGOVSTC/bulletins/416f9d3","reason":"Wyoming Stable Token Commission source establishes public-entity issuance, full reserve framing and daily reserve attestations."},
+    {"name":"Sui Dollar","symbol":"USDsui","proposed_record_id":"sog_st_usdsui","disposition":"advance_primary_review","source":"https://www.sui.io/blog/sui-dollar-launch-bridge","reason":"Official Sui source states mainnet launch and Bridge issuance."},
+    {"name":"Brale SBC","symbol":"SBC","proposed_record_id":"sog_st_sbc","disposition":"advance_primary_review","source":"https://visa.gcs-web.com/news-releases/news-release-details/visa-and-brale-explore-private-stablecoin-settlement","reason":"Visa source identifies SBC as a Brale-issued USD-backed stablecoin; full product launch/status must be verified before promotion."},
+    {"name":"Revolut EURR","symbol":"EURR","proposed_record_id":"sog_st_revolut_eurr","disposition":"needs_primary_and_identity_review","source":"https://www.disruptionbanking.com/2026/08/26/revolut-rolls-out-its-first-euro-backed-stablecoin-eurr-creating-a-new-bridge-between-fiat-and-crypto/","reason":"Recent rollout is reported, but symbol collides with an existing EURR identity in the registry ecosystem; exact identity and primary Revolut source required."},
+    {"name":"Decibel USDCBL","symbol":"USDCBL","proposed_record_id":"sog_st_usdcbl","disposition":"needs_primary_launch_confirmation","source":"https://chainwire.org/2026/02/12/decibel-foundation-announces-usdcbl-stablecoin-issued-by-bridge-redesigning-dex-economics-for-onchain-trading/","reason":"Announcement described intended February mainnet launch through Bridge; current launched state and primary product evidence must be confirmed."},
+    {"name":"Open USD","symbol":"Open USD","proposed_record_id":"sog_st_open_usd","disposition":"needs_duplicate_and_launch_review","source":"https://www.onepay.com/newsroom/introducing-open-usd","reason":"OnePay announced Open USD on 2026-06-30; canonical identity, actual issuance state and existing registry overlap require review."},
+    {"name":"Boundary USBD","symbol":"USBD","proposed_record_id":"sog_st_boundary_usbd","disposition":"hold_not_launched","source":"https://www.prnewswire.com/news-releases/boundary-labs-announces-2m-pre-seed-led-by-galaxy-ventures-to-launch-verifiable-institutional-stablecoin-usbd-302767720.html","reason":"Source describes capital to accelerate launch rather than a confirmed live asset."},
+    {"name":"OSL USDGO","symbol":"USDGO","proposed_record_id":"sog_st_usdgo","disposition":"reject_canonical_duplicate","source":"https://www.osl.com/hk-en/press-release/osl-group-officially-launches-regulated-enterprise-stablecoin-usdgo","reason":"Already detected as an existing canonical asset in prior batch duplicate screening."},
+    {"name":"SoFiUSD","symbol":"SoFiUSD","proposed_record_id":"sog_st_sofiusd","disposition":"reject_canonical_duplicate","source":"https://investors.sofi.com/news/news-details/2026/SoFiUSD-Becomes-the-First-Stablecoin-Issued-by-a-US-National-Bank-to-Launch-on-a-Banking-Platform/default.aspx","reason":"Already detected as an existing canonical asset in prior batch duplicate screening."},
+    {"name":"AllUnity SEKAU","symbol":"SEKAU","proposed_record_id":"sog_st_sekau","disposition":"reject_canonical_duplicate","source":"https://allunity.com/news/allunity-launches-the-first-fully-reserved-swedish-krona-backed-stablecoin-sekau","reason":"Already represented in canonical batch 028."},
+    {"name":"AllUnity CHFAU","symbol":"CHFAU","proposed_record_id":"sog_st_chfau","disposition":"reject_canonical_duplicate","source":"https://allunity.com/news/allunity-announces-intent-to-launch-swiss-franc-denominated-stablecoin","reason":"Already represented in canonical batch 028."},
+    {"name":"Bison Bank EUB","symbol":"EUB","proposed_record_id":"sog_st_eub","disposition":"reject_canonical_duplicate","source":"https://www.prnewswire.com/news-releases/bison-bank-wholly-owned-by-hong-kongs-bison-capital-launches-its-mica-compliant-stablecoin-for-institutional-cross-border-payments-302764996.html","reason":"Already represented in canonical batch 031."},
+    {"name":"Bison Bank USB","symbol":"USB","proposed_record_id":"sog_st_usb","disposition":"reject_canonical_duplicate","source":"https://www.prnewswire.com/news-releases/bison-bank-wholly-owned-by-hong-kongs-bison-capital-launches-its-mica-compliant-stablecoin-for-institutional-cross-border-payments-302764996.html","reason":"Already represented in canonical batch 031."},
+    {"name":"Western Union USDPT","symbol":"USDPT","proposed_record_id":"sog_st_usdpt","disposition":"reject_canonical_duplicate","source":"https://www.anchorage.com/insights/western-union-launches-usdpt-a-federally-regulated-digital-dollar","reason":"Already promoted in batch 033."},
+    {"name":"MoneyGram MGUSD","symbol":"MGUSD","proposed_record_id":"sog_st_mgusd","disposition":"reject_canonical_duplicate","source":"https://www.m0.org/press-releases/moneygram-launches-mgusd-a-stablecoin-to-power-its-own-global-network","reason":"Already promoted in batch 034."},
+    {"name":"Anchorpoint HKDAP","symbol":"HKDAP","proposed_record_id":"sog_st_hkdap","disposition":"reject_canonical_duplicate","source":"https://anchorpoint.hk/HKDAP/","reason":"Already promoted in batch 034."}
+  ],
+  "summary": {
+    "advance_primary_review": 7,
+    "needs_additional_review": 3,
+    "hold_not_launched": 1,
+    "reject_canonical_duplicate": 9,
+    "total": 20
+  }
+}
