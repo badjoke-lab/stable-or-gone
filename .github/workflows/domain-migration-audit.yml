@@ -4,9 +4,6 @@ on:
   pull_request:
     paths:
       - 'config/public-origin.mjs'
-      - 'src/pages/**'
-      - 'src/layouts/**'
-      - 'src/components/**'
       - 'public/**'
       - 'astro.config.mjs'
       - 'scripts/audit-built-origin.mjs'
