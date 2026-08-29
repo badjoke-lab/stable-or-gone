@@ -1,1 +1,3 @@
-[]
+[
+  {"id":"sog_dep_mgusd_stellar_20260602","stablecoin_id":"sog_st_mgusd","chain":"Stellar","deployment_type":"issuer_native_token","token_standard":"Stellar asset","contract_address":null,"status":"active","control_event_ids":["sog_ev_mgusd_launch_20260602"],"notes":"MoneyGram's launch announcement identifies Stellar as the blockchain on which MGUSD was deployed at launch. Exact Stellar asset identifier and current control configuration are not normalized from the reviewed source.","evidence_ids":["sog_src_mgusd_moneygram_launch_20260602"],"canonicality":"issuer_native","origin_deployment_id":null,"bridge_operator_organization_id":null,"mint_authority_type":"issuer_controlled_current_roles_unverified","contract_version":"Stellar launch deployment; exact asset identifier not normalized","is_primary":true}
+]
