@@ -1,0 +1,6 @@
+[
+  {"id":"sog_ev_fidd_launch_20260204","title":"Fidelity launches FIDD","subject_stablecoin_ids":["sog_st_fidd"],"subject_organization_ids":["sog_issuer_fidelity_digital_assets_na"],"evidence_ids":["sog_src_fidd_fidelity_launch_20260204"],"event_detail_kind":"launch"},
+  {"id":"sog_ev_mainusd_launch_20260623","title":"Mosta launches MainUSD","subject_stablecoin_ids":["sog_st_mainusd"],"subject_organization_ids":["sog_issuer_brale"],"evidence_ids":["sog_src_mainusd_mosta_launch_20260623"],"event_detail_kind":"launch"},
+  {"id":"sog_ev_falcon_fusd_launch_20260527","title":"Falcon and Anchorage Digital Bank launch fUSD","subject_stablecoin_ids":["sog_st_falcon_fusd"],"subject_organization_ids":["sog_issuer_anchorage_digital_bank"],"evidence_ids":["sog_src_falcon_fusd_launch_20260527"],"event_detail_kind":"launch"},
+  {"id":"sog_ev_usdsui_launch_20260304","title":"USDsui launches on Sui mainnet","subject_stablecoin_ids":["sog_st_usdsui"],"subject_organization_ids":["sog_issuer_bridge"],"evidence_ids":["sog_src_usdsui_sui_launch_20260304"],"event_detail_kind":"launch"}
+]
