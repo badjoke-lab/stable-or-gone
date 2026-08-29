@@ -39,11 +39,17 @@ export function buildPrimaryDisplayRelationshipStats(root = process.cwd()) {
     stablecoin.id,
     relationships.filter((relationship) => relationship.stablecoin_id === stablecoin.id)
   ]));
+  const ambiguous = stablecoins
+    .map((stablecoin, index) => ({ stablecoin_id: stablecoin.id, resolution: resolutions[index] }))
+    .filter(({ resolution }) => !resolution.valid);
+  for (const { stablecoin_id, resolution } of ambiguous) {
+    console.error(`Primary display ambiguity: ${stablecoin_id} -> ${resolution.tied_top_relationship_ids.join(', ') || 'no relationship'}`);
+  }
 
   return {
     selected_relationships: selected.length,
     explicit_overrides: Object.keys(primaryDisplayRelationshipOverrides).length,
-    ambiguous_selections: resolutions.filter((resolution) => !resolution.valid).length,
+    ambiguous_selections: ambiguous.length,
     stablecoins_with_multiple_relationships: stablecoins.filter((stablecoin) => (relationshipsByStablecoin.get(stablecoin.id)?.length ?? 0) > 1).length,
     stablecoins_with_multiple_organizations: stablecoins.filter((stablecoin) => new Set((relationshipsByStablecoin.get(stablecoin.id) ?? []).map((relationship) => relationship.organization_id)).size > 1).length,
     stablecoins_with_historical_relationships: stablecoins.filter((stablecoin) => (relationshipsByStablecoin.get(stablecoin.id) ?? []).some((relationship) => relationship.status === 'ended')).length,

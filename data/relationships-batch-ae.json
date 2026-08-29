@@ -1,0 +1,4 @@
+[
+  {"id":"sog_rel_hkdap_anchorpoint_20260812","stablecoin_id":"sog_st_hkdap","organization_id":"sog_issuer_anchorpoint_financial_limited","role":"legal_issuer","start_date":"2026-08-12","end_date":null,"status":"active","evidence_ids":["sog_src_hkdap_product_20260829","sog_src_hkdap_transparency_20260829"],"notes":"Anchorpoint Financial Limited is the HKMA-licensed issuer of HKDAP during Beta Access."},
+  {"id":"sog_rel_mgusd_bridge_20260602","stablecoin_id":"sog_st_mgusd","organization_id":"sog_issuer_bridge","role":"legal_issuer","start_date":"2026-06-02","end_date":null,"status":"active","evidence_ids":["sog_src_mgusd_moneygram_launch_20260602"],"notes":"MoneyGram's launch announcement identifies Bridge, a Stripe company, as the regulated issuer of MGUSD."}
+]

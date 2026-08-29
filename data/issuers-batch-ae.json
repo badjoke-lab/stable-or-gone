@@ -1,0 +1,3 @@
+[
+  {"id":"sog_issuer_anchorpoint_financial_limited","slug":"anchorpoint-financial-limited","name":"Anchorpoint Financial Limited","issuer_type":"regulated_stablecoin_issuer","jurisdiction":"Hong Kong","related_stablecoins":["hkdap"],"official_url":"https://anchorpoint.hk/","summary":"HKMA-licensed issuer of HKD At Par (HKDAP).","confidence":"high","last_verified_at":"2026-08-29","notes":"Legacy issuer compatibility row for the new Anchorpoint organization. Anchorage Digital Bank already exists canonically and is not duplicated."}
+]

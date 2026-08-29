@@ -40,14 +40,20 @@ function countBy(values) {
   return Object.fromEntries([...counts.entries()].sort(([left], [right]) => left.localeCompare(right)));
 }
 
-function duplicateUrlGroups(rows) {
-  const counts = new Map();
+function duplicateUrlEntries(rows) {
+  const groups = new Map();
   for (const row of rows) {
     const url = String(row.url ?? '').trim();
     if (!url) continue;
-    counts.set(url, (counts.get(url) ?? 0) + 1);
+    const entries = groups.get(url) ?? [];
+    entries.push(row.id);
+    groups.set(url, entries);
   }
-  return [...counts.values()].filter((count) => count > 1).length;
+  return [...groups.entries()].filter(([, ids]) => ids.length > 1);
+}
+
+function duplicateUrlGroups(rows) {
+  return duplicateUrlEntries(rows).length;
 }
 
 export function buildEvidenceSourceIdentityStats(root = defaultRoot) {
@@ -64,6 +70,9 @@ export function buildEvidenceSourceIdentityStats(root = defaultRoot) {
   }));
   const relationSourceIdentityIds = new Set(evidenceRelations.map((relation) => relation.evidence_id));
   const orphanRelationSourceIds = [...relationSourceIdentityIds].filter((id) => !sourceIdentityIds.has(id)).sort();
+  for (const [url, ids] of duplicateUrlEntries(sourceIdentities)) {
+    console.error(`Public evidence URL duplicate: ${url} -> ${ids.join(', ')}`);
+  }
 
   return {
     canonical_evidence_records: canonicalEvidence.length,

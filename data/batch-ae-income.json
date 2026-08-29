@@ -1,0 +1,4 @@
+[
+  {"id":"sog_st_hkdap","availability":"none","source":"none","accrual":"none","rate":"none","related_asset_ids":[],"evidence_ids":["sog_src_hkdap_product_20260829","sog_src_hkdap_transparency_20260829"],"notes":"No issuer-native holder yield, rebase, reserve-income pass-through or other holding return is established in the reviewed HKDAP materials."},
+  {"id":"sog_st_mgusd","availability":"none","source":"none","accrual":"none","rate":"none","related_asset_ids":[],"evidence_ids":["sog_src_mgusd_moneygram_launch_20260602"],"notes":"No issuer-native holder yield, rebase, reserve-income pass-through or other holding return is established in the reviewed MoneyGram launch announcement."}
+]

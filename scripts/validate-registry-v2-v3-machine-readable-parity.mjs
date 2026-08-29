@@ -45,6 +45,12 @@ const legalIds = uniqueIds(legalProfiles);
 const incomeIds = uniqueIds(incomeProfiles);
 const reserveAssetIds = new Set(reserveComponents.map((row) => row.stablecoin_id));
 const deploymentAssetIds = new Set(deployments.map((row) => row.stablecoin_id));
+const deploymentUnknownIds = new Set(
+  knownUnknowns
+    .filter((row) => /deployment|contract|token proxy|asset identity/i.test(`${row.topic ?? ''} ${row.description ?? ''}`))
+    .map((row) => row.stablecoin_id)
+    .filter(Boolean),
+);
 
 const v2Counts = {
   stablecoins: stablecoins.length,
@@ -94,12 +100,16 @@ for (const id of stablecoinIds) {
   check(legalIds.has(id), `legal profile missing for ${id}`);
   check(incomeIds.has(id), `income profile missing for ${id}`);
   check(reserveAssetIds.has(id), `reserve component coverage missing for ${id}`);
-  check(deploymentAssetIds.has(id), `deployment view coverage missing for ${id}`);
+  check(
+    deploymentAssetIds.has(id) || deploymentUnknownIds.has(id),
+    `deployment view or explicit deployment-unknown coverage missing for ${id}`,
+  );
 }
 for (const id of legalIds) check(stablecoinIds.has(id), `orphan legal profile ${id}`);
 for (const id of incomeIds) check(stablecoinIds.has(id), `orphan income profile ${id}`);
 for (const id of reserveAssetIds) check(stablecoinIds.has(id), `orphan reserve component asset ${id}`);
 for (const id of deploymentAssetIds) check(stablecoinIds.has(id), `orphan deployment asset ${id}`);
+for (const id of deploymentUnknownIds) check(stablecoinIds.has(id), `orphan deployment unknown asset ${id}`);
 
 check(foundation.minimum_counts?.legal_profiles === parityBaseline.expected_v3_counts?.legal_profiles, 'foundation legal profile minimum does not match current parity baseline');
 check(foundation.minimum_counts?.stable_asset_relationships === parityBaseline.expected_v3_counts?.stable_asset_relationships, 'foundation relationship minimum does not match current parity baseline');
@@ -154,6 +164,7 @@ const report = {
   registry_v3_schema_version: 'sog_registry_v3',
   counts: { v2: v2Counts, v3: v3Counts },
   coverage: v3Coverage,
+  deployment_unknown_assets: [...deploymentUnknownIds].filter((id) => stablecoinIds.has(id)).sort(),
   failures,
   ok: failures.length === 0,
 };
