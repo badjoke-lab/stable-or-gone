@@ -51,6 +51,6 @@
     "batch_031":{"minimum_candidates":2,"theme":"Bison Bank regulated institutional EUR and USD electronic-money tokens"},
     "batch_032":{"minimum_candidates":1,"theme":"JPYR evidence-bounded JPY-reference asset with material concern and uncertainty presentation"},
     "batch_033":{"minimum_candidates":2,"theme":"post-119 clean launched stablecoin growth: EURXT and USDPT; SoFiUSD and USDGO rejected as existing canonical duplicates"},
-    "batch_034":{"minimum_candidates":2,"theme":"clean replacement intake after duplicate rejection: USA₮ and HKDAP; full-layer promotion pending duplicate verification and canonical evidence normalization"}
+    "batch_034":{"minimum_candidates":2,"theme":"clean launched stablecoin growth: HKDAP and MGUSD; USA₮ rejected after canonical duplicate detection"}
   }
 }
