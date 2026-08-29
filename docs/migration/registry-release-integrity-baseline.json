@@ -12,7 +12,7 @@
   "expected_route_counts": {"stablecoin_detail":124,"organization_detail":112,"event_detail":200,"total_detail":436,"declared_main_routes":13},
   "machine_readable_contract": {"schema_version":"1.0.0","data_schema_version":"sog_registry_v2","compatibility_mode":"v2_public_contract_with_additive_v3_summary","version_record_counts_path":"data.record_counts","version_breakdown_path":"data.record_count_breakdown","manifest_record_counts_path":"record_counts","manifest_breakdown_path":"record_count_breakdown","shared_build_provenance_required":true,"shared_count_getters_required":true,"canonical_only":true},
   "provenance_contract": {"schema_version":"1.0","verification_marker":"sog_build_provenance_v1","machine_readable_verification_marker":"sog_machine_readable_layer_v1","hash_algorithm":"sha256","source_template_mode":"sentinel_until_build","source_template_commit":"unknown","source_template_branch":"main","source_template_generated_at":"1970-01-01T00:00:00.000Z","source_template_hash":"sha256:0000000000000000000000000000000000000000000000000000000000000000","source_template_file_count":0,"runtime_generation_required":true},
-  "evidence_quality": {"archive_index_count":475,"archive_not_recorded_count":114,"archive_partition_complete":true,"new_evidence_records":4,"source_replacements":0,"all_new_evidence_primary":true},
+  "evidence_quality": {"archive_index_count":475,"archive_not_recorded_count":118,"archive_partition_complete":true,"new_evidence_records":4,"source_replacements":0,"all_new_evidence_primary":true},
   "validator": "scripts/validate-counts-manifest-version-provenance-integrity.mjs",
   "audit_report": "docs/audits/counts-manifest-version-provenance-integrity-100-assets.md",
   "source_pr": 609,
