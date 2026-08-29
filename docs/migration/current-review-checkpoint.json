@@ -13,16 +13,7 @@
   "source_growth_checkpoint_id": "sog_batch_035_canonical_129_2026_08_30",
   "stats_checkpoint_id": "sog_stats_batch_035_129_2026_08_30",
   "canonical_counts_unchanged": false,
-  "counts": {
-    "assets": 129,
-    "organizations": 115,
-    "events": 204,
-    "evidence": 604,
-    "reserve_reports": 131,
-    "known_unknowns": 366,
-    "deployments": 191,
-    "detail_routes": 436
-  },
+  "counts": {"assets":129,"organizations":115,"events":204,"evidence":604,"reserve_reports":131,"known_unknowns":366,"deployments":191,"detail_routes":448},
   "reviewed_stablecoin_ids": ["sog_st_fidd", "sog_st_mainusd", "sog_st_falcon_fusd", "sog_st_frnt", "sog_st_usdsui"],
   "reviewed_known_unknown_ids": ["sog_ku_fidd_reserve_deployment_controls_20260830", "sog_ku_mainusd_reserve_redemption_deployment_20260830", "sog_ku_falcon_fusd_reserve_redemption_deployment_20260830", "sog_ku_frnt_launch_redemption_deployment_20260830", "sog_ku_usdsui_reserve_redemption_contract_20260830"],
   "new_canonical_records": 5,
