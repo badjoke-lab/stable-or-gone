@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "classified_at": "2026-08-23",
+  "classified_at": "2026-08-29",
   "source_review": "docs/quality/reserve-applicability-review-2026-06-28.md",
   "source_status_review": "docs/audits/husd-eurt-reserve-source-recheck.md",
   "policy": {
@@ -10,8 +10,8 @@
     "no_universal_coverage_target": true,
     "canonical_updates_require_reviewed_primary_context": true
   },
-  "expected_total": 13,
-  "category_counts": {"report_expected_but_missing":0,"not_applicable_by_design":10,"source_status_unresolved":3},
+  "expected_total": 14,
+  "category_counts": {"report_expected_but_missing":0,"not_applicable_by_design":10,"source_status_unresolved":4},
   "records": [
     {"stablecoin_id":"sog_st_mim","applicability":"not_applicable_by_design","reason_code":"onchain_collateral_protocol_without_periodic_report","evidence_ids":["sog_src_mim_docs_batch_a","sog_src_mim_tokenomics_batch_a"],"review_note":"MIM is minted through protocol cauldrons against supported collateral. Backing is represented by protocol mechanics and collateral inventories rather than an issuer-style periodic reserve report.","next_action":"retain_not_applicable"},
     {"stablecoin_id":"sog_st_usdn","applicability":"not_applicable_by_design","reason_code":"algorithmic_protocol_backing_without_periodic_report","evidence_ids":["sog_src_usdn_faq_batch_a","sog_src_usdn_surf_batch_a"],"review_note":"USDN used protocol backing-ratio and recapitalization mechanics rather than a conventional issuer reserve-report cycle. Historical mechanics remain documented separately from the later XTN transition.","next_action":"retain_not_applicable"},
@@ -25,6 +25,7 @@
     {"stablecoin_id":"sog_st_musd","applicability":"not_applicable_by_design","reason_code":"protocol_basket_and_legacy_exit_without_periodic_report","evidence_ids":["sog_src_musd_docs_batch_d","sog_src_musd_save_batch_d"],"review_note":"mUSD was a protocol basket asset and is now handled through legacy withdrawal paths. Protocol mechanics and exit documentation are applicable, but a current periodic reserve report is not.","next_action":"retain_not_applicable"},
     {"stablecoin_id":"sog_st_eurt","applicability":"source_status_unresolved","reason_code":"consolidated_reporting_found_product_scope_unresolved","evidence_ids":["sog_src_eurt_legal_batch_e","sog_src_eurt_history_batch_e","sog_src_eurt_tether_transparency_scope_2026","sog_src_eurt_relevant_information_scope_2026"],"review_note":"Tether publishes quarterly consolidated reserve and assurance reports, but reviewed official material does not separately identify EURT assets, EURT liabilities, the EURT issuer boundary, or a final product-specific reconciliation after redemption ended.","next_action":"investigate_source_status"},
     {"stablecoin_id":"sog_st_alusd","applicability":"not_applicable_by_design","reason_code":"yield_backed_debt_protocol_without_periodic_report","evidence_ids":["sog_src_alusd_current_docs_batch_e","sog_src_alusd_transmuter_batch_e"],"review_note":"alUSD is protocol debt issued against yield-bearing collateral and settled through the Transmuter. Its backing is represented by protocol mechanics rather than a periodic issuer reserve report.","next_action":"retain_not_applicable"},
-    {"stablecoin_id":"sog_st_jpyr","applicability":"source_status_unresolved","reason_code":"conflicting_backing_claims_no_token_specific_reserve_assurance","evidence_ids":["sog_src_jpyr_potential_20260823","sog_src_jpyr_backing_conflict_20260823","sog_src_jpyr_metamask_20260823"],"review_note":"Reviewed IZAKA-YA materials describe JPYR inconsistently, including reserve-like framing and crypto/DeFi collateral framing. No token-specific reserve report, assurance opinion, reserve balance, reserve custodian, liabilities reconciliation, or legally identified redemption obligor has been established in the reviewed record.","next_action":"investigate_source_status"}
+    {"stablecoin_id":"sog_st_jpyr","applicability":"source_status_unresolved","reason_code":"conflicting_backing_claims_no_token_specific_reserve_assurance","evidence_ids":["sog_src_jpyr_potential_20260823","sog_src_jpyr_backing_conflict_20260823","sog_src_jpyr_metamask_20260823"],"review_note":"Reviewed IZAKA-YA materials describe JPYR inconsistently, including reserve-like framing and crypto/DeFi collateral framing. No token-specific reserve report, assurance opinion, reserve balance, reserve custodian, liabilities reconciliation, or legally identified redemption obligor has been established in the reviewed record.","next_action":"investigate_source_status"},
+    {"stablecoin_id":"sog_st_mgusd","applicability":"source_status_unresolved","reason_code":"launch_confirms_identity_but_reserve_reporting_not_established","evidence_ids":["sog_src_mgusd_moneygram_launch_20260602"],"review_note":"MoneyGram's reviewed launch announcement establishes MGUSD identity, Bridge issuer role and launch infrastructure, but does not establish reserve composition, a token-specific reserve report, assurance opinion, reserve balance, reserve custodian or liabilities reconciliation. No reserve report is inferred from the launch announcement.","next_action":"investigate_source_status"}
   ]
 }
