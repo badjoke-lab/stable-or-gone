@@ -48,6 +48,15 @@ Primary sources:
 
 Primary source: https://www.stably.io/post/case-study-how-stably-helped-launch-litusd
 
+### MetaMask USD (mUSD)
+- MetaMask primary material establishes mUSD as a distinct MetaMask stablecoin launched in September 2025.
+- Bridge is the issuer and M0 supplies stablecoin infrastructure.
+- Reviewed MetaMask material states 1:1 backing by short-term U.S. Treasury bills.
+- Ethereum Mainnet and Linea support are established.
+- Do not infer reserve allocation percentages, holder legal claim terms, unrestricted issuer redemption, or administrative controls beyond the reviewed primary material.
+
+Primary source: MetaMask official mUSD launch/product material captured in the batch 036 candidate review.
+
 ## Held from first tranche
 
 ### Gaia GUSD
@@ -57,4 +66,4 @@ Primary source: https://www.prnewswire.com/news-releases/gaia-interactive-inc-la
 
 ## Promotion boundary
 
-The first tranche is SBC / Movement USDCx / USDU / USDKG / litUSD. Promotion requires full-layer canonical records and existing validators. Unknown issuer/legal/reserve/deployment facts remain unknown rather than inferred.
+The first tranche is SBC / Movement USDCx / USDU / USDKG / litUSD / MetaMask mUSD. Promotion requires full-layer canonical records and existing validators. Unknown issuer/legal/reserve/deployment facts remain unknown rather than inferred.
