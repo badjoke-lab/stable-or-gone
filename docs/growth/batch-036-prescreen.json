@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0",
+  "batch_id": "batch_036",
+  "created_at": "2026-08-30",
+  "base_canonical_assets": 129,
+  "prescreen_target": 20,
+  "promotion_target": 10,
+  "promotion_minimum": 5,
+  "policy": {
+    "canonical_duplicates_rejected": true,
+    "planned_but_not_launched_assets_not_promoted": true,
+    "primary_source_required_before_promotion": true,
+    "identity_must_be_exact_before_promotion": true,
+    "unknowns_not_inferred": true
+  },
+  "candidates": [
+    {"name":"Gaia GUSD","symbol":"GUSD","proposed_record_id":"sog_st_gaia_gusd","disposition":"advance_primary_review","source":"https://www.prnewswire.com/news-releases/gaia-interactive-inc-launches-regulated-stablecoin-gusd-for-global-payments-powered-by-bridge-302743123.html","reason":"Launch announcement identifies a distinct Gaia USD-backed stablecoin powered by Bridge."},
+    {"name":"Brale SBC","symbol":"SBC","proposed_record_id":"sog_st_sbc","disposition":"advance_primary_review","source":"https://visa.gcs-web.com/news-releases/news-release-details/visa-and-brale-explore-private-stablecoin-settlement","reason":"Visa identifies SBC as a USD-backed stablecoin issued by Brale on Canton for institutional settlement testing."},
+    {"name":"Movement USDCx","symbol":"USDCx","proposed_record_id":"sog_st_usdcx","disposition":"advance_primary_review","source":"https://www.globenewswire.com/news-release/2026/03/25/3262226/0/en/Movement-Launches-USDCx-The-Native-USDC-Backed-Stablecoin-on-M1-Mainnet.html","reason":"Launch announcement states USDCx is live on M1 Mainnet and fully backed 1:1 by USDC held in Circle xReserve."},
+    {"name":"Universal USDU","symbol":"USDU","proposed_record_id":"sog_st_usdu","disposition":"advance_primary_review","source":"https://www.universal.ae/news/universal-launches-uaes-first-central-bank-registered-usd-stablecoin","reason":"Universal primary source is the intended review anchor for a launched UAE USD stablecoin; issuer, registration, reserve and redemption claims require direct capture."},
+    {"name":"Kyrgyz Republic USDKG","symbol":"USDKG","proposed_record_id":"sog_st_usdkg","disposition":"advance_primary_review","source":"https://www.globenewswire.com/news-release/2026/05/21/3299149/0/en/osl-strengthens-asia-s-digital-asset-ecosystem-with-listing-of-state-supervised-gold-backed-stablecoin-usdkg.html","reason":"OSL states USDKG is issued, state-supervised, USD-pegged and physically gold-backed; primary issuer/state evidence still required."},
+    {"name":"litUSD","symbol":"litUSD","proposed_record_id":"sog_st_litusd","disposition":"advance_primary_review","source":"https://www.stably.io/post/case-study-how-stably-helped-launch-litusd","reason":"Stably describes an Ethereum mainnet launch through Brale with parity issuance/redemption for verified Brale users."},
+    {"name":"Bridge USDB","symbol":"USDB","proposed_record_id":"sog_st_bridge_usdb","disposition":"needs_identity_and_duplicate_review","source":"https://www.bridge.xyz/news/introducing-open-issuance","reason":"Bridge documents USDB as an issued coin in its stablecoin stack, but exact identity must be disambiguated from canonical Blast USDB before any promotion."},
+    {"name":"Revolut EURR","symbol":"EURR","proposed_record_id":"sog_st_revolut_eurr","disposition":"needs_primary_and_identity_review","source":null,"reason":"Recent phased rollout is reported externally, but symbol collides with canonical StablR EURR; exact primary Revolut/Bridge identity required."},
+    {"name":"Decibel USDCBL","symbol":"USDCBL","proposed_record_id":"sog_st_usdcbl","disposition":"needs_primary_launch_confirmation","source":null,"reason":"Prior announcement described a Bridge-issued stablecoin and intended mainnet launch; live state must be confirmed from primary evidence."},
+    {"name":"Open USD","symbol":"Open USD","proposed_record_id":"sog_st_open_usd","disposition":"needs_duplicate_and_launch_review","source":"https://www.onepay.com/newsroom/introducing-open-usd","reason":"OnePay announcement exists; canonical overlap, actual issuance state and exact token identity require review."},
+    {"name":"Boundary USBD","symbol":"USBD","proposed_record_id":"sog_st_boundary_usbd","disposition":"hold_not_launched","source":"https://www.prnewswire.com/news-releases/boundary-labs-announces-2m-pre-seed-led-by-galaxy-ventures-to-launch-verifiable-institutional-stablecoin-usbd-302767720.html","reason":"Source describes capital to accelerate a future launch rather than confirmed live issuance."},
+    {"name":"MetaMask custom stablecoin","symbol":null,"proposed_record_id":null,"disposition":"needs_exact_identity_review","source":"https://www.bridge.xyz/news/introducing-open-issuance","reason":"Bridge names MetaMask among Open Issuance coins, but exact canonical product identity, symbol and live status must be captured from MetaMask primary sources."},
+    {"name":"Dakota custom stablecoin","symbol":null,"proposed_record_id":null,"disposition":"needs_exact_identity_review","source":"https://www.bridge.xyz/news/introducing-open-issuance","reason":"Bridge names Dakota among coins on Open Issuance; exact stable asset identity must be resolved before candidacy."},
+    {"name":"Slash custom stablecoin","symbol":null,"proposed_record_id":null,"disposition":"needs_exact_identity_review","source":"https://www.bridge.xyz/news/introducing-open-issuance","reason":"Bridge names Slash among coins on Open Issuance; exact product identity and launch state are unresolved."},
+    {"name":"Lava custom stablecoin","symbol":null,"proposed_record_id":null,"disposition":"needs_exact_identity_review","source":"https://www.bridge.xyz/news/introducing-open-issuance","reason":"Bridge names Lava among coins on Open Issuance; exact stable asset identity and current status require primary review."},
+    {"name":"Takenos custom stablecoin","symbol":null,"proposed_record_id":null,"disposition":"needs_exact_identity_review","source":"https://www.bridge.xyz/news/introducing-open-issuance","reason":"Bridge names Takenos among coins on Open Issuance; exact stable asset identity must be established before promotion."},
+    {"name":"CASH","symbol":"CASH","proposed_record_id":"sog_st_bridge_cash","disposition":"needs_identity_and_duplicate_review","source":"https://www.bridge.xyz/news/introducing-open-issuance","reason":"Bridge explicitly references CASH as an already-issued coin moving to Open Issuance; issuer, sponsor, chain and canonical overlap require review."},
+    {"name":"USDH","symbol":"USDH","proposed_record_id":"sog_st_usdh_open_issuance_review","disposition":"reject_or_lineage_review","source":"https://www.bridge.xyz/news/introducing-open-issuance","reason":"USDH already exists canonically; only lineage/migration evidence may be relevant, not a new asset record."},
+    {"name":"Western Union USDPT","symbol":"USDPT","proposed_record_id":"sog_st_usdpt","disposition":"reject_canonical_duplicate","source":"https://www.anchorage.com/insights/western-union-launches-usdpt-a-federally-regulated-digital-dollar","reason":"Already promoted in batch 033; retained only as a duplicate-control sentinel for the new prescreen."},
+    {"name":"OSL USDGO","symbol":"USDGO","proposed_record_id":"sog_st_usdgo","disposition":"reject_canonical_duplicate","source":"https://www.globenewswire.com/news-release/2026/02/10/3235131/0/en/update-osl-group-officially-launches-regulated-enterprise-stablecoin-usdgo.html","reason":"Already represented canonically; retained only as a duplicate-control sentinel."}
+  ],
+  "summary": {
+    "advance_primary_review": 6,
+    "needs_additional_review": 9,
+    "hold_not_launched": 1,
+    "reject_or_lineage_review": 1,
+    "reject_canonical_duplicate": 2,
+    "needs_identity_and_duplicate_review": 1,
+    "total": 20
+  }
+}
