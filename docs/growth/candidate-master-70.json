@@ -23,7 +23,7 @@
     "data/candidate-stable-assets-growth-129-clean.json",
     "data/candidate-stable-assets-growth-135-clean.json"
   ],
-  "protected_minimums": {"total_candidates":135,"promoted_candidates":129,"pending_candidates":6},
+  "protected_minimums": {"total_candidates":136,"promoted_candidates":129,"pending_candidates":7},
   "planned_batches": {
     "batch_006":{"minimum_candidates":5,"theme":"current USD and regulated assets"},
     "batch_007":{"minimum_candidates":5,"theme":"protocol stablecoins"},
@@ -55,6 +55,6 @@
     "batch_033":{"minimum_candidates":2,"theme":"post-119 clean launched stablecoin growth: EURXT and USDPT; SoFiUSD and USDGO rejected as existing canonical duplicates"},
     "batch_034":{"minimum_candidates":2,"theme":"clean launched stablecoin growth: HKDAP and MGUSD; USA₮ rejected after canonical duplicate detection"},
     "batch_035":{"minimum_candidates":5,"target_candidates":10,"prescreen_pool_target":20,"theme":"FIDD, MainUSD, Falcon fUSD, FRNT and USDsui first full-layer promotion tranche; duplicate-first prescreen retained"},
-    "batch_036":{"minimum_candidates":5,"target_candidates":10,"prescreen_pool_target":20,"theme":"Gaia GUSD, SBC, Movement USDCx, USDU, USDKG and litUSD reviewed-candidate tranche; duplicate-first prescreen retained"}
+    "batch_036":{"minimum_candidates":5,"target_candidates":10,"prescreen_pool_target":20,"theme":"SBC, Movement USDCx, USDU, litUSD and MetaMask mUSD first full-layer tranche; Gaia GUSD and USDKG remain reviewed candidates pending issuer-boundary resolution"}
   }
 }
