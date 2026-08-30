@@ -1,6 +1,6 @@
 {
   "schema_version": "2.0",
-  "status": "batch_034_intake",
+  "status": "batch_035_promotion_complete",
   "candidate_files": [
     "data/candidate-stable-assets.json",
     "data/candidate-stable-assets-growth-70.json",
@@ -19,9 +19,10 @@
     "data/candidate-stable-assets-growth-119.json",
     "data/candidate-stable-assets-growth-120.json",
     "data/candidate-stable-assets-growth-124-clean.json",
-    "data/candidate-stable-assets-growth-126-clean.json"
+    "data/candidate-stable-assets-growth-126-clean.json",
+    "data/candidate-stable-assets-growth-129-clean.json"
   ],
-  "protected_minimums": {"total_candidates":124,"promoted_candidates":122,"pending_candidates":2},
+  "protected_minimums": {"total_candidates":129,"promoted_candidates":129,"pending_candidates":0},
   "planned_batches": {
     "batch_006":{"minimum_candidates":5,"theme":"current USD and regulated assets"},
     "batch_007":{"minimum_candidates":5,"theme":"protocol stablecoins"},
@@ -51,6 +52,7 @@
     "batch_031":{"minimum_candidates":2,"theme":"Bison Bank regulated institutional EUR and USD electronic-money tokens"},
     "batch_032":{"minimum_candidates":1,"theme":"JPYR evidence-bounded JPY-reference asset with material concern and uncertainty presentation"},
     "batch_033":{"minimum_candidates":2,"theme":"post-119 clean launched stablecoin growth: EURXT and USDPT; SoFiUSD and USDGO rejected as existing canonical duplicates"},
-    "batch_034":{"minimum_candidates":2,"theme":"clean launched stablecoin growth: HKDAP and MGUSD; USA₮ rejected after canonical duplicate detection"}
+    "batch_034":{"minimum_candidates":2,"theme":"clean launched stablecoin growth: HKDAP and MGUSD; USA₮ rejected after canonical duplicate detection"},
+    "batch_035":{"minimum_candidates":5,"target_candidates":10,"prescreen_pool_target":20,"theme":"FIDD, MainUSD, Falcon fUSD, FRNT and USDsui first full-layer promotion tranche; duplicate-first prescreen retained"}
   }
 }

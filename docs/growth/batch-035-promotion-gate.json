@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0",
+  "batch_id": "batch_035",
+  "base_canonical_assets": 124,
+  "target_canonical_assets": 129,
+  "promotion_candidates": ["sog_st_fidd","sog_st_mainusd","sog_st_falcon_fusd","sog_st_frnt","sog_st_usdsui"],
+  "promotion_count": 5,
+  "primary_review": "docs/growth/batch-035-primary-review.md",
+  "unknowns_not_inferred": true,
+  "duplicate_validation_not_weakened": true,
+  "canonical_inclusion_not_safety_endorsement": true,
+  "status": "validation_pending"
+}

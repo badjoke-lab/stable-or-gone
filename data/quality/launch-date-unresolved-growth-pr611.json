@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0",
+  "recorded_at": "2026-08-30",
+  "source_pr": 611,
+  "records": [
+    {
+      "stablecoin_id": "sog_st_frnt",
+      "category": "C",
+      "best_known_range": "live public Wyoming stable-token and reserve-attestation surface reviewed 2026-08-30; original launch day unresolved",
+      "reason_code": "current_operation_without_original_launch_day",
+      "review_note": "Wyoming Stable Token Commission material establishes FRNT identity, issuance and reserve-attestation framework, but the reviewed source does not establish the original day-level launch, first issuance or first public availability boundary. The launch date remains null rather than inferred.",
+      "last_reviewed": "2026-08-30",
+      "reviewed_sources": ["https://content.govdelivery.com/accounts/WYGOVSTC/bulletins/416f9d3"]
+    }
+  ]
+}
