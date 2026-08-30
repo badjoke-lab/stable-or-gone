@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0",
+  "recorded_at": "2026-08-30",
+  "source_pr": 613,
+  "records": [
+    {
+      "stablecoin_id": "sog_st_sbc",
+      "category": "C",
+      "best_known_range": "live Brale-issued SBC and Canton institutional settlement use confirmed by Visa on 2026-06-04; original launch day unresolved",
+      "reason_code": "current_operation_without_original_launch_day",
+      "review_note": "Visa establishes SBC identity, Brale issuer role, U.S.-dollar backing and Canton support, but the reviewed source is an institutional settlement proof-of-concept announcement and does not establish SBC's original launch, first issuance or first public availability date. The launch date remains null rather than inferred.",
+      "last_reviewed": "2026-08-30",
+      "reviewed_sources": ["https://visa.gcs-web.com/news-releases/news-release-details/visa-and-brale-explore-private-stablecoin-settlement"]
+    },
+    {
+      "stablecoin_id": "sog_st_litusd",
+      "category": "C",
+      "best_known_range": "Stably establishes Ethereum launch in August 2025; exact day unresolved",
+      "reason_code": "launch_month_known_day_unresolved",
+      "review_note": "Stably's case study establishes that litUSD launched on Ethereum in August 2025 through Brale, but does not establish the exact day-level launch boundary. The canonical launch date remains null rather than converting the month into a guessed day.",
+      "last_reviewed": "2026-08-30",
+      "reviewed_sources": ["https://www.stably.io/post/case-study-how-stably-helped-launch-litusd"]
+    }
+  ]
+}
