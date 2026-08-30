@@ -1,6 +1,6 @@
 {
   "schema_version": "2.0",
-  "status": "batch_035_candidate_intake",
+  "status": "batch_035_promotion_complete",
   "candidate_files": [
     "data/candidate-stable-assets.json",
     "data/candidate-stable-assets-growth-70.json",
@@ -22,7 +22,7 @@
     "data/candidate-stable-assets-growth-126-clean.json",
     "data/candidate-stable-assets-growth-129-clean.json"
   ],
-  "protected_minimums": {"total_candidates":129,"promoted_candidates":124,"pending_candidates":5},
+  "protected_minimums": {"total_candidates":129,"promoted_candidates":129,"pending_candidates":0},
   "planned_batches": {
     "batch_006":{"minimum_candidates":5,"theme":"current USD and regulated assets"},
     "batch_007":{"minimum_candidates":5,"theme":"protocol stablecoins"},
