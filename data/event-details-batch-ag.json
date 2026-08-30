@@ -1,0 +1,7 @@
+[
+  {"id":"sog_ev_sbc_visa_canton_20260604","title":"Visa and Brale announce SBC Canton settlement proof of concept","subject_stablecoin_ids":["sog_st_sbc"],"subject_organization_ids":["sog_issuer_brale"],"evidence_ids":["sog_src_sbc_visa_canton_20260604"],"event_detail_kind":"integration"},
+  {"id":"sog_ev_usdcx_movement_launch_20260325","title":"USDCx becomes available on Movement through Circle xReserve","subject_stablecoin_ids":["sog_st_usdcx"],"subject_organization_ids":["sog_org_movement_network"],"evidence_ids":["sog_src_usdcx_circle_launch_20260325","sog_src_usdcx_circle_addresses_20260830"],"event_detail_kind":"launch"},
+  {"id":"sog_ev_usdu_launch_20260129","title":"Universal launches USDU","subject_stablecoin_ids":["sog_st_usdu"],"subject_organization_ids":["sog_issuer_universal_digital_intl"],"evidence_ids":["sog_src_usdu_universal_launch_20260129"],"event_detail_kind":"launch"},
+  {"id":"sog_ev_litusd_launch_202508","title":"litUSD launches on Ethereum in August 2025","subject_stablecoin_ids":["sog_st_litusd"],"subject_organization_ids":["sog_issuer_brale"],"evidence_ids":["sog_src_litusd_stably_case_20250911"],"event_detail_kind":"launch"},
+  {"id":"sog_ev_metamask_musd_launch_20250915","title":"MetaMask USD becomes available","subject_stablecoin_ids":["sog_st_metamask_musd"],"subject_organization_ids":["sog_issuer_bridge"],"evidence_ids":["sog_src_metamask_musd_launch_20250915"],"event_detail_kind":"launch"}
+]
