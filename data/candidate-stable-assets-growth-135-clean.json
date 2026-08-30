@@ -45,7 +45,7 @@
     "priority": "P0",
     "status": "reviewed_candidate",
     "target_batch": "batch_036",
-    "notes": "Move Industries launch source reviewed; USDCx is live on M1 Mainnet and fully backed 1:1 by USDC held in Circle xReserve. Redemption path, issuer/operator boundary and exact deployment identifiers require bounded review."
+    "notes": "Circle primary source reviewed; USDCx is available on Movement, deployed by Movement and fully backed 1:1 by USDC held in Circle xReserve. Circle publishes the Movement mainnet token address."
   },
   {
     "candidate_id": "sog_cand_000133",
@@ -77,7 +77,7 @@
     "priority": "P0",
     "status": "reviewed_candidate",
     "target_batch": "batch_036",
-    "notes": "OSL listing source reviewed; USDKG is described as a state-supervised USD-pegged stablecoin backed by physical gold and listed for professional investors. Primary issuer/state evidence is still required before stronger legal, reserve or redemption assertions."
+    "notes": "USDKG official site and OSL listing source reviewed; physical-gold backing and institutional redemption are described, but exact authorized issuing legal entity is still unresolved and will not be guessed."
   },
   {
     "candidate_id": "sog_cand_000135",
@@ -94,5 +94,21 @@
     "status": "reviewed_candidate",
     "target_batch": "batch_036",
     "notes": "Stably launch case study reviewed; litUSD launched on Ethereum in August 2025, is issued by Brale, backed 1:1 by cash and cash equivalents, and mintable/redeemable at parity by verified Brale users. Exact launch day and contract identity require additional primary capture."
+  },
+  {
+    "candidate_id": "sog_cand_000136",
+    "proposed_record_id": "sog_st_metamask_musd",
+    "slug": "metamask-musd",
+    "name": "MetaMask USD",
+    "symbol": "mUSD",
+    "aliases": ["MetaMask USD", "mUSD", "$mUSD"],
+    "candidate_type": "stablecoin",
+    "asset_class": "stablecoin",
+    "reference_kind": "fiat",
+    "reference_label": "USD",
+    "priority": "P0",
+    "status": "reviewed_candidate",
+    "target_batch": "batch_036",
+    "notes": "MetaMask primary sources reviewed; mUSD launched in September 2025, is issued by Bridge and powered by M0, backed 1:1 by short-term U.S. Treasury bills, and supported on Ethereum Mainnet and Linea."
   }
 ]
