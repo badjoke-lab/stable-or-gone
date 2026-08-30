@@ -29,16 +29,6 @@ Primary sources:
 
 Primary source: https://www.universal.ae/news/universal-launches-uaes-first-central-bank-registered-usd-stablecoin
 
-### USDKG
-- The USDKG/Gold Dollar official site describes USDKG as a 1:1 USD-pegged stablecoin fully backed by physical gold.
-- It states reserves are held in audited custody within Kyrgyzstan and supported by the Ministry of Finance of the Kyrgyz Republic.
-- Direct minting and redemption are stated to be available to institutional clients subject to KYC/AML and issuer procedures; retail users access liquidity through supported exchanges.
-- The exact authorized issuing legal entity is not established in the reviewed homepage/about material and must not be guessed.
-
-Primary sources:
-- https://www.usdkg.com/
-- https://www.usdkg.com/about
-
 ### litUSD
 - Stably states litUSD launched on Ethereum in August 2025.
 - Brale is identified as issuer.
@@ -49,7 +39,7 @@ Primary sources:
 Primary source: https://www.stably.io/post/case-study-how-stably-helped-launch-litusd
 
 ### MetaMask USD (mUSD)
-- MetaMask primary material establishes mUSD as a distinct MetaMask stablecoin launched in September 2025.
+- MetaMask primary material establishes mUSD as a distinct MetaMask stablecoin available from 2025-09-15.
 - Bridge is the issuer and M0 supplies stablecoin infrastructure.
 - Reviewed MetaMask material states 1:1 backing by short-term U.S. Treasury bills.
 - Ethereum Mainnet and Linea support are established.
@@ -64,6 +54,13 @@ Gaia's launch announcement establishes a distinct USD-backed GUSD powered by Bri
 
 Primary source: https://www.prnewswire.com/news-releases/gaia-interactive-inc-launches-regulated-stablecoin-gusd-for-global-payments-powered-by-bridge-302743123.html
 
+### USDKG
+The USDKG official material establishes the USD peg, physical-gold backing, institutional mint/redemption framing and state-supervision context, but the exact authorized issuing legal entity remains unresolved in the reviewed primary material. Keep as reviewed candidate until that issuer boundary is established; do not guess an issuer to increase the canonical count.
+
+Primary sources:
+- https://www.usdkg.com/
+- https://www.usdkg.com/about
+
 ## Promotion boundary
 
-The first tranche is SBC / Movement USDCx / USDU / USDKG / litUSD / MetaMask mUSD. Promotion requires full-layer canonical records and existing validators. Unknown issuer/legal/reserve/deployment facts remain unknown rather than inferred.
+The first canonical tranche is SBC / Movement USDCx / USDU / litUSD / MetaMask mUSD. Gaia GUSD and USDKG remain reviewed candidates. Promotion requires full-layer canonical records and existing validators. Unknown issuer/legal/reserve/deployment facts remain unknown rather than inferred.
