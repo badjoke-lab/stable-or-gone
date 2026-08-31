@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0",
+  "batch_id": "batch_038",
+  "base_canonical_count": 139,
+  "reviewed_at": "2026-08-31",
+  "policy": {
+    "reject_canonical_duplicates": true,
+    "do_not_promote_planned_not_launched": true,
+    "primary_source_required_before_promotion": true,
+    "deployment_only_changes_are_not_new_stable_assets": true,
+    "unknowns_not_inferred": true
+  },
+  "summary": {
+    "total": 20,
+    "advance_primary_review": 5,
+    "needs_additional_review": 1,
+    "hold_not_launched": 3,
+    "reject_canonical_duplicate": 9,
+    "reject_deployment_only": 2
+  },
+  "candidates": [
+    {"name":"Gaia GUSD","symbol":"GUSD","disposition":"advance_primary_review","reason":"Carried forward from batch 037. Public launch material exists; exact legal issuer boundary and identity distinction from Gemini Dollar remain mandatory before promotion."},
+    {"name":"USDKG","symbol":"USDKG","disposition":"advance_primary_review","reason":"Carried forward from batch 037. Product identity is known but exact authorized issuing legal entity and holder-claim boundary still require primary confirmation."},
+    {"name":"Decibel USDCBL","symbol":"USDCBL","disposition":"advance_primary_review","reason":"Prior launch announcement identifies a Bridge-issued Decibel stablecoin. Current live-mainnet state, issuer role and deployment identity must be captured from primary material before promotion."},
+    {"name":"Open USD","symbol":"USDO","disposition":"advance_primary_review","reason":"Open Standard / OnePay launch material identifies a distinct USD stablecoin initiative. Current live issuance state and exact issuer/deployment boundary require primary confirmation before promotion."},
+    {"name":"GELT","symbol":"GELT","disposition":"advance_primary_review","reason":"Georgia/Tether launch material identifies a proposed Georgian-lari stablecoin. Review must establish whether issuance is actually live and identify the legal issuer before promotion."},
+    {"name":"Revolut additional currency stablecoins","symbol":null,"disposition":"needs_additional_review","reason":"Revolut states additional currency-denominated stablecoins are in development, but no distinct launched asset is established in the reviewed material."},
+    {"name":"Boundary USBD","symbol":"USBD","disposition":"hold_not_launched","reason":"Reviewed material describes financing and intended launch rather than established live issuance."},
+    {"name":"Qivalis euro stablecoin","symbol":null,"disposition":"hold_not_launched","reason":"Qivalis states first issuance is planned for the second half of 2026; no live distinct asset is established in the reviewed source."},
+    {"name":"EDGE native USDC","symbol":"USDC","disposition":"hold_not_launched","reason":"Circle material describes native USDC as coming soon to EDGE Chain. Even after launch this is expected to be a deployment of existing USDC rather than a new stable-asset identity."},
+    {"name":"Movement USDCx","symbol":"USDCx","disposition":"reject_canonical_duplicate","reason":"Already canonical in batch 036."},
+    {"name":"Cardano USDCx","symbol":"USDCx","disposition":"reject_canonical_duplicate","reason":"Already canonical in batch 037."},
+    {"name":"Canton USDCx","symbol":"USDCx","disposition":"reject_canonical_duplicate","reason":"Already canonical in batch 037."},
+    {"name":"Stacks USDCx","symbol":"USDCx","disposition":"reject_canonical_duplicate","reason":"Already canonical in batch 037."},
+    {"name":"Aleo USDCx","symbol":"USDCx","disposition":"reject_canonical_duplicate","reason":"Already canonical in batch 037."},
+    {"name":"SoFiUSD","symbol":"SoFiUSD","disposition":"reject_canonical_duplicate","reason":"Already canonical; later consumer rollout belongs to lifecycle/access history rather than a new stable asset."},
+    {"name":"Fidelity Digital Dollar","symbol":"FIDD","disposition":"reject_canonical_duplicate","reason":"Already canonical in batch 035."},
+    {"name":"Falcon fUSD","symbol":"fUSD","disposition":"reject_canonical_duplicate","reason":"Already canonical in batch 035."},
+    {"name":"Brale SBC","symbol":"SBC","disposition":"reject_canonical_duplicate","reason":"Already canonical in batch 036; additional use cases or chains belong to deployment/history layers."},
+    {"name":"USDC on Plasma","symbol":"USDC","disposition":"reject_deployment_only","reason":"Circle confirms native USDC support on Plasma; this is a deployment of existing USDC, not a distinct stable-asset identity."},
+    {"name":"EURC on Plasma","symbol":"EURC","disposition":"reject_deployment_only","reason":"Circle confirms EURC support on Plasma; this is a deployment of existing EURC, not a distinct stable-asset identity."}
+  ]
+}
