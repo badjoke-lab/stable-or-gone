@@ -1,21 +1,5 @@
 [
   {
-    "candidate_id": "sog_cand_000142",
-    "proposed_record_id": "sog_st_usdkg",
-    "slug": "usdkg",
-    "name": "USDKG",
-    "symbol": "USDKG",
-    "aliases": ["USDKG"],
-    "candidate_type": "stablecoin",
-    "asset_class": "stablecoin",
-    "reference_kind": "fiat",
-    "reference_label": "USD",
-    "priority": "P0",
-    "status": "reviewed_candidate",
-    "target_batch": "batch_038",
-    "notes": "Public USDKG materials describe a live gold-backed stablecoin pegged 1:1 to USD and backed by physical gold; OSL HK listing material confirms live market availability for professional investors. Exact issuing legal entity and holder-claim structure remain for full-layer primary review."
-  },
-  {
     "candidate_id": "sog_cand_000143",
     "proposed_record_id": "sog_st_eurau",
     "slug": "eurau",
@@ -29,7 +13,7 @@
     "priority": "P0",
     "status": "reviewed_candidate",
     "target_batch": "batch_038",
-    "notes": "AllUnity primary material confirms EURAU as a live, fully reserved, MiCAR-compliant euro stablecoin issued by AllUnity GmbH under a BaFin EMI licence. Exact deployment set and current reserve-component detail remain source-bounded for canonical promotion."
+    "notes": "AllUnity primary material confirms EURAU as a live, fully reserved, MiCAR-compliant euro stablecoin issued by AllUnity under a BaFin EMI licence. Exact deployment set and current reserve-component detail remain source-bounded for canonical promotion."
   },
   {
     "candidate_id": "sog_cand_000144",
@@ -61,7 +45,7 @@
     "priority": "P0",
     "status": "reviewed_candidate",
     "target_batch": "batch_038",
-    "notes": "Quantoz primary product material identifies EURQ as a euro stablecoin issued under MiCA by Quantoz with safeguarded reserves at Tier 1 institutions. Full-layer review will preserve exact issuer legal name, redemption scope and deployment identity from primary sources only."
+    "notes": "Quantoz primary product material identifies EURQ as a euro stablecoin issued under MiCA by Quantoz Payments B.V.; exact token-specific reserve allocation and operational redemption details remain source-bounded."
   },
   {
     "candidate_id": "sog_cand_000146",
@@ -77,6 +61,6 @@
     "priority": "P0",
     "status": "reviewed_candidate",
     "target_batch": "batch_038",
-    "notes": "Quantoz primary product material identifies USDQ as a U.S.-dollar stablecoin issued under MiCA by Quantoz with safeguarded reserves at Tier 1 institutions. Full-layer review will preserve exact issuer legal name, redemption scope and deployment identity from primary sources only."
+    "notes": "Quantoz primary product material identifies USDQ as a U.S.-dollar stablecoin issued under MiCA by Quantoz Payments B.V.; exact token-specific reserve allocation and operational redemption details remain source-bounded."
   }
 ]
