@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0",
-  "classified_at": "2026-08-30",
+  "classified_at": "2026-08-31",
   "source_review": "docs/quality/reserve-applicability-review-2026-06-28.md",
-  "source_status_review": "docs/growth/batch-036-primary-review.md",
+  "source_status_review": "docs/growth/batch-037-prescreen.json",
   "policy": {
     "publication_specific_layer": true,
     "reserve_components_remain_required": true,
@@ -10,8 +10,8 @@
     "no_universal_coverage_target": true,
     "canonical_updates_require_reviewed_primary_context": true
   },
-  "expected_total": 23,
-  "category_counts": {"report_expected_but_missing":0,"not_applicable_by_design":11,"source_status_unresolved":12},
+  "expected_total": 28,
+  "category_counts": {"report_expected_but_missing":0,"not_applicable_by_design":15,"source_status_unresolved":13},
   "records": [
     {"stablecoin_id":"sog_st_mim","applicability":"not_applicable_by_design","reason_code":"onchain_collateral_protocol_without_periodic_report","evidence_ids":["sog_src_mim_docs_batch_a","sog_src_mim_tokenomics_batch_a"],"review_note":"MIM is minted through protocol cauldrons against supported collateral. Backing is represented by protocol mechanics and collateral inventories rather than an issuer-style periodic reserve report.","next_action":"retain_not_applicable"},
     {"stablecoin_id":"sog_st_usdn","applicability":"not_applicable_by_design","reason_code":"algorithmic_protocol_backing_without_periodic_report","evidence_ids":["sog_src_usdn_faq_batch_a","sog_src_usdn_surf_batch_a"],"review_note":"USDN used protocol backing-ratio and recapitalization mechanics rather than a conventional issuer reserve-report cycle. Historical mechanics remain documented separately from the later XTN transition.","next_action":"retain_not_applicable"},
@@ -35,6 +35,11 @@
     {"stablecoin_id":"sog_st_usdcx","applicability":"not_applicable_by_design","reason_code":"xreserve_onchain_usdc_backing_without_issuer_periodic_report","evidence_ids":["sog_src_usdcx_circle_launch_20260325","sog_src_usdcx_circle_addresses_20260830"],"review_note":"USDCx is represented as a Movement-deployed protocol asset fully backed 1:1 by USDC held in Circle xReserve. Its backing is covered by xReserve protocol mechanics rather than a separate issuer-style periodic reserve report for USDCx.","next_action":"retain_not_applicable"},
     {"stablecoin_id":"sog_st_usdu","applicability":"source_status_unresolved","reason_code":"monthly_attestation_claimed_specific_report_not_normalized","evidence_ids":["sog_src_usdu_universal_launch_20260129"],"review_note":"Universal states monthly independent reserve attestations and 1:1 safeguarded U.S.-dollar backing, but this batch does not normalize a specific attestation report, reserve balance or liabilities reconciliation.","next_action":"investigate_source_status"},
     {"stablecoin_id":"sog_st_litusd","applicability":"source_status_unresolved","reason_code":"reserve_categories_established_periodic_report_not_established","evidence_ids":["sog_src_litusd_stably_case_20250911"],"review_note":"Stably establishes cash-and-cash-equivalent backing and verified-user parity redemption, but the reviewed source set does not establish a normalized litUSD-specific periodic reserve report or assurance opinion.","next_action":"investigate_source_status"},
-    {"stablecoin_id":"sog_st_metamask_musd","applicability":"source_status_unresolved","reason_code":"treasury_backing_established_periodic_report_not_normalized","evidence_ids":["sog_src_metamask_musd_launch_20250915"],"review_note":"MetaMask establishes 1:1 short-term U.S. Treasury backing, but this batch does not normalize a token-specific periodic reserve report, assurance opinion, reserve balance or liabilities reconciliation.","next_action":"investigate_source_status"}
+    {"stablecoin_id":"sog_st_metamask_musd","applicability":"source_status_unresolved","reason_code":"treasury_backing_established_periodic_report_not_normalized","evidence_ids":["sog_src_metamask_musd_launch_20250915"],"review_note":"MetaMask establishes 1:1 short-term U.S. Treasury backing, but this batch does not normalize a token-specific periodic reserve report, assurance opinion, reserve balance or liabilities reconciliation.","next_action":"investigate_source_status"},
+    {"stablecoin_id":"sog_st_usdcx_cardano","applicability":"not_applicable_by_design","reason_code":"xreserve_onchain_usdc_backing_without_issuer_periodic_report","evidence_ids":["sog_src_usdcx_cardano_circle_launch_20260227"],"review_note":"Cardano USDCx is a protocol asset backed 1:1 by USDC held through Circle xReserve. Its backing is represented by xReserve protocol mechanics rather than a separate Cardano-USDCx issuer periodic reserve report.","next_action":"retain_not_applicable"},
+    {"stablecoin_id":"sog_st_usdcx_canton","applicability":"not_applicable_by_design","reason_code":"xreserve_onchain_usdc_backing_without_issuer_periodic_report","evidence_ids":["sog_src_usdcx_canton_circle_launch_20251204"],"review_note":"Canton USDCx is a protocol asset backed through Circle xReserve. A separate issuer-style periodic reserve report for Canton USDCx is not part of the reviewed design.","next_action":"retain_not_applicable"},
+    {"stablecoin_id":"sog_st_usdcx_stacks","applicability":"not_applicable_by_design","reason_code":"xreserve_onchain_usdc_backing_without_issuer_periodic_report","evidence_ids":["sog_src_usdcx_stacks_circle_launch_20251218"],"review_note":"Stacks USDCx is a protocol asset fully backed by USDC held through Circle xReserve. Its backing is represented by xReserve protocol mechanics rather than a separate issuer periodic reserve report.","next_action":"retain_not_applicable"},
+    {"stablecoin_id":"sog_st_usdcx_aleo","applicability":"not_applicable_by_design","reason_code":"xreserve_protocol_backing_without_issuer_periodic_report","evidence_ids":["sog_src_usdcx_aleo_circle_release_20260127"],"review_note":"Circle establishes Aleo xReserve mainnet support. USDCx backing follows the xReserve protocol model rather than a separate Aleo-USDCx issuer periodic reserve report; exact token identity remains under review.","next_action":"retain_not_applicable"},
+    {"stablecoin_id":"sog_st_revolut_eurr","applicability":"source_status_unresolved","reason_code":"emt_status_established_token_specific_reserve_report_not_normalized","evidence_ids":["sog_src_revolut_eurr_launch_20260808"],"review_note":"Revolut establishes EURR issuer identity and electronic-money-token status, but the reviewed launch source does not normalize token-specific reserve allocation, reserve balance, assurance report or liabilities reconciliation. The issuer whitepaper requires separate review.","next_action":"investigate_source_status"}
   ]
 }
