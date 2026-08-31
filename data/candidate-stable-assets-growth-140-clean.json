@@ -11,7 +11,7 @@
     "reference_kind": "crypto_asset",
     "reference_label": "USDC",
     "priority": "P0",
-    "status": "reviewed_candidate",
+    "status": "promoted",
     "target_batch": "batch_037",
     "notes": "Circle primary source confirms USDCx on Cardano live on 2026-02-27, issued by a decentralized protocol on Cardano, fully backed by USDC held in Circle xReserve, with mainnet address asset1e7eewpjw8ua3f2gpfx7y34ww9vjl63hayn80kl."
   },
@@ -27,7 +27,7 @@
     "reference_kind": "crypto_asset",
     "reference_label": "USDC",
     "priority": "P0",
-    "status": "reviewed_candidate",
+    "status": "promoted",
     "target_batch": "batch_037",
     "notes": "Circle primary source confirms USDCx on Canton live on 2025-12-04, created by a decentralized protocol on Canton and backed through Circle xReserve; mainnet InstrumentId identity is published by Circle."
   },
@@ -43,7 +43,7 @@
     "reference_kind": "crypto_asset",
     "reference_label": "USDC",
     "priority": "P0",
-    "status": "reviewed_candidate",
+    "status": "promoted",
     "target_batch": "batch_037",
     "notes": "Circle primary source confirms USDCx on Stacks live on 2025-12-18, issued by Stacks and fully backed by USDC held in Circle xReserve; mainnet address SP120SBRBQJ00MCWS7TM5R8WJNTTKD5K0HFRC2CNE.usdcx is published."
   },
@@ -59,7 +59,7 @@
     "reference_kind": "crypto_asset",
     "reference_label": "USDC",
     "priority": "P0",
-    "status": "reviewed_candidate",
+    "status": "promoted",
     "target_batch": "batch_037",
     "notes": "Circle primary material establishes Aleo USDCx as an Aleo-deployed USDC-backed stablecoin using xReserve; Circle release notes establish Aleo mainnet support on 2026-01-27. Exact mainnet token identity remains under primary capture and must not be invented."
   },
@@ -75,7 +75,7 @@
     "reference_kind": "fiat",
     "reference_label": "EUR",
     "priority": "P0",
-    "status": "reviewed_candidate",
+    "status": "promoted",
     "target_batch": "batch_037",
     "notes": "Revolut primary source confirms phased August 2026 launch, Bridge Building S.A. issuer, euro-pegged EMT status, Ethereum launch and eligible-customer scope in Denmark, Poland and Portugal. Identity must remain distinct from any other EURR-branded stable asset."
   }
