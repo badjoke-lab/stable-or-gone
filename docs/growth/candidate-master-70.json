@@ -1,6 +1,6 @@
 {
   "schema_version": "2.0",
-  "status": "batch_036_candidate_intake",
+  "status": "batch_037_candidate_intake",
   "candidate_files": [
     "data/candidate-stable-assets.json",
     "data/candidate-stable-assets-growth-70.json",
@@ -21,9 +21,10 @@
     "data/candidate-stable-assets-growth-124-clean.json",
     "data/candidate-stable-assets-growth-126-clean.json",
     "data/candidate-stable-assets-growth-129-clean.json",
-    "data/candidate-stable-assets-growth-135-clean.json"
+    "data/candidate-stable-assets-growth-135-clean.json",
+    "data/candidate-stable-assets-growth-140-clean.json"
   ],
-  "protected_minimums": {"total_candidates":136,"promoted_candidates":129,"pending_candidates":7},
+  "protected_minimums": {"total_candidates":141,"promoted_candidates":134,"pending_candidates":7},
   "planned_batches": {
     "batch_006":{"minimum_candidates":5,"theme":"current USD and regulated assets"},
     "batch_007":{"minimum_candidates":5,"theme":"protocol stablecoins"},
@@ -55,6 +56,7 @@
     "batch_033":{"minimum_candidates":2,"theme":"post-119 clean launched stablecoin growth: EURXT and USDPT; SoFiUSD and USDGO rejected as existing canonical duplicates"},
     "batch_034":{"minimum_candidates":2,"theme":"clean launched stablecoin growth: HKDAP and MGUSD; USA₮ rejected after canonical duplicate detection"},
     "batch_035":{"minimum_candidates":5,"target_candidates":10,"prescreen_pool_target":20,"theme":"FIDD, MainUSD, Falcon fUSD, FRNT and USDsui first full-layer promotion tranche; duplicate-first prescreen retained"},
-    "batch_036":{"minimum_candidates":5,"target_candidates":10,"prescreen_pool_target":20,"theme":"SBC, Movement USDCx, USDU, litUSD and MetaMask mUSD first full-layer tranche; Gaia GUSD and USDKG remain reviewed candidates pending issuer-boundary resolution"}
+    "batch_036":{"minimum_candidates":5,"target_candidates":10,"prescreen_pool_target":20,"theme":"SBC, Movement USDCx, USDU, litUSD and MetaMask mUSD first full-layer tranche; Gaia GUSD and USDKG remain reviewed candidates pending issuer-boundary resolution"},
+    "batch_037":{"minimum_candidates":5,"target_candidates":10,"prescreen_pool_target":20,"theme":"Cardano, Canton, Stacks and Aleo USDCx plus Revolut EURR first full-layer tranche; Gaia GUSD and USDKG remain pending issuer-boundary review"}
   }
 }
