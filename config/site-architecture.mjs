@@ -122,7 +122,8 @@ export const footerNavigationGroups = Object.freeze([
       Object.freeze({ label: 'BadJoke-Lab project hub', href: 'https://badjoke-lab.com/' }),
       Object.freeze({ label: 'Historical Exchange Index', href: 'https://hei.badjoke-lab.com/' }),
       Object.freeze({ label: 'Crypto Yield Archive', href: 'https://cya.badjoke-lab.com/' }),
-      Object.freeze({ label: 'Bridge Incident Registry', href: 'https://bir.badjoke-lab.com/' })
+      Object.freeze({ label: 'Bridge Incident Registry', href: 'https://bir.badjoke-lab.com/' }),
+      Object.freeze({ label: 'Crypto Card Lifecycle Registry', href: 'https://badjoke-lab.github.io/crypto-card-lifecycle-registry/' })
     ])
   })
 ]);
