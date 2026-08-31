@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0",
+  "base_manifest": "docs/migration/registry-v2-baseline-batch-zh.json",
+  "batch_id": "batch_037",
+  "defer_legacy_v3_full_coverage": false,
+  "captured_at": "2026-08-31",
+  "minimum_counts": {
+    "stablecoins": 139,
+    "organizations": 122,
+    "relationships": 151,
+    "classifications": 139,
+    "profiles": 139,
+    "events": 214,
+    "event_details": 214,
+    "evidence": 615,
+    "evidence_relations": 615,
+    "reserve_reports": 131,
+    "known_unknowns": 376,
+    "regulatory_notes": 9,
+    "deployments": 201,
+    "classification_extensions": 2
+  },
+  "data_group_additions": {
+    "stablecoins": ["data/stablecoins-batch-ah.json"],
+    "organizations": ["data/organizations-batch-ah.json"],
+    "relationships": ["data/relationships-batch-ah.json"],
+    "classifications": ["data/stablecoin-classification-batch-ah.json"],
+    "profiles": ["data/batch-ah-reserve-redemption.json"],
+    "events": ["data/events-batch-ah.json"],
+    "event_details": ["data/event-details-batch-ah.json"],
+    "evidence": ["data/evidence-batch-ah.json"],
+    "evidence_relations": ["data/evidence-batch-ah.json"],
+    "known_unknowns": ["data/batch-ah-review-gaps.json"],
+    "deployments": ["data/batch-ah-deployments.json"]
+  }
+}

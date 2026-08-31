@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0",
+  "batch_id": "batch_037",
+  "base_canonical_count": 134,
+  "policy": {
+    "reject_canonical_duplicates": true,
+    "do_not_promote_planned_not_launched": true,
+    "primary_source_required_before_promotion": true,
+    "unknowns_not_inferred": true
+  },
+  "summary": {
+    "total": 20,
+    "advance_primary_review": 7,
+    "needs_additional_review": 4,
+    "hold_not_launched": 1,
+    "reject_canonical_duplicate": 8
+  },
+  "candidates": [
+    {"name":"Cardano USDCx","symbol":"USDCx","disposition":"advance_primary_review","reason":"Circle primary source confirms live Cardano USDCx via xReserve, 1:1 USDC backing and mainnet asset address; no canonical match found in reviewed repository search."},
+    {"name":"Canton USDCx","symbol":"USDCx","disposition":"advance_primary_review","reason":"Circle primary source confirms live Canton USDCx via xReserve and publishes mainnet instrument identity; no canonical match found in reviewed repository search."},
+    {"name":"Stacks USDCx","symbol":"USDCx","disposition":"advance_primary_review","reason":"Circle primary source confirms live Stacks USDCx via xReserve, Stacks issuer role and mainnet address; no canonical match found in reviewed repository search."},
+    {"name":"Aleo USDCx","symbol":"USDCx","disposition":"advance_primary_review","reason":"Circle release notes establish Aleo mainnet xReserve support on 2026-01-27; primary identity capture remains required before canonical deployment normalization."},
+    {"name":"Revolut EURR","symbol":"EURR","disposition":"advance_primary_review","reason":"Revolut primary source confirms phased August 2026 launch, Bridge Building S.A. issuer, EUR peg and Ethereum launch. Must preserve identity distinction from other EURR-branded assets."},
+    {"name":"Gaia GUSD","symbol":"GUSD","disposition":"advance_primary_review","reason":"Carried forward reviewed candidate; exact legal issuer boundary still requires primary confirmation before promotion."},
+    {"name":"USDKG","symbol":"USDKG","disposition":"advance_primary_review","reason":"Carried forward reviewed candidate; exact authorized issuing legal entity remains unresolved."},
+    {"name":"Decibel USDCBL","symbol":"USDCBL","disposition":"needs_additional_review","reason":"Prior announcement exists but live mainnet status and primary issuer/deployment evidence need current confirmation."},
+    {"name":"Open USD","symbol":"USDO","disposition":"needs_additional_review","reason":"Announcement material exists; live status, issuer and deployment must be confirmed before promotion."},
+    {"name":"Brale SBC additional deployments","symbol":"SBC","disposition":"reject_canonical_duplicate","reason":"SBC already canonical in batch 036; additional chain support belongs in deployment history, not a new stable asset."},
+    {"name":"Movement USDCx","symbol":"USDCx","disposition":"reject_canonical_duplicate","reason":"Canonical in batch 036."},
+    {"name":"USDU","symbol":"USDU","disposition":"reject_canonical_duplicate","reason":"Canonical in batch 036."},
+    {"name":"litUSD","symbol":"litUSD","disposition":"reject_canonical_duplicate","reason":"Canonical in batch 036."},
+    {"name":"MetaMask USD","symbol":"mUSD","disposition":"reject_canonical_duplicate","reason":"Canonical in batch 036."},
+    {"name":"MGUSD","symbol":"MGUSD","disposition":"reject_canonical_duplicate","reason":"Canonical in batch 034."},
+    {"name":"USDsui","symbol":"USDsui","disposition":"reject_canonical_duplicate","reason":"Canonical in batch 035."},
+    {"name":"SoFiUSD","symbol":"SoFiUSD","disposition":"reject_canonical_duplicate","reason":"Previously rejected as canonical duplicate."},
+    {"name":"Boundary USBD","symbol":"USBD","disposition":"hold_not_launched","reason":"Reviewed source described planned launch/capital raise rather than established live issuance."},
+    {"name":"Revolut future non-EUR stablecoins","symbol":null,"disposition":"needs_additional_review","reason":"Revolut says other currency stablecoins are in development; no launched distinct asset yet."},
+    {"name":"GELT","symbol":"GELT","disposition":"needs_additional_review","reason":"Tether/Georgia announcement described intended launch; exact live issuance status must be established before canonical intake."}
+  ]
+}

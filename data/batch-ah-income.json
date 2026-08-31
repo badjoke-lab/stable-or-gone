@@ -1,0 +1,7 @@
+[
+  {"id":"sog_st_usdcx_cardano","availability":"none","source":"none","accrual":"none","rate":"none","related_asset_ids":[],"evidence_ids":["sog_src_usdcx_cardano_circle_launch_20260227"],"notes":"No intrinsic holder yield is established for Cardano USDCx."},
+  {"id":"sog_st_usdcx_canton","availability":"none","source":"none","accrual":"none","rate":"none","related_asset_ids":[],"evidence_ids":["sog_src_usdcx_canton_circle_launch_20251204"],"notes":"No intrinsic holder yield is established for Canton USDCx."},
+  {"id":"sog_st_usdcx_stacks","availability":"none","source":"none","accrual":"none","rate":"none","related_asset_ids":[],"evidence_ids":["sog_src_usdcx_stacks_circle_launch_20251218"],"notes":"No intrinsic holder yield is established for Stacks USDCx."},
+  {"id":"sog_st_usdcx_aleo","availability":"none","source":"none","accrual":"none","rate":"none","related_asset_ids":[],"evidence_ids":["sog_src_usdcx_aleo_circle_release_20260127"],"notes":"No intrinsic holder yield is established for Aleo USDCx."},
+  {"id":"sog_st_revolut_eurr","availability":"none","source":"none","accrual":"none","rate":"none","related_asset_ids":[],"evidence_ids":["sog_src_revolut_eurr_launch_20260808"],"notes":"No issuer-native holder yield or reserve-income pass-through is established in reviewed Revolut material."}
+]

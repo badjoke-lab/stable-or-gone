@@ -12,7 +12,7 @@
     "reference_label": "USD",
     "priority": "P0",
     "status": "reviewed_candidate",
-    "target_batch": "batch_036",
+    "target_batch": "batch_037",
     "notes": "Gaia launch announcement reviewed; distinct Gaia USD-backed stablecoin identity and Bridge-powered launch are established. Issuer legal entity, reserve composition, redemption and exact deployment require source-bounded review."
   },
   {
@@ -27,9 +27,9 @@
     "reference_kind": "fiat",
     "reference_label": "USD",
     "priority": "P0",
-    "status": "reviewed_candidate",
+    "status": "promoted",
     "target_batch": "batch_036",
-    "notes": "Visa primary source reviewed; SBC is a U.S.-dollar-backed stablecoin issued by Brale and natively supported on Canton. Public availability, reserve composition, holder redemption and control details remain unresolved."
+    "notes": "Promoted to canonical in batch 036 via merged PR #614."
   },
   {
     "candidate_id": "sog_cand_000132",
@@ -43,9 +43,9 @@
     "reference_kind": "crypto_asset",
     "reference_label": "USDC",
     "priority": "P0",
-    "status": "reviewed_candidate",
+    "status": "promoted",
     "target_batch": "batch_036",
-    "notes": "Circle primary source reviewed; USDCx is available on Movement, deployed by Movement and fully backed 1:1 by USDC held in Circle xReserve. Circle publishes the Movement mainnet token address."
+    "notes": "Promoted to canonical in batch 036 via merged PR #614."
   },
   {
     "candidate_id": "sog_cand_000133",
@@ -59,9 +59,9 @@
     "reference_kind": "fiat",
     "reference_label": "USD",
     "priority": "P0",
-    "status": "reviewed_candidate",
+    "status": "promoted",
     "target_batch": "batch_036",
-    "notes": "Universal primary source reviewed; 2026-01-29 launch, Universal Digital Intl Limited issuer role, CBUAE registration, FSRA permission, 1:1 USD safeguarded reserves at Emirates NBD and Mashreq, monthly independent attestation and Professional Client scope are established."
+    "notes": "Promoted to canonical in batch 036 via merged PR #614."
   },
   {
     "candidate_id": "sog_cand_000134",
@@ -76,7 +76,7 @@
     "reference_label": "USD",
     "priority": "P0",
     "status": "reviewed_candidate",
-    "target_batch": "batch_036",
+    "target_batch": "batch_037",
     "notes": "USDKG official site and OSL listing source reviewed; physical-gold backing and institutional redemption are described, but exact authorized issuing legal entity is still unresolved and will not be guessed."
   },
   {
@@ -91,9 +91,9 @@
     "reference_kind": "fiat",
     "reference_label": "USD",
     "priority": "P0",
-    "status": "reviewed_candidate",
+    "status": "promoted",
     "target_batch": "batch_036",
-    "notes": "Stably launch case study reviewed; litUSD launched on Ethereum in August 2025, is issued by Brale, backed 1:1 by cash and cash equivalents, and mintable/redeemable at parity by verified Brale users. Exact launch day and contract identity require additional primary capture."
+    "notes": "Promoted to canonical in batch 036 via merged PR #614."
   },
   {
     "candidate_id": "sog_cand_000136",
@@ -107,8 +107,8 @@
     "reference_kind": "fiat",
     "reference_label": "USD",
     "priority": "P0",
-    "status": "reviewed_candidate",
+    "status": "promoted",
     "target_batch": "batch_036",
-    "notes": "MetaMask primary sources reviewed; mUSD launched in September 2025, is issued by Bridge and powered by M0, backed 1:1 by short-term U.S. Treasury bills, and supported on Ethereum Mainnet and Linea."
+    "notes": "Promoted to canonical in batch 036 via merged PR #614."
   }
 ]
