@@ -1,0 +1,7 @@
+[
+  {"id":"sog_ev_usdcx_cardano_launch_20260227","title":"USDCx becomes available on Cardano through Circle xReserve","subject_stablecoin_ids":["sog_st_usdcx_cardano"],"subject_organization_ids":["sog_org_cardano_usdcx_protocol"],"evidence_ids":["sog_src_usdcx_cardano_circle_launch_20260227"],"event_detail_kind":"launch"},
+  {"id":"sog_ev_usdcx_canton_launch_20251204","title":"USDCx becomes available on Canton through Circle xReserve","subject_stablecoin_ids":["sog_st_usdcx_canton"],"subject_organization_ids":["sog_org_canton_usdcx_protocol"],"evidence_ids":["sog_src_usdcx_canton_circle_launch_20251204"],"event_detail_kind":"launch"},
+  {"id":"sog_ev_usdcx_stacks_launch_20251218","title":"USDCx becomes available on Stacks through Circle xReserve","subject_stablecoin_ids":["sog_st_usdcx_stacks"],"subject_organization_ids":["sog_org_stacks_network"],"evidence_ids":["sog_src_usdcx_stacks_circle_launch_20251218"],"event_detail_kind":"launch"},
+  {"id":"sog_ev_usdcx_aleo_mainnet_20260127","title":"Circle records Aleo mainnet USDCx support through xReserve","subject_stablecoin_ids":["sog_st_usdcx_aleo"],"subject_organization_ids":["sog_org_aleo_network"],"evidence_ids":["sog_src_usdcx_aleo_circle_release_20260127"],"event_detail_kind":"launch"},
+  {"id":"sog_ev_revolut_eurr_phased_launch_20260808","title":"Revolut announces phased EURR rollout","subject_stablecoin_ids":["sog_st_revolut_eurr"],"subject_organization_ids":["sog_issuer_bridge_building_sa"],"evidence_ids":["sog_src_revolut_eurr_launch_20260808"],"event_detail_kind":"launch"}
+]
