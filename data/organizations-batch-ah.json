@@ -1,0 +1,7 @@
+[
+  {"id":"sog_org_cardano_usdcx_protocol","name":"Cardano USDCx decentralized protocol","organization_type":"protocol","jurisdiction":null,"official_url":"https://www.cardano.org/","status":"active","notes":"Protocol identity used for Cardano USDCx because Circle describes issuance by a decentralized protocol on Cardano; no conventional corporate issuer is inferred."},
+  {"id":"sog_org_canton_usdcx_protocol","name":"Canton USDCx decentralized protocol","organization_type":"protocol","jurisdiction":null,"official_url":"https://www.canton.network/","status":"active","notes":"Protocol identity used because Circle describes Canton USDCx as created by a decentralized protocol on Canton."},
+  {"id":"sog_org_stacks_network","name":"Stacks","organization_type":"protocol","jurisdiction":null,"official_url":"https://www.stacks.co/","status":"active","notes":"Circle identifies Stacks as issuer/deployer context for Stacks USDCx; this row does not assert a corporate legal issuer."},
+  {"id":"sog_org_aleo_network","name":"Aleo","organization_type":"protocol","jurisdiction":null,"official_url":"https://aleo.org/","status":"active","notes":"Circle identifies Aleo as the blockchain team deploying USDCx through xReserve."},
+  {"id":"sog_issuer_bridge_building_sa","name":"Bridge Building S.A.","organization_type":"issuer","jurisdiction":"Luxembourg","official_url":"https://www.bridge.xyz/","status":"active","notes":"Luxembourg electronic-money institution identified by Revolut as issuer of EURR and supervised by the CSSF."}
+]
