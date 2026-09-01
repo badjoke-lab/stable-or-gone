@@ -1,7 +1,3 @@
 [
-  {"id":"sog_ev_usdkg_launch_20251120","title":"USDKG launches with first 50 million token issuance","subject_stablecoin_ids":["sog_st_usdkg"],"subject_organization_ids":["sog_issuer_ojsc_virtual_asset_issuer"],"evidence_ids":["sog_src_usdkg_launch_20251120"],"event_detail_kind":"launch"},
-  {"id":"sog_ev_eurau_launch_20250731","title":"AllUnity launches EURAU","subject_stablecoin_ids":["sog_st_eurau"],"subject_organization_ids":["sog_issuer_allunity"],"evidence_ids":["sog_src_eurau_allunity_launch_20250731"],"event_detail_kind":"launch"},
-  {"id":"sog_ev_euri_launch_20240826","title":"Banking Circle launches EURI","subject_stablecoin_ids":["sog_st_euri"],"subject_organization_ids":["sog_issuer_banking_circle_sa"],"evidence_ids":["sog_src_euri_banking_circle_launch_20240826"],"event_detail_kind":"launch"},
-  {"id":"sog_ev_eurq_launch_20241118","title":"Quantoz begins issuing EURQ","subject_stablecoin_ids":["sog_st_eurq"],"subject_organization_ids":["sog_issuer_quantoz_payments"],"evidence_ids":["sog_src_eurq_usdq_quantoz_launch_20241118"],"event_detail_kind":"launch"},
-  {"id":"sog_ev_usdq_launch_20241118","title":"Quantoz begins issuing USDQ","subject_stablecoin_ids":["sog_st_usdq"],"subject_organization_ids":["sog_issuer_quantoz_payments"],"evidence_ids":["sog_src_eurq_usdq_quantoz_launch_20241118"],"event_detail_kind":"launch"}
+  {"id":"sog_ev_usdkg_launch_20251120","title":"USDKG launches with first 50 million token issuance","subject_stablecoin_ids":["sog_st_usdkg"],"subject_organization_ids":["sog_issuer_ojsc_virtual_asset_issuer"],"evidence_ids":["sog_src_usdkg_launch_20251120"],"event_detail_kind":"launch"}
 ]
