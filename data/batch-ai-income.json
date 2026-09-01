@@ -1,7 +1,3 @@
 [
-  {"id":"sog_st_usdkg","availability":"none","source":"none","accrual":"none","rate":"none","related_asset_ids":[],"evidence_ids":["sog_src_usdkg_launch_20251120"],"notes":"No issuer-native holder yield is established for USDKG."},
-  {"id":"sog_st_eurau","availability":"none","source":"none","accrual":"none","rate":"none","related_asset_ids":[],"evidence_ids":["sog_src_eurau_allunity_launch_20250731"],"notes":"No issuer-native holder yield is established for EURAU."},
-  {"id":"sog_st_euri","availability":"none","source":"none","accrual":"none","rate":"none","related_asset_ids":[],"evidence_ids":["sog_src_euri_banking_circle_launch_20240826"],"notes":"No issuer-native holder yield is established for EURI."},
-  {"id":"sog_st_eurq","availability":"none","source":"none","accrual":"none","rate":"none","related_asset_ids":[],"evidence_ids":["sog_src_eurq_usdq_quantoz_launch_20241118"],"notes":"No issuer-native holder yield is established for EURQ."},
-  {"id":"sog_st_usdq","availability":"none","source":"none","accrual":"none","rate":"none","related_asset_ids":[],"evidence_ids":["sog_src_eurq_usdq_quantoz_launch_20241118"],"notes":"No issuer-native holder yield is established for USDQ."}
+  {"id":"sog_st_usdkg","availability":"none","source":"none","accrual":"none","rate":"none","related_asset_ids":[],"evidence_ids":["sog_src_usdkg_launch_20251120"],"notes":"No issuer-native holder yield is established for USDKG."}
 ]
