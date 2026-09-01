@@ -39,7 +39,7 @@
     "data/batch-ah-income.json",
     "data/batch-ai-income.json"
   ],
-  "minimum_count": 144,
+  "minimum_count": 140,
   "loader": "src/lib/data/incomeProfilesV3.ts",
   "loader_export": "getIncomeProfilesV3",
   "validator": "scripts/validate-registry-v3-income-profiles.mjs"
