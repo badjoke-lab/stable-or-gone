@@ -1,0 +1,40 @@
+name: Registry audits
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'data/**'
+      - 'scripts/**'
+      - 'src/**'
+      - 'package.json'
+      - '.github/workflows/registry-audits.yml'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Validate canonical data
+        run: npm run validate:data
+      - name: Validate classifications
+        run: npm run validate:classification
+      - name: Validate profiles
+        run: npm run validate:profiles
+      - name: Validate events
+        run: npm run validate:events-v2
+      - name: Validate evidence relations
+        run: npm run validate:evidence-relations-v2
+      - name: Validate integrity
+        run: npm run validate:integrity
+      - name: Validate release integrity
+        run: npm run validate:release-integrity
