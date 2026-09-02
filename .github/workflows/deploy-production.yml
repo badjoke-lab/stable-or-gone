@@ -1,0 +1,191 @@
+name: Deploy production
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: Type DEPLOY to run a manual fallback deployment
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: sog-production-deployment
+  cancel-in-progress: true
+
+env:
+  SOG_BASE_URL: https://www.stableorgone.com
+
+jobs:
+  deploy:
+    name: Build, deploy, and verify production
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Validate trigger
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          CONFIRM: ${{ inputs.confirm }}
+        run: |
+          if [ "$GITHUB_REF_NAME" != "main" ]; then
+            echo "Production deployment must use main." >&2
+            exit 1
+          fi
+          if [ "$EVENT_NAME" = "workflow_dispatch" ] && [ "$CONFIRM" != "DEPLOY" ]; then
+            echo "Manual fallback deployment requires confirm=DEPLOY." >&2
+            exit 1
+          fi
+
+      - name: Checkout deployed commit
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 1
+
+      - name: Record deterministic source context
+        id: source
+        shell: bash
+        run: |
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+          echo "timestamp=$(git show -s --format=%cI HEAD)" >> "$GITHUB_OUTPUT"
+          echo "epoch=$(git show -s --format=%ct HEAD)" >> "$GITHUB_OUTPUT"
+
+      - name: Report deployment start
+        uses: actions/github-script@v7
+        env:
+          SOURCE_SHA: ${{ steps.source.outputs.sha }}
+          EVENT_NAME: ${{ github.event_name }}
+        with:
+          script: |
+            const runUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: 479,
+              body: `Production deployment started.\n\n- Source commit: \`${process.env.SOURCE_SHA}\`\n- Trigger: \`${process.env.EVENT_NAME}\`\n- Public origin: \`${process.env.SOG_BASE_URL || 'https://www.stableorgone.com'}\`\n- Run: ${runUrl}`
+            });
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Validate guide publication metadata
+        run: npm run validate:guides
+
+      - name: Validate official public origin
+        run: npm run validate:public-origin
+
+      - name: Build publishable site
+        env:
+          SOG_BUILD_COMMIT: ${{ steps.source.outputs.sha }}
+          SOG_BUILD_BRANCH: main
+          SOG_BUILD_TIMESTAMP: ${{ steps.source.outputs.timestamp }}
+          SOURCE_DATE_EPOCH: ${{ steps.source.outputs.epoch }}
+          PUBLIC_GA_MEASUREMENT_ID: G-L27LGVRN22
+        run: npm run build
+
+      - name: Verify GA4 static-build output
+        id: ga4
+        env:
+          PUBLIC_GA_MEASUREMENT_ID: G-L27LGVRN22
+        run: |
+          node scripts/verify-ga4-build-output.mjs
+          if [ -n "$PUBLIC_GA_MEASUREMENT_ID" ]; then
+            echo "configured=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "configured=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Upload prebuilt site to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: >-
+            pages deploy dist
+            --project-name stable-or-gone
+            --branch main
+            --commit-hash ${{ steps.source.outputs.sha }}
+            --commit-message "Automatic main publication"
+
+      - name: Verify deployed production
+        shell: bash
+        env:
+          SOG_EXPECTED_COMMIT: ${{ steps.source.outputs.sha }}
+          SOG_SMOKE_ATTEMPTS: '5'
+          SOG_SMOKE_DELAY_MS: '10000'
+        run: |
+          set -o pipefail
+          npm run check:production 2>&1 | tee production-smoke.log
+          node scripts/check-production-stablecoin-record-json.mjs 2>&1 | tee -a production-smoke.log
+          node scripts/check-production-phase3-surfaces.mjs 2>&1 | tee -a production-smoke.log
+
+      - name: Verify UK guide publication
+        run: |
+          for attempt in $(seq 1 5); do
+            GUIDES_HTML="$(curl -fsS "$SOG_BASE_URL/guides/" || true)"
+            ARTICLE_HTML="$(curl -fsS "$SOG_BASE_URL/guides/uk-stablecoin-capital-rules-2026/" || true)"
+            if printf '%s' "$GUIDES_HTML" | grep -q 'uk-stablecoin-capital-rules-2026' \
+              && printf '%s' "$ARTICLE_HTML" | grep -q 'Capital Does Not Mean 1% Backing'; then
+              echo "UK guide publication verified."
+              exit 0
+            fi
+            sleep 10
+          done
+          echo "UK guide publication did not converge in time." >&2
+          exit 1
+
+      - name: Write deployment summary
+        env:
+          SOURCE_SHA: ${{ steps.source.outputs.sha }}
+          EVENT_NAME: ${{ github.event_name }}
+          GA4_CONFIGURED: ${{ steps.ga4.outputs.configured }}
+        run: |
+          echo "## Production deployment complete" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Trigger: $EVENT_NAME" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Source commit: $SOURCE_SHA" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Pages project: stable-or-gone" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Public origin: $SOG_BASE_URL/" >> "$GITHUB_STEP_SUMMARY"
+          if [ "$GA4_CONFIGURED" = "true" ]; then
+            echo "- GA4 static-build injection: configured and verified" >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "- GA4 static-build injection: not configured in the production environment" >> "$GITHUB_STEP_SUMMARY"
+          fi
+          echo "- Stablecoin record JSON verification: passed for all canonical records" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Phase 3 cross-surface verification: passed" >> "$GITHUB_STEP_SUMMARY"
+          echo "- UK guide publication: passed" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Report deployment result
+        if: always()
+        uses: actions/github-script@v7
+        env:
+          SOURCE_SHA: ${{ steps.source.outputs.sha || github.sha }}
+          EVENT_NAME: ${{ github.event_name }}
+          JOB_STATUS: ${{ job.status }}
+        with:
+          script: |
+            const fs = require('fs');
+            const runUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            let diagnostic = '';
+            if (fs.existsSync('production-smoke.log')) {
+              const lines = fs.readFileSync('production-smoke.log', 'utf8').trim().split(/\r?\n/);
+              diagnostic = lines.slice(-12).join('\n').slice(-3000);
+            }
+            const diagnosticBlock = diagnostic ? `\n\n### Production smoke tail\n\n\`\`\`text\n${diagnostic}\n\`\`\`` : '';
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: 479,
+              body: `Production deployment finished.\n\n- Result: **${process.env.JOB_STATUS}**\n- Source commit: \`${process.env.SOURCE_SHA}\`\n- Trigger: \`${process.env.EVENT_NAME}\`\n- Public origin: \`${process.env.SOG_BASE_URL || 'https://www.stableorgone.com'}\`\n- Run: ${runUrl}${diagnosticBlock}`
+            });
