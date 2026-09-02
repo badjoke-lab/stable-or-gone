@@ -1,0 +1,34 @@
+name: Visual audit
+
+on:
+  workflow_dispatch:
+
+jobs:
+  visual:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Install Playwright browser
+        run: npx playwright install --with-deps chromium
+      - name: Build site
+        run: npm run build:site
+      - name: Capture representative screenshots
+        run: npm run screenshot:all
+      - name: Audit representative visuals
+        run: npm run audit:visual-representatives
+      - name: Validate visual system mocks
+        run: npm run validate:visual-system-mocks
+      - name: Upload visual artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: visual-audit-${{ github.run_id }}
+          if-no-files-found: ignore
+          path: |
+            artifacts/**
+            screenshots/**
