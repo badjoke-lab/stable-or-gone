@@ -1,0 +1,71 @@
+{
+  "schema_version": "1.0",
+  "batch_id": "batch_039",
+  "base_canonical_count": 140,
+  "reviewed_at": "2026-09-02",
+  "policy": {
+    "reject_canonical_duplicates": true,
+    "do_not_promote_planned_not_launched": true,
+    "primary_source_required_before_promotion": true,
+    "deployment_only_changes_are_not_new_stable_assets": true,
+    "unknowns_not_inferred": true
+  },
+  "summary": {
+    "total": 8,
+    "advance_primary_review": 1,
+    "needs_additional_review": 1,
+    "hold_not_launched": 6,
+    "reject_canonical_duplicate": 0,
+    "reject_deployment_only": 0
+  },
+  "candidates": [
+    {
+      "name": "Decibel usDCBL",
+      "symbol": "usDCBL",
+      "disposition": "advance_primary_review",
+      "reason": "Decibel's May 2026 mainnet update states that its economic model is now live with usDCBL; current Decibel terms identify Bridge as issuer. This supersedes batch 038's earlier hold, which was based on the February launch note saying integration would occur in coming weeks. Full-layer review must still bound issuer affiliate, reserve composition, redemption, legal claim and exact token identity."
+    },
+    {
+      "name": "Gaia GUSD",
+      "symbol": "GUSD",
+      "disposition": "needs_additional_review",
+      "reason": "Existing reviewed candidate. Launch announcement establishes a distinct Bridge-powered Gaia stablecoin identity, but issuer legal entity and exact live deployment remain unresolved in reviewed primary material."
+    },
+    {
+      "name": "XrymaCoin",
+      "symbol": "XREUR",
+      "disposition": "hold_not_launched",
+      "reason": "Issuer announcement schedules circulation for 2026-09-03. As of the 2026-09-02 review date it is not yet eligible for canonical promotion."
+    },
+    {
+      "name": "HSBC Hong Kong dollar stablecoin",
+      "symbol": null,
+      "disposition": "hold_not_launched",
+      "reason": "HSBC still describes the asset as planned for the second half of 2026; reviewed HSBC material does not establish issuance as of 2026-09-02."
+    },
+    {
+      "name": "Open USD",
+      "symbol": "USDO",
+      "disposition": "hold_not_launched",
+      "reason": "Open Standard launch material continues to state that Open USD will go live later in 2026 rather than establishing live issuance."
+    },
+    {
+      "name": "GELT",
+      "symbol": "GELT",
+      "disposition": "hold_not_launched",
+      "reason": "Tether and Georgia announced plans to launch GELT, but reviewed material still does not establish live issuance."
+    },
+    {
+      "name": "Qivalis euro stablecoin",
+      "symbol": null,
+      "disposition": "hold_not_launched",
+      "reason": "Qivalis continues to target launch in the second half of 2026; reviewed material does not establish a live issued token."
+    },
+    {
+      "name": "Global bank consortium USD stablecoin",
+      "symbol": null,
+      "disposition": "hold_not_launched",
+      "reason": "The consortium announced in September 2026 targets first-half 2027 issuance, so it is research-only and outside the current canonical promotion boundary."
+    }
+  ]
+}
