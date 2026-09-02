@@ -1,0 +1,30 @@
+name: Statistics
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'data/**'
+      - 'scripts/build-stats.mjs'
+      - 'scripts/validate-stats.mjs'
+      - 'scripts/validate-stats-history.mjs'
+      - '.github/workflows/stats.yml'
+
+jobs:
+  stats:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Generate deterministic statistics
+        run: node scripts/build-stats.mjs
+      - name: Validate deterministic statistics
+        run: SOG_STATS_VALIDATE_OUTPUT=artifacts/stats-current.json node scripts/validate-stats.mjs
+      - name: Validate statistics history
+        run: node scripts/validate-stats-history.mjs
