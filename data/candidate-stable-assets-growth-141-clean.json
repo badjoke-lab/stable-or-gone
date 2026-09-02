@@ -1,0 +1,18 @@
+[
+  {
+    "candidate_id": "sog_cand_000142",
+    "proposed_record_id": "sog_st_usdcbl",
+    "slug": "decibel-usdcbl",
+    "name": "Decibel usDCBL",
+    "symbol": "usDCBL",
+    "aliases": ["Decibel usDCBL", "usDCBL", "USDCBL"],
+    "candidate_type": "stablecoin",
+    "asset_class": "stablecoin",
+    "reference_kind": "fiat",
+    "reference_label": "USD",
+    "priority": "P0",
+    "status": "reviewed_candidate",
+    "target_batch": "batch_039",
+    "notes": "Decibel primary materials now establish that the protocol-native usDCBL economic model is live on mainnet. Decibel identifies Bridge as issuer and describes usDCBL as a USD-denominated stablecoin used inside the protocol; exact reserve composition, holder redemption rights, legal claim, contract identity and issuer affiliate must remain source-bounded during full-layer promotion."
+  }
+]
