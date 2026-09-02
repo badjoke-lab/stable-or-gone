@@ -1,0 +1,3 @@
+[
+  {"id":"sog_ku_usdkg_redemption_claim_custody_controls_20260901","stablecoin_id":"sog_st_usdkg","issuer_id":"sog_issuer_ojsc_virtual_asset_issuer","topic":"issuer_redemption_holder_claim_gold_custody_current_reserve_valuation_and_contract_controls","description":"USDKG official material establishes launch, state-owned issuer, physical-gold backing and TRON availability, but exact direct redemption mechanics, holder legal claim, current reserve valuation/custody structure, contract address and administrative controls remain unresolved.","severity":"medium","last_checked_at":"2026-09-01","notes":"Do not infer universal redemption or current gold quantity from launch-period reserve facts."}
+]

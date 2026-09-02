@@ -75,9 +75,9 @@
     "reference_kind": "fiat",
     "reference_label": "USD",
     "priority": "P0",
-    "status": "reviewed_candidate",
-    "target_batch": "batch_037",
-    "notes": "USDKG official site and OSL listing source reviewed; physical-gold backing and institutional redemption are described, but exact authorized issuing legal entity is still unresolved and will not be guessed."
+    "status": "promoted",
+    "target_batch": "batch_038",
+    "notes": "Promoted to canonical in batch 038 with OJSC Virtual Asset Issuer as the source-bounded issuer, physical-gold backing, launch evidence and TRON availability; unresolved details remain explicit unknowns."
   },
   {
     "candidate_id": "sog_cand_000135",

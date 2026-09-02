@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0",
+  "batch_id": "batch_038",
+  "base_canonical_count": 139,
+  "reviewed_at": "2026-09-01",
+  "policy": {
+    "reject_canonical_duplicates": true,
+    "do_not_promote_planned_not_launched": true,
+    "primary_source_required_before_promotion": true,
+    "deployment_only_changes_are_not_new_stable_assets": true,
+    "unknowns_not_inferred": true
+  },
+  "summary": {
+    "total": 20,
+    "advance_primary_review": 1,
+    "needs_additional_review": 1,
+    "hold_not_launched": 7,
+    "reject_canonical_duplicate": 9,
+    "reject_deployment_only": 2
+  },
+  "candidates": [
+    {"name":"USDKG","symbol":"USDKG","disposition":"advance_primary_review","reason":"USDKG public materials describe a live gold-backed USD stablecoin and OSL HK announced an official May 2026 listing. Exact issuing legal entity remains bounded for full-layer review."},
+    {"name":"EURAU","symbol":"EURAU","disposition":"reject_canonical_duplicate","reason":"Canonical re-audit during batch 038 review found an existing EURAU record. Do not promote a second stable-asset identity."},
+    {"name":"Eurite","symbol":"EURI","disposition":"reject_canonical_duplicate","reason":"Canonical re-audit during batch 038 review found an existing EURI record. Do not promote a second stable-asset identity."},
+    {"name":"EURQ","symbol":"EURQ","disposition":"reject_canonical_duplicate","reason":"Canonical re-audit during batch 038 review found an existing EURQ record. Do not promote a second stable-asset identity."},
+    {"name":"USDQ","symbol":"USDQ","disposition":"reject_canonical_duplicate","reason":"Canonical re-audit during batch 038 review found an existing USDQ record. Do not promote a second stable-asset identity."},
+    {"name":"Gaia GUSD","symbol":"GUSD","disposition":"needs_additional_review","reason":"Gaia announced GUSD with Bridge, but the same release says stablecoin capabilities would launch in select markets in Q2 2026. Exact legal issuer and identity distinction from Gemini Dollar remain unresolved."},
+    {"name":"Decibel USDCBL","symbol":"USDCBL","disposition":"hold_not_launched","reason":"Decibel mainnet launched on 2026-02-26, but its own announcement said the protocol-native stablecoin design would be integrated in the coming weeks; reviewed material does not yet establish live USDCBL issuance."},
+    {"name":"Open USD","symbol":"USDO","disposition":"hold_not_launched","reason":"OnePay/Open Standard announced Open USD on 2026-06-30 but explicitly states it will be live later in 2026."},
+    {"name":"GELT","symbol":"GELT","disposition":"hold_not_launched","reason":"Tether announced plans to launch GELT; National Bank of Georgia reporting showed registration still under review and issuance dependent on approval."},
+    {"name":"Revolut additional currency stablecoins","symbol":null,"disposition":"hold_not_launched","reason":"Revolut states additional currency-denominated stablecoins are in development, but no distinct launched asset is established."},
+    {"name":"Boundary USBD","symbol":"USBD","disposition":"hold_not_launched","reason":"Reviewed material describes financing and intended launch rather than established live issuance."},
+    {"name":"Qivalis euro stablecoin","symbol":null,"disposition":"hold_not_launched","reason":"Qivalis states first issuance is planned for the second half of 2026; no live distinct asset is established in the reviewed source."},
+    {"name":"EDGE native USDC","symbol":"USDC","disposition":"hold_not_launched","reason":"Circle material describes native USDC as coming soon to EDGE Chain; if launched it belongs to existing-USDC deployment history unless a distinct asset identity emerges."},
+    {"name":"Aleo USDCx","symbol":"USDCx","disposition":"reject_canonical_duplicate","reason":"Already canonical in batch 037."},
+    {"name":"SoFiUSD","symbol":"SoFiUSD","disposition":"reject_canonical_duplicate","reason":"Already canonical; later consumer rollout belongs to lifecycle/access history rather than a new stable asset."},
+    {"name":"Fidelity Digital Dollar","symbol":"FIDD","disposition":"reject_canonical_duplicate","reason":"Already canonical in batch 035."},
+    {"name":"Falcon fUSD","symbol":"fUSD","disposition":"reject_canonical_duplicate","reason":"Already canonical in batch 035."},
+    {"name":"Brale SBC","symbol":"SBC","disposition":"reject_canonical_duplicate","reason":"Already canonical in batch 036; additional use cases or chains belong to deployment/history layers."},
+    {"name":"USDC on Plasma","symbol":"USDC","disposition":"reject_deployment_only","reason":"Circle confirms USDC support on Plasma; this is a deployment of existing USDC, not a distinct stable-asset identity."},
+    {"name":"EURC on Plasma","symbol":"EURC","disposition":"reject_deployment_only","reason":"Circle confirms EURC support on Plasma; this is a deployment of existing EURC, not a distinct stable-asset identity."}
+  ]
+}

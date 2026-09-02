@@ -4,7 +4,7 @@
   "source_manifest": "docs/migration/registry-v2-baseline.json",
   "source_group": "deployments",
   "canonicality_default": "unknown",
-  "minimum_count": 201,
+  "minimum_count": 202,
   "loader": "src/lib/data/registryV3.ts",
   "loader_export": "getDeploymentsV3",
   "validator": "scripts/validate-registry-v3-deployments.mjs"

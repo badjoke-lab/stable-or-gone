@@ -1,0 +1,3 @@
+[
+  {"id":"sog_rc_usdkg_physical_gold_20251120","stablecoin_id":"sog_st_usdkg","reserve_report_id":null,"asset_category":"commodity","asset_label":"Physical gold reserves backing USDKG","share_percent":100,"amount_text":"First issuance described as backed by physical gold reserves; exact current reserve amount changes over time.","currency":"USD","liquidity_class":"medium","maturity_bucket":"not_applicable","custodian_organization_id":null,"as_of_date":"2025-11-20","confidence":"high","evidence_ids":["sog_src_usdkg_launch_20251120"],"notes":"USDKG official material describes 1:1 dollar peg backed by physical gold. Current reserve valuation and custodian details are not inferred here."}
+]
