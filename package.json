@@ -10,7 +10,7 @@
     "preview": "astro preview",
     "check": "astro check",
     "monitor:review": "node scripts/monitoring/run.mjs",
-    "validate:monitoring": "node scripts/validate-monitoring-pipeline-pr230.mjs",
+    "validate:monitoring": "node scripts/validate-monitoring-pipeline.mjs",
     "generate:provenance": "node scripts/generate-build-provenance.mjs",
     "generate:public-taxonomy-values": "node scripts/collect-public-taxonomy-values.mjs",
     "generate:public-taxonomy": "node scripts/generate-public-taxonomy-registry.mjs",
