@@ -11,8 +11,8 @@
     "reference_kind": "fiat",
     "reference_label": "USD",
     "priority": "P0",
-    "status": "reviewed_candidate",
+    "status": "promoted",
     "target_batch": "batch_039",
-    "notes": "Decibel primary materials now establish that the protocol-native usDCBL economic model is live on mainnet. Decibel identifies Bridge as issuer and describes usDCBL as a USD-denominated stablecoin used inside the protocol; exact reserve composition, holder redemption rights, legal claim, contract identity and issuer affiliate must remain source-bounded during full-layer promotion."
+    "notes": "Promoted in batch 039 after Decibel primary material confirmed usDCBL is live; Bridge issuer, protocol-only availability, no-secondary-market limitation, reserve structure and redemption boundary are source-bounded, while exact token contract identity and affiliate-specific issuance remain explicit unknowns."
   }
 ]

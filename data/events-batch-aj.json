@@ -1,0 +1,3 @@
+[
+  {"id":"sog_ev_usdcbl_live_20260513","stablecoin_id":"sog_st_usdcbl","issuer_id":"sog_issuer_bridge","event_type":"launch","event_date":"2026-05-13","title":"Decibel confirms usDCBL is live","description":"Decibel states that its economic model is now live with usDCBL and that usDCBL is live as part of the protocol-native stablecoin design.","impact_level":"medium","confidence":"high","source_count":3,"event_status_effect":"active","notes":"The February mainnet launch described usDCBL as coming in the following weeks; the May update supersedes that hold by explicitly confirming live status."}
+]

@@ -1,6 +1,6 @@
 {
   "schema_version": "2.0",
-  "status": "batch_039_candidate_intake",
+  "status": "batch_039_canonical_promotion",
   "candidate_files": [
     "data/candidate-stable-assets.json",
     "data/candidate-stable-assets-growth-70.json",
@@ -25,7 +25,7 @@
     "data/candidate-stable-assets-growth-140-clean.json",
     "data/candidate-stable-assets-growth-141-clean.json"
   ],
-  "protected_minimums": {"total_candidates":142,"promoted_candidates":140,"pending_candidates":2},
+  "protected_minimums": {"total_candidates":142,"promoted_candidates":141,"pending_candidates":1},
   "planned_batches": {
     "batch_006":{"minimum_candidates":5,"theme":"current USD and regulated assets"},
     "batch_007":{"minimum_candidates":5,"theme":"protocol stablecoins"},
@@ -60,6 +60,6 @@
     "batch_036":{"minimum_candidates":5,"target_candidates":10,"prescreen_pool_target":20,"theme":"SBC, Movement USDCx, USDU, litUSD and MetaMask mUSD first full-layer tranche; Gaia GUSD and USDKG remain reviewed candidates pending issuer-boundary resolution"},
     "batch_037":{"minimum_candidates":5,"target_candidates":10,"prescreen_pool_target":20,"theme":"Cardano, Canton, Stacks and Aleo USDCx plus Revolut EURR full-layer promotion; Gaia GUSD and USDKG remain pending issuer-boundary review"},
     "batch_038":{"minimum_candidates":1,"target_candidates":1,"prescreen_pool_target":20,"theme":"USDKG full-layer promotion; EURAU, EURI, EURQ and USDQ rejected after canonical duplicate detection; Open USD, GELT and Decibel USDCBL held until live-launch evidence"},
-    "batch_039":{"minimum_candidates":1,"target_candidates":1,"prescreen_pool_target":8,"theme":"Decibel usDCBL full-layer review after live-mainnet evidence superseded the batch 038 hold; Gaia GUSD remains under issuer/deployment review; XREUR, HSBC HKD, Open USD, GELT, Qivalis and the 2027 global bank consortium remain pre-launch holds"}
+    "batch_039":{"minimum_candidates":1,"target_candidates":1,"prescreen_pool_target":8,"theme":"Decibel usDCBL full-layer canonical promotion after live-mainnet evidence superseded the batch 038 hold; existing Bridge organization reused; Gaia GUSD remains the pending reviewed candidate"}
   }
 }

@@ -1,0 +1,3 @@
+[
+  {"id":"sog_rel_usdcbl_bridge_20260513","stablecoin_id":"sog_st_usdcbl","organization_id":"sog_issuer_bridge","role":"legal_issuer","start_date":"2026-05-13","end_date":null,"status":"active","evidence_ids":["sog_src_usdcbl_live_20260513","sog_src_usdcbl_terms_20260903"],"notes":"Decibel official materials identify usDCBL as issued by Bridge. The existing canonical Bridge organization is reused; current Terms name Bridge Building Inc. and/or affiliates including Bridge Ventures LLC."}
+]

@@ -1,3 +1,4 @@
+import './batchAjRuntime';
 import batchA from '../../../data/income-profiles-v3-a.json';
 import batchB from '../../../data/income-profiles-v3-b.json';
 import batchC from '../../../data/income-profiles-v3-c.json';

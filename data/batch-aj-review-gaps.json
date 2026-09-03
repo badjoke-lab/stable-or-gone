@@ -1,0 +1,3 @@
+[
+  {"id":"sog_st_usdcbl","unknowns":[{"field":"contract_identity","status":"unknown","notes":"Exact onchain token contract identity is not established in the reviewed primary sources."},{"field":"bridge_affiliate_boundary","status":"unknown","notes":"Current Decibel Terms name Bridge Building Inc. and/or affiliates including Bridge Ventures LLC collectively; affiliate-specific issuance allocation is not inferred."},{"field":"direct_redemption_eligibility","status":"unknown","notes":"Direct redemption exists only to the extent a user is eligible under Bridge Stablecoin Terms; universal holder redemption is not established."}],"evidence_ids":["sog_src_usdcbl_live_20260513","sog_src_usdcbl_terms_20260903"]}
+]

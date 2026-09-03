@@ -1,3 +1,4 @@
+import './batchAjRuntime';
 import profileData from '../../../data/stablecoin-profiles-v2.json';
 import profileBatchAData from '../../../data/stablecoin-profiles-batch-a.json';
 import profileBatchBData from '../../../data/stablecoin-profiles-batch-b.json';
