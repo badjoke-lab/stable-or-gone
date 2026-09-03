@@ -1,210 +1,22 @@
 import fs from 'node:fs';
-import path from 'node:path';
 
-const root = process.cwd();
-const failures = [];
-const baseline = readJson('docs/migration/registry-v2-baseline.json') ?? {};
-const foundation = readJson('docs/migration/registry-v3-foundation.json') ?? {};
-
-const legalClassifications = new Set(['fiat_backed_stablecoin','e_money_token','asset_referenced_token','tokenized_deposit','bank_liability_token','fund_share','security_token','commodity_claim','protocol_asset','unclassified','unknown']);
-const holderClaimTypes = new Set(['direct_claim_on_issuer','direct_claim_on_bank','beneficial_interest_in_reserve','fund_share_claim','commodity_ownership_or_claim','protocol_redemption_right','contractual_conversion_right','no_direct_claim','unclear','unknown']);
-const reserveOwnershipTypes = new Set(['issuer_owned','issuer_owned_for_holders','trust_or_custodial','fund_owned','protocol_controlled','holder_owned','mixed','unclear','unknown']);
-const reserveSegregationTypes = new Set(['legally_segregated','stated_segregated','operationally_separate','not_segregated','not_applicable','unclear','unknown']);
-const bankruptcyRemotenessTypes = new Set(['confirmed','stated','limited','not_established','not_applicable','unclear','unknown']);
-const relationshipTypes = new Set(['predecessor_of','successor_of','rebranded_as','migrated_to','wrapper_of','yield_wrapper_of','receipt_for','bridged_representation_of','redeemable_into','collateralized_by','basket_contains','fork_of','other','unknown']);
-const relationshipStatuses = new Set(['active','ended','planned','unknown']);
-const reserveCategories = new Set(['cash','cash_equivalents','bank_deposits','government_securities','commercial_paper','corporate_bonds','private_credit','receivables','secured_loans','crypto_collateral','stablecoin_collateral','tokenized_fund','fund_share','commodity','insurance_or_guarantee','other','unknown']);
-const liquidityClasses = new Set(['high','medium','low','illiquid','not_applicable','unknown']);
-const maturityBuckets = new Set(['on_demand','under_30_days','under_90_days','under_1_year','over_1_year','perpetual','not_applicable','unknown']);
-const deploymentCanonicalities = new Set(['native','issuer_native','canonical_bridge','third_party_bridge','wrapped','synthetic','legacy','unknown']);
-
-function absolute(relativePath) {
-  return path.join(root, relativePath);
-}
-
-function readJson(relativePath) {
-  try {
-    return JSON.parse(fs.readFileSync(absolute(relativePath), 'utf8'));
-  } catch (error) {
-    failures.push(`${relativePath}: ${error.message}`);
-    return null;
+const basePath = new URL('./validate-registry-v3-foundation-core.mjs', import.meta.url);
+const original = fs.readFileSync(basePath, 'utf8');
+const anchor = "const baseline = readJson('docs/migration/registry-v2-baseline.json') ?? {};";
+if (!original.includes(anchor)) throw new Error('Registry v3 foundation baseline patch anchor is missing');
+const replacement = `
+const baselineBase = readJson('docs/migration/registry-v2-baseline.json') ?? {};
+const baselineGroups = { ...baselineBase.data_groups };
+const overlayFiles = fs.readdirSync(absolute('docs/migration'))
+  .filter((name) => /^registry-v2-baseline-batch-[a-z]+\\.json$/i.test(name))
+  .sort();
+for (const name of overlayFiles) {
+  const overlayPath = \`docs/migration/\${name}\`;
+  const overlay = readJson(overlayPath) ?? {};
+  for (const [groupName, additions] of Object.entries(overlay.data_group_additions ?? {})) {
+    baselineGroups[groupName] = [...new Set([...(baselineGroups[groupName] ?? []), ...additions])];
   }
 }
-
-function filesForGroup(name) {
-  return [
-    ...(baseline.data_groups?.[name] ?? []),
-    ...(foundation.data_groups?.[name] ?? [])
-  ];
-}
-
-function group(name) {
-  const rows = [];
-  const seenFiles = new Set();
-  for (const file of filesForGroup(name)) {
-    if (seenFiles.has(file)) {
-      failures.push(`${name}: duplicate data-group path ${file}`);
-      continue;
-    }
-    seenFiles.add(file);
-    const value = readJson(file);
-    if (!Array.isArray(value)) {
-      failures.push(`${file}: expected a JSON array`);
-      continue;
-    }
-    rows.push(...value.map((row) => ({ ...row, __source_file: file })));
-  }
-  return rows;
-}
-
-function label(row) {
-  return `${row.__source_file ?? 'unknown'}: ${row.id ?? 'unknown'}`;
-}
-
-function requiredString(row, field) {
-  if (typeof row[field] !== 'string' || row[field].length === 0) failures.push(`${label(row)} ${field} must be a non-empty string`);
-}
-
-function optionalString(row, field) {
-  const value = row[field];
-  if (value !== undefined && value !== null && typeof value !== 'string') failures.push(`${label(row)} ${field} must be a string or null`);
-}
-
-function stringArray(row, field, { required = true } = {}) {
-  const value = row[field];
-  if (value === undefined && !required) return;
-  if (!Array.isArray(value) || value.some((item) => typeof item !== 'string')) failures.push(`${label(row)} ${field} must be a string array`);
-}
-
-function references(row, field, known, options) {
-  stringArray(row, field, options);
-  for (const id of row[field] ?? []) if (!known.has(id)) failures.push(`${label(row)} ${field} references missing ID ${id}`);
-}
-
-function date(value, fieldLabel) {
-  if (value !== undefined && value !== null && value !== '' && (typeof value !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(value))) failures.push(`${fieldLabel} must be YYYY-MM-DD or null`);
-}
-
-function dateRange(row, startField, endField) {
-  date(row[startField], `${label(row)} ${startField}`);
-  date(row[endField], `${label(row)} ${endField}`);
-  if (row[startField] && row[endField] && row[endField] < row[startField]) failures.push(`${label(row)} ${endField} precedes ${startField}`);
-}
-
-function uniqueIds(rows, groupName) {
-  const ids = new Set();
-  for (const row of rows) {
-    requiredString(row, 'id');
-    if (!row.id) continue;
-    if (ids.has(row.id)) failures.push(`${groupName}: duplicate id ${row.id}`);
-    ids.add(row.id);
-  }
-  return ids;
-}
-
-const stablecoins = group('stablecoins');
-const organizations = group('organizations');
-const evidence = group('evidence');
-const reserveReports = group('reserve_reports');
-const deployments = group('deployments');
-const legalProfiles = group('legal_profiles');
-const assetRelationships = group('stable_asset_relationships');
-const reserveComponents = group('reserve_components');
-
-const stablecoinIds = uniqueIds(stablecoins, 'stablecoins');
-const organizationIds = uniqueIds(organizations, 'organizations');
-const evidenceIds = uniqueIds(evidence, 'evidence');
-const reserveReportIds = uniqueIds(reserveReports, 'reserve_reports');
-const deploymentIds = uniqueIds(deployments, 'deployments');
-uniqueIds(legalProfiles, 'legal_profiles');
-uniqueIds(assetRelationships, 'stable_asset_relationships');
-uniqueIds(reserveComponents, 'reserve_components');
-
-for (const [name, minimum] of Object.entries(foundation.minimum_counts ?? {})) {
-  const actual = { legal_profiles: legalProfiles.length, stable_asset_relationships: assetRelationships.length, reserve_components: reserveComponents.length }[name];
-  if (typeof actual !== 'number') failures.push(`Registry v3 foundation count ${name}: no matching data group`);
-  else if (actual < minimum) failures.push(`Registry v3 foundation count ${name}: expected at least ${minimum}, found ${actual}`);
-}
-
-for (const row of legalProfiles) {
-  if (!stablecoinIds.has(row.id)) failures.push(`${label(row)} references missing stablecoin`);
-  if (!Array.isArray(row.classifications) || row.classifications.length === 0) failures.push(`${label(row)} classifications must be non-empty`);
-  for (const [index, entry] of (row.classifications ?? []).entries()) {
-    const entryLabel = `${label(row)} classifications[${index}]`;
-    if (!entry || typeof entry !== 'object' || Array.isArray(entry)) {
-      failures.push(`${entryLabel} must be an object`);
-      continue;
-    }
-    if (!legalClassifications.has(entry.classification)) failures.push(`${entryLabel} invalid classification ${entry.classification}`);
-    if (entry.jurisdiction !== undefined && entry.jurisdiction !== null && typeof entry.jurisdiction !== 'string') failures.push(`${entryLabel} jurisdiction must be a string or null`);
-    date(entry.effective_from, `${entryLabel} effective_from`);
-    date(entry.effective_to, `${entryLabel} effective_to`);
-    if (entry.effective_from && entry.effective_to && entry.effective_to < entry.effective_from) failures.push(`${entryLabel} effective_to precedes effective_from`);
-    if (!Array.isArray(entry.evidence_ids) || entry.evidence_ids.some((item) => typeof item !== 'string')) failures.push(`${entryLabel} evidence_ids must be a string array`);
-    for (const id of entry.evidence_ids ?? []) if (!evidenceIds.has(id)) failures.push(`${entryLabel} references missing evidence ${id}`);
-  }
-  if (!holderClaimTypes.has(row.holder_claim_type)) failures.push(`${label(row)} invalid holder_claim_type ${row.holder_claim_type}`);
-  if (!reserveOwnershipTypes.has(row.reserve_ownership)) failures.push(`${label(row)} invalid reserve_ownership ${row.reserve_ownership}`);
-  if (!reserveSegregationTypes.has(row.reserve_segregation)) failures.push(`${label(row)} invalid reserve_segregation ${row.reserve_segregation}`);
-  if (!bankruptcyRemotenessTypes.has(row.bankruptcy_remoteness)) failures.push(`${label(row)} invalid bankruptcy_remoteness ${row.bankruptcy_remoteness}`);
-  references(row, 'claim_against_organization_ids', organizationIds);
-  stringArray(row, 'licensed_or_regulated_as');
-  references(row, 'evidence_ids', evidenceIds);
-  optionalString(row, 'notes');
-}
-
-for (const row of assetRelationships) {
-  requiredString(row, 'from_asset_id');
-  requiredString(row, 'to_asset_id');
-  if (!stablecoinIds.has(row.from_asset_id)) failures.push(`${label(row)} missing from_asset_id ${row.from_asset_id}`);
-  if (!stablecoinIds.has(row.to_asset_id)) failures.push(`${label(row)} missing to_asset_id ${row.to_asset_id}`);
-  if (row.from_asset_id && row.from_asset_id === row.to_asset_id) failures.push(`${label(row)} self-referential asset relationship is not allowed`);
-  if (!relationshipTypes.has(row.relationship_type)) failures.push(`${label(row)} invalid relationship_type ${row.relationship_type}`);
-  if (!relationshipStatuses.has(row.status)) failures.push(`${label(row)} invalid status ${row.status}`);
-  dateRange(row, 'start_date', 'end_date');
-  references(row, 'evidence_ids', evidenceIds);
-  optionalString(row, 'conversion_terms');
-  optionalString(row, 'notes');
-}
-
-for (const row of reserveComponents) {
-  requiredString(row, 'stablecoin_id');
-  if (!stablecoinIds.has(row.stablecoin_id)) failures.push(`${label(row)} missing stablecoin ${row.stablecoin_id}`);
-  if (row.reserve_report_id && !reserveReportIds.has(row.reserve_report_id)) failures.push(`${label(row)} missing reserve report ${row.reserve_report_id}`);
-  if (!reserveCategories.has(row.asset_category)) failures.push(`${label(row)} invalid asset_category ${row.asset_category}`);
-  if (row.share_percent !== undefined && row.share_percent !== null && (typeof row.share_percent !== 'number' || row.share_percent < 0 || row.share_percent > 100)) failures.push(`${label(row)} share_percent must be between 0 and 100`);
-  if (row.liquidity_class !== undefined && !liquidityClasses.has(row.liquidity_class)) failures.push(`${label(row)} invalid liquidity_class ${row.liquidity_class}`);
-  if (row.maturity_bucket !== undefined && !maturityBuckets.has(row.maturity_bucket)) failures.push(`${label(row)} invalid maturity_bucket ${row.maturity_bucket}`);
-  if (row.custodian_organization_id && !organizationIds.has(row.custodian_organization_id)) failures.push(`${label(row)} missing custodian organization ${row.custodian_organization_id}`);
-  date(row.as_of_date, `${label(row)} as_of_date`);
-  references(row, 'evidence_ids', evidenceIds);
-  optionalString(row, 'asset_label');
-  optionalString(row, 'amount_text');
-  optionalString(row, 'currency');
-  optionalString(row, 'notes');
-}
-
-const primaryDeploymentByStablecoin = new Map();
-for (const row of deployments) {
-  if (row.canonicality !== undefined && !deploymentCanonicalities.has(row.canonicality)) failures.push(`${label(row)} invalid canonicality ${row.canonicality}`);
-  if (row.origin_deployment_id) {
-    if (!deploymentIds.has(row.origin_deployment_id)) failures.push(`${label(row)} missing origin_deployment_id ${row.origin_deployment_id}`);
-    if (row.origin_deployment_id === row.id) failures.push(`${label(row)} origin_deployment_id cannot reference itself`);
-  }
-  if (row.bridge_operator_organization_id && !organizationIds.has(row.bridge_operator_organization_id)) failures.push(`${label(row)} missing bridge operator ${row.bridge_operator_organization_id}`);
-  if (row.is_primary !== undefined && typeof row.is_primary !== 'boolean') failures.push(`${label(row)} is_primary must be boolean`);
-  if (row.is_primary === true) {
-    if (primaryDeploymentByStablecoin.has(row.stablecoin_id)) failures.push(`${label(row)} duplicates primary deployment for ${row.stablecoin_id}`);
-    primaryDeploymentByStablecoin.set(row.stablecoin_id, row.id);
-  }
-  optionalString(row, 'mint_authority_type');
-  optionalString(row, 'contract_version');
-}
-
-if (failures.length) {
-  console.error('Registry v3 foundation validation failed:');
-  failures.forEach((failure) => console.error(`- ${failure}`));
-  process.exit(1);
-}
-
-console.log(`Registry v3 foundation validation passed: ${legalProfiles.length} legal profiles, ${assetRelationships.length} asset relationships, ${reserveComponents.length} reserve components, ${deployments.length} deployments checked.`);
+const baseline = { ...baselineBase, data_groups: baselineGroups };
+`;
+await import(`data:text/javascript;base64,${Buffer.from(original.replace(anchor, replacement)).toString('base64')}`);
