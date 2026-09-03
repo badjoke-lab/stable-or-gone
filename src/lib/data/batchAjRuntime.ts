@@ -8,9 +8,6 @@ import evidenceBatchACData from '../../../data/evidence-batch-ac.json';
 import knownUnknownsBatchACData from '../../../data/batch-ac-review-gaps.json';
 import deploymentsBatchACData from '../../../data/batch-ac-deployments.json';
 import reserveProfilesBatchACData from '../../../data/batch-ac-reserve-redemption.json';
-import legalProfilesBatchAIData from '../../../data/ai-legal.json';
-import reserveComponentsBatchAIData from '../../../data/batch-ai-components.json';
-import incomeProfilesBatchAIData from '../../../data/batch-ai-income.json';
 
 import stablecoinsBatchAJData from '../../../data/stablecoins-batch-aj.json';
 import stablecoinClassificationBatchAJData from '../../../data/stablecoin-classification-batch-aj.json';
@@ -22,9 +19,6 @@ import evidenceBatchAJData from '../../../data/evidence-batch-aj.json';
 import knownUnknownsBatchAJData from '../../../data/batch-aj-review-gaps.json';
 import deploymentsBatchAJData from '../../../data/batch-aj-deployments.json';
 import reserveProfilesBatchAJData from '../../../data/batch-aj-reserve-redemption.json';
-import legalProfilesBatchAJData from '../../../data/aj-legal.json';
-import reserveComponentsBatchAJData from '../../../data/batch-aj-components.json';
-import incomeProfilesBatchAJData from '../../../data/batch-aj-income.json';
 
 type IdentifiedRow = { id: string; [key: string]: unknown };
 
@@ -47,6 +41,3 @@ appendUniqueRows(evidenceBatchACData as IdentifiedRow[], evidenceBatchAJData as 
 appendUniqueRows(knownUnknownsBatchACData as IdentifiedRow[], knownUnknownsBatchAJData as IdentifiedRow[]);
 appendUniqueRows(deploymentsBatchACData as IdentifiedRow[], deploymentsBatchAJData as IdentifiedRow[]);
 appendUniqueRows(reserveProfilesBatchACData as IdentifiedRow[], reserveProfilesBatchAJData as IdentifiedRow[]);
-appendUniqueRows(legalProfilesBatchAIData as IdentifiedRow[], legalProfilesBatchAJData as IdentifiedRow[]);
-appendUniqueRows(reserveComponentsBatchAIData as IdentifiedRow[], reserveComponentsBatchAJData as IdentifiedRow[]);
-appendUniqueRows(incomeProfilesBatchAIData as IdentifiedRow[], incomeProfilesBatchAJData as IdentifiedRow[]);
