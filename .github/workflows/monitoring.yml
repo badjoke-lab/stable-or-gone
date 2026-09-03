@@ -24,4 +24,4 @@ jobs:
       - name: Run read-only monitoring review
         run: npm run monitor:review
       - name: Validate monitoring pipeline
-        run: npm run validate:monitoring
+        run: node scripts/validate-monitoring-pipeline.mjs
