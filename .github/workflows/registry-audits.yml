@@ -35,6 +35,12 @@ jobs:
       - name: Validate evidence relations
         run: npm run validate:evidence-relations-v2
       - name: Audit integrity
-        run: npm run audit:integrity
+        run: |
+          set -o pipefail
+          if ! npm run audit:integrity; then
+            echo '--- registry-integrity-audit.json ---'
+            cat data/generated/registry-integrity-audit.json || true
+            exit 1
+          fi
       - name: Validate release integrity
         run: npm run validate:release-integrity
