@@ -11,9 +11,10 @@
     "reference_kind": "fiat",
     "reference_label": "USD",
     "priority": "P0",
-    "status": "reviewed_candidate",
+    "status": "promoted",
     "target_batch": "batch_035",
-    "notes": "Official Fidelity launch source reviewed; full-layer issuer, reserve, redemption, legal, deployment and income fields remain bounded by primary evidence."
+    "promoted_record_id": "sog_st_fidd",
+    "notes": "Promoted to canonical in batch 035 via merged PR #611; primary-source-bounded issuer, reserve, redemption, legal, deployment and income treatment remains authoritative."
   },
   {
     "candidate_id": "sog_cand_000126",
@@ -27,9 +28,10 @@
     "reference_kind": "fiat",
     "reference_label": "USD",
     "priority": "P0",
-    "status": "reviewed_candidate",
+    "status": "promoted",
     "target_batch": "batch_035",
-    "notes": "Mosta launch announcement reviewed; Brale issuer role and eligible-US-business availability established. Reserve and legal details require source-bounded review."
+    "promoted_record_id": "sog_st_mainusd",
+    "notes": "Promoted to canonical in batch 035 via merged PR #611; Mosta launch evidence and Brale issuer role remain source-bounded."
   },
   {
     "candidate_id": "sog_cand_000127",
@@ -43,9 +45,10 @@
     "reference_kind": "fiat",
     "reference_label": "USD",
     "priority": "P0",
-    "status": "reviewed_candidate",
+    "status": "promoted",
     "target_batch": "batch_035",
-    "notes": "Falcon primary launch source reviewed; Anchorage Digital Bank issuer role, reserve supervision, monthly Deloitte attestations and separate Falcon rewards are established."
+    "promoted_record_id": "sog_st_falcon_fusd",
+    "notes": "Promoted to canonical in batch 035 via merged PR #611; Falcon primary launch evidence and Anchorage Digital Bank issuer role remain source-bounded."
   },
   {
     "candidate_id": "sog_cand_000128",
@@ -59,9 +62,10 @@
     "reference_kind": "fiat",
     "reference_label": "USD",
     "priority": "P0",
-    "status": "reviewed_candidate",
+    "status": "promoted",
     "target_batch": "batch_035",
-    "notes": "Wyoming Stable Token Commission source reviewed; public-entity issuance, fully reserved framing and daily independent reserve attestations are established."
+    "promoted_record_id": "sog_st_frnt",
+    "notes": "Promoted to canonical in batch 035 via merged PR #611; Wyoming Stable Token Commission evidence remains the source boundary and launch date is not inferred."
   },
   {
     "candidate_id": "sog_cand_000129",
@@ -75,8 +79,9 @@
     "reference_kind": "fiat",
     "reference_label": "USD",
     "priority": "P0",
-    "status": "reviewed_candidate",
+    "status": "promoted",
     "target_batch": "batch_035",
-    "notes": "Official Sui mainnet launch source reviewed; Bridge issuer role and Sui mainnet launch are established. Reserve/redemption/legal details require source-bounded review."
+    "promoted_record_id": "sog_st_usdsui",
+    "notes": "Promoted to canonical in batch 035 via merged PR #611; official Sui mainnet launch evidence and Bridge issuer role remain source-bounded."
   }
 ]
