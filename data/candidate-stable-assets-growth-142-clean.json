@@ -11,8 +11,8 @@
     "reference_kind": "fiat",
     "reference_label": "NGN",
     "priority": "P0",
-    "status": "reviewed_candidate",
+    "status": "promoted",
     "target_batch": "batch_040",
-    "notes": "WrappedCBDC primary materials establish a live 1:1 Nigerian-naira stablecoin, issuer identity, reserve backing in Naira-denominated assets held with approved commercial banks, minting against Naira deposits and KYC-gated redemption. The proposed record ID is namespaced to distinguish this asset from the separate Celo/Mento cNGN symbol lineage. Full-layer promotion remains gated on exact deployment/source review and duplicate confirmation."
+    "notes": "Promoted in batch 040 using WrappedCBDC primary materials for issuer identity, current 1:1 NGN backing, mint/redemption terms and nine mainnet deployments. Exact reserve segregation, insolvency treatment, current reserve allocation and full custodian set remain explicit unknowns; the record remains namespaced from the separate Celo/Mento cNGN lineage."
   }
 ]
