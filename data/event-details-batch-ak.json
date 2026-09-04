@@ -1,0 +1,3 @@
+[
+  {"id":"sog_ev_cngn_launch_20250203","title":"WrappedCBDC cNGN live circulation and current operational state","subject_stablecoin_ids":["sog_st_cngn_wrappedcbdc"],"subject_organization_ids":["sog_issuer_wrappedcbdc_limited"],"evidence_ids":["sog_src_cngn_terms_20260904","sog_src_cngn_current_20260903","sog_src_cngn_deployments_20260904","sog_src_cngn_launch_date_20251212"],"event_detail_kind":"launch"}
+]
