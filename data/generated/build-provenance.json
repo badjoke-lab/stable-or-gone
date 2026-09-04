@@ -5,7 +5,7 @@
   "generated_at": "1970-01-01T00:00:00.000Z",
   "canonical_data_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
   "canonical_file_count": 0,
-  "canonical_record_counts": {"stablecoins":140,"organizations":123,"relationships":152,"classifications":140,"profiles":140,"events":215,"event_details":215,"evidence":616,"reserve_reports":131,"known_unknowns":377,"regulatory_notes":9,"deployments":202,"legal_profiles":140,"stable_asset_relationships":5,"reserve_components":174,"income_profiles":140,"evidence_relations":616},
-  "route_counts": {"stablecoin_detail":140,"organization_detail":123,"event_detail":215,"total_detail":478,"declared_main_routes":13},
+  "canonical_record_counts": {"stablecoins":141,"organizations":123,"relationships":153,"classifications":141,"profiles":141,"events":216,"event_details":216,"evidence":619,"reserve_reports":131,"known_unknowns":378,"regulatory_notes":9,"deployments":203,"legal_profiles":141,"stable_asset_relationships":5,"reserve_components":175,"income_profiles":141,"evidence_relations":619},
+  "route_counts": {"stablecoin_detail":141,"organization_detail":123,"event_detail":216,"total_detail":480,"declared_main_routes":13},
   "verification_marker": "sog_build_provenance_v1"
 }

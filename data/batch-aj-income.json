@@ -1,0 +1,3 @@
+[
+  {"id":"sog_st_usdcbl","availability":"none","source":"none","accrual":"none","rate":"none","related_asset_ids":[],"evidence_ids":["sog_src_usdcbl_backing_2026","sog_src_usdcbl_live_20260513"],"notes":"Decibel describes reserve-generated economic value as retained at the protocol layer. No issuer-native holder yield for usDCBL is established in the reviewed sources."}
+]
