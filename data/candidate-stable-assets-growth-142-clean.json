@@ -1,0 +1,18 @@
+[
+  {
+    "candidate_id": "sog_cand_000143",
+    "proposed_record_id": "sog_st_cngn_wrappedcbdc",
+    "slug": "cngn-wrappedcbdc",
+    "name": "Compliant Naira",
+    "symbol": "cNGN",
+    "aliases": ["cNGN", "Compliant Naira", "WrappedCBDC cNGN"],
+    "candidate_type": "stablecoin",
+    "asset_class": "stablecoin",
+    "reference_kind": "fiat",
+    "reference_label": "NGN",
+    "priority": "P0",
+    "status": "reviewed_candidate",
+    "target_batch": "batch_040",
+    "notes": "WrappedCBDC primary materials establish a live 1:1 Nigerian-naira stablecoin, issuer identity, reserve backing in Naira-denominated assets held with approved commercial banks, minting against Naira deposits and KYC-gated redemption. The proposed record ID is namespaced to distinguish this asset from the separate Celo/Mento cNGN symbol lineage. Full-layer promotion remains gated on exact deployment/source review and duplicate confirmation."
+  }
+]
