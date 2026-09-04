@@ -1,0 +1,3 @@
+[
+  {"id":"sog_rel_cngn_wrappedcbdc_20250203","stablecoin_id":"sog_st_cngn_wrappedcbdc","organization_id":"sog_issuer_wrappedcbdc_limited","role":"legal_issuer","start_date":"2025-02-03","end_date":null,"status":"active","evidence_ids":["sog_src_cngn_terms_20260904","sog_src_cngn_current_20260903"],"notes":"WrappedCBDC official Terms and current cNGN site identify WrappedCBDC Limited as the issuer of cNGN."}
+]
