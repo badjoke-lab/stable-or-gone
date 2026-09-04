@@ -5,9 +5,11 @@ on:
   pull_request:
     paths:
       - 'data/**'
+      - 'docs/migration/current-stats-history-checkpoint.json'
       - 'scripts/build-stats.mjs'
       - 'scripts/validate-stats.mjs'
       - 'scripts/validate-stats-history.mjs'
+      - 'scripts/stats/build-history-snapshot.mjs'
       - '.github/workflows/stats.yml'
 
 jobs:
@@ -26,5 +28,22 @@ jobs:
         run: node scripts/build-stats.mjs
       - name: Validate deterministic statistics
         run: SOG_STATS_VALIDATE_OUTPUT=artifacts/stats-current.json node scripts/validate-stats.mjs
-      - name: Validate statistics history
+      - name: Validate statistics history when history changes
+        if: github.event_name == 'workflow_dispatch'
         run: node scripts/validate-stats-history.mjs
+      - name: Validate statistics history changes in pull requests
+        if: github.event_name == 'pull_request'
+        env:
+          SOG_STATS_HISTORY_BASE_REF: ${{ github.event.pull_request.base.sha }}
+          SOG_STATS_HISTORY_HEAD_REF: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set -euo pipefail
+          if git diff --quiet "$SOG_STATS_HISTORY_BASE_REF...$SOG_STATS_HISTORY_HEAD_REF" -- \
+            data/stats-history.json \
+            docs/migration/current-stats-history-checkpoint.json \
+            scripts/validate-stats-history.mjs \
+            scripts/stats/build-history-snapshot.mjs; then
+            echo "No statistics-history contract or snapshot changes; deterministic current statistics already validated."
+          else
+            node scripts/validate-stats-history.mjs
+          fi
