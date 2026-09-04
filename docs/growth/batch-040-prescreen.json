@@ -1,0 +1,74 @@
+{
+  "schema_version": "1.0",
+  "batch": "batch_040",
+  "reviewed_at": "2026-09-04",
+  "base_canonical_asset_count": 141,
+  "prescreen_count": 6,
+  "summary": {
+    "advance_primary_review": 1,
+    "needs_additional_review": 1,
+    "hold_live_not_verified": 2,
+    "hold_not_launched": 2
+  },
+  "candidates": [
+    {
+      "name": "Compliant Naira",
+      "symbol": "cNGN",
+      "proposed_record_id": "sog_st_cngn_wrappedcbdc",
+      "decision": "advance_primary_review",
+      "reason": "WrappedCBDC official site and Terms establish current issuance, 1:1 NGN backing, issuer identity, minting and redemption mechanics; repo search returned no matching canonical or candidate record. Symbol namespace must remain distinct from Celo/Mento cNGN lineage.",
+      "primary_sources": [
+        "https://www.cngn.co/",
+        "https://cngn.co/terms-and-condition",
+        "https://docs.cngn.co/"
+      ]
+    },
+    {
+      "name": "Stabld",
+      "symbol": null,
+      "decision": "needs_additional_review",
+      "reason": "Tap Global states Stabld is live in Tap Earn, but the same RNS describes stUSD, stGBP and stEUR as a planned family and does not identify which currency-specific token is already issued. Asset identity/reference currency is therefore unresolved.",
+      "primary_sources": [
+        "https://www.lse.co.uk/rns/tap-launches-own-stablecoin-8220stabld8221-1fmx98hppiehubz.html"
+      ]
+    },
+    {
+      "name": "XrymaCoin",
+      "symbol": "XREUR",
+      "decision": "hold_live_not_verified",
+      "reason": "Issuer material set public circulation for 2026-09-03, but the authoritative announcements page still shows only July launch/whitepaper and August whitepaper modification notices; no post-launch operational notice was found.",
+      "primary_sources": [
+        "https://www.xryma.com/investors",
+        "https://www.xryma.com/"
+      ]
+    },
+    {
+      "name": "Gaia GUSD",
+      "symbol": "GUSD",
+      "decision": "hold_live_not_verified",
+      "reason": "Gaia announced GUSD on 2026-04-15 but also stated capabilities would launch in select markets in Q2 2026. No later primary operational notice confirming live issuance was found.",
+      "primary_sources": [
+        "https://www.prnewswire.com/news-releases/gaia-interactive-inc-launches-regulated-stablecoin-gusd-for-global-payments-powered-by-bridge-302743123.html"
+      ]
+    },
+    {
+      "name": "Open USD",
+      "symbol": "OUSD",
+      "decision": "hold_not_launched",
+      "reason": "Visa described Open USD as recently introduced, but Open Standard's own current FAQ still states Open USD will launch later this year. Issuer source controls the launch boundary.",
+      "primary_sources": [
+        "https://joinopenstandard.com/",
+        "https://visa.gcs-web.com/news-releases/news-release-details/visa-introduces-platform-stablecoin-minting-movement-and"
+      ]
+    },
+    {
+      "name": "International bank consortium USD stablecoin",
+      "symbol": null,
+      "decision": "hold_not_launched",
+      "reason": "The 21-institution group announced formation of an issuing company and future USD stablecoin; no live asset exists yet.",
+      "primary_sources": [
+        "https://newsroom.wf.com/news-releases/news-details/2026/Group-of-leading-international-financial-institutions-to-establish-stablecoin-enterprise/default.aspx"
+      ]
+    }
+  ]
+}
