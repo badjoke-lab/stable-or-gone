@@ -34,7 +34,7 @@ jobs:
         run: npm run validate:events-v2
       - name: Validate evidence relations
         run: npm run validate:evidence-relations-v2
-      - name: Validate integrity
-        run: npm run validate:integrity
+      - name: Audit integrity
+        run: npm run audit:integrity
       - name: Validate release integrity
         run: npm run validate:release-integrity
