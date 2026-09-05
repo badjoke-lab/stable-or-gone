@@ -1,4 +1,3 @@
-import './batchAkV3Runtime';
 import stablecoinsBatchACData from '../../../data/stablecoins-batch-ac.json';
 import stablecoinClassificationBatchACData from '../../../data/stablecoin-classification-batch-ac.json';
 import organizationsBatchACData from '../../../data/organizations-batch-ac.json';
