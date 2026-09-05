@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.0",
+  "batch_id": "batch_041",
+  "reviewed_at": "2026-09-05",
+  "base_canonical_assets": 142,
+  "prescreen_pool": [
+    {
+      "name": "XrymaCoin",
+      "symbol": "XREUR",
+      "issuer_or_operator": "Xryma Plc",
+      "reference": "EUR",
+      "decision": "launch_verification_hold",
+      "candidate_id": "sog_cand_000144",
+      "primary_source": "https://www.xryma.com/investors",
+      "announced_launch_date": "2026-09-03",
+      "reason": "The planned circulation date has passed, but the authoritative Xryma announcements page reviewed on 2026-09-05 does not yet provide a separate primary-source confirmation that public issuance actually started. Do not convert a scheduled date into a live-launch fact."
+    },
+    {
+      "name": "Open USD",
+      "symbol": "OUSD",
+      "issuer_or_operator": "Open Standard",
+      "reference": "USD",
+      "decision": "hold_not_launched",
+      "candidate_id": null,
+      "primary_source": "https://joinopenstandard.com/",
+      "reason": "Open Standard's current official FAQ still states that Open USD will launch later this year. Visa's July 16 platform announcement describes OUSD as recently introduced and provides mint/burn connectivity context, but this does not override the issuer/operator's own not-yet-launched statement for SOG canonical promotion."
+    },
+    {
+      "name": "Gaia GUSD",
+      "symbol": "GUSD",
+      "issuer_or_operator": "Gaia / Bridge boundary unresolved",
+      "reference": "USD",
+      "decision": "needs_additional_review",
+      "candidate_id": "existing_pending_candidate",
+      "reason": "Existing protected pending candidate. April announcement described a future Q2 launch; strong primary live-launch evidence and exact issuer boundary remain unresolved."
+    }
+  ],
+  "summary": {
+    "advance_to_canonical_promotion": 0,
+    "launch_verification_hold": 1,
+    "hold_not_launched": 1,
+    "needs_additional_review": 1
+  },
+  "boundary": "No asset in this prescreen is promoted solely because an announced launch date has arrived. Canonical promotion requires primary evidence of actual issuance or circulation and a reviewable issuer/asset boundary."
+}
