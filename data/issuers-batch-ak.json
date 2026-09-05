@@ -1,0 +1,3 @@
+[
+  {"id":"sog_issuer_wrappedcbdc_limited","slug":"wrappedcbdc-limited","name":"WrappedCBDC Limited","issuer_type":"stablecoin_issuer","jurisdiction":"Nigeria","related_stablecoins":["cngn"],"official_url":"https://www.cngn.co/","summary":"Nigerian issuer of the WrappedCBDC Compliant Naira (cNGN), supported by issuer terms and current cNGN materials.","confidence":"high","last_verified_at":"2026-09-05","notes":"Legacy issuer compatibility row for the canonical organization. Regulatory, reserve and redemption claims remain bounded by the reviewed primary evidence; unresolved reserve segregation and custodian-allocation details are not inferred."}
+]
