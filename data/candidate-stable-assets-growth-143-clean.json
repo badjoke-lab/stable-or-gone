@@ -1,0 +1,18 @@
+[
+  {
+    "candidate_id": "sog_cand_000144",
+    "proposed_record_id": "sog_st_xreur",
+    "slug": "xrymacoin-xreur",
+    "name": "XrymaCoin",
+    "symbol": "XREUR",
+    "aliases": ["XrymaCoin", "XREUR"],
+    "candidate_type": "stablecoin",
+    "asset_class": "stablecoin",
+    "reference_kind": "fiat",
+    "reference_label": "EUR",
+    "priority": "P0",
+    "status": "launch_verification_hold",
+    "target_batch": "batch_041",
+    "notes": "Xryma Plc announced public issuance for 2026-09-03 and its official announcements page remains the authoritative release channel. As of the 2026-09-05 review, the official announcements page shows the July whitepaper launch and August modification but no separate verified circulation-start announcement. Planned launch date alone is not treated as proof of live issuance; promotion requires primary evidence that XREUR was actually put into circulation."
+  }
+]
