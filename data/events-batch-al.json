@@ -1,0 +1,3 @@
+[
+  {"id":"sog_ev_dlusd_launch_20260603","stablecoin_id":"sog_st_dlusd","issuer_id":"sog_issuer_bridge","event_type":"launch","event_date":"2026-06-03","title":"DLUSD stablecoin wallet launches in Argentina","description":"Deel launched its stablecoin wallet using DLUSD on 2026-06-03, with Bridge Open Issuance minting the custom stablecoin and Tempo providing settlement. Deel later reported the wallet live in more than 80 countries.","impact_level":"medium","confidence":"high","source_count":3,"event_status_effect":"active","notes":"Launch date comes from Stripe's contemporaneous announcement. Later Deel material confirms broader live rollout rather than a planned-only launch."}
+]
