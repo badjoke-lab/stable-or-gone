@@ -52,6 +52,7 @@ import legalProfilesGrowthAH from '../../../data/ah-legal.json';
 import legalProfilesGrowthAI from '../../../data/ai-legal.json';
 import legalProfilesGrowthAJ from '../../../data/aj-legal.json';
 import legalProfilesGrowthAK from '../../../data/ak-legal.json';
+import legalProfilesGrowthAL from '../../../data/al-legal.json';
 import stableAssetRelationshipsData from '../../../data/stable-asset-relationships-v3.json';
 import stableAssetRelationshipsBatchH from '../../../data/stable-asset-relationships-v3-batch-h.json';
 import stableAssetRelationshipsPr358 from '../../../data/stable-asset-relationships-v3-pr358.json';
@@ -88,6 +89,7 @@ import reserveComponentsBatchAH from '../../../data/batch-ah-components.json';
 import reserveComponentsBatchAI from '../../../data/batch-ai-components.json';
 import reserveComponentsBatchAJ from '../../../data/batch-aj-components.json';
 import reserveComponentsBatchAK from '../../../data/batch-ak-components.json';
+import reserveComponentsBatchAL from '../../../data/batch-al-components.json';
 import { getDeployments } from './registry';
 import type { DeploymentRow } from './registry';
 import type {
@@ -112,7 +114,7 @@ const legalProfiles = [
   ...legalProfilesGrowthX, ...legalProfilesGrowthY, ...legalProfilesGrowthZ, ...legalProfilesGrowthAA,
   ...legalProfilesGrowthAB, ...legalProfilesGrowthAC, ...legalProfilesGrowthAD, ...legalProfilesGrowthAE,
   ...legalProfilesGrowthAF, ...legalProfilesGrowthAG, ...legalProfilesGrowthAH, ...legalProfilesGrowthAI,
-  ...legalProfilesGrowthAJ, ...legalProfilesGrowthAK,
+  ...legalProfilesGrowthAJ, ...legalProfilesGrowthAK, ...legalProfilesGrowthAL,
 ] as LegalProfileV3[];
 
 const stableAssetRelationships = [
@@ -129,7 +131,7 @@ const reserveComponents = [
   ...reserveComponentsBatchY, ...reserveComponentsBatchZ, ...reserveComponentsBatchAA, ...reserveComponentsBatchAB,
   ...reserveComponentsBatchAC, ...reserveComponentsBatchAD, ...reserveComponentsBatchAE, ...reserveComponentsBatchAF,
   ...reserveComponentsBatchAG, ...reserveComponentsBatchAH, ...reserveComponentsBatchAI, ...reserveComponentsBatchAJ,
-  ...reserveComponentsBatchAK,
+  ...reserveComponentsBatchAK, ...reserveComponentsBatchAL,
 ] as ReserveComponentV3[];
 
 export type DeploymentV3View = DeploymentRow & DeploymentV3Fields & {
