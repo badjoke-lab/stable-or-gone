@@ -1,0 +1,3 @@
+[
+  {"id":"sog_rel_dlusd_bridge_20260603","stablecoin_id":"sog_st_dlusd","organization_id":"sog_issuer_bridge","role":"legal_issuer","start_date":"2026-06-03","end_date":null,"status":"active","evidence_ids":["sog_src_dlusd_stripe_launch_20260603","sog_src_dlusd_bridge_issuance_20260908"],"notes":"Stripe identifies DLUSD as a custom stablecoin issued through Bridge Open Issuance. Existing canonical Bridge organization is reused; exact issuing affiliate remains unresolved."}
+]
