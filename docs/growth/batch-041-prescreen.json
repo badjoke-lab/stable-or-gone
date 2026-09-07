@@ -1,9 +1,19 @@
 {
   "schema_version": "1.0",
   "batch_id": "batch_041",
-  "reviewed_at": "2026-09-05",
+  "reviewed_at": "2026-09-08",
   "base_canonical_assets": 142,
   "prescreen_pool": [
+    {
+      "name": "DLUSD",
+      "symbol": "DLUSD",
+      "issuer_or_operator": "Deel / Bridge Open Issuance",
+      "reference": "USD",
+      "decision": "advance_to_canonical_promotion",
+      "candidate_id": "sog_cand_000145",
+      "primary_source": "https://stripe.com/newsroom/news/deel-and-stripe",
+      "reason": "Stripe's 2026-06-03 launch announcement establishes a live DLUSD stablecoin wallet, Bridge Open Issuance as the issuance rail and Tempo as settlement. Current Deel materials establish ongoing live availability and 1:1 USD-value platform exit. Exact Bridge affiliate, token contract, direct issuer-redemption boundary and reserve allocation remain explicit unknowns rather than promotion blockers."
+    },
     {
       "name": "XrymaCoin",
       "symbol": "XREUR",
@@ -13,7 +23,7 @@
       "candidate_id": "sog_cand_000144",
       "primary_source": "https://www.xryma.com/investors",
       "announced_launch_date": "2026-09-03",
-      "reason": "The planned circulation date has passed, but the authoritative Xryma announcements page reviewed on 2026-09-05 does not yet provide a separate primary-source confirmation that public issuance actually started. Do not convert a scheduled date into a live-launch fact."
+      "reason": "The planned circulation date has passed, but the authoritative Xryma announcements page reviewed for this batch does not yet provide a separate primary-source confirmation that public issuance actually started. Do not convert a scheduled date into a live-launch fact."
     },
     {
       "name": "Open USD",
@@ -23,7 +33,7 @@
       "decision": "hold_not_launched",
       "candidate_id": null,
       "primary_source": "https://joinopenstandard.com/",
-      "reason": "Open Standard's current official FAQ still states that Open USD will launch later this year. Visa's July 16 platform announcement describes OUSD as recently introduced and provides mint/burn connectivity context, but this does not override the issuer/operator's own not-yet-launched statement for SOG canonical promotion."
+      "reason": "Open Standard's current official FAQ still states that Open USD will launch later this year. External platform integration language does not override the operator's own not-yet-launched statement for SOG canonical promotion."
     },
     {
       "name": "Gaia GUSD",
@@ -36,10 +46,10 @@
     }
   ],
   "summary": {
-    "advance_to_canonical_promotion": 0,
+    "advance_to_canonical_promotion": 1,
     "launch_verification_hold": 1,
     "hold_not_launched": 1,
     "needs_additional_review": 1
   },
-  "boundary": "No asset in this prescreen is promoted solely because an announced launch date has arrived. Canonical promotion requires primary evidence of actual issuance or circulation and a reviewable issuer/asset boundary."
+  "boundary": "DLUSD advances because primary sources establish actual launch and continuing live product use. No other candidate is promoted merely because an announced launch date has arrived or because an integration partner describes future availability."
 }

@@ -1,0 +1,3 @@
+[
+  {"id":"sog_dep_dlusd_tempo_20260603","stablecoin_id":"sog_st_dlusd","chain":"Tempo","deployment_type":"issuer_native_token","token_standard":"unknown","contract_address":null,"status":"active","control_event_ids":["sog_ev_dlusd_launch_20260603"],"notes":"Stripe's launch announcement states that every DLUSD transaction is conducted on Tempo. Exact contract or token identifier is not established in the reviewed primary sources.","evidence_ids":["sog_src_dlusd_stripe_launch_20260603","sog_src_dlusd_deel_live_20260817"],"canonicality":"issuer_native","origin_deployment_id":null,"bridge_operator_organization_id":null,"mint_authority_type":"issuer_managed","contract_version":"unknown","is_primary":true}
+]

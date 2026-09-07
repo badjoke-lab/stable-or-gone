@@ -1,6 +1,6 @@
 {
   "schema_version": "2.0",
-  "status": "batch_041_candidate_intake",
+  "status": "batch_041_canonical_promotion",
   "candidate_files": [
     "data/candidate-stable-assets.json",
     "data/candidate-stable-assets-growth-70.json",
@@ -25,9 +25,10 @@
     "data/candidate-stable-assets-growth-140-clean.json",
     "data/candidate-stable-assets-growth-141-clean.json",
     "data/candidate-stable-assets-growth-142-clean.json",
-    "data/candidate-stable-assets-growth-143-clean.json"
+    "data/candidate-stable-assets-growth-143-clean.json",
+    "data/candidate-stable-assets-growth-144-clean.json"
   ],
-  "protected_minimums": {"total_candidates":144,"promoted_candidates":142,"pending_candidates":2},
+  "protected_minimums": {"total_candidates":145,"promoted_candidates":143,"pending_candidates":2},
   "planned_batches": {
     "batch_006":{"minimum_candidates":5,"theme":"current USD and regulated assets"},
     "batch_007":{"minimum_candidates":5,"theme":"protocol stablecoins"},
@@ -64,6 +65,6 @@
     "batch_038":{"minimum_candidates":1,"target_candidates":1,"prescreen_pool_target":20,"theme":"USDKG full-layer promotion; EURAU, EURI, EURQ and USDQ rejected after canonical duplicate detection; Open USD, GELT and Decibel USDCBL held until live-launch evidence"},
     "batch_039":{"minimum_candidates":1,"target_candidates":1,"prescreen_pool_target":8,"theme":"Decibel usDCBL full-layer canonical promotion after live-mainnet evidence superseded the batch 038 hold; existing Bridge organization reused; Gaia GUSD remains the pending reviewed candidate"},
     "batch_040":{"minimum_candidates":1,"target_candidates":1,"prescreen_pool_target":6,"theme":"WrappedCBDC cNGN full-layer promotion with issuer, 1:1 NGN reserve/redemption terms and nine verified mainnet deployments; Gaia GUSD remains the protected pending candidate; Stabld, XREUR and Open USD remain prescreen holds"},
-    "batch_041":{"minimum_candidates":1,"target_candidates":1,"prescreen_pool_target":3,"theme":"XREUR launch-verification intake after its announced 2026-09-03 circulation date; Open USD remains explicitly not launched on the current operator site; Gaia GUSD remains pending live-launch and issuer-boundary evidence"}
+    "batch_041":{"minimum_candidates":1,"target_candidates":1,"prescreen_pool_target":4,"theme":"DLUSD full-layer canonical promotion using Stripe, Deel and Bridge primary evidence; XREUR remains on launch-verification hold, Gaia GUSD remains pending issuer/live-launch evidence, and Open USD remains not launched"}
   }
 }
