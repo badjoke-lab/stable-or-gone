@@ -1,0 +1,3 @@
+[
+  {"id":"sog_ev_dlusd_launch_20260603","title":"DLUSD launch and live expansion","subject_stablecoin_ids":["sog_st_dlusd"],"subject_organization_ids":["sog_issuer_bridge"],"evidence_ids":["sog_src_dlusd_stripe_launch_20260603","sog_src_dlusd_deel_live_20260817","sog_src_dlusd_bridge_issuance_20260908"],"event_detail_kind":"launch"}
+]
