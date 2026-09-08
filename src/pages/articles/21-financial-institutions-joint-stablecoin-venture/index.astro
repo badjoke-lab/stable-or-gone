@@ -1,5 +1,5 @@
 ---
-import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ArticleLayout from '../../../layouts/ArticleLayout.astro';
 const headline = '21 Financial Institutions Plan Joint Stablecoin Venture, Targeting USD Launch in H1 2027';
 const title = `${headline} — Stable or Gone`;
 const description = 'MUFG, Goldman Sachs, Bank of America, Citi and other institutions plan a joint stablecoin venture. SOG separates the confirmed facts, open questions and market-structure implications.';
@@ -12,15 +12,26 @@ const jsonLd = {
   url: `https://www.stableorgone.com${canonicalPath}`,
   inLanguage: 'en',
   datePublished: '2026-09-02',
-  dateModified: '2026-09-02',
+  dateModified: '2026-09-08',
   isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://www.stableorgone.com/' },
   about: ['stablecoins', 'bank-issued stablecoins', 'MUFG Bank', 'Goldman Sachs', 'USDT', 'USDC', 'Qivalis']
 };
 ---
-<BaseLayout title={title} description={description} canonicalPath={canonicalPath} jsonLd={jsonLd}>
+<ArticleLayout
+  title={title}
+  description={description}
+  canonicalPath={canonicalPath}
+  headline={headline}
+  sectionLabel="Institutions / market structure"
+  deck="A 21-institution venture has moved beyond a feasibility study toward a planned company and a stated 2027 launch window. The article separates that material development from claims that a named, issued stablecoin already exists."
+  publishedAt="September 2, 2026"
+  updatedAt="September 8, 2026"
+  treatment="Planned / non-canonical watch"
+  scope="Bank-led stablecoin venture / issuance planning"
+  jsonLd={jsonLd}
+>
   <section class="panel registry">
-    <div class="bar">Article · Published September 2, 2026 · Non-canonical analysis</div>
-    <h1>{headline}</h1>
+    <div class="bar">Why this is material</div>
     <p><strong>Twenty-one major financial institutions have committed to establish a new company in the second half of 2026 to support a stablecoin solution, with an initial USD-denominated offering targeted for the first half of 2027.</strong> The group includes Bank of America, Citi, Goldman Sachs, Wells Fargo, Deutsche Bank, UBS, Santander, BBVA and MUFG Bank.</p>
     <p>This is a material stablecoin development, but it is not evidence that a new stablecoin is already live. The company has not yet been named, and the token name, ticker, legal issuer, blockchain deployments, contracts, reserve structure and final redemption terms have not been published.</p>
   </section>
@@ -119,4 +130,4 @@ const jsonLd = {
       <li><a href="https://www.reuters.com/business/finance/goldman-sachs-bofa-others-plan-issue-dollar-stablecoin-together-2027-2026-09-01/" rel="noreferrer">Reuters, September 1, 2026</a> — independent confirmation and context on Qivalis, Tether, bank-issued stablecoin adoption and the broader market.</li>
     </ul>
   </section>
-</BaseLayout>
+</ArticleLayout>
