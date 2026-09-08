@@ -1,0 +1,3 @@
+[
+  {"id":"sog_ev_usdb_launch_20250507","title":"Bridge USDB launch and continuing live operation","subject_stablecoin_ids":["sog_st_usdb_bridge"],"subject_organization_ids":["sog_issuer_bridge"],"evidence_ids":["sog_src_usdb_bridge_launch_20250507","sog_src_usdb_bridge_docs_20260909","sog_src_usdb_bridge_faq_20260909","sog_src_usdb_bridge_routes_20260909","sog_src_usdb_bloomberg_launch_20250507"],"event_detail_kind":"launch"}
+]
