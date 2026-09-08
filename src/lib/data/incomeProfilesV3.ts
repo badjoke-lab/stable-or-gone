@@ -37,10 +37,11 @@ import batchAI from '../../../data/batch-ai-income.json';
 import batchAJ from '../../../data/batch-aj-income.json';
 import batchAK from '../../../data/batch-ak-income.json';
 import batchAL from '../../../data/batch-al-income.json';
+import batchAM from '../../../data/batch-am-income.json';
 import type { YieldSource, AccrualMechanism, RateType } from '../schema/registry-v3';
 
 export type IncomeAvailability = 'native' | 'via_wrapper' | 'none' | 'unknown';
 export type IncomeProfileV3 = { id:string; availability:IncomeAvailability; source:YieldSource; accrual:AccrualMechanism; rate:RateType; related_asset_ids:string[]; evidence_ids:string[]; notes?:string; };
-const profiles = [...batchA,...batchB,...batchC,...batchD,...batchE,...batchF,...batchG,...batchH,...batchJ,...batchK,...batchL,...batchMA,...batchMB,...batchN,...batchO,...batchP,...batchQ,...batchR,...batchS,...batchT,...batchU,...batchV,...batchW,...batchX,...batchY,...batchZ,...batchAA,...batchAB,...batchAC,...batchAD,...batchAE,...batchAF,...batchAG,...batchAH,...batchAI,...batchAJ,...batchAK,...batchAL] as IncomeProfileV3[];
+const profiles = [...batchA,...batchB,...batchC,...batchD,...batchE,...batchF,...batchG,...batchH,...batchJ,...batchK,...batchL,...batchMA,...batchMB,...batchN,...batchO,...batchP,...batchQ,...batchR,...batchS,...batchT,...batchU,...batchV,...batchW,...batchX,...batchY,...batchZ,...batchAA,...batchAB,...batchAC,...batchAD,...batchAE,...batchAF,...batchAG,...batchAH,...batchAI,...batchAJ,...batchAK,...batchAL,...batchAM] as IncomeProfileV3[];
 export function getIncomeProfilesV3(): IncomeProfileV3[] { return profiles.map((row) => ({...row,related_asset_ids:[...row.related_asset_ids],evidence_ids:[...row.evidence_ids]})); }
 export function getIncomeProfileV3(id:string): IncomeProfileV3 | undefined { return getIncomeProfilesV3().find((row) => row.id === id); }
