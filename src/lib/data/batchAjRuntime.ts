@@ -42,6 +42,17 @@ import knownUnknownsBatchALData from '../../../data/batch-al-review-gaps.json';
 import deploymentsBatchALData from '../../../data/batch-al-deployments.json';
 import reserveProfilesBatchALData from '../../../data/batch-al-reserve-redemption.json';
 
+import stablecoinsBatchAMData from '../../../data/stablecoins-batch-am.json';
+import stablecoinClassificationBatchAMData from '../../../data/stablecoin-classification-batch-am.json';
+import organizationsBatchAMData from '../../../data/organizations-batch-am.json';
+import relationshipsBatchAMData from '../../../data/relationships-batch-am.json';
+import eventsBatchAMData from '../../../data/events-batch-am.json';
+import eventDetailsBatchAMData from '../../../data/event-details-batch-am.json';
+import evidenceBatchAMData from '../../../data/evidence-batch-am.json';
+import knownUnknownsBatchAMData from '../../../data/batch-am-review-gaps.json';
+import deploymentsBatchAMData from '../../../data/batch-am-deployments.json';
+import reserveProfilesBatchAMData from '../../../data/batch-am-reserve-redemption.json';
+
 type IdentifiedRow = { id: string; [key: string]: unknown };
 
 const appendUniqueRows = (target: IdentifiedRow[], additions: IdentifiedRow[]) => {
@@ -85,3 +96,14 @@ appendUniqueRows(evidenceBatchACData as IdentifiedRow[], evidenceBatchALData as 
 appendUniqueRows(knownUnknownsBatchACData as IdentifiedRow[], knownUnknownsBatchALData as IdentifiedRow[]);
 appendUniqueRows(deploymentsBatchACData as IdentifiedRow[], deploymentsBatchALData as IdentifiedRow[]);
 appendUniqueRows(reserveProfilesBatchACData as IdentifiedRow[], reserveProfilesBatchALData as IdentifiedRow[]);
+
+appendUniqueRows(stablecoinsBatchACData as IdentifiedRow[], stablecoinsBatchAMData as IdentifiedRow[]);
+appendUniqueRows(stablecoinClassificationBatchACData as IdentifiedRow[], stablecoinClassificationBatchAMData as IdentifiedRow[]);
+appendUniqueRows(organizationsBatchACData as IdentifiedRow[], organizationsBatchAMData as IdentifiedRow[]);
+appendUniqueRows(relationshipsBatchACData as IdentifiedRow[], relationshipsBatchAMData as IdentifiedRow[]);
+appendUniqueRows(eventsBatchACData as IdentifiedRow[], eventsBatchAMData as IdentifiedRow[]);
+appendUniqueRows(eventDetailsBatchACData as IdentifiedRow[], eventDetailsBatchAMData as IdentifiedRow[]);
+appendUniqueRows(evidenceBatchACData as IdentifiedRow[], evidenceBatchAMData as IdentifiedRow[]);
+appendUniqueRows(knownUnknownsBatchACData as IdentifiedRow[], knownUnknownsBatchAMData as IdentifiedRow[]);
+appendUniqueRows(deploymentsBatchACData as IdentifiedRow[], deploymentsBatchAMData as IdentifiedRow[]);
+appendUniqueRows(reserveProfilesBatchACData as IdentifiedRow[], reserveProfilesBatchAMData as IdentifiedRow[]);
