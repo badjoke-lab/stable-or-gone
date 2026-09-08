@@ -1,0 +1,103 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+const headline = 'Ethereum Hegotá Targets ERC-20 Gas Payments: What EIP-8141 Means for Stablecoins';
+const title = `${headline} — Stable or Gone`;
+const description = 'Ethereum has made EIP-8141 Frame Transactions a locked-in execution-layer headliner for Hegotá. SOG explains how ERC-20 fee payment works, why it matters for stablecoins, and what remains unconfirmed.';
+const canonicalPath = '/articles/ethereum-hegota-eip-8141-stablecoin-gas-payments/';
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline,
+  description,
+  url: `https://www.stableorgone.com${canonicalPath}`,
+  inLanguage: 'en',
+  datePublished: '2026-09-08',
+  dateModified: '2026-09-08',
+  isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://www.stableorgone.com/' },
+  about: ['stablecoins', 'Ethereum', 'EIP-8141', 'Frame Transactions', 'Hegotá', 'ERC-20 gas payment', 'account abstraction']
+};
+---
+<BaseLayout title={title} description={description} canonicalPath={canonicalPath} jsonLd={jsonLd}>
+  <section class="panel registry">
+    <div class="bar">Article · Published September 8, 2026 · Non-canonical analysis</div>
+    <h1>{headline}</h1>
+    <p><strong>Ethereum's Protocol Cluster has ranked EIP-8141 Frame Transactions as an S-tier, locked-in execution-layer headliner for the Hegotá upgrade targeted for 2027.</strong> The proposal is broader than stablecoins, but one of its explicit use cases is paying transaction fees with ERC-20 tokens through a sponsor rather than requiring the user to hold ETH for gas.</p>
+    <p>That makes EIP-8141 material stablecoin infrastructure news. It could remove one of the most persistent usability frictions in onchain stablecoin payments: a user can hold the token they want to send yet still be unable to transact because the wallet has no ETH for gas.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">What Ethereum has actually decided</div>
+    <p>On September 7, 2026, the Ethereum Foundation Protocol Cluster published its unified Hegotá EIP tier list. EIP-8141, Frame Transactions, received an S-tier rating and was described as the <strong>“Locked-in EL headliner.”</strong> The same post says it ships with EIP-8250 and EIP-8272 as the Frames core package.</p>
+    <p>Ethereum.org currently lists Hegotá for 2027 and includes Frame Transactions among its main features. The roadmap also warns that the scope is not final and that Ethereum development is community-driven and subject to change. So this is substantially stronger than a speculative EIP, but it is not a completed mainnet feature or a fixed activation date.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">How ERC-20 fee payment works in EIP-8141</div>
+    <p>Frame Transactions separate transaction validation, execution and gas-payment authorization into programmable frames. The EIP says this allows alternative fee-payment schemes without requiring a centralized third-party relayer.</p>
+    <p>The specification includes an explicit example titled <strong>“Sponsored Transaction (Fee Payment in ERC-20).”</strong> In that flow, a sponsor approves payment, the user transfers an ERC-20 token to the sponsor, the user's intended call executes, and an optional post-operation step can account for unpaid gas, refund tokens or convert tokens to ETH.</p>
+    <p>The EIP also states that EOAs using the default-code mechanism can benefit from account-abstraction features including sponsored transactions and paying gas in ERC-20 tokens.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">What “pay gas in stablecoins” does — and does not — mean</div>
+    <table>
+      <thead><tr><th>Claim</th><th>Current interpretation</th></tr></thead>
+      <tbody>
+        <tr><td>A user may be able to transact without holding ETH</td><td>Supported by the Frame Transactions sponsorship model.</td></tr>
+        <tr><td>An ERC-20 can be used to compensate a sponsor for transaction fees</td><td>Explicitly demonstrated in EIP-8141.</td></tr>
+        <tr><td>Stablecoins can fit this model</td><td>Yes, where the stablecoin is an ERC-20 accepted by the sponsor/application. The EIP is generic and does not privilege a specific stablecoin.</td></tr>
+        <tr><td>Ethereum's protocol base fee will be denominated and burned directly in stablecoins</td><td>No. EIP-8141 does not redefine Ethereum's base fee as a stablecoin-denominated protocol fee.</td></tr>
+        <tr><td>USDC, USDT or another named stablecoin has announced EIP-8141 support</td><td>Not established by the sources reviewed for this article.</td></tr>
+        <tr><td>The feature is live on Ethereum mainnet</td><td>No. Hegotá is targeted for 2027 and the final scope and implementation can still change.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Why this matters for stablecoins</div>
+    <p>Stablecoin payment UX has a structural mismatch today: the asset a user wants to spend and the asset needed to submit the transaction can be different. A wallet holding only an ERC-20 stablecoin may still require a separate ETH balance before the user can send, swap or interact with an application.</p>
+    <p>Frame Transactions create a native path for applications or sponsors to absorb that distinction. From the user's perspective, a wallet could potentially present one economic balance and one payment flow instead of forcing the user to acquire and maintain a separate gas asset.</p>
+    <p>This is particularly relevant to consumer payments, remittances, payroll, merchant checkout and embedded wallets. In those contexts, requiring users to understand gas-token inventory is a product failure rather than a feature. Stablecoins become more useful when the infrastructure can hide that complexity safely.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">The important shift is distribution, not a new stablecoin</div>
+    <p>EIP-8141 does not create a new stablecoin and does not change the reserve, redemption or legal structure of any existing stable asset. Its significance is distribution infrastructure.</p>
+    <p>If wallets and applications adopt the model, ERC-20 stablecoins could become easier to use as the only visible balance in a transaction flow. That can expand practical utility without changing the token itself. The competitive effect would therefore depend on which issuers, wallets, payment processors, exchanges and sponsors integrate the new transaction model and how they price sponsorship.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Does this make ETH unnecessary?</div>
+    <p>No. The proposal changes what the user may need to hold, not the existence of Ethereum's native fee accounting. The sponsor mechanism can let the user compensate a sponsor in an ERC-20 while the sponsor handles the network-side gas obligation.</p>
+    <p>That distinction matters. “Users can pay in stablecoins” is a reasonable product-level description of the proposed experience. “Ethereum replaces ETH gas with stablecoins” overstates what EIP-8141 specifies.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Stable or Gone treatment</div>
+    <p><strong>Current SOG treatment: ecosystem infrastructure article / non-canonical watch.</strong></p>
+    <p>This development does not by itself change the canonical status of USDC, USDT or any other stable asset. No specific issuer or stablecoin is being promoted, impaired, migrated or discontinued by EIP-8141 alone.</p>
+    <p>It is still important enough to publish because it changes the possible transaction infrastructure around stablecoins. SOG therefore treats it as a material ecosystem development while keeping the canonical stablecoin, issuer, event and evidence datasets unchanged.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">What SOG will watch next</div>
+    <ul>
+      <li>Hegotá client implementations and public devnet support for Frame Transactions;</li>
+      <li>changes to EIP-8141's fee-payment and sponsorship mechanics;</li>
+      <li>wallets announcing Frame Transaction support;</li>
+      <li>stablecoin issuers or payment companies explicitly supporting sponsored ERC-20 fee payment;</li>
+      <li>which ERC-20 assets sponsors accept and under what pricing/refund rules;</li>
+      <li>mainnet activation timing and any scope changes before Hegotá ships.</li>
+    </ul>
+    <p>A later announcement by a specific stablecoin issuer, wallet or payment system may justify a separate SOG event or article. This article does not pre-assign that outcome.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Sources</div>
+    <ul>
+      <li><a href="https://blog.ethereum.org/2026/09/07/protocol-hegota-eips" rel="noreferrer">Ethereum Foundation Protocol Cluster, September 7, 2026</a> — Hegotá tier list; EIP-8141 is rated S-tier and described as the locked-in execution-layer headliner.</li>
+      <li><a href="https://eips.ethereum.org/EIPS/eip-8141" rel="noreferrer">EIP-8141: Frame Transaction</a> — specification, EOA support, alternative fee-payment design and the sponsored ERC-20 fee-payment example.</li>
+      <li><a href="https://ethereum.org/roadmap/" rel="noreferrer">Ethereum.org roadmap</a> — Hegotá 2027 target, Frame Transactions as a main feature, and the explicit warning that fork scope is not final.</li>
+    </ul>
+  </section>
+</BaseLayout>
