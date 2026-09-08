@@ -1,5 +1,5 @@
 ---
-import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ArticleLayout from '../../../layouts/ArticleLayout.astro';
 const headline = 'Ethereum Hegotá Targets ERC-20 Gas Payments: What EIP-8141 Means for Stablecoins';
 const title = `${headline} — Stable or Gone`;
 const description = 'Ethereum has made EIP-8141 Frame Transactions a locked-in execution-layer headliner for Hegotá. SOG explains how ERC-20 fee payment works, why it matters for stablecoins, and what remains unconfirmed.';
@@ -17,10 +17,20 @@ const jsonLd = {
   about: ['stablecoins', 'Ethereum', 'EIP-8141', 'Frame Transactions', 'Hegotá', 'ERC-20 gas payment', 'account abstraction']
 };
 ---
-<BaseLayout title={title} description={description} canonicalPath={canonicalPath} jsonLd={jsonLd}>
+<ArticleLayout
+  title={title}
+  description={description}
+  canonicalPath={canonicalPath}
+  headline={headline}
+  sectionLabel="Ecosystem infrastructure"
+  deck="Ethereum has elevated Frame Transactions into the Hegotá execution-layer package. The stablecoin significance is not a new token or a new reserve model: it is the possibility of removing the separate ETH-for-gas balance from the user-facing payment flow."
+  publishedAt="September 8, 2026"
+  treatment="Non-canonical analysis"
+  scope="Ethereum transaction infrastructure / stablecoin payment UX"
+  jsonLd={jsonLd}
+>
   <section class="panel registry">
-    <div class="bar">Article · Published September 8, 2026 · Non-canonical analysis</div>
-    <h1>{headline}</h1>
+    <div class="bar">Why this is stablecoin infrastructure news</div>
     <p><strong>Ethereum's Protocol Cluster has ranked EIP-8141 Frame Transactions as an S-tier, locked-in execution-layer headliner for the Hegotá upgrade targeted for 2027.</strong> The proposal is broader than stablecoins, but one of its explicit use cases is paying transaction fees with ERC-20 tokens through a sponsor rather than requiring the user to hold ETH for gas.</p>
     <p>That makes EIP-8141 material stablecoin infrastructure news. It could remove one of the most persistent usability frictions in onchain stablecoin payments: a user can hold the token they want to send yet still be unable to transact because the wallet has no ETH for gas.</p>
   </section>
@@ -100,4 +110,4 @@ const jsonLd = {
       <li><a href="https://ethereum.org/roadmap/" rel="noreferrer">Ethereum.org roadmap</a> — Hegotá 2027 target, Frame Transactions as a main feature, and the explicit warning that fork scope is not final.</li>
     </ul>
   </section>
-</BaseLayout>
+</ArticleLayout>
