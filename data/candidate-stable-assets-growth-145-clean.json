@@ -1,0 +1,18 @@
+[
+  {
+    "candidate_id": "sog_cand_000146",
+    "proposed_record_id": "sog_st_usdb_bridge",
+    "slug": "bridge-usdb",
+    "name": "Bridge USDB",
+    "symbol": "USDB",
+    "aliases": ["USDB", "Bridge USDB"],
+    "candidate_type": "stablecoin",
+    "asset_class": "stablecoin",
+    "reference_kind": "fiat",
+    "reference_label": "USD",
+    "priority": "P0",
+    "status": "promoted",
+    "target_batch": "batch_042",
+    "notes": "Promoted from Bridge primary materials establishing active issuance, Bridge issuer identity, 1:1 USD backing, segregated and stated bankruptcy-remote reserves, current redemption/conversion paths and supported Base/Solana routes. Canonical identity is namespaced from Blast USDB; exact authoritative contract addresses, precise holder legal claim and universal holder reward entitlement remain explicit unknowns."
+  }
+]

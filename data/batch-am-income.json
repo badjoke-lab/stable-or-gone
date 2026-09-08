@@ -1,0 +1,3 @@
+[
+  {"id":"sog_st_usdb_bridge","availability":"unknown","source":"reserve_income","accrual":"external_distribution","rate":"unknown","related_asset_ids":[],"evidence_ids":["sog_src_usdb_bridge_launch_20250507","sog_src_usdb_bridge_docs_20260909","sog_src_usdb_bridge_faq_20260909"],"notes":"Bridge describes stablecoin reserve economics and developer-facing reward or marketing-fee distribution, but the reviewed sources do not establish a universal intrinsic yield entitlement for every USDB holder. The token is therefore not modeled as natively yield-bearing."}
+]
