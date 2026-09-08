@@ -1,0 +1,56 @@
+{
+  "schema_version": "1.0",
+  "batch_id": "batch_042",
+  "reviewed_at": "2026-09-09",
+  "base_canonical_assets": 143,
+  "prescreen_pool": [
+    {
+      "name": "USDB",
+      "symbol": "USDB",
+      "issuer_or_operator": "Bridge",
+      "reference": "USD",
+      "decision": "promote",
+      "candidate_id": "sog_cand_000146",
+      "primary_sources": ["https://www.bridge.xyz/news/usdb","https://apidocs.bridge.xyz/platform/issuance/usdb","https://apidocs.bridge.xyz/platform/issuance/faq","https://apidocs.bridge.xyz/get-started/introduction/what-we-support/payment-routes"],
+      "reason": "Bridge primary materials establish a live Bridge-issued USDB, 1:1 USD backing, reserve segregation and stated bankruptcy-remoteness, conversion/redemption paths, and current Base/Solana support. Exact contract addresses and universal holder reward entitlement are not inferred."
+    },
+    {
+      "name": "Stabld family",
+      "symbol": "stUSD / stGBP / stEUR",
+      "issuer_or_operator": "Stabld",
+      "reference": "USD / GBP / EUR",
+      "decision": "identity_split_hold",
+      "candidate_id": null,
+      "reason": "Current evidence establishes a live Stabld product surface but does not cleanly separate which denomination-specific stable asset is presently issued and live. Brand-level activity is not converted into three canonical asset records."
+    },
+    {
+      "name": "XrymaCoin",
+      "symbol": "XREUR",
+      "issuer_or_operator": "Xryma Plc",
+      "reference": "EUR",
+      "decision": "launch_verification_hold",
+      "candidate_id": "sog_cand_000144",
+      "reason": "The announced 2026-09-03 circulation date has passed, but actual issuance remains gated on primary confirmation rather than calendar inference."
+    },
+    {
+      "name": "Gaia GUSD",
+      "symbol": "GUSD",
+      "issuer_or_operator": "Gaia / Bridge boundary unresolved",
+      "reference": "USD",
+      "decision": "needs_additional_review",
+      "candidate_id": "existing_pending_candidate",
+      "reason": "Existing protected pending candidate; live-launch evidence and exact issuer boundary remain unresolved."
+    },
+    {
+      "name": "Open USD",
+      "symbol": "OUSD",
+      "issuer_or_operator": "Open Standard",
+      "reference": "USD",
+      "decision": "hold_not_launched",
+      "candidate_id": null,
+      "reason": "The operator's current launch language remains future-tense, so external platform references are not used to override the issuer/operator launch boundary."
+    }
+  ],
+  "summary": {"advance_to_canonical_promotion":1,"identity_split_hold":1,"launch_verification_hold":1,"hold_not_launched":1,"needs_additional_review":1},
+  "boundary": "Only USDB advances. Planned dates, brand-level live claims, external platform references and unresolved issuer boundaries are insufficient for canonical promotion."
+}
