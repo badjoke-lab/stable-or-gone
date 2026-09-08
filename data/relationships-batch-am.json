@@ -1,0 +1,3 @@
+[
+  {"id":"sog_rel_usdb_bridge_20250507","stablecoin_id":"sog_st_usdb_bridge","organization_id":"sog_issuer_bridge","role":"legal_issuer","start_date":"2025-05-07","end_date":null,"status":"active","evidence_ids":["sog_src_usdb_bridge_launch_20250507","sog_src_usdb_bridge_docs_20260909","sog_src_usdb_bridge_faq_20260909"],"notes":"Bridge official materials identify USDB as a stablecoin issued and managed by Bridge."}
+]
