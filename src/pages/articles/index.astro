@@ -1,23 +1,94 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 const title = 'Articles — Stable or Gone';
-const description = 'Source-backed analysis of stablecoin launches, institutions, regulation, market structure, and lifecycle developments.';
+const description = 'Source-backed analysis of stablecoin launches, institutions, regulation, market structure, infrastructure, and lifecycle developments.';
 const canonicalPath = '/articles/';
+const articles = [
+  {
+    href: '/articles/ethereum-hegota-eip-8141-stablecoin-gas-payments/',
+    title: 'Ethereum Hegotá Targets ERC-20 Gas Payments: What EIP-8141 Means for Stablecoins',
+    summary: 'Frame Transactions are the locked-in execution-layer headliner for Hegotá. The article separates ERC-20 fee sponsorship from direct stablecoin-denominated protocol gas and explains the stablecoin payment UX implications.',
+    published: 'September 8, 2026',
+    scope: 'Ecosystem infrastructure',
+    treatment: 'Non-canonical analysis'
+  },
+  {
+    href: '/articles/21-financial-institutions-joint-stablecoin-venture/',
+    title: '21 Financial Institutions Plan Joint Stablecoin Venture, Targeting USD Launch in H1 2027',
+    summary: 'MUFG, Goldman Sachs, Bank of America, Citi and other institutions have committed to establish a new company. The article separates confirmed plans from the still-unidentified stablecoin product.',
+    published: 'September 2, 2026',
+    scope: 'Institutions / market structure',
+    treatment: 'Non-canonical analysis'
+  }
+];
 ---
 <BaseLayout title={title} description={description} canonicalPath={canonicalPath}>
-  <section class="panel registry">
-    <div class="bar">Articles</div>
-    <h1>Stablecoin developments, separated from the registry</h1>
-    <p>These articles explain material developments that may matter to the stablecoin market but are not, by publication alone, canonical Stable or Gone records. Confirmed facts, unresolved questions, and analysis are kept separate.</p>
-  </section>
-  <section class="panel registry">
-    <div class="bar">September 8, 2026</div>
-    <h2><a href="/articles/ethereum-hegota-eip-8141-stablecoin-gas-payments/">Ethereum Hegotá Targets ERC-20 Gas Payments: What EIP-8141 Means for Stablecoins</a></h2>
-    <p>Frame Transactions are now the locked-in execution-layer headliner for Hegotá. What ERC-20 fee sponsorship actually does, why it matters for stablecoin payment UX, and what it does not change about Ethereum gas.</p>
-  </section>
-  <section class="panel registry">
-    <div class="bar">September 2, 2026</div>
-    <h2><a href="/articles/21-financial-institutions-joint-stablecoin-venture/">21 Financial Institutions Plan Joint Stablecoin Venture, Targeting USD Launch in H1 2027</a></h2>
-    <p>MUFG, Goldman Sachs, Bank of America, Citi and other institutions have committed to establish a new company. What is confirmed, what remains unknown, and why the plan matters for bank deposits, reserve economics and competition with existing stablecoins.</p>
-  </section>
+  <article class="guide-index-page" data-article-index>
+    <header class="guide-index-masthead">
+      <div class="guide-index-overline">
+        <span>Editorial archive</span>
+        <span>Source-backed stablecoin analysis</span>
+      </div>
+      <div class="guide-index-title">
+        <h1>Articles</h1>
+        <p>Material stablecoin developments that deserve explanation but do not, by publication alone, alter the canonical registry. Confirmed facts, unresolved questions, interpretation, and SOG treatment stay visibly separate.</p>
+      </div>
+      <dl class="guide-index-ledger" aria-label="Article archive summary">
+        <div><dt>Published articles</dt><dd>{articles.length}</dd></div>
+        <div><dt>Canonical changes from publication</dt><dd>0</dd></div>
+        <div><dt>Latest publication</dt><dd>September 8, 2026</dd></div>
+        <div><dt>Editorial boundary</dt><dd>Analysis ≠ registry promotion</dd></div>
+      </dl>
+    </header>
+
+    <nav class="guide-index-nav" aria-label="Article archive navigation">
+      <a href="#latest-articles">Latest articles</a>
+      <a href="#article-boundary">Editorial boundary</a>
+      <a href="/guides/">Guides</a>
+      <a href="/methodology/">Methodology</a>
+    </nav>
+
+    <section class="guide-index-section" id="latest-articles">
+      <div class="guide-index-section-heading">
+        <h2>Latest articles</h2>
+        <p>Read the analysis surface, then follow canonical stablecoin, organization, event, and evidence pages when a development crosses the registry threshold.</p>
+      </div>
+      <div class="guide-index-table">
+        <table>
+          <thead><tr><th>Article</th><th>Scope</th><th>Published</th><th>Treatment</th></tr></thead>
+          <tbody>
+            {articles.map((article) => (
+              <tr>
+                <td><h3><a href={article.href}>{article.title}</a></h3><p>{article.summary}</p></td>
+                <td>{article.scope}</td>
+                <td>{article.published}</td>
+                <td><span class="guide-index-status">{article.treatment}</span></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div class="guide-index-mobile" aria-label="Published articles">
+        {articles.map((article) => (
+          <article>
+            <h3><a href={article.href}>{article.title}</a></h3>
+            <p>{article.summary}</p>
+            <p><small>{article.scope} · {article.published} · {article.treatment}</small></p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="guide-index-section" id="article-boundary">
+      <div class="guide-index-section-heading">
+        <h2>Editorial boundary</h2>
+        <p>Articles can cover important infrastructure, regulation, institutions, and market structure before a specific stable asset qualifies for a canonical record change.</p>
+      </div>
+      <nav class="guide-index-reference" aria-label="Article archive reference links">
+        <a href="/stablecoins/"><strong>Stablecoin register</strong><span>Canonical asset records and current lifecycle state.</span></a>
+        <a href="/events/"><strong>Events</strong><span>Canonical lifecycle events tied to identified records and evidence.</span></a>
+        <a href="/methodology/"><strong>Methodology</strong><span>How Stable or Gone separates evidence, uncertainty, interpretation, and record promotion.</span></a>
+      </nav>
+    </section>
+  </article>
 </BaseLayout>
