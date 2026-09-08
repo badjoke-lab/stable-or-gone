@@ -1,19 +1,19 @@
 {
   "schema_version": "3.0-parity-baseline",
   "status": "current",
-  "baseline_id": "sog_registry_v3_parity_batch_041_143_assets_2026_09_08",
-  "recorded_at": "2026-09-08",
-  "data_checkpoint_commit": "agent/record-growth-batch-041-dlusd-promotion",
-  "source_baseline_id": "sog_registry_v3_parity_batch_040_142_assets_2026_09_05",
-  "canonical_checkpoint_id": "sog_batch_041_canonical_143_2026_09_08",
+  "baseline_id": "sog_registry_v3_parity_batch_042_144_assets_2026_09_09",
+  "recorded_at": "2026-09-09",
+  "data_checkpoint_commit": "agent/record-growth-batch-042-usdb-promotion",
+  "source_baseline_id": "sog_registry_v3_parity_batch_041_143_assets_2026_09_08",
+  "canonical_checkpoint_id": "sog_batch_042_canonical_144_2026_09_09",
   "v2_composed_baseline": "docs/migration/registry-v2-baseline.json",
   "v3_foundation": "docs/migration/registry-v3-foundation.json",
   "v3_income_profiles": "docs/migration/registry-v3-income-profiles.json",
-  "expected_v2_counts": {"stablecoins":143,"organizations":124,"relationships":155,"classifications":143,"profiles":143,"events":218,"event_details":218,"evidence":626,"evidence_relations":626,"reserve_reports":131,"known_unknowns":380,"regulatory_notes":9,"deployments":213},
-  "expected_v3_counts": {"legal_profiles":143,"stable_asset_relationships":5,"reserve_components":177,"income_profiles":143,"deployment_view":213},
-  "expected_v3_coverage": {"legal_profiles":143,"income_profiles":143,"reserve_component_assets":143,"deployment_view_assets":137},
+  "expected_v2_counts": {"stablecoins":144,"organizations":124,"relationships":156,"classifications":144,"profiles":144,"events":219,"event_details":219,"evidence":631,"evidence_relations":631,"reserve_reports":131,"known_unknowns":381,"regulatory_notes":9,"deployments":215},
+  "expected_v3_counts": {"legal_profiles":144,"stable_asset_relationships":5,"reserve_components":181,"income_profiles":144,"deployment_view":215},
+  "expected_v3_coverage": {"legal_profiles":144,"income_profiles":144,"reserve_component_assets":144,"deployment_view_assets":138},
   "machine_readable_contract": {"schema_version":"1.0.0","data_schema_version":"sog_registry_v2","compatibility_mode":"v2_public_contract_with_additive_v3_summary","registry_v3_summary":true,"summary_locations":["version.data.registry_v3","manifest.registry_v3"],"data_safety":{"canonical_only":true,"includes_unreviewed_candidates":false,"includes_internal_monitoring":false,"includes_private_notes":false}},
   "audit_report": "docs/audits/registry-v2-v3-machine-readable-parity-100-assets.md",
   "validator": "scripts/validate-registry-v2-v3-machine-readable-parity.mjs",
-  "notes": "Batch 041 parity baseline advances canonical coverage from 142 to 143 assets with Deel DLUSD. Existing Bridge organization is reused and one Tempo deployment advances deployment coverage to 137 canonical assets; exact contract, issuing affiliate, reserve allocation and direct Bridge-redemption boundary remain explicit unknowns."
+  "notes": "Batch 042 parity baseline advances canonical coverage from 143 to 144 assets with Bridge USDB. Existing Bridge organization is reused and two current supported deployments advance deployment coverage to 138 canonical assets; exact contract addresses, precise holder claim and universal holder reward entitlement remain explicit unknowns."
 }
