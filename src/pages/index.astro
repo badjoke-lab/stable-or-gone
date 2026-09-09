@@ -4,15 +4,15 @@ import StablecoinMark from '../components/StablecoinMark.astro';
 import { formatLifecycleLabel } from '../utils/publicTaxonomy';
 import { formatReferenceTargetLabel } from '../utils/referenceTarget';
 import { resolvePrimaryRelationshipForStablecoin } from '../utils/primaryDisplayRelationship';
-import { getStablecoins, getOrganizations, getRelationships, getEvents, getEvidence } from '../lib/data/registry';
-import { getEvidenceSourceIdentitySummary } from '../lib/data/evidenceSources';
+import { getStablecoins, getOrganizations, getRelationships, getEvents } from '../lib/data/registry';
+import { getCompleteEvidence, getEvidenceSourceIdentitySummary } from '../lib/data/evidenceSources';
 import { getFeaturedGuides } from '../data/guideCatalog';
 
 const stablecoins = getStablecoins();
 const organizations = getOrganizations();
 const relationships = getRelationships();
 const events = getEvents();
-const evidence = getEvidence();
+const evidence = getCompleteEvidence();
 const evidenceSummary = getEvidenceSourceIdentitySummary();
 
 const stablecoinById = new Map(stablecoins.map((coin) => [coin.id, coin] as const));
@@ -128,7 +128,7 @@ const jsonLd = {
       <div><dt>Organizations</dt><dd>{organizations.length}</dd><small>connected organizations</small></div>
       <div><dt>Events</dt><dd>{events.length}</dd><small>material records</small></div>
       <div><dt>Evidence</dt><dd>{evidence.length}</dd><small>{evidenceSummary.source_identities} source identities</small></div>
-      <div><dt>Last verified</dt><dd class="home-kpi-date">{latestVerified}</dd><small>latest asset review date</small></div>
+      <div><dt>Last verified</dt><dd class="home-kpi-date" data-ui-mono="true">{latestVerified}</dd><small>latest asset review date</small></div>
     </dl>
 
     {recentEvents.length > 0 && (
