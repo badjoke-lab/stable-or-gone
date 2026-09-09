@@ -5,9 +5,17 @@ import EventEditorialBody from './EventEditorialBody.astro';
 import { buildEventDetailView } from '../lib/views/eventDetailView';
 const { event } = Astro.props;
 const view = buildEventDetailView(event);
-const title = `${view.eventTitle} — Stablecoin Event | Stable or Gone`;
+const title = `${view.eventTitle} — SOG Event`;
 const description = view.eventDescription;
-const jsonLd = { '@context': 'https://schema.org', '@type': 'Article', headline: view.eventTitle, url: `https://www.stableorgone.com/event/${event.id}/`, description, datePublished: event.event_date };
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: view.eventTitle,
+  url: `https://www.stableorgone.com/event/${event.id}/`,
+  description,
+  datePublished: event.event_date,
+  image: 'https://www.stableorgone.com/og/sog-og.svg'
+};
 ---
 <BaseLayout title={title} description={description} canonicalPath={`/event/${event.id}/`} jsonLd={jsonLd}>
   <article class="event-detail-page" data-ui-v3-event-detail>

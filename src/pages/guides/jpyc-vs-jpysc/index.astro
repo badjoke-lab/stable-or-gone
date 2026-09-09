@@ -6,8 +6,8 @@ import RelatedSogRecords from '../../../components/RelatedSogRecords.astro';
 import { getGuide, guideCategoryLabels } from '../../../data/guideCatalog';
 
 const guide = getGuide('jpyc-vs-jpysc');
-const title = 'JPYC vs JPYSC: Two Japanese-Yen Stablecoins Compared — Stable or Gone';
-const description = 'A side-by-side comparison of JPYC and JPYSC covering issuer, legal structure, reserves, redemption, transaction limits, distribution, wallet transfer, and launch stage.';
+const title = 'JPYC vs JPYSC: Yen Stablecoin Comparison — Stable or Gone';
+const description = 'Compare JPYC and JPYSC by issuer, legal structure, reserves, redemption, transfer limits, distribution, wallet access, and launch stage.';
 const canonicalPath = '/guides/jpyc-vs-jpysc/';
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -15,6 +15,7 @@ const jsonLd = {
   headline: 'JPYC vs JPYSC',
   description,
   url: `https://www.stableorgone.com${canonicalPath}`,
+  image: 'https://www.stableorgone.com/og/sog-og.svg',
   inLanguage: 'en',
   isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://www.stableorgone.com/' },
   about: ['JPYC', 'JPYSC', 'Japanese yen stablecoins', 'electronic payment instruments', 'stablecoin comparison'],
