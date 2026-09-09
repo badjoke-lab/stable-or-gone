@@ -5,15 +5,15 @@ import EventIndexCard from './EventIndexCard.astro';
 import { buildEventIndexView } from '../lib/views/eventIndexView';
 
 const { records, filters, stablecoinSubjectCount, organizationSubjectCount, sourceIdentityCount } = buildEventIndexView();
-const title = 'Events — Stable or Gone';
-const description = 'Browse stablecoin lifecycle events by public category, precise subtype, status effect, recovery state, year, subjects, and evidence.';
+const title = 'Stablecoin Events: Launches, Depegs & More | Stable or Gone';
+const description = 'Browse reviewed stablecoin events including launches, depegs, migrations, regulatory actions, shutdowns, recoveries, and other lifecycle changes.';
 const jsonLd = { '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'Stablecoin Events', url: 'https://www.stableorgone.com/events/', description, isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://www.stableorgone.com/' } };
 ---
 <BaseLayout title={title} description={description} canonicalPath="/events/" jsonLd={jsonLd}>
   <div class="event-index-page" data-event-index data-ui-v3-events>
     <header class="event-index-masthead">
       <div class="event-index-overline"><span>Event register</span><nav aria-label="Related registers"><a href="/stablecoins/">Stablecoins</a><a href="/issuers/">Organizations</a></nav></div>
-      <div class="event-index-title"><div><p>Material changes and public records</p><h1>Events</h1></div><span>Launches, incidents, migrations, regulatory actions, shutdowns, recoveries, and other reviewed changes. Events are chronological records, not current-status labels.</span></div>
+      <div class="event-index-title"><div><p>Material changes and public records</p><h1>Stablecoin events</h1></div><span>Launches, incidents, migrations, regulatory actions, shutdowns, recoveries, and other reviewed changes. Events are chronological records, not current-status labels.</span></div>
       <dl class="event-index-ledger" aria-label="Event register totals"><div><dt>Events</dt><dd>{records.length}</dd></div><div><dt>Stablecoin subjects</dt><dd>{stablecoinSubjectCount}</dd></div><div><dt>Organization subjects</dt><dd>{organizationSubjectCount}</dd></div><div><dt>Source identities</dt><dd>{sourceIdentityCount}</dd></div></dl>
     </header>
 
