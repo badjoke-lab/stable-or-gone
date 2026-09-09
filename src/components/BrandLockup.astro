@@ -1,6 +1,7 @@
 ---
 import { uiV3BrandAssets } from '../../config/ui-v3-foundation.mjs';
 import '../styles/public-ui.css';
+import '../styles/redesign-v4.css';
 import MobileTableRuntime from './MobileTableRuntime.astro';
 import DisclosureRuntime from './DisclosureRuntime.astro';
 import TechnicalTokenRuntime from './TechnicalTokenRuntime.astro';
@@ -22,7 +23,7 @@ const {
   class: className = ''
 } = Astro.props;
 const loadsGlobalRuntime = className.split(/\s+/).includes('site-brand');
-const effectiveSurface = loadsGlobalRuntime ? 'light' : surface;
+const effectiveSurface = surface;
 const asset = compact
   ? (effectiveSurface === 'dark' ? uiV3BrandAssets.mark_on_dark : uiV3BrandAssets.mark_on_light)
   : (effectiveSurface === 'dark' ? uiV3BrandAssets.lockup_on_dark : uiV3BrandAssets.lockup_on_light);
