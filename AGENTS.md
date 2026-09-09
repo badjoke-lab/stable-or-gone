@@ -5,94 +5,110 @@ This file is the mandatory entry point for humans, AI agents, and automation wor
 ## Current authority
 
 ```text
-Current stage: UI_REDESIGN_V4_AUTHORITY
-Active implementation authority: config/ui-redesign-v4-authority.json
-Primary implementation branch: ui/sog-redesign-v4
+Current stage: POST_CUTOVER_STATS_HEALTH_SPLIT
+Active workstream specification: docs/stats-spec.md
+Implementation branch: ui/stats-registry-health-20260910
 Production branch: main
 Official public origin: https://www.stableorgone.com
-Partial redesign publication to main: forbidden
-Current public UI remains live until full redesign cutover: yes
+UI Redesign V4 production cutover: complete via PR #636 / merge 60940f0c1ad1d69961e839fa4979a7c4e29d91af
+Partial Stats / Registry Health publication to main: forbidden
 Ranking / scoring / recommendation authorized: no
 DNS / Cloudflare account mutation authorized: no
 New GA4 property / Measurement ID creation authorized: no
 ```
 
-Merged repository authority outranks chat memory, handoff prose, issue discussion, stale branch state, generated reports, and unmerged drafts.
+Merged repository authority outranks chat memory, handoff prose, issue discussion, stale branch state, generated reports, and unmerged drafts. The completed UI Redesign V4 authority remains historical implementation lineage; its accepted data, route, accessibility, mobile, and deployment contracts continue where they do not conflict with the current post-cutover workstream.
 
-## Mandatory redesign references
+## Mandatory references
 
-Before starting or resuming UI redesign work, read in this order:
+Before starting or resuming the current Stats / Registry Health work, read in this order:
 
-1. `config/ui-redesign-v4-authority.json`
-2. `docs/UI-REDESIGN-SPEC.md`
-3. `docs/UI-REDESIGN-SCHEDULE.md`
-4. `DESIGN.md`
-5. `docs/spec-governance.md`
-6. `docs/roadmap.md`
-7. `docs/deployment-policy.md`
-8. `docs/ai-era-registry-spec.md`
-9. `docs/ai-era-execution-schedule.md`
-10. relevant permanent data/classification/evidence/deployment specifications for the surface being edited
-11. current implementation of the affected route/components
+1. `AGENTS.md`
+2. `docs/stats-spec.md`
+3. `DESIGN.md`
+4. `docs/spec-governance.md`
+5. `docs/roadmap.md`
+6. `docs/deployment-policy.md`
+7. `docs/ai-era-registry-spec.md`
+8. `docs/ai-era-execution-schedule.md`
+9. relevant permanent data/classification/evidence/deployment specifications
+10. current implementation of `/stats/` and `/maintenance/`
 
 Do not rely on chat summaries when merged repository documents are available.
 
-## Redesign operating rule
+## Current operating rule
 
-At the start of each redesign session:
+At the start of each implementation session:
 
-- identify the current gate in `docs/UI-REDESIGN-SCHEDULE.md`;
-- fetch current `main` and `ui/sog-redesign-v4` heads;
-- determine whether `main` needs to be synced;
-- inspect the affected canonical data and current route implementation;
-- work only within the active gate unless a real dependency requires otherwise.
+- fetch current `main` and `ui/stats-registry-health-20260910` heads;
+- determine whether `main` advanced and must be synchronized before release;
+- inspect the current Stats and Maintenance implementations and the canonical fields used by them;
+- read `docs/stats-spec.md` before changing analytical semantics;
+- keep the public Stats and Registry Health responsibilities separate;
+- do not start unrelated framework, validator, or workflow work without a demonstrated need.
 
 At the end of each implementation unit:
 
-- update schedule checkboxes/status when a deliverable changed;
+- update the relevant specification / roadmap / schedule status when deliverables changed;
 - record branch/head and validation results;
 - state completed and incomplete surfaces;
 - state latest main sync point;
 - state explicitly whether production changed.
 
-## Production safety
+## Public Stats / Registry Health boundary
 
-- Keep the current public UI on `main` through Gates 0–7.
-- Do not merge partial redesign pages to `main`.
-- Ordinary record growth, evidence, guides, monitoring, and maintenance may continue independently on `main`.
-- Sync current `main` into the redesign branch at safe checkpoints.
-- Record the pre-cutover `main` SHA before Gate 8 integration.
-- Roll back if a critical production regression is found after cutover.
+`/stats/` is the public analytical view. It should answer:
+
+- what the registry looks like now;
+- how lifecycle states are distributed;
+- how assets differ by supported canonical dimensions;
+- where historical failures are concentrated, using descriptive historical rates only;
+- how recorded material events changed over time;
+- how much evidence and coverage supports the public view;
+- where a reader can drill into the underlying registry.
+
+`/maintenance/` is the public-safe Registry Health / operations view. It may show aggregate review freshness, coverage, known-unknown counts, evidence depth, reviewed-corpus growth, public-layer integrity, and the existing monthly maintenance log.
+
+It must not publish monitoring candidates, private queues, candidate URLs, private notes, secrets, or row-level internal review tasks.
+
+Corpus growth, review freshness, missing-field coverage, and operational integrity belong primarily to Registry Health rather than the main public Stats narrative.
 
 ## Data integrity
 
 The UI adapts to canonical data. Canonical records must not be changed merely to make a desired visual state appear complete.
 
-Do not invent market cap, price, lifecycle, backing, redemption, reserve, access, regulatory, evidence-coverage, issuer, deployment, or related values. Mockup numbers are not production data.
+Do not invent market cap, price, lifecycle, backing, redemption, reserve, access, regulatory, evidence-coverage, issuer, deployment, failure-rate, or related values. Mockup numbers are not production data.
 
-Derived presentation labels require deterministic documented rules. Missing information must remain explicit as `Unknown`, `Not recorded`, or another approved null state.
+Derived analytical labels and rates require deterministic documented rules. Missing information must remain explicit as `Unknown`, `Not recorded`, or another approved null state.
 
-Preserve current deterministic per-asset JSON, provenance, evidence relationships, public machine-readable layer, Ledger Series projection, official-origin rules, legacy-host migration behavior, StablecoinMark/fallback behavior, and canonical logo-disposition requirements.
+Historical failure concentration is descriptive registry context, not a forecast, safety score, risk score, ranking, or investment recommendation.
+
+Preserve deterministic per-asset JSON, provenance, evidence relationships, public machine-readable layers, Ledger Series projection, official-origin rules, legacy-host migration behavior, StablecoinMark/fallback behavior, and canonical logo-disposition requirements.
 
 ## UI validation policy
 
-Preserve data/integrity/build/public-layer checks. Do not let obsolete visual baselines control the redesign.
+Preserve data/integrity/build/public-layer checks. New UI checks should target demonstrated failure modes: route health, broken links, horizontal overflow, control usability, basic accessibility, state correctness, and representative desktop/mobile inspection.
 
-Not redesign acceptance criteria:
+Do not restore obsolete UI-v3 visual baselines, generated SVG mock fidelity, or pixel-perfect equality to an outgoing composition as acceptance gates.
 
-- outgoing UI-v3 layout baselines;
-- old UI-repair baseline;
-- generated SVG mock fidelity;
-- representative visual assertions whose only purpose is freezing the outgoing UI;
-- pixel-perfect equality to the outgoing production site.
-
-New UI checks should target demonstrated failure modes: route health, broken links, horizontal overflow, control usability, basic accessibility, state correctness, and representative desktop/mobile inspection.
-
-Do not create new audit frameworks, validators, or workflow layers unless required by `docs/UI-REDESIGN-SPEC.md` or needed to cover an actual defect. Prefer implementing the product over expanding process machinery.
+Do not create new audit frameworks, validators, or workflow layers unless required by a current specification or needed to cover an actual defect. Prefer implementing the product over expanding process machinery.
 
 ## Mobile
 
-Mobile is part of each milestone, not a post-launch retrofit. A major surface is not complete until its desktop and mobile variants satisfy the relevant gate.
+Mobile is part of each public surface. Stats uses one major chart or analytical block per row at narrow widths, preserves exact counts alongside graphics, and avoids squeezed multi-column dashboards. Registry Health follows the same rule.
+
+## Production safety
+
+`main` is the production source and publishes automatically. Develop the Stats / Registry Health split on `ui/stats-registry-health-20260910`; do not merge only one half of the split or an obviously incomplete analytical state.
+
+Before release:
+
+- sync current `main` if it advanced;
+- run canonical, statistics, registry-integrity, Astro/build, public-layer, route/link, and representative responsive checks;
+- record the pre-merge `main` SHA;
+- merge the completed change once;
+- verify production routes and public data after deployment;
+- roll back on a critical regression.
 
 ## Enduring non-UI boundaries
 
@@ -105,6 +121,5 @@ DNS / Cloudflare account mutation: forbidden
 new GA4 identity creation or guessing: forbidden
 remote runtime Stablecoin-logo fetching: forbidden
 canonical fact invention for presentation: forbidden
+private monitoring/candidate publication: forbidden
 ```
-
-Historical completed authorities remain in repository history and their accepted machine/data/deployment contracts continue where they do not conflict with the active redesign authority. `docs/ui-v3-remediation-authority.md` is retained as historical regression context for accessibility, responsive safety, state handling, and canonical boundaries; its outgoing visual composition is not the new design target.
