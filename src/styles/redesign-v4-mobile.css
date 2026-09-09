@@ -52,6 +52,15 @@
     color: var(--ui-hover);
   }
 
+  /* Keep mobile controls above the fixed primary navigation. */
+  .comparison-dock {
+    bottom: calc(68px + env(safe-area-inset-bottom));
+  }
+
+  .stablecoin-index-filter-options {
+    bottom: calc(68px + env(safe-area-inset-bottom));
+  }
+
   .site-footer {
     padding-bottom: 12px;
   }
