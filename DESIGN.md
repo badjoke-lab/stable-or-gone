@@ -1,33 +1,16 @@
 # DESIGN.md — Stable or Gone
 
-Status: active restoration authority
-Updated: 2026-07-03
-Visual family: Terminal Registry
-Tracking: issue #281
-Restoration source: `3df568eab0a179d7690a88efb599156b0d659ab7`
+Status: active UI redesign authority
+Updated: 2026-09-09
+Authority: `config/ui-redesign-v4-authority.json`
+Detailed specification: `docs/UI-REDESIGN-SPEC.md`
+Execution schedule: `docs/UI-REDESIGN-SCHEDULE.md`
 
-## 0. Authority
-
-The Modern Data Product, Editorial Ledger, and Modern Evidence Registry directions were rejected in owner review. They must not be revived as the controlling visual system.
-
-The active authority is:
-
-```text
-DESIGN.md
-docs/ui-redesign/rebuild-contract-v4.md
-config/ui-v4-visual-acceptance.json
-docs/roadmap.md
-```
-
-The current work restores the original terminal-style visual family while retaining the modernized data, routes, information architecture, responsive behavior, accessibility behavior, and interactions developed later.
-
-No document or workflow may claim UI completion without satisfying the visual acceptance contract and explicit owner approval of the exact screenshot set.
-
-## 1. Product identity
+## Product identity
 
 Stable or Gone is a source-backed historical and operational registry for stablecoins and related stable-value assets.
 
-It must help a reader answer:
+The interface must help a reader answer quickly:
 
 - What is this asset now?
 - Can it be issued or redeemed?
@@ -37,97 +20,41 @@ It must help a reader answer:
 - What evidence supports the record?
 - What remains unknown?
 
-It must feel like a focused research terminal and evidence registry. It must not resemble a promotional crypto landing page, generic SaaS dashboard, newspaper reproduction, or trading interface with invented market data.
+## Active visual direction
 
-## 2. Visual direction
+The outgoing Terminal Registry / paper-derived treatments are not the redesign target.
 
-Use the restored Terminal Registry system:
+Use a modern stablecoin observatory system:
 
-- deep navy and near-black backgrounds;
-- layered dark panels with restrained depth;
-- cyan links and actions;
-- green, amber, red, violet, and muted gray for semantic states;
-- monospace typography as the default interface voice;
-- square controls and panels rather than rounded card styling;
-- compact, structured density appropriate for a research tool;
-- visible borders and table structure;
-- atmospheric radial/linear dark background treatment;
-- clear focus, hover, selected, and expanded states;
-- no light paper background;
-- no red editorial accent as the primary action color;
-- no giant newspaper masthead;
-- no generic white SaaS card grid.
+- deep graphite / near-black backgrounds;
+- layered dark panels;
+- clean sans-serif primary typography;
+- monospace restricted to technical metadata;
+- semantic green, amber, red, blue, violet and muted states;
+- dense but readable data layouts;
+- restrained borders and depth;
+- clear hierarchy before decoration;
+- no globe/Earth hero artwork as an implementation dependency;
+- no newspaper/paper visual system;
+- no retro-terminal parody;
+- no generated SVG mock as visual authority.
 
-The terminal style is a visual language, not permission to make the site unreadable. Current responsive transformations, bounded index behavior, search, filtering, pagination, comparison, and mobile cards remain protected.
+## Information architecture
 
-## 3. Protected assets and contracts
+Primary desktop product surfaces are Home, Stablecoin Register, Stablecoin Dossier, Compare, Material Events, Event Detail, Timeline, Stats, Issuer/Organization, Methodology/Data, Access & Regulation, Guides, Updates/Maintenance, and utility/legal surfaces.
 
-Preserve:
+Mobile is a first-class layout with bottom navigation, filter drawers, stacked record cards, vertical timelines, swipeable/stacked comparison, and one-chart-per-row analytics where appropriate.
 
-- 100 canonical stable assets;
-- 94 organizations;
-- 172 events;
-- 501 evidence records;
-- all current public routes;
-- machine-readable outputs and provenance;
-- current record hierarchy and field ownership;
-- keyboard operation and visible focus;
-- reduced-motion and forced-colors support;
-- 320px behavior and 200 percent zoom support;
-- mobile alternatives for dense tables;
-- bounded index pagination and URL state;
-- current S/G logo assets.
+## Data rule
 
-## 4. Typography and density
+Design never authorizes fabricated facts. All displayed values come from current canonical data or documented deterministic derived rules. Unsupported values remain explicit unknown/not-recorded states.
 
-The interface may be compact, but important information must remain readable.
+## Production rule
 
-Targets:
+The existing public UI remains live on `main` until the complete redesign passes `docs/UI-REDESIGN-SCHEDULE.md` Gate 7. The redesign is then merged in one cutover under Gate 8 and production-verified.
 
-- primary body and data: approximately 13–15px depending on context;
-- controls: approximately 12–14px with at least 42–44px target height;
-- metadata and headings may be smaller only when contrast and spacing remain sufficient;
-- H1 and major counts must not overwhelm the operational content;
-- long-form guide text must retain a comfortable line length and line height.
+## Acceptance
 
-## 5. Page hierarchy
+The new UI must pass data integrity, build, machine-readable/public-layer, route/link, responsive overflow, basic accessibility, and representative desktop/mobile browser checks.
 
-### Home
-
-Retain current search, registry totals, material changes, lifecycle distribution, recently reviewed records, guides, and reference links. Present them through the terminal visual family.
-
-### Stablecoin register
-
-Retain search, visible filter state, clear action, sorting, pagination, comparison, desktop table, and mobile record cards. Use terminal panels, compact controls, and cyan/semantic states.
-
-### Stablecoin dossier
-
-Retain the current operational hierarchy:
-
-1. current status and identity;
-2. redemption and backing;
-3. issuer and control;
-4. material events and lifecycle history;
-5. deployments and legal context;
-6. evidence and unresolved questions;
-7. raw registry fields and coverage.
-
-### Events and Organizations
-
-Retain current filters, bounded browsing, responsive transformations, record relationships, and evidence context. Apply the same terminal system without replacing the page semantics.
-
-### Guides and long-form
-
-Retain contents navigation, readable article width, examples, callouts, tables, and sources. Apply dark terminal surfaces without compressing prose into an unreadable data table.
-
-## 6. Acceptance
-
-Screenshot generation is not design approval. Automated rendering checks establish technical health only.
-
-Completion requires:
-
-- no required audit step skipped;
-- desktop and mobile artifact review;
-- explicit approval of Home, Register, Dossier, Events, Organizations, and Guides/long-form;
-- all data, route, provenance, accessibility, and machine-readable checks green;
-- explicit owner approval recorded against the exact commit and screenshot run.
+Pixel fidelity to the outgoing UI, old UI-v3 layout baselines, and generated SVG mock fidelity are not redesign acceptance criteria.
