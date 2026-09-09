@@ -117,10 +117,12 @@ async function checkOnce() {
   const eventsText = visibleText(eventsResponse.text);
   const initialStablecoinRangeEnd = Math.min(20, counts.primary_records);
 
-  assert(homeText.includes(`${counts.primary_records} stable assets`), 'home stable asset count mismatch');
-  assert(homeText.includes(`${breakdown.organizations} organizations`), 'home organization count mismatch');
-  assert(homeText.includes(`${counts.events} events`), 'home event count mismatch');
-  assert(homeText.includes(`Source identities ${breakdown.evidence_source_identities}`), 'home source identity count mismatch');
+  assert(homeText.includes('Stablecoin state observatory'), 'home V4 observatory marker missing');
+  assert(homeText.includes(`${counts.primary_records} canonical records`), 'home lifecycle canonical count mismatch');
+  assert(homeText.includes(`Stablecoins ${counts.primary_records} canonical stable assets`), 'home stablecoin KPI mismatch');
+  assert(homeText.includes(`Organizations ${breakdown.organizations} connected organizations`), 'home organization KPI mismatch');
+  assert(homeText.includes(`Events ${counts.events} material records`), 'home event KPI mismatch');
+  assert(homeText.includes(`Evidence ${counts.evidence} ${breakdown.evidence_source_identities} source identities`), 'home evidence KPI mismatch');
   assert(stablecoinsText.includes(`${counts.primary_records} records`), 'stablecoin index record count mismatch');
   assert(stablecoinsText.includes(`1–${initialStablecoinRangeEnd} of ${counts.primary_records} records`), 'stablecoin index initial range mismatch');
   assert(stablecoinsText.includes('20 per page'), 'stablecoin index page-size marker missing');
