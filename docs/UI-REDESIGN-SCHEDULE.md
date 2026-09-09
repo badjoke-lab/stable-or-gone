@@ -14,93 +14,95 @@ This is a gated execution schedule. Gate completion, not elapsed time, controls 
 - [x] redesign schedule defined;
 - [x] implementation branch created from main checkpoint `5e12ed2c5c40f945a8af5821c443fefad7594a98`;
 - [x] agent operating rules defined;
-- [ ] authority/docs merged to main;
-- [x] obsolete `.github/workflows/visual-audit.yml` removed from the redesign branch;
+- [x] authority/docs merged to main as PR #635, merge `8e6d34d2893c6f557d90419158f260aa7ca01c92`;
+- [x] obsolete `.github/workflows/visual-audit.yml` removed;
 - [x] legacy UI-v3 / SVG visual gates explicitly quarantined from redesign completion gating by the active authority/spec/agent rules.
+
+Gate 0 status: COMPLETE.
 
 Exit: implementation can proceed without publishing partial UI or being blocked by obsolete visual contracts.
 
 ## Gate 1 — Design system and responsive shell
 
-- design tokens;
-- typography hierarchy;
-- lifecycle/status color semantics;
-- panel/card/table/form primitives;
-- desktop navigation shell;
-- mobile navigation shell;
-- shared responsive spacing/layout;
-- unknown/empty/error display rules.
+- [ ] design tokens;
+- [ ] typography hierarchy;
+- [ ] lifecycle/status color semantics;
+- [ ] panel/card/table/form primitives;
+- [ ] desktop navigation shell;
+- [ ] mobile navigation shell;
+- [ ] shared responsive spacing/layout;
+- [ ] unknown/empty/error display rules.
 
 Exit: common desktop/mobile shells can render canonical data without page-specific hacks.
 
 ## Gate 2 — Discovery
 
-- Home desktop + mobile;
-- Register desktop + mobile;
-- search/filter/sort/pagination;
-- mobile filter drawer;
-- compare-selection entry point.
+- [ ] Home desktop + mobile;
+- [ ] Register desktop + mobile;
+- [ ] search/filter/sort/pagination;
+- [ ] mobile filter drawer;
+- [ ] compare-selection entry point.
 
 Exit: canonical records are discoverable and filterable on desktop and mobile.
 
 ## Gate 3 — Stablecoin research
 
-- Dossier desktop + mobile;
-- issuer/control;
-- backing/redemption/reserve sections;
-- deployments/access where supportable;
-- evidence;
-- regulatory notes;
-- known unknowns;
-- lifecycle/history presentation.
+- [ ] Dossier desktop + mobile;
+- [ ] issuer/control;
+- [ ] backing/redemption/reserve sections;
+- [ ] deployments/access where supportable;
+- [ ] evidence;
+- [ ] regulatory notes;
+- [ ] known unknowns;
+- [ ] lifecycle/history presentation.
 
 Exit: dossier answers current state and historical basis without fabricated summaries.
 
 ## Gate 4 — Events and history
 
-- Events desktop + mobile;
-- Event Detail desktop + mobile;
-- Timeline desktop + mobile;
-- evidence-linked chronology;
-- before/after display only where supported.
+- [ ] Events desktop + mobile;
+- [ ] Event Detail desktop + mobile;
+- [ ] Timeline desktop + mobile;
+- [ ] evidence-linked chronology;
+- [ ] before/after display only where supported.
 
 Exit: material state change is navigable as structured history.
 
 ## Gate 5 — Compare, issuers, and analytics
 
-- Compare desktop + mobile;
-- Issuer/Organization detail desktop + mobile;
-- Stats desktop + mobile;
-- documented deterministic aggregation rules.
+- [ ] Compare desktop + mobile;
+- [ ] Issuer/Organization detail desktop + mobile;
+- [ ] Stats desktop + mobile;
+- [ ] documented deterministic aggregation rules.
 
 Exit: all comparison/statistics values are canonical or documented derivations.
 
 ## Gate 6 — Reference and secondary surfaces
 
-- Methodology / Data;
-- Access & Regulation;
-- Guides index + article layout;
-- Updates / Maintenance;
-- Support / Contact / About / legal utility pages;
-- 404 / empty / error states.
+- [ ] Methodology / Data;
+- [ ] Access & Regulation;
+- [ ] Guides index + article layout;
+- [ ] Updates / Maintenance;
+- [ ] Support / Contact / About / legal utility pages;
+- [ ] 404 / empty / error states.
 
 Exit: no production route family remains visually incompatible unless explicitly approved.
 
 ## Gate 7 — Full redesign verification
 
-- sync latest `main`;
-- canonical/classification/profile/event/evidence validation;
-- registry integrity;
-- Astro check;
-- production-equivalent build;
-- reproducibility/public-layer verification;
-- route and broken-link check;
-- desktop representative browser inspection;
-- mobile representative browser inspection;
-- horizontal overflow check;
-- basic accessibility checks;
-- data-vs-UI spot checks;
-- pre-cutover rollback SHA recorded.
+- [ ] sync latest `main`;
+- [ ] canonical/classification/profile/event/evidence validation;
+- [ ] registry integrity;
+- [ ] Astro check;
+- [ ] production-equivalent build;
+- [ ] reproducibility/public-layer verification;
+- [ ] route and broken-link check;
+- [ ] desktop representative browser inspection;
+- [ ] mobile representative browser inspection;
+- [ ] horizontal overflow check;
+- [ ] basic accessibility checks;
+- [ ] data-vs-UI spot checks;
+- [ ] pre-cutover rollback SHA recorded.
 
 No pixel-perfect equality to the outgoing UI is allowed as a release gate.
 
