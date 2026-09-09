@@ -5,20 +5,13 @@ This file is the mandatory entry point for humans, AI agents, and automation wor
 ## Current authority
 
 ```text
-Repository state: REVIEW_GATE
-Current stage: REVIEW_GATE
-Active implementation authority: none
-Current closeout contract: config/ledger-series-phase9-closeout.json
-Automatic continuation: false
+Current stage: UI_REDESIGN_V4_AUTHORITY
+Active implementation authority: config/ui-redesign-v4-authority.json
+Primary implementation branch: ui/sog-redesign-v4
+Production branch: main
 Official public origin: https://www.stableorgone.com
-Legacy migration origin: https://sog.badjoke-lab.com
-Current canonical hash: sha256:4e7570b6fab88a8178a01ae280a36d98787573b376440b891491f25469458798
-Canonical file count: 466
-Canonical delta authorized: 0
-Canonical archive additions authorized: 0
-Canonical Market Access promotion authorized: no
-Additional logo promotions authorized: no
-New unrelated public route family authorized: no
+Partial redesign publication to main: forbidden
+Current public UI remains live until full redesign cutover: yes
 Ranking / scoring / recommendation authorized: no
 DNS / Cloudflare account mutation authorized: no
 New GA4 property / Measurement ID creation authorized: no
@@ -26,206 +19,92 @@ New GA4 property / Measurement ID creation authorized: no
 
 Merged repository authority outranks chat memory, handoff prose, issue discussion, stale branch state, generated reports, and unmerged drafts.
 
-No new implementation begins from this gate without a fresh reviewed authority.
+## Mandatory redesign references
 
-## Current canonical counts
+Before starting or resuming UI redesign work, read in this order:
 
-```text
-Canonical stable assets: 119
-Organizations: 109
-Relationships: 131
-Events: 194
-Canonical Evidence: 585
-Evidence Relations: 585
-Reserve reports: 127
-Known unknowns: 352
-Regulatory notes: 9
-Deployments: 186
-Legal profiles: 119
-Reserve components: 153
-Income profiles: 119
-Market Access Records: 12
-Archive recorded: 471
-Archive not recorded: 114
-Detail routes: 422
-Metadata-checked routes: 422
-```
+1. `config/ui-redesign-v4-authority.json`
+2. `docs/UI-REDESIGN-SPEC.md`
+3. `docs/UI-REDESIGN-SCHEDULE.md`
+4. `DESIGN.md`
+5. `docs/spec-governance.md`
+6. `docs/roadmap.md`
+7. `docs/deployment-policy.md`
+8. `docs/ai-era-registry-spec.md`
+9. `docs/ai-era-execution-schedule.md`
+10. relevant permanent data/classification/evidence/deployment specifications for the surface being edited
+11. current implementation of the affected route/components
 
-## Completed cross-registry Ledger Series Phase 9 adapter lane
+Do not rely on chat summaries when merged repository documents are available.
 
-The reviewed SOG adapter authority is historical lineage after closeout:
+## Redesign operating rule
 
-```text
-config/ledger-series-phase9-authority.json
-docs/roadmap-amendments/2026-08-20-ledger-series-phase9-authority.md
-config/ledger-series-phase9-closeout.json
-```
+At the start of each redesign session:
 
-Accepted result:
+- identify the current gate in `docs/UI-REDESIGN-SCHEDULE.md`;
+- fetch current `main` and `ui/sog-redesign-v4` heads;
+- determine whether `main` needs to be synced;
+- inspect the affected canonical data and current route implementation;
+- work only within the active gate unless a real dependency requires otherwise.
 
-```text
-Authority PR: #578 — merged before implementation
-Implementation PR: #579 — merged
-Production verifier PR: #580 — closed without merge after acceptance
-Verified main: bd84caf11e2decd0250260bbfe2551e42b6a955f
-Production run: 32325360838 — success
-Production job: 96295386599 — success
-Series descriptor/index: complete
-Series record envelopes: 119 / 119
-Series JSON production equality: 121 / 121
-Global keys unique: 119 / 119
-Representative human routes: success
-Canonical delta: 0
-Schema/taxonomy delta: 0
-UI/Search/Compare/Stats behavior delta: 0
-```
+At the end of each implementation unit:
 
-The enduring Phase 9 result is a canonical-only `/data/series/` projection over the existing 119 reviewed native stablecoin dossiers. Native dossier facts, events, evidence, provenance, unknowns, and canonical hash remain authoritative. Stage 3 emits no inferred typed Series relationships. Future relationship promotion or Series expansion requires separate reviewed authority.
+- update schedule checkboxes/status when a deliverable changed;
+- record branch/head and validation results;
+- state completed and incomplete surfaces;
+- state latest main sync point;
+- state explicitly whether production changed.
 
-Issue #479 records the production evidence. Cross-registry coordination evidence is also recorded in `badjoke-lab/historical-exchange-index#780`.
+## Production safety
 
-## Completed Ledger Series Phase 3 lane
+- Keep the current public UI on `main` through Gates 0–7.
+- Do not merge partial redesign pages to `main`.
+- Ordinary record growth, evidence, guides, monitoring, and maintenance may continue independently on `main`.
+- Sync current `main` into the redesign branch at safe checkpoints.
+- Record the pre-cutover `main` SHA before Gate 8 integration.
+- Roll back if a critical production regression is found after cutover.
 
-The reviewed Phase 3 authority is historical lineage after closeout:
+## Data integrity
 
-```text
-config/ledger-series-phase3-authority.json
-docs/roadmap-amendments/2026-08-17-ledger-series-phase3-authority.md
-config/ledger-series-phase3-closeout.json
-```
+The UI adapts to canonical data. Canonical records must not be changed merely to make a desired visual state appear complete.
 
-Accepted result:
+Do not invent market cap, price, lifecycle, backing, redemption, reserve, access, regulatory, evidence-coverage, issuer, deployment, or related values. Mockup numbers are not production data.
 
-```text
-Representative lifecycle + public-surface audit: complete
-Schema/canonical decision gate: pass without mutation
-Deterministic per-asset JSON: complete
-Structured-filter lifecycle gap closure: complete
-Compare lifecycle/outcome gap closure: complete
-Stats lifecycle/quality gap closure: complete
-Exact-main production cross-surface verification: complete
-Verified main: 6cac1ef858d35e2a8c015142f29011e4aff33fdc
-Production run: 32153641423 — success
-Production job: 95765437402 — success
-Stablecoin dossiers verified: 119
-Canonical delta: 0
-Schema/taxonomy delta: 0
-```
+Derived presentation labels require deterministic documented rules. Missing information must remain explicit as `Unknown`, `Not recorded`, or another approved null state.
 
-The enduring public result includes deterministic per-asset JSON, lifecycle/depeg-recovery filtering, lifecycle aftermath fields in the existing Compare product, lifecycle-quality Stats, and exact-main production verification. These are regression contracts, not standing authority for further expansion.
+Preserve current deterministic per-asset JSON, provenance, evidence relationships, public machine-readable layer, Ledger Series projection, official-origin rules, legacy-host migration behavior, StablecoinMark/fallback behavior, and canonical logo-disposition requirements.
 
-Issue #479 records the deployment evidence. The same verified main also passed the strict domain migration gate with 15/15 legacy redirects and zero official-origin failures.
+## UI validation policy
 
-## Completed SEO / GA4 migration audit
+Preserve data/integrity/build/public-layer checks. Do not let obsolete visual baselines control the redesign.
 
-The earlier bounded SEO / GA4 migration audit remains historical lineage:
+Not redesign acceptance criteria:
+
+- outgoing UI-v3 layout baselines;
+- old UI-repair baseline;
+- generated SVG mock fidelity;
+- representative visual assertions whose only purpose is freezing the outgoing UI;
+- pixel-perfect equality to the outgoing production site.
+
+New UI checks should target demonstrated failure modes: route health, broken links, horizontal overflow, control usability, basic accessibility, state correctness, and representative desktop/mobile inspection.
+
+Do not create new audit frameworks, validators, or workflow layers unless required by `docs/UI-REDESIGN-SPEC.md` or needed to cover an actual defect. Prefer implementing the product over expanding process machinery.
+
+## Mobile
+
+Mobile is part of each milestone, not a post-launch retrofit. A major surface is not complete until its desktop and mobile variants satisfy the relevant gate.
+
+## Enduring non-UI boundaries
+
+Unless separately authorized:
 
 ```text
-Closeout contract: config/seo-ga4-migration-closeout.json
-Verified main: 9277d04ca7e463e3a965473b82a7c15ef117a5fb
-Production run: 32035190608 — success
-Production job: 95403850881 — success
-Official-origin validation: success
-GA4 static-build verification: success
-Cloudflare Pages upload: success
-Deployed-production verification: success
-Canonical delta: 0
+ranking / scoring / recommendation: forbidden
+AI-generated canonical classification: forbidden
+DNS / Cloudflare account mutation: forbidden
+new GA4 identity creation or guessing: forbidden
+remote runtime Stablecoin-logo fetching: forbidden
+canonical fact invention for presentation: forbidden
 ```
 
-Binding migration rules remain:
-
-```text
-Official public origin: https://www.stableorgone.com
-Legacy redirect: https://sog.badjoke-lab.com/<path>?<query> -> 301 https://www.stableorgone.com/<path>?<query>
-GA4 variable: PUBLIC_GA_MEASUREMENT_ID
-Reuse existing SOG GA4 identity: yes
-Create / guess / hardcode a Measurement ID: no
-```
-
-Google Search Console ownership, Change of Address, sitemap submission, and GA4 account administration outside the existing build variable remain account-side state and are not proven by repository evidence alone.
-
-## Historical non-UI acceptance checkpoints
-
-These remain baseline lineage, not standing authority outside their accepted regression contracts:
-
-```text
-PR #493 — migrated SOG to https://www.stableorgone.com as the single official production origin
-PR #500 — deepened the bounded MNEE Evidence/archive/control review without forcing unsupported unknowns closed
-PR #517 — added complete canonical Bison Bank EUB/USB records and established the 119-asset / 186-deployment checkpoint lineage
-PR #565 — recorded SEO / GA4 migration exact-main acceptance evidence
-PR #567 — authorized Ledger Series Phase 3 lifecycle strengthening
-PR #578 — authorized the cross-registry Ledger Series Phase 9 SOG adapter
-PR #579 — implemented the Phase 9 SOG Series adapter
-```
-
-## Current Stablecoin mark contract
-
-```text
-Canonical Stablecoins: 119
-Reviewed logo dispositions: 119 / 119
-Direct Stablecoin/product logos: 101
-Neutral monogram fallbacks: 18
-Last reviewed promotions: mnee, usdgo, usr
-Remote runtime image fetching: no
-Canonical delta: 0
-```
-
-## Permanent future record-growth logo gate
-
-Core `.github/workflows/ci.yml` runs `node scripts/audit-stablecoin-logo-coverage.mjs` on every pull request without data-path exclusions. Every future canonical Stablecoin addition must satisfy `docs/quality/stablecoin-logo-disposition-operating-spec.md`.
-
-A neutral fallback is valid. Missing disposition is not.
-
-## Enduring Compare, Phase 3, and Series adapter behavior
-
-Accepted Compare behavior remains a regression contract:
-
-```text
-control: Hide matching rows
-differing attribute count: visible
-matching shown/hidden count: visible
-no-op copy: All displayed attributes already differ. Nothing to hide.
-Compare marks: same pre-rendered StablecoinMark result used elsewhere
-Compare-only logo map: none
-remote runtime fetch: none
-```
-
-Do not regress 2–4 selection, fifth-selection rejection, URL order/history restoration, explicit `Unknown` / `Not recorded`, bounded mobile matrix scrolling, or accepted Compare dock/footer behavior.
-
-Do not regress the reviewed Phase 3 deterministic per-asset JSON, Event lifecycle / Depeg recovery filters, six lifecycle Compare fields, lifecycle-quality Stats, or production cross-surface verifier without a separately reviewed change.
-
-Do not regress the accepted `/data/series/registry.json`, `/data/series/index.json`, or 119 `/data/series/records/{slug}.json` envelopes. Series outputs must remain canonical-only, official-origin-only, lossless over the native dossier, and free of inferred typed relationships unless a future reviewed authority explicitly changes that contract.
-
-## Required work-start protocol from REVIEW_GATE
-
-Before substantive new work:
-
-1. Read `AGENTS.md`, `docs/spec-governance.md`, `docs/roadmap.md`, `docs/deployment-policy.md`, `docs/ai-era-registry-spec.md`, and `docs/ai-era-execution-schedule.md`.
-2. Confirm current main, canonical counts/hash, open PRs, and current production state.
-3. Read the relevant permanent operating specifications and enduring regression authorities.
-4. Create a fresh reviewed authority that states scope, canonical/public boundary, acceptance artifacts, and closeout behavior.
-5. Do not infer authority from chat instructions, historical PRs, stale branches, or old roadmap amendments.
-
-## Preserved exclusions at REVIEW_GATE
-
-No current authority exists for:
-
-```text
-canonical archive mutation
-canonical Market Access mutation
-new Evidence identities or Evidence Relations
-stable-asset additions/deletions
-schema/taxonomy change
-additional logo promotion
-new unrelated public route family
-Series expansion or typed relationship promotion
-ranking / scoring / recommendation
-unrelated sitewide redesign
-new lifecycle/search/Compare/Stats expansion
-DNS / Cloudflare account mutation
-new GA4 property or Measurement ID creation
-measurement ID guessing or hardcoding
-automatic continuation beyond the current closeout
-```
-
-`docs/ui-v3-remediation-authority.md` remains the enduring material-public-UI regression authority. Issue #479 remains the deployment-history authority.
+Historical completed authorities remain in repository history and their accepted machine/data/deployment contracts continue where they do not conflict with the active redesign authority. `docs/ui-v3-remediation-authority.md` is retained as historical regression context for accessibility, responsive safety, state handling, and canonical boundaries; its outgoing visual composition is not the new design target.

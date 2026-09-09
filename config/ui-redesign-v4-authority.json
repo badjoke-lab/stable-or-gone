@@ -1,0 +1,104 @@
+{
+  "schema_version": "1.0",
+  "authority_id": "sog_ui_redesign_v4_2026_09_09",
+  "status": "active_after_merge",
+  "entry_main_commit": "5e12ed2c5c40f945a8af5821c443fefad7594a98",
+  "official_public_origin": "https://www.stableorgone.com",
+  "purpose": "Authorize a production-safe full SOG presentation-layer rebuild while the current public UI remains live. The redesign must be completed on an isolated branch and cut over to main only as one complete release after desktop, mobile, data-integrity, build, route, and production-readiness verification.",
+  "mandatory_references": [
+    "AGENTS.md",
+    "DESIGN.md",
+    "docs/UI-REDESIGN-SPEC.md",
+    "docs/UI-REDESIGN-SCHEDULE.md",
+    "docs/spec-governance.md",
+    "docs/roadmap.md",
+    "docs/deployment-policy.md",
+    "docs/ai-era-registry-spec.md",
+    "docs/ai-era-execution-schedule.md",
+    "docs/ui-v3-remediation-authority.md"
+  ],
+  "implementation_branch": "ui/sog-redesign-v4",
+  "production_branch": "main",
+  "scope": [
+    "replace_the_outgoing_visual_system_and_page_composition",
+    "implement_desktop_and_mobile_versions_of_all_major_existing_public_surfaces",
+    "preserve_and_improve_registry_discovery_comparison_events_history_statistics_issuer_and_reference_surfaces",
+    "use_existing_canonical_fields_and_deterministic_documented_derived_presentations_only",
+    "quarantine_obsolete_visual_baselines_generated_svg_mock_gates_and_pixel_style_assertions_from_redesign_acceptance",
+    "preserve_data_integrity_public_machine_readable_outputs_and_production_availability_during_development",
+    "complete_the_redesign_before_the_single_production_cutover"
+  ],
+  "canonical_boundary": {
+    "redesign_may_mutate_canonical_facts": false,
+    "redesign_may_invent_market_or_registry_values": false,
+    "record_growth_on_main_may_continue_independently": true,
+    "redesign_branch_must_sync_current_main_at_safe_checkpoints": true,
+    "schema_or_taxonomy_change_requires_separate_review": true
+  },
+  "public_surface_boundary": {
+    "sitewide_ui_redesign_authorized": true,
+    "desktop_and_mobile_information_architecture_change_authorized": true,
+    "existing_route_semantics_must_be_preserved_or_explicitly_migrated": true,
+    "new_unrelated_product_family_authorized": false,
+    "ranking_scoring_or_recommendation_authorized": false,
+    "dns_or_cloudflare_account_change_authorized": false,
+    "new_ga4_identity_authorized": false
+  },
+  "production_safety": {
+    "partial_redesign_merge_to_main": false,
+    "current_public_ui_remains_live_until_cutover": true,
+    "preview_or_branch_builds_may_be_used_for_review": true,
+    "pre_cutover_main_sha_must_be_recorded": true,
+    "rollback_required_for_critical_cutover_regression": true
+  },
+  "validation_policy": {
+    "keep": [
+      "canonical_data_validation",
+      "classification_profile_event_and_evidence_validation",
+      "registry_integrity",
+      "astro_check_and_build",
+      "reproducible_build_and_public_layer_verification",
+      "route_and_broken_link_checks",
+      "desktop_and_mobile_overflow_checks",
+      "basic_accessibility_checks",
+      "production_smoke_after_cutover"
+    ],
+    "not_redesign_gates": [
+      "obsolete_ui_v3_layout_baselines",
+      "obsolete_ui_repair_baseline",
+      "legacy_generated_svg_mock_fidelity",
+      "legacy_representative_visual_assertions_that_encode_the_outgoing_ui",
+      "pixel_perfect_equality_to_the_outgoing_ui"
+    ]
+  },
+  "required_acceptance": [
+    "all_required_desktop_surfaces_complete",
+    "all_required_mobile_surfaces_complete",
+    "latest_main_synced_into_redesign_branch",
+    "canonical_and_public_machine_contracts_green",
+    "production_equivalent_build_green",
+    "critical_routes_and_links_green",
+    "representative_desktop_and_mobile_browser_review_complete",
+    "critical_horizontal_overflow_zero",
+    "pre_cutover_main_sha_recorded",
+    "single_integration_merge_to_main",
+    "post_cutover_production_smoke_green"
+  ],
+  "forbidden": [
+    "publishing_partial_redesign_to_main",
+    "changing_canonical_facts_to_make_the_ui_look_complete",
+    "copying_mockup_placeholder_numbers_into_production",
+    "creating_new_visual_audit_frameworks_without_a_demonstrated_failure_mode",
+    "restoring_the_old_terminal_or_paper_visual_system_as_the_redesign_target",
+    "using_globe_or_earth_hero_art_as_a_required_design_dependency",
+    "ranking_scoring_or_investment_recommendation",
+    "dns_or_cloudflare_account_mutation",
+    "new_ga4_property_or_measurement_id_creation"
+  ],
+  "closeout": {
+    "production_verification_required": true,
+    "deployment_record_issue": 479,
+    "automatic_continuation_after_cutover": false,
+    "post_cutover_cleanup_required": true
+  }
+}
