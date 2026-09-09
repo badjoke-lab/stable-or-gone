@@ -5,8 +5,38 @@ import EventEditorialBody from './EventEditorialBody.astro';
 import { buildEventDetailView } from '../lib/views/eventDetailView';
 const { event } = Astro.props;
 const view = buildEventDetailView(event);
-const title = `${view.eventTitle} — SOG Event`;
-const description = view.eventDescription;
+
+function compactMetaDescription(value: string, maxLength = 155) {
+  const normalized = value.replace(/\s+/g, ' ').trim();
+  if (normalized.length <= maxLength) return normalized;
+
+  const clipped = normalized.slice(0, maxLength - 1);
+  const sentenceBreak = clipped.lastIndexOf('. ');
+  if (sentenceBreak >= 100) return clipped.slice(0, sentenceBreak + 1);
+
+  const wordBreak = clipped.lastIndexOf(' ');
+  const safeEnd = wordBreak >= 110 ? wordBreak : clipped.length;
+  return `${clipped.slice(0, safeEnd).replace(/[,:;.!?\s]+$/, '')}…`;
+}
+
+const seoOverrides: Record<string, { title?: string; description?: string }> = {
+  sog_ev_usdn_xtn_transition: {
+    title: 'USDN to XTN: Neutrino Begins Waves Asset Rename | SOG',
+    description: "Neutrino began the USDN-to-XTN rename on Waves on January 31, 2023, ending USDN's original hard-USD stablecoin classification during a staged rollout."
+  },
+  sog_ev_fei_2022_09_final_redemption: {
+    title: 'FEI Final Redemption: Tribe DAO Vote Concludes | SOG'
+  },
+  sog_ev_fxusd_v2_upgrade_2025: {
+    title: 'fxUSD Upgrades to f(x) Protocol V2 | SOG'
+  },
+  sog_ev_musd_2026_01_legacy_transition: {
+    title: 'mUSD Legacy Status During the mStable Relaunch | SOG'
+  }
+};
+const seo = seoOverrides[event.id];
+const title = seo?.title ?? `${view.eventTitle} — SOG Event`;
+const description = seo?.description ?? compactMetaDescription(view.eventDescription);
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Article',

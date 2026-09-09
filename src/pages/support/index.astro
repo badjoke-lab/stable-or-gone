@@ -61,7 +61,7 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'WebPage', name: tit
               <div class="address-block">
                 <span class="address-label">Address</span>
                 <code>{wallet.address}</code>
-                <button class="copy-button" type="button" data-copy-address={wallet.address} aria-label={`Copy ${wallet.asset} support address`}>Copy address</button>
+                <button class="copy-button" type="button" data-copy-address={wallet.address} data-support-asset={wallet.asset} data-support-network={wallet.network} aria-label={`Copy ${wallet.asset} support address`}>Copy address</button>
                 <span class="wallet-copy-feedback" data-copy-feedback></span>
               </div>
               <p class="wallet-network-warning">Verify the asset, chain, and address before sending. Transfers on the wrong network may be unrecoverable.</p>
@@ -87,7 +87,7 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'WebPage', name: tit
                   <code>{wallet.address}</code>
                 </div>
               )}
-              <button class="copy-button copy-button--standalone" type="button" data-copy-address={wallet.address} aria-label={`Copy ${wallet.asset} support address`}>Copy address</button>
+              <button class="copy-button copy-button--standalone" type="button" data-copy-address={wallet.address} data-support-asset={wallet.asset} data-support-network={wallet.network} aria-label={`Copy ${wallet.asset} support address`}>Copy address</button>
               {wallet.note && <p class="network-note">{wallet.note}</p>}
               <span class="wallet-copy-feedback" data-copy-feedback></span>
               <p class="wallet-network-warning">Verify the asset, chain, and address before sending. Transfers on the wrong network may be unrecoverable.</p>
@@ -141,6 +141,13 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'WebPage', name: tit
             const feedback = container?.querySelector('[data-copy-feedback]');
             if (feedback) feedback.textContent = copied ? 'Address copied to clipboard.' : 'Copy failed. Select the address manually.';
             if (status) status.textContent = copied ? 'Address copied to clipboard.' : 'Could not copy automatically. Select and copy the address manually.';
+            if (copied && typeof window.gtag === 'function') {
+              window.gtag('event', 'support_address_copy', {
+                asset: button.getAttribute('data-support-asset') || 'unknown',
+                network: button.getAttribute('data-support-network') || 'unknown',
+                page_path: window.location.pathname
+              });
+            }
             window.setTimeout(() => {
               button.textContent = originalLabel;
               button.removeAttribute('data-copy-state');

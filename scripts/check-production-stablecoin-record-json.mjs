@@ -58,6 +58,41 @@ async function waitForExpectedManifest() {
   throw lastError;
 }
 
+function assertExpectedDossier(dossier, stablecoin, manifest, pathname) {
+  assert(dossier.schema_version === manifest.schema_version, `${pathname}: schema version mismatch`);
+  assert(dossier.data_schema_version === manifest.data_schema_version, `${pathname}: data schema mismatch`);
+  assert(dossier.project_id === 'stable-or-gone', `${pathname}: project mismatch`);
+  assert(dossier.record_type === 'stablecoin', `${pathname}: record type mismatch`);
+  assert(dossier.id === stablecoin.id && dossier.slug === stablecoin.slug, `${pathname}: identity mismatch`);
+  assert(dossier.record?.id === stablecoin.id && dossier.record?.slug === stablecoin.slug, `${pathname}: canonical record mismatch`);
+  assert(dossier.self_url === `${origin}${pathname}`, `${pathname}: self URL mismatch`);
+  assert(dossier.canonical_page_url === `${origin}/stablecoin/${stablecoin.slug}/`, `${pathname}: canonical page URL mismatch`);
+  assert(dossier.canonical_only === true && dossier.data_safety?.canonical_only === true, `${pathname}: canonical-only marker missing`);
+  assert(dossier.includes_unreviewed_candidates === false && dossier.data_safety?.includes_unreviewed_candidates === false, `${pathname}: candidate marker invalid`);
+  assert(dossier.build?.commit === manifest.build?.commit, `${pathname}: build commit mismatch`);
+  assert(dossier.build?.canonical_data_hash === manifest.build?.canonical_data_hash, `${pathname}: canonical hash mismatch`);
+}
+
+async function waitForExpectedDossier(stablecoin, manifest, initialCacheBust) {
+  const pathname = `/data/stablecoin/${stablecoin.slug}.json`;
+  let lastError;
+  for (let attempt = 1; attempt <= attempts; attempt += 1) {
+    const cacheBust = attempt === 1
+      ? initialCacheBust
+      : `${expectedCommit || manifest.build?.commit || 'unknown'}-${stablecoin.slug}-${attempt}-${Date.now()}`;
+    try {
+      const dossier = await readJson(pathname, cacheBust);
+      assertExpectedDossier(dossier, stablecoin, manifest, pathname);
+      return dossier;
+    } catch (error) {
+      lastError = error;
+      console.error(`${pathname} convergence attempt ${attempt}/${attempts} failed: ${error.message}`);
+      if (attempt < attempts) await sleep(delayMs);
+    }
+  }
+  throw lastError;
+}
+
 async function mapConcurrent(items, limit, worker) {
   let cursor = 0;
   const runners = Array.from({ length: Math.min(limit, items.length) }, async () => {
@@ -72,20 +107,7 @@ async function mapConcurrent(items, limit, worker) {
 const { manifest, cacheBust, attempt: convergenceAttempt } = await waitForExpectedManifest();
 const dossiers = new Map();
 await mapConcurrent(stablecoins, concurrency, async (stablecoin) => {
-  const pathname = `/data/stablecoin/${stablecoin.slug}.json`;
-  const dossier = await readJson(pathname, cacheBust);
-  assert(dossier.schema_version === manifest.schema_version, `${pathname}: schema version mismatch`);
-  assert(dossier.data_schema_version === manifest.data_schema_version, `${pathname}: data schema mismatch`);
-  assert(dossier.project_id === 'stable-or-gone', `${pathname}: project mismatch`);
-  assert(dossier.record_type === 'stablecoin', `${pathname}: record type mismatch`);
-  assert(dossier.id === stablecoin.id && dossier.slug === stablecoin.slug, `${pathname}: identity mismatch`);
-  assert(dossier.record?.id === stablecoin.id && dossier.record?.slug === stablecoin.slug, `${pathname}: canonical record mismatch`);
-  assert(dossier.self_url === `${origin}${pathname}`, `${pathname}: self URL mismatch`);
-  assert(dossier.canonical_page_url === `${origin}/stablecoin/${stablecoin.slug}/`, `${pathname}: canonical page URL mismatch`);
-  assert(dossier.canonical_only === true && dossier.data_safety?.canonical_only === true, `${pathname}: canonical-only marker missing`);
-  assert(dossier.includes_unreviewed_candidates === false && dossier.data_safety?.includes_unreviewed_candidates === false, `${pathname}: candidate marker invalid`);
-  assert(dossier.build?.commit === manifest.build?.commit, `${pathname}: build commit mismatch`);
-  assert(dossier.build?.canonical_data_hash === manifest.build?.canonical_data_hash, `${pathname}: canonical hash mismatch`);
+  const dossier = await waitForExpectedDossier(stablecoin, manifest, cacheBust);
   dossiers.set(stablecoin.slug, dossier);
 });
 

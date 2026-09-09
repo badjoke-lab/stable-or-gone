@@ -9,8 +9,8 @@ const categories = categoryOrder
   .filter((group) => group.entries.length > 0);
 const published = guides.filter((guide) => Boolean(guide.publishedAt));
 const currentThrough = [...guides].map((guide) => guide.informationCurrentThrough).sort().at(-1) ?? 'Not recorded';
-const title = 'Guides — Stable or Gone';
-const description = 'Beginner-friendly guides to stablecoin regulation, asset structures, depegs, reserves, redemption, lifecycle events, and the records behind each claim.';
+const title = 'Stablecoin Guides & Regulation Explainers | Stable or Gone';
+const description = 'Guides to stablecoin regulation, asset structures, depegs, reserves, redemption, lifecycle events, and the source-backed records behind each claim.';
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'CollectionPage',
@@ -18,7 +18,14 @@ const jsonLd = {
   url: 'https://www.stableorgone.com/guides/',
   description,
   isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://www.stableorgone.com/' },
-  hasPart: published.map((guide) => ({ '@type': 'Article', name: guide.title, url: `https://www.stableorgone.com/guides/${guide.slug}/`, datePublished: guide.publishedAt }))
+  hasPart: published.map((guide) => ({
+    '@type': 'Article',
+    headline: guide.title,
+    name: guide.title,
+    url: `https://www.stableorgone.com/guides/${guide.slug}/`,
+    image: 'https://www.stableorgone.com/og/sog-og.svg',
+    datePublished: guide.publishedAt
+  }))
 };
 ---
 <BaseLayout title={title} description={description} canonicalPath="/guides/" jsonLd={jsonLd}>
