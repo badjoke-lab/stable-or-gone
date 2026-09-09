@@ -5,8 +5,15 @@ import EventEditorialBody from './EventEditorialBody.astro';
 import { buildEventDetailView } from '../lib/views/eventDetailView';
 const { event } = Astro.props;
 const view = buildEventDetailView(event);
-const title = `${view.eventTitle} — SOG Event`;
-const description = view.eventDescription;
+const seoOverrides: Record<string, { title?: string; description?: string }> = {
+  sog_ev_usdn_xtn_transition: {
+    title: 'USDN to XTN: Neutrino Begins Waves Asset Rename | SOG',
+    description: "Neutrino began the USDN-to-XTN rename on Waves on January 31, 2023, ending USDN's original hard-USD stablecoin classification during a staged rollout."
+  }
+};
+const seo = seoOverrides[event.id];
+const title = seo?.title ?? `${view.eventTitle} — SOG Event`;
+const description = seo?.description ?? view.eventDescription;
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Article',
