@@ -92,8 +92,10 @@ jobs:
             dist/version.json
             dist/data/manifest.json
 
-      # Gate 7 uses the existing screenshot collector against the built redesign.
-      # Do not run the obsolete outgoing-UI visual audit or SVG fidelity gates.
+      # Gate 7 branch checks are tied to release defects, not outgoing visual fidelity.
+      - name: Check Gate 7 built internal links
+        if: github.event_name == 'pull_request' && github.head_ref == 'ui/sog-redesign-v4'
+        run: node scripts/check-built-internal-links.mjs
       - name: Install Gate 7 Chromium
         if: github.event_name == 'pull_request' && github.head_ref == 'ui/sog-redesign-v4'
         run: npx playwright install --with-deps chromium
