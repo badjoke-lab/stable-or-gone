@@ -1,7 +1,7 @@
 # Stable or Gone Specification Governance
 
 Status: canonical governance specification
-Updated: 2026-09-09
+Updated: 2026-09-10
 
 ## Authority order
 
@@ -19,45 +19,85 @@ Authority order:
 8. named audits, baselines, queues, and reviewed prior outputs
 9. conversation history and unmerged drafts
 
-## Current reviewed authority
+## Current reviewed stage
 
 ```text
-Stage: UI_REDESIGN_V4_AUTHORITY
-Authority: config/ui-redesign-v4-authority.json
-Roadmap amendment: docs/roadmap-amendments/2026-09-09-ui-redesign-v4-authority.md
-Specification: docs/UI-REDESIGN-SPEC.md
-Schedule: docs/UI-REDESIGN-SCHEDULE.md
-Implementation branch: ui/sog-redesign-v4
+Stage: POST_CUTOVER_STATS_HEALTH_SPLIT
+Primary specification: docs/stats-spec.md
+Current schedule: docs/UI-REDESIGN-SCHEDULE.md
+Implementation branch: ui/stats-registry-health-20260910
 Production branch: main
 ```
 
-This authority permits a sitewide presentation-layer redesign but does not authorize canonical-fact mutation, schema/taxonomy mutation, ranking/scoring/recommendation, DNS/Cloudflare account mutation, or new analytics identity creation.
+UI Redesign V4 completed production cutover through PR #636, merge commit `60940f0c1ad1d69961e839fa4979a7c4e29d91af`. The former `UI_REDESIGN_V4_AUTHORITY` remains historical implementation lineage rather than the current unfinished production-isolation state.
 
-## Production isolation rule
+## Current product authority
 
-The outgoing public UI remains live on `main` during redesign. Partial redesign merges to `main` are not authorized. The complete redesign is integrated only after Gate 7 acceptance and then production-verified under Gate 8.
+The current workstream is a post-cutover information-architecture refinement:
+
+```text
+/stats/        public registry analysis
+/maintenance/  public-safe Registry Health and maintenance
+```
+
+The workstream may change page composition, analytical hierarchy, and documented deterministic presentation rules, but it does not authorize canonical-fact mutation, schema/taxonomy mutation, predictive risk scoring, ranking/recommendation, private monitoring publication, DNS/Cloudflare account mutation, or new analytics identity creation.
+
+## Release isolation rule
+
+`main` publishes automatically. The Public Stats and Registry Health changes are developed together on `ui/stats-registry-health-20260910` and released as one unit after validation.
+
+Do not merge only the Stats half or only the Registry Health half of the approved split.
+
+Canonical record growth, evidence, guides, monitoring, and ordinary maintenance may continue independently on `main`; before release, the refinement branch must sync newer reviewed changes when necessary.
 
 ## Canonical boundary
 
-Current counts and hash are dynamic because approved record-growth work may continue on `main`. The redesign authority does not freeze a stale checkpoint. Every verification cycle must read current canonical counts/hash from the current branch/main state and confirm the redesign did not alter facts merely for presentation.
+Current counts and hash are dynamic because approved record-growth work may continue on `main`. Analytical pages read current canonical data at build time and must not freeze stale mockup counts.
 
-## Visual authority transition
+The UI must not edit canonical facts merely to complete a desired chart. Unknown values remain visible.
 
-`DESIGN.md`, `docs/UI-REDESIGN-SPEC.md`, and the active roadmap amendment supersede the outgoing Terminal Registry/paper visual target for this workstream.
+Historical failure-rate presentation is permitted only as a deterministic descriptive calculation with the category numerator and denominator shown. It must not be framed as a safety/risk score, forecast, or investment recommendation.
 
-`docs/ui-v3-remediation-authority.md` remains an enduring regression reference for accessibility, responsive safety, state handling, route/public safety, and canonical boundaries. Its exact outgoing visual composition, generated SVG mock fidelity, and obsolete layout baselines are not active redesign acceptance gates.
+## Public/private operational boundary
+
+Registry Health may publish reviewed aggregate quality metrics and reviewed monthly maintenance outcomes.
+
+It must not publish:
+
+- monitoring candidates;
+- unreviewed candidate stablecoins;
+- private source queues;
+- candidate URLs;
+- private notes;
+- secrets;
+- row-level internal review tasks;
+- unreviewed classifications.
+
+The existing public monthly maintenance-log contract remains valid.
+
+## Visual authority
+
+`DESIGN.md` and `docs/stats-spec.md` control the current analytical page hierarchy. The V4 dark observatory design remains the production visual lineage.
+
+Older UI-v3 layout baselines, generated SVG mock fidelity, and outgoing visual composition are not active acceptance gates.
 
 ## Required start protocol
 
-Before substantive redesign implementation:
+Before substantive current-work implementation:
 
-1. read `AGENTS.md`, the active authority, redesign spec, and redesign schedule;
-2. confirm current main, redesign branch head, open PRs, and relevant production state;
-3. inspect the current route/components and canonical fields used by that surface;
-4. identify the current schedule gate;
-5. sync current main when necessary;
-6. do not start unscheduled side frameworks or validators without a demonstrated need.
+1. read `AGENTS.md`;
+2. read `docs/stats-spec.md`;
+3. read `DESIGN.md`, this file, roadmap, and deployment policy;
+4. confirm current `main`, implementation branch head, open PRs, and relevant production state;
+5. inspect `/stats/`, `/maintenance/`, canonical statistics, and maintenance-log sources;
+6. sync current `main` when necessary;
+7. do not start unrelated validators/frameworks without a demonstrated need.
 
 ## Closeout
 
-After Gate 8 production verification, complete Gate 9 cleanup and then establish the next reviewed authority or return the repository to its normal post-redesign operating state. Automatic continuation beyond closeout is not implied.
+After the paired Stats / Registry Health release is production-verified:
+
+- update roadmap/schedule with final merge/deploy evidence;
+- keep only demonstrated regression checks;
+- continue normal record growth and registry work under the next reviewed lane;
+- keep any remaining V4 cleanup as an explicit, non-destructive maintenance task.
