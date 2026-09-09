@@ -1,0 +1,72 @@
+/* SOG UI Redesign V4 — mobile navigation contract */
+.site-mobile-bottom-navigation {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  body {
+    padding-bottom: calc(68px + env(safe-area-inset-bottom));
+  }
+
+  .site-mobile-bottom-navigation {
+    position: fixed;
+    z-index: 95;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    min-height: calc(58px + env(safe-area-inset-bottom));
+    padding: 6px 8px calc(6px + env(safe-area-inset-bottom));
+    border-top: 1px solid var(--ui-line-strong);
+    background: rgba(5, 9, 15, .96);
+    box-shadow: 0 -12px 30px rgba(0, 0, 0, .28);
+    backdrop-filter: blur(18px) saturate(130%);
+  }
+
+  .site-mobile-bottom-navigation a {
+    min-width: 0;
+    min-height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 4px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    color: var(--ui-muted);
+    font: 680 11px/1.2 var(--ui-sans);
+    letter-spacing: .02em;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  .site-mobile-bottom-navigation a:hover,
+  .site-mobile-bottom-navigation a:focus-visible {
+    color: var(--ui-text);
+    background: rgba(104, 215, 255, .06);
+  }
+
+  .site-mobile-bottom-navigation a[aria-current="page"] {
+    border-color: rgba(104, 215, 255, .34);
+    background: rgba(104, 215, 255, .09);
+    color: var(--ui-hover);
+  }
+
+  .site-footer {
+    padding-bottom: 12px;
+  }
+}
+
+@media (forced-colors: active) and (max-width: 640px) {
+  .site-mobile-bottom-navigation {
+    border-top: 1px solid CanvasText;
+    background: Canvas;
+  }
+
+  .site-mobile-bottom-navigation a,
+  .site-mobile-bottom-navigation a[aria-current="page"] {
+    border: 1px solid CanvasText;
+    background: Canvas;
+    color: CanvasText;
+  }
+}
