@@ -1,6 +1,6 @@
 # Stable or Gone Deployment Policy
 
-Updated: 2026-09-09
+Updated: 2026-09-10
 
 ## Production contract
 
@@ -12,31 +12,47 @@ Official public origin: https://www.stableorgone.com
 Legacy migration origin: https://sog.badjoke-lab.com
 Automatic main publication: enabled
 Deployment record: Issue #479
-Active presentation authority: config/ui-redesign-v4-authority.json
+Current product workstream: Public Stats / Registry Health split
+Current implementation branch: ui/stats-registry-health-20260910
 ```
 
-A merge to `main` automatically enters the production publication path. Therefore the UI redesign must not be merged to `main` incrementally.
+A merge to `main` automatically enters the production publication path. Significant paired information-architecture changes must therefore be completed and validated off `main` before merge.
 
-## Redesign publication rule
+## UI Redesign V4 cutover status
 
-During `docs/UI-REDESIGN-SCHEDULE.md` Gates 0–7:
+UI Redesign V4 completed its one-shot production integration through PR #636, merge commit `60940f0c1ad1d69961e839fa4979a7c4e29d91af`.
 
-- production continues from `main` with the outgoing UI;
-- canonical record growth/evidence/guides/maintenance may continue normally;
-- redesign implementation remains isolated on `ui/sog-redesign-v4`;
-- preview/branch builds may be used for redesign review;
-- partial redesign pages are not production candidates.
+The former rule that the outgoing UI remain live until Gate 8 is historical. The V4 observatory UI is now production lineage.
 
-At Gate 8:
+## Current Stats / Registry Health publication rule
+
+The current post-cutover refinement is developed on `ui/stats-registry-health-20260910`.
+
+Release unit:
 
 ```text
-sync latest main
--> repeat critical release checks
--> record pre-cutover main SHA
--> merge complete redesign once
+Public Stats rebuild
++
+Registry Health / Maintenance rebuild
+```
+
+Do not merge only one half of the split.
+
+Before release:
+
+```text
+fetch current main
+-> sync any newer reviewed main changes when necessary
+-> validate canonical/statistics/registry contracts
+-> Astro check + production-equivalent build
+-> route/internal-link checks
+-> representative desktop/mobile inspection
+-> confirm no mock values/private monitoring rows
+-> record pre-merge main SHA
+-> merge both surfaces together
 -> normal main production deployment
--> verify deployed commit/data/public layer/routes
--> representative desktop/mobile production verification
+-> verify /stats/ and /maintenance/
+-> verify /data/stats.json and /data/maintenance-log.json
 -> rollback on critical regression
 ```
 
@@ -50,17 +66,31 @@ https://sog.badjoke-lab.com/<path>?<query>
 -> 301 https://www.stableorgone.com/<path>?<query>
 ```
 
-- current deterministic public JSON, manifest/version, llms/ai, sitemap/robots, provenance, and Ledger Series outputs remain derived from reviewed data;
+- deterministic public JSON, manifest/version, llms/ai, sitemap/robots, provenance, and Ledger Series outputs remain derived from reviewed data;
+- `/data/stats.json`, `/data/stats-history.json`, and `/data/maintenance-log.json` remain public deterministic/reviewed outputs under their existing contracts;
 - no new GA4 Measurement ID/property is created, guessed, or hardcoded;
-- redesign does not authorize DNS or Cloudflare account mutation;
+- current work does not authorize DNS or Cloudflare account mutation;
 - a repository merge is not itself production-parity evidence.
 
-## Release verification
+## Current release verification
 
-Gate 7/8 verification includes canonical/classification/profile/event/evidence checks, registry integrity, Astro check/build, reproducibility/public-layer verification, route/link checks, responsive overflow checks, basic accessibility, and representative desktop/mobile browser inspection.
+Validation must include, as applicable:
 
-Obsolete pixel/visual equality to the outgoing UI is not a deployment requirement.
+- canonical/classification/profile/event/evidence checks;
+- statistics validation;
+- registry integrity;
+- Astro check/build;
+- reproducibility/public-layer verification;
+- route/internal-link checks;
+- responsive overflow checks;
+- basic accessibility;
+- representative desktop/mobile browser inspection;
+- explicit data-vs-UI spot checks for `/stats/` and `/maintenance/`;
+- confirmation that historical failure rates use correct category denominators;
+- confirmation that private monitoring/candidate data is absent from public output.
+
+Obsolete pixel/visual equality to older UI compositions is not a deployment requirement.
 
 ## Emergency rollback
 
-Before Gate 8 merge, record the exact pre-cutover `main` SHA. A critical production regression after cutover requires rollback to that known-good checkpoint and re-verification.
+Before the release merge, record the exact pre-merge `main` SHA. A critical production regression after deployment requires rollback to that known-good checkpoint and re-verification.
