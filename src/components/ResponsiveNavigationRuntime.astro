@@ -7,20 +7,48 @@
 
     const links = Array.from(primary.querySelectorAll<HTMLAnchorElement>(':scope > a'));
     const movedLinks = links.slice(3);
-    if (movedLinks.length === 0) return;
-
     const mobileGroup = document.createElement('div');
     mobileGroup.className = 'site-more-mobile-primary';
     mobileGroup.setAttribute('aria-label', 'Additional registry and research links');
+
+    const mobileBottomNav = document.createElement('nav');
+    mobileBottomNav.className = 'site-mobile-bottom-navigation';
+    mobileBottomNav.setAttribute('aria-label', 'Mobile primary navigation');
+    mobileBottomNav.dataset.mobileBottomNavigation = 'true';
+
+    const preferredBottomPaths = ['/stablecoins/', '/events/', '/compare/', '/stats/', '/guides/'];
+    const bottomLabels = new Map([
+      ['/stablecoins/', 'Explore'],
+      ['/events/', 'Changes'],
+      ['/compare/', 'Compare'],
+      ['/stats/', 'Stats'],
+      ['/guides/', 'Reference']
+    ]);
+
+    for (const href of preferredBottomPaths) {
+      const source = links.find((link) => link.getAttribute('href') === href);
+      if (!source) continue;
+      const link = document.createElement('a');
+      link.href = source.href;
+      link.textContent = bottomLabels.get(href) ?? source.textContent?.trim() ?? href;
+      link.dataset.mobileBottomItem = href;
+      if (source.getAttribute('aria-current') === 'page') link.setAttribute('aria-current', 'page');
+      mobileBottomNav.append(link);
+    }
+
     const media = window.matchMedia('(max-width: 640px)');
 
     const sync = () => {
       if (media.matches) {
-        if (!mobileGroup.isConnected) panel.prepend(mobileGroup);
-        for (const link of movedLinks) mobileGroup.append(link);
+        if (movedLinks.length > 0) {
+          if (!mobileGroup.isConnected) panel.prepend(mobileGroup);
+          for (const link of movedLinks) mobileGroup.append(link);
+        }
+        if (mobileBottomNav.childElementCount > 0 && !mobileBottomNav.isConnected) document.body.append(mobileBottomNav);
       } else {
         for (const link of movedLinks) primary.append(link);
         mobileGroup.remove();
+        mobileBottomNav.remove();
       }
     };
 

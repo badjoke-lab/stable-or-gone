@@ -91,3 +91,47 @@ jobs:
             data/generated/deployment-taxonomy-migration.json
             dist/version.json
             dist/data/manifest.json
+
+      # Gate 7 branch checks are tied to release defects, not outgoing visual fidelity.
+      - name: Check Gate 7 built internal links
+        if: github.event_name == 'pull_request' && github.head_ref == 'ui/sog-redesign-v4'
+        run: node scripts/check-built-internal-links.mjs
+      - name: Install Gate 7 Chromium
+        if: github.event_name == 'pull_request' && github.head_ref == 'ui/sog-redesign-v4'
+        run: npx playwright install --with-deps chromium
+      - name: Start Gate 7 local preview
+        if: github.event_name == 'pull_request' && github.head_ref == 'ui/sog-redesign-v4'
+        shell: bash
+        run: |
+          npm run preview -- --host 127.0.0.1 --port 4321 > ui-redesign-preview.log 2>&1 &
+          for attempt in {1..30}; do
+            if curl -fsS http://127.0.0.1:4321/ >/dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat ui-redesign-preview.log
+          exit 1
+      - name: Check Gate 7 accessibility and UI data contract
+        if: github.event_name == 'pull_request' && github.head_ref == 'ui/sog-redesign-v4'
+        run: node scripts/check-gate7-ui-contract.mjs --base-url http://127.0.0.1:4321
+      - name: Capture Gate 7 desktop representatives
+        if: github.event_name == 'pull_request' && github.head_ref == 'ui/sog-redesign-v4'
+        run: node scripts/capture-site-screenshots.mjs --device desktop --mode representative --base-url http://127.0.0.1:4321
+      - name: Capture Gate 7 mobile representatives
+        if: github.event_name == 'pull_request' && github.head_ref == 'ui/sog-redesign-v4'
+        run: node scripts/capture-site-screenshots.mjs --device mobile --mode representative --base-url http://127.0.0.1:4321
+      - name: Upload Gate 7 browser artifacts
+        if: always() && github.event_name == 'pull_request' && github.head_ref == 'ui/sog-redesign-v4'
+        uses: actions/upload-artifact@v4
+        with:
+          name: ui-redesign-v4-gate7-${{ github.run_id }}
+          if-no-files-found: warn
+          path: |
+            ui-redesign-preview.log
+            artifacts/screenshots/manifest.desktop.json
+            artifacts/screenshots/manifest.mobile.json
+            artifacts/screenshots/desktop/**
+            artifacts/screenshots/mobile/**
+            artifacts/screenshots-desktop.zip
+            artifacts/screenshots-mobile.zip

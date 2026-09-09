@@ -1,7 +1,19 @@
 <script>
-  const applyPaperRegistrySemantics = () => {
-    document.documentElement.style.setProperty('--ui-quiet', '#66645d');
-    document.documentElement.style.setProperty('--ui-warning', '#8a6324');
+  const lifecycleTone = (value: string) => {
+    const normalized = value.trim().toLowerCase();
+    if (/\b(active|operational|available|open|recovered)\b/.test(normalized)) return 'active';
+    if (/\b(limited|restricted|review|watch|partial)\b/.test(normalized)) return 'limited';
+    if (/\b(impaired|depeg|stressed|suspended)\b/.test(normalized)) return 'impaired';
+    if (/\b(failed|failure|collapsed)\b/.test(normalized)) return 'failed';
+    if (/\b(migrated|migration)\b/.test(normalized)) return 'migrated';
+    if (/\b(discontinued|inactive|closed|wind[- ]?down|terminated)\b/.test(normalized)) return 'discontinued';
+    if (/\b(unknown|not recorded|unverified|unclear)\b/.test(normalized)) return 'unknown';
+    return null;
+  };
+
+  const applyObservatorySemantics = () => {
+    const themeColor = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');
+    if (themeColor) themeColor.content = '#05090f';
 
     document.querySelectorAll<HTMLElement>('main small, footer small, header small').forEach((element) => {
       if (element.matches('[data-ui-mono]') || element.closest('[data-ui-mono]')) return;
@@ -36,30 +48,30 @@
       '.directory-number',
       '.ticker-badge'
     ].join(', ')).forEach((element) => {
+      const tone = lifecycleTone(element.textContent || '');
+      if (tone && (!element.dataset.tone || element.dataset.tone === 'neutral')) element.dataset.tone = tone;
+    });
+
+    document.querySelectorAll<HTMLElement>([
+      '.contract-address',
+      '.transaction-hash',
+      '[data-long-value]',
+      '[data-technical-value]',
+      '.directory-number',
+      '.ticker-badge'
+    ].join(', ')).forEach((element) => {
       element.dataset.uiMono = 'true';
     });
 
-    document.querySelectorAll<HTMLElement>('.home-facts dd, .directory-copy strong').forEach((element) => {
-      element.dataset.editorialNumber = 'true';
-    });
-
-    document.querySelectorAll<HTMLElement>('.home-facts dd').forEach((element) => {
-      element.style.lineHeight = '1.35';
-    });
-
-    document.querySelectorAll<HTMLElement>('.support-cta').forEach((element) => {
-      delete element.dataset.tone;
-      element.style.background = 'transparent';
-      element.style.color = 'var(--ui-text)';
-      element.style.borderColor = 'var(--ui-text)';
-    });
-
-    document.querySelectorAll<HTMLElement>('.footer-support, .context-support-callout').forEach((element) => {
-      delete element.dataset.tone;
+    document.querySelectorAll<HTMLElement>('.support-cta, .footer-support, .context-support-callout').forEach((element) => {
+      if (element.dataset.tone === 'neutral') delete element.dataset.tone;
+      element.style.removeProperty('background');
+      element.style.removeProperty('color');
+      element.style.removeProperty('border-color');
     });
   };
 
-  applyPaperRegistrySemantics();
-  const observer = new MutationObserver(applyPaperRegistrySemantics);
+  applyObservatorySemantics();
+  const observer = new MutationObserver(applyObservatorySemantics);
   observer.observe(document.body, { childList: true, subtree: true });
 </script>
