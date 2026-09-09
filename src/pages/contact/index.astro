@@ -14,8 +14,8 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'ContactPage', name:
     <section class="utility-section">
       <div class="utility-section-heading"><h2>Choose a reporting route</h2><p>Use the private form for normal submissions. Use GitHub only when the report and supporting sources may remain public.</p></div>
       <nav class="contact-actions" aria-label="Contact routes">
-        <a class="contact-card-primary" href={googleFormUrl} target="_blank" rel="noopener noreferrer"><h2>Submit via Google Form</h2><p>Best for corrections, missing records, broken links, source suggestions, general contact, or reports that do not need public discussion.</p></a>
-        <a href={githubIssueUrl} target="_blank" rel="noopener noreferrer"><h2>Open a GitHub Issue</h2><p>Best for public, source-backed corrections where discussion, review notes, and acceptance history should remain visible.</p></a>
+        <a class="contact-card-primary" href={googleFormUrl} target="_blank" rel="noopener noreferrer" data-contact-route="google_form" data-contact-surface="primary"><h2>Submit via Google Form</h2><p>Best for corrections, missing records, broken links, source suggestions, general contact, or reports that do not need public discussion.</p></a>
+        <a href={githubIssueUrl} target="_blank" rel="noopener noreferrer" data-contact-route="github_issue" data-contact-surface="primary"><h2>Open a GitHub Issue</h2><p>Best for public, source-backed corrections where discussion, review notes, and acceptance history should remain visible.</p></a>
         <a href={githubIssuesUrl} target="_blank" rel="noopener noreferrer"><h2>View existing reports</h2><p>Check open and closed reports before submitting a duplicate.</p></a>
       </nav>
     </section>
@@ -29,7 +29,21 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'ContactPage', name:
     </section>
     <section class="utility-section" aria-labelledby="methodology-before-reporting">
       <div class="utility-section-heading"><h2 id="methodology-before-reporting">Before reporting</h2><p>Review the methodology when the issue concerns status labels, event treatment, evidence quality, relationship roles, or unresolved questions.</p></div>
-      <div class="report-actions"><a href="/methodology/">Read methodology</a><a href={googleFormUrl} target="_blank" rel="noopener noreferrer" data-primary="true">Submit via Google Form</a><a href={githubIssueUrl} target="_blank" rel="noopener noreferrer">Open GitHub Issue</a></div>
+      <div class="report-actions"><a href="/methodology/">Read methodology</a><a href={googleFormUrl} target="_blank" rel="noopener noreferrer" data-primary="true" data-contact-route="google_form" data-contact-surface="before_reporting">Submit via Google Form</a><a href={githubIssueUrl} target="_blank" rel="noopener noreferrer" data-contact-route="github_issue" data-contact-surface="before_reporting">Open GitHub Issue</a></div>
     </section>
+    <script is:inline>
+      (() => {
+        document.querySelectorAll('[data-contact-route]').forEach((link) => {
+          link.addEventListener('click', () => {
+            if (typeof window.gtag !== 'function') return;
+            window.gtag('event', 'contact_route_click', {
+              route: link.getAttribute('data-contact-route') || 'unknown',
+              surface: link.getAttribute('data-contact-surface') || 'unknown',
+              page_path: window.location.pathname
+            });
+          });
+        });
+      })();
+    </script>
   </article>
 </BaseLayout>
