@@ -43,7 +43,13 @@ sync latest main
 ## Preserved deployment invariants
 
 - official origin remains `https://www.stableorgone.com`;
-- legacy host remains a path/query-preserving migration surface;
+- legacy host remains a migration-only origin and permanently redirects with HTTP 301 while preserving path/query:
+
+```text
+https://sog.badjoke-lab.com/<path>?<query>
+-> 301 https://www.stableorgone.com/<path>?<query>
+```
+
 - current deterministic public JSON, manifest/version, llms/ai, sitemap/robots, provenance, and Ledger Series outputs remain derived from reviewed data;
 - no new GA4 Measurement ID/property is created, guessed, or hardcoded;
 - redesign does not authorize DNS or Cloudflare account mutation;
