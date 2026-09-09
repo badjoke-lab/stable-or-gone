@@ -15,8 +15,8 @@ This is a gated execution schedule. Gate completion, not elapsed time, controls 
 - [x] implementation branch created from main checkpoint `5e12ed2c5c40f945a8af5821c443fefad7594a98`;
 - [x] agent operating rules defined;
 - [ ] authority/docs merged to main;
-- [ ] obsolete visual audit workflow removed or disabled for redesign work;
-- [ ] legacy UI-v3 / SVG visual gates explicitly quarantined from redesign completion gating.
+- [x] obsolete `.github/workflows/visual-audit.yml` removed from the redesign branch;
+- [x] legacy UI-v3 / SVG visual gates explicitly quarantined from redesign completion gating by the active authority/spec/agent rules.
 
 Exit: implementation can proceed without publishing partial UI or being blocked by obsolete visual contracts.
 
