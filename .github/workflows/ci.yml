@@ -112,6 +112,9 @@ jobs:
           done
           cat ui-redesign-preview.log
           exit 1
+      - name: Check Gate 7 accessibility and UI data contract
+        if: github.event_name == 'pull_request' && github.head_ref == 'ui/sog-redesign-v4'
+        run: node scripts/check-gate7-ui-contract.mjs --base-url http://127.0.0.1:4321
       - name: Capture Gate 7 desktop representatives
         if: github.event_name == 'pull_request' && github.head_ref == 'ui/sog-redesign-v4'
         run: node scripts/capture-site-screenshots.mjs --device desktop --mode representative --base-url http://127.0.0.1:4321
