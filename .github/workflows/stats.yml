@@ -5,7 +5,11 @@ on:
   pull_request:
     paths:
       - 'data/**'
+      - 'docs/stats-spec.md'
       - 'docs/migration/current-stats-history-checkpoint.json'
+      - 'src/pages/stats/**'
+      - 'src/pages/maintenance/**'
+      - 'src/lib/statsData.mjs'
       - 'scripts/build-stats.mjs'
       - 'scripts/validate-stats.mjs'
       - 'scripts/validate-stats-history.mjs'
