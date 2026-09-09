@@ -12,6 +12,9 @@
   };
 
   const applyObservatorySemantics = () => {
+    const themeColor = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');
+    if (themeColor) themeColor.content = '#05090f';
+
     document.querySelectorAll<HTMLElement>('main small, footer small, header small').forEach((element) => {
       if (element.matches('[data-ui-mono]') || element.closest('[data-ui-mono]')) return;
       element.style.fontFamily = 'var(--ui-sans)';
