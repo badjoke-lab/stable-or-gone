@@ -15,6 +15,7 @@ const events = getEvents();
 const evidence = getEvidence();
 const evidenceSummary = getEvidenceSourceIdentitySummary();
 
+const stablecoinById = new Map(stablecoins.map((coin) => [coin.id, coin] as const));
 const organizationById = new Map(organizations.map((organization) => [organization.id, organization] as const));
 const primaryOrganization = (stablecoinId: string) => {
   const relationship = resolvePrimaryRelationshipForStablecoin(stablecoinId, relationships).relationship;
@@ -33,6 +34,26 @@ const eventCount = (stablecoinId: string) => events.filter((event) =>
   event.stablecoin_id === stablecoinId || (event.subject_stablecoin_ids ?? []).includes(stablecoinId)
 ).length;
 const latestVerified = stablecoins.map((coin) => coin.last_verified_at).filter(Boolean).sort().at(-1) ?? '—';
+
+const lifecycleOrder = ['active', 'limited', 'impaired', 'failed', 'migrated', 'discontinued', 'unknown'];
+const lifecycleSummary = lifecycleOrder
+  .map((status) => ({ status, count: stablecoins.filter((coin) => (coin.lifecycle_status ?? 'unknown') === status).length }))
+  .filter((item) => item.count > 0);
+
+const recentEvents = [...events]
+  .filter((event) => Boolean(event.event_date))
+  .sort((left, right) => String(right.event_date).localeCompare(String(left.event_date)) || right.title.localeCompare(left.title))
+  .slice(0, 6)
+  .map((event) => {
+    const stablecoinId = event.stablecoin_id ?? event.subject_stablecoin_ids?.[0];
+    const coin = stablecoinId ? stablecoinById.get(stablecoinId) : undefined;
+    return {
+      event,
+      coin,
+      type: String(event.event_type ?? 'material_change').replaceAll('_', ' '),
+      impact: String(event.impact_level ?? 'recorded').replaceAll('_', ' ')
+    };
+  });
 
 const entryCards = [
   { href: '/stablecoins/', number: '01', title: 'Stablecoin records', text: 'Canonical assets, lifecycle states, reference targets, backing models, and unresolved questions.' },
@@ -75,136 +96,104 @@ const jsonLd = {
 };
 ---
 <BaseLayout title={title} description={description} canonicalPath="/" jsonLd={jsonLd}>
-  <div class="home-ledger" data-home-priority="recent-records-first">
-    <section class="home-intro" aria-labelledby="home-title">
-      <div class="home-intro-copy">
-        <p class="kicker">Stablecoin history</p>
-        <h1 id="home-title">A historical registry of stablecoins.</h1>
-        <p class="lede">Track {stablecoins.length} stablecoins, their organizations, material events, access changes, and supporting evidence.</p>
+  <div class="home-ledger home-observatory" data-home-priority="state-first">
+    <section class="home-observatory-hero" aria-labelledby="home-title">
+      <div class="home-observatory-copy">
+        <p class="kicker">Stablecoin state observatory</p>
+        <h1 id="home-title">Track what stablecoins are now — and how they got there.</h1>
+        <p class="lede">A source-backed registry of {stablecoins.length} stable assets, their organizations, material events, access conditions, lifecycle changes, and supporting evidence.</p>
+        <div class="home-observatory-actions">
+          <a class="ui-button" href="/stablecoins/">Explore the register</a>
+          <a class="home-secondary-action" href="/events/">Review material changes</a>
+        </div>
       </div>
-      <dl class="home-facts" aria-label="Registry summary">
-        <div><dt>Stablecoins</dt><dd>{stablecoins.length}<small> stable assets</small></dd></div>
-        <div><dt>Organizations</dt><dd>{organizations.length}<small> organizations</small></dd></div>
-        <div><dt>Events</dt><dd>{events.length}<small> events</small></dd></div>
-        <div><dt>Evidence</dt><dd>{evidence.length}<small> source records</small><small>Source identities {evidenceSummary.source_identities}</small></dd></div>
-      </dl>
+
+      <div class="home-state-overview" aria-labelledby="home-state-title">
+        <div class="home-state-overview-heading">
+          <div><p class="kicker">State overview</p><h2 id="home-state-title">Lifecycle distribution</h2></div>
+          <span>{stablecoins.length} canonical records</span>
+        </div>
+        <div class="home-state-band" role="list" aria-label="Stablecoin lifecycle distribution">
+          {lifecycleSummary.map(({ status, count }) => (
+            <a href={`/stablecoins/?lifecycle=${status}`} class="home-state-segment" data-tone={status} role="listitem" style={`--state-share:${Math.max(count, 1)}`}>
+              <strong>{formatLifecycleLabel(status)}</strong><span>{count}</span>
+            </a>
+          ))}
+        </div>
+      </div>
     </section>
+
+    <dl class="home-kpi-strip" aria-label="Registry summary">
+      <div><dt>Stablecoins</dt><dd>{stablecoins.length}</dd><small>canonical stable assets</small></div>
+      <div><dt>Organizations</dt><dd>{organizations.length}</dd><small>connected organizations</small></div>
+      <div><dt>Events</dt><dd>{events.length}</dd><small>material records</small></div>
+      <div><dt>Evidence</dt><dd>{evidence.length}</dd><small>{evidenceSummary.source_identities} source identities</small></div>
+      <div><dt>Last verified</dt><dd class="home-kpi-date">{latestVerified}</dd><small>latest asset review date</small></div>
+    </dl>
+
+    {recentEvents.length > 0 && (
+      <section class="home-material-changes" aria-labelledby="material-changes-title">
+        <div class="section-heading">
+          <div><p class="kicker">Material changes</p><h2 id="material-changes-title">Recent recorded events</h2></div>
+          <a class="registry-heading-link" href="/events/">All events →</a>
+        </div>
+        <div class="home-change-stream">
+          {recentEvents.map(({ event, coin, type, impact }) => (
+            <article class="home-change-card">
+              <div class="home-change-card-meta"><time datetime={event.event_date ?? undefined}>{event.event_date}</time><span data-tone={impact}>{impact}</span></div>
+              <p class="home-change-type">{type}</p>
+              <h3>{event.title}</h3>
+              <p>{coin ? <><a href={`/stablecoin/${coin.slug}/`}>{coin.name}</a>{coin.symbol ? ` · ${coin.symbol}` : ''}</> : 'Cross-registry / organization event'}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+    )}
 
     <section class="registry-section registry-section--priority" aria-labelledby="registry-title">
       <div class="section-heading home-registry-heading">
-        <div>
-          <p class="kicker">Recently reviewed</p>
-          <h2 id="registry-title">Latest registry entries</h2>
-        </div>
+        <div><p class="kicker">Explore stablecoins</p><h2 id="registry-title">Recently reviewed records</h2></div>
         <a class="registry-heading-link" href="/stablecoins/">Browse all {stablecoins.length} records →</a>
       </div>
 
-      <div class="registry-panel">
-        <div class="registry-count">
-          <span><strong>{previewRows.length}</strong> recently reviewed records</span>
-          <span>Last verified <strong>{latestVerified}</strong></span>
-        </div>
+      <div class="registry-panel home-registry-panel">
+        <div class="registry-count"><span><strong>{previewRows.length}</strong> recent records</span><span>Latest verification <strong>{latestVerified}</strong></span></div>
         <div class="table-wrap home-registry-table-wrap">
           <table class="home-registry-table">
-            <thead>
-              <tr>
-                <th>Stablecoin</th>
-                <th>Lifecycle</th>
-                <th>Reference</th>
-                <th>Organization</th>
-                <th>Reviewed</th>
-                <th>Evidence / events</th>
-              </tr>
-            </thead>
+            <thead><tr><th>Stablecoin</th><th>Lifecycle</th><th>Reference</th><th>Organization</th><th>Reviewed</th><th>Evidence / events</th></tr></thead>
             <tbody>
               {previewRows.map(({ coin, organization, domain, lifecycle, reference, evidence: sourceCount, events: linkedEvents }) => (
                 <tr class="home-registry-row">
-                  <td data-label="Stablecoin">
-                    <div class="stablecoin-dossier-heading-identity">
-                      <StablecoinMark slug={coin.slug} symbol={coin.symbol || ''} name={coin.name} size="small" loading="eager" />
-                      <div>
-                        <a href={`/stablecoin/${coin.slug}/`}><strong>{coin.name}</strong></a>
-                        <small>{coin.symbol || 'No symbol'}{domain ? ` · ${domain}` : ''}</small>
-                      </div>
-                    </div>
-                  </td>
-                  <td data-label="Lifecycle"><span class={`chip chip--${lifecycle}`}>{formatLifecycleLabel(lifecycle)}</span></td>
+                  <td data-label="Stablecoin"><div class="stablecoin-dossier-heading-identity"><StablecoinMark slug={coin.slug} symbol={coin.symbol || ''} name={coin.name} size="small" loading="eager" /><div><a href={`/stablecoin/${coin.slug}/`}><strong>{coin.name}</strong></a><small>{coin.symbol || 'No symbol'}{domain ? ` · ${domain}` : ''}</small></div></div></td>
+                  <td data-label="Lifecycle"><span class={`chip chip--${lifecycle}`} data-tone={lifecycle}>{formatLifecycleLabel(lifecycle)}</span></td>
                   <td data-label="Reference">{reference}</td>
-                  <td data-label="Organization">
-                    {organization ? <a href={`/issuer/${organization.slug}/`}>{organization.name}</a> : 'Not recorded'}
-                  </td>
+                  <td data-label="Organization">{organization ? <a href={`/issuer/${organization.slug}/`}>{organization.name}</a> : 'Not recorded'}</td>
                   <td data-label="Reviewed"><strong>{coin.last_verified_at || 'Not recorded'}</strong></td>
-                  <td data-label="Evidence / events" class="home-registry-evidence">
-                    <strong>{sourceCount} sources</strong><small> · {linkedEvents} {linkedEvents === 1 ? 'event' : 'events'}</small>
-                  </td>
+                  <td data-label="Evidence / events" class="home-registry-evidence"><strong>{sourceCount} sources</strong><small> · {linkedEvents} {linkedEvents === 1 ? 'event' : 'events'}</small></td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
-        <div class="registry-count registry-count--footer">
-          <a class="support-cta" href="/stablecoins/">Open all stablecoin records</a>
-        </div>
+        <div class="registry-count registry-count--footer"><a class="ui-button" href="/stablecoins/">Open the stablecoin register</a></div>
       </div>
     </section>
 
-    {leadGuide && (
-      <section class="directory-section" aria-labelledby="research-guides-title">
-        <div class="section-heading">
-          <div>
-            <p class="kicker">Research &amp; guides</p>
-            <h2 id="research-guides-title">Read the regulatory context</h2>
-          </div>
-          <a class="registry-heading-link" href="/guides/">All guides →</a>
-        </div>
-        <div class="panel registry">
-          <div class="bar">Featured research</div>
-          <h3><a href={`/guides/${leadGuide.slug}/`}>{leadGuide.title}</a></h3>
-          <p>{leadGuide.summary}</p>
-          <p><strong>{leadGuide.regionLabel ?? 'Global'}</strong> · Published {leadGuide.publishedAt} · Current through {leadGuide.informationCurrentThrough}</p>
-          <p><a href={`/guides/${leadGuide.slug}/`}>Open the 2026 global comparison →</a></p>
-        </div>
-        {latestGuides.length > 0 && (
-          <div class="editorial-directory" aria-label="Latest featured guides">
-            {latestGuides.map((guide, index) => (
-              <a href={`/guides/${guide.slug}/`}>
-                <span class="directory-number">{String(index + 1).padStart(2, '0')}</span>
-                <span class="directory-copy"><strong>{guide.title}</strong><small>{guide.regionLabel ?? 'Guide'} · Current through {guide.informationCurrentThrough}</small></span>
-                <span aria-hidden="true">→</span>
-              </a>
-            ))}
-          </div>
-        )}
+    <div class="home-lower-grid">
+      {leadGuide && (
+        <section class="home-research-panel" aria-labelledby="research-guides-title">
+          <div class="section-heading"><div><p class="kicker">Research &amp; guides</p><h2 id="research-guides-title">Context behind the records</h2></div><a class="registry-heading-link" href="/guides/">All guides →</a></div>
+          <div class="panel registry home-featured-guide"><div class="bar">Featured research</div><h3><a href={`/guides/${leadGuide.slug}/`}>{leadGuide.title}</a></h3><p>{leadGuide.summary}</p><p><strong>{leadGuide.regionLabel ?? 'Global'}</strong> · Published {leadGuide.publishedAt} · Current through {leadGuide.informationCurrentThrough}</p></div>
+          {latestGuides.length > 0 && <div class="editorial-directory" aria-label="Latest featured guides">{latestGuides.map((guide, index) => <a href={`/guides/${guide.slug}/`}><span class="directory-number">{String(index + 1).padStart(2, '0')}</span><span class="directory-copy"><strong>{guide.title}</strong><small>{guide.regionLabel ?? 'Guide'} · Current through {guide.informationCurrentThrough}</small></span><span aria-hidden="true">→</span></a>)}</div>}
+        </section>
+      )}
+
+      <section class="directory-section home-directory-panel" aria-labelledby="directory-title">
+        <div class="section-heading"><div><p class="kicker">Registry views</p><h2 id="directory-title">Explore the archive</h2></div></div>
+        <div class="editorial-directory">{entryCards.map((card) => <a href={card.href}><span class="directory-number">{card.number}</span><span class="directory-copy"><strong>{card.title}</strong><small>{card.text}</small></span><span aria-hidden="true">→</span></a>)}</div>
       </section>
-    )}
+    </div>
 
-    <section class="archive-note" aria-label="Registry scope note">
-      <span>Evidence-based static registry</span>
-      <span>Not a ranking or market dashboard</span>
-    </section>
-
-    <section class="directory-section" aria-labelledby="directory-title">
-      <div class="section-heading">
-        <div>
-          <p class="kicker">Archive directory</p>
-          <h2 id="directory-title">Explore the record</h2>
-        </div>
-        <p>Cross-record views for lifecycle, organizations, events, access, evidence, and statistics.</p>
-      </div>
-      <div class="editorial-directory">
-        {entryCards.map((card) => (
-          <a href={card.href}>
-            <span class="directory-number">{card.number}</span>
-            <span class="directory-copy"><strong>{card.title}</strong><small>{card.text}</small></span>
-            <span aria-hidden="true">→</span>
-          </a>
-        ))}
-      </div>
-    </section>
-
-    <aside class="context-support-callout" aria-label="Support Stable or Gone">
-      <p><strong>Help keep Stable or Gone public.</strong> Support source verification, broken-link review, new records, and archive maintenance.</p>
-      <a class="support-cta" href="/support/">View support options</a>
-    </aside>
+    <section class="archive-note" aria-label="Registry scope note"><span>Evidence-backed historical registry</span><span>Not a ranking or real-time market dashboard</span></section>
   </div>
 </BaseLayout>
