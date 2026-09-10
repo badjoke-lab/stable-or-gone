@@ -1,8 +1,10 @@
 # SOG statistics and registry-health specification
 
-Status: active post-cutover implementation specification  
-Updated: 2026-09-10  
-Implementation branch: `ui/stats-registry-health-20260910`
+Status: implemented production specification  
+Updated: 2026-09-11  
+Completed implementation branch: `ui/stats-registry-health-20260910`  
+Feature PR: #653  
+Verified production commit: `157ec8c391a9134552c9e0beabb3ff430e867fd6`
 
 Public routes:
 
@@ -295,7 +297,7 @@ Quality coverage is not a safety score.
 }
 ```
 
-This workstream does not require a schema migration merely to change page composition. Page-only deterministic projections may be calculated from the same reviewed canonical input at build time where necessary, provided the calculation is documented here and does not use private sources.
+This production contract does not require a schema migration merely to change page composition. Page-only deterministic projections may be calculated from the same reviewed canonical input at build time where necessary, provided the calculation is documented here and does not use private sources.
 
 `stats-history.json` remains reviewed checkpoint history. It is used primarily by Registry Health for corpus-growth context rather than as a headline public-market statistic.
 
@@ -339,7 +341,9 @@ Fail or block release when:
 - public Stats and Registry Health regress into the same undifferentiated dashboard;
 - responsive layouts introduce horizontal overflow or hide exact counts.
 
-## Release sequence
+## Implementation and release record
+
+The initial production implementation followed this sequence:
 
 ```text
 update specification and agent authority
@@ -348,7 +352,10 @@ update specification and agent authority
 -> validate canonical/statistics/registry contracts
 -> Astro check + production-equivalent build
 -> route/link + responsive inspection
--> sync latest main if required
--> merge both surfaces together
--> verify production /stats/ and /maintenance/
+-> sync latest main
+-> merge both surfaces together in PR #653
+-> correct stale pre-split Stats production smoke assertion in PR #658
+-> verify production on Deploy production run #516
 ```
+
+Production verification succeeded on commit `157ec8c391a9134552c9e0beabb3ff430e867fd6`. Future changes must continue to satisfy this specification but do not reopen the completed implementation branch by default.
