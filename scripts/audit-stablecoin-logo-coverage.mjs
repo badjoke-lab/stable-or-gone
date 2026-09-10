@@ -17,7 +17,7 @@ const registrySourcePaths = [
 const canonicalStablecoinFiles = new Set();
 for (const sourcePath of registrySourcePaths) {
   const source = fs.readFileSync(sourcePath, 'utf8');
-  for (const match of source.matchAll(/from ['"]\.\.\/\.\.\/\.\.\/data\/(stablecoins[^'"]+\.json)['"]/g)) {
+  for (const match of source.matchAll(/from ['"]\.\.\/\.\.\/\.\.\/data\/(stablecoins[^'"]*\.json)['"]/g)) {
     canonicalStablecoinFiles.add(match[1]);
   }
 }
