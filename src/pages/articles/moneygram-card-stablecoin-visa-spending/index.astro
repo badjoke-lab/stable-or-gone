@@ -1,0 +1,98 @@
+---
+import ArticleLayout from '../../../layouts/ArticleLayout.astro';
+const headline = 'MoneyGram Adds Visa Spending to Its Stablecoin Balance With New Card';
+const title = `${headline} — Stable or Gone`;
+const description = 'MoneyGram has introduced a stablecoin-backed card that turns its app-based stable-dollar balance into Visa spending. SOG separates the confirmed payment expansion from unresolved questions around MGUSD and card infrastructure.';
+const canonicalPath = '/articles/moneygram-card-stablecoin-visa-spending/';
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline,
+  description,
+  url: `https://www.stableorgone.com${canonicalPath}`,
+  inLanguage: 'en',
+  datePublished: '2026-09-11',
+  dateModified: '2026-09-11',
+  isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://www.stableorgone.com/' },
+  about: ['stablecoins', 'MoneyGram', 'Visa', 'USDC', 'MGUSD', 'remittances', 'stablecoin cards', 'payments']
+};
+---
+<ArticleLayout
+  title={title}
+  description={description}
+  canonicalPath={canonicalPath}
+  headline={headline}
+  sectionLabel="Payments and distribution"
+  deck="MoneyGram's new card extends the company's stable-dollar balance from holding and cash-out into everyday card spending. The important change is distribution: a stablecoin-backed balance can now reach ordinary Visa checkout without becoming a separate crypto-card experience."
+  publishedAt="September 11, 2026"
+  treatment="Non-canonical analysis"
+  scope="MoneyGram stablecoin balance / consumer card spending"
+  jsonLd={jsonLd}
+>
+  <section class="panel registry">
+    <div class="bar">What happened</div>
+    <p><strong>MoneyGram has introduced the MoneyGram Card as a stablecoin-backed card inside the MoneyGram app.</strong> The announced experience lets customers use their stable-dollar balance for online and in-store purchases where Visa is accepted, add the digital card to Apple Pay or Google Wallet, view card activity, and freeze or unfreeze the card from the MoneyGram app.</p>
+    <p>Independent reporting published September 10 places the initial launch in Colombia and describes the product as MoneyGram's first stablecoin-backed Visa card. That geographic detail is useful context, but SOG does not use the secondary report to infer unannounced issuer or settlement relationships.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Why this matters for stablecoins</div>
+    <p>MoneyGram already had a stablecoin-balance model built around remittances: recipients could receive funds into a dollar-denominated balance, hold stable digital dollars and cash out through MoneyGram locations. The card adds a third path — <strong>spend</strong> — alongside hold and cash-out.</p>
+    <p>That is a material distribution change. It reduces the need to leave the MoneyGram experience, move funds to another wallet, or cash out before making an ordinary merchant purchase. For SOG, this is stronger evidence of stablecoin utility than a listing announcement or a generic partnership because the stable balance is being connected to a mainstream payment network at the point of sale.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">The Colombia balance was built on USDC</div>
+    <p>MoneyGram and the Stellar Development Foundation previously documented that the MoneyGram app's stablecoin balance first went live in Colombia using Stellar, Crossmint and Circle's USDC. Customers could receive funds into a USD-denominated balance, hold stable digital dollars and cash out at MoneyGram locations.</p>
+    <p>That makes USDC directly relevant background for the Colombian product lineage. It does <strong>not</strong>, by itself, prove that every MoneyGram Card transaction, every future market, or every version of the card is funded or settled in USDC.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Do not relabel this as an MGUSD card yet</div>
+    <p>MoneyGram launched MGUSD in June 2026 and described the stablecoin as a foundation for a growing suite of financial services across its network. That makes a future MGUSD connection plausible, but the card announcement reviewed for this article describes a <strong>stablecoin-backed card</strong> and a <strong>stable-dollar balance</strong>; it does not establish that MGUSD is the specific funding asset for this card.</p>
+    <p>SOG therefore does not call the product an “MGUSD-backed card.” A direct MoneyGram disclosure connecting the card balance, card funding or settlement flow to MGUSD would justify updating that treatment.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">What is confirmed and what remains open</div>
+    <table>
+      <thead><tr><th>Question</th><th>Current treatment</th></tr></thead>
+      <tbody>
+        <tr><td>Is there a MoneyGram-branded card connected to the app experience?</td><td>Yes.</td></tr>
+        <tr><td>Is the announced card stablecoin-backed?</td><td>Yes; that is how MoneyGram presents the product.</td></tr>
+        <tr><td>Can the balance be spent through Visa acceptance?</td><td>Yes.</td></tr>
+        <tr><td>Does the digital card support Apple Pay and Google Wallet?</td><td>Yes.</td></tr>
+        <tr><td>Was the existing Colombia stablecoin balance built using USDC?</td><td>Yes, according to MoneyGram/Stellar partnership material.</td></tr>
+        <tr><td>Is the new card definitively MGUSD-backed?</td><td>Not established by the sources reviewed.</td></tr>
+        <tr><td>Is Rain the card issuer or processor?</td><td>Not canonicalized here. Secondary reporting says Rain powers the product, but SOG is waiting for direct first-party confirmation before treating that relationship as settled.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Stable or Gone treatment</div>
+    <p><strong>Current SOG treatment: material adoption / payment-distribution article, without a canonical stablecoin lifecycle change.</strong></p>
+    <p>The launch expands how a stablecoin balance can be used, but it does not by itself change the lifecycle status, backing quality, redemption state or issuer status of USDC or MGUSD. SOG therefore publishes the development as ecosystem analysis while keeping the canonical asset-status layer unchanged.</p>
+    <p>If MoneyGram explicitly identifies the card's funding asset or establishes an MGUSD migration, replacement or mandatory card-balance relationship, that would be a separate canonical-event decision.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">What SOG will watch next</div>
+    <ul>
+      <li>MoneyGram's direct disclosure of the card's supported stablecoin or stablecoins;</li>
+      <li>whether MGUSD replaces, supplements or remains separate from the existing USDC-based app balance;</li>
+      <li>first-party confirmation of the card issuer, program manager and stablecoin-card infrastructure provider;</li>
+      <li>launch markets beyond Colombia and whether the funding model varies by jurisdiction;</li>
+      <li>fees, conversion mechanics and whether card spending is direct from a stablecoin balance or converted before authorization/settlement.</li>
+    </ul>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Sources</div>
+    <ul>
+      <li><a href="https://stellar.org/press/moneygram-and-stellar-extend-partnership-to-scale-real-world-stablecoin-utility-globally" rel="noreferrer">Stellar Development Foundation — MoneyGram and Stellar Extend Partnership to Scale Real-World Stablecoin Utility Globally</a> — documents the Colombia stablecoin balance and its Stellar / Crossmint / Circle USDC infrastructure.</li>
+      <li><a href="https://corporate.moneygram.com/news" rel="noreferrer">MoneyGram Newsroom</a> — documents MoneyGram's June 2026 MGUSD launch and the company's broader stablecoin strategy.</li>
+      <li><a href="https://coindoo.com/moneygram-adds-visa-spending-stablecoin-remittances/" rel="noreferrer">Coindoo, September 10, 2026</a> — reports the MoneyGram stablecoin-backed Visa card launch in Colombia.</li>
+    </ul>
+  </section>
+</ArticleLayout>
