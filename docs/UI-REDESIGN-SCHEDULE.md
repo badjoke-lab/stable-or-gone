@@ -1,180 +1,156 @@
 # SOG UI Redesign Schedule
 
-Status: GATE 7 COMPLETE — GATE 8 CUTOVER READY
-Workstream: production-safe full UI rebuild
-Implementation branch: `ui/sog-redesign-v4`
+Status: V4 CUTOVER COMPLETE — POST-CUTOVER STATS / REGISTRY HEALTH REFINEMENT ACTIVE
+Updated: 2026-09-10
 Production branch: `main`
+Current refinement branch: `ui/stats-registry-health-20260910`
 
-This is a gated execution schedule. Gate completion, not elapsed time, controls progression. The public site remains on the outgoing UI until Gate 8.
+## Completed UI Redesign V4 gates
 
-## Gate 0 — Authority, controls, and isolation
+### Gate 0 — Authority, controls, isolation
 
-- [x] redesign authority defined;
-- [x] redesign specification defined;
-- [x] redesign schedule defined;
-- [x] implementation branch created from main checkpoint `5e12ed2c5c40f945a8af5821c443fefad7594a98`;
-- [x] agent operating rules defined;
-- [x] authority/docs merged to main as PR #635, merge `8e6d34d2893c6f557d90419158f260aa7ca01c92`;
-- [x] obsolete `.github/workflows/visual-audit.yml` removed;
-- [x] legacy UI-v3 / SVG visual gates explicitly quarantined from redesign completion gating by the active authority/spec/agent rules.
+COMPLETE.
 
-Gate 0 status: COMPLETE.
+- redesign authority/spec/schedule established;
+- implementation isolated from `main`;
+- obsolete `.github/workflows/visual-audit.yml` removed;
+- outgoing UI-v3 / SVG visual baselines quarantined from redesign acceptance.
 
-Exit: implementation can proceed without publishing partial UI or being blocked by obsolete visual contracts.
+### Gate 1 — Design system and responsive shell
 
-## Gate 1 — Design system and responsive shell
+COMPLETE.
 
-- [x] design tokens;
-- [x] typography hierarchy;
-- [x] lifecycle/status color semantics;
-- [x] panel/card/table/form primitives;
-- [x] desktop navigation shell;
-- [x] mobile navigation shell, including fixed bottom primary navigation;
-- [x] shared responsive spacing/layout;
-- [x] unknown/empty/error display rules.
+- dark observatory tokens and sans-first typography;
+- lifecycle/status semantics;
+- desktop shell;
+- fixed mobile primary navigation;
+- responsive spacing and unknown/empty/error states.
 
-Gate 1 status: COMPLETE ON REDESIGN BRANCH.
+### Gate 2 — Discovery
 
-Exit: common desktop/mobile shells can render canonical data without page-specific hacks.
+COMPLETE.
 
-## Gate 2 — Discovery
+- Home;
+- Stablecoin Register;
+- search/filter/sort/pagination;
+- compare-selection entry point;
+- desktop and mobile variants.
 
-- [x] Home desktop + mobile;
-- [x] Register desktop + mobile;
-- [x] search/filter/sort/pagination;
-- [x] mobile filter drawer;
-- [x] compare-selection entry point.
+### Gate 3 — Stablecoin research
 
-Gate 2 status: COMPLETE ON REDESIGN BRANCH.
+COMPLETE.
 
-Exit: canonical records are discoverable and filterable on desktop and mobile.
+- Dossier;
+- issuer/control;
+- backing/redemption/reserves;
+- deployments/access where supportable;
+- evidence;
+- regulatory notes;
+- known unknowns;
+- lifecycle/history.
 
-## Gate 3 — Stablecoin research
+### Gate 4 — Events and history
 
-- [x] Dossier desktop + mobile;
-- [x] issuer/control;
-- [x] backing/redemption/reserve sections;
-- [x] deployments/access where supportable;
-- [x] evidence;
-- [x] regulatory notes;
-- [x] known unknowns;
-- [x] lifecycle/history presentation.
+COMPLETE.
 
-Gate 3 status: COMPLETE ON REDESIGN BRANCH.
+- Events;
+- Event Detail;
+- Timeline;
+- evidence-linked chronology;
+- before/after state only where supported.
 
-Exit: dossier answers current state and historical basis without fabricated summaries.
+### Gate 5 — Compare, organizations, analytics
 
-## Gate 4 — Events and history
+COMPLETE.
 
-- [x] Events desktop + mobile;
-- [x] Event Detail desktop + mobile;
-- [x] Timeline desktop + mobile;
-- [x] evidence-linked chronology;
-- [x] before/after display only where supported.
+- Compare;
+- Organizations / issuer detail;
+- initial Stats redesign;
+- deterministic aggregation rules.
 
-Gate 4 status: COMPLETE ON REDESIGN BRANCH.
+### Gate 6 — Reference and secondary surfaces
 
-Exit: material state change is navigable as structured history.
+COMPLETE.
 
-## Gate 5 — Compare, issuers, and analytics
+- Methodology/data/reference;
+- Access & Regulation;
+- Guides and article layout;
+- Updates / Maintenance;
+- support/contact/about/legal/utility states.
 
-- [x] Compare desktop + mobile;
-- [x] Issuer/Organization detail desktop + mobile;
-- [x] Stats desktop + mobile;
-- [x] documented deterministic aggregation rules (`docs/stats-spec.md` and existing canonical projection rules).
+### Gate 7 — Full redesign verification
 
-Gate 5 status: COMPLETE ON REDESIGN BRANCH.
+COMPLETE.
 
-Exit: all comparison/statistics values are canonical or documented derivations.
+Final pre-cutover verification included canonical/classification/profile/event/evidence validation, registry integrity, Astro check, production-equivalent build, reproducibility/public-layer verification, internal-link checks, representative desktop/mobile browser inspection, overflow checks, basic accessibility checks, and data-vs-UI spot checks.
 
-## Gate 6 — Reference and secondary surfaces
+The verified redesign history was integrated through PR #636.
 
-- [x] Methodology / public data/reference surfaces;
-- [x] Access & Regulation;
-- [x] Guides index + article layout;
-- [x] Updates / Maintenance;
-- [x] Support / Contact / About / legal utility pages;
-- [x] 404 / empty / error states.
+### Gate 8 — Production cutover
 
-Gate 6 status: COMPLETE ON REDESIGN BRANCH. `redesign-v4-secondary.css` covers reference/guide/utility surfaces and `redesign-v4-operations.css` covers Updates/Maintenance.
+COMPLETE.
 
-Exit: no production route family remains visually incompatible unless explicitly approved.
+- integration PR: #636 `UI Redesign V4 integration — Gate 8 cutover ready`;
+- merged: 2026-09-09;
+- merge commit: `60940f0c1ad1d69961e839fa4979a7c4e29d91af`;
+- complete redesign moved to `main` in one integration merge;
+- subsequent production UI fixes and SEO/structured-data fixes were merged on top of the cutover;
+- current public screenshots and repository `main` reflect the V4 observatory UI.
 
-## Gate 7 — Full redesign verification
+The previous `READY, NOT YET EXECUTED` status was stale after PR #636 merged and is superseded by this schedule update.
 
-Gate 7 status: COMPLETE.
+### Gate 9 — Post-cutover cleanup
 
-- [x] full ancestry sync with latest `main`;
-  - verified production/main checkpoint: `1feb7e218a46d8875c25cfe194e2cae359b36454`;
-  - sync merge on redesign history: `8495ba20c267eb3bcd51daa920307b37b159e097`;
-  - compare after sync: redesign branch is ahead of `main` and behind by zero commits.
-- [x] canonical/classification/profile/event/evidence validation — CI run `34339616126` / run #5703 success;
-- [x] registry integrity — Registry audits run `34339616146` / run #118 success;
-- [x] Astro check — CI run `34339616126` / run #5703 success;
-- [x] production-equivalent build — CI run `34339616126` / run #5703 success;
-- [x] reproducibility/public-layer verification — Reproducible build run `34339616075` / run #3474 success and Public consistency run `34339616084` / run #5194 success;
-- [x] route and broken-link check — Gate 7 built internal-link check succeeded in CI run #5703;
-- [x] desktop representative browser inspection — 45/45 selected desktop routes captured successfully from the built redesign, with zero capture failures;
-- [x] mobile representative browser inspection — 45/45 selected mobile routes captured successfully from the built redesign, with zero capture failures;
-- [x] horizontal overflow check — zero representative desktop/mobile overflow violations in the final Gate 7 artifact;
-- [x] basic accessibility checks — representative desktop/mobile UI-contract check passed for page landmarks, heading count, IDs, visible image alternatives, accessible control names, and overflow;
-- [x] data-vs-UI spot checks — Home and Stablecoin/Organization/Event register counts match the built canonical `version.json`; Home evidence was corrected to use the complete evidence set before final validation;
-- [x] pre-cutover rollback SHA recorded — `1feb7e218a46d8875c25cfe194e2cae359b36454`; Gate 8 must re-confirm this exact SHA immediately before merge and replace it if `main` advances.
+ONGOING / NON-BLOCKING FOR APPROVED PRODUCT REFINEMENTS.
 
-Final Gate 7 screenshot artifact for CI #5703: 45 desktop + 45 mobile representative pages, zero failed captures, zero horizontal overflow violations, zero broken images, zero brand violations, zero outgoing-visual markers, zero residual legacy-interface mono violations, and zero unexpected empty-state violations.
+Remaining cleanup may include obsolete outgoing styles/components and historical design machinery that no longer provide value. Cleanup must not delete enduring data, accessibility, route, or deployment contracts.
 
-No pixel-perfect equality to the outgoing UI is allowed as a release gate.
+## Active post-cutover refinement — Public Stats / Registry Health split
 
-Exit: complete redesign branch is release-ready.
+Authority/specification: `docs/stats-spec.md`  
+Implementation branch: `ui/stats-registry-health-20260910`
 
-## Gate 8 — Production cutover
+### Objective
 
-Status: READY, NOT YET EXECUTED.
+Separate two different jobs that were previously mixed on `/stats/`:
 
-1. freeze redesign branch for integration;
-2. re-fetch `main` and confirm it still equals the recorded rollback SHA or incorporate any new commits;
-3. repeat critical release checks on the final integration head;
-4. record the exact pre-cutover production SHA;
-5. merge complete redesign to `main` once;
-6. allow normal production deployment;
-7. run production smoke + critical-route checks;
-8. verify production canonical counts/public JSON;
-9. verify representative desktop/mobile production pages;
-10. rollback to the recorded SHA on critical regression.
+```text
+/stats/        understand the stablecoin registry
+/maintenance/  understand SOG registry quality and maintenance health
+```
 
-Exit: new UI is public and verified.
+### Work order
 
-## Gate 9 — Cleanup
+- [x] agent authority updated on implementation branch;
+- [x] Stats / Registry Health specification updated;
+- [x] Public Stats page rebuilt around executive summary, current lifecycle state, composition, historical failure patterns, event change over time, compact coverage/confidence, and registry drilldowns;
+- [x] Registry Health overview added to `/maintenance/` with review freshness, data coverage, public-safe gap aggregates, reviewed maintenance checks, corpus growth, and preserved monthly log;
+- [ ] update DESIGN / roadmap / governance documents to the post-cutover split;
+- [ ] run canonical/statistics/registry validations;
+- [ ] run Astro check and production-equivalent build;
+- [ ] run route/internal-link checks;
+- [ ] inspect representative desktop/mobile `/stats/` and `/maintenance/` outputs;
+- [ ] confirm no mock values or private monitoring rows appear;
+- [ ] sync latest `main` if it advanced;
+- [ ] open integration PR;
+- [ ] merge Public Stats and Registry Health together;
+- [ ] verify production `/stats/`, `/maintenance/`, `/data/stats.json`, and `/data/maintenance-log.json`.
 
-- remove obsolete outgoing UI components/styles;
-- remove obsolete visual validators/SVG mock machinery that no longer provides value;
-- retire conflicting historical design documents;
-- document final production UI architecture;
-- keep only lightweight ongoing regression checks tied to demonstrated failure modes.
+### Release rule
 
-## Parallel-work rule
+Do not merge only one half of the split. The public Stats and Registry Health surfaces ship together after validation.
 
-Canonical record growth, evidence work, guides, monitoring, and maintenance may continue on `main` during Gates 0–7. At safe checkpoints, sync `main` into the redesign branch. The redesign adapts to data/schema changes; it does not rewrite canonical facts to fit the UI.
+### Production status
 
-## Latest implementation checkpoint
-
-Gate 7 verification head before this schedule update: `c02a3058cccbe909f1bc079723c4b067f856e101`.
-
-Implemented in the redesign sequence:
-
-- dark observatory foundation and semantic runtime;
-- Home / Register / Dossier / Events / Event Detail / Timeline;
-- Compare / Organizations / Stats;
-- Access & Regulation / Guides / reference / utility surfaces;
-- Updates / Maintenance operational surfaces;
-- mobile fixed bottom primary navigation;
-- mobile conflict avoidance for comparison dock and filter drawer;
-- complete-evidence Home counts and per-record evidence totals;
-- final removal of residual outgoing-interface monospace treatment;
-- built internal-link verification and representative accessibility/data UI-contract checks.
-
-Production changed by this redesign through Gate 7: **no**.
+Production changed by this post-cutover refinement so far: **no**.
 
 ## Required progress report
 
-Every redesign progress report must state current gate, branch/head, completed surfaces, incomplete surfaces, latest main sync point, validation status, and whether production changed. Expected production change is `no` until Gate 8.
+Every continuation report for the active refinement must state:
+
+- branch/head;
+- latest main sync point;
+- completed/incomplete surfaces;
+- validation status;
+- PR/merge state;
+- whether production changed.

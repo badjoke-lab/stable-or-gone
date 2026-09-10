@@ -92,15 +92,16 @@ jobs:
             dist/version.json
             dist/data/manifest.json
 
-      # Gate 7 branch checks are tied to release defects, not outgoing visual fidelity.
-      - name: Check Gate 7 built internal links
-        if: github.event_name == 'pull_request' && github.head_ref == 'ui/sog-redesign-v4'
+      # UI release checks are tied to demonstrated route, accessibility, and responsive defects,
+      # not outgoing visual fidelity or screenshot equality.
+      - name: Check UI release built internal links
+        if: github.event_name == 'pull_request' && (github.head_ref == 'ui/sog-redesign-v4' || github.head_ref == 'ui/stats-registry-health-20260910')
         run: node scripts/check-built-internal-links.mjs
-      - name: Install Gate 7 Chromium
-        if: github.event_name == 'pull_request' && github.head_ref == 'ui/sog-redesign-v4'
+      - name: Install UI release Chromium
+        if: github.event_name == 'pull_request' && (github.head_ref == 'ui/sog-redesign-v4' || github.head_ref == 'ui/stats-registry-health-20260910')
         run: npx playwright install --with-deps chromium
-      - name: Start Gate 7 local preview
-        if: github.event_name == 'pull_request' && github.head_ref == 'ui/sog-redesign-v4'
+      - name: Start UI release local preview
+        if: github.event_name == 'pull_request' && (github.head_ref == 'ui/sog-redesign-v4' || github.head_ref == 'ui/stats-registry-health-20260910')
         shell: bash
         run: |
           npm run preview -- --host 127.0.0.1 --port 4321 > ui-redesign-preview.log 2>&1 &
@@ -112,20 +113,20 @@ jobs:
           done
           cat ui-redesign-preview.log
           exit 1
-      - name: Check Gate 7 accessibility and UI data contract
-        if: github.event_name == 'pull_request' && github.head_ref == 'ui/sog-redesign-v4'
+      - name: Check UI release accessibility and UI data contract
+        if: github.event_name == 'pull_request' && (github.head_ref == 'ui/sog-redesign-v4' || github.head_ref == 'ui/stats-registry-health-20260910')
         run: node scripts/check-gate7-ui-contract.mjs --base-url http://127.0.0.1:4321
-      - name: Capture Gate 7 desktop representatives
-        if: github.event_name == 'pull_request' && github.head_ref == 'ui/sog-redesign-v4'
+      - name: Capture UI release desktop representatives
+        if: github.event_name == 'pull_request' && (github.head_ref == 'ui/sog-redesign-v4' || github.head_ref == 'ui/stats-registry-health-20260910')
         run: node scripts/capture-site-screenshots.mjs --device desktop --mode representative --base-url http://127.0.0.1:4321
-      - name: Capture Gate 7 mobile representatives
-        if: github.event_name == 'pull_request' && github.head_ref == 'ui/sog-redesign-v4'
+      - name: Capture UI release mobile representatives
+        if: github.event_name == 'pull_request' && (github.head_ref == 'ui/sog-redesign-v4' || github.head_ref == 'ui/stats-registry-health-20260910')
         run: node scripts/capture-site-screenshots.mjs --device mobile --mode representative --base-url http://127.0.0.1:4321
-      - name: Upload Gate 7 browser artifacts
-        if: always() && github.event_name == 'pull_request' && github.head_ref == 'ui/sog-redesign-v4'
+      - name: Upload UI release browser artifacts
+        if: always() && github.event_name == 'pull_request' && (github.head_ref == 'ui/sog-redesign-v4' || github.head_ref == 'ui/stats-registry-health-20260910')
         uses: actions/upload-artifact@v4
         with:
-          name: ui-redesign-v4-gate7-${{ github.run_id }}
+          name: ui-release-browser-${{ github.run_id }}
           if-no-files-found: warn
           path: |
             ui-redesign-preview.log

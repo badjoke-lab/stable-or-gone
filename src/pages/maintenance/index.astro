@@ -1,7 +1,9 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getPublicMaintenanceLog } from '../../lib/maintenanceLogData.mjs';
+import { getPublicStats, getPublicStatsHistory } from '../../lib/statsData.mjs';
 import { formatPublicLabel } from '../../utils/displayLabels';
+import { loadStatsInput } from '../../../scripts/stats/load-stats-input.mjs';
 
 type MaintenanceCheck = { check_id: string; result: string; summary: string };
 type MaintenanceRelease = { id: string; label: string; route: string };
@@ -17,9 +19,91 @@ type MaintenanceEntry = {
 };
 
 const log = getPublicMaintenanceLog();
-const entries = log.entries as MaintenanceEntry[];
-const title = 'Maintenance Log — Stable or Gone';
-const description = 'Monthly public maintenance checkpoints for Stable or Gone, limited to public-safe aggregate outcomes, contract checks, released surfaces, and next maintenance priorities.';
+const entries = [...(log.entries as MaintenanceEntry[])].sort((left, right) => right.month.localeCompare(left.month));
+const latestEntry = entries[0];
+const stats = getPublicStats() as any;
+const history = getPublicStatsHistory() as any;
+const input = loadStatsInput(process.cwd()) as any;
+const totalAssets = Number(stats.totals?.assets ?? 0);
+const percentage = (count: number, denominator: number) => denominator > 0 ? Number(((count / denominator) * 100).toFixed(1)) : 0;
+
+const recencyOrder = ['0_30_days', '31_90_days', '91_180_days', '181_365_days', '366_plus_days', 'unknown'];
+const recency = recencyOrder
+  .map((key) => ({
+    key,
+    label: formatPublicLabel(key),
+    count: Number(stats.data_quality?.verification_recency?.[key]?.count ?? 0),
+    percentage: Number(stats.data_quality?.verification_recency?.[key]?.percentage ?? 0)
+  }))
+  .filter((row) => row.count > 0);
+
+const coverageConfig = [
+  ['classification', 'Classification'],
+  ['reserve_redemption_profile', 'Reserve / redemption profile'],
+  ['legal_profile', 'Legal profile'],
+  ['deployment', 'Deployment'],
+  ['stable_asset_relationship', 'Stable-asset relationships'],
+  ['reserve_component', 'Reserve components']
+] as const;
+const coverageRows = coverageConfig.map(([key, label]) => ({
+  key,
+  label,
+  count: Number(stats.data_quality?.coverage?.[key]?.count ?? 0),
+  denominator: Number(stats.data_quality?.coverage?.[key]?.denominator ?? totalAssets),
+  percentage: Number(stats.data_quality?.coverage?.[key]?.percentage ?? 0)
+}));
+
+const evidenceDepth = stats.data_quality?.evidence_per_asset?.distribution ?? {};
+const zeroEvidenceAssets = Number(evidenceDepth?.['0']?.count ?? 0);
+const oneEvidenceAssets = Number(evidenceDepth?.['1']?.count ?? 0);
+const lowEvidenceAssets = zeroEvidenceAssets + oneEvidenceAssets;
+const staleOverYear = Number(stats.data_quality?.verification_recency?.['366_plus_days']?.count ?? 0);
+const unknownReviewDate = Number(stats.data_quality?.verification_recency?.unknown?.count ?? 0);
+const highUnknownAssets = Number(stats.data_quality?.known_unknowns?.assets_with_high_or_critical ?? 0);
+const knownUnknownRows = Number(stats.data_quality?.known_unknowns?.total ?? 0);
+const deploymentCovered = Number(stats.data_quality?.coverage?.deployment?.count ?? 0);
+const reserveComponentCovered = Number(stats.data_quality?.coverage?.reserve_component?.count ?? 0);
+const reserveReportAssets = new Set((input.reserve_reports ?? []).map((row: any) => row?.stablecoin_id).filter(Boolean)).size;
+const evidenceCoveredAssets = Math.max(0, totalAssets - zeroEvidenceAssets);
+
+const attentionRows = [
+  { label: 'Zero evidence items', count: zeroEvidenceAssets, note: 'Assets with no linked evidence items in the current reviewed corpus', tone: 'danger' },
+  { label: 'Low evidence depth', count: lowEvidenceAssets, note: 'Assets with zero or one evidence item', tone: 'warning' },
+  { label: 'High / critical known unknowns', count: highUnknownAssets, note: `${knownUnknownRows} known-unknown records in total`, tone: 'warning' },
+  { label: 'Review older than one year', count: staleOverYear, note: `${unknownReviewDate} assets have no usable verification date`, tone: 'muted' },
+  { label: 'No deployment coverage', count: Math.max(0, totalAssets - deploymentCovered), note: 'Assets without a reviewed deployment record', tone: 'muted' },
+  { label: 'No reserve-component coverage', count: Math.max(0, totalAssets - reserveComponentCovered), note: 'Assets without a reviewed reserve-component record', tone: 'muted' }
+];
+
+const snapshotSignature = (snapshot: any) => [snapshot?.asset_count ?? 0, snapshot?.totals?.events ?? 0, snapshot?.totals?.evidence ?? 0].join(':');
+const snapshots = Array.isArray(history.snapshots) ? history.snapshots : [];
+const distinctSnapshots = snapshots.filter((snapshot: any, index: number) => index === 0 || snapshotSignature(snapshot) !== snapshotSignature(snapshots[index - 1]));
+const recentSnapshots = distinctSnapshots.slice(-8);
+const maxEvidence = Math.max(1, ...recentSnapshots.map((snapshot: any) => Number(snapshot?.totals?.evidence ?? 0)));
+const firstSnapshot = distinctSnapshots[0] ?? {};
+const latestSnapshot = distinctSnapshots.at(-1) ?? {};
+const growth = {
+  assets: Number(latestSnapshot.asset_count ?? 0) - Number(firstSnapshot.asset_count ?? 0),
+  events: Number(latestSnapshot.totals?.events ?? 0) - Number(firstSnapshot.totals?.events ?? 0),
+  evidence: Number(latestSnapshot.totals?.evidence ?? 0) - Number(firstSnapshot.totals?.evidence ?? 0)
+};
+
+const healthCards = [
+  { label: 'Stable assets', value: totalAssets, note: 'Canonical records' },
+  { label: 'Evidence', value: Number(stats.totals?.evidence ?? 0), note: `${evidenceCoveredAssets} assets with evidence` },
+  { label: 'Known unknowns', value: knownUnknownRows, note: `${highUnknownAssets} assets high/critical` },
+  { label: 'Maintenance checkpoints', value: Number(log.summary?.entry_count ?? entries.length), note: `Latest ${log.summary?.latest_month ?? latestEntry?.month ?? 'not recorded'}` }
+];
+
+const dataCoverageCards = [
+  { label: 'Evidence coverage', count: evidenceCoveredAssets, denominator: totalAssets, percentage: percentage(evidenceCoveredAssets, totalAssets) },
+  { label: 'Reserve-report coverage', count: reserveReportAssets, denominator: totalAssets, percentage: percentage(reserveReportAssets, totalAssets) },
+  { label: 'Deployment coverage', count: deploymentCovered, denominator: totalAssets, percentage: percentage(deploymentCovered, totalAssets) },
+  { label: 'Reserve-component coverage', count: reserveComponentCovered, denominator: totalAssets, percentage: percentage(reserveComponentCovered, totalAssets) }
+];
+
+const title = 'Registry Health & Maintenance — Stable or Gone';
+const description = 'Public-safe registry health for Stable or Gone: review freshness, data coverage, known unknowns, evidence depth, reviewed corpus growth, public contract checks, and monthly maintenance checkpoints.';
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'CollectionPage',
@@ -30,101 +114,209 @@ const jsonLd = {
 };
 ---
 <BaseLayout title={title} description={description} canonicalPath="/maintenance/" jsonLd={jsonLd}>
-  <div class="maintenance-page" data-maintenance-log-page>
-    <header class="maintenance-masthead">
+  <article class="health-page" data-maintenance-log-page>
+    <header class="health-hero">
       <div>
-        <p class="maintenance-eyebrow">Project / Public operations</p>
-        <h1>Maintenance Log</h1>
-        <p>Monthly public checkpoints for registry maintenance. The log records aggregate outcomes, contract checks, released public surfaces, and next priorities without publishing internal monitoring rows, unreviewed candidates, private notes, or source queues.</p>
+        <p class="health-kicker">Public operations</p>
+        <h1>Maintenance / Registry Health</h1>
+        <p>Monitor the health of the registry itself: how fresh the reviews are, where coverage is thin, how much evidence supports the corpus, whether public contracts are passing, and how the reviewed dataset is growing.</p>
       </div>
-      <dl class="maintenance-contract-summary" aria-label="Maintenance log summary">
-        <div><dt>Months</dt><dd>{log.summary.entry_count}</dd></div>
-        <div><dt>Latest</dt><dd>{log.summary.latest_month ?? 'None'}</dd></div>
-        <div><dt>Safety</dt><dd>Public-safe only</dd></div>
-      </dl>
+      <aside class="health-boundary-badge">
+        <strong>Public-safe aggregates only</strong>
+        <span>No monitoring candidates, private source queues, candidate URLs, private notes, or internal reviewer tasks are published here.</span>
+      </aside>
     </header>
 
-    <section class="maintenance-boundary" aria-labelledby="maintenance-boundary-heading">
-      <p class="maintenance-eyebrow">Public boundary</p>
-      <h2 id="maintenance-boundary-heading">Operational transparency without exposing the research queue</h2>
-      <div class="maintenance-boundary-grid">
-        <article><h3>What is public</h3><p>Monthly aggregate counts, contract outcomes, public-surface releases, maintenance status, and next public priorities.</p></article>
-        <article><h3>What stays internal</h3><p>Monitoring rows, unreviewed candidates, private source queues, private notes, candidate URLs, and secrets.</p></article>
-        <article><h3>What this is not</h3><p>This is not historical subject change, the publication feed, a live monitoring feed, a risk score, or a ranking.</p></article>
+    <nav class="health-jump" aria-label="Registry Health sections">
+      <a href="#health-summary">Summary</a>
+      <a href="#freshness">Freshness</a>
+      <a href="#coverage">Coverage</a>
+      <a href="#attention">Gaps</a>
+      <a href="#integrity">Integrity</a>
+      <a href="#growth">Growth</a>
+      <a href="#maintenance-log">Monthly log</a>
+    </nav>
+
+    <section id="health-summary" class="health-section health-section--summary">
+      <div class="health-heading">
+        <div><p class="health-kicker">Registry Health</p><h2>Operational state of the reviewed corpus</h2></div>
+        <p>This page measures data quality and maintenance state. It does not score stablecoin safety.</p>
+      </div>
+      <dl class="health-kpis">
+        {healthCards.map((item) => <div><dt>{item.label}</dt><dd>{item.value}</dd><p>{item.note}</p></div>)}
+      </dl>
+    </section>
+
+    <section id="freshness" class="health-section">
+      <div class="health-heading">
+        <div><p class="health-kicker">Review freshness</p><h2>How recently stablecoin records were verified</h2></div>
+        <p>Recency comes from the canonical `last_verified_at` field. Unknown dates remain visible instead of being treated as fresh.</p>
+      </div>
+      <div class="health-freshness-layout">
+        <div class="health-freshness-bars">
+          {recency.map((row) => (
+            <div class="health-freshness-row">
+              <div><strong>{row.label}</strong><span>{row.count} assets</span></div>
+              <div class="health-track"><i style={`width:${Math.min(100, row.percentage)}%`}></i></div>
+              <b>{row.percentage}%</b>
+            </div>
+          ))}
+        </div>
+        <aside class="health-freshness-summary">
+          <span>Evidence depth</span>
+          <strong>{stats.data_quality?.evidence_per_asset?.average ?? 0}</strong>
+          <p>Average evidence items per asset; median {stats.data_quality?.evidence_per_asset?.median ?? 0}.</p>
+          <dl>
+            <div><dt>Zero evidence</dt><dd>{zeroEvidenceAssets}</dd></div>
+            <div><dt>One evidence item</dt><dd>{oneEvidenceAssets}</dd></div>
+            <div><dt>High/critical unknown assets</dt><dd>{highUnknownAssets}</dd></div>
+          </dl>
+        </aside>
       </div>
     </section>
 
-    <section class="maintenance-ledger" aria-labelledby="maintenance-ledger-heading">
-      <div class="maintenance-section-heading">
-        <div>
-          <p class="maintenance-eyebrow">Monthly checkpoints</p>
-          <h2 id="maintenance-ledger-heading">Public maintenance record</h2>
-          <p>Entries are ordered newest first. Closed months are immutable and append-only; the current month may remain in progress until month-end review.</p>
-        </div>
-        <p class="maintenance-machine-link"><a href="/data/maintenance-log.json">Machine-readable log</a> · aggregate outcomes only</p>
+    <section id="coverage" class="health-section">
+      <div class="health-heading">
+        <div><p class="health-kicker">Data coverage</p><h2>Where the registry is complete — and where it is thin</h2></div>
+        <p>Coverage is a documentation metric. It says whether a reviewed domain is present, not whether the asset itself is safe.</p>
       </div>
+      <div class="health-coverage-cards">
+        {dataCoverageCards.map((item) => (
+          <article>
+            <span>{item.label}</span>
+            <strong>{item.percentage}%</strong>
+            <div class="health-track"><i style={`width:${Math.min(100, item.percentage)}%`}></i></div>
+            <p>{item.count} / {item.denominator} assets</p>
+          </article>
+        ))}
+      </div>
+      <div class="health-coverage-table" role="table" aria-label="Registry data-domain coverage">
+        {coverageRows.map((row) => (
+          <div class="health-coverage-row" role="row">
+            <strong role="cell">{row.label}</strong>
+            <div class="health-track" role="cell"><i style={`width:${Math.min(100, row.percentage)}%`}></i></div>
+            <span role="cell">{row.count} / {row.denominator}</span>
+            <b role="cell">{row.percentage}%</b>
+          </div>
+        ))}
+      </div>
+    </section>
 
-      <div class="maintenance-entry-list">
-        {entries.map((entry) => (
-          <article class="maintenance-entry" data-maintenance-month={entry.month}>
-            <header class="maintenance-entry__header">
-              <div>
-                <p class="maintenance-entry__month">{entry.month}</p>
-                <h3>{entry.status === 'closed' ? 'Closed monthly checkpoint' : 'Maintenance in progress'}</h3>
-                <p>{entry.public_summary}</p>
-              </div>
-              <dl>
-                <div><dt>Status</dt><dd>{formatPublicLabel(entry.status)}</dd></div>
-                <div><dt>As of</dt><dd>{entry.as_of}</dd></div>
-              </dl>
-            </header>
-
-            <section class="maintenance-checks" aria-label={`${entry.month} contract checks`}>
-              <h4>Contract checks</h4>
-              <div class="maintenance-check-grid">
-                {entry.checks.map((check) => (
-                  <div class="maintenance-check" data-result={check.result}>
-                    <span>{formatPublicLabel(check.result)}</span>
-                    <strong>{formatPublicLabel(check.check_id)}</strong>
-                    <p>{check.summary}</p>
-                  </div>
-                ))}
-              </div>
-            </section>
-
-            <section class="maintenance-counts" aria-label={`${entry.month} public counts`}>
-              <h4>Public counts at checkpoint</h4>
-              <dl>
-                {Object.entries(entry.counts).map(([key, value]) => (
-                  <div><dt>{formatPublicLabel(key)}</dt><dd>{value}</dd></div>
-                ))}
-              </dl>
-            </section>
-
-            <section class="maintenance-releases" aria-label={`${entry.month} public surface releases`}>
-              <h4>Public surfaces in this maintenance sequence</h4>
-              <div>
-                {entry.public_surface_releases.map((release) => <a href={release.route}>{release.label}</a>)}
-              </div>
-            </section>
-
-            <section class="maintenance-next-focus" aria-label={`${entry.month} next focus`}>
-              <h4>Next focus</h4>
-              <ol>{entry.next_focus.map((item) => <li>{item}</li>)}</ol>
-            </section>
+    <section id="attention" class="health-section health-section--attention">
+      <div class="health-heading">
+        <div><p class="health-kicker">Public gap signals</p><h2>What needs more registry work</h2></div>
+        <p>These are aggregate public-safe gaps only. They are not an internal task queue and do not expose unreviewed records or private research notes.</p>
+      </div>
+      <div class="health-attention-grid">
+        {attentionRows.map((item) => (
+          <article data-tone={item.tone}>
+            <span>{item.label}</span>
+            <strong>{item.count}</strong>
+            <p>{item.note}</p>
           </article>
         ))}
       </div>
     </section>
 
-    <section class="maintenance-related">
-      <p class="maintenance-eyebrow">Related public layers</p>
-      <h2>Read the right record for the right question</h2>
-      <div class="maintenance-related-grid">
-        <a href="/updates/"><strong>Update Feed</strong><span>When did the registry publish a reviewed public change?</span></a>
-        <a href="/timeline/"><strong>Change Timeline</strong><span>When did the historical subject change?</span></a>
-        <a href="/methodology/"><strong>Methodology</strong><span>How are records, uncertainty, evidence, and public boundaries handled?</span></a>
+    <section id="integrity" class="health-section">
+      <div class="health-heading">
+        <div><p class="health-kicker">Public-layer integrity</p><h2>Latest reviewed maintenance checks</h2></div>
+        <p>These are the public-safe outcomes already recorded in the reviewed monthly maintenance log.</p>
+      </div>
+      {latestEntry ? (
+        <>
+          <div class="health-integrity-meta"><strong>{latestEntry.month}</strong><span>{latestEntry.status === 'closed' ? 'Closed checkpoint' : 'Maintenance in progress'}</span><time datetime={latestEntry.as_of}>{latestEntry.as_of}</time></div>
+          <div class="health-check-grid">
+            {latestEntry.checks.map((check) => (
+              <article data-result={check.result}>
+                <span>{formatPublicLabel(check.result)}</span>
+                <strong>{formatPublicLabel(check.check_id)}</strong>
+                <p>{check.summary}</p>
+              </article>
+            ))}
+          </div>
+        </>
+      ) : <p>No public maintenance checkpoint is recorded yet.</p>}
+    </section>
+
+    <section id="growth" class="health-section">
+      <div class="health-heading">
+        <div><p class="health-kicker">Reviewed corpus growth</p><h2>How the maintained registry has expanded</h2></div>
+        <p>Checkpoint growth belongs here rather than in Public Stats because it describes SOG's corpus and maintenance work, not the stablecoin ecosystem itself.</p>
+      </div>
+      <dl class="health-growth-kpis">
+        <div><dt>Assets added</dt><dd>+{growth.assets}</dd></div>
+        <div><dt>Events added</dt><dd>+{growth.events}</dd></div>
+        <div><dt>Evidence added</dt><dd>+{growth.evidence}</dd></div>
+      </dl>
+      <div class="health-growth-list">
+        {recentSnapshots.map((snapshot: any) => {
+          const evidence = Number(snapshot?.totals?.evidence ?? 0);
+          return (
+            <article>
+              <time datetime={snapshot.recorded_at}>{String(snapshot.recorded_at ?? '').slice(0, 10)}</time>
+              <div class="health-growth-track"><i style={`width:${(evidence / maxEvidence) * 100}%`}></i></div>
+              <dl>
+                <div><dt>Assets</dt><dd>{snapshot.asset_count ?? 0}</dd></div>
+                <div><dt>Events</dt><dd>{snapshot.totals?.events ?? 0}</dd></div>
+                <div><dt>Evidence</dt><dd>{evidence}</dd></div>
+              </dl>
+            </article>
+          );
+        })}
       </div>
     </section>
-  </div>
+
+    <section id="maintenance-log" class="health-section health-section--log">
+      <div class="health-heading">
+        <div><p class="health-kicker">Monthly checkpoints</p><h2>Public maintenance record</h2></div>
+        <p>Closed entries remain append-only. Details use progressive disclosure so the operational log does not overwhelm the health overview.</p>
+      </div>
+      <div class="health-log-list">
+        {entries.map((entry) => (
+          <details class="health-log-entry" data-maintenance-month={entry.month} open={entry === latestEntry}>
+            <summary>
+              <div><strong>{entry.month}</strong><span>{entry.status === 'closed' ? 'Closed checkpoint' : 'In progress'}</span></div>
+              <time datetime={entry.as_of}>{entry.as_of}</time>
+            </summary>
+            <div class="health-log-body">
+              <p>{entry.public_summary}</p>
+              <section aria-label={`${entry.month} contract checks`}>
+                <h3>Contract checks</h3>
+                <div class="health-log-checks">{entry.checks.map((check) => <div data-result={check.result}><strong>{formatPublicLabel(check.check_id)}</strong><span>{formatPublicLabel(check.result)}</span><p>{check.summary}</p></div>)}</div>
+              </section>
+              <section aria-label={`${entry.month} public counts`}>
+                <h3>Public counts at checkpoint</h3>
+                <dl class="health-log-counts">{Object.entries(entry.counts).map(([key, value]) => <div><dt>{formatPublicLabel(key)}</dt><dd>{value}</dd></div>)}</dl>
+              </section>
+              {entry.public_surface_releases.length > 0 && (
+                <section aria-label={`${entry.month} public surface releases`}>
+                  <h3>Public surfaces in this maintenance sequence</h3>
+                  <div class="health-log-links">{entry.public_surface_releases.map((release) => <a href={release.route}>{release.label}</a>)}</div>
+                </section>
+              )}
+              {entry.next_focus.length > 0 && (
+                <section aria-label={`${entry.month} next focus`}>
+                  <h3>Next public focus</h3>
+                  <ol>{entry.next_focus.map((item) => <li>{item}</li>)}</ol>
+                </section>
+              )}
+            </div>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <aside class="health-related">
+      <div><strong>Use the right surface for the question.</strong><span>Public Stats explains the stablecoin registry. Registry Health explains the quality and upkeep of SOG itself.</span></div>
+      <nav aria-label="Registry Health references"><a href="/stats/">Public Stats</a><a href="/data/maintenance-log.json">Maintenance JSON</a><a href="/data/stats.json">Stats JSON</a><a href="/methodology/">Methodology</a></nav>
+    </aside>
+  </article>
+
+  <style>
+    .health-page{display:grid;gap:22px}.health-page section+section{margin-top:0}.health-hero,.health-section,.health-related{border:1px solid var(--ui-line);border-radius:var(--ui-radius);background:linear-gradient(180deg,rgba(14,24,35,.94),rgba(7,14,22,.97))}.health-hero{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(320px,.75fr);gap:28px;align-items:end;padding:30px}.health-hero h1{margin:5px 0 12px}.health-hero>div>p:last-child{max-width:820px;font-size:1.03rem}.health-kicker{margin:0;color:var(--ui-muted)!important;font:750 11px/1.2 var(--ui-sans)!important;letter-spacing:.09em!important;text-transform:uppercase}.health-boundary-badge{padding:17px;border:1px solid rgba(88,215,160,.24);border-radius:var(--ui-radius-small);background:rgba(88,215,160,.05);display:grid;gap:6px}.health-boundary-badge strong{color:var(--ui-positive)}.health-boundary-badge span{color:var(--ui-muted);font-size:12px;line-height:1.5}.health-jump{position:sticky;z-index:20;top:117px;display:flex;gap:4px;overflow-x:auto;padding:7px;border:1px solid var(--ui-line);border-radius:var(--ui-radius-small);background:rgba(7,14,22,.95);backdrop-filter:blur(12px);scrollbar-width:none}.health-jump a{flex:0 0 auto;min-height:36px;display:inline-flex;align-items:center;padding:0 10px;border-radius:6px;color:var(--ui-muted);font-size:12px;font-weight:680}.health-jump a:hover{background:rgba(104,215,255,.06);color:var(--ui-hover);text-decoration:none}.health-section{padding:24px}.health-heading{display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,.7fr);gap:18px;align-items:end;margin-bottom:18px;padding-bottom:15px;border-bottom:1px solid var(--ui-line)}.health-heading h2{margin:4px 0 0}.health-heading>p{color:var(--ui-muted);font-size:13px;line-height:1.55}.health-kpis{margin:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.health-kpis>div{min-height:112px;padding:17px;border:1px solid var(--ui-line-soft);border-radius:var(--ui-radius-small);background:#08121b}.health-kpis dt{color:var(--ui-muted);font:700 12px/1.2 var(--ui-sans);letter-spacing:.04em;text-transform:uppercase}.health-kpis dd{margin:9px 0 6px;color:var(--ui-text);font:760 2rem/1 var(--ui-sans)}.health-kpis p{color:var(--ui-muted);font-size:12px}.health-freshness-layout{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(280px,.65fr);gap:10px}.health-freshness-bars,.health-freshness-summary{padding:18px;border:1px solid var(--ui-line-soft);border-radius:var(--ui-radius-small);background:#08121b}.health-freshness-bars{display:grid;gap:11px}.health-freshness-row{display:grid;grid-template-columns:minmax(190px,.55fr) minmax(0,1fr) 54px;gap:10px;align-items:center}.health-freshness-row>div:first-child{display:flex;justify-content:space-between;gap:10px}.health-freshness-row strong{font-size:13px}.health-freshness-row span{color:var(--ui-muted);font-size:11px}.health-freshness-row>b{text-align:right;font-size:12px}.health-track{height:8px;overflow:hidden;border-radius:999px;background:#162635}.health-track i{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,#68d7ff,#58d7a0)}.health-freshness-summary>span{color:var(--ui-muted);font-size:12px}.health-freshness-summary>strong{display:block;margin:9px 0 6px;font:780 2.8rem/1 var(--ui-sans)}.health-freshness-summary>p{color:var(--ui-muted);font-size:12px}.health-freshness-summary dl{margin:15px 0 0;display:grid}.health-freshness-summary dl>div{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-top:1px solid var(--ui-line-soft)}.health-freshness-summary dt{font-family:var(--ui-sans);font-size:12px;letter-spacing:0;text-transform:none}.health-freshness-summary dd{margin:0;color:var(--ui-text);font-weight:740}.health-coverage-cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}.health-coverage-cards article{padding:15px;border:1px solid var(--ui-line-soft);border-radius:var(--ui-radius-small);background:#08121b}.health-coverage-cards span{color:var(--ui-muted);font-size:12px}.health-coverage-cards strong{display:block;margin:8px 0;font:760 1.7rem/1 var(--ui-sans)}.health-coverage-cards p{margin-top:7px;color:var(--ui-muted);font-size:11px}.health-coverage-table{margin-top:10px;border:1px solid var(--ui-line-soft);border-radius:var(--ui-radius-small);overflow:hidden;background:#08121b}.health-coverage-row{display:grid;grid-template-columns:minmax(190px,.8fr) minmax(0,1fr) 110px 54px;gap:10px;align-items:center;padding:11px 13px;border-top:1px solid var(--ui-line-soft)}.health-coverage-row:first-child{border-top:0}.health-coverage-row strong,.health-coverage-row span,.health-coverage-row b{font-size:12px}.health-coverage-row span{color:var(--ui-muted)}.health-coverage-row b{text-align:right}.health-attention-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.health-attention-grid article{min-height:126px;padding:15px;border:1px solid var(--ui-line-soft);border-radius:var(--ui-radius-small);background:#08121b}.health-attention-grid article[data-tone="danger"]{border-top-color:var(--ui-danger)}.health-attention-grid article[data-tone="warning"]{border-top-color:var(--ui-warning)}.health-attention-grid article>span{color:var(--ui-muted);font-size:12px}.health-attention-grid article>strong{display:block;margin:9px 0 7px;font:760 1.9rem/1 var(--ui-sans)}.health-attention-grid article>p{color:var(--ui-muted);font-size:11px}.health-integrity-meta{display:flex;flex-wrap:wrap;gap:9px 18px;align-items:center;margin-bottom:10px;padding:11px 13px;border:1px solid var(--ui-line-soft);border-radius:var(--ui-radius-small);background:#08121b}.health-integrity-meta strong{color:var(--ui-link)}.health-integrity-meta span,.health-integrity-meta time{color:var(--ui-muted);font-size:12px}.health-check-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.health-check-grid article{padding:15px;border:1px solid var(--ui-line-soft);border-radius:var(--ui-radius-small);background:#08121b}.health-check-grid article>span{display:inline-flex;margin-bottom:8px;padding:3px 7px;border:1px solid var(--ui-line);border-radius:999px;color:var(--ui-muted);font-size:10px;text-transform:uppercase;letter-spacing:.06em}.health-check-grid article[data-result="pass"],.health-check-grid article[data-result="success"],.health-check-grid article[data-result="ok"]{border-top-color:var(--ui-positive)}.health-check-grid article[data-result="fail"],.health-check-grid article[data-result="failed"],.health-check-grid article[data-result="error"]{border-top-color:var(--ui-danger)}.health-check-grid article>strong{display:block;font-size:13px}.health-check-grid article>p{margin-top:6px;color:var(--ui-muted);font-size:11px}.health-growth-kpis{margin:0 0 10px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.health-growth-kpis>div{padding:15px;border:1px solid var(--ui-line-soft);border-radius:var(--ui-radius-small);background:#08121b}.health-growth-kpis dt{color:var(--ui-muted);font:700 11px/1.2 var(--ui-sans);letter-spacing:.04em;text-transform:uppercase}.health-growth-kpis dd{margin:8px 0 0;color:var(--ui-positive);font:760 1.8rem/1 var(--ui-sans)}.health-growth-list{display:grid;gap:7px}.health-growth-list>article{display:grid;grid-template-columns:98px minmax(0,1fr) minmax(260px,.7fr);gap:12px;align-items:center;padding:11px 13px;border:1px solid var(--ui-line-soft);border-radius:var(--ui-radius-small);background:#08121b}.health-growth-list time{color:var(--ui-muted);font:650 11px/1 var(--ui-sans)}.health-growth-track{height:9px;overflow:hidden;border-radius:999px;background:#162635}.health-growth-track i{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,#68d7ff,#9a8cff)}.health-growth-list dl{margin:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}.health-growth-list dl>div{display:flex;justify-content:space-between;gap:6px}.health-growth-list dt{font-family:var(--ui-sans);font-size:11px;letter-spacing:0;text-transform:none}.health-growth-list dd{margin:0;color:var(--ui-text);font-size:11px;font-weight:740}.health-log-list{display:grid;gap:8px}.health-log-entry{border:1px solid var(--ui-line-soft);border-radius:var(--ui-radius-small);background:#08121b;overflow:hidden}.health-log-entry>summary{min-height:60px;padding:12px 14px;display:flex;justify-content:space-between;gap:16px;align-items:center;cursor:pointer;list-style:none}.health-log-entry>summary::-webkit-details-marker{display:none}.health-log-entry>summary>div{display:flex;gap:12px;align-items:center}.health-log-entry>summary strong{color:var(--ui-link)}.health-log-entry>summary span,.health-log-entry>summary time{color:var(--ui-muted);font-size:11px}.health-log-entry>summary:after{content:"+";color:var(--ui-link);font-size:18px}.health-log-entry[open]>summary:after{content:"−"}.health-log-body{padding:0 14px 16px;border-top:1px solid var(--ui-line-soft)}.health-log-body>p{padding-top:13px;color:var(--ui-copy);font-size:13px}.health-log-body section{padding:14px 0 0;border:0;background:none}.health-log-body h3{font-size:13px}.health-log-checks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.health-log-checks>div{padding:11px;border:1px solid var(--ui-line-soft);border-radius:6px;background:#0b1722}.health-log-checks strong,.health-log-checks span{font-size:11px}.health-log-checks span{float:right;color:var(--ui-muted)}.health-log-checks p{margin-top:5px;color:var(--ui-muted);font-size:11px}.health-log-counts{margin:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}.health-log-counts>div{padding:10px;border:1px solid var(--ui-line-soft);border-radius:6px;background:#0b1722}.health-log-counts dt{font-family:var(--ui-sans);font-size:10px;letter-spacing:0;text-transform:none}.health-log-counts dd{margin:5px 0 0;color:var(--ui-text);font-weight:740}.health-log-links{display:flex;flex-wrap:wrap;gap:7px}.health-log-links a{padding:6px 9px;border:1px solid var(--ui-line);border-radius:6px;background:#0b1722;font-size:11px}.health-log-body ol{margin:0;padding-left:18px}.health-log-body li{font-size:12px}.health-related{padding:17px 19px;display:flex;justify-content:space-between;gap:18px;align-items:center}.health-related>div{display:grid;gap:3px}.health-related span{color:var(--ui-muted);font-size:12px}.health-related nav{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:10px}.health-related a{font-size:12px}
+    @media(max-width:1050px){.health-hero,.health-heading,.health-freshness-layout{grid-template-columns:1fr}.health-kpis,.health-coverage-cards{grid-template-columns:repeat(2,minmax(0,1fr))}.health-check-grid,.health-attention-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.health-growth-list>article{grid-template-columns:90px minmax(0,1fr)}.health-growth-list dl{grid-column:1/-1}.health-related{align-items:flex-start;flex-direction:column}.health-related nav{justify-content:flex-start}}
+    @media(max-width:760px){.health-page{gap:14px}.health-hero,.health-section{padding:18px}.health-jump{top:101px}.health-kpis,.health-coverage-cards,.health-check-grid,.health-attention-grid,.health-growth-kpis{grid-template-columns:1fr}.health-freshness-row{grid-template-columns:1fr auto}.health-freshness-row .health-track{grid-column:1/-1}.health-coverage-row{grid-template-columns:1fr auto}.health-coverage-row .health-track{grid-column:1/-1}.health-coverage-row span{grid-column:1}.health-coverage-row b{grid-column:2;grid-row:1}.health-growth-list>article{grid-template-columns:1fr}.health-growth-list dl{grid-column:auto}.health-log-checks,.health-log-counts{grid-template-columns:1fr 1fr}.health-log-entry>summary{align-items:flex-start}.health-log-entry>summary>div{align-items:flex-start;flex-direction:column;gap:3px}}
+    @media(max-width:460px){.health-hero,.health-section{padding:15px}.health-log-checks,.health-log-counts{grid-template-columns:1fr}.health-related{padding:15px}}
+  </style>
 </BaseLayout>
