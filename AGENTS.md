@@ -5,34 +5,32 @@ This file is the mandatory entry point for humans, AI agents, and automation wor
 ## Current authority
 
 ```text
-Current stage: POST_CUTOVER_STATS_HEALTH_SPLIT
-Active workstream specification: docs/stats-spec.md
-Implementation branch: ui/stats-registry-health-20260910
+Current stage: POST_CUTOVER_STATS_HEALTH_COMPLETE
 Production branch: main
 Official public origin: https://www.stableorgone.com
 UI Redesign V4 production cutover: complete via PR #636 / merge 60940f0c1ad1d69961e839fa4979a7c4e29d91af
-Partial Stats / Registry Health publication to main: forbidden
+Public Stats / Registry Health split: complete via PR #653
+Verified production commit after smoke-contract fix: 157ec8c391a9134552c9e0beabb3ff430e867fd6
+Deploy production verification: run #516 / success
 Ranking / scoring / recommendation authorized: no
 DNS / Cloudflare account mutation authorized: no
 New GA4 property / Measurement ID creation authorized: no
 ```
 
-Merged repository authority outranks chat memory, handoff prose, issue discussion, stale branch state, generated reports, and unmerged drafts. The completed UI Redesign V4 authority remains historical implementation lineage; its accepted data, route, accessibility, mobile, and deployment contracts continue where they do not conflict with the current post-cutover workstream.
+Merged repository authority outranks chat memory, handoff prose, issue discussion, stale branch state, generated reports, and unmerged drafts. Completed implementation branches are historical lineage and must not be treated as active work merely because they remain in repository history.
 
 ## Mandatory references
 
-Before starting or resuming the current Stats / Registry Health work, read in this order:
+Before starting or resuming substantive work, read the specifications relevant to the requested lane. For presentation, analytics, or publication work, read at minimum:
 
 1. `AGENTS.md`
-2. `docs/stats-spec.md`
-3. `DESIGN.md`
-4. `docs/spec-governance.md`
-5. `docs/roadmap.md`
-6. `docs/deployment-policy.md`
-7. `docs/ai-era-registry-spec.md`
-8. `docs/ai-era-execution-schedule.md`
-9. relevant permanent data/classification/evidence/deployment specifications
-10. current implementation of `/stats/` and `/maintenance/`
+2. `DESIGN.md`
+3. `docs/spec-governance.md`
+4. `docs/roadmap.md`
+5. `docs/deployment-policy.md`
+6. the workstream-specific specification, such as `docs/stats-spec.md`
+7. relevant permanent data/classification/evidence/deployment specifications
+8. current implementation of the affected public surfaces
 
 Do not rely on chat summaries when merged repository documents are available.
 
@@ -40,22 +38,24 @@ Do not rely on chat summaries when merged repository documents are available.
 
 At the start of each implementation session:
 
-- fetch current `main` and `ui/stats-registry-health-20260910` heads;
-- determine whether `main` advanced and must be synchronized before release;
-- inspect the current Stats and Maintenance implementations and the canonical fields used by them;
-- read `docs/stats-spec.md` before changing analytical semantics;
-- keep the public Stats and Registry Health responsibilities separate;
+- fetch current `main` and relevant open PR/branch heads;
+- inspect the current implementation and canonical fields used by the target surface;
+- read the applicable permanent/workstream specification before changing semantics;
+- determine whether the requested work is ordinary maintenance or needs a new reviewed workstream;
+- do not resurrect completed branches as active work by default;
 - do not start unrelated framework, validator, or workflow work without a demonstrated need.
 
 At the end of each implementation unit:
 
 - update the relevant specification / roadmap / schedule status when deliverables changed;
-- record branch/head and validation results;
-- state completed and incomplete surfaces;
-- state latest main sync point;
+- record branch/head and validation results when applicable;
+- state completed and incomplete work;
+- state latest main sync point when a release branch exists;
 - state explicitly whether production changed.
 
 ## Public Stats / Registry Health boundary
+
+The completed production split is an enduring product contract.
 
 `/stats/` is the public analytical view. It should answer:
 
@@ -87,7 +87,7 @@ Preserve deterministic per-asset JSON, provenance, evidence relationships, publi
 
 ## UI validation policy
 
-Preserve data/integrity/build/public-layer checks. New UI checks should target demonstrated failure modes: route health, broken links, horizontal overflow, control usability, basic accessibility, state correctness, and representative desktop/mobile inspection.
+Preserve data/integrity/build/public-layer checks. UI checks should target demonstrated failure modes: route health, broken links, horizontal overflow, control usability, basic accessibility, state correctness, and representative desktop/mobile inspection.
 
 Do not restore obsolete UI-v3 visual baselines, generated SVG mock fidelity, or pixel-perfect equality to an outgoing composition as acceptance gates.
 
@@ -99,16 +99,17 @@ Mobile is part of each public surface. Stats uses one major chart or analytical 
 
 ## Production safety
 
-`main` is the production source and publishes automatically. Develop the Stats / Registry Health split on `ui/stats-registry-health-20260910`; do not merge only one half of the split or an obviously incomplete analytical state.
+`main` is the production source and publishes automatically. For a substantial change that should not ship partially:
 
-Before release:
-
-- sync current `main` if it advanced;
-- run canonical, statistics, registry-integrity, Astro/build, public-layer, route/link, and representative responsive checks;
-- record the pre-merge `main` SHA;
-- merge the completed change once;
+- use an isolated implementation branch;
+- sync current `main` if it advances;
+- run applicable canonical, statistics, registry-integrity, Astro/build, public-layer, route/link, and representative responsive checks;
+- record the pre-merge `main` SHA when rollback may be needed;
+- merge only after the release unit is complete;
 - verify production routes and public data after deployment;
 - roll back on a critical regression.
+
+The former `ui/stats-registry-health-20260910` release is complete and does not remain an active production-safety branch.
 
 ## Enduring non-UI boundaries
 

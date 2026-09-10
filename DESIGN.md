@@ -1,7 +1,7 @@
 # DESIGN.md — Stable or Gone
 
-Status: active post-cutover observatory design authority
-Updated: 2026-09-10
+Status: active production observatory design authority
+Updated: 2026-09-11
 Primary analytical specification: `docs/stats-spec.md`
 
 ## Product identity
@@ -20,7 +20,7 @@ The interface must help a reader answer quickly:
 
 ## Active visual direction
 
-UI Redesign V4 completed production cutover through PR #636. The modern stablecoin observatory system is now the production design lineage.
+UI Redesign V4 completed production cutover through PR #636. The modern stablecoin observatory system is production design lineage. The Public Stats / Registry Health split later shipped through PR #653 and is also part of the production design contract.
 
 Use:
 
@@ -101,9 +101,9 @@ Unsupported values remain explicit unknown/not-recorded states. Historical failu
 
 ## Production rule
 
-`main` is the production source and publishes automatically. Significant page-family refinements are developed on an isolated branch, validated, and merged as a complete release unit rather than exposing half of a paired information-architecture change.
+`main` is the production source and publishes automatically. Significant page-family refinements should be developed on an isolated branch, validated, and merged as a complete release unit when partial publication would create an inconsistent product state.
 
-For the current Stats / Registry Health split, the implementation branch is `ui/stats-registry-health-20260910` and both routes ship together.
+The Stats / Registry Health split has already shipped and is no longer an active implementation branch. Its current production hierarchy remains the default unless superseded by a reviewed future change.
 
 ## Acceptance
 

@@ -1,9 +1,9 @@
 # SOG UI Redesign Schedule
 
-Status: V4 CUTOVER COMPLETE — POST-CUTOVER STATS / REGISTRY HEALTH REFINEMENT ACTIVE
-Updated: 2026-09-10
+Status: V4 CUTOVER COMPLETE — STATS / REGISTRY HEALTH REFINEMENT COMPLETE
+Updated: 2026-09-11
 Production branch: `main`
-Current refinement branch: `ui/stats-registry-health-20260910`
+Completed refinement branch: `ui/stats-registry-health-20260910`
 
 ## Completed UI Redesign V4 gates
 
@@ -95,62 +95,63 @@ COMPLETE.
 - merge commit: `60940f0c1ad1d69961e839fa4979a7c4e29d91af`;
 - complete redesign moved to `main` in one integration merge;
 - subsequent production UI fixes and SEO/structured-data fixes were merged on top of the cutover;
-- current public screenshots and repository `main` reflect the V4 observatory UI.
-
-The previous `READY, NOT YET EXECUTED` status was stale after PR #636 merged and is superseded by this schedule update.
+- current public UI uses the V4 observatory system.
 
 ### Gate 9 — Post-cutover cleanup
 
-ONGOING / NON-BLOCKING FOR APPROVED PRODUCT REFINEMENTS.
+ONGOING / NON-BLOCKING.
 
-Remaining cleanup may include obsolete outgoing styles/components and historical design machinery that no longer provide value. Cleanup must not delete enduring data, accessibility, route, or deployment contracts.
+Remaining cleanup may remove obsolete outgoing styles/components and historical design machinery that no longer provide value. Cleanup must not delete enduring data, accessibility, route, or deployment contracts.
 
-## Active post-cutover refinement — Public Stats / Registry Health split
+## Completed post-cutover refinement — Public Stats / Registry Health split
 
-Authority/specification: `docs/stats-spec.md`  
-Implementation branch: `ui/stats-registry-health-20260910`
+Authority/specification: `docs/stats-spec.md`
 
 ### Objective
 
-Separate two different jobs that were previously mixed on `/stats/`:
+The completed split assigns two distinct public jobs:
 
 ```text
 /stats/        understand the stablecoin registry
 /maintenance/  understand SOG registry quality and maintenance health
 ```
 
-### Work order
+### Completed work
 
-- [x] agent authority updated on implementation branch;
-- [x] Stats / Registry Health specification updated;
-- [x] Public Stats page rebuilt around executive summary, current lifecycle state, composition, historical failure patterns, event change over time, compact coverage/confidence, and registry drilldowns;
+- [x] agent authority and analytical specification updated;
+- [x] Public Stats rebuilt around executive summary, current lifecycle state, composition, historical failure patterns, event change over time, compact coverage/confidence, and registry drilldowns;
 - [x] Registry Health overview added to `/maintenance/` with review freshness, data coverage, public-safe gap aggregates, reviewed maintenance checks, corpus growth, and preserved monthly log;
-- [ ] update DESIGN / roadmap / governance documents to the post-cutover split;
-- [ ] run canonical/statistics/registry validations;
-- [ ] run Astro check and production-equivalent build;
-- [ ] run route/internal-link checks;
-- [ ] inspect representative desktop/mobile `/stats/` and `/maintenance/` outputs;
-- [ ] confirm no mock values or private monitoring rows appear;
-- [ ] sync latest `main` if it advanced;
-- [ ] open integration PR;
-- [ ] merge Public Stats and Registry Health together;
-- [ ] verify production `/stats/`, `/maintenance/`, `/data/stats.json`, and `/data/maintenance-log.json`.
+- [x] DESIGN / roadmap / governance / deployment documentation updated for the split;
+- [x] canonical/statistics/registry validations passed;
+- [x] Astro check and production-equivalent build passed;
+- [x] route/internal-link checks passed;
+- [x] representative desktop/mobile outputs passed responsive and UI-contract checks;
+- [x] no mock values or private monitoring rows were introduced;
+- [x] latest reviewed `main` was synchronized before release;
+- [x] integration PR #653 merged both surfaces together;
+- [x] stale pre-split production Stats smoke copy was corrected in PR #658 without changing canonical data or the new UI;
+- [x] production deployment run #516 completed successfully on `157ec8c391a9134552c9e0beabb3ff430e867fd6`;
+- [x] production verification passed for `/stats/`, `/maintenance/`, deterministic public data, stablecoin record JSON, and the cross-surface Stats lifecycle-quality contract.
 
-### Release rule
+### Release evidence
 
-Do not merge only one half of the split. The public Stats and Registry Health surfaces ship together after validation.
+```text
+Feature PR: #653 Split Public Stats from Registry Health
+Feature merge: 0fc86a7d1020e1271306b5c479e2747383b84680
+Smoke hotfix PR: #658 Fix Stats production smoke after analytics split
+Verified production commit: 157ec8c391a9134552c9e0beabb3ff430e867fd6
+Deploy production run: #516 / 34497114140 / success
+Canonical data hash: sha256:ed2ecd7561adc8ca0f689d92f4ecd33cf716213c7c3dd7d3e7e8589ce7b529a4
+```
+
+The smoke hotfix changed only the production verification contract so it checks the accepted post-split Stats structure instead of obsolete pre-split copy. It did not change canonical facts or the public analytical design.
 
 ### Production status
 
-Production changed by this post-cutover refinement so far: **no**.
+Production changed by the completed refinement: **yes — released and verified**.
 
-## Required progress report
+The paired Stats / Registry Health release is closed. Future changes to these surfaces are ordinary reviewed product changes unless a new workstream authority says otherwise.
 
-Every continuation report for the active refinement must state:
+## Continuation rule
 
-- branch/head;
-- latest main sync point;
-- completed/incomplete surfaces;
-- validation status;
-- PR/merge state;
-- whether production changed.
+For future work, use merged repository specifications as source of truth, check current `main`, and do not infer an unfinished Stats / Registry Health release from the historical implementation branch. Any new substantial workstream should define its own scope instead of reopening this completed release by default.
