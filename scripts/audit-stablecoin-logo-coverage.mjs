@@ -10,8 +10,19 @@ const decisionsPath = path.join(root, 'config/stablecoin-logo-decisions.json');
 const decisionAdditionsPath = path.join(root, 'config/stablecoin-logo-decisions-additions.json');
 const displayPolicyPath = path.join(root, 'config/stablecoin-logo-display-policy.json');
 const outputPath = path.join(root, 'artifacts/stablecoin-logo-coverage.json');
+const registrySourcePaths = [
+  path.join(root, 'src/lib/data/registryBase.ts'),
+  path.join(root, 'src/lib/data/registry.ts')
+];
+const canonicalStablecoinFiles = new Set();
+for (const sourcePath of registrySourcePaths) {
+  const source = fs.readFileSync(sourcePath, 'utf8');
+  for (const match of source.matchAll(/from ['"]\.\.\/\.\.\/\.\.\/data\/(stablecoins[^'"]*\.json)['"]/g)) {
+    canonicalStablecoinFiles.add(match[1]);
+  }
+}
 const recordsBySlug = new Map();
-for (const filename of fs.readdirSync(dataDir).filter((name) => /^stablecoins(?:-|\.)/.test(name) && name.endsWith('.json'))) {
+for (const filename of [...canonicalStablecoinFiles].sort()) {
   const parsed = JSON.parse(fs.readFileSync(path.join(dataDir, filename), 'utf8'));
   for (const record of (Array.isArray(parsed) ? parsed : parsed.stablecoins ?? parsed.records ?? parsed.items ?? [])) {
     if (record && typeof record.slug === 'string') recordsBySlug.set(record.slug, { slug: record.slug, symbol: String(record.symbol ?? ''), name: String(record.name ?? record.slug) });
@@ -38,6 +49,7 @@ const researchOnlyAssets = new Set(decisionRecords.filter((record) => fallbackSl
 const expectedCanonicalRecords = Number(displayPolicy.canonical_records);
 const expectedDirectLogoRecords = Number(displayPolicy.direct_logo_records);
 const expectedFallbackRecords = Number(displayPolicy.neutral_fallback_records);
+if (canonicalStablecoinFiles.size === 0) failures.push('no runtime canonical stablecoin source files discovered from registry imports');
 if (recordsBySlug.size !== expectedCanonicalRecords) failures.push(`expected ${expectedCanonicalRecords} canonical records, found ${recordsBySlug.size}`);
 if (mappings.length !== expectedDirectLogoRecords) failures.push(`expected ${expectedDirectLogoRecords} direct Stablecoin/product logo mappings, found ${mappings.length}`);
 if (fallbackSlugs.size !== expectedFallbackRecords) failures.push(`expected ${expectedFallbackRecords} neutral fallback records, found ${fallbackSlugs.size}`);
@@ -78,8 +90,9 @@ for (const asset of localAssets) {
 }
 for (const collision of ['USX', 'USDX', 'USDN']) if (!resolver.includes(collision)) failures.push(`ambiguous symbol guard missing: ${collision}`);
 const report = {
-  schema_version: '3.0',
+  schema_version: '3.1',
   generated_at: new Date().toISOString(),
+  canonical_source_files: [...canonicalStablecoinFiles].sort(),
   canonical_stablecoin_records: recordsBySlug.size,
   direct_logo_records: mappings.length,
   neutral_fallback_records: fallbackSlugs.size,
