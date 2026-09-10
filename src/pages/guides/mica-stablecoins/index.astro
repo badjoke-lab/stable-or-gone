@@ -6,8 +6,8 @@ import RelatedSogRecords from '../../../components/RelatedSogRecords.astro';
 import { getGuide, guideCategoryLabels } from '../../../data/guideCatalog';
 
 const guide = getGuide('mica-stablecoins');
-const title = 'MiCA and Stablecoins: What Changes in the EU — Stable or Gone';
-const description = 'A beginner-friendly guide to EU MiCA stablecoin rules, EMTs and ARTs, the July 1, 2026 CASP deadline, and representative dollar, euro, and protocol-issued assets.';
+const title = 'MiCA and Stablecoins: EU Rules | Stable or Gone';
+const description = 'Guide to EU MiCA stablecoin rules, EMTs and ARTs, the July 1, 2026 CASP deadline, and representative regulated and protocol-issued assets.';
 const canonicalPath = '/guides/mica-stablecoins/';
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -15,6 +15,7 @@ const jsonLd = {
   headline: 'MiCA and Stablecoins',
   description,
   url: `https://www.stableorgone.com${canonicalPath}`,
+  image: 'https://www.stableorgone.com/og/sog-og.svg',
   inLanguage: 'en',
   isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://www.stableorgone.com/' },
   about: ['MiCA', 'e-money tokens', 'asset-referenced tokens', 'stablecoin regulation', 'crypto-asset service providers'],
