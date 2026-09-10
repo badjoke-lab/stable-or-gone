@@ -97,8 +97,15 @@ async function checkOnce() {
   assert(Number(quality.depeg?.recovery_state_recorded?.denominator) === Number(quality.depeg?.event_count), 'Stage 6 depeg recovery denominator mismatch');
 
   const statsHtml = await read('/stats/', 'text/html');
-  for (const marker of ['Recorded event lifecycle', 'Depeg recovery status', 'Typed lifecycle-event kinds', 'Migration / termination']) {
-    assert(statsHtml.includes(marker), `Stage 6 Stats UI marker missing: ${marker}`);
+  const statsSurfaceMarkers = [
+    ['id="state"', 'lifecycle state section'],
+    ['id="failure-patterns"', 'historical failure-pattern section'],
+    ['Failed / category total', 'failure-rate denominator contract'],
+    ['id="change"', 'material-event change section'],
+    ['id="confidence"', 'coverage and confidence section']
+  ];
+  for (const [marker, label] of statsSurfaceMarkers) {
+    assert(statsHtml.includes(marker), `Stage 6 Stats UI contract missing: ${label}`);
   }
 
   return {
