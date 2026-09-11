@@ -8,7 +8,7 @@ const title = 'Stablecoin Status and Event Records — Stable or Gone';
 const description = 'Why Stable or Gone keeps a stablecoin’s current status separate from dated events such as depegs, launches, migrations, wind-downs, and collapses.';
 const canonicalPath = '/guides/status-vs-event/';
 const jsonLd = {
-  '@context': 'https://schema.org', '@type': 'Article', headline: title, description,
+  '@context': 'https://schema.org', '@type': guide.publishedAt ? 'Article' : 'WebPage', headline: title, description,
   url: `https://www.stableorgone.com${canonicalPath}`,
   isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://www.stableorgone.com/' },
   about: ['stablecoin status', 'stablecoin events', 'stablecoin history'],
