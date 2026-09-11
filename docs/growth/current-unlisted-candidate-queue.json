@@ -1,0 +1,187 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-09-11",
+  "source_cutoff": {
+    "latest_growth_batch": "batch_042",
+    "latest_reviewed_at": "2026-09-09"
+  },
+  "purpose": "Carry forward stable-asset candidates that are not currently canonical/published and still require a future promotion, launch, identity, duplicate, or evidence decision. A candidate must not disappear merely because a later growth batch did not revisit it.",
+  "policy": {
+    "canonical_publication_requires_existing_evidence_and_integrity_gates": true,
+    "planned_or_unverified_launches_are_not_promoted": true,
+    "deployment_only_items_are_not_new_assets": true,
+    "promotion_removes_from_active_queue_only_after_canonical_commit_lands": true,
+    "terminal_exclusion_requires_explicit_reason": true,
+    "unknowns_not_inferred": true
+  },
+  "active_unlisted_candidates": [
+    {
+      "name": "Gaia GUSD",
+      "symbol": "GUSD",
+      "candidate_id": "existing_pending_candidate",
+      "current_disposition": "needs_additional_review",
+      "last_reviewed_batch": "batch_042",
+      "last_reviewed_at": "2026-09-09",
+      "next_trigger": "Confirm live issuance and resolve the exact Gaia/Bridge issuer boundary from primary evidence.",
+      "source_prescreens": ["batch_035", "batch_036", "batch_037", "batch_038", "batch_039", "batch_040", "batch_041", "batch_042"]
+    },
+    {
+      "name": "Open USD",
+      "symbol": "OUSD",
+      "candidate_id": null,
+      "current_disposition": "hold_not_launched",
+      "last_reviewed_batch": "batch_042",
+      "last_reviewed_at": "2026-09-09",
+      "next_trigger": "Re-review when Open Standard primary material establishes actual live issuance.",
+      "source_prescreens": ["batch_035", "batch_036", "batch_037", "batch_038", "batch_039", "batch_040", "batch_041", "batch_042"]
+    },
+    {
+      "name": "XrymaCoin",
+      "symbol": "XREUR",
+      "candidate_id": "sog_cand_000144",
+      "current_disposition": "launch_verification_hold",
+      "last_reviewed_batch": "batch_042",
+      "last_reviewed_at": "2026-09-09",
+      "next_trigger": "Require primary confirmation that public issuance actually started; do not infer launch from the announced date.",
+      "source_prescreens": ["batch_039", "batch_040", "batch_041", "batch_042"]
+    },
+    {
+      "name": "Stabld family",
+      "symbol": "stUSD / stGBP / stEUR",
+      "candidate_id": null,
+      "current_disposition": "identity_split_hold",
+      "last_reviewed_batch": "batch_042",
+      "last_reviewed_at": "2026-09-09",
+      "next_trigger": "Resolve which denomination-specific assets are actually issued and live before creating separate canonical identities.",
+      "source_prescreens": ["batch_040", "batch_042"]
+    },
+    {
+      "name": "HSBC Hong Kong dollar stablecoin",
+      "symbol": null,
+      "candidate_id": null,
+      "current_disposition": "hold_not_launched",
+      "last_reviewed_batch": "batch_039",
+      "last_reviewed_at": "2026-09-02",
+      "next_trigger": "Re-review when HSBC primary material establishes issuance rather than a planned launch.",
+      "source_prescreens": ["batch_039"]
+    },
+    {
+      "name": "GELT",
+      "symbol": "GELT",
+      "candidate_id": null,
+      "current_disposition": "hold_not_launched",
+      "last_reviewed_batch": "batch_039",
+      "last_reviewed_at": "2026-09-02",
+      "next_trigger": "Re-review when issuer or authoritative Georgian material establishes live issuance and approval status.",
+      "source_prescreens": ["batch_037", "batch_038", "batch_039"]
+    },
+    {
+      "name": "Qivalis euro stablecoin",
+      "symbol": null,
+      "candidate_id": null,
+      "current_disposition": "hold_not_launched",
+      "last_reviewed_batch": "batch_039",
+      "last_reviewed_at": "2026-09-02",
+      "next_trigger": "Re-review when Qivalis primary material establishes first issuance.",
+      "source_prescreens": ["batch_038", "batch_039"]
+    },
+    {
+      "name": "International bank consortium USD stablecoin",
+      "symbol": null,
+      "candidate_id": null,
+      "current_disposition": "hold_not_launched",
+      "last_reviewed_batch": "batch_040",
+      "last_reviewed_at": "2026-09-04",
+      "next_trigger": "Re-review when the consortium establishes a named issued asset or materially changes the announced launch state.",
+      "source_prescreens": ["batch_039", "batch_040"]
+    },
+    {
+      "name": "Revolut future non-EUR stablecoins",
+      "symbol": null,
+      "candidate_id": null,
+      "current_disposition": "hold_not_launched",
+      "last_reviewed_batch": "batch_038",
+      "last_reviewed_at": "2026-09-01",
+      "next_trigger": "Create a distinct candidate only when Revolut identifies a specific additional currency stablecoin and establishes launch evidence.",
+      "source_prescreens": ["batch_037", "batch_038"]
+    },
+    {
+      "name": "Boundary USBD",
+      "symbol": "USBD",
+      "candidate_id": null,
+      "current_disposition": "hold_not_launched",
+      "last_reviewed_batch": "batch_038",
+      "last_reviewed_at": "2026-09-01",
+      "next_trigger": "Re-review on authoritative evidence of actual launch rather than financing or launch intent.",
+      "source_prescreens": ["batch_035", "batch_036", "batch_037", "batch_038"]
+    },
+    {
+      "name": "Dakota custom stablecoin",
+      "symbol": null,
+      "candidate_id": null,
+      "current_disposition": "needs_exact_identity_review",
+      "last_reviewed_batch": "batch_036",
+      "last_reviewed_at": "2026-08-30",
+      "next_trigger": "Resolve the exact stable-asset identity, symbol and live status from Dakota primary sources.",
+      "source_prescreens": ["batch_036"]
+    },
+    {
+      "name": "Slash custom stablecoin",
+      "symbol": null,
+      "candidate_id": null,
+      "current_disposition": "needs_exact_identity_review",
+      "last_reviewed_batch": "batch_036",
+      "last_reviewed_at": "2026-08-30",
+      "next_trigger": "Resolve the exact product identity and live status from Slash primary sources.",
+      "source_prescreens": ["batch_036"]
+    },
+    {
+      "name": "Lava custom stablecoin",
+      "symbol": null,
+      "candidate_id": null,
+      "current_disposition": "needs_exact_identity_review",
+      "last_reviewed_batch": "batch_036",
+      "last_reviewed_at": "2026-08-30",
+      "next_trigger": "Resolve the exact stable-asset identity and current status from Lava primary sources.",
+      "source_prescreens": ["batch_036"]
+    },
+    {
+      "name": "Takenos custom stablecoin",
+      "symbol": null,
+      "candidate_id": null,
+      "current_disposition": "needs_exact_identity_review",
+      "last_reviewed_batch": "batch_036",
+      "last_reviewed_at": "2026-08-30",
+      "next_trigger": "Resolve the exact stable-asset identity before any promotion decision.",
+      "source_prescreens": ["batch_036"]
+    },
+    {
+      "name": "CASH",
+      "symbol": "CASH",
+      "candidate_id": null,
+      "current_disposition": "needs_identity_and_duplicate_review",
+      "last_reviewed_batch": "batch_036",
+      "last_reviewed_at": "2026-08-30",
+      "next_trigger": "Resolve issuer, sponsor, chain and canonical overlap before deciding whether this is a distinct SOG asset.",
+      "source_prescreens": ["batch_036"]
+    }
+  ],
+  "excluded_from_active_unlisted_queue": [
+    {
+      "category": "already_promoted",
+      "examples": ["Revolut EURR", "USDKG", "Decibel usDCBL", "Compliant Naira cNGN", "DLUSD", "Bridge USDB"],
+      "rule": "Do not carry an item as unlisted after its canonical promotion has landed."
+    },
+    {
+      "category": "deployment_only",
+      "examples": ["EDGE native USDC", "USDC on Plasma", "EURC on Plasma"],
+      "rule": "Track as deployment/history work for the existing canonical asset, not as a new stable-asset candidate."
+    },
+    {
+      "category": "canonical_duplicate_or_lineage_only",
+      "examples": ["USDH Open Issuance review"],
+      "rule": "Do not create a second canonical asset; preserve only lineage/history work when relevant."
+    }
+  ],
+  "active_count": 15
+}
