@@ -26,7 +26,13 @@ const {
 const pathname = Astro.url.pathname;
 const canonicalUrl = new URL(canonicalPath, siteUrl).toString();
 const ogImageUrl = new URL(ogImage, siteUrl).toString();
-const structuredData = jsonLd ? JSON.stringify(jsonLd).replace(/</g, '\u003c') : '';
+const enrichStructuredData = (entry: Record<string, unknown>) => {
+  const type = entry['@type'];
+  const isArticle = type === 'Article' || (Array.isArray(type) && type.includes('Article'));
+  return isArticle && !entry.image ? { ...entry, image: ogImageUrl } : entry;
+};
+const normalizedJsonLd = Array.isArray(jsonLd) ? jsonLd.map(enrichStructuredData) : jsonLd ? enrichStructuredData(jsonLd) : undefined;
+const structuredData = normalizedJsonLd ? JSON.stringify(normalizedJsonLd).replace(/</g, '\u003c') : '';
 const gaLoaderUrl = gaMeasurementId ? `https://www.google${'tagmanager'}.com/gtag/js?id=${gaMeasurementId}` : '';
 const gaInline = gaMeasurementId
   ? `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${gaMeasurementId}');`
