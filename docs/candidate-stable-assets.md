@@ -1,12 +1,35 @@
-# Candidate Stable Asset Master List
+# Candidate Stable Asset Control
 
-## Purpose
+## Current authority
 
-`data/candidate-stable-assets.json` is SOG's internal candidate-control ledger. It prevents duplicate additions, records naming and symbol conflicts, separates stablecoins from adjacent stable-value assets, reserves proposed record IDs, and preserves inclusion or exclusion decisions before promotion into the public registry.
+SOG now separates the original bootstrap candidate ledger from the live unresolved candidate queue.
 
-The candidate master is not a public recommendation list and does not promote assets automatically.
+- `data/candidate-stable-assets.json` is the **legacy/bootstrap candidate ledger** for the original 40 entries. All 40 are already promoted. It remains useful for historical candidate IDs, duplicate control, aliases, and promotion provenance, but it is **not** a complete list of current unlisted candidates.
+- `docs/growth/current-unlisted-candidate-queue.json` is the **current carry-forward queue for stable assets that are not canonical/published and still require a promotion, launch, identity, duplicate, or evidence decision**.
+- `docs/growth/batch-*-prescreen.json` files remain the review trail that feeds the live queue.
 
-## Required fields
+A candidate must not disappear merely because a later growth batch did not revisit it. Every non-canonical candidate found during record-growth work must either remain in the live queue or receive an explicit terminal disposition explaining why it is no longer a new-asset candidate.
+
+Promotion does not occur automatically. A candidate leaves the active unlisted queue only after its canonical promotion commit has actually landed and the ordinary integrity/evidence gates have passed.
+
+The candidate system is not a public recommendation list.
+
+## Live carry-forward rules
+
+For every reviewed candidate that is not yet canonical:
+
+1. record the latest disposition;
+2. preserve the latest reviewed batch/date;
+3. preserve the next evidence or launch trigger required for another decision;
+4. carry the candidate forward even if the next batch focuses elsewhere;
+5. do not infer launch, issuer, backing, identity, deployment, or legal status to force promotion;
+6. remove it from the active queue only after canonical promotion lands or a terminal exclusion/duplicate/deployment-only decision is recorded.
+
+Planned assets, unresolved identities, unverified launches, and insufficiently sourced assets therefore remain visible to maintainers as pending work rather than being silently dropped.
+
+## Legacy bootstrap ledger fields
+
+`data/candidate-stable-assets.json` retains these fields for its original entries:
 
 - `candidate_id`
 - `proposed_record_id`
@@ -23,7 +46,7 @@ The candidate master is not a public recommendation list and does not promote as
 - `target_batch`
 - `notes`
 
-## Candidate status
+## Legacy candidate status
 
 - `candidate`: identified but not yet source-reviewed for promotion
 - `accepted`: approved for a future record batch but not yet promoted
@@ -32,6 +55,8 @@ The candidate master is not a public recommendation list and does not promote as
 - `excluded`: reviewed and outside SOG scope
 - `watchlist`: retained for monitoring without an addition decision
 - `needs_review`: identity or classification remains unresolved
+
+Newer growth batches may use more specific dispositions such as `hold_not_launched`, `launch_verification_hold`, `identity_split_hold`, `needs_exact_identity_review`, or `needs_additional_review`. Those dispositions are normalized only by the live carry-forward queue; they must not be collapsed into a fake canonical fact.
 
 ## Priority
 
@@ -75,36 +100,30 @@ The candidate master is not a public recommendation list and does not promote as
 
 ## Identity rules
 
-- `candidate_id`, `slug`, and `proposed_record_id` must be unique.
-- A promoted entry must match one canonical stablecoin record by ID and slug.
-- A non-promoted entry must not collide with an existing stablecoin ID or slug.
+- A canonical stable-asset identity must remain unique under the normal registry validators.
+- A non-promoted candidate must not be promoted into a duplicate canonical identity.
 - Symbol and alias collisions are warnings because legitimate collisions can exist, but they must be reviewed.
-- Existing stablecoins must each have one promoted candidate-master entry.
 - Wrappers, receipt tokens, bridged representations, and yield-bearing derivatives must not be promoted as the underlying stablecoin without an explicit classification decision.
+- Deployment-only changes belong to the existing asset's deployment/history layer rather than the new-asset queue.
+- Lineage-only findings must not create duplicate canonical assets.
 
-## Current counts
+## Bootstrap ledger counts
 
-- total unique entries: 40
-- promoted entries: 40
-- P0 entries: 22
-- P0 promoted: USDe, sUSD, MIM, FEI, USDN, RAI, PAXG, XAUT, SPOT, Nuon, GHO, BOLD, USD0, USR, SAI, HUSD, IRON, mUSD, EURS, EURT, Mento Dollar / USDm, alUSD
-- P0 pending promotion: 0
+`data/candidate-stable-assets.json` currently contains:
 
-Current 36 → 40 working set:
+- total unique bootstrap entries: 40
+- promoted bootstrap entries: 40
+- pending bootstrap promotion: 0
 
-- Batch C: GHO, BOLD, USD0, USR — promoted
-- Batch D: SAI, HUSD, IRON, mUSD — promoted
-- Batch E: EURS, EURT, Mento Dollar / USDm, alUSD — promoted
-
-HUSD is promoted as a public-quality historical record while its final issuer, reserve, liability, and redemption outcomes remain explicit known unknowns. Mento Dollar / USDm is promoted as the same continuous asset as cUSD because Mento explicitly documented a pure naming change with no contract or peg change. A target batch does not override evidence requirements or force promotion.
-
-Batch A promoted MIM, FEI, and USDN. Batch B promoted RAI, PAXG, XAUT, SPOT, and Nuon. Batch C promoted GHO, BOLD, USD0, and USR. Batch D promoted SAI, HUSD, IRON, and mUSD. Batch E promoted EURS, EURT, Mento Dollar / USDm, and alUSD. USDe and sUSD remain the same canonical records and received classification and evidence expansion rather than duplicate entries.
+These numbers describe only the historical bootstrap ledger. They are **not** the current canonical registry count and are **not** the count of all unlisted candidates.
 
 ## Required direct scans
 
-The validator must directly read:
+Duplicate and promotion review must directly inspect the relevant canonical data and current candidate-control sources, including:
 
-- `data/candidate-stable-assets.json`
+- `docs/growth/current-unlisted-candidate-queue.json`
+- relevant `docs/growth/batch-*-prescreen.json` review trail
+- `data/candidate-stable-assets.json` for bootstrap-history collisions
 - all stablecoin data groups
 - all Registry v2 classification and profile data groups
 - organizations and relationships
