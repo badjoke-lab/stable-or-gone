@@ -8,7 +8,7 @@ const title = 'What Is a Stablecoin Depeg? — Stable or Gone';
 const description = 'What a stablecoin depeg is, how recoveries differ from collapses, and what details matter when reviewing an event.';
 const canonicalPath = '/guides/what-is-a-depeg/';
 const jsonLd = {
-  '@context': 'https://schema.org', '@type': 'Article', headline: 'What Is a Stablecoin Depeg?', description,
+  '@context': 'https://schema.org', '@type': guide.publishedAt ? 'Article' : 'WebPage', headline: 'What Is a Stablecoin Depeg?', description,
   url: `https://www.stableorgone.com${canonicalPath}`,
   isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://www.stableorgone.com/' },
   about: ['stablecoin depeg', 'stablecoin collapse', 'stablecoin event history'],
