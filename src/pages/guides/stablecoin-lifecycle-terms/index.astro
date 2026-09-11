@@ -8,7 +8,7 @@ const title = 'Stablecoin Lifecycle Terms — Stable or Gone';
 const description = 'A guide to stablecoin launches, migrations, rebrands, wind-downs, discontinuations, failures, successor assets, and post-collapse trading.';
 const canonicalPath = '/guides/stablecoin-lifecycle-terms/';
 const jsonLd = {
-  '@context': 'https://schema.org', '@type': 'Article', headline: title, description,
+  '@context': 'https://schema.org', '@type': guide.publishedAt ? 'Article' : 'WebPage', headline: title, description,
   url: `https://www.stableorgone.com${canonicalPath}`,
   isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://www.stableorgone.com/' },
   about: ['stablecoin lifecycle', 'stablecoin wind-down', 'stablecoin failure', 'stablecoin migration'],
