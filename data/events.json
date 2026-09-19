@@ -49,5 +49,22 @@
     "confidence": "medium",
     "source_count": 4,
     "notes": "Deepened in PR-018C with Paxos wind-down, NYDFS-related context, reported SEC no-action outcome context, and exchange support phase-out context. Final redemption and exchange conversion status still require source-specific review."
+  },
+  {
+    "id": "sog_ev_usdc_2026_09_arc_mainnet",
+    "stablecoin_id": "sog_st_usdc",
+    "issuer_id": "sog_issuer_circle",
+    "event_type": "chain_expansion",
+    "event_date": "2026-09-16",
+    "title": "USDC becomes natively available on Arc as public mainnet launches",
+    "description": "Circle launched Arc public mainnet with USDC natively supported on the network and network fees payable in USDC. SOG records this as chain-expansion and infrastructure-adoption context, not as a change to USDC backing, redemption, or lifecycle status.",
+    "impact_level": "medium",
+    "event_status_effect": "none",
+    "recovered": null,
+    "recovery_date": null,
+    "failure_mechanism": "chain_expansion",
+    "confidence": "high",
+    "source_count": 2,
+    "notes": "Circle first-party launch and USDC product sources confirm Arc mainnet availability and USDC-denominated network fees. This event does not imply a reserve, redemption, or lifecycle-status change."
   }
 ]

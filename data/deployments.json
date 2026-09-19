@@ -240,5 +240,20 @@
     "status": "retirement_proposed",
     "notes": "Optimism legacy sUSD proxy confirmed during the PR #229 source review. SIP-423 includes this deployment in the proposed retirement, but proposal status is not treated as completed termination.",
     "evidence_ids": ["sog_src_susd_synthetix_docs", "sog_src_susd_sip423_2026"]
+  },
+  {
+    "id": "sog_dep_usdc_arc_mainnet",
+    "stablecoin_id": "sog_st_usdc",
+    "chain": "Arc",
+    "deployment_type": "native_or_issuer_supported",
+    "canonicality": "issuer_native",
+    "contract_address": null,
+    "verification_status": "source_linked_no_identifier",
+    "status": "active",
+    "notes": "Circle's 2026-09-16 Arc mainnet announcement and current USDC product page confirm native USDC support on Arc. SOG records the deployment without a contract identifier until an official identifier source is reviewed.",
+    "evidence_ids": [
+      "sog_src_circle_arc_mainnet_20260916",
+      "sog_src_circle_usdc_product"
+    ]
   }
 ]

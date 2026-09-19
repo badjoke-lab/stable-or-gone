@@ -81,11 +81,27 @@
     "title": "USDC official product page",
     "url": "https://www.circle.com/usdc",
     "publisher": "Circle",
-    "accessed_at": "2026-06-03",
+    "accessed_at": "2026-09-20",
     "reliability": "high",
-    "claim_scope": "entity_redemption",
-    "notes": "Official USDC product reference for issuer, access, and product context.",
-    "archived_url": "https://web.archive.org/web/20260710145752/https://www.circle.com/usdc"
+    "claim_scope": "entity_redemption_and_network_support",
+    "notes": "Official USDC product reference for issuer, access, product context, and current native-network support. Re-reviewed 2026-09-20; Arc is listed among natively supported USDC networks as of 2026-09-16.",
+    "archived_url": "https://web.archive.org/web/20260710145752/https://www.circle.com/usdc",
+    "stablecoin_ids": [
+      "sog_st_usdc"
+    ],
+    "organization_ids": [
+      "sog_issuer_circle"
+    ],
+    "event_ids": [
+      "sog_ev_usdc_2026_09_arc_mainnet"
+    ],
+    "claim_scopes": [
+      "identity",
+      "issuer",
+      "redemption",
+      "deployment",
+      "current_state"
+    ]
   },
   {
     "id": "sog_src_circle_stability_update_2023_03_13",
@@ -870,5 +886,36 @@
     "event_ids": [
       "sog_ev_susd_rebrand_2018"
     ]
+  },
+  {
+    "id": "sog_src_circle_arc_mainnet_20260916",
+    "stablecoin_id": "sog_st_usdc",
+    "issuer_id": "sog_issuer_circle",
+    "event_id": "sog_ev_usdc_2026_09_arc_mainnet",
+    "source_type": "issuer_statement",
+    "title": "Circle launches Arc mainnet, an economic operating system for the internet",
+    "url": "https://www.circle.com/pressroom/circle-launches-arc-mainnet-an-economic-operating-system-for-the-internet",
+    "publisher": "Circle",
+    "published_at": "2026-09-16",
+    "accessed_at": "2026-09-20",
+    "reliability": "high",
+    "claim_scope": "usdc_arc_mainnet_native_integration_and_network_fees",
+    "notes": "Circle first-party launch announcement. Supports Arc public mainnet launch, native USDC integration, USDC-denominated network fees, and the stated day-one ecosystem scale.",
+    "stablecoin_ids": [
+      "sog_st_usdc"
+    ],
+    "organization_ids": [
+      "sog_issuer_circle"
+    ],
+    "event_ids": [
+      "sog_ev_usdc_2026_09_arc_mainnet"
+    ],
+    "claim_scopes": [
+      "deployment",
+      "launch",
+      "distribution",
+      "current_state"
+    ],
+    "is_primary": true
   }
 ]
