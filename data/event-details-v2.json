@@ -562,5 +562,19 @@
         "sog_issuer_synthetix"
       ]
     }
+  },
+  {
+    "id": "sog_ev_usdc_2026_09_arc_mainnet",
+    "subject_stablecoin_ids": [
+      "sog_st_usdc"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_circle"
+    ],
+    "evidence_ids": [
+      "sog_src_circle_arc_mainnet_20260916",
+      "sog_src_circle_usdc_product"
+    ],
+    "event_detail_kind": "other"
   }
 ]
