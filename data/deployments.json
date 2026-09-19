@@ -10,7 +10,10 @@
     "verification_status": "verified",
     "status": "active",
     "notes": "Issuer-supported Ethereum USDt contract confirmed from Tether's supported-protocol documentation. This row does not imply that every USDT-like deployment on other chains is current or issuer-supported.",
-    "evidence_ids": ["sog_src_tether_transparency", "sog_src_tether_legal_terms"]
+    "evidence_ids": [
+      "sog_src_tether_transparency",
+      "sog_src_tether_legal_terms"
+    ]
   },
   {
     "id": "sog_dep_usdc_ethereum_seed",
@@ -21,7 +24,10 @@
     "contract_address": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
     "status": "active",
     "notes": "PR-024A source-specific Ethereum USDC contract row. Full chain-by-chain native/bridged status remains a known unknown outside selected official Circle contract references.",
-    "evidence_ids": ["sog_src_circle_usdc_product", "sog_src_circle_usdc_contract_addresses"]
+    "evidence_ids": [
+      "sog_src_circle_usdc_product",
+      "sog_src_circle_usdc_contract_addresses"
+    ]
   },
   {
     "id": "sog_dep_usdc_base_seed",
@@ -32,7 +38,9 @@
     "contract_address": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
     "status": "active",
     "notes": "PR-024A selected Base USDC contract row from Circle developer documentation. Not a complete deployment inventory.",
-    "evidence_ids": ["sog_src_circle_usdc_contract_addresses"]
+    "evidence_ids": [
+      "sog_src_circle_usdc_contract_addresses"
+    ]
   },
   {
     "id": "sog_dep_usdc_solana_seed",
@@ -43,7 +51,9 @@
     "contract_address": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
     "status": "active",
     "notes": "PR-024A selected Solana USDC contract row from Circle developer documentation. Not a complete deployment inventory.",
-    "evidence_ids": ["sog_src_circle_usdc_contract_addresses"]
+    "evidence_ids": [
+      "sog_src_circle_usdc_contract_addresses"
+    ]
   },
   {
     "id": "sog_dep_dai_ethereum_seed",
@@ -56,7 +66,10 @@
     "verification_status": "verified",
     "status": "active",
     "notes": "Ethereum DAI token contract confirmed during the PR #229 source-status review. Sky/USDS lifecycle and successor or parallel-asset relationships remain separate from this deployment identifier.",
-    "evidence_ids": ["sog_src_makerdao_docs_dai", "sog_src_sky_dai_product_docs"]
+    "evidence_ids": [
+      "sog_src_makerdao_docs_dai",
+      "sog_src_sky_dai_product_docs"
+    ]
   },
   {
     "id": "sog_dep_ust_terra_seed",
@@ -70,7 +83,10 @@
     "verification_status": "verified",
     "status": "failed_legacy_context",
     "notes": "Historical UST was a Terra-native bank denomination, not a smart-contract token. The canonical micro-denomination was uusd; the post-collapse USTC and Terra Classic lifecycle remain separate from restored stablecoin status.",
-    "evidence_ids": ["sog_src_terra_docs", "sog_src_ust_failure_research_arxiv"]
+    "evidence_ids": [
+      "sog_src_terra_docs",
+      "sog_src_ust_failure_research_arxiv"
+    ]
   },
   {
     "id": "sog_dep_busd_ethereum_seed",
@@ -83,7 +99,10 @@
     "verification_status": "verified",
     "status": "discontinued_or_wind_down_context",
     "notes": "Ethereum BUSD contract confirmed from Paxos issuer materials. New issuance ended, while Paxos reserve and redemption responsibilities remain a separate lifecycle layer.",
-    "evidence_ids": ["sog_src_paxos_busd_announcement", "sog_src_busd_paxos_issuer_update"]
+    "evidence_ids": [
+      "sog_src_paxos_busd_announcement",
+      "sog_src_busd_paxos_issuer_update"
+    ]
   },
   {
     "id": "sog_dep_frax_ethereum_seed",
@@ -96,7 +115,9 @@
     "verification_status": "verified",
     "status": "active",
     "notes": "Ethereum-native FRAX token contract confirmed from Frax Finance deployment documentation.",
-    "evidence_ids": ["sog_src_frax_docs_frax"]
+    "evidence_ids": [
+      "sog_src_frax_docs_frax"
+    ]
   },
   {
     "id": "sog_dep_tusd_ethereum_seed",
@@ -109,7 +130,9 @@
     "verification_status": "verified",
     "status": "active",
     "notes": "Ethereum TUSD proxy address confirmed from the project's published smart-contract repository during the PR #229 review.",
-    "evidence_ids": ["sog_src_tusd_official_site"]
+    "evidence_ids": [
+      "sog_src_tusd_official_site"
+    ]
   },
   {
     "id": "sog_dep_fdusd_ethereum_seed",
@@ -122,7 +145,9 @@
     "verification_status": "verified",
     "status": "active",
     "notes": "Ethereum FDUSD contract confirmed from First Digital's signed reserve-account reporting.",
-    "evidence_ids": ["sog_src_fdusd_official_site"]
+    "evidence_ids": [
+      "sog_src_fdusd_official_site"
+    ]
   },
   {
     "id": "sog_dep_pyusd_ethereum_seed",
@@ -135,7 +160,9 @@
     "verification_status": "verified",
     "status": "active",
     "notes": "Ethereum PYUSD contract confirmed from PayPal's authentication guidance.",
-    "evidence_ids": ["sog_src_pyusd_paxos_official"]
+    "evidence_ids": [
+      "sog_src_pyusd_paxos_official"
+    ]
   },
   {
     "id": "sog_dep_pyusd_solana_seed",
@@ -148,7 +175,9 @@
     "verification_status": "verified",
     "status": "active",
     "notes": "Solana PYUSD mint confirmed from PayPal's authentication guidance.",
-    "evidence_ids": ["sog_src_pyusd_paypal_official"]
+    "evidence_ids": [
+      "sog_src_pyusd_paypal_official"
+    ]
   },
   {
     "id": "sog_dep_usdd_tron_seed",
@@ -161,7 +190,9 @@
     "verification_status": "verified",
     "status": "active",
     "notes": "TRON mainnet USDD contract confirmed from official USDD deployment documentation.",
-    "evidence_ids": ["sog_src_usdd_official_site"]
+    "evidence_ids": [
+      "sog_src_usdd_official_site"
+    ]
   },
   {
     "id": "sog_dep_gusd_ethereum_seed",
@@ -174,7 +205,9 @@
     "verification_status": "verified",
     "status": "active",
     "notes": "Ethereum GUSD contract confirmed from Gemini's official smart-contract link and technical materials.",
-    "evidence_ids": ["sog_src_gusd_gemini_official"]
+    "evidence_ids": [
+      "sog_src_gusd_gemini_official"
+    ]
   },
   {
     "id": "sog_dep_lusd_ethereum_seed",
@@ -187,7 +220,9 @@
     "verification_status": "verified",
     "status": "active_or_legacy_context",
     "notes": "Ethereum LUSD token contract confirmed from Liquity V1 documentation and official protocol materials.",
-    "evidence_ids": ["sog_src_lusd_liquity_docs"]
+    "evidence_ids": [
+      "sog_src_lusd_liquity_docs"
+    ]
   },
   {
     "id": "sog_dep_crvusd_ethereum_seed",
@@ -200,7 +235,9 @@
     "verification_status": "verified",
     "status": "active",
     "notes": "Ethereum crvUSD token contract confirmed from Curve's official contract and registry materials.",
-    "evidence_ids": ["sog_src_crvusd_curve_docs"]
+    "evidence_ids": [
+      "sog_src_crvusd_curve_docs"
+    ]
   },
   {
     "id": "sog_dep_usde_ethereum_seed",
@@ -213,7 +250,9 @@
     "verification_status": "verified",
     "status": "active",
     "notes": "Ethereum USDe token contract confirmed from Ethena's official key-address documentation.",
-    "evidence_ids": ["sog_src_usde_ethena_docs"]
+    "evidence_ids": [
+      "sog_src_usde_ethena_docs"
+    ]
   },
   {
     "id": "sog_dep_susd_ethereum_seed",
@@ -226,7 +265,14 @@
     "verification_status": "verified",
     "status": "impaired_retirement_proposed",
     "notes": "Ethereum legacy sUSD proxy confirmed during the PR #229 source review. The 2018 nUSD-to-sUSD rename did not change the contract address; later upgrades and the pending retirement proposal remain separate lifecycle layers.",
-    "evidence_ids": ["sog_src_susd_synthetix_docs", "sog_src_susd_sip423_2026", "sog_src_susd_metamask_market_2026_06_18", "sog_src_susd_nusd_launch_2018", "sog_src_susd_rebrand_2018", "sog_src_susd_synths_mainnet_2018"]
+    "evidence_ids": [
+      "sog_src_susd_synthetix_docs",
+      "sog_src_susd_sip423_2026",
+      "sog_src_susd_metamask_market_2026_06_18",
+      "sog_src_susd_nusd_launch_2018",
+      "sog_src_susd_rebrand_2018",
+      "sog_src_susd_synths_mainnet_2018"
+    ]
   },
   {
     "id": "sog_dep_susd_optimism_legacy",
@@ -239,6 +285,24 @@
     "verification_status": "verified",
     "status": "retirement_proposed",
     "notes": "Optimism legacy sUSD proxy confirmed during the PR #229 source review. SIP-423 includes this deployment in the proposed retirement, but proposal status is not treated as completed termination.",
-    "evidence_ids": ["sog_src_susd_synthetix_docs", "sog_src_susd_sip423_2026"]
+    "evidence_ids": [
+      "sog_src_susd_synthetix_docs",
+      "sog_src_susd_sip423_2026"
+    ]
+  },
+  {
+    "id": "sog_dep_usdc_arc_mainnet",
+    "stablecoin_id": "sog_st_usdc",
+    "chain": "Arc",
+    "deployment_type": "native_or_issuer_supported",
+    "canonicality": "issuer_native",
+    "contract_address": null,
+    "verification_status": "source_linked_no_identifier",
+    "status": "active",
+    "notes": "Circle's 2026-09-16 Arc mainnet announcement and current USDC product page confirm native USDC support on Arc. SOG records the deployment without a contract identifier until an official identifier source is reviewed.",
+    "evidence_ids": [
+      "sog_src_circle_arc_mainnet_20260916",
+      "sog_src_circle_usdc_product"
+    ]
   }
 ]
