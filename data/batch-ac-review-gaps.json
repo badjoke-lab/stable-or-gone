@@ -156,7 +156,7 @@
     "topic": "legal_issuer_and_redemption_obligor",
     "description": "Affiliated public material names a JPYR Organization, but reviewed sources do not establish the exact incorporated legal issuer, jurisdiction, holder legal claim, direct redemption obligor, or bankruptcy priority.",
     "severity": "high",
-    "last_checked_at": "2026-08-23",
+    "last_checked_at": "2026-09-20",
     "notes": "Do not convert the descriptive organization name into a verified legal-issuer finding without primary legal documentation."
   },
   {
@@ -164,19 +164,19 @@
     "stablecoin_id": "sog_st_jpyr",
     "issuer_id": "sog_org_jpyr_organization",
     "topic": "backing_model_and_independent_reserve_assurance",
-    "description": "IZAKA-YA-affiliated material gives materially inconsistent descriptions of JPYR backing, including simple yen-reserve language and a separate description of collateral deposited to an Ethereum DeFi platform. No complete independently reviewable reserve series, liabilities matching, custodian statement, or assurance opinion was identified in the reviewed record.",
+    "description": "Current JPYR first-party sources materially conflict: the project homepage says JPYR is 100% backed by reserves, while the project whitepaper says issuance is managed to match Ethereum deposited in DeFi. No complete independently reviewable reserve series, liabilities matching, custodian statement or assurance opinion was identified.",
     "severity": "high",
-    "last_checked_at": "2026-08-23",
-    "notes": "SOG preserves the conflict rather than choosing the more favorable claim."
+    "last_checked_at": "2026-09-20",
+    "notes": "SOG preserves the first-party conflict rather than choosing either backing account as verified."
   },
   {
     "id": "sog_ku_jpyr_redemption_20260823",
     "stablecoin_id": "sog_st_jpyr",
     "issuer_id": "sog_org_jpyr_organization",
     "topic": "direct_redemption_right_and_terms",
-    "description": "Reviewed public material does not establish who can redeem JPYR directly, whether redemption at par is a contractual holder right, minimums, fees, settlement timing, eligible jurisdictions, or the settlement counterparty.",
+    "description": "Reviewed public material still does not establish who can redeem JPYR directly with the issuer, whether par redemption is a contractual holder right, minimums, fees, settlement timing, eligible jurisdictions or the settlement counterparty. BTSE's withdrawal window after delisting is an exchange custody exit path, not direct issuer redemption.",
     "severity": "high",
-    "last_checked_at": "2026-08-23",
+    "last_checked_at": "2026-09-20",
     "notes": "Wallet swap availability or secondary-market purchase routes are not equivalent to direct issuer redemption."
   },
   {
@@ -186,7 +186,7 @@
     "topic": "smart_contract_controls_audit_and_current_roles",
     "description": "Affiliated material states that JPYR includes mint, burn and transfer-stop functionality and also states that the contract had not received a formal third-party audit as of June 2026. Current administrator addresses, role assignments, upgradeability, pause/freeze operational state, mint policy and burn policy remain unestablished in the reviewed record.",
     "severity": "high",
-    "last_checked_at": "2026-08-23",
+    "last_checked_at": "2026-09-20",
     "notes": "Capability claims do not prove current role holders or use history."
   },
   {
@@ -194,9 +194,9 @@
     "stablecoin_id": "sog_st_jpyr",
     "issuer_id": "sog_org_jpyr_organization",
     "topic": "regulatory_status_and_market_liquidity",
-    "description": "IZAKA-YA-affiliated material states that JPYR was not registered with Japan's FSA as of June 2026 and describes liquidity as limited. The reviewed record does not contain an independent regulator finding establishing the legal classification of JPYR itself or a normalized current liquidity series.",
+    "description": "JPYR-affiliated material previously stated that JPYR was not registered with Japan's FSA and described liquidity as limited. By 2026-09-15 BTSE had delisted JPYR and disabled deposits/trading; on 2026-09-17 IZAKA-YA announced a Japan-facing service exit. The reviewed record still lacks a complete current market/liquidity inventory and does not establish a regulator finding about JPYR's own legal classification.",
     "severity": "high",
-    "last_checked_at": "2026-08-23",
-    "notes": "Record the first-party registration statement and liquidity warning without converting them into an unverified fraud or illegality finding."
+    "last_checked_at": "2026-09-20",
+    "notes": "Record the direct BTSE delisting and IZAKA-YA service restriction as access/liquidity facts without converting them into an unsupported finding of JPYR illegality, depeg, reserve failure or issuer redemption failure."
   }
 ]

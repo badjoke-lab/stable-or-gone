@@ -12,9 +12,18 @@
     "accessed_at": "2026-06-28",
     "reliability": "high",
     "claim_scope": "launch_date",
-    "stablecoin_ids": ["sog_st_gyen"],
-    "organization_ids": ["sog_issuer_gmo_trust"],
-    "claim_scopes": ["launch_date", "issuance_start", "redemption_start", "service_start"],
+    "stablecoin_ids": [
+      "sog_st_gyen"
+    ],
+    "organization_ids": [
+      "sog_issuer_gmo_trust"
+    ],
+    "claim_scopes": [
+      "launch_date",
+      "issuance_start",
+      "redemption_start",
+      "service_start"
+    ],
     "notes": "The official release states that GMO Trust began GYEN issuance, redemption, and service on 2021-03-01 New York time. The release itself is dated 2021-03-02."
   },
   {
@@ -30,9 +39,17 @@
     "accessed_at": "2026-06-28",
     "reliability": "high",
     "claim_scope": "launch_date",
-    "stablecoin_ids": ["sog_st_gyen"],
-    "organization_ids": ["sog_issuer_gmo_trust"],
-    "claim_scopes": ["launch_date", "service_start", "issuer_history"],
+    "stablecoin_ids": [
+      "sog_st_gyen"
+    ],
+    "organization_ids": [
+      "sog_issuer_gmo_trust"
+    ],
+    "claim_scopes": [
+      "launch_date",
+      "service_start",
+      "issuer_history"
+    ],
     "notes": "The later official retrospective independently states that GYEN and ZUSD service began on 2021-03-01 New York time."
   },
   {
@@ -48,9 +65,18 @@
     "accessed_at": "2026-07-05",
     "reliability": "high",
     "claim_scope": "official_contract_identity",
-    "stablecoin_ids": ["sog_st_usdf"],
-    "organization_ids": ["sog_issuer_falcon_finance"],
-    "claim_scopes": ["contract_address", "deployment", "network", "verification"],
+    "stablecoin_ids": [
+      "sog_st_usdf"
+    ],
+    "organization_ids": [
+      "sog_issuer_falcon_finance"
+    ],
+    "claim_scopes": [
+      "contract_address",
+      "deployment",
+      "network",
+      "verification"
+    ],
     "event_ids": []
   },
   {
@@ -67,10 +93,21 @@
     "accessed_at": "2026-08-23",
     "reliability": "high",
     "claim_scope": "jpyr_ethereum_contract_identity",
-    "stablecoin_ids": ["sog_st_jpyr"],
-    "organization_ids": ["sog_org_jpyr_organization"],
-    "claim_scopes": ["identity", "deployment", "contract_address", "network"],
-    "event_ids": ["sog_ev_jpyr_ethereum_documented_20260517"],
+    "stablecoin_ids": [
+      "sog_st_jpyr"
+    ],
+    "organization_ids": [
+      "sog_org_jpyr_organization"
+    ],
+    "claim_scopes": [
+      "identity",
+      "deployment",
+      "contract_address",
+      "network"
+    ],
+    "event_ids": [
+      "sog_ev_jpyr_ethereum_documented_20260517"
+    ],
     "notes": "Affiliated first-party guide explicitly instructs users to select Ethereum and add JPYR contract 0xAf5D2cf39F2d4E2F5900D6cf37ab3596866347e4. Strong evidence for operator-published contract identity, not reserve safety."
   },
   {
@@ -86,9 +123,22 @@
     "accessed_at": "2026-08-23",
     "reliability": "medium",
     "claim_scope": "jpyr_affiliated_issuer_backing_control_and_risk_statements",
-    "stablecoin_ids": ["sog_st_jpyr"],
-    "organization_ids": ["sog_org_jpyr_organization"],
-    "claim_scopes": ["identity", "issuer_claim", "reference_asset", "reserve_claim", "control_policy", "regulatory_context", "audit_status", "liquidity_risk"],
+    "stablecoin_ids": [
+      "sog_st_jpyr"
+    ],
+    "organization_ids": [
+      "sog_org_jpyr_organization"
+    ],
+    "claim_scopes": [
+      "identity",
+      "issuer_claim",
+      "reference_asset",
+      "reserve_claim",
+      "control_policy",
+      "regulatory_context",
+      "audit_status",
+      "liquidity_risk"
+    ],
     "event_ids": [],
     "notes": "Affiliated editorial material names JPYR Organization, states a one-yen target and reserve/mint-burn claims, and itself states that JPYR was not registered with Japan's FSA as of June 2026, had no formal third-party smart-contract audit, and had limited liquidity. Used as evidence of those first-party statements only, not independent verification."
   },
@@ -105,9 +155,17 @@
     "accessed_at": "2026-08-23",
     "reliability": "medium",
     "claim_scope": "jpyr_conflicting_backing_description",
-    "stablecoin_ids": ["sog_st_jpyr"],
-    "organization_ids": ["sog_org_jpyr_organization"],
-    "claim_scopes": ["reserve_claim", "collateral_model", "known_unknown"],
+    "stablecoin_ids": [
+      "sog_st_jpyr"
+    ],
+    "organization_ids": [
+      "sog_org_jpyr_organization"
+    ],
+    "claim_scopes": [
+      "reserve_claim",
+      "collateral_model",
+      "known_unknown"
+    ],
     "event_ids": [],
     "notes": "Affiliated article describes JPYR as stabilized by collateral assets deposited to an Ethereum DeFi platform. This materially differs from simple yen-reserve descriptions elsewhere in the same affiliated publishing surface, so SOG preserves the inconsistency instead of selecting one account as verified."
   },
@@ -125,10 +183,20 @@
     "accessed_at": "2026-08-23",
     "reliability": "medium",
     "claim_scope": "jpyr_onchain_contract_identity",
-    "stablecoin_ids": ["sog_st_jpyr"],
-    "organization_ids": ["sog_org_jpyr_organization"],
-    "claim_scopes": ["deployment", "contract_address", "onchain_identity"],
-    "event_ids": ["sog_ev_jpyr_ethereum_documented_20260517"],
+    "stablecoin_ids": [
+      "sog_st_jpyr"
+    ],
+    "organization_ids": [
+      "sog_org_jpyr_organization"
+    ],
+    "claim_scopes": [
+      "deployment",
+      "contract_address",
+      "onchain_identity"
+    ],
+    "event_ids": [
+      "sog_ev_jpyr_ethereum_documented_20260517"
+    ],
     "notes": "Explorer corroboration for the Ethereum contract identity. Explorer labeling is not evidence of reserve assets, legal issuer identity, holder redemption rights, or smart-contract audit quality."
   },
   {
@@ -144,10 +212,20 @@
     "accessed_at": "2026-08-27",
     "reliability": "high",
     "claim_scope": "jpyr_ecosystem_access_context",
-    "stablecoin_ids": ["sog_st_jpyr"],
-    "organization_ids": ["sog_org_jpyr_organization"],
-    "claim_scopes": ["ecosystem_access", "withdrawal_dependency", "known_unknown"],
-    "event_ids": ["sog_ev_jpyr_access_route_deterioration_20260825"],
+    "stablecoin_ids": [
+      "sog_st_jpyr"
+    ],
+    "organization_ids": [
+      "sog_org_jpyr_organization"
+    ],
+    "claim_scopes": [
+      "ecosystem_access",
+      "withdrawal_dependency",
+      "known_unknown"
+    ],
+    "event_ids": [
+      "sog_ev_jpyr_access_route_deterioration_20260825"
+    ],
     "notes": "First-party IZAKA-YA notice states that some accounts were temporarily restricted from transfers and withdrawals while explicitly denying a platform-wide halt. Used as ecosystem access context only; it does not establish JPYR depeg, reserve impairment, or direct issuer redemption failure."
   },
   {
@@ -163,10 +241,21 @@
     "accessed_at": "2026-08-27",
     "reliability": "high",
     "claim_scope": "jpyr_ecosystem_offramp_change",
-    "stablecoin_ids": ["sog_st_jpyr"],
-    "organization_ids": ["sog_org_jpyr_organization"],
-    "claim_scopes": ["ecosystem_access", "offramp_dependency", "counterparty_route", "known_unknown"],
-    "event_ids": ["sog_ev_jpyr_access_route_deterioration_20260825"],
+    "stablecoin_ids": [
+      "sog_st_jpyr"
+    ],
+    "organization_ids": [
+      "sog_org_jpyr_organization"
+    ],
+    "claim_scopes": [
+      "ecosystem_access",
+      "offramp_dependency",
+      "counterparty_route",
+      "known_unknown"
+    ],
+    "event_ids": [
+      "sog_ev_jpyr_access_route_deterioration_20260825"
+    ],
     "notes": "Counterparty first-party notice states that CryptoPanda ended its IZAKA-YA partnership and disabled IZAKA-YA wallet-connected transactions while other-wallet transactions remained available. Used to document loss of a JPYR-linked ecosystem route, not to infer JPYR depeg, failure, reserve impairment, or direct redemption failure."
   },
   {
@@ -182,10 +271,145 @@
     "accessed_at": "2026-08-27",
     "reliability": "high",
     "claim_scope": "jpyr_ecosystem_access_followup",
-    "stablecoin_ids": ["sog_st_jpyr"],
-    "organization_ids": ["sog_org_jpyr_organization"],
-    "claim_scopes": ["ecosystem_access", "withdrawal_dependency", "operator_status_statement", "known_unknown"],
-    "event_ids": ["sog_ev_jpyr_access_route_deterioration_20260825"],
+    "stablecoin_ids": [
+      "sog_st_jpyr"
+    ],
+    "organization_ids": [
+      "sog_org_jpyr_organization"
+    ],
+    "claim_scopes": [
+      "ecosystem_access",
+      "withdrawal_dependency",
+      "operator_status_statement",
+      "known_unknown"
+    ],
+    "event_ids": [
+      "sog_ev_jpyr_access_route_deterioration_20260825"
+    ],
     "notes": "IZAKA-YA states that no universal withdrawal/transfer halt is in place, that some reviewed transfers were completed on 2026-08-25, and that remaining cases are being processed after individual checks. This limits the claim boundary: the event remains an ecosystem access concern, not evidence of universal withdrawal failure or JPYR redemption failure."
+  },
+  {
+    "id": "sog_src_jpyr_site_20260920",
+    "stablecoin_id": "sog_st_jpyr",
+    "issuer_id": "sog_org_jpyr_organization",
+    "source_type": "official_website",
+    "title": "JPYR - 1:1 JPY-Pegged Digital Currency",
+    "url": "https://jpyr.org/",
+    "publisher": "JPYR Organization",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://jpyr.org/",
+    "accessed_at": "2026-09-20",
+    "reliability": "high",
+    "claim_scope": "jpyr_current_project_site_backing_and_market_access",
+    "stablecoin_ids": [
+      "sog_st_jpyr"
+    ],
+    "organization_ids": [
+      "sog_org_jpyr_organization"
+    ],
+    "claim_scopes": [
+      "identity",
+      "reference_asset",
+      "reserve_claim",
+      "ecosystem_access",
+      "known_unknown"
+    ],
+    "event_ids": [],
+    "notes": "Current first-party JPYR project site states a 1:1 JPY peg and '100% Backed with Complete Transparency' reserve claim, identifies JPYR Organization in the footer, and links 'Get JPYR' to BTSE. Used as first-party claim evidence only; it does not independently verify reserves, legal issuer identity, direct redemption rights, or the continued availability of the linked exchange route."
+  },
+  {
+    "id": "sog_src_jpyr_whitepaper_20260920",
+    "stablecoin_id": "sog_st_jpyr",
+    "issuer_id": "sog_org_jpyr_organization",
+    "source_type": "official_whitepaper",
+    "title": "JPYR Whitepaper",
+    "url": "https://jpyr.org/whitepaper.pdf",
+    "publisher": "JPYR Organization",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://jpyr.org/whitepaper.pdf",
+    "accessed_at": "2026-09-20",
+    "reliability": "high",
+    "claim_scope": "jpyr_current_whitepaper_collateral_and_control_claims",
+    "stablecoin_ids": [
+      "sog_st_jpyr"
+    ],
+    "organization_ids": [
+      "sog_org_jpyr_organization"
+    ],
+    "claim_scopes": [
+      "identity",
+      "deployment",
+      "reserve_claim",
+      "collateral_model",
+      "control_policy",
+      "audit_claim",
+      "known_unknown"
+    ],
+    "event_ids": [],
+    "notes": "First-party whitepaper states JPYR is issued on Ethereum, describes supply-management, transfer/withdrawal automation and compliance controls, and says issuance is managed to match Ethereum deposited in DeFi with periodic collateral audits. This conflicts materially with simple reserve-backing language on the project homepage and is not an independently verified reserve or audit report."
+  },
+  {
+    "id": "sog_src_jpyr_btse_delisting_20260915",
+    "stablecoin_id": "sog_st_jpyr",
+    "issuer_id": "sog_org_jpyr_organization",
+    "event_id": "sog_ev_jpyr_btse_delisting_20260915",
+    "source_type": "exchange_notice",
+    "title": "USDP and JPYR Have Been Delisted",
+    "url": "https://www.btse.com/blog/usdp-jpyr-delisted-btse/",
+    "publisher": "BTSE",
+    "published_at": "2026-09-15",
+    "archived_url": "https://web.archive.org/web/*/https://www.btse.com/blog/usdp-jpyr-delisted-btse/",
+    "accessed_at": "2026-09-20",
+    "reliability": "high",
+    "claim_scope": "jpyr_exchange_delisting_and_withdrawal_deadline",
+    "stablecoin_ids": [
+      "sog_st_jpyr"
+    ],
+    "organization_ids": [
+      "sog_org_jpyr_organization"
+    ],
+    "claim_scopes": [
+      "event",
+      "ecosystem_access",
+      "market_support",
+      "withdrawal_dependency",
+      "known_unknown"
+    ],
+    "event_ids": [
+      "sog_ev_jpyr_btse_delisting_20260915"
+    ],
+    "notes": "Primary exchange notice establishes JPYR delisting, closure of spot markets, disabled deposits/trading and a 2026-10-20 withdrawal deadline. It does not establish issuer redemption failure, reserve impairment, depeg or global token termination."
+  },
+  {
+    "id": "sog_src_jpyr_izakaya_japan_exit_20260917",
+    "stablecoin_id": "sog_st_jpyr",
+    "issuer_id": "sog_org_jpyr_organization",
+    "event_id": "sog_ev_jpyr_izakaya_japan_exit_20260917",
+    "source_type": "official_statement",
+    "title": "〖重要〗日本居住者の皆様へのサービス提供終了および預かり資産の出金手続きについて",
+    "url": "https://izakaya.tech/news/end-of-service-japan-residents/",
+    "publisher": "Izakaya Limited",
+    "published_at": "2026-09-17",
+    "archived_url": "https://web.archive.org/web/*/https://izakaya.tech/news/end-of-service-japan-residents/",
+    "accessed_at": "2026-09-20",
+    "reliability": "high",
+    "claim_scope": "jpyr_ecosystem_japan_service_exit_context",
+    "stablecoin_ids": [
+      "sog_st_jpyr"
+    ],
+    "organization_ids": [
+      "sog_org_jpyr_organization"
+    ],
+    "claim_scopes": [
+      "event",
+      "ecosystem_access",
+      "regional_restriction",
+      "withdrawal_dependency",
+      "known_unknown"
+    ],
+    "event_ids": [
+      "sog_ev_jpyr_izakaya_japan_exit_20260917"
+    ],
+    "notes": "First-party IZAKA-YA notice establishes a Japan-resident/Japanese-national service exit, stop on new registration and lending for the affected population, planned Japanese-site closure, and a continued withdrawal procedure. Used only as JPYR ecosystem access context; it does not establish JPYR issuer redemption failure, reserve impairment, depeg, or global discontinuation."
   }
 ]
