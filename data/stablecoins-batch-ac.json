@@ -4,7 +4,10 @@
     "slug": "mnee",
     "name": "MNEE",
     "symbol": "MNEE",
-    "aliases": ["MNEE", "MNEE USD Stablecoin"],
+    "aliases": [
+      "MNEE",
+      "MNEE USD Stablecoin"
+    ],
     "status": "active",
     "issuer_id": "sog_issuer_mnee_limited",
     "peg_asset": "USD",
@@ -29,7 +32,11 @@
     "slug": "bison-bank-eub",
     "name": "Bison Bank Electronic Money Token — Euro",
     "symbol": "EUB",
-    "aliases": ["EUB", "Bison Bank EUB", "Bison Electronic Money Token Euro"],
+    "aliases": [
+      "EUB",
+      "Bison Bank EUB",
+      "Bison Electronic Money Token Euro"
+    ],
     "status": "limited",
     "issuer_id": "sog_issuer_bison_bank",
     "peg_asset": "EUR",
@@ -54,7 +61,11 @@
     "slug": "bison-bank-usb",
     "name": "Bison Bank Electronic Money Token — US Dollar",
     "symbol": "USB",
-    "aliases": ["USB", "Bison Bank USB", "Bison Electronic Money Token US Dollar"],
+    "aliases": [
+      "USB",
+      "Bison Bank USB",
+      "Bison Electronic Money Token US Dollar"
+    ],
     "status": "limited",
     "issuer_id": "sog_issuer_bison_bank",
     "peg_asset": "USD",
@@ -79,8 +90,10 @@
     "slug": "jpyr",
     "name": "JPYR",
     "symbol": "JPYR",
-    "aliases": ["JPYR Token"],
-    "status": "active",
+    "aliases": [
+      "JPYR Token"
+    ],
+    "status": "limited",
     "issuer_id": "sog_org_jpyr_organization",
     "peg_asset": "JPY",
     "collateral_model": "unclear_conflicting_public_backing_descriptions",
@@ -90,13 +103,13 @@
     "retail_redemption": "unknown",
     "institutional_redemption": "unknown",
     "minimum_redemption": "unknown",
-    "redemption_region_notes": "The reviewed public material does not establish a direct issuer redemption channel or jurisdiction-specific redemption eligibility. A previously documented IZAKA-YA/CryptoPanda transaction route was terminated by CryptoPanda on 2026-08-25; this is an access/off-ramp deterioration signal and is not treated as proof that JPYR itself lost its peg or became non-redeemable.",
-    "redemption_notes": "Operator/editorial material describes a one-yen target and backing or collateral concepts, but no reviewed source establishes the complete legal redemption mechanism, obligor, settlement terms, fees, minimums, or holder priority. The 2026-08-24 IZAKA-YA account-level withdrawal restrictions and the 2026-08-25 CryptoPanda integration termination affect a documented ecosystem access route but do not establish a direct JPYR issuer redemption failure.",
+    "redemption_region_notes": "The reviewed public material does not establish a direct issuer redemption channel or jurisdiction-specific redemption eligibility. CryptoPanda ended its IZAKA-YA wallet integration on 2026-08-25. BTSE then delisted JPYR on 2026-09-15, disabled JPYR deposits and trading, and kept withdrawals open only through 2026-10-20. IZAKA-YA announced on 2026-09-17 that its service would end for Japan residents and Japanese nationals abroad. These are material access/market-route restrictions and are not treated as proof that JPYR itself lost its peg or that a direct issuer redemption right failed.",
+    "redemption_notes": "Direct JPYR issuer redemption remains unresolved. The current JPYR project site claims 1:1 JPY reserve backing, while the project whitepaper describes issuance matched to Ethereum deposited in DeFi; neither source establishes a complete legal redemption mechanism, obligor, settlement terms, fees, minimums, holder priority, or independently assured reserve series. BTSE delisting and the IZAKA-YA Japan-facing service exit reduce documented access routes but are not equivalent to issuer redemption failure.",
     "launch_date": null,
     "discontinued_date": null,
-    "summary": "Ethereum ERC-20 token targeting 1 JPY per JPYR. Reviewed IZAKA-YA-affiliated public material identifies a JPYR Organization and publishes the Ethereum contract, but gives materially inconsistent descriptions of backing and does not establish an independently reviewed reserve series or direct holder redemption right. In August 2026, IZAKA-YA disclosed account-level withdrawal restrictions and CryptoPanda ended its IZAKA-YA wallet integration, creating an additional access/off-ramp concern without establishing a JPYR depeg or issuer redemption failure.",
+    "summary": "Ethereum ERC-20 token targeting 1 JPY per JPYR. Current JPYR first-party materials make conflicting backing descriptions: the project site says JPYR is 100% backed by reserves, while the whitepaper describes issuance matched to Ethereum deposited in DeFi. No independently reviewed reserve series or direct holder redemption right is established. Market access materially tightened in September 2026 when BTSE delisted JPYR and IZAKA-YA announced a Japan-facing service exit; these restrictions do not by themselves establish a depeg, reserve impairment, or global token shutdown.",
     "confidence": "medium",
-    "last_verified_at": "2026-08-27",
-    "notes": "Canonical inclusion and active status are not safety endorsements. Reviewed operator/editorial material itself states that JPYR was not registered with Japan's FSA as of June 2026, that the smart contract had not received a formal third-party audit, and that liquidity was limited. On 2026-08-24 IZAKA-YA disclosed temporary transfer/withdrawal restrictions for some accounts; on 2026-08-25 CryptoPanda terminated its IZAKA-YA partnership and disabled IZAKA-YA-wallet-connected transactions; on 2026-08-27 IZAKA-YA stated that there was no universal withdrawal halt and that individually reviewed transfers were being processed. SOG preserves these as ecosystem access and counterparty-route facts and does not infer depeg, reserve impairment, universal withdrawal failure, or direct issuer redemption failure from them."
+    "last_verified_at": "2026-09-20",
+    "notes": "Canonical inclusion and limited status are not safety endorsements. SOG classifies JPYR as limited because material market/access restrictions now exist: BTSE delisted JPYR on 2026-09-15, disabled deposits and trading, and left withdrawals open through 2026-10-20; IZAKA-YA announced on 2026-09-17 that service would end for Japan residents and Japanese nationals abroad. The JPYR project site remains live and the reviewed record does not establish a depeg, reserve impairment, direct issuer redemption failure, contract termination, or global shutdown. Legal issuer identity, reserve assurance, redemption rights, current administrator roles, issuance policy, and remaining market liquidity remain explicit known unknowns."
   }
 ]
