@@ -1,0 +1,11 @@
+{
+  "batch_id": "arc_usdc_deployment_maintenance_20260920",
+  "captured_at": "2026-09-20",
+  "minimum_counts": {
+    "evidence": 636,
+    "evidence_relations": 636,
+    "deployments": 216
+  },
+  "data_group_additions": {},
+  "notes": "Count-only baseline advance for reviewed Arc public-mainnet USDC deployment maintenance on the 144-asset corpus after the JPYR September checkpoint. One Circle Evidence row is appended to data/evidence.json and one Arc deployment row to data/deployments.json; this overlay adds no new data-group paths."
+}
