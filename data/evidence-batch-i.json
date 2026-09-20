@@ -530,7 +530,9 @@
     "stablecoin_ids": [
       "sog_st_jpyc"
     ],
-    "organization_ids": [],
+    "organization_ids": [
+      "sog_issuer_jpyc_inc"
+    ],
     "event_ids": [
       "sog_ev_jpyc_issuance_interruption_20260917"
     ],
@@ -593,7 +595,9 @@
     "stablecoin_ids": [
       "sog_st_jpyc"
     ],
-    "organization_ids": [],
+    "organization_ids": [
+      "sog_issuer_jpyc_inc"
+    ],
     "event_ids": [
       "sog_ev_jpyc_issuance_interruption_20260917"
     ],
@@ -651,7 +655,9 @@
     "stablecoin_ids": [
       "sog_st_jpyc"
     ],
-    "organization_ids": [],
+    "organization_ids": [
+      "sog_issuer_jpyc_inc"
+    ],
     "event_ids": [],
     "claim_scopes": [
       "market_access",
@@ -680,7 +686,9 @@
     "stablecoin_ids": [
       "sog_st_jpyc"
     ],
-    "organization_ids": [],
+    "organization_ids": [
+      "sog_issuer_jpyc_inc"
+    ],
     "event_ids": [],
     "claim_scopes": [
       "market_price",
