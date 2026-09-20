@@ -68,5 +68,33 @@
     "source_count": 2,
     "event_status_effect": "active",
     "notes": "This is an ecosystem access/off-ramp deterioration event. It does not establish that JPYR itself depegged, that its reserves became impaired, that a direct issuer redemption channel failed, or that all IZAKA-YA withdrawals were blocked. IZAKA-YA stated on 2026-08-27 that there was no platform-wide halt and that individually reviewed transfers were being processed."
+  },
+  {
+    "id": "sog_ev_jpyr_btse_delisting_20260915",
+    "stablecoin_id": "sog_st_jpyr",
+    "issuer_id": "sog_org_jpyr_organization",
+    "event_type": "exchange_phaseout",
+    "event_date": "2026-09-15",
+    "title": "BTSE delists JPYR and disables deposits and trading",
+    "description": "BTSE announced that JPYR was delisted effective 2026-09-15, all JPYR spot markets were closed, and JPYR deposits and trading were disabled. BTSE said JPYR withdrawals would remain open until 2026-10-20, after which remaining balances may be converted to USDT on users' behalf.",
+    "impact_level": "high",
+    "confidence": "high",
+    "source_count": 1,
+    "event_status_effect": "restricted",
+    "notes": "This is a direct market-access and exchange-exit event for JPYR. It does not establish a JPYR depeg, reserve impairment, issuer insolvency, direct issuer redemption failure, smart-contract shutdown, or global token termination."
+  },
+  {
+    "id": "sog_ev_jpyr_izakaya_japan_exit_20260917",
+    "stablecoin_id": "sog_st_jpyr",
+    "issuer_id": "sog_org_jpyr_organization",
+    "event_type": "other",
+    "event_date": "2026-09-17",
+    "title": "IZAKA-YA announces Japan-facing service termination",
+    "description": "IZAKA-YA announced that service would end for all customers residing in Japan and Japanese nationals living abroad, with new registration and new lending stopped for the affected population and a withdrawal procedure remaining available for held assets. JPYR had been documented within the IZAKA-YA product ecosystem.",
+    "impact_level": "high",
+    "confidence": "high",
+    "source_count": 1,
+    "event_status_effect": "restricted",
+    "notes": "This is ecosystem access context for JPYR, not evidence that JPYR itself was discontinued globally or that its direct issuer redemption, reserves, or peg failed."
   }
 ]
