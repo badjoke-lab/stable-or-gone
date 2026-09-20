@@ -23,10 +23,10 @@
     "related_stablecoins": [
       "jpyr"
     ],
-    "official_url": "https://izakaya.tech/cryptocurrency/jpyr-potential/",
-    "summary": "Compatibility row for the descriptive JPYR Organization label used in IZAKA-YA-affiliated public material; exact legal issuer identity remains unresolved.",
+    "official_url": "https://jpyr.org/",
+    "summary": "Compatibility row for the JPYR Organization label shown on the current JPYR project site; exact legal issuer identity remains unresolved.",
     "confidence": "low",
-    "last_verified_at": "2026-08-23",
-    "notes": "Legacy issuer compatibility only. Do not treat this row as proof of a separately incorporated legal issuer, jurisdiction, redemption obligor, reserve manager, or regulatory status."
+    "last_verified_at": "2026-09-20",
+    "notes": "Legacy issuer compatibility only. The direct project site confirms JPYR branding but does not establish a separately incorporated legal issuer, jurisdiction, redemption obligor, reserve manager or regulatory status."
   }
 ]
