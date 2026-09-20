@@ -1,0 +1,103 @@
+---
+import ArticleLayout from '../../../layouts/ArticleLayout.astro';
+const headline = 'Circle Launches Arc Mainnet With USDC as Network Gas';
+const title = `${headline} — Stable or Gone`;
+const description = 'Circle launched Arc public mainnet on September 16, 2026 with native USDC integration and network fees paid in USDC. SOG records the Arc deployment separately from USDC lifecycle status.';
+const canonicalPath = '/articles/circle-arc-mainnet-usdc-gas/';
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline,
+  description,
+  url: `https://www.stableorgone.com${canonicalPath}`,
+  inLanguage: 'en',
+  datePublished: '2026-09-20',
+  dateModified: '2026-09-20',
+  isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://www.stableorgone.com/' },
+  about: ['USDC', 'Circle', 'Arc', 'stablecoin gas', 'Layer 1', 'stablecoin infrastructure']
+};
+---
+<ArticleLayout
+  title={title}
+  description={description}
+  canonicalPath={canonicalPath}
+  headline={headline}
+  sectionLabel="Stablecoin infrastructure"
+  deck="Arc is now a public Layer 1 where USDC is not only a supported stablecoin but also the asset used to pay network transaction fees. That is a deployment and infrastructure change for USDC, not a change to its backing, redemption model, or lifecycle status."
+  publishedAt="September 20, 2026"
+  treatment="Canonical deployment update + analysis"
+  scope="USDC / Arc public mainnet"
+  jsonLd={jsonLd}
+>
+  <section class="panel registry">
+    <div class="bar">What happened</div>
+    <p><strong>Circle launched Arc public mainnet on September 16, 2026.</strong> Circle's launch announcement says Arc went live with native integration into Circle's platform, including USDC, and that network fees are paid in USDC rather than requiring a separate volatile gas token.</p>
+    <p>For Stable or Gone, the important point is not that another chain can hold USDC. Arc makes USDC part of the network's transaction-fee path itself. SOG therefore records Arc as an active native USDC deployment while keeping the asset's existing lifecycle status unchanged.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">USDC is the gas asset, not just a payment token</div>
+    <p>On many networks, a user can hold USDC but still needs a different native asset to submit a transaction. Arc removes that split at the network interface: USDC is used to pay gas.</p>
+    <p>This is different from a sponsored or abstracted fee flow in which an application accepts a stablecoin from the user while another actor ultimately handles the native gas asset. Circle describes USDC as the asset required to pay Arc network fees directly.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">The validator cohort is institutional by design</div>
+    <p>Circle's founding validator announcement named BlackRock, DTCC, Galaxy, Global Payments, ICE, Mastercard, MoneyGram, SBI Group, Standard Chartered, Sumitomo Corporation, and Visa alongside Circle. The September 16 launch announcement says Arc went live with more than 100 applications and more than 100 institutional and ecosystem builders.</p>
+    <p>Those names are relevant to Arc's distribution and operating model, but validator participation does not change the reserve quality, redemption rights, or legal status of USDC. SOG keeps network infrastructure and stablecoin balance-sheet claims separate.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">What changes for the USDC record</div>
+    <table>
+      <thead><tr><th>Question</th><th>SOG treatment</th></tr></thead>
+      <tbody>
+        <tr><td>Is Arc public mainnet live?</td><td>Yes, from September 16, 2026.</td></tr>
+        <tr><td>Is USDC natively integrated on Arc?</td><td>Yes, according to Circle's launch announcement.</td></tr>
+        <tr><td>Are Arc network fees payable in USDC?</td><td>Yes.</td></tr>
+        <tr><td>Does this change USDC's lifecycle status?</td><td>No. USDC remains active.</td></tr>
+        <tr><td>Does this change USDC backing or redemption terms?</td><td>No such change is established by the Arc launch.</td></tr>
+        <tr><td>Does SOG record an Arc deployment?</td><td>Yes. The deployment and its primary evidence are recorded separately from lifecycle events.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">A future ARC token does not replace USDC gas in the current design</div>
+    <p>Circle also disclosed that it completed the genesis mint of an ARC token as a technical milestone toward a possible future proof-of-stake model. Circle explicitly said that the mint is not a commitment to publicly launch ARC and that network fees remain payable in USDC.</p>
+    <p>SOG therefore does not reinterpret the ARC token milestone as a replacement of USDC's fee role. Any later change to fee mechanics would require new first-party evidence and a separate review.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Wallet distribution is already following the launch</div>
+    <p>Bitget Wallet published an Arc guide on September 16 documenting Arc mainnet support, USDC gas, CCTP-based cross-chain transfers, onchain trading, and Arc dApp access from its self-custodial wallet. SOG treats that as ecosystem-distribution context rather than evidence about USDC reserves or redemption.</p>
+    <p>The launch-day wallet integration is also relevant to Wallet Lifecycle Registry as a product-capability change for the existing Bitget Wallet record. Referral promotions, token-performance claims, and launch-day price moves are not part of this SOG record.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Stable or Gone treatment</div>
+    <p><strong>Current SOG treatment: canonical Arc deployment + primary evidence + infrastructure analysis.</strong></p>
+    <p>No new USDC lifecycle event is added because SOG already has a distinct deployment record family for chain presence. The Arc launch does not establish an impairment, migration, wind-down, reserve change, or redemption change. Recording the deployment separately keeps those concepts from being collapsed into one generic event stream.</p>
+    <p>The deployment row intentionally does not assert a full Arc mainnet USDC contract or predeploy address from the launch press release. Address-level authentication can be added separately when the reviewed first-party contract-address source exposes the complete mainnet identifier unambiguously.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">What SOG will watch next</div>
+    <ul>
+      <li>Circle's authenticated Arc mainnet USDC contract or predeploy identifier in its contract-address documentation;</li>
+      <li>changes to USDC gas mechanics as Arc develops its proof-of-stake roadmap;</li>
+      <li>CCTP and other issuer-supported cross-chain routes involving Arc;</li>
+      <li>wallet, exchange, custody, and payment-provider support that materially changes USDC distribution on Arc;</li>
+      <li>any future ARC-token launch or governance change that alters the current fee design.</li>
+    </ul>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Sources</div>
+    <ul>
+      <li><a href="https://www.circle.com/pressroom/circle-launches-arc-mainnet-an-economic-operating-system-for-the-internet" rel="noreferrer">Circle, September 16, 2026 — Circle Launches Arc Mainnet, an Economic Operating System for the Internet</a> — public mainnet launch, native USDC integration, USDC-denominated network fees, builder counts, and ARC-token roadmap context.</li>
+      <li><a href="https://www.circle.com/pressroom/circle-announces-founding-validator-cohort-and-major-integrations-for-arc-ahead-of-september-16-mainnet-launch" rel="noreferrer">Circle, August 5, 2026 — Founding Validator Cohort and Major Integrations for Arc</a> — named founding validators and pre-launch integration context.</li>
+      <li><a href="https://web3.bitget.com/ja/academy/arc-wallet-guide" rel="noreferrer">Bitget Wallet, September 16, 2026 — Arc Wallet Guide</a> — Arc support, USDC gas, CCTP transfers, trading, and dApp access in Bitget Wallet.</li>
+    </ul>
+  </section>
+</ArticleLayout>
