@@ -9,7 +9,7 @@
   "asset_count": 144,
   "source_checkpoint_id": "sog_batch_042_canonical_144_2026_09_09",
   "previous_checkpoint_id": "sog_batch_042_canonical_144_2026_09_09",
-  "source_pr": null,
+  "source_pr": 671,
   "growth_pr": 634,
   "authority_pr": 634,
   "expected_counts": {
