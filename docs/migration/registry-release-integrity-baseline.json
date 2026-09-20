@@ -83,7 +83,7 @@
   },
   "validator": "scripts/validate-counts-manifest-version-provenance-integrity.mjs",
   "audit_report": "docs/audits/counts-manifest-version-provenance-integrity-100-assets.md",
-  "source_pr": null,
+  "source_pr": 671,
   "source_commit": "update/jpyr-september-access-20260920",
   "captured_at": "2026-09-20",
   "expected_market_access_records": 12,
