@@ -1,0 +1,113 @@
+---
+import ArticleLayout from '../../../layouts/ArticleLayout.astro';
+const headline = 'JPYR Market Access Tightens After BTSE Delisting and IZAKA-YA Japan Exit';
+const title = `${headline} — Stable or Gone`;
+const description = 'JPYR lost a documented exchange route when BTSE delisted the token, while IZAKA-YA announced a Japan-facing service exit. SOG records the access restriction without treating it as evidence of depeg, reserve failure, or issuer-redemption failure.';
+const canonicalPath = '/articles/jpyr-btse-delisting-izakaya-japan-exit/';
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline,
+  description,
+  url: `https://www.stableorgone.com${canonicalPath}`,
+  inLanguage: 'en',
+  datePublished: '2026-09-20',
+  dateModified: '2026-09-20',
+  isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://www.stableorgone.com/' },
+  about: ['JPYR', 'stablecoins', 'BTSE', 'IZAKA-YA', 'Japanese yen', 'stablecoin market access', 'stablecoin redemption']
+};
+---
+<ArticleLayout
+  title={title}
+  description={description}
+  canonicalPath={canonicalPath}
+  headline={headline}
+  sectionLabel="Market access and lifecycle"
+  deck="JPYR is still a live token project, but its documented access surface has narrowed. BTSE delisted JPYR and disabled deposits and trading, while IZAKA-YA announced a Japan-facing service exit. The evidence supports a restricted lifecycle classification — not a conclusion that JPYR has collapsed."
+  publishedAt="September 20, 2026"
+  treatment="Canonical event analysis"
+  scope="JPYR / market access / redemption boundary"
+  jsonLd={jsonLd}
+>
+  <section class="panel registry">
+    <div class="bar">What changed</div>
+    <p><strong>BTSE delisted JPYR effective September 15, 2026.</strong> The exchange said all JPYR spot markets were closed and that JPYR deposits and trading were disabled. Withdrawals remain open through October 20, after which remaining balances may be converted to USDT on users' behalf.</p>
+    <p>Two days later, IZAKA-YA announced that its service would end for customers residing in Japan and for Japanese nationals living abroad. The operator said new registration and new lending would stop for the affected population while a withdrawal procedure would remain available for held assets.</p>
+    <p>Those developments follow the August deterioration already recorded by SOG, when IZAKA-YA disclosed account-level transfer and withdrawal restrictions and CryptoPanda ended its IZAKA-YA wallet integration.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Why SOG changed JPYR from Active to Limited</div>
+    <p>SOG keeps lifecycle status separate from failure. Its methodology uses a restricted state when an asset is still operating but important access, minting, redemption, geography, or market-availability constraints exist.</p>
+    <p>The BTSE delisting is direct JPYR market-access evidence. A documented acquisition and trading route disappeared, deposits and trading were disabled, and the remaining exchange withdrawal path now has a cutoff date. Combined with the separate IZAKA-YA regional service exit, that is enough to move JPYR from <strong>Active</strong> to <strong>Limited</strong> in the public record and from <strong>active</strong> to <strong>restricted</strong> in the canonical lifecycle classification.</p>
+    <p>This classification does not mean JPYR has failed. It describes the current access state supported by the reviewed sources.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">The project site still points users to BTSE</div>
+    <p>The current JPYR project homepage remains live and still includes a “Get JPYR” link to BTSE. That creates a visible distribution mismatch: the project's acquisition link points to an exchange that has now delisted JPYR.</p>
+    <p>SOG records that as evidence of a stale or impaired access route, not as proof that no other market or transfer route exists. A complete current inventory of JPYR liquidity venues has not been established.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Backing claims remain unresolved</div>
+    <p>The access changes do not resolve a separate problem in the JPYR record: the project's own public materials describe backing differently.</p>
+    <p>The JPYR homepage says the token is <strong>100% backed by reserves</strong>. The project whitepaper instead says issuance is managed to match the balance of <strong>Ethereum deposited in DeFi</strong> and says collateral assets are periodically audited.</p>
+    <p>SOG does not choose one description and treat it as verified. No independently reviewed token-specific reserve series, liabilities reconciliation, custodian statement, or audit opinion was identified in the reviewed material. The conflicting first-party descriptions therefore remain a known unknown.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Exchange withdrawal is not issuer redemption</div>
+    <p>BTSE's October 20 withdrawal deadline concerns assets held on the exchange. It is not evidence that JPYR holders have, or have lost, a direct contractual right to redeem JPYR with an issuer for Japanese yen.</p>
+    <p>The reviewed public material still does not establish the legal redemption obligor, eligible holders, minimum redemption amount, fees, settlement timing, jurisdiction restrictions, holder priority, or a direct issuer redemption channel.</p>
+    <p>That distinction is why SOG leaves JPYR's direct redemption status as <strong>unknown</strong> even while changing its lifecycle status to restricted.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">What the evidence does — and does not — establish</div>
+    <table>
+      <thead><tr><th>Question</th><th>Current treatment</th></tr></thead>
+      <tbody>
+        <tr><td>Did BTSE delist JPYR?</td><td>Yes. Effective September 15, 2026.</td></tr>
+        <tr><td>Are JPYR deposits and trading still available on BTSE?</td><td>No. BTSE says both are disabled.</td></tr>
+        <tr><td>Can BTSE users still withdraw JPYR?</td><td>Yes, through October 20, 2026 according to the exchange notice.</td></tr>
+        <tr><td>Did IZAKA-YA announce a Japan-facing service exit?</td><td>Yes.</td></tr>
+        <tr><td>Is the JPYR project site still live?</td><td>Yes.</td></tr>
+        <tr><td>Has JPYR been shown to depeg?</td><td>Not by the evidence reviewed for this update.</td></tr>
+        <tr><td>Has reserve impairment been established?</td><td>No.</td></tr>
+        <tr><td>Has direct issuer redemption failure been established?</td><td>No; direct issuer redemption terms remain unresolved.</td></tr>
+        <tr><td>Has JPYR globally shut down?</td><td>No such terminal event is established.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Stable or Gone treatment</div>
+    <p><strong>Current SOG treatment: Limited / restricted, with direct redemption still unknown.</strong></p>
+    <p>The canonical record now contains separate events for the BTSE delisting and the IZAKA-YA Japan-facing service exit. The JPYR record also preserves the project's conflicting backing descriptions and unresolved legal-issuer, reserve, redemption, contract-control and liquidity questions.</p>
+    <p>The status can change again if stronger evidence establishes restored market access, a direct redemption route, a formal wind-down, a depeg, reserve impairment, migration, or a terminal shutdown. None of those outcomes is inferred in advance.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">What SOG will watch next</div>
+    <ul>
+      <li>whether BTSE changes or completes the October 20 JPYR withdrawal cutoff;</li>
+      <li>whether the JPYR project replaces its current BTSE acquisition link;</li>
+      <li>first-party disclosure of a direct JPYR mint, burn or fiat-redemption mechanism;</li>
+      <li>independent reserve or collateral assurance that resolves the conflicting backing descriptions;</li>
+      <li>remaining live trading and liquidity venues after the BTSE delisting;</li>
+      <li>whether IZAKA-YA's Japan-facing withdrawal process materially affects JPYR balances or access.</li>
+    </ul>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Sources</div>
+    <ul>
+      <li><a href="https://www.btse.com/blog/usdp-jpyr-delisted-btse/" rel="noreferrer">BTSE — USDP and JPYR Have Been Delisted</a> — primary exchange notice for the September 15 delisting, disabled deposits/trading and October 20 withdrawal deadline.</li>
+      <li><a href="https://jpyr.org/" rel="noreferrer">JPYR — official project site</a> — current project identity, 1:1 JPY target, reserve-backing claim and BTSE acquisition link.</li>
+      <li><a href="https://jpyr.org/whitepaper.pdf" rel="noreferrer">JPYR Whitepaper</a> — first-party technical and collateral description, including Ethereum/DeFi collateral language.</li>
+      <li><a href="https://izakaya.tech/news/end-of-service-japan-residents/" rel="noreferrer">IZAKA-YA — Japan-facing service termination notice</a> — first-party scope and withdrawal-process context.</li>
+      <li><a href="/stablecoin/jpyr/">SOG canonical JPYR record</a> — current lifecycle, events, evidence and known-unknown presentation.</li>
+    </ul>
+  </section>
+</ArticleLayout>
