@@ -633,5 +633,64 @@
     ],
     "is_primary": true,
     "notes": "JPYC Inc. states that cumulative issuance through JPYC EX exceeded JPY 10 billion as of 2026-09-18. This is a cumulative issuance milestone, not a claim about circulating supply at one point in time."
+  },
+  {
+    "id": "sog_src_jpyc_upbit_network_expansion_20260917",
+    "stablecoin_id": "sog_st_jpyc",
+    "issuer_id": "sog_issuer_jpyc_inc",
+    "event_id": null,
+    "source_type": "official_social",
+    "title": "Upbit adds Kaia and Polygon JPYC deposit networks",
+    "url": "https://t.me/s/upbit_news",
+    "publisher": "Upbit",
+    "published_at": "2026-09-17",
+    "archived_url": "https://web.archive.org/web/*/https://t.me/s/upbit_news",
+    "accessed_at": "2026-09-20",
+    "reliability": "high",
+    "claim_scope": "upbit_jpyc_deposit_network_expansion",
+    "stablecoin_ids": [
+      "sog_st_jpyc"
+    ],
+    "organization_ids": [],
+    "event_ids": [],
+    "claim_scopes": [
+      "market_access",
+      "deposit",
+      "network_support",
+      "kaia",
+      "polygon"
+    ],
+    "is_primary": true,
+    "notes": "Upbit's official Telegram channel published a 18:44 KST notice that Kaia and Polygon would be added as JPYC deposit/withdrawal-capable networks, followed by a 19:23 KST update that deposits on Kaia and Polygon had opened. This record uses the confirmed deposit opening only and does not infer the withdrawal opening time."
+  },
+  {
+    "id": "sog_src_jpyc_upbit_datalab_20260920",
+    "stablecoin_id": "sog_st_jpyc",
+    "issuer_id": "sog_issuer_jpyc_inc",
+    "event_id": null,
+    "source_type": "market_data_page",
+    "title": "Upbit Data Lab JPYC asset summary",
+    "url": "https://datalab.upbit.com/assets/JPYC/summary",
+    "publisher": "Upbit Data Lab",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://datalab.upbit.com/assets/JPYC/summary",
+    "accessed_at": "2026-09-20",
+    "reliability": "high",
+    "claim_scope": "upbit_price_and_supported_networks",
+    "stablecoin_ids": [
+      "sog_st_jpyc"
+    ],
+    "organization_ids": [],
+    "event_ids": [],
+    "claim_scopes": [
+      "market_price",
+      "all_time_high",
+      "network_support",
+      "ethereum",
+      "kaia",
+      "polygon"
+    ],
+    "is_primary": false,
+    "notes": "Upbit Data Lab records a 37.60 KRW all-time high on 2026-09-17 and lists Ethereum, Kaia and Polygon as supported JPYC blockchain networks at the September 20 review. Market-data observations are not issuer accounting or reserve evidence."
   }
 ]
