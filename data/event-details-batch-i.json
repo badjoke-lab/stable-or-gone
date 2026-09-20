@@ -126,8 +126,8 @@
     ],
     "evidence_ids": [
       "sog_src_jpyc_incident_social_20260917",
-      "sog_src_jpyc_yonhap_upbit_dislocation_20260917",
-      "sog_src_jpyc_10b_20260918"
+      "sog_src_jpyc_upbit_notice_20260917",
+      "sog_src_jpyc_yonhap_upbit_dislocation_20260917"
     ],
     "event_detail_kind": "other"
   }
