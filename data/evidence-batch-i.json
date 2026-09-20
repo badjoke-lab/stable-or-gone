@@ -512,5 +512,193 @@
       "continuous_asset_identity"
     ],
     "notes": "Official fifth-anniversary history explicitly states first issuance on 2020-10-05."
+  },
+  {
+    "id": "sog_src_jpyc_upbit_notice_20260917",
+    "stablecoin_id": "sog_st_jpyc",
+    "issuer_id": "sog_issuer_jpyc_inc",
+    "event_id": "sog_ev_jpyc_issuance_interruption_20260917",
+    "source_type": "exchange_notice",
+    "title": "Upbit trading support notice for PayPal USD (PYUSD) and JPY Coin (JPYC)",
+    "url": "https://upbit.com/service_center/notice?id=1580532257",
+    "publisher": "Upbit",
+    "published_at": "2026-09-17",
+    "archived_url": "https://web.archive.org/web/*/https://upbit.com/service_center/notice?id=1580532257",
+    "accessed_at": "2026-09-20",
+    "reliability": "high",
+    "claim_scope": "jpyc_upbit_listing_markets_and_launch_network",
+    "stablecoin_ids": [
+      "sog_st_jpyc"
+    ],
+    "organization_ids": [
+      "sog_issuer_jpyc_inc"
+    ],
+    "event_ids": [
+      "sog_ev_jpyc_issuance_interruption_20260917"
+    ],
+    "claim_scopes": [
+      "market_access",
+      "exchange_listing",
+      "trading_markets",
+      "network_support"
+    ],
+    "is_primary": true,
+    "notes": "Upbit's September 17 trading-support notice announced JPYC support in KRW, BTC and USDT markets. The launch-stage notice supported Ethereum for deposit/withdrawal and the JPYC trading start was delayed to 18:00 KST. This evidence is used only for provider-scoped Upbit access and listing-day context."
+  },
+  {
+    "id": "sog_src_jpyc_incident_social_20260917",
+    "stablecoin_id": "sog_st_jpyc",
+    "issuer_id": "sog_issuer_jpyc_inc",
+    "event_id": "sog_ev_jpyc_issuance_interruption_20260917",
+    "source_type": "official_social",
+    "title": "JPYC official issuance-reservation interruption and recovery notices",
+    "url": "https://x.com/jpyc_official",
+    "publisher": "JPYC Inc.",
+    "published_at": "2026-09-17",
+    "archived_url": "https://web.archive.org/web/*/https://x.com/jpyc_official",
+    "accessed_at": "2026-09-20",
+    "reliability": "high",
+    "claim_scope": "ethereum_polygon_issuance_reservation_interruption_and_recovery",
+    "stablecoin_ids": [
+      "sog_st_jpyc"
+    ],
+    "organization_ids": [
+      "sog_issuer_jpyc_inc"
+    ],
+    "event_ids": [
+      "sog_ev_jpyc_issuance_interruption_20260917"
+    ],
+    "claim_scopes": [
+      "issuance",
+      "service_interruption",
+      "ethereum",
+      "polygon",
+      "recovery"
+    ],
+    "is_primary": true,
+    "notes": "Reviewed issuer notices state Ethereum issuance reservations were suspended at 20:34 JST and restored at 23:43 JST on 2026-09-17; Polygon reservations were suspended at 22:19 JST and restored at 00:22 JST on 2026-09-18. The issuer said the cause was under investigation and did not publish a causal link to the Upbit price dislocation in the reviewed notices."
+  },
+  {
+    "id": "sog_src_jpyc_yonhap_upbit_dislocation_20260917",
+    "stablecoin_id": "sog_st_jpyc",
+    "issuer_id": "sog_issuer_jpyc_inc",
+    "event_id": "sog_ev_jpyc_issuance_interruption_20260917",
+    "source_type": "wire_service",
+    "title": "JPY stablecoin JPYC surges after Upbit listing",
+    "url": "https://www.yna.co.kr/view/AKR20260917189700002",
+    "publisher": "Yonhap News Agency",
+    "published_at": "2026-09-17",
+    "archived_url": "https://web.archive.org/web/*/https://www.yna.co.kr/view/AKR20260917189700002",
+    "accessed_at": "2026-09-20",
+    "reliability": "high",
+    "claim_scope": "upbit_listing_day_price_dislocation",
+    "stablecoin_ids": [
+      "sog_st_jpyc"
+    ],
+    "organization_ids": [
+      "sog_issuer_jpyc_inc"
+    ],
+    "event_ids": [
+      "sog_ev_jpyc_issuance_interruption_20260917"
+    ],
+    "claim_scopes": [
+      "market_price",
+      "exchange_listing",
+      "price_dislocation"
+    ],
+    "is_primary": false,
+    "notes": "Yonhap reported JPYC at 35.7 KRW at 18:42 KST, 197.5% above Upbit's listing reference and more than three times a cited global-market price. SOG treats this as a venue-specific listing-day dislocation, not proof of lasting asset-wide depeg or reserve impairment."
+  },
+  {
+    "id": "sog_src_jpyc_10b_20260918",
+    "stablecoin_id": "sog_st_jpyc",
+    "issuer_id": "sog_issuer_jpyc_inc",
+    "event_id": null,
+    "source_type": "official_statement",
+    "title": "JPYC EX cumulative issuance exceeds JPY 10 billion",
+    "url": "https://corporate.jpyc.co.jp/news/posts/JPYCEX-10-Billion",
+    "publisher": "JPYC Inc.",
+    "published_at": "2026-09-18",
+    "archived_url": "https://web.archive.org/web/*/https://corporate.jpyc.co.jp/news/posts/JPYCEX-10-Billion",
+    "accessed_at": "2026-09-20",
+    "reliability": "high",
+    "claim_scope": "current_operating_status_and_cumulative_issuance",
+    "stablecoin_ids": [
+      "sog_st_jpyc"
+    ],
+    "organization_ids": [
+      "sog_issuer_jpyc_inc"
+    ],
+    "event_ids": [],
+    "claim_scopes": [
+      "active_status",
+      "cumulative_issuance",
+      "post_incident_operation"
+    ],
+    "is_primary": true,
+    "notes": "JPYC Inc. states that cumulative issuance through JPYC EX exceeded JPY 10 billion as of 2026-09-18. This is a cumulative issuance milestone, not a claim about circulating supply at one point in time."
+  },
+  {
+    "id": "sog_src_jpyc_upbit_network_expansion_20260917",
+    "stablecoin_id": "sog_st_jpyc",
+    "issuer_id": "sog_issuer_jpyc_inc",
+    "event_id": null,
+    "source_type": "official_social",
+    "title": "Upbit adds Kaia and Polygon JPYC deposit networks",
+    "url": "https://t.me/s/upbit_news",
+    "publisher": "Upbit",
+    "published_at": "2026-09-17",
+    "archived_url": "https://web.archive.org/web/*/https://t.me/s/upbit_news",
+    "accessed_at": "2026-09-20",
+    "reliability": "high",
+    "claim_scope": "upbit_jpyc_deposit_network_expansion",
+    "stablecoin_ids": [
+      "sog_st_jpyc"
+    ],
+    "organization_ids": [
+      "sog_issuer_jpyc_inc"
+    ],
+    "event_ids": [],
+    "claim_scopes": [
+      "market_access",
+      "deposit",
+      "network_support",
+      "kaia",
+      "polygon"
+    ],
+    "is_primary": true,
+    "notes": "Upbit's official Telegram channel published a 18:44 KST notice that Kaia and Polygon would be added as JPYC deposit/withdrawal-capable networks, followed by a 19:23 KST update that deposits on Kaia and Polygon had opened. This record uses the confirmed deposit opening only and does not infer the withdrawal opening time."
+  },
+  {
+    "id": "sog_src_jpyc_upbit_datalab_20260920",
+    "stablecoin_id": "sog_st_jpyc",
+    "issuer_id": "sog_issuer_jpyc_inc",
+    "event_id": null,
+    "source_type": "market_data_page",
+    "title": "Upbit Data Lab JPYC asset summary",
+    "url": "https://datalab.upbit.com/assets/JPYC/summary",
+    "publisher": "Upbit Data Lab",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://datalab.upbit.com/assets/JPYC/summary",
+    "accessed_at": "2026-09-20",
+    "reliability": "high",
+    "claim_scope": "upbit_price_and_supported_networks",
+    "stablecoin_ids": [
+      "sog_st_jpyc"
+    ],
+    "organization_ids": [
+      "sog_issuer_jpyc_inc"
+    ],
+    "event_ids": [],
+    "claim_scopes": [
+      "market_price",
+      "all_time_high",
+      "network_support",
+      "ethereum",
+      "kaia",
+      "polygon"
+    ],
+    "is_primary": false,
+    "notes": "Upbit Data Lab records a 37.60 KRW all-time high on 2026-09-17 and lists Ethereum, Kaia and Polygon as supported JPYC blockchain networks at the September 20 review. Market-data observations are not issuer accounting or reserve evidence."
   }
 ]

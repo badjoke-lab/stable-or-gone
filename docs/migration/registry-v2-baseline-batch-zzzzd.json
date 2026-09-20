@@ -1,0 +1,12 @@
+{
+  "batch_id": "jpyc_upbit_incident_maintenance_20260920",
+  "captured_at": "2026-09-20",
+  "minimum_counts": {
+    "events": 222,
+    "event_details": 222,
+    "evidence": 642,
+    "evidence_relations": 642
+  },
+  "data_group_additions": {},
+  "notes": "Count-only baseline advance for reviewed JPYC September 2026 maintenance on the 144-asset corpus after the Arc USDC checkpoint. One recovered issuance-reservation event is added in Batch I with six Evidence rows; two provider-scoped Upbit Market Access records are added separately for spot buy/sell and deposits."
+}

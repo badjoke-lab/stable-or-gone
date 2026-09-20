@@ -35,7 +35,7 @@ const eventTypesByCategory = {
   reserve: ['reserve_intervention_context', 'reserve_verification_termination'],
   redemption: ['redemption_change'],
   regulatory: ['regulatory', 'regulatory_action', 'regulatory_settlement'],
-  issuer_control: ['issuer_freeze'],
+  issuer_control: ['issuer_freeze', 'issuance_interruption'],
   security: [
     'chain_halt_context', 'erroneous_mint_incident', 'exploit', 'production_security_program_start',
     'protocol_exploit', 'security_incident'

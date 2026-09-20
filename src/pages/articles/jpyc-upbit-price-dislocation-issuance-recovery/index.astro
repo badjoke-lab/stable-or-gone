@@ -1,0 +1,109 @@
+---
+import ArticleLayout from '../../../layouts/ArticleLayout.astro';
+const headline = 'JPYC on Upbit: Price Dislocation, Issuance Interruption, and Recovery';
+const title = `${headline} — Stable or Gone`;
+const description = 'JPYC began Upbit trading on September 17, 2026, briefly traded far above its yen reference, and saw short-lived JPYC EX issuance-reservation interruptions on Ethereum and Polygon before both recovered.';
+const canonicalPath = '/articles/jpyc-upbit-price-dislocation-issuance-recovery/';
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline,
+  description,
+  url: `https://www.stableorgone.com${canonicalPath}`,
+  inLanguage: 'en',
+  datePublished: '2026-09-20',
+  dateModified: '2026-09-20',
+  isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://www.stableorgone.com/' },
+  about: ['JPYC', 'Upbit', 'Japanese yen stablecoin', 'market access', 'issuance interruption', 'price dislocation']
+};
+---
+<ArticleLayout
+  title={title}
+  description={description}
+  canonicalPath={canonicalPath}
+  headline={headline}
+  sectionLabel="Market access and operations"
+  deck="JPYC's first Upbit trading day combined three distinct developments: a new South Korean trading venue, a short-lived venue-specific price dislocation, and temporary JPYC EX issuance-reservation interruptions on Ethereum and Polygon. Both issuance routes recovered within hours, and SOG keeps the asset itself active."
+  publishedAt="September 20, 2026"
+  treatment="Canonical event + market-access update + analysis"
+  scope="JPYC / Upbit / JPYC EX"
+  jsonLd={jsonLd}
+>
+  <section class="panel registry">
+    <div class="bar">What happened</div>
+    <p><strong>Upbit began JPYC trading on September 17, 2026 in KRW, BTC and USDT markets.</strong> The launch time was postponed twice and ultimately moved to 18:00 KST. The launch-stage notice specified Ethereum for deposits and withdrawals.</p>
+    <p>JPYC then traded far above its one-yen issuer reference on Upbit. Yonhap reported 35.7 KRW at 18:42 KST, while Upbit's own asset data later recorded a September 17 all-time high of 37.60 KRW.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">The price move was a venue dislocation, not a lasting asset-wide failure</div>
+    <p>The Upbit move was extreme, but SOG does not convert a single-venue listing spike into a permanent JPYC lifecycle reclassification. JPYC EX continued to define issuance and redemption against Japanese yen, and the reviewed evidence does not establish reserve impairment, issuer insolvency, or a lasting inability to redeem at the issuer.</p>
+    <p>Upbit's data surface subsequently showed JPYC around 9.21 KRW, close to the yen-linked reference region and far below the 37.60 KRW listing-day high. That supports treating the episode as a short-lived market dislocation rather than a durable four-times revaluation of JPYC.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">JPYC EX issuance reservations were interrupted on two networks</div>
+    <table>
+      <thead><tr><th>Network</th><th>Suspended</th><th>Restored</th><th>SOG treatment</th></tr></thead>
+      <tbody>
+        <tr><td>Ethereum</td><td>Sep. 17, 20:34 JST</td><td>Sep. 17, 23:43 JST</td><td>Recovered issuance-reservation interruption</td></tr>
+        <tr><td>Polygon</td><td>Sep. 17, 22:19 JST</td><td>Sep. 18, 00:22 JST</td><td>Recovered issuance-reservation interruption</td></tr>
+      </tbody>
+    </table>
+    <p>JPYC's issuer described both as temporary suspensions of <em>issuance reservations</em> while the cause was under investigation. The notices did not say that already-issued JPYC stopped transferring, that redemptions failed, or that reserves were impaired.</p>
+    <p>The reviewed issuer notices also do not establish that the issuance-reservation interruption caused the Upbit premium. SOG therefore records the operational interruption and the market dislocation as related in time, not as a proven causal chain.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">What happened after the recovery</div>
+    <p>On September 18, JPYC Inc. announced that cumulative issuance through JPYC EX had exceeded JPY 10 billion. That is a cumulative service milestone, not a point-in-time circulating-supply figure.</p>
+    <p>Independent on-chain analysis by ChainAnalyzer estimated that circulating JPYC rose from about JPY 1.93 billion to JPY 4.41 billion in the roughly 48 hours after the Upbit listing, with most of the increase occurring on Ethereum and Polygon. The same analysis reported that issuer-side flows had turned net-redemption across the four tracked chains during the first half of September 19.</p>
+    <p>Those on-chain figures are useful market-structure context, but they are third-party analysis rather than issuer accounting. SOG does not promote the address-cluster interpretations or a causal explanation for the listing-day premium into canonical asset facts.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Market access changed too</div>
+    <p>SOG records a provider-scoped South Korea Market Access observation for JPYC spot trading on Upbit from September 17. It is deliberately narrow: it says that eligible Upbit customers gained buy/sell access in the KRW, BTC and USDT markets.</p>
+    <p>The launch-stage notice specified Ethereum for deposit and withdrawal. At 18:44 KST, Upbit announced that Kaia and Polygon would be added, and at 19:23 KST it updated the notice to say deposits on both networks had opened. SOG therefore records current provider-scoped deposit access across Ethereum, Kaia and Polygon from the September 17 date, while avoiding a withdrawal-effective-time claim that the reviewed update does not establish.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Stable or Gone treatment</div>
+    <table>
+      <thead><tr><th>Question</th><th>SOG treatment</th></tr></thead>
+      <tbody>
+        <tr><td>JPYC lifecycle status</td><td><strong>Active</strong> — unchanged.</td></tr>
+        <tr><td>Issuer issuance incident</td><td>Canonical recovered event covering the Ethereum and Polygon reservation interruptions.</td></tr>
+        <tr><td>Upbit listing</td><td>Canonical provider-scoped Market Access record for buy/sell availability.</td></tr>
+        <tr><td>37.60 KRW high</td><td>Material listing-day price dislocation; not treated as a lasting asset-wide depeg.</td></tr>
+        <tr><td>Cause of issuance interruption</td><td>Not established in the reviewed issuer notices.</td></tr>
+        <tr><td>Link between outage and premium</td><td>Not established; timing alone is not treated as causation.</td></tr>
+        <tr><td>JPY 10 billion figure</td><td>Issuer-reported cumulative JPYC EX issuance milestone as of September 18.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">What SOG will watch next</div>
+    <ul>
+      <li>any issuer postmortem or explanation for the September 17 issuance-reservation interruptions;</li>
+      <li>dated Upbit notices that establish when Kaia or Polygon deposit/withdrawal support became effective;</li>
+      <li>whether JPYC trading liquidity on Upbit remains close to the yen reference under normal market conditions;</li>
+      <li>issuer disclosures that distinguish cumulative issuance from circulating supply and redemption flows;</li>
+      <li>any future interruption that affects redemption, reserve access, or already-issued token transfer rather than only issuance reservation.</li>
+    </ul>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Sources</div>
+    <ul>
+      <li><a href="https://upbit.com/service_center/notice?id=1580532257" rel="noreferrer">Upbit, September 17, 2026 — PYUSD and JPYC trading-support notice</a> — KRW/BTC/USDT markets, launch timing and launch-stage Ethereum network scope.</li>
+      <li><a href="https://x.com/jpyc_official" rel="noreferrer">JPYC Inc. official X account, September 17–18, 2026</a> — Ethereum and Polygon issuance-reservation suspension and restoration notices.</li>
+      <li><a href="https://www.yna.co.kr/view/AKR20260917189700002" rel="noreferrer">Yonhap News Agency, September 17, 2026</a> — listing-day JPYC/KRW price dislocation.</li>
+      <li><a href="https://t.me/s/upbit_news" rel="noreferrer">Upbit official Telegram, September 17, 2026</a> — Kaia and Polygon network-addition notice and 19:23 KST deposit-opening update.</li>
+      <li><a href="https://datalab.upbit.com/assets/JPYC/summary" rel="noreferrer">Upbit Data Lab — JPYC asset summary</a> — recorded 37.60 KRW high, subsequent market data, and current Ethereum/Kaia/Polygon network listing.</li>
+      <li><a href="https://corporate.jpyc.co.jp/news/posts/JPYCEX-10-Billion" rel="noreferrer">JPYC Inc., September 18, 2026 — JPYC EX cumulative issuance exceeds JPY 10 billion</a>.</li>
+      <li><a href="https://chain-analyzer.com/en/news/jpyc-circulation-after-listing" rel="noreferrer">ChainAnalyzer, September 19, 2026</a> — third-party 48-hour circulation and issuer-flow analysis.</li>
+    </ul>
+  </section>
+</ArticleLayout>
