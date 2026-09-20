@@ -32,10 +32,10 @@
     "organization_type": "other",
     "legacy_issuer_type": "organization",
     "jurisdiction": "Unknown",
-    "official_url": "https://izakaya.tech/cryptocurrency/jpyr-potential/",
-    "summary": "Name used in IZAKA-YA-affiliated public material for the organization described as issuing JPYR. The reviewed public record does not establish the exact legal entity, incorporation jurisdiction, or legal redemption obligor behind that name.",
+    "official_url": "https://jpyr.org/",
+    "summary": "Name presented on the current JPYR project website for the organization behind JPYR. The direct project site strengthens the brand/operator identity boundary but still does not establish the exact incorporated legal issuer, incorporation jurisdiction, reserve owner, or legal redemption obligor.",
     "confidence": "low",
-    "last_verified_at": "2026-08-23",
-    "notes": "Do not treat this descriptive organization label as proof of a separately incorporated legal issuer. Legal identity, jurisdiction, reserve manager, redemption obligor, and formal regulatory status require stronger primary documentation."
+    "last_verified_at": "2026-09-20",
+    "notes": "Do not treat the descriptive JPYR Organization label or jpyr.org branding as proof of a separately incorporated legal issuer. Legal identity, jurisdiction, reserve manager, redemption obligor and formal regulatory status remain unresolved."
   }
 ]
