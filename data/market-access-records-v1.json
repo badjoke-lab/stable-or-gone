@@ -682,5 +682,60 @@
     "review_status": "reviewed",
     "supersedes_record_ids": [],
     "notes": "Provider-scoped South Korea observation. It does not assert universal Korea-wide access or direct issuer issuance/redemption through Upbit."
+  },
+  {
+    "id": "sog_ma_jpyc_kr_upbit_spot_deposit_20260917",
+    "schema_version": "1.0",
+    "asset_id": "sog_st_jpyc",
+    "jurisdiction": {
+      "country_code": "KR",
+      "subdivision_code": null
+    },
+    "platform": {
+      "organization_id": null,
+      "name": "Upbit",
+      "service": "Spot trading"
+    },
+    "function": "deposit",
+    "access_state": "available",
+    "effective_from": "2026-09-17",
+    "effective_to": null,
+    "observed_at": "2026-09-20",
+    "date_precision": "day",
+    "network_scope": {
+      "kind": "specific_networks",
+      "network_ids": [
+        "ethereum",
+        "kaia",
+        "polygon"
+      ],
+      "note": "Ethereum deposit support was available at the listing stage. Upbit announced Kaia and Polygon network expansion at 18:44 KST and stated at 19:23 KST that deposits on Kaia and Polygon had opened."
+    },
+    "customer_scope": {
+      "kind": "mixed_or_platform_defined",
+      "note": "Limited to customers accepted by Upbit under its jurisdiction, account, identity-verification, compliance and service rules."
+    },
+    "conditions": [
+      {
+        "type": "network_support",
+        "description": "Reviewed current support covers Ethereum, Kaia and Polygon for JPYC deposits. The three networks did not all open at the same time on listing day."
+      },
+      {
+        "type": "service_condition",
+        "description": "Deposit availability remains subject to Upbit wallet status, maintenance, confirmations, account controls and compliance rules."
+      }
+    ],
+    "legal_route": {
+      "status": "not_assessed",
+      "description": "This record documents Upbit service availability and does not make a separate legal-route determination for South Korea."
+    },
+    "evidence_ids": [
+      "sog_src_jpyc_upbit_network_expansion_20260917",
+      "sog_src_jpyc_upbit_datalab_20260920"
+    ],
+    "confidence": "high",
+    "review_status": "reviewed",
+    "supersedes_record_ids": [],
+    "notes": "Provider-scoped South Korea observation. Withdrawal support is not promoted from the same notice because the reviewed update gives a precise opening time for Kaia/Polygon deposits but not for withdrawals."
   }
 ]
