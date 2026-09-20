@@ -870,5 +870,20 @@
     "event_ids": [
       "sog_ev_susd_rebrand_2018"
     ]
+  },
+  {
+    "id": "sog_src_circle_arc_mainnet_2026_09_16",
+    "stablecoin_id": "sog_st_usdc",
+    "issuer_id": "sog_issuer_circle",
+    "event_id": null,
+    "source_type": "issuer_statement",
+    "title": "Circle Launches Arc Mainnet, an Economic Operating System for the Internet",
+    "url": "https://www.circle.com/pressroom/circle-launches-arc-mainnet-an-economic-operating-system-for-the-internet",
+    "publisher": "Circle Internet Group",
+    "published_at": "2026-09-16",
+    "accessed_at": "2026-09-20",
+    "reliability": "high",
+    "claim_scope": "deployment_and_network_fee_role",
+    "notes": "Primary Circle announcement confirming Arc public mainnet launch, native USDC integration, and USDC-denominated network fees. Used for the Arc deployment row; it does not by itself change USDC lifecycle, reserve, or redemption status."
   }
 ]
