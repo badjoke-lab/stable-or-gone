@@ -4,7 +4,7 @@
     "date": "2026-09-20",
     "title": "JPYC Upbit listing and recovered issuance interruption recorded",
     "category": "data",
-    "summary": "Recorded JPYC's provider-scoped Upbit spot-trading access, a recovered September 17-18 Ethereum/Polygon issuance-reservation interruption, four new reviewed evidence sources, and a source-separated analysis of the listing-day price dislocation and subsequent supply normalization. JPYC remains active; SOG does not treat the Upbit spike as a lasting asset-wide depeg or infer that the issuance interruption caused it.",
+    "summary": "Recorded JPYC's provider-scoped Upbit spot-trading and deposit access, a recovered September 17-18 Ethereum/Polygon issuance-reservation interruption, six new reviewed evidence sources, and a source-separated analysis of the listing-day price dislocation and subsequent supply normalization. JPYC remains active; SOG does not treat the Upbit spike as a lasting asset-wide depeg or infer that the issuance interruption caused it.",
     "related_paths": [
       "/articles/jpyc-upbit-price-dislocation-issuance-recovery/",
       "/stablecoin/jpyc/",
