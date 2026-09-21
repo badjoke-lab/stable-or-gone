@@ -1,0 +1,120 @@
+---
+import ArticleLayout from '../../../layouts/ArticleLayout.astro';
+const headline = 'ECB Launches Pontes for Central-Bank-Money Settlement of Tokenised Assets';
+const title = `${headline} — Stable or Gone`;
+const description = 'The Eurosystem launched Pontes on September 21, 2026, connecting tokenised wholesale finance to central bank money. SOG explains where stablecoins fit, what Pontes does not change, and why this is separate from the retail digital euro pilot.';
+const canonicalPath = '/articles/ecb-pontes-central-bank-money-stablecoins/';
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline,
+  description,
+  url: `https://www.stableorgone.com${canonicalPath}`,
+  inLanguage: 'en',
+  datePublished: '2026-09-21',
+  dateModified: '2026-09-21',
+  isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://www.stableorgone.com/' },
+  about: ['Pontes', 'European Central Bank', 'Eurosystem', 'stablecoins', 'tokenised deposits', 'central bank money', 'tokenised finance', 'DLT']
+};
+---
+<ArticleLayout
+  title={title}
+  description={description}
+  canonicalPath={canonicalPath}
+  headline={headline}
+  sectionLabel="Settlement infrastructure"
+  deck="Pontes is now live as a Eurosystem bridge between tokenised wholesale transactions and central bank money. The launch matters to stablecoin infrastructure because the ECB explicitly expects public and private settlement assets to coexist, while keeping the wholesale Pontes system separate from the retail digital euro project."
+  publishedAt="September 21, 2026"
+  treatment="Non-canonical analysis"
+  scope="Pontes / wholesale central bank money / stablecoins / tokenised finance"
+  jsonLd={jsonLd}
+>
+  <section class="panel registry">
+    <div class="bar">What launched on September 21</div>
+    <p><strong>The Eurosystem launched Pontes on September 21, 2026.</strong> Pontes enables wholesale transactions in tokenised assets to be settled in central bank money and connects market distributed-ledger infrastructure to existing Eurosystem settlement services.</p>
+    <p>The ECB says the service will start with a core set of functions and expand gradually, with enhanced features and longer operating hours expected over time and full implementation targeted for 2028.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">This is wholesale settlement infrastructure, not the retail digital euro</div>
+    <p>Pontes and the digital euro are separate projects serving different layers of the financial system.</p>
+    <table>
+      <thead><tr><th>Project</th><th>Current role</th></tr></thead>
+      <tbody>
+        <tr><td>Pontes</td><td>Live wholesale settlement infrastructure for tokenised asset transactions using central bank money.</td></tr>
+        <tr><td>Digital euro pilot</td><td>A planned retail-payment pilot using a beta digital euro in everyday payment scenarios.</td></tr>
+      </tbody>
+    </table>
+    <p>The ECB plans the digital euro pilot for the second half of 2027 for 12 months. It has selected 36 payment service providers for that exercise. The ECB says a potential first issuance would be targeted for 2029 only if the relevant legislation is adopted and a later issuance decision is taken.</p>
+    <p>SOG therefore does not treat the Pontes launch as a digital-euro issuance event.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Why Pontes belongs in stablecoin analysis</div>
+    <p>Pontes does not issue a stablecoin, but it changes the settlement environment in which private tokenised money can operate. The ECB has repeatedly described tokenised central bank money as a public settlement anchor for a broader ecosystem that can also contain private settlement assets.</p>
+    <p>In its 2026 speeches on tokenised finance, the ECB explicitly names stablecoins and tokenised deposits as private settlement assets that can coexist with central bank money. The stated model is not that Pontes automatically replaces them, but that central bank money provides a settlement anchor and supports interoperability and convertibility across the system.</p>
+    <p>That makes Pontes relevant to SOG as infrastructure context: it may affect how stablecoins, tokenised deposits and tokenised securities interact in European wholesale markets without changing any individual stablecoin's backing, redemption rights or lifecycle state by itself.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">What the launch does not establish</div>
+    <table>
+      <thead><tr><th>Claim</th><th>SOG treatment</th></tr></thead>
+      <tbody>
+        <tr><td>Pontes is a new stablecoin</td><td>No. It is a Eurosystem settlement solution.</td></tr>
+        <tr><td>The retail digital euro launched on September 21</td><td>No. The retail pilot is planned for the second half of 2027.</td></tr>
+        <tr><td>Existing stablecoins have new ECB backing</td><td>No. Pontes does not change private-asset reserves, redemption or issuer obligations.</td></tr>
+        <tr><td>The ECB has said private stablecoins will be eliminated from tokenised finance</td><td>No. ECB speeches describe coexistence with private settlement assets.</td></tr>
+        <tr><td>Every stablecoin can now settle through Pontes</td><td>Not established. Pontes participation and supported transaction structures must be verified case by case.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Initial participants and market infrastructure</div>
+    <p>The ECB says the first onboarded market participants include ABANCA, BayernLB, Caisse des Dépôts et Consignations, Cecabank, Deutsche Bank, DekaBank, DZ Bank, the European Investment Bank, KfW, Memo Bank, NRW.BANK, Santander and Société Générale. The first listed market DLT operators are Axiology, Cashlink, Clearstream and SWIAT. Deutsche Bundesbank has also onboarded in a market-participant capacity.</p>
+    <p>Additional participants are expected to connect over the coming months. SOG does not infer stablecoin support from institutional participation alone.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">The ECB is also preparing to use Pontes for its own investments</div>
+    <p>In a separate September 21 announcement, the ECB said it has started preparatory work to invest a small portion of its own funds in tokenised securities. Those purchases are intended to be settled in central bank money through Pontes.</p>
+    <p>The initial investment focus is expected to be euro-denominated securities issued by euro-area public-sector entities and European supranational institutions. Operational details and timing remain to be determined after the preparatory work.</p>
+    <p>This matters because Pontes is not only a testing label: the ECB is preparing to use the same settlement infrastructure in its own investment operations.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Where Appia fits</div>
+    <p>Pontes is the near-term settlement bridge. Appia is the longer-term Eurosystem initiative for designing a broader European tokenised-finance ecosystem. The ECB says Appia is intended to produce a blueprint by 2028.</p>
+    <p>For SOG, this creates a useful monitoring boundary: Pontes is the operational wholesale settlement layer to watch now, while Appia may later define wider interoperability rules and structures affecting private tokenised money.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Stable or Gone treatment</div>
+    <p><strong>Current SOG treatment: non-canonical infrastructure analysis.</strong></p>
+    <p>No stable asset is added or reclassified because Pontes launched. No existing stablecoin receives a lifecycle, reserve, redemption, deployment or market-access change from this announcement alone.</p>
+    <p>A later canonical update would require asset-specific evidence: for example, an identified stablecoin or tokenised deposit being admitted to a Pontes-linked settlement flow, a documented issuer integration, or a concrete interoperability change that materially alters a canonical SOG record.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">What SOG will watch next</div>
+    <ul>
+      <li>named stablecoin or tokenised-deposit integrations with Pontes-connected market infrastructure;</li>
+      <li>asset-specific settlement or convertibility mechanisms between private tokenised money and central bank money;</li>
+      <li>new Pontes participants whose published implementation details identify stablecoin usage;</li>
+      <li>Appia specifications that define interoperability or settlement rules for private digital money;</li>
+      <li>any future change that affects an existing SOG asset's deployment, access, redemption or legal treatment.</li>
+    </ul>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Sources</div>
+    <ul>
+      <li><a href="https://www.ecb.europa.eu/press/pr/date/2026/html/ecb.pr260921~e754847a7b.en.html" rel="noreferrer">ECB, September 21, 2026 — Eurosystem brings central bank money to tokenised finance</a> — Pontes launch, function, implementation timeline and initial participants.</li>
+      <li><a href="https://www.ecb.europa.eu/press/pr/date/2026/html/ecb.pr260921_1~5a011ecbea.en.html" rel="noreferrer">ECB, September 21, 2026 — ECB to invest part of own funds in tokenised securities, with settlement via Pontes</a> — planned ECB investment use of Pontes.</li>
+      <li><a href="https://www.ecb.europa.eu/press/key/date/2026/html/ecb.sp260619~53145e5a0b.en.html" rel="noreferrer">ECB, June 19, 2026 — The foundations of national sovereignty: the role of central bank money</a> — coexistence of tokenised central bank money with private settlement assets including stablecoins and tokenised deposits.</li>
+      <li><a href="https://www.ecb.europa.eu/euro/digital_euro/pilot/html/index.en.html" rel="noreferrer">ECB — Digital euro pilot</a> — retail pilot timing, scope and potential 2029 issuance readiness.</li>
+      <li><a href="https://www.ecb.europa.eu/press/pr/date/2026/html/ecb.pr260714~8cd07d9d45.en.html" rel="noreferrer">ECB, July 14, 2026 — ECB selects 36 payment service providers to join digital euro pilot</a> — selected PSP count and pilot schedule.</li>
+    </ul>
+  </section>
+</ArticleLayout>
