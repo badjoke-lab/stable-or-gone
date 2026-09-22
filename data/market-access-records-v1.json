@@ -737,5 +737,155 @@
     "review_status": "reviewed",
     "supersedes_record_ids": [],
     "notes": "Provider-scoped South Korea observation. Withdrawal support is not promoted from the same notice because the reviewed update gives a precise opening time for Kaia/Polygon deposits but not for withdrawals."
+  },
+  {
+    "id": "sog_ma_usdt_vn_holdstation_pay_buy_sell_20260212",
+    "schema_version": "1.0",
+    "asset_id": "sog_st_usdt",
+    "jurisdiction": {
+      "country_code": "VN",
+      "subdivision_code": null
+    },
+    "platform": {
+      "organization_id": null,
+      "name": "Holdstation",
+      "service": "Holdstation Pay"
+    },
+    "function": "buy_sell",
+    "access_state": "available",
+    "effective_from": "2026-02-12",
+    "effective_to": null,
+    "observed_at": "2026-09-22",
+    "date_precision": "day",
+    "network_scope": {
+      "kind": "unknown",
+      "network_ids": [],
+      "note": "The reviewed Vietnam guide establishes fiat/stablecoin buy and sell access but does not bind the VND conversion flow for this asset to one blockchain network."
+    },
+    "customer_scope": {
+      "kind": "mixed_or_platform_defined",
+      "note": "The reviewed Holdstation Pay flow is for users accepted under its KYC and payment-service rules in Vietnam; SOG does not generalize access to every person or account type in Vietnam."
+    },
+    "conditions": [
+      {
+        "type": "customer_eligibility",
+        "description": "Holdstation states that KYC is required before using fiat on/off-ramp services."
+      },
+      {
+        "type": "service_condition",
+        "description": "The reviewed sell/off-ramp flow requires a receiving bank account whose account-holder name matches the KYC identity; service availability remains subject to Holdstation Pay and payment-partner controls."
+      }
+    ],
+    "legal_route": {
+      "status": "provider_characterization",
+      "description": "Holdstation characterizes the VND fiat flow as processed through a licensed electronic-payment intermediary under State Bank of Vietnam oversight. This record preserves that provider characterization and does not treat it as an independently verified regulator finding."
+    },
+    "evidence_ids": [
+      "sog_src_holdstation_pay_vn_stablecoins_20260212"
+    ],
+    "confidence": "high",
+    "review_status": "reviewed",
+    "supersedes_record_ids": [],
+    "notes": "Provider-scoped Vietnam observation for USDT. The source explicitly supports USDT <-> VND buy/sell access through Holdstation Pay; it does not establish direct issuer mint/redemption, universal Vietnam-wide availability, or access in other countries."
+  },
+  {
+    "id": "sog_ma_usdc_vn_holdstation_pay_buy_sell_20260212",
+    "schema_version": "1.0",
+    "asset_id": "sog_st_usdc",
+    "jurisdiction": {
+      "country_code": "VN",
+      "subdivision_code": null
+    },
+    "platform": {
+      "organization_id": null,
+      "name": "Holdstation",
+      "service": "Holdstation Pay"
+    },
+    "function": "buy_sell",
+    "access_state": "available",
+    "effective_from": "2026-02-12",
+    "effective_to": null,
+    "observed_at": "2026-09-22",
+    "date_precision": "day",
+    "network_scope": {
+      "kind": "unknown",
+      "network_ids": [],
+      "note": "The reviewed Vietnam guide establishes fiat/stablecoin buy and sell access but does not bind the VND conversion flow for this asset to one blockchain network."
+    },
+    "customer_scope": {
+      "kind": "mixed_or_platform_defined",
+      "note": "The reviewed Holdstation Pay flow is for users accepted under its KYC and payment-service rules in Vietnam; SOG does not generalize access to every person or account type in Vietnam."
+    },
+    "conditions": [
+      {
+        "type": "customer_eligibility",
+        "description": "Holdstation states that KYC is required before using fiat on/off-ramp services."
+      },
+      {
+        "type": "service_condition",
+        "description": "The reviewed sell/off-ramp flow requires a receiving bank account whose account-holder name matches the KYC identity; service availability remains subject to Holdstation Pay and payment-partner controls."
+      }
+    ],
+    "legal_route": {
+      "status": "provider_characterization",
+      "description": "Holdstation characterizes the VND fiat flow as processed through a licensed electronic-payment intermediary under State Bank of Vietnam oversight. This record preserves that provider characterization and does not treat it as an independently verified regulator finding."
+    },
+    "evidence_ids": [
+      "sog_src_holdstation_pay_vn_stablecoins_20260212"
+    ],
+    "confidence": "high",
+    "review_status": "reviewed",
+    "supersedes_record_ids": [],
+    "notes": "Provider-scoped Vietnam observation for USDC. The source explicitly supports USDC <-> VND buy/sell access through Holdstation Pay; it does not establish direct issuer mint/redemption, universal Vietnam-wide availability, or access in other countries."
+  },
+  {
+    "id": "sog_ma_usd1_vn_holdstation_pay_buy_sell_20260212",
+    "schema_version": "1.0",
+    "asset_id": "sog_st_usd1",
+    "jurisdiction": {
+      "country_code": "VN",
+      "subdivision_code": null
+    },
+    "platform": {
+      "organization_id": null,
+      "name": "Holdstation",
+      "service": "Holdstation Pay"
+    },
+    "function": "buy_sell",
+    "access_state": "available",
+    "effective_from": "2026-02-12",
+    "effective_to": null,
+    "observed_at": "2026-09-22",
+    "date_precision": "day",
+    "network_scope": {
+      "kind": "unknown",
+      "network_ids": [],
+      "note": "The reviewed Vietnam guide establishes fiat/stablecoin buy and sell access but does not bind the VND conversion flow for this asset to one blockchain network."
+    },
+    "customer_scope": {
+      "kind": "mixed_or_platform_defined",
+      "note": "The reviewed Holdstation Pay flow is for users accepted under its KYC and payment-service rules in Vietnam; SOG does not generalize access to every person or account type in Vietnam."
+    },
+    "conditions": [
+      {
+        "type": "customer_eligibility",
+        "description": "Holdstation states that KYC is required before using fiat on/off-ramp services."
+      },
+      {
+        "type": "service_condition",
+        "description": "The reviewed sell/off-ramp flow requires a receiving bank account whose account-holder name matches the KYC identity; service availability remains subject to Holdstation Pay and payment-partner controls."
+      }
+    ],
+    "legal_route": {
+      "status": "provider_characterization",
+      "description": "Holdstation characterizes the VND fiat flow as processed through a licensed electronic-payment intermediary under State Bank of Vietnam oversight. This record preserves that provider characterization and does not treat it as an independently verified regulator finding."
+    },
+    "evidence_ids": [
+      "sog_src_holdstation_pay_vn_stablecoins_20260212"
+    ],
+    "confidence": "high",
+    "review_status": "reviewed",
+    "supersedes_record_ids": [],
+    "notes": "Provider-scoped Vietnam observation for USD1. The source explicitly supports USD1 <-> VND buy/sell access through Holdstation Pay; it does not establish direct issuer mint/redemption, universal Vietnam-wide availability, or access in other countries."
   }
 ]
