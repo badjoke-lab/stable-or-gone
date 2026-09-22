@@ -1,0 +1,125 @@
+{
+  "schema_version": "1.0",
+  "research_id": "sog_holdstation_pay_market_access_review_2026_09_22",
+  "status": "reviewed_bounded_promotion",
+  "recorded_at": "2026-09-22",
+  "information_current_through": "2026-09-22",
+  "canonical_boundary": {
+    "automatic_promotion": false,
+    "publication_role": "review_support",
+    "canonical_promotion_scoped_to": [
+      "sog_st_usdt",
+      "sog_st_usdc",
+      "sog_st_usd1"
+    ]
+  },
+  "trigger": {
+    "description": "Holdstation Pay regional fiat/stablecoin expansion signal",
+    "treatment": "Discovery signal only until first-party provider evidence is reviewed."
+  },
+  "reviewed_sources": [
+    {
+      "url": "https://blog.holdstation.com/holdstation-pay-la-gi-huong-dan-mua-ban-usdt-vnd/",
+      "publisher": "Holdstation",
+      "source_role": "primary_provider_function_scope",
+      "supports": [
+        "Vietnam VND buy/sell access",
+        "USDT",
+        "USDC",
+        "USD1",
+        "fiat on-ramp",
+        "fiat off-ramp",
+        "KYC requirement"
+      ]
+    },
+    {
+      "url": "https://pay.holdstation.com/",
+      "publisher": "Holdstation Pay",
+      "source_role": "current_product_discovery_and_scope_check",
+      "supports": [
+        "current Holdstation Pay product",
+        "USD1/USDT/USDC listed as leading stablecoins",
+        "localized payment-method cards for Vietnam, Philippines, Indonesia, Brazil and Argentina"
+      ]
+    }
+  ],
+  "candidate_asset_platform_service_matrix": [
+    {
+      "asset_id": "sog_st_usdt",
+      "symbol": "USDT",
+      "jurisdiction": "VN",
+      "platform": "Holdstation",
+      "service": "Holdstation Pay",
+      "function": "buy_sell",
+      "disposition": "promote",
+      "reason": "First-party Vietnam guide explicitly binds USDT to VND buy/sell access."
+    },
+    {
+      "asset_id": "sog_st_usdc",
+      "symbol": "USDC",
+      "jurisdiction": "VN",
+      "platform": "Holdstation",
+      "service": "Holdstation Pay",
+      "function": "buy_sell",
+      "disposition": "promote",
+      "reason": "First-party Vietnam guide explicitly binds USDC to VND buy/sell access."
+    },
+    {
+      "asset_id": "sog_st_usd1",
+      "symbol": "USD1",
+      "jurisdiction": "VN",
+      "platform": "Holdstation",
+      "service": "Holdstation Pay",
+      "function": "buy_sell",
+      "disposition": "promote",
+      "reason": "First-party Vietnam guide explicitly identifies USD1 as supported for VND buy/sell access."
+    }
+  ],
+  "held_back_scope": [
+    {
+      "jurisdictions": [
+        "PH",
+        "ID",
+        "BR",
+        "AR"
+      ],
+      "disposition": "not_promoted",
+      "reason": "The current Holdstation Pay page separately shows localized payment methods and separately lists USD1/USDT/USDC, but the reviewed page does not explicitly bind each stablecoin to each country/function pair strongly enough for SOG canonical promotion."
+    },
+    {
+      "jurisdictions": [
+        "PE",
+        "CO",
+        "KR",
+        "MY"
+      ],
+      "disposition": "not_promoted",
+      "reason": "These jurisdictions were present in the discovery signal supplied for review, but no independently retrievable first-party Holdstation page was found in this review that establishes the required asset x jurisdiction x service x function scope."
+    }
+  ],
+  "function_scope": {
+    "promoted": [
+      "buy_sell"
+    ],
+    "not_promoted": [
+      "deposit",
+      "withdrawal",
+      "external_wallet_transfer",
+      "direct_issuer_mint",
+      "direct_issuer_redemption"
+    ],
+    "reason": "The reviewed provider guide establishes fiat buy/on-ramp and sell/off-ramp conversion. It does not establish canonical exchange-style deposit/withdrawal or direct issuer functions."
+  },
+  "evidence_identity": {
+    "id": "sog_src_holdstation_pay_vn_stablecoins_20260212",
+    "reuse": false,
+    "new_identity": true
+  },
+  "promotion_summary": {
+    "new_market_access_records": 3,
+    "new_evidence_records": 1,
+    "new_assets": 0,
+    "new_events": 0,
+    "new_organizations": 0
+  }
+}
