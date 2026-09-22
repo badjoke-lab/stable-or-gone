@@ -1,0 +1,114 @@
+---
+import ArticleLayout from '../../../layouts/ArticleLayout.astro';
+const headline = 'World Money Rolls Out Stablecoin Super App Across 150+ Countries';
+const title = `${headline} — Stable or Gone`;
+const description = 'World Money is rolling out across more than 150 countries with stablecoin balances, local-currency rails, Stripe funding, Morpho-powered Earn and third-party financial apps. SOG separates the global rollout from country- and asset-specific availability.';
+const canonicalPath = '/articles/world-money-stablecoin-super-app/';
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline,
+  description,
+  url: `https://www.stableorgone.com${canonicalPath}`,
+  inLanguage: 'en',
+  datePublished: '2026-09-22',
+  dateModified: '2026-09-22',
+  isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://www.stableorgone.com/' },
+  about: ['stablecoins', 'World Money', 'World Chain', 'USDC', 'local stablecoins', 'Morpho', 'Stripe', 'payments']
+};
+---
+<ArticleLayout
+  title={title}
+  description={description}
+  canonicalPath={canonicalPath}
+  headline={headline}
+  sectionLabel="Payments, distribution and market access"
+  deck="World Money is becoming a broad stablecoin distribution surface, but the headline rollout is not the same thing as universal access. World itself says features and eligibility vary by country, so SOG keeps global product availability separate from asset-by-asset and jurisdiction-by-jurisdiction access claims."
+  publishedAt="September 22, 2026"
+  treatment="Non-canonical analysis"
+  scope="World Money stablecoin balances / ramps / Earn / local-currency access"
+  jsonLd={jsonLd}
+>
+  <section class="panel registry">
+    <div class="bar">What happened</div>
+    <p><strong>World began rolling out World Money in more than 150 countries on September 17, 2026.</strong> The first-party launch describes a self-custodial financial app that combines stablecoin balances, digital-asset transfers, funding, earning, trading and Mini Apps in one interface.</p>
+    <p>The same announcement explicitly warns that features and eligibility vary by country. That qualifier is central to SOG's treatment: a 150+ country app rollout is not evidence that every stablecoin, fiat rail, Earn program, bank withdrawal option or trading feature is available in every one of those countries.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Stablecoins are a core balance layer</div>
+    <p>World says the World Money home screen centers stablecoin balances and supports balances across eight currencies. Its current Help Center separately describes Local Stablecoins as on-chain tokens that mirror local fiat currencies and says supported Local Stablecoins can be bought, deposited, withdrawn, sent and received where the relevant app and ramp support exists.</p>
+    <p>The Help Center gives <strong>wARS</strong> as a Local Stablecoin example. A separate World virtual-account page identifies specific current routes: a U.S. USD virtual account converts incoming funds into <strong>USDC</strong>; an Argentina virtual account maps ARS to <strong>wARS</strong>; and a Colombia virtual account maps COP to <strong>wCOP</strong>. Mexico's listed virtual-account flow maps MXN to WLD rather than to a stablecoin.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">World-wide availability is not one Market Access record</div>
+    <p>SOG's Market Access model is deliberately narrower than a marketing rollout claim. The canonical unit is an asset × jurisdiction × platform/service × function × state × effective date. World Money's own documentation says cash-in and cash-out availability depends on country and local providers.</p>
+    <p>For that reason, SOG does <strong>not</strong> translate “150+ countries” into 150+ stablecoin access rows. Specific routes such as U.S. USD→USDC, Argentina ARS→wARS and Colombia COP→wCOP can be researched independently because the provider documentation binds the jurisdiction, currency and digital asset. Other countries require their own source-backed function review.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Stripe and Apple Pay start in the United States</div>
+    <p>World's launch announcement says Stripe is the default funding provider for a redesigned World Money flow beginning in the United States. Users can use Apple Pay to convert everyday money into stablecoins that typically arrive in the wallet within minutes.</p>
+    <p>This is a U.S.-scoped funding route, not evidence that the Stripe/Apple Pay flow is already active across the full 150+ country rollout. SOG therefore treats it as a distribution and market-access signal rather than as a universal stablecoin availability claim.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Earn is a separate yield layer</div>
+    <p>World Money's Earn feature lets users deposit supported assets into on-chain lending programs. Current World support material names examples including <strong>WLD, USDC, wETH and wBTC</strong> and states that the rates come from protocol provider <strong>Morpho</strong>. Availability varies by region, and World warns that on-chain smart-contract and market risks remain.</p>
+    <p>That means the stablecoin balance layer and the yield layer should not be collapsed into one claim. Holding or transferring a stablecoin in World Money does not automatically mean that the same asset is eligible for Earn in the user's jurisdiction.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Local-currency stablecoins are broader than one app</div>
+    <p>World's MiniKit documentation names a broader set of local stablecoins usable in Mini Apps, including <strong>wARS, wCOP, wMXN, wBRL, wPEN and wCLP</strong>, alongside EURC. Ripio separately identifies the six wFIAT assets as 1:1-backed local-currency stablecoins for Argentina, Brazil, Colombia, Mexico, Peru and Chile.</p>
+    <p>That does not prove that every one of those assets is exposed through every World Money surface today. SOG therefore keeps the questions separate: the asset can exist canonically, World Chain or Mini Apps can support it, and World Money can expose a country-specific balance or ramp. Each layer needs its own evidence.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">What is confirmed and what remains open</div>
+    <table>
+      <thead><tr><th>Question</th><th>Current treatment</th></tr></thead>
+      <tbody>
+        <tr><td>Is World Money rolling out in more than 150 countries?</td><td>Yes, according to World; features and eligibility vary by country.</td></tr>
+        <tr><td>Does World Money support stablecoin balances and Local Stablecoins?</td><td>Yes.</td></tr>
+        <tr><td>Does the U.S. virtual-account flow convert incoming USD into USDC?</td><td>Yes, according to World Help Center documentation.</td></tr>
+        <tr><td>Does World document ARS→wARS and COP→wCOP virtual-account routes?</td><td>Yes, for the listed Argentina and Colombia virtual-account products.</td></tr>
+        <tr><td>Is Stripe/Apple Pay funding global?</td><td>No such claim is supported; World says the redesigned flow begins in the United States.</td></tr>
+        <tr><td>Does Earn use Morpho?</td><td>Yes. World says supported assets are deposited into Morpho-powered on-chain lending programs.</td></tr>
+        <tr><td>Are all stablecoins and all functions available in all 150+ countries?</td><td>No. World explicitly says feature and eligibility availability varies by country.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Stable or Gone treatment</div>
+    <p><strong>Current SOG treatment: material stablecoin distribution and market-access analysis, not a blanket 150-country canonical access expansion.</strong></p>
+    <p>The World Money rollout is important because stablecoin balances, local-currency rails, fiat funding, bank withdrawal and DeFi yield are being bundled into one self-custodial consumer application. But the canonical registry still requires narrower evidence before attaching a stable asset to a particular country and function.</p>
+    <p>SOG will separately review the World/Ripio local-stablecoin family and any jurisdiction-specific World Money routes that meet the canonical Market Access contract.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">What SOG will watch next</div>
+    <ul>
+      <li>the full eight-currency stablecoin balance list as first-party documentation becomes explicit;</li>
+      <li>country-specific on-ramp and off-ramp support for USDC and Local Stablecoins;</li>
+      <li>World Money support for wARS, wCOP, wMXN, wBRL, wPEN and wCLP by jurisdiction and function;</li>
+      <li>changes to Stripe funding availability beyond the United States;</li>
+      <li>Earn asset and country eligibility changes, including Morpho program availability;</li>
+      <li>new issuer, reserve, redemption or legal-route evidence for the Ripio wFIAT family.</li>
+    </ul>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Sources</div>
+    <ul>
+      <li><a href="https://world.org/blog/announcements/world-money" rel="noreferrer">World — Introducing World Money: a financial super app for humans</a> — launch, 150+ country rollout, stablecoin balances, Stripe/Apple Pay funding and Morpho-powered Earn.</li>
+      <li><a href="https://support.world.org/hc/en-us/articles/44774231726867-What-is-a-Local-Stablecoin" rel="noreferrer">World Help Center — What is a Local Stablecoin?</a> — Local Stablecoin definition and World Money support model.</li>
+      <li><a href="https://support.world.org/hc/en-us/articles/44413326159635-What-is-a-Virtual-Account" rel="noreferrer">World Help Center — What is a Virtual Account?</a> — U.S. USD→USDC, Argentina ARS→wARS and Colombia COP→wCOP routes.</li>
+      <li><a href="https://support.world.org/hc/en-us/articles/47022343436307-How-do-I-use-Earn" rel="noreferrer">World Help Center — How do I use Earn?</a> — Morpho-powered Earn, supported asset examples and regional availability boundary.</li>
+      <li><a href="https://world.org/blog/announcements/build-once-deploy-anywhere-minikit-2.0-is-live-for-world-developers" rel="noreferrer">World — MiniKit 2.0</a> — expanded Mini App support for local stablecoins including wARS, wCOP, wMXN, wBRL, wPEN and wCLP.</li>
+      <li><a href="https://www.ripio.com/en" rel="noreferrer">Ripio — Local Stablecoins / wFIAT</a> — issuer-side identification of the six local-currency stablecoins and 1:1 backing model.</li>
+    </ul>
+  </section>
+</ArticleLayout>
