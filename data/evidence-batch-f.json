@@ -535,5 +535,39 @@
       "prelaunch_boundary"
     ],
     "notes": "The transaction created the current canonical Ethereum AUSD token contract at 2024-07-07 22:28:59 UTC. Contract creation is not treated as proof of the original public-launch day."
+  },
+  {
+    "id": "sog_src_holdstation_pay_vn_stablecoins_20260212",
+    "stablecoin_id": "sog_st_usdt",
+    "event_id": null,
+    "source_type": "official_blog",
+    "title": "Holdstation Pay Là Gì? Hướng Dẫn Mua Bán Stablecoin Bằng VND Trực Tiếp Trên Ví",
+    "url": "https://blog.holdstation.com/holdstation-pay-la-gi-huong-dan-mua-ban-usdt-vnd/",
+    "archived_url": "https://web.archive.org/web/*/https://blog.holdstation.com/holdstation-pay-la-gi-huong-dan-mua-ban-usdt-vnd/",
+    "publisher": "Holdstation",
+    "published_at": "2026-02-12",
+    "accessed_at": "2026-09-22",
+    "reliability": "high",
+    "claim_scope": "holdstation_pay_vietnam_stablecoin_fiat_access",
+    "stablecoin_ids": [
+      "sog_st_usdt",
+      "sog_st_usdc",
+      "sog_st_usd1"
+    ],
+    "organization_ids": [],
+    "event_ids": [],
+    "claim_scopes": [
+      "market_access",
+      "vietnam",
+      "buy_sell",
+      "fiat_on_ramp",
+      "fiat_off_ramp",
+      "usdt",
+      "usdc",
+      "usd1",
+      "kyc_required"
+    ],
+    "is_primary": true,
+    "notes": "First-party Holdstation guide explicitly describes Holdstation Pay as supporting USDT, USDC and USD1 against VND for Vietnamese users, with buy/on-ramp and sell/off-ramp flows. KYC is required for fiat on/off-ramp use. SOG uses this only for provider-scoped Vietnam Holdstation Pay access and does not generalize it to other countries, networks, issuer redemption, or a regulator-verified legal conclusion."
   }
 ]
