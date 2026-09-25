@@ -1,5 +1,18 @@
 [
   {
+    "id": "sog_update_2026_09_26_sofiusd_mastercard_settlement",
+    "date": "2026-09-26",
+    "title": "SoFiUSD Mastercard production settlement recorded",
+    "category": "data",
+    "summary": "Recorded the September 22 production settlement milestone for SoFiUSD across SoFi Bank's debit and credit card program, with the March Mastercard announcement retained as the planned-state baseline. Added one canonical adoption event and two first-party evidence sources; SoFiUSD remains active and its reserve, redemption, issuer, and deployment state are unchanged.",
+    "related_paths": [
+      "/articles/sofiusd-mastercard-live-settlement/",
+      "/stablecoin/sofiusd/",
+      "/event/sog_ev_sofiusd_mastercard_settlement_20260922/",
+      "/updates/"
+    ]
+  },
+  {
     "id": "sog_update_2026_09_26_usdc_binance_circle_partnership",
     "date": "2026-09-26",
     "title": "Binance-Circle five-year USDC partnership recorded",

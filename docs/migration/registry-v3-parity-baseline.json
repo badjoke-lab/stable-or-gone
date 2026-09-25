@@ -1,11 +1,11 @@
 {
   "schema_version": "3.0-parity-baseline",
   "status": "current",
-  "baseline_id": "sog_registry_v3_parity_usdc_binance_partnership_144_assets_2026_09_26",
+  "baseline_id": "sog_registry_v3_parity_sofiusd_mastercard_settlement_144_assets_2026_09_26",
   "recorded_at": "2026-09-26",
-  "data_checkpoint_commit": "record/usdc-binance-circle-partnership-20260926",
-  "source_baseline_id": "sog_registry_v3_parity_holdstation_pay_vietnam_144_assets_2026_09_22",
-  "canonical_checkpoint_id": "sog_usdc_binance_partnership_maintenance_144_2026_09_26",
+  "data_checkpoint_commit": "feat/sofiusd-mastercard-settlement-20260926",
+  "source_baseline_id": "sog_registry_v3_parity_usdc_binance_partnership_144_assets_2026_09_26",
+  "canonical_checkpoint_id": "sog_sofiusd_mastercard_settlement_144_2026_09_26",
   "v2_composed_baseline": "docs/migration/registry-v2-baseline.json",
   "v3_foundation": "docs/migration/registry-v3-foundation.json",
   "v3_income_profiles": "docs/migration/registry-v3-income-profiles.json",
@@ -15,10 +15,10 @@
     "relationships": 156,
     "classifications": 144,
     "profiles": 144,
-    "events": 223,
-    "event_details": 223,
-    "evidence": 645,
-    "evidence_relations": 645,
+    "events": 224,
+    "event_details": 224,
+    "evidence": 647,
+    "evidence_relations": 647,
     "reserve_reports": 131,
     "known_unknowns": 381,
     "regulatory_notes": 9,
@@ -55,5 +55,5 @@
   },
   "audit_report": "docs/audits/registry-v2-v3-machine-readable-parity-100-assets.md",
   "validator": "scripts/validate-registry-v2-v3-machine-readable-parity.mjs",
-  "notes": "Current parity baseline preserves the reviewed 144-asset corpus while adding one USDC exchange-adoption event and two first-party Evidence records for the September 22, 2026 Binance-Circle five-year partnership. No asset, organization, relationship, deployment, Market Access, reserve, redemption, peg, issuer, or legal-status change is inferred."
+  "notes": "Current parity baseline preserves the reviewed 144-asset corpus and the preceding Binance-Circle USDC partnership checkpoint while adding one SoFiUSD payment-settlement adoption event and two first-party Evidence records documenting the planned-to-live Mastercard settlement transition. SoFiUSD remains active; reserve, redemption, legal issuer, deployment, peg, and market-access semantics are unchanged."
 }

@@ -1,12 +1,12 @@
 {
-  "batch_id": "usdc_binance_partnership_maintenance_20260926",
+  "batch_id": "sofiusd_mastercard_settlement_20260926",
   "captured_at": "2026-09-26",
   "minimum_counts": {
-    "events": 223,
-    "event_details": 223,
-    "evidence": 645,
-    "evidence_relations": 645
+    "events": 224,
+    "event_details": 224,
+    "evidence": 647,
+    "evidence_relations": 647
   },
   "data_group_additions": {},
-  "notes": "Count-only baseline advance for reviewed USDC Binance-Circle partnership maintenance on the 144-asset corpus. One exchange-adoption event and two first-party Evidence records are added. USDC lifecycle, reserve, redemption, peg, issuer, legal status, deployment, and Market Access state remain unchanged."
+  "notes": "Count-only baseline advance for reviewed SoFiUSD Mastercard settlement maintenance on the 144-asset corpus after the Binance-Circle USDC partnership checkpoint. One payment-settlement adoption event and two first-party Evidence records document the transition from the March planned state to the September 22 production settlement state."
 }

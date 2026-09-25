@@ -1,0 +1,91 @@
+---
+import ArticleLayout from '../../../layouts/ArticleLayout.astro';
+const headline = 'SoFiUSD Goes Live for Mastercard Settlement Across SoFi’s $25 Billion Card Program';
+const title = `${headline} — Stable or Gone`;
+const description = 'SoFi and Mastercard moved SoFiUSD settlement from a March plan into live production across SoFi Bank’s debit and credit card program. SOG records the change as an adoption event while keeping lifecycle, reserve, redemption and deployment state separate.';
+const canonicalPath = '/articles/sofiusd-mastercard-live-settlement/';
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline,
+  description,
+  url: `https://www.stableorgone.com${canonicalPath}`,
+  inLanguage: 'en',
+  datePublished: '2026-09-26',
+  dateModified: '2026-09-26',
+  isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://www.stableorgone.com/' },
+  about: ['SoFiUSD', 'SoFi Bank', 'Mastercard', 'stablecoin settlement', 'payments', 'bank-issued stablecoins']
+};
+---
+<ArticleLayout
+  title={title}
+  description={description}
+  canonicalPath={canonicalPath}
+  headline={headline}
+  sectionLabel="Payments and settlement"
+  deck="The important change is not a new SoFiUSD asset or a new reserve model. It is the move from an announced settlement plan to a live production use: SoFi Bank says its debit and credit card program is now settling through SoFiUSD and is being migrated to blockchain-based settlement."
+  publishedAt="September 26, 2026"
+  treatment="Canonical event update + analysis"
+  scope="SoFiUSD / Mastercard settlement / SoFi Bank card program"
+  jsonLd={jsonLd}
+>
+  <section class="panel registry">
+    <div class="bar">What changed</div>
+    <p><strong>On September 22, 2026, SoFi and Mastercard announced that SoFiUSD settlement was live across SoFi Bank, N.A.’s debit and credit card program.</strong> SoFi said it was migrating the full program to blockchain-based settlement using SoFiUSD and that transactions were already live on-chain.</p>
+    <p>The same announcement says the card program is expected to process more than <strong>$25 billion in annualized volume</strong>. That figure describes SoFi’s card program, not Mastercard’s network-wide transaction volume.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">From plan to production</div>
+    <p>This is a distinct step from the companies’ March 3 announcement. In March, Mastercard and SoFi described SoFiUSD settlement as an option they planned to enable, said SoFi Bank was expected to settle its Mastercard-powered credit and debit transactions in SoFiUSD, and identified additional integrations they expected to explore.</p>
+    <p>September supplies the missing production boundary: the SoFi Bank card program is now described as live, and SoFi says the migration to stablecoin settlement is underway. SOG therefore records the September development as a separate adoption event rather than rewriting the original SoFiUSD launch event.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">What the settlement layer does — and does not mean</div>
+    <p>The announcement concerns the settlement layer behind SoFi Bank’s card program. It does not mean cardholders are paying merchants in SoFiUSD at checkout, and it does not require merchants to hold SoFiUSD. SoFi says merchants can continue receiving funds through ordinary banking infrastructure while the stablecoin operates in the settlement process behind the scenes.</p>
+    <p>That distinction matters for SOG. A payment rail can adopt a stablecoin without changing the stablecoin’s peg, reserve model, redemption rules or consumer-facing lifecycle state.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Why SOG records a canonical event</div>
+    <p>SoFiUSD already has a canonical SOG asset record and an earlier launch event. The September announcement is source-backed, dated, material, and changes how the asset is being used in production, so it crosses the event threshold.</p>
+    <p>SOG classifies it as <strong>Adoption and expansion</strong> with the canonical subtype <code>payment_settlement_launch</code>. SoFiUSD itself remains <strong>active</strong>. No reserve, redemption or chain-deployment state is changed by this update.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">What is confirmed and what is not</div>
+    <table>
+      <thead><tr><th>Question</th><th>SOG treatment</th></tr></thead>
+      <tbody>
+        <tr><td>Is SoFiUSD settlement live for SoFi Bank’s debit and credit card program?</td><td>Yes, according to SoFi’s September 22 announcement.</td></tr>
+        <tr><td>Is SoFi migrating its full card program to SoFiUSD settlement?</td><td>Yes. SoFi says the migration is underway.</td></tr>
+        <tr><td>Does the $25 billion figure refer to all Mastercard settlement?</td><td>No. It refers to SoFi’s card program and is stated as expected annualized volume.</td></tr>
+        <tr><td>Does every Mastercard issuer or acquirer now settle in SoFiUSD?</td><td>No such claim is supported by the cited announcements.</td></tr>
+        <tr><td>Are cross-border payments and remittances already live through this arrangement?</td><td>No. SoFi says the companies will explore additional opportunities including those use cases.</td></tr>
+        <tr><td>Did SoFiUSD’s reserve or redemption model change because of this launch?</td><td>No change is established by this settlement announcement.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Why this matters</div>
+    <p>The useful historical marker is the move from experimentation and planned integration into production settlement for a bank card program. SoFiUSD is issued by SoFi Bank, N.A., and the September release places that bank-issued stablecoin inside an operating card-settlement workflow rather than only a product roadmap.</p>
+    <p>Mastercard had already broadened its stablecoin settlement program in June, naming SoFiUSD alongside USDC, PYUSD, USDG, USDP and RLUSD and describing support across multiple blockchain networks. The SoFi launch is therefore best read as one concrete production deployment inside that wider settlement strategy, not as the conversion of Mastercard’s entire global network to SoFiUSD.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Stable or Gone treatment</div>
+    <p><strong>Canonical update: one new SoFiUSD adoption event plus supporting evidence.</strong></p>
+    <p>The asset remains active. The event records payment-settlement adoption; it does not alter reserve disclosure, redemption access, legal issuer identity or existing Ethereum/Solana deployment records. Future expansion to additional merchants, issuers, cross-border flows or other Mastercard use cases requires separate dated evidence before SOG records another canonical change.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Sources</div>
+    <ul>
+      <li><a href="https://investors.sofi.com/news/news-details/2026/SoFi-Becomes-First-National-Bank-to-Go-Live-with-Stablecoin-Settlement-across-Mastercards-Global-Payments-Network/default.aspx" rel="noreferrer">SoFi — SoFi Becomes First National Bank to Go Live with Stablecoin Settlement across Mastercard’s Global Payments Network</a> — September 22 production launch, SoFi card-program migration, annualized-volume context and live-settlement claims.</li>
+      <li><a href="https://www.mastercard.com/global/en/news-and-trends/press/2026/march/sofi-and-mastercard-partner-to-enable-sofiusd-settlement-across-.html" rel="noreferrer">Mastercard — SoFi and Mastercard partner to enable SoFiUSD settlement across Mastercard’s global payments network</a> — March 3 planned-state baseline and intended settlement use cases.</li>
+      <li><a href="https://www.mastercard.com/us/en/news-and-trends/press/2026/june/mastercard-expands-settlement-capabilities-to-include-stablecoin.html" rel="noreferrer">Mastercard — Mastercard expands settlement capabilities</a> — June ecosystem context naming SoFiUSD among supported regulated stablecoins and listing supported blockchain networks.</li>
+    </ul>
+  </section>
+</ArticleLayout>
