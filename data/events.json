@@ -49,5 +49,22 @@
     "confidence": "medium",
     "source_count": 4,
     "notes": "Deepened in PR-018C with Paxos wind-down, NYDFS-related context, reported SEC no-action outcome context, and exchange support phase-out context. Final redemption and exchange conversion status still require source-specific review."
+  },
+  {
+    "id": "sog_ev_usdc_2026_09_binance_circle_partnership",
+    "stablecoin_id": "sog_st_usdc",
+    "issuer_id": "sog_issuer_circle",
+    "event_type": "exchange_adoption_context",
+    "event_date": "2026-09-22",
+    "title": "Binance invests $100 million in Circle and renews five-year USDC partnership",
+    "description": "Circle and Binance announced a new five-year commercial agreement focused on expanding USDC access, promotion, and integration across Binance's platform, especially in emerging markets, alongside a $100 million strategic equity investment by Binance in Circle. SOG records this as exchange-adoption and distribution context for USDC, not as a change to USDC backing, redemption, legal status, or lifecycle state.",
+    "impact_level": "medium",
+    "event_status_effect": "none",
+    "recovered": null,
+    "recovery_date": null,
+    "failure_mechanism": "exchange_distribution_partnership_expansion",
+    "confidence": "high",
+    "source_count": 2,
+    "notes": "Primary Circle and Binance announcements confirm the equity investment and five-year USDC commercial agreement. The event records distribution/adoption context only; no reserve, redemption, lifecycle, peg, or country-wide availability change is inferred."
   }
 ]

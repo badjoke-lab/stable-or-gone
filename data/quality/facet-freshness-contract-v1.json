@@ -2,8 +2,8 @@
   "schema_version": "1.0",
   "contract_id": "sog_facet_freshness_contract_pr342_v1",
   "status": "canonical_internal_derivation_contract",
-  "as_of_date": "2026-09-22",
-  "review_checkpoint_id": "sog_holdstation_pay_vietnam_market_access_144_2026_09_22",
+  "as_of_date": "2026-09-26",
+  "review_checkpoint_id": "sog_usdc_binance_partnership_maintenance_144_2026_09_26",
   "comparison_contract_id": "sog_comparison_readiness_contract_pr336_v1",
   "market_access_governance_id": "sog_market_access_governance_v1_pr341",
   "freshness_states": [

@@ -1,12 +1,12 @@
 {
-  "batch_id": "holdstation_pay_vietnam_market_access_20260922",
-  "captured_at": "2026-09-22",
+  "batch_id": "usdc_binance_partnership_maintenance_20260926",
+  "captured_at": "2026-09-26",
   "minimum_counts": {
-    "events": 222,
-    "event_details": 222,
-    "evidence": 643,
-    "evidence_relations": 643
+    "events": 223,
+    "event_details": 223,
+    "evidence": 645,
+    "evidence_relations": 645
   },
   "data_group_additions": {},
-  "notes": "Count-only baseline advance for reviewed Holdstation Pay Vietnam Market Access maintenance on the 144-asset corpus. One first-party Holdstation Evidence row is added in Batch F and three provider-scoped Vietnam Market Access buy/sell records are added for USDT, USDC and USD1."
+  "notes": "Count-only baseline advance for reviewed USDC Binance-Circle partnership maintenance on the 144-asset corpus. One exchange-adoption event and two first-party Evidence records are added. USDC lifecycle, reserve, redemption, peg, issuer, legal status, deployment, and Market Access state remain unchanged."
 }

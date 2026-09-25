@@ -885,5 +885,67 @@
     "reliability": "high",
     "claim_scope": "deployment_and_network_fee_role",
     "notes": "Primary Circle announcement confirming Arc public mainnet launch, native USDC integration, and USDC-denominated network fees. Used for the Arc deployment row; it does not by itself change USDC lifecycle, reserve, or redemption status."
+  },
+  {
+    "id": "sog_src_circle_binance_partnership_20260922",
+    "stablecoin_id": "sog_st_usdc",
+    "issuer_id": "sog_issuer_circle",
+    "event_id": "sog_ev_usdc_2026_09_binance_circle_partnership",
+    "source_type": "issuer_statement",
+    "title": "Binance Invests $100 Million in Circle, Expands Strategic Partnership and Renews Commercial Agreement for Five Years",
+    "url": "https://investor.circle.com/news/news-details/2026/Binance-Invests-100-Million-in-Circle-Expands-Strategic-Partnership-and-Renews-Commercial-Agreement-for-Five-Years/default.aspx",
+    "publisher": "Circle Internet Group",
+    "published_at": "2026-09-22",
+    "accessed_at": "2026-09-26",
+    "reliability": "high",
+    "claim_scope": "usdc_binance_distribution_partnership_and_equity_investment",
+    "notes": "Primary Circle announcement confirming Binance's $100 million strategic equity investment, the new five-year commercial agreement, and the focus on expanding USDC promotion, integration, and access through Binance. This source does not establish any change to USDC reserves, redemption, peg, legal status, or lifecycle state.",
+    "stablecoin_ids": [
+      "sog_st_usdc"
+    ],
+    "organization_ids": [
+      "sog_issuer_circle"
+    ],
+    "event_ids": [
+      "sog_ev_usdc_2026_09_binance_circle_partnership"
+    ],
+    "claim_scopes": [
+      "distribution",
+      "partnership",
+      "equity_investment_context",
+      "current_state"
+    ],
+    "is_primary": true
+  },
+  {
+    "id": "sog_src_binance_circle_usdc_partnership_20260922",
+    "stablecoin_id": "sog_st_usdc",
+    "issuer_id": "sog_issuer_circle",
+    "event_id": "sog_ev_usdc_2026_09_binance_circle_partnership",
+    "source_type": "exchange_notice",
+    "title": "Binance Invests $100 Million in Circle, Expands and Renews USDC Partnership for Five Years",
+    "url": "https://www.binance.com/en/blog/ecosystem/167890448134073062",
+    "publisher": "Binance",
+    "published_at": "2026-09-22",
+    "accessed_at": "2026-09-26",
+    "reliability": "high",
+    "claim_scope": "usdc_binance_distribution_and_adoption_partnership",
+    "notes": "Primary Binance announcement confirming the $100 million Circle equity investment and five-year USDC partnership, with Binance leading distribution and adoption across its global platform and Circle continuing supporting infrastructure. This is exchange-adoption context, not evidence of a USDC reserve, redemption, peg, or lifecycle change.",
+    "stablecoin_ids": [
+      "sog_st_usdc"
+    ],
+    "organization_ids": [
+      "sog_issuer_circle"
+    ],
+    "event_ids": [
+      "sog_ev_usdc_2026_09_binance_circle_partnership"
+    ],
+    "claim_scopes": [
+      "distribution",
+      "exchange_adoption",
+      "partnership",
+      "current_state"
+    ],
+    "is_primary": true
   }
 ]

@@ -562,5 +562,19 @@
         "sog_issuer_synthetix"
       ]
     }
+  },
+  {
+    "id": "sog_ev_usdc_2026_09_binance_circle_partnership",
+    "subject_stablecoin_ids": [
+      "sog_st_usdc"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_circle"
+    ],
+    "evidence_ids": [
+      "sog_src_circle_binance_partnership_20260922",
+      "sog_src_binance_circle_usdc_partnership_20260922"
+    ],
+    "event_detail_kind": "other"
   }
 ]
