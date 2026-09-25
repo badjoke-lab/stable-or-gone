@@ -1,0 +1,60 @@
+[
+  {
+    "id": "sog_st_wars",
+    "lifecycle_status": "active",
+    "issuance_status": "open",
+    "peg_reference": {
+      "kind": "fiat",
+      "asset": "ARS",
+      "target_value": 1,
+      "notes": "Ripio describes wARS as a local stablecoin collateralized 1:1 with Argentine-peso reserves."
+    },
+    "backing_types": [
+      "bank_deposits"
+    ],
+    "stabilization_mechanism": "other",
+    "governance_model": "centralized",
+    "asset_class": "stablecoin",
+    "reference_target": "fiat",
+    "redemption_or_exit_model": "ripio_platform_conversion_direct_issuer_redemption_unknown",
+    "yield_or_rebase_profile": {
+      "mode": "none",
+      "accrual_target": "none",
+      "yield_source": "none",
+      "accrual_mechanism": "none",
+      "rate_type": "none",
+      "rate_source": null,
+      "notes": "wARS itself is not modeled as intrinsically yield-bearing. Separate Morpho supply positions can earn variable borrower-funded yield."
+    },
+    "classification_notes": "Fiat-reserve-backed ARS stablecoin. The reviewed sources establish 1:1 collateral and Ripio conversion rails, but not a direct legal redemption right against a resolved issuing entity."
+  },
+  {
+    "id": "sog_st_wcop",
+    "lifecycle_status": "active",
+    "issuance_status": "open",
+    "peg_reference": {
+      "kind": "fiat",
+      "asset": "COP",
+      "target_value": 1,
+      "notes": "Ripio describes wCOP as a local stablecoin collateralized 1:1 with Colombian-peso reserves."
+    },
+    "backing_types": [
+      "bank_deposits"
+    ],
+    "stabilization_mechanism": "other",
+    "governance_model": "centralized",
+    "asset_class": "stablecoin",
+    "reference_target": "fiat",
+    "redemption_or_exit_model": "ripio_platform_conversion_direct_issuer_redemption_unknown",
+    "yield_or_rebase_profile": {
+      "mode": "none",
+      "accrual_target": "none",
+      "yield_source": "none",
+      "accrual_mechanism": "none",
+      "rate_type": "none",
+      "rate_source": null,
+      "notes": "No intrinsic holder yield is established by the reviewed wCOP source set."
+    },
+    "classification_notes": "Fiat-reserve-backed COP stablecoin. The reviewed sources establish 1:1 collateral and Ripio conversion rails, but not a direct legal redemption right against a resolved issuing entity."
+  }
+]
