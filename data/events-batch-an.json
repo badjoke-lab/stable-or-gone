@@ -1,0 +1,30 @@
+[
+  {
+    "id": "sog_ev_wars_worldchain_mint_20250521",
+    "stablecoin_id": "sog_st_wars",
+    "issuer_id": "sog_org_ripio",
+    "event_type": "chain_expansion",
+    "event_date": "2025-05-21",
+    "title": "wARS records its first mint on World Chain",
+    "description": "Ripio's wFIAT timeline records the first-ever mint of wARS on World Chain on 2025-05-21. SOG treats this as a dated network-deployment milestone and does not infer that it was the asset's original global launch.",
+    "impact_level": "medium",
+    "confidence": "high",
+    "source_count": 1,
+    "event_status_effect": "none",
+    "notes": "World Chain expansion milestone only; original global wARS launch date remains unresolved."
+  },
+  {
+    "id": "sog_ev_wcop_arc_launch_20260916",
+    "stablecoin_id": "sog_st_wcop",
+    "issuer_id": "sog_org_ripio",
+    "event_type": "chain_expansion",
+    "event_date": "2026-09-16",
+    "title": "wCOP goes live on Arc with Ripio's wFIAT suite",
+    "description": "Ripio announced that all six wFIAT local stablecoins, including wCOP, were live on Arc public mainnet from day one with on-chain liquidity support.",
+    "impact_level": "medium",
+    "confidence": "high",
+    "source_count": 1,
+    "event_status_effect": "none",
+    "notes": "Arc deployment/adoption event only. It does not establish the original wCOP launch date or change reserve/redemption status."
+  }
+]
