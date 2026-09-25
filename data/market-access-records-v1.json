@@ -887,5 +887,115 @@
     "review_status": "reviewed",
     "supersedes_record_ids": [],
     "notes": "Provider-scoped Vietnam observation for USD1. The source explicitly supports USD1 <-> VND buy/sell access through Holdstation Pay; it does not establish direct issuer mint/redemption, universal Vietnam-wide availability, or access in other countries."
+  },
+  {
+    "id": "sog_ma_wars_ar_world_money_ripio_virtual_account_buy_sell_20260926",
+    "schema_version": "1.0",
+    "asset_id": "sog_st_wars",
+    "jurisdiction": {
+      "country_code": "AR",
+      "subdivision_code": null
+    },
+    "platform": {
+      "organization_id": null,
+      "name": "World Money",
+      "service": "Ripio Virtual Account"
+    },
+    "function": "buy_sell",
+    "access_state": "available_with_conditions",
+    "effective_from": "2026-09-26",
+    "effective_to": null,
+    "observed_at": "2026-09-26",
+    "date_precision": "day",
+    "network_scope": {
+      "kind": "unknown",
+      "network_ids": [],
+      "note": "World documents ARS conversion into wARS in the World Wallet, but this Market Access row does not infer a specific blockchain path for every cash-in/cash-out transaction."
+    },
+    "customer_scope": {
+      "kind": "mixed_or_platform_defined",
+      "note": "Limited to users accepted by World Money/Ripio under identity verification, account, local-residency and service-eligibility rules in Argentina."
+    },
+    "conditions": [
+      {
+        "type": "customer_eligibility",
+        "description": "World states that Ripio Virtual Accounts require verification and a Ripio account; local residency documentation may be required."
+      },
+      {
+        "type": "geographic_scope",
+        "description": "This record is limited to the reviewed Argentina ARS-to-wARS Virtual Account route."
+      },
+      {
+        "type": "service_condition",
+        "description": "Cash-in/cash-out availability remains subject to Ripio and World Money account status, provider controls, bank-rail availability and service terms."
+      }
+    ],
+    "legal_route": {
+      "status": "not_assessed",
+      "description": "This record documents provider-scoped service availability and does not make an independent legal-status determination for wARS or the Ripio Virtual Account route in Argentina."
+    },
+    "evidence_ids": [
+      "sog_src_world_virtual_accounts_wfiat_20260926",
+      "sog_src_wars_ripio_product_20260926"
+    ],
+    "confidence": "high",
+    "review_status": "reviewed",
+    "supersedes_record_ids": [],
+    "notes": "Provider-scoped Argentina observation. The 2026-09-26 effective date is an observation-bounded canonical start, not a claim that the service first launched that day or that wARS is universally available across Argentina."
+  },
+  {
+    "id": "sog_ma_wcop_co_world_money_ripio_virtual_account_buy_sell_20260926",
+    "schema_version": "1.0",
+    "asset_id": "sog_st_wcop",
+    "jurisdiction": {
+      "country_code": "CO",
+      "subdivision_code": null
+    },
+    "platform": {
+      "organization_id": null,
+      "name": "World Money",
+      "service": "Ripio Virtual Account"
+    },
+    "function": "buy_sell",
+    "access_state": "available_with_conditions",
+    "effective_from": "2026-09-26",
+    "effective_to": null,
+    "observed_at": "2026-09-26",
+    "date_precision": "day",
+    "network_scope": {
+      "kind": "unknown",
+      "network_ids": [],
+      "note": "World documents COP conversion into wCOP in the World Wallet, but this Market Access row does not infer a specific blockchain path for every cash-in/cash-out transaction."
+    },
+    "customer_scope": {
+      "kind": "mixed_or_platform_defined",
+      "note": "Limited to users accepted by World Money/Ripio under identity verification, account, local-residency and service-eligibility rules in Colombia."
+    },
+    "conditions": [
+      {
+        "type": "customer_eligibility",
+        "description": "World states that Ripio Virtual Accounts require verification and a Ripio account; local residency documentation may be required."
+      },
+      {
+        "type": "geographic_scope",
+        "description": "This record is limited to the reviewed Colombia COP-to-wCOP Virtual Account route."
+      },
+      {
+        "type": "service_condition",
+        "description": "Cash-in/cash-out availability remains subject to Ripio and World Money account status, provider controls, bank-rail availability and service terms."
+      }
+    ],
+    "legal_route": {
+      "status": "not_assessed",
+      "description": "This record documents provider-scoped service availability and does not make an independent legal-status determination for wCOP or the Ripio Virtual Account route in Colombia."
+    },
+    "evidence_ids": [
+      "sog_src_world_virtual_accounts_wfiat_20260926",
+      "sog_src_wcop_ripio_product_20260926"
+    ],
+    "confidence": "high",
+    "review_status": "reviewed",
+    "supersedes_record_ids": [],
+    "notes": "Provider-scoped Colombia observation. The 2026-09-26 effective date is an observation-bounded canonical start, not a claim that the service first launched that day or that wCOP is universally available across Colombia."
   }
 ]
