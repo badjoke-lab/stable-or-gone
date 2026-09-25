@@ -1,0 +1,105 @@
+---
+import ArticleLayout from '../../../layouts/ArticleLayout.astro';
+const headline = 'ESCB Pushes to Extend MiCA Stablecoin Yield Restrictions to Lending and Staking';
+const title = `${headline} — Stable or Gone`;
+const description = 'The European System of Central Banks wants the MiCA review to preserve the stablecoin remuneration ban, close indirect-yield routes through lending and staking, revise reserve-liquidity rules, and strengthen safeguards for foreign-currency stablecoins.';
+const canonicalPath = '/articles/escb-mica-stablecoin-yield-lending-staking/';
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline,
+  description,
+  url: `https://www.stableorgone.com${canonicalPath}`,
+  inLanguage: 'en',
+  datePublished: '2026-09-26',
+  dateModified: '2026-09-26',
+  isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://www.stableorgone.com/' },
+  about: ['MiCA', 'MiCAR', 'stablecoins', 'stablecoin yield', 'staking', 'crypto lending', 'European Central Bank', 'European System of Central Banks', 'reserve assets']
+};
+---
+<ArticleLayout
+  title={title}
+  description={description}
+  canonicalPath={canonicalPath}
+  headline={headline}
+  sectionLabel="Regulation and stablecoin yield"
+  deck="The ESCB's response to the European Commission's MiCA review does not change EU law today. It asks the Commission to preserve the stablecoin remuneration ban, extend it to indirect-yield structures such as lending and staking, replace fixed bank-deposit reserve floors with liquidity-based requirements, and add stronger safeguards for foreign-currency stablecoins."
+  publishedAt="September 26, 2026"
+  treatment="Non-canonical analysis"
+  scope="MiCA review / stablecoin remuneration / lending / staking / reserves"
+  jsonLd={jsonLd}
+>
+  <section class="panel registry">
+    <div class="bar">What happened</div>
+    <p><strong>On September 22, the European System of Central Banks published its response to the European Commission's targeted review of the Markets in Crypto-Assets Regulation.</strong> The ESCB brings together the European Central Bank and the EU's national central banks.</p>
+    <p>The response asks for targeted changes across stablecoins, crypto-asset services, supervision and reserve requirements. For SOG, the most important points are the proposed treatment of stablecoin remuneration, the boundary around lending and staking, the redesign of reserve-liquidity rules, and the treatment of foreign-currency stablecoins.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">This is a review recommendation, not a new prohibition taking effect now</div>
+    <p>The ESCB response is input into the Commission's MiCA review. It is not itself a regulation, delegated act or enforcement decision, and it does not reclassify any stable asset in SOG.</p>
+    <p>MiCA already restricts remuneration connected to regulated stablecoins. The new issue is how far that prohibition should reach when a holder receives an economically similar return through a separate service rather than through the token issuer itself.</p>
+    <p>SOG therefore records this as regulatory analysis rather than a canonical lifecycle event for any individual asset.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">The ESCB wants indirect stablecoin yield routes brought inside the rule</div>
+    <p>The ESCB argues that the remuneration restriction should not be easy to reproduce through ancillary or currently unregulated services. Its response specifically points to crypto borrowing, lending and staking as structures that can reproduce the economic effect of interest.</p>
+    <p>It also reaches beyond explicit interest payments. Reported examples include loyalty benefits and DeFi liquidity incentives where those benefits function as indirect remuneration for holding or deploying a stablecoin.</p>
+    <p>The practical distinction matters: the policy target is not only an issuer promising a yield on a token balance, but also structures in which a separate platform or protocol creates an equivalent return around the stablecoin.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Lending, borrowing and staking are a separate regulatory perimeter question</div>
+    <p>The ESCB also asks for crypto lending, borrowing and staking to be regulated at EU level. Its reasoning is broader than stablecoins: where a customer transfers control of crypto-assets and expects equivalent assets to be returned later, potentially with an additional return, the economic substance can resemble regulated financial activity.</p>
+    <p>For SOG, this creates an important monitoring boundary. A stable asset can remain fully active while the services built around it face a different regulatory treatment. Asset lifecycle, issuer obligations and third-party yield products must therefore remain separate records and claims.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">The reserve proposal is not simply tighter</div>
+    <p>The same response asks the Commission to reconsider MiCA's fixed bank-deposit floors for stablecoin reserves. Current rules require minimum shares of reserve assets to be held as deposits with credit institutions, with a higher threshold for significant tokens.</p>
+    <p>The ESCB instead favors a liquidity-oriented approach based on how quickly reserve assets can mature or be converted into cash. Reuters reports that the central banks are concerned that large issuer deposits can behave differently from ordinary retail deposits and can move quickly during redemption stress.</p>
+    <p>That means the package combines a stricter proposed perimeter around stablecoin yield with a potential redesign of reserve composition rules rather than a simple across-the-board tightening.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Foreign-currency stablecoins are another major part of the response</div>
+    <p>The ESCB wants stronger intervention tools where foreign-currency stablecoins create financial-stability or monetary-policy concerns in the EU. Reported proposals include powers that could stop new issuance and require redemption of existing tokens in defined risk circumstances.</p>
+    <p>The response also maintains a cautious position on multi-issuance structures in which tokens issued inside and outside the EU are treated as interchangeable. The concern is that EU reserve assets could ultimately support redemption demands generated outside the Union while EU authorities do not have full visibility over where all tokens are held.</p>
+    <p>These are policy proposals, not asset-specific findings. SOG does not infer that dollar stablecoins have been banned, impaired or scheduled for redemption.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">What changes in SOG today</div>
+    <table>
+      <thead><tr><th>Question</th><th>SOG treatment</th></tr></thead>
+      <tbody>
+        <tr><td>Did MiCA change on September 22?</td><td>No. The ESCB published review recommendations.</td></tr>
+        <tr><td>Did a stablecoin become Failed, Impaired or Limited because of this response?</td><td>No asset-level lifecycle change is established by the response alone.</td></tr>
+        <tr><td>Is stablecoin yield now newly prohibited across all lending and staking products?</td><td>No. The ESCB is asking for the perimeter to be widened; that is not yet an enacted rule change.</td></tr>
+        <tr><td>Are reserve requirements unchanged in the policy proposal?</td><td>No. The ESCB also proposes replacing fixed bank-deposit floors with liquidity-based requirements.</td></tr>
+        <tr><td>Does the response matter to SOG?</td><td>Yes. It is material regulatory context for stablecoin remuneration, reserves, access and future issuer/platform obligations.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">What SOG will watch next</div>
+    <ul>
+      <li>whether the Commission carries the remuneration and reserve proposals into legislative text;</li>
+      <li>how any future rule distinguishes issuer-paid yield from third-party lending, staking, loyalty or DeFi incentives;</li>
+      <li>whether foreign-currency stablecoin intervention powers become part of a formal proposal;</li>
+      <li>whether multi-issuance rules change for stablecoins issued across EU and non-EU entities;</li>
+      <li>asset-specific changes to issuance, redemption, market access or reserve policy that cross SOG's canonical threshold.</li>
+    </ul>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Sources</div>
+    <ul>
+      <li><a href="https://www.ecb.europa.eu/home/html/index.en.html" rel="noreferrer">European Central Bank, September 22, 2026 — ESCB response to the European Commission's targeted consultation on the Markets in Crypto-Assets Regulation (MiCAR)</a> — primary-source publication listing for the consultation response.</li>
+      <li><a href="https://www.reuters.com/business/finance/ecb-eu-central-banks-oppose-stablecoin-bank-deposit-rule-2026-09-22/" rel="noreferrer">Reuters, September 22, 2026 — ECB, EU central banks suggest dropping stablecoin deposits rule</a> — reserve-deposit requirements, liquidity proposal and multi-issuance concerns.</li>
+      <li><a href="https://www.euronews.com/2026/09/22/ecb-calls-for-tougher-eu-crypto-rules-and-wider-ban-on-stablecoin-interest" rel="noreferrer">Euronews, September 22, 2026 — ECB calls for tougher EU crypto rules and wider ban on stablecoin interest</a> — remuneration, lending, staking, foreign-currency stablecoin and supervision proposals.</li>
+    </ul>
+  </section>
+</ArticleLayout>
