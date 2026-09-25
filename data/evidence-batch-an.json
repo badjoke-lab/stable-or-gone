@@ -1,0 +1,225 @@
+[
+  {
+    "id": "sog_src_wfiat_ripio_transparency_20260926",
+    "stablecoin_id": "sog_st_wars",
+    "issuer_id": "sog_org_ripio",
+    "event_id": "sog_ev_wars_worldchain_mint_20250521",
+    "source_type": "reserve_transparency_page",
+    "title": "wFIAT — Local stablecoins by Ripio",
+    "url": "https://www.ripio.com/en/wfiat",
+    "publisher": "Ripio",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://www.ripio.com/en/wfiat",
+    "accessed_at": "2026-09-26",
+    "reliability": "high",
+    "claim_scope": "wfiat_identity_reserves_attestations_and_deployments",
+    "stablecoin_ids": [
+      "sog_st_wars",
+      "sog_st_wcop"
+    ],
+    "organization_ids": [
+      "sog_org_ripio"
+    ],
+    "claim_scopes": [
+      "identity",
+      "backing",
+      "reserve",
+      "attestation",
+      "deployment",
+      "current_state"
+    ],
+    "event_ids": [
+      "sog_ev_wars_worldchain_mint_20250521"
+    ],
+    "is_primary": true,
+    "notes": "First-party wFIAT transparency/product page. Used for the wARS and wCOP suite identity, 2026-03-31 collateral figures, multi-network issuance/burn context, and the dated World Chain wARS mint milestone."
+  },
+  {
+    "id": "sog_src_wars_ripio_product_20260926",
+    "stablecoin_id": "sog_st_wars",
+    "issuer_id": "sog_org_ripio",
+    "event_id": null,
+    "source_type": "official_product_page",
+    "title": "wARS — Wrapped Argentine Peso",
+    "url": "https://www.ripio.com/en/cryptocurrencies/wars",
+    "publisher": "Ripio",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://www.ripio.com/en/cryptocurrencies/wars",
+    "accessed_at": "2026-09-26",
+    "reliability": "high",
+    "claim_scope": "wars_product_reference_and_conversion",
+    "stablecoin_ids": [
+      "sog_st_wars"
+    ],
+    "organization_ids": [
+      "sog_org_ripio"
+    ],
+    "claim_scopes": [
+      "identity",
+      "peg",
+      "conversion",
+      "current_state",
+      "deployment"
+    ],
+    "event_ids": [],
+    "is_primary": true,
+    "notes": "First-party product page describing wARS as ARS-referenced and supporting conversion through Ripio. Platform conversion is not treated as proof of a direct legal issuer-redemption right."
+  },
+  {
+    "id": "sog_src_wcop_ripio_product_20260926",
+    "stablecoin_id": "sog_st_wcop",
+    "issuer_id": "sog_org_ripio",
+    "event_id": null,
+    "source_type": "official_product_page",
+    "title": "wCOP — Wrapped Colombian Peso",
+    "url": "https://www.ripio.com/es/criptomonedas/wcop",
+    "publisher": "Ripio",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://www.ripio.com/es/criptomonedas/wcop",
+    "accessed_at": "2026-09-26",
+    "reliability": "high",
+    "claim_scope": "wcop_product_reference_and_conversion",
+    "stablecoin_ids": [
+      "sog_st_wcop"
+    ],
+    "organization_ids": [
+      "sog_org_ripio"
+    ],
+    "claim_scopes": [
+      "identity",
+      "peg",
+      "conversion",
+      "current_state",
+      "deployment"
+    ],
+    "event_ids": [],
+    "is_primary": true,
+    "notes": "First-party product page describing wCOP as COP-referenced and supporting conversion through Ripio. Platform conversion is not treated as proof of a direct legal issuer-redemption right."
+  },
+  {
+    "id": "sog_src_wfiat_ripio_celo_20260731",
+    "stablecoin_id": "sog_st_wars",
+    "issuer_id": "sog_org_ripio",
+    "event_id": null,
+    "source_type": "official_blog",
+    "title": "Las stablecoins wFIAT ya están disponibles en Celo",
+    "url": "https://action.ripio.com/es/blog/las-stablecoins-wfiat-ya-estan-disponibles-en-celo",
+    "publisher": "Ripio",
+    "published_at": "2026-07-31",
+    "archived_url": "https://web.archive.org/web/*/https://action.ripio.com/es/blog/las-stablecoins-wfiat-ya-estan-disponibles-en-celo",
+    "accessed_at": "2026-09-26",
+    "reliability": "high",
+    "claim_scope": "wfiat_celo_deployment",
+    "stablecoin_ids": [
+      "sog_st_wars",
+      "sog_st_wcop"
+    ],
+    "organization_ids": [
+      "sog_org_ripio"
+    ],
+    "claim_scopes": [
+      "deployment",
+      "backing",
+      "current_state"
+    ],
+    "event_ids": [],
+    "is_primary": true,
+    "notes": "First-party Ripio announcement supporting Celo availability for the six-asset wFIAT suite and preserving Ripio's 1:1 collateral framing."
+  },
+  {
+    "id": "sog_src_wfiat_ripio_arc_20260916",
+    "stablecoin_id": "sog_st_wcop",
+    "issuer_id": "sog_org_ripio",
+    "event_id": "sog_ev_wcop_arc_launch_20260916",
+    "source_type": "official_blog",
+    "title": "Ripio's wFIAT Stablecoins Go Live on Arc Public Mainnet From Day One",
+    "url": "https://launchpad.ripio.com/blog/ripios-wfiat-stablecoins-go-live-on-arc-public-mainnet-from-day-one",
+    "publisher": "Ripio",
+    "published_at": "2026-09-16",
+    "archived_url": "https://web.archive.org/web/*/https://launchpad.ripio.com/blog/ripios-wfiat-stablecoins-go-live-on-arc-public-mainnet-from-day-one",
+    "accessed_at": "2026-09-26",
+    "reliability": "high",
+    "claim_scope": "wfiat_arc_deployment_and_backing",
+    "stablecoin_ids": [
+      "sog_st_wars",
+      "sog_st_wcop"
+    ],
+    "organization_ids": [
+      "sog_org_ripio"
+    ],
+    "claim_scopes": [
+      "deployment",
+      "backing",
+      "current_state",
+      "liquidity"
+    ],
+    "event_ids": [
+      "sog_ev_wcop_arc_launch_20260916"
+    ],
+    "is_primary": true,
+    "notes": "First-party Arc launch announcement for the full six-asset wFIAT suite. It supports Arc deployment and Ripio's 1:1 collateral claim but not each asset's original launch date."
+  },
+  {
+    "id": "sog_src_wars_ripio_morpho_20260819",
+    "stablecoin_id": "sog_st_wars",
+    "issuer_id": "sog_org_ripio",
+    "event_id": null,
+    "source_type": "official_blog",
+    "title": "wARS lending markets are now available on Morpho, curated by KPK",
+    "url": "https://action.ripio.com/en/blog/ripio-launches-peso-borrowing-and-yield-on-morpho-with-markets-curated-by-kpk",
+    "publisher": "Ripio",
+    "published_at": "2026-08-19",
+    "archived_url": "https://web.archive.org/web/*/https://action.ripio.com/en/blog/ripio-launches-peso-borrowing-and-yield-on-morpho-with-markets-curated-by-kpk",
+    "accessed_at": "2026-09-26",
+    "reliability": "high",
+    "claim_scope": "wars_external_lending_and_yield",
+    "stablecoin_ids": [
+      "sog_st_wars"
+    ],
+    "organization_ids": [
+      "sog_org_ripio"
+    ],
+    "claim_scopes": [
+      "lending",
+      "yield",
+      "ethereum",
+      "conversion"
+    ],
+    "event_ids": [],
+    "is_primary": true,
+    "notes": "First-party Ripio announcement for wARS Morpho markets. Used only to model external lending availability; it does not make wARS itself intrinsically yield-bearing."
+  },
+  {
+    "id": "sog_src_world_virtual_accounts_wfiat_20260926",
+    "stablecoin_id": "sog_st_wars",
+    "issuer_id": "sog_org_ripio",
+    "event_id": null,
+    "source_type": "official_documentation",
+    "title": "What is a Virtual Account?",
+    "url": "https://support.world.org/hc/en-us/articles/44413326159635-What-is-a-Virtual-Account",
+    "publisher": "World Help Center",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://support.world.org/hc/en-us/articles/44413326159635-What-is-a-Virtual-Account",
+    "accessed_at": "2026-09-26",
+    "reliability": "high",
+    "claim_scope": "world_money_ripio_virtual_account_market_access",
+    "stablecoin_ids": [
+      "sog_st_wars",
+      "sog_st_wcop"
+    ],
+    "organization_ids": [
+      "sog_org_ripio"
+    ],
+    "claim_scopes": [
+      "market_access",
+      "argentina",
+      "colombia",
+      "fiat_on_ramp",
+      "fiat_off_ramp",
+      "virtual_account"
+    ],
+    "event_ids": [],
+    "is_primary": true,
+    "notes": "First-party World documentation mapping Argentina ARS to wARS and Colombia COP to wCOP through Ripio Virtual Accounts. It also states local residency/verification requirements and supports bank cash-in/cash-out. SOG does not generalize these routes beyond the provider/jurisdiction scope."
+  }
+]
