@@ -1,0 +1,58 @@
+[
+  {
+    "id": "sog_st_wars",
+    "slug": "wars",
+    "name": "wARS",
+    "symbol": "wARS",
+    "aliases": [
+      "Wrapped Argentine Peso",
+      "Ripio wARS"
+    ],
+    "status": "active",
+    "issuer_id": "sog_org_ripio",
+    "peg_asset": "ARS",
+    "collateral_model": "fiat_reserve_backed",
+    "reserve_disclosure_status": "ripio_independent_attestation",
+    "redemption_status": "ripio_platform_conversion_available_direct_issuer_redemption_unknown",
+    "who_can_redeem": "Ripio product material supports conversion between wARS and Argentine pesos for eligible Ripio users; a separate direct legal redemption right against the exact issuing entity is not established by the reviewed public sources.",
+    "retail_redemption": "ripio_platform_conversion_subject_to_account_eligibility",
+    "institutional_redemption": "unknown",
+    "minimum_redemption": "not established",
+    "redemption_region_notes": "World Money separately documents an Argentina ARS-to-wARS virtual-account route for eligible Ripio users with local residency and verification requirements.",
+    "redemption_notes": "Platform conversion is recorded separately from direct issuer redemption. Exact holder claim, issuing legal entity and insolvency treatment remain unresolved.",
+    "launch_date": null,
+    "discontinued_date": null,
+    "summary": "Argentine-peso-referenced member of Ripio's wFIAT local-stablecoin suite, backed 1:1 by peso-denominated reserves according to Ripio and distributed across multiple EVM networks and consumer wallet rails.",
+    "confidence": "high",
+    "last_verified_at": "2026-09-26",
+    "notes": "The earliest dated lifecycle milestone promoted here is the first wARS mint on World Chain on 2025-05-21; SOG does not convert that network-specific milestone into an invented global launch date. Ripio is used as the compatibility issuer/operator identity while the exact legal issuing entity remains an explicit known unknown."
+  },
+  {
+    "id": "sog_st_wcop",
+    "slug": "wcop",
+    "name": "wCOP",
+    "symbol": "wCOP",
+    "aliases": [
+      "Wrapped Colombian Peso",
+      "Ripio wCOP"
+    ],
+    "status": "active",
+    "issuer_id": "sog_org_ripio",
+    "peg_asset": "COP",
+    "collateral_model": "fiat_reserve_backed",
+    "reserve_disclosure_status": "ripio_independent_attestation",
+    "redemption_status": "ripio_platform_conversion_available_direct_issuer_redemption_unknown",
+    "who_can_redeem": "Ripio product material supports conversion between wCOP and Colombian pesos for eligible Ripio users; a separate direct legal redemption right against the exact issuing entity is not established by the reviewed public sources.",
+    "retail_redemption": "ripio_platform_conversion_subject_to_account_eligibility",
+    "institutional_redemption": "unknown",
+    "minimum_redemption": "not established",
+    "redemption_region_notes": "World Money separately documents a Colombia COP-to-wCOP virtual-account route for eligible Ripio users with local residency and verification requirements.",
+    "redemption_notes": "Platform conversion is recorded separately from direct issuer redemption. Exact holder claim, issuing legal entity and insolvency treatment remain unresolved.",
+    "launch_date": null,
+    "discontinued_date": null,
+    "summary": "Colombian-peso-referenced member of Ripio's wFIAT local-stablecoin suite, backed 1:1 by peso-denominated reserves according to Ripio and distributed across multiple EVM networks and consumer wallet rails.",
+    "confidence": "high",
+    "last_verified_at": "2026-09-26",
+    "notes": "Current first-party material establishes live wCOP and reserve backing but does not justify inventing an original global launch date. Ripio is used as the compatibility issuer/operator identity while the exact legal issuing entity remains an explicit known unknown."
+  }
+]

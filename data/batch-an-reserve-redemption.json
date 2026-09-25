@@ -1,0 +1,74 @@
+[
+  {
+    "id": "sog_st_wars",
+    "reserve_profile": {
+      "backing_types": [
+        "bank_deposits"
+      ],
+      "summary": "Ripio's wFIAT transparency material reports 973,000,960.19 wARS outstanding against ARS 1,036,276,284 held in Argentine bank accounts and financial institutions as of 2026-03-31, with independent local-accountant attestation.",
+      "disclosure_status": "independent_attestation",
+      "as_of_date": "2026-03-31",
+      "latest_report_id": "sog_rr_wars_20260331",
+      "confidence": "high",
+      "evidence_ids": [
+        "sog_src_wfiat_ripio_transparency_20260926"
+      ]
+    },
+    "redemption_profile": {
+      "status": "unknown",
+      "settlement_asset": "ARS",
+      "eligible_parties": "Ripio product material supports wARS-to-peso conversion for eligible Ripio users. The exact direct issuer redemption right and legal obligor are not established.",
+      "retail_access": "ripio_platform_conversion_available_subject_to_account_and_jurisdiction_eligibility",
+      "institutional_access": "unknown",
+      "minimum_amount_text": "not established",
+      "fee_text": "not established",
+      "settlement_time_text": "not established",
+      "jurisdiction_restrictions": [
+        "ripio_account_eligibility",
+        "provider_and_local_jurisdiction_rules"
+      ],
+      "as_of_date": "2026-09-26",
+      "confidence": "high",
+      "evidence_ids": [
+        "sog_src_wars_ripio_product_20260926",
+        "sog_src_world_virtual_accounts_wfiat_20260926"
+      ]
+    }
+  },
+  {
+    "id": "sog_st_wcop",
+    "reserve_profile": {
+      "backing_types": [
+        "bank_deposits"
+      ],
+      "summary": "Ripio's wFIAT transparency material reports 104,898,654 wCOP outstanding against COP 107,966,549.02 held in a Colombian bank account as of 2026-03-31, with independent local-accountant attestation.",
+      "disclosure_status": "independent_attestation",
+      "as_of_date": "2026-03-31",
+      "latest_report_id": "sog_rr_wcop_20260331",
+      "confidence": "high",
+      "evidence_ids": [
+        "sog_src_wfiat_ripio_transparency_20260926"
+      ]
+    },
+    "redemption_profile": {
+      "status": "unknown",
+      "settlement_asset": "COP",
+      "eligible_parties": "Ripio product material supports wCOP-to-peso conversion for eligible Ripio users. The exact direct issuer redemption right and legal obligor are not established.",
+      "retail_access": "ripio_platform_conversion_available_subject_to_account_and_jurisdiction_eligibility",
+      "institutional_access": "unknown",
+      "minimum_amount_text": "not established",
+      "fee_text": "not established",
+      "settlement_time_text": "not established",
+      "jurisdiction_restrictions": [
+        "ripio_account_eligibility",
+        "provider_and_local_jurisdiction_rules"
+      ],
+      "as_of_date": "2026-09-26",
+      "confidence": "high",
+      "evidence_ids": [
+        "sog_src_wcop_ripio_product_20260926",
+        "sog_src_world_virtual_accounts_wfiat_20260926"
+      ]
+    }
+  }
+]

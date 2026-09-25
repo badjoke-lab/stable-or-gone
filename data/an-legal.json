@@ -1,0 +1,58 @@
+[
+  {
+    "id": "sog_st_wars",
+    "classifications": [
+      {
+        "classification": "fiat_backed_stablecoin",
+        "jurisdiction": "Argentina / Ripio distribution context",
+        "effective_from": null,
+        "effective_to": null,
+        "authority_or_basis": "Ripio first-party material identifies wARS as an ARS-referenced member of the wFIAT suite backed 1:1 by local-currency reserves. The exact legal issuing entity and statutory token classification are not established in the reviewed public source set.",
+        "confidence": "high",
+        "evidence_ids": [
+          "sog_src_wfiat_ripio_transparency_20260926",
+          "sog_src_wars_ripio_product_20260926"
+        ]
+      }
+    ],
+    "holder_claim_type": "unclear",
+    "claim_against_organization_ids": [],
+    "reserve_ownership": "unknown",
+    "reserve_segregation": "unknown",
+    "bankruptcy_remoteness": "not_established",
+    "licensed_or_regulated_as": [],
+    "notes": "Ripio is preserved as the brand/operator compatibility identity, not asserted as a resolved legal obligor. Platform conversion and collateral attestation do not establish the precise holder claim or insolvency treatment.",
+    "evidence_ids": [
+      "sog_src_wfiat_ripio_transparency_20260926",
+      "sog_src_wars_ripio_product_20260926"
+    ]
+  },
+  {
+    "id": "sog_st_wcop",
+    "classifications": [
+      {
+        "classification": "fiat_backed_stablecoin",
+        "jurisdiction": "Colombia / Ripio distribution context",
+        "effective_from": null,
+        "effective_to": null,
+        "authority_or_basis": "Ripio first-party material identifies wCOP as a COP-referenced member of the wFIAT suite backed 1:1 by local-currency reserves. The exact legal issuing entity and statutory token classification are not established in the reviewed public source set.",
+        "confidence": "high",
+        "evidence_ids": [
+          "sog_src_wfiat_ripio_transparency_20260926",
+          "sog_src_wcop_ripio_product_20260926"
+        ]
+      }
+    ],
+    "holder_claim_type": "unclear",
+    "claim_against_organization_ids": [],
+    "reserve_ownership": "unknown",
+    "reserve_segregation": "unknown",
+    "bankruptcy_remoteness": "not_established",
+    "licensed_or_regulated_as": [],
+    "notes": "Ripio is preserved as the brand/operator compatibility identity, not asserted as a resolved legal obligor. Platform conversion and collateral attestation do not establish the precise holder claim or insolvency treatment.",
+    "evidence_ids": [
+      "sog_src_wfiat_ripio_transparency_20260926",
+      "sog_src_wcop_ripio_product_20260926"
+    ]
+  }
+]

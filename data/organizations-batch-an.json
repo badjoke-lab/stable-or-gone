@@ -1,0 +1,15 @@
+[
+  {
+    "id": "sog_org_ripio",
+    "slug": "ripio",
+    "name": "Ripio",
+    "organization_type": "financial_services",
+    "legacy_issuer_type": "stablecoin_issuer_brand",
+    "jurisdiction": "Latin America / multi-jurisdiction",
+    "official_url": "https://www.ripio.com/",
+    "summary": "Crypto financial-services and infrastructure brand operating the wFIAT local-stablecoin suite, including wARS and wCOP.",
+    "confidence": "high",
+    "last_verified_at": "2026-09-26",
+    "notes": "Ripio first-party material describes Ripio as issuer/operator of the wFIAT suite. This brand-level organization record does not infer which Ripio legal entity is the token issuer in each jurisdiction; that legal-entity boundary remains explicit in the asset legal profiles and known-unknown records."
+  }
+]

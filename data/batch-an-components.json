@@ -1,0 +1,40 @@
+[
+  {
+    "id": "sog_rc_wars_ars_reserve_20260331",
+    "stablecoin_id": "sog_st_wars",
+    "reserve_report_id": "sog_rr_wars_20260331",
+    "asset_category": "bank_deposits",
+    "asset_label": "Argentine-peso bank and financial-institution balances",
+    "share_percent": null,
+    "amount_text": "ARS 1,036,276,284 reported against 973,000,960.19 wARS outstanding as of 2026-03-31.",
+    "currency": "ARS",
+    "liquidity_class": "unknown",
+    "maturity_bucket": "unknown",
+    "custodian_organization_id": null,
+    "as_of_date": "2026-03-31",
+    "confidence": "high",
+    "evidence_ids": [
+      "sog_src_wfiat_ripio_transparency_20260926"
+    ],
+    "notes": "No reserve allocation percentage, named custodian, segregation status or bankruptcy-remoteness claim is inferred beyond the disclosed total collateral amount and institution type."
+  },
+  {
+    "id": "sog_rc_wcop_cop_reserve_20260331",
+    "stablecoin_id": "sog_st_wcop",
+    "reserve_report_id": "sog_rr_wcop_20260331",
+    "asset_category": "bank_deposits",
+    "asset_label": "Colombian-peso bank balance",
+    "share_percent": null,
+    "amount_text": "COP 107,966,549.02 reported against 104,898,654 wCOP outstanding as of 2026-03-31.",
+    "currency": "COP",
+    "liquidity_class": "unknown",
+    "maturity_bucket": "unknown",
+    "custodian_organization_id": null,
+    "as_of_date": "2026-03-31",
+    "confidence": "high",
+    "evidence_ids": [
+      "sog_src_wfiat_ripio_transparency_20260926"
+    ],
+    "notes": "No reserve allocation percentage, named custodian, segregation status or bankruptcy-remoteness claim is inferred beyond the disclosed total collateral amount and institution type."
+  }
+]

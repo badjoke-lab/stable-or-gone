@@ -1,0 +1,326 @@
+[
+  {
+    "id": "sog_dep_wars_ethereum",
+    "stablecoin_id": "sog_st_wars",
+    "chain": "Ethereum",
+    "deployment_type": "issuer_native_token",
+    "token_standard": null,
+    "contract_address": null,
+    "status": "active",
+    "control_event_ids": [],
+    "notes": "Ripio's 2026-03-31 wFIAT transparency material identifies wARS issuance/burn activity on Ethereum. Exact authoritative token address and mint-control identity are not asserted from the reviewed source.",
+    "evidence_ids": [
+      "sog_src_wfiat_ripio_transparency_20260926"
+    ],
+    "canonicality": "issuer_native",
+    "origin_deployment_id": null,
+    "bridge_operator_organization_id": null,
+    "mint_authority_type": "unknown",
+    "contract_version": "unknown",
+    "is_primary": false
+  },
+  {
+    "id": "sog_dep_wars_world_chain",
+    "stablecoin_id": "sog_st_wars",
+    "chain": "World Chain",
+    "deployment_type": "issuer_native_token",
+    "token_standard": null,
+    "contract_address": null,
+    "status": "active",
+    "control_event_ids": [
+      "sog_ev_wars_worldchain_mint_20250521"
+    ],
+    "notes": "Ripio's 2026-03-31 wFIAT transparency material identifies wARS issuance/burn activity on World Chain. Exact authoritative token address and mint-control identity are not asserted from the reviewed source.",
+    "evidence_ids": [
+      "sog_src_wfiat_ripio_transparency_20260926"
+    ],
+    "canonicality": "issuer_native",
+    "origin_deployment_id": null,
+    "bridge_operator_organization_id": null,
+    "mint_authority_type": "unknown",
+    "contract_version": "unknown",
+    "is_primary": false
+  },
+  {
+    "id": "sog_dep_wars_base",
+    "stablecoin_id": "sog_st_wars",
+    "chain": "Base",
+    "deployment_type": "issuer_native_token",
+    "token_standard": null,
+    "contract_address": null,
+    "status": "active",
+    "control_event_ids": [],
+    "notes": "Ripio's 2026-03-31 wFIAT transparency material identifies wARS issuance/burn activity on Base. Exact authoritative token address and mint-control identity are not asserted from the reviewed source.",
+    "evidence_ids": [
+      "sog_src_wfiat_ripio_transparency_20260926"
+    ],
+    "canonicality": "issuer_native",
+    "origin_deployment_id": null,
+    "bridge_operator_organization_id": null,
+    "mint_authority_type": "unknown",
+    "contract_version": "unknown",
+    "is_primary": false
+  },
+  {
+    "id": "sog_dep_wars_polygon",
+    "stablecoin_id": "sog_st_wars",
+    "chain": "Polygon",
+    "deployment_type": "issuer_native_token",
+    "token_standard": null,
+    "contract_address": null,
+    "status": "active",
+    "control_event_ids": [],
+    "notes": "Ripio's 2026-03-31 wFIAT transparency material identifies wARS issuance/burn activity on Polygon. Exact authoritative token address and mint-control identity are not asserted from the reviewed source.",
+    "evidence_ids": [
+      "sog_src_wfiat_ripio_transparency_20260926"
+    ],
+    "canonicality": "issuer_native",
+    "origin_deployment_id": null,
+    "bridge_operator_organization_id": null,
+    "mint_authority_type": "unknown",
+    "contract_version": "unknown",
+    "is_primary": false
+  },
+  {
+    "id": "sog_dep_wars_gnosis",
+    "stablecoin_id": "sog_st_wars",
+    "chain": "Gnosis",
+    "deployment_type": "issuer_native_token",
+    "token_standard": null,
+    "contract_address": null,
+    "status": "active",
+    "control_event_ids": [],
+    "notes": "Ripio's 2026-03-31 wFIAT transparency material identifies wARS issuance/burn activity on Gnosis. Exact authoritative token address and mint-control identity are not asserted from the reviewed source.",
+    "evidence_ids": [
+      "sog_src_wfiat_ripio_transparency_20260926"
+    ],
+    "canonicality": "issuer_native",
+    "origin_deployment_id": null,
+    "bridge_operator_organization_id": null,
+    "mint_authority_type": "unknown",
+    "contract_version": "unknown",
+    "is_primary": false
+  },
+  {
+    "id": "sog_dep_wars_bnb_smart_chain",
+    "stablecoin_id": "sog_st_wars",
+    "chain": "BNB Smart Chain",
+    "deployment_type": "issuer_native_token",
+    "token_standard": null,
+    "contract_address": null,
+    "status": "active",
+    "control_event_ids": [],
+    "notes": "Ripio's 2026-03-31 wFIAT transparency material identifies wARS issuance/burn activity on BNB Smart Chain. Exact authoritative token address and mint-control identity are not asserted from the reviewed source.",
+    "evidence_ids": [
+      "sog_src_wfiat_ripio_transparency_20260926"
+    ],
+    "canonicality": "issuer_native",
+    "origin_deployment_id": null,
+    "bridge_operator_organization_id": null,
+    "mint_authority_type": "unknown",
+    "contract_version": "unknown",
+    "is_primary": false
+  },
+  {
+    "id": "sog_dep_wars_celo",
+    "stablecoin_id": "sog_st_wars",
+    "chain": "Celo",
+    "deployment_type": "issuer_native_token",
+    "token_standard": null,
+    "contract_address": null,
+    "status": "active",
+    "control_event_ids": [],
+    "notes": "Ripio's 2026-07-31 first-party announcement identifies wARS as available on Celo with the wFIAT suite. Exact contract address is not asserted here.",
+    "evidence_ids": [
+      "sog_src_wfiat_ripio_celo_20260731"
+    ],
+    "canonicality": "issuer_native",
+    "origin_deployment_id": null,
+    "bridge_operator_organization_id": null,
+    "mint_authority_type": "unknown",
+    "contract_version": "unknown",
+    "is_primary": false
+  },
+  {
+    "id": "sog_dep_wars_arc",
+    "stablecoin_id": "sog_st_wars",
+    "chain": "Arc",
+    "deployment_type": "issuer_native_token",
+    "token_standard": null,
+    "contract_address": null,
+    "status": "active",
+    "control_event_ids": [],
+    "notes": "Ripio's 2026-09-16 Arc announcement identifies wARS as live on Arc public mainnet with the wFIAT suite. Exact token address is not asserted here.",
+    "evidence_ids": [
+      "sog_src_wfiat_ripio_arc_20260916"
+    ],
+    "canonicality": "issuer_native",
+    "origin_deployment_id": null,
+    "bridge_operator_organization_id": null,
+    "mint_authority_type": "unknown",
+    "contract_version": "unknown",
+    "is_primary": false
+  },
+  {
+    "id": "sog_dep_wcop_ethereum",
+    "stablecoin_id": "sog_st_wcop",
+    "chain": "Ethereum",
+    "deployment_type": "issuer_native_token",
+    "token_standard": null,
+    "contract_address": null,
+    "status": "active",
+    "control_event_ids": [],
+    "notes": "Ripio's 2026-03-31 wFIAT transparency material identifies wCOP issuance/burn activity on Ethereum. Exact authoritative token address and mint-control identity are not asserted from the reviewed source.",
+    "evidence_ids": [
+      "sog_src_wfiat_ripio_transparency_20260926"
+    ],
+    "canonicality": "issuer_native",
+    "origin_deployment_id": null,
+    "bridge_operator_organization_id": null,
+    "mint_authority_type": "unknown",
+    "contract_version": "unknown",
+    "is_primary": false
+  },
+  {
+    "id": "sog_dep_wcop_world_chain",
+    "stablecoin_id": "sog_st_wcop",
+    "chain": "World Chain",
+    "deployment_type": "issuer_native_token",
+    "token_standard": null,
+    "contract_address": null,
+    "status": "active",
+    "control_event_ids": [],
+    "notes": "Ripio's 2026-03-31 wFIAT transparency material identifies wCOP issuance/burn activity on World Chain. Exact authoritative token address and mint-control identity are not asserted from the reviewed source.",
+    "evidence_ids": [
+      "sog_src_wfiat_ripio_transparency_20260926"
+    ],
+    "canonicality": "issuer_native",
+    "origin_deployment_id": null,
+    "bridge_operator_organization_id": null,
+    "mint_authority_type": "unknown",
+    "contract_version": "unknown",
+    "is_primary": false
+  },
+  {
+    "id": "sog_dep_wcop_base",
+    "stablecoin_id": "sog_st_wcop",
+    "chain": "Base",
+    "deployment_type": "issuer_native_token",
+    "token_standard": null,
+    "contract_address": null,
+    "status": "active",
+    "control_event_ids": [],
+    "notes": "Ripio's 2026-03-31 wFIAT transparency material identifies wCOP issuance/burn activity on Base. Exact authoritative token address and mint-control identity are not asserted from the reviewed source.",
+    "evidence_ids": [
+      "sog_src_wfiat_ripio_transparency_20260926"
+    ],
+    "canonicality": "issuer_native",
+    "origin_deployment_id": null,
+    "bridge_operator_organization_id": null,
+    "mint_authority_type": "unknown",
+    "contract_version": "unknown",
+    "is_primary": false
+  },
+  {
+    "id": "sog_dep_wcop_polygon",
+    "stablecoin_id": "sog_st_wcop",
+    "chain": "Polygon",
+    "deployment_type": "issuer_native_token",
+    "token_standard": null,
+    "contract_address": null,
+    "status": "active",
+    "control_event_ids": [],
+    "notes": "Ripio's 2026-03-31 wFIAT transparency material identifies wCOP issuance/burn activity on Polygon. Exact authoritative token address and mint-control identity are not asserted from the reviewed source.",
+    "evidence_ids": [
+      "sog_src_wfiat_ripio_transparency_20260926"
+    ],
+    "canonicality": "issuer_native",
+    "origin_deployment_id": null,
+    "bridge_operator_organization_id": null,
+    "mint_authority_type": "unknown",
+    "contract_version": "unknown",
+    "is_primary": false
+  },
+  {
+    "id": "sog_dep_wcop_gnosis",
+    "stablecoin_id": "sog_st_wcop",
+    "chain": "Gnosis",
+    "deployment_type": "issuer_native_token",
+    "token_standard": null,
+    "contract_address": null,
+    "status": "active",
+    "control_event_ids": [],
+    "notes": "Ripio's 2026-03-31 wFIAT transparency material identifies wCOP issuance/burn activity on Gnosis. Exact authoritative token address and mint-control identity are not asserted from the reviewed source.",
+    "evidence_ids": [
+      "sog_src_wfiat_ripio_transparency_20260926"
+    ],
+    "canonicality": "issuer_native",
+    "origin_deployment_id": null,
+    "bridge_operator_organization_id": null,
+    "mint_authority_type": "unknown",
+    "contract_version": "unknown",
+    "is_primary": false
+  },
+  {
+    "id": "sog_dep_wcop_bnb_smart_chain",
+    "stablecoin_id": "sog_st_wcop",
+    "chain": "BNB Smart Chain",
+    "deployment_type": "issuer_native_token",
+    "token_standard": null,
+    "contract_address": null,
+    "status": "active",
+    "control_event_ids": [],
+    "notes": "Ripio's 2026-03-31 wFIAT transparency material identifies wCOP issuance/burn activity on BNB Smart Chain. Exact authoritative token address and mint-control identity are not asserted from the reviewed source.",
+    "evidence_ids": [
+      "sog_src_wfiat_ripio_transparency_20260926"
+    ],
+    "canonicality": "issuer_native",
+    "origin_deployment_id": null,
+    "bridge_operator_organization_id": null,
+    "mint_authority_type": "unknown",
+    "contract_version": "unknown",
+    "is_primary": false
+  },
+  {
+    "id": "sog_dep_wcop_celo",
+    "stablecoin_id": "sog_st_wcop",
+    "chain": "Celo",
+    "deployment_type": "issuer_native_token",
+    "token_standard": null,
+    "contract_address": null,
+    "status": "active",
+    "control_event_ids": [],
+    "notes": "Ripio's 2026-07-31 first-party announcement identifies wCOP as available on Celo with the wFIAT suite. Exact contract address is not asserted here.",
+    "evidence_ids": [
+      "sog_src_wfiat_ripio_celo_20260731"
+    ],
+    "canonicality": "issuer_native",
+    "origin_deployment_id": null,
+    "bridge_operator_organization_id": null,
+    "mint_authority_type": "unknown",
+    "contract_version": "unknown",
+    "is_primary": false
+  },
+  {
+    "id": "sog_dep_wcop_arc",
+    "stablecoin_id": "sog_st_wcop",
+    "chain": "Arc",
+    "deployment_type": "issuer_native_token",
+    "token_standard": null,
+    "contract_address": null,
+    "status": "active",
+    "control_event_ids": [
+      "sog_ev_wcop_arc_launch_20260916"
+    ],
+    "notes": "Ripio's 2026-09-16 Arc announcement identifies wCOP as live on Arc public mainnet with the wFIAT suite. Exact token address is not asserted here.",
+    "evidence_ids": [
+      "sog_src_wfiat_ripio_arc_20260916"
+    ],
+    "canonicality": "issuer_native",
+    "origin_deployment_id": null,
+    "bridge_operator_organization_id": null,
+    "mint_authority_type": "unknown",
+    "contract_version": "unknown",
+    "is_primary": false
+  }
+]

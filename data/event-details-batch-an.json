@@ -1,0 +1,50 @@
+[
+  {
+    "id": "sog_ev_wars_worldchain_mint_20250521",
+    "title": "wARS first World Chain mint",
+    "subject_stablecoin_ids": [
+      "sog_st_wars"
+    ],
+    "subject_organization_ids": [
+      "sog_org_ripio"
+    ],
+    "evidence_ids": [
+      "sog_src_wfiat_ripio_transparency_20260926"
+    ],
+    "event_detail_kind": "launch",
+    "launch_detail": {
+      "summary": "Ripio records the first wARS mint on World Chain on 2025-05-21. This is a World Chain deployment milestone, not an inferred global asset-launch date.",
+      "status": "active",
+      "affected_deployment_ids": [
+        "sog_dep_wars_world_chain"
+      ],
+      "related_organization_ids": [
+        "sog_org_ripio"
+      ]
+    }
+  },
+  {
+    "id": "sog_ev_wcop_arc_launch_20260916",
+    "title": "wCOP Arc mainnet expansion",
+    "subject_stablecoin_ids": [
+      "sog_st_wcop"
+    ],
+    "subject_organization_ids": [
+      "sog_org_ripio"
+    ],
+    "evidence_ids": [
+      "sog_src_wfiat_ripio_arc_20260916"
+    ],
+    "event_detail_kind": "launch",
+    "launch_detail": {
+      "summary": "Ripio states that the full wFIAT suite, including wCOP, went live on Arc public mainnet on 2026-09-16.",
+      "status": "active",
+      "affected_deployment_ids": [
+        "sog_dep_wcop_arc"
+      ],
+      "related_organization_ids": [
+        "sog_org_ripio"
+      ]
+    }
+  }
+]

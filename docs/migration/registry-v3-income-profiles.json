@@ -41,9 +41,10 @@
     "data/batch-aj-income.json",
     "data/batch-ak-income.json",
     "data/batch-al-income.json",
-    "data/batch-am-income.json"
+    "data/batch-am-income.json",
+    "data/batch-an-income.json"
   ],
-  "minimum_count": 144,
+  "minimum_count": 146,
   "loader": "src/lib/data/incomeProfilesV3.ts",
   "loader_export": "getIncomeProfilesV3",
   "validator": "scripts/validate-registry-v3-income-profiles.mjs"

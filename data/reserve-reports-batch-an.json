@@ -1,0 +1,34 @@
+[
+  {
+    "id": "sog_rr_wars_20260331",
+    "stablecoin_id": "sog_st_wars",
+    "issuer_id": "sog_org_ripio",
+    "report_date": "2026-03-31",
+    "period_covered": "collateral position as of 2026-03-31",
+    "publisher": "Ripio",
+    "report_type": "independent_local_accountant_collateral_attestation",
+    "asset_categories": [
+      "bank_deposits"
+    ],
+    "url": "https://www.ripio.com/en/wfiat",
+    "archived_url": "https://web.archive.org/web/*/https://www.ripio.com/en/wfiat",
+    "confidence": "high",
+    "notes": "Ripio's transparency page reports 973,000,960.19 wARS and ARS 1,036,276,284 in Argentine bank accounts/financial institutions at the attestation date. The report_date is the disclosed as-of date; SOG does not invent a separate publication date or named accountant not exposed in the reviewed text."
+  },
+  {
+    "id": "sog_rr_wcop_20260331",
+    "stablecoin_id": "sog_st_wcop",
+    "issuer_id": "sog_org_ripio",
+    "report_date": "2026-03-31",
+    "period_covered": "collateral position as of 2026-03-31",
+    "publisher": "Ripio",
+    "report_type": "independent_local_accountant_collateral_attestation",
+    "asset_categories": [
+      "bank_deposits"
+    ],
+    "url": "https://www.ripio.com/en/wfiat",
+    "archived_url": "https://web.archive.org/web/*/https://www.ripio.com/en/wfiat",
+    "confidence": "high",
+    "notes": "Ripio's transparency page reports 104,898,654 wCOP and COP 107,966,549.02 in a Colombian bank account at the attestation date. The report_date is the disclosed as-of date; SOG does not invent a separate publication date or named accountant not exposed in the reviewed text."
+  }
+]

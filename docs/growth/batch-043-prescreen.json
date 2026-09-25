@@ -1,0 +1,71 @@
+{
+  "schema_version": "1.0",
+  "batch_id": "batch_043",
+  "reviewed_at": "2026-09-26",
+  "base_canonical_assets": 144,
+  "authority_sources": [
+    "data/editorial-research/wfiat-world-money-source-review-2026-09-22.json",
+    "docs/post-351-data-growth-operating-spec.md"
+  ],
+  "prescreen_pool": [
+    {
+      "name": "wARS",
+      "symbol": "wARS",
+      "issuer_or_operator": "Ripio",
+      "reference": "ARS",
+      "decision": "promote",
+      "candidate_id": "sog_cand_wars_20260926",
+      "reason": "First-party Ripio material establishes live identity, 1:1 ARS collateral framing, individual 2026-03-31 attestation, multi-network deployments and platform conversion; World independently documents an Argentina ARS→wARS Ripio Virtual Account route. Exact legal issuer and direct-holder redemption remain explicit unknowns."
+    },
+    {
+      "name": "wCOP",
+      "symbol": "wCOP",
+      "issuer_or_operator": "Ripio",
+      "reference": "COP",
+      "decision": "promote",
+      "candidate_id": "sog_cand_wcop_20260926",
+      "reason": "First-party Ripio material establishes live identity, 1:1 COP collateral framing, individual 2026-03-31 attestation, multi-network deployments and platform conversion; World independently documents a Colombia COP→wCOP Ripio Virtual Account route. Exact legal issuer and direct-holder redemption remain explicit unknowns."
+    },
+    {
+      "name": "wBRL",
+      "symbol": "wBRL",
+      "issuer_or_operator": "Ripio",
+      "reference": "BRL",
+      "decision": "full_record_review_hold",
+      "candidate_id": null,
+      "reason": "Family identity and attestation evidence exist, but batch 043 is capped at two new assets and the World Money review does not establish the same jurisdiction-specific route depth used for wARS/wCOP."
+    },
+    {
+      "name": "wMXN",
+      "symbol": "wMXN",
+      "issuer_or_operator": "Ripio",
+      "reference": "MXN",
+      "decision": "full_record_review_hold",
+      "candidate_id": null,
+      "reason": "Ripio identity is supported, but World Money's currently reviewed Mexico Virtual Account maps MXN to WLD rather than wMXN."
+    },
+    {
+      "name": "wCLP",
+      "symbol": "wCLP",
+      "issuer_or_operator": "Ripio",
+      "reference": "CLP",
+      "decision": "full_record_review_hold",
+      "candidate_id": null,
+      "reason": "Family identity is supported; asset-specific assurance/redemption/access review remains pending and batch 043 is capped at two new assets."
+    },
+    {
+      "name": "wPEN",
+      "symbol": "wPEN",
+      "issuer_or_operator": "Ripio",
+      "reference": "PEN",
+      "decision": "full_record_review_hold",
+      "candidate_id": null,
+      "reason": "Family identity is supported; asset-specific assurance/redemption/access review remains pending and batch 043 is capped at two new assets."
+    }
+  ],
+  "summary": {
+    "advance_to_canonical_promotion": 2,
+    "full_record_review_hold": 4
+  },
+  "boundary": "Only wARS and wCOP advance in batch 043. The two-asset growth cap is preserved; no blanket 150+ country inference, unresolved legal issuer claim, or direct redemption right is created."
+}
