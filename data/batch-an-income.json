@@ -1,0 +1,26 @@
+[
+  {
+    "id": "sog_st_wars",
+    "availability": "via_wrapper",
+    "source": "lending",
+    "accrual": "protocol_position",
+    "rate": "variable",
+    "related_asset_ids": [],
+    "evidence_ids": [
+      "sog_src_wars_ripio_morpho_20260819"
+    ],
+    "notes": "wARS itself is not modeled as intrinsically yield-bearing. Ripio documents separate Morpho supply positions on Ethereum where users may earn borrower-funded variable yield."
+  },
+  {
+    "id": "sog_st_wcop",
+    "availability": "unknown",
+    "source": "unknown",
+    "accrual": "unknown",
+    "rate": "unknown",
+    "related_asset_ids": [],
+    "evidence_ids": [
+      "sog_src_wcop_ripio_product_20260926"
+    ],
+    "notes": "The reviewed wCOP source set does not establish an intrinsic holder yield or a canonical yield wrapper. Unknown is preserved."
+  }
+]
