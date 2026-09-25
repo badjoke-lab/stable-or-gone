@@ -1,0 +1,96 @@
+---
+import ArticleLayout from '../../../layouts/ArticleLayout.astro';
+const headline = 'Binance Invests $100 Million in Circle and Renews USDC Partnership for Five Years';
+const title = `${headline} — Stable or Gone`;
+const description = 'Binance invested $100 million in Circle and renewed its USDC partnership for five years. SOG records the distribution agreement as a canonical USDC adoption event while separating it from reserve, redemption, peg, and lifecycle status.';
+const canonicalPath = '/articles/binance-circle-usdc-five-year-partnership/';
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline,
+  description,
+  url: `https://www.stableorgone.com${canonicalPath}`,
+  inLanguage: 'en',
+  datePublished: '2026-09-26',
+  dateModified: '2026-09-26',
+  isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://www.stableorgone.com/' },
+  about: ['USDC', 'Circle', 'Binance', 'stablecoins', 'exchange distribution', 'stablecoin adoption']
+};
+---
+<ArticleLayout
+  title={title}
+  description={description}
+  canonicalPath={canonicalPath}
+  headline={headline}
+  sectionLabel="Distribution and exchange adoption"
+  deck="The September 22 agreement combines a $100 million strategic equity investment in Circle with a new five-year commercial commitment around USDC. For SOG, the material stablecoin change is the distribution agreement: Binance says it will lead promotion and adoption across its global platform while Circle continues the infrastructure supporting USDC holding and use."
+  publishedAt="September 26, 2026"
+  treatment="Canonical event + non-canonical analysis"
+  scope="USDC / Circle / Binance / five-year distribution partnership"
+  jsonLd={jsonLd}
+>
+  <section class="panel registry">
+    <div class="bar">What happened</div>
+    <p><strong>Circle and Binance announced an expanded five-year strategic partnership on September 22, 2026.</strong> Binance made a $100 million strategic equity investment in Circle, and the companies entered a new commercial agreement focused on expanding USDC access, promotion and integration through Binance.</p>
+    <p>Both companies describe emerging markets as a particular focus. Circle says it will provide the infrastructure services supporting the holding and use of USDC, while Binance says it will lead distribution and adoption across its platform.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Why SOG records this as a USDC event</div>
+    <p>The equity purchase is a corporate transaction involving Circle, but the commercial agreement is explicitly tied to USDC distribution. That makes the development relevant to the stablecoin record rather than merely to Circle's corporate history.</p>
+    <p>SOG records the September 22 development as <strong>exchange-adoption context</strong> for USDC. The event captures a named major distribution platform, a defined five-year term and first-party commitments from both sides.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">What the $100 million investment does not prove</div>
+    <p>Binance's investment is an equity investment in Circle. It is not evidence that Binance owns USDC reserves, becomes the legal issuer of USDC, gains a redemption role, or changes the assets backing USDC.</p>
+    <p>The reviewed announcements also do not establish a peg change, reserve impairment, redemption restriction, legal-status change or lifecycle-status change for USDC. Those questions remain governed by their own source-backed SOG layers.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">A five-year distribution commitment is broader than one listing</div>
+    <p>SOG distinguishes a routine exchange listing from a broader distribution commitment. The new agreement is described as a five-year partnership to promote USDC across Binance's global platform, with Binance leading distribution and adoption and Circle continuing supporting infrastructure.</p>
+    <p>That does not mean every Binance product, jurisdiction or user receives the same USDC functionality. SOG does not convert a platform-wide partnership announcement into country-by-country Market Access records without function-specific and jurisdiction-specific evidence.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Confirmed facts and boundaries</div>
+    <table>
+      <thead><tr><th>Question</th><th>Current treatment</th></tr></thead>
+      <tbody>
+        <tr><td>Did Binance invest $100 million in Circle?</td><td>Yes. Circle and Binance both describe a $100 million equity investment.</td></tr>
+        <tr><td>Was the USDC partnership renewed for five years?</td><td>Yes. Both first-party announcements describe a new five-year term.</td></tr>
+        <tr><td>Is the partnership focused on USDC distribution and adoption?</td><td>Yes. Binance is described as leading distribution and adoption while Circle provides supporting infrastructure.</td></tr>
+        <tr><td>Does this change the USDC issuer?</td><td>No such change is established. Circle remains the canonical issuer in SOG.</td></tr>
+        <tr><td>Does this change USDC reserves or redemption?</td><td>No such change is established by the partnership announcements.</td></tr>
+        <tr><td>Does it prove universal USDC access on Binance in every jurisdiction and function?</td><td>No. Specific market-access claims still require narrower evidence.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Stable or Gone treatment</div>
+    <p><strong>Current SOG treatment: canonical USDC exchange-adoption event plus non-canonical analysis.</strong></p>
+    <p>The canonical event is limited to what the reviewed primary sources establish: the $100 million strategic equity investment, the five-year commercial agreement and the USDC distribution/adoption commitment. USDC remains active, and SOG makes no reserve, redemption, peg, legal-state or lifecycle downgrade from this event.</p>
+    <p>Binance is not added as a USDC issuer or reserve counterparty merely because of the investment. The corporate investment and the stablecoin distribution role remain conceptually separate.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">What SOG will watch next</div>
+    <ul>
+      <li>specific Binance product integrations that materially change how users can hold, transfer, trade or otherwise use USDC;</li>
+      <li>jurisdiction-specific USDC availability where first-party evidence binds the country, platform function and effective date;</li>
+      <li>material changes to the five-year commercial arrangement or Circle infrastructure supporting Binance USDC usage;</li>
+      <li>any later source-backed change to USDC issuance, redemption, reserve management or legal structure that is distinct from this distribution partnership.</li>
+    </ul>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Sources</div>
+    <ul>
+      <li><a href="https://investor.circle.com/news/news-details/2026/Binance-Invests-100-Million-in-Circle-Expands-Strategic-Partnership-and-Renews-Commercial-Agreement-for-Five-Years/default.aspx" rel="noreferrer">Circle Internet Group, September 22, 2026 — Binance Invests $100 Million in Circle, Expands Strategic Partnership and Renews Commercial Agreement for Five Years</a> — primary source for the equity investment, five-year term and USDC distribution agreement.</li>
+      <li><a href="https://www.binance.com/en/blog/ecosystem/167890448134073062" rel="noreferrer">Binance, September 22, 2026 — Binance Invests $100 Million in Circle, Expands and Renews USDC Partnership for Five Years</a> — primary exchange source for distribution/adoption responsibilities and the expanded partnership.</li>
+      <li><a href="https://www.reuters.com/legal/transactional/binance-buys-100-million-stake-circle-expands-partnership-2026-09-22/" rel="noreferrer">Reuters, September 22, 2026 — Binance buys $100 million stake in Circle, expands partnership</a> — independent reporting context.</li>
+    </ul>
+  </section>
+</ArticleLayout>
