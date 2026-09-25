@@ -340,5 +340,41 @@
     "organization_ids": ["sog_issuer_origin_protocol"],
     "claim_scopes": ["audits", "security"],
     "event_ids": ["sog_ev_ousd_launch_batch_o"]
+  },
+  {
+    "id": "sog_src_sofiusd_mastercard_live_20260922",
+    "stablecoin_id": "sog_st_sofiusd",
+    "issuer_id": "sog_issuer_sofi_bank",
+    "source_type": "official_blog",
+    "title": "SoFi becomes first national bank to go live with stablecoin settlement across Mastercard's global payments network",
+    "url": "https://investors.sofi.com/news/news-details/2026/SoFi-Becomes-First-National-Bank-to-Go-Live-with-Stablecoin-Settlement-across-Mastercards-Global-Payments-Network/default.aspx",
+    "publisher": "SoFi",
+    "published_at": "2026-09-22",
+    "archived_url": "https://web.archive.org/web/*/https://investors.sofi.com/news/news-details/2026/SoFi-Becomes-First-National-Bank-to-Go-Live-with-Stablecoin-Settlement-across-Mastercards-Global-Payments-Network/default.aspx",
+    "accessed_at": "2026-09-26",
+    "reliability": "high",
+    "claim_scope": "payment_settlement_adoption",
+    "stablecoin_ids": ["sog_st_sofiusd"],
+    "organization_ids": ["sog_issuer_sofi_bank"],
+    "claim_scopes": ["settlement_live", "mastercard", "card_program", "adoption"],
+    "event_ids": ["sog_ev_sofiusd_mastercard_settlement_20260922"]
+  },
+  {
+    "id": "sog_src_sofiusd_mastercard_plan_20260303",
+    "stablecoin_id": "sog_st_sofiusd",
+    "issuer_id": "sog_issuer_sofi_bank",
+    "source_type": "official_blog",
+    "title": "SoFi and Mastercard partner to enable SoFiUSD settlement across Mastercard's global payments network",
+    "url": "https://www.mastercard.com/global/en/news-and-trends/press/2026/march/sofi-and-mastercard-partner-to-enable-sofiusd-settlement-across-.html",
+    "publisher": "Mastercard",
+    "published_at": "2026-03-03",
+    "archived_url": "https://web.archive.org/web/*/https://www.mastercard.com/global/en/news-and-trends/press/2026/march/sofi-and-mastercard-partner-to-enable-sofiusd-settlement-across-.html",
+    "accessed_at": "2026-09-26",
+    "reliability": "high",
+    "claim_scope": "planned_payment_settlement",
+    "stablecoin_ids": ["sog_st_sofiusd"],
+    "organization_ids": ["sog_issuer_sofi_bank"],
+    "claim_scopes": ["settlement_plan", "mastercard", "planned_adoption"],
+    "event_ids": ["sog_ev_sofiusd_mastercard_settlement_20260922"]
   }
 ]

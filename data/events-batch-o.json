@@ -68,5 +68,19 @@
     "source_count": 4,
     "event_status_effect": "active",
     "notes": "Later security, restart, and compensation chronology remains a separate review queue."
+  },
+  {
+    "id": "sog_ev_sofiusd_mastercard_settlement_20260922",
+    "stablecoin_id": "sog_st_sofiusd",
+    "issuer_id": "sog_issuer_sofi_bank",
+    "event_type": "payment_settlement_launch",
+    "event_date": "2026-09-22",
+    "title": "SoFiUSD goes live for Mastercard settlement",
+    "description": "SoFi and Mastercard announced live SoFiUSD settlement across SoFi Bank's debit and credit card program as the bank began migrating the program to blockchain-based settlement.",
+    "impact_level": "high",
+    "confidence": "high",
+    "source_count": 2,
+    "event_status_effect": "active",
+    "notes": "Adoption and settlement event only. SoFiUSD remains active; this does not by itself change reserve, redemption, or deployment status."
   }
 ]

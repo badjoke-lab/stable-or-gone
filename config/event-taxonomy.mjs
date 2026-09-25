@@ -52,7 +52,7 @@ const eventTypesByCategory = {
     'governance_change_proposed', 'governance_transition', 'protocol_model_update',
     'protocol_upgrade', 'protocol_upgrade_announced'
   ],
-  adoption: ['chain_expansion', 'exchange_adoption_context'],
+  adoption: ['chain_expansion', 'exchange_adoption_context', 'payment_settlement_launch'],
   ownership: ['acquired'],
   lifecycle_review: ['status_review'],
   market_support: ['liquidity_incentive_start'],
