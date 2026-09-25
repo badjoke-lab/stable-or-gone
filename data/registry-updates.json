@@ -1,5 +1,18 @@
 [
   {
+    "id": "sog_update_2026_09_26_usdc_binance_circle_partnership",
+    "date": "2026-09-26",
+    "title": "Binance-Circle five-year USDC partnership recorded",
+    "category": "data",
+    "summary": "Recorded the September 22 Binance-Circle expansion as a canonical USDC exchange-adoption event using first-party Circle and Binance evidence. The event includes Binance's $100 million strategic equity investment and the new five-year USDC distribution agreement while leaving USDC lifecycle, reserve, redemption, peg, and legal status unchanged.",
+    "related_paths": [
+      "/articles/binance-circle-usdc-five-year-partnership/",
+      "/stablecoin/usdc/",
+      "/event/sog_ev_usdc_2026_09_binance_circle_partnership/",
+      "/updates/"
+    ]
+  },
+  {
     "id": "sog_update_2026_09_20_jpyc_upbit_incident",
     "date": "2026-09-20",
     "title": "JPYC Upbit listing and recovered issuance interruption recorded",
