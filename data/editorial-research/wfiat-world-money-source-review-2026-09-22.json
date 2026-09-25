@@ -1,0 +1,194 @@
+{
+  "schema_version": "1.0",
+  "batch_id": "batch_043",
+  "review_id": "sog_wfiat_world_money_source_review_2026_09_22",
+  "status": "reviewed_internal_candidate_prescreen",
+  "reviewed_at": "2026-09-22",
+  "base_canonical_assets": 144,
+  "trigger": {
+    "description": "World Money 150+ country rollout and Local Stablecoin support exposed a previously untracked Ripio wFIAT family in the SOG corpus.",
+    "treatment": "Discovery signal only. Promotion decisions use first-party World and Ripio sources."
+  },
+  "family": {
+    "issuer_or_operator": "Ripio",
+    "family_name": "wFIAT",
+    "assets": [
+      {
+        "name": "wARS",
+        "symbol": "wARS",
+        "reference": "ARS",
+        "disposition": "advance_to_full_record_review",
+        "priority_reason": "World Money has a first-party Argentina ARS→wARS virtual-account route; Ripio publishes individual reserve attestations and current DeFi/product evidence."
+      },
+      {
+        "name": "wCOP",
+        "symbol": "wCOP",
+        "reference": "COP",
+        "disposition": "advance_to_full_record_review",
+        "priority_reason": "World Money has a first-party Colombia COP→wCOP virtual-account route; Ripio publishes an individual reserve attestation."
+      },
+      {
+        "name": "wBRL",
+        "symbol": "wBRL",
+        "reference": "BRL",
+        "disposition": "family_verified_full_record_review_required",
+        "priority_reason": "Ripio identifies the asset as live, 1:1 backed, multi-network and individually attested; no World Money jurisdiction-specific route was established in this review."
+      },
+      {
+        "name": "wMXN",
+        "symbol": "wMXN",
+        "reference": "MXN",
+        "disposition": "family_verified_full_record_review_required",
+        "priority_reason": "Ripio identifies the asset as live and 1:1 backed; World Money's current Mexico virtual account maps MXN to WLD, not wMXN."
+      },
+      {
+        "name": "wCLP",
+        "symbol": "wCLP",
+        "reference": "CLP",
+        "disposition": "family_verified_full_record_review_required",
+        "priority_reason": "Ripio identifies the asset as live and 1:1 backed; asset-specific assurance and redemption detail still require full record review."
+      },
+      {
+        "name": "wPEN",
+        "symbol": "wPEN",
+        "reference": "PEN",
+        "disposition": "family_verified_full_record_review_required",
+        "priority_reason": "Ripio identifies the asset as live and 1:1 backed; asset-specific assurance and redemption detail still require full record review."
+      }
+    ]
+  },
+  "reviewed_primary_sources": [
+    {
+      "publisher": "World",
+      "title": "Introducing World Money: a financial super app for humans",
+      "url": "https://world.org/blog/announcements/world-money",
+      "published_at": "2026-09-17",
+      "supports": [
+        "150+ country rollout",
+        "stablecoin balances",
+        "country-varying feature eligibility",
+        "Stripe/Apple Pay U.S. start",
+        "Morpho-powered Earn"
+      ],
+      "boundary": "Does not establish every asset/function in every country."
+    },
+    {
+      "publisher": "World Help Center",
+      "title": "What is a Virtual Account?",
+      "url": "https://support.world.org/hc/en-us/articles/44413326159635-What-is-a-Virtual-Account",
+      "supports": [
+        "USD→USDC virtual account",
+        "Argentina ARS→wARS",
+        "Colombia COP→wCOP",
+        "Mexico MXN→WLD",
+        "bank withdrawal path for Ripio virtual accounts"
+      ],
+      "boundary": "Provider/product scope only; does not establish universal country-wide access."
+    },
+    {
+      "publisher": "World Help Center",
+      "title": "What is a Local Stablecoin?",
+      "url": "https://support.world.org/hc/en-us/articles/44774231726867-What-is-a-Local-Stablecoin",
+      "supports": [
+        "World Money Local Stablecoin feature",
+        "wARS example",
+        "supported local stablecoins can be held/transacted",
+        "bank-transfer purchase requires matching fiat currency"
+      ],
+      "boundary": "The page does not enumerate every supported Local Stablecoin in every jurisdiction."
+    },
+    {
+      "publisher": "Ripio",
+      "title": "Ripio stablecoins and infrastructure",
+      "url": "https://www.ripio.com/en",
+      "supports": [
+        "wARS",
+        "wBRL",
+        "wCOP",
+        "wMXN",
+        "wCLP",
+        "wPEN",
+        "1:1 backing family claim"
+      ],
+      "boundary": "Family-level product evidence; individual asset assurance and legal/redemption fields still require asset review."
+    },
+    {
+      "publisher": "Ripio",
+      "title": "wFIAT / Local Stablecoins",
+      "url": "https://www.ripio.com/en/wfiat",
+      "supports": [
+        "wARS attestation",
+        "wBRL attestation",
+        "wCOP attestation",
+        "multi-network issuance/burn evidence",
+        "bank/financial-institution reserve evidence"
+      ],
+      "boundary": "Attestation coverage visible in the reviewed page is strongest for wARS, wBRL and wCOP."
+    },
+    {
+      "publisher": "Ripio",
+      "title": "Ripio's wFIAT Stablecoins Go Live on Arc Public Mainnet From Day One",
+      "url": "https://launchpad.ripio.com/blog/ripios-wfiat-stablecoins-go-live-on-arc-public-mainnet-from-day-one",
+      "published_at": "2026-09-16",
+      "supports": [
+        "all six wFIAT identities live on Arc",
+        "fully collateralized 1:1 family claim",
+        "Arc deployment",
+        "Uniswap liquidity"
+      ],
+      "boundary": "Arc launch does not by itself establish issuer redemption terms or each asset's full historical network set."
+    },
+    {
+      "publisher": "Ripio",
+      "title": "wARS lending markets are now available on Morpho, curated by KPK",
+      "url": "https://action.ripio.com/en/blog/ripio-launches-peso-borrowing-and-yield-on-morpho-with-markets-curated-by-kpk",
+      "published_at": "2026-08-19",
+      "supports": [
+        "wARS identity",
+        "Ethereum Morpho lending markets",
+        "wARS supply/yield",
+        "Ripio app integration"
+      ],
+      "boundary": "Yield/lending evidence is not issuer redemption or reserve evidence."
+    }
+  ],
+  "identity_and_duplicate_review": {
+    "current_code_search_result": "No canonical SOG records found for wARS, wBRL, wCOP, wMXN, wCLP, wPEN, wFIAT or Ripio at review entry.",
+    "family_members_are_distinct_assets": true,
+    "reason": "Each member has a different fiat reference currency and token identity; they must not be collapsed into one wFIAT canonical asset."
+  },
+  "proposed_growth_sequence": {
+    "policy_limit": "Maximum two new canonical stable assets per growth PR.",
+    "first_pair": [
+      "wARS",
+      "wCOP"
+    ],
+    "first_pair_reason": "Both have direct World Money jurisdiction-specific virtual-account routes plus Ripio issuer/family evidence; both also have individual attestation evidence on Ripio's reviewed wFIAT page.",
+    "later_pairs": [
+      [
+        "wBRL",
+        "wMXN"
+      ],
+      [
+        "wCLP",
+        "wPEN"
+      ]
+    ],
+    "later_pair_boundary": "Order is provisional and must be re-reviewed against primary issuer, reserve, deployment, legal and redemption evidence immediately before promotion."
+  },
+  "canonical_changes": {
+    "allowed_in_this_review": false,
+    "assets_added": 0,
+    "events_added": 0,
+    "evidence_added": 0,
+    "market_access_records_added": 0
+  },
+  "next_step": "Build a complete-record review for wARS and wCOP. Promote only if identity, issuer/operator, backing/reserve disclosure, deployment, redemption/access, evidence, known-unknown and legal-profile requirements are satisfied on current sources.",
+  "safety": {
+    "no_automatic_promotion": true,
+    "no_country_wide_inference": true,
+    "no_yield_as_safety_claim": true,
+    "no_unverified_redemption_claim": true,
+    "preserve_unknowns": true
+  }
+}
