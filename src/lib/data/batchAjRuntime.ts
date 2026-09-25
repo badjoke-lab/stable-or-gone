@@ -8,6 +8,7 @@ import evidenceBatchACData from '../../../data/evidence-batch-ac.json';
 import knownUnknownsBatchACData from '../../../data/batch-ac-review-gaps.json';
 import deploymentsBatchACData from '../../../data/batch-ac-deployments.json';
 import reserveProfilesBatchACData from '../../../data/batch-ac-reserve-redemption.json';
+import reserveReportsBatchACData from '../../../data/batch-ac-context.json';
 
 import stablecoinsBatchAJData from '../../../data/stablecoins-batch-aj.json';
 import stablecoinClassificationBatchAJData from '../../../data/stablecoin-classification-batch-aj.json';
@@ -52,6 +53,18 @@ import evidenceBatchAMData from '../../../data/evidence-batch-am.json';
 import knownUnknownsBatchAMData from '../../../data/batch-am-review-gaps.json';
 import deploymentsBatchAMData from '../../../data/batch-am-deployments.json';
 import reserveProfilesBatchAMData from '../../../data/batch-am-reserve-redemption.json';
+
+import stablecoinsBatchANData from '../../../data/stablecoins-batch-an.json';
+import stablecoinClassificationBatchANData from '../../../data/stablecoin-classification-batch-an.json';
+import organizationsBatchANData from '../../../data/organizations-batch-an.json';
+import relationshipsBatchANData from '../../../data/relationships-batch-an.json';
+import eventsBatchANData from '../../../data/events-batch-an.json';
+import eventDetailsBatchANData from '../../../data/event-details-batch-an.json';
+import evidenceBatchANData from '../../../data/evidence-batch-an.json';
+import knownUnknownsBatchANData from '../../../data/batch-an-review-gaps.json';
+import deploymentsBatchANData from '../../../data/batch-an-deployments.json';
+import reserveProfilesBatchANData from '../../../data/batch-an-reserve-redemption.json';
+import reserveReportsBatchANData from '../../../data/reserve-reports-batch-an.json';
 
 type IdentifiedRow = { id: string; [key: string]: unknown };
 
@@ -107,3 +120,15 @@ appendUniqueRows(evidenceBatchACData as IdentifiedRow[], evidenceBatchAMData as 
 appendUniqueRows(knownUnknownsBatchACData as IdentifiedRow[], knownUnknownsBatchAMData as IdentifiedRow[]);
 appendUniqueRows(deploymentsBatchACData as IdentifiedRow[], deploymentsBatchAMData as IdentifiedRow[]);
 appendUniqueRows(reserveProfilesBatchACData as IdentifiedRow[], reserveProfilesBatchAMData as IdentifiedRow[]);
+
+appendUniqueRows(stablecoinsBatchACData as IdentifiedRow[], stablecoinsBatchANData as IdentifiedRow[]);
+appendUniqueRows(stablecoinClassificationBatchACData as IdentifiedRow[], stablecoinClassificationBatchANData as IdentifiedRow[]);
+appendUniqueRows(organizationsBatchACData as IdentifiedRow[], organizationsBatchANData as IdentifiedRow[]);
+appendUniqueRows(relationshipsBatchACData as IdentifiedRow[], relationshipsBatchANData as IdentifiedRow[]);
+appendUniqueRows(eventsBatchACData as IdentifiedRow[], eventsBatchANData as IdentifiedRow[]);
+appendUniqueRows(eventDetailsBatchACData as IdentifiedRow[], eventDetailsBatchANData as IdentifiedRow[]);
+appendUniqueRows(evidenceBatchACData as IdentifiedRow[], evidenceBatchANData as IdentifiedRow[]);
+appendUniqueRows(knownUnknownsBatchACData as IdentifiedRow[], knownUnknownsBatchANData as IdentifiedRow[]);
+appendUniqueRows(deploymentsBatchACData as IdentifiedRow[], deploymentsBatchANData as IdentifiedRow[]);
+appendUniqueRows(reserveProfilesBatchACData as IdentifiedRow[], reserveProfilesBatchANData as IdentifiedRow[]);
+appendUniqueRows(reserveReportsBatchACData as IdentifiedRow[], reserveReportsBatchANData as IdentifiedRow[]);
