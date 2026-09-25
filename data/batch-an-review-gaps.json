@@ -1,0 +1,22 @@
+[
+  {
+    "id": "sog_ku_wars_legal_redemption_contracts_20260926",
+    "stablecoin_id": "sog_st_wars",
+    "issuer_id": "sog_org_ripio",
+    "topic": "legal_issuer_holder_claim_direct_redemption_and_contract_identity",
+    "description": "Reviewed Ripio and World sources establish wARS identity, ARS reference, collateral attestation, platform conversion, multi-network distribution and Argentina World Money access, but do not resolve the exact legal issuing entity, direct holder claim/redemption terms, insolvency treatment, or authoritative contract addresses and mint-control details across all deployments.",
+    "severity": "medium",
+    "last_checked_at": "2026-09-26",
+    "notes": "Do not infer that the Ripio platform operator in Argentina is necessarily the token's legal issuer, and do not equate platform conversion with an unconditional direct issuer redemption right."
+  },
+  {
+    "id": "sog_ku_wcop_legal_redemption_contracts_20260926",
+    "stablecoin_id": "sog_st_wcop",
+    "issuer_id": "sog_org_ripio",
+    "topic": "legal_issuer_holder_claim_direct_redemption_and_contract_identity",
+    "description": "Reviewed Ripio and World sources establish wCOP identity, COP reference, collateral attestation, platform conversion, multi-network distribution and Colombia World Money access, but do not resolve the exact legal issuing entity, direct holder claim/redemption terms, insolvency treatment, or authoritative contract addresses and mint-control details across all deployments.",
+    "severity": "medium",
+    "last_checked_at": "2026-09-26",
+    "notes": "Do not infer a legal issuer from brand/operator material and do not equate platform conversion with an unconditional direct issuer redemption right."
+  }
+]
