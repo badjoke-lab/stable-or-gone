@@ -1,0 +1,30 @@
+[
+  {
+    "id": "sog_rel_wars_ripio_20260926",
+    "stablecoin_id": "sog_st_wars",
+    "organization_id": "sog_org_ripio",
+    "role": "brand_owner",
+    "start_date": null,
+    "end_date": null,
+    "status": "active",
+    "evidence_ids": [
+      "sog_src_wfiat_ripio_transparency_20260926",
+      "sog_src_wars_ripio_product_20260926"
+    ],
+    "notes": "Ripio's first-party materials identify wARS as part of its wFIAT suite. Relationship is modeled as brand_owner rather than legal_issuer because the exact issuing legal entity is not established by the reviewed public sources."
+  },
+  {
+    "id": "sog_rel_wcop_ripio_20260926",
+    "stablecoin_id": "sog_st_wcop",
+    "organization_id": "sog_org_ripio",
+    "role": "brand_owner",
+    "start_date": null,
+    "end_date": null,
+    "status": "active",
+    "evidence_ids": [
+      "sog_src_wfiat_ripio_transparency_20260926",
+      "sog_src_wcop_ripio_product_20260926"
+    ],
+    "notes": "Ripio's first-party materials identify wCOP as part of its wFIAT suite. Relationship is modeled as brand_owner rather than legal_issuer because the exact issuing legal entity is not established by the reviewed public sources."
+  }
+]
