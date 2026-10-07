@@ -1,5 +1,19 @@
 [
   {
+    "id": "sog_update_2026_10_08_binance_pay_paypay_usdt_usdc",
+    "date": "2026-10-08",
+    "title": "Binance Pay–PayPay USDT and USDC payment access recorded",
+    "category": "data",
+    "summary": "Recorded the September 30 Binance Pay–PayPay launch as a canonical multi-asset payment-adoption event for USDT and USDC. Eligible overseas Binance Pay users visiting Japan can use supported crypto balances at PayPay merchants through HIVEX; Binance names USDT and USDC among supported assets, while PayPay confirms that merchants receive JPY. The update does not change reserve, redemption, peg, legal, or lifecycle state and does not generalize the service to Japan residents.",
+    "related_paths": [
+      "/articles/binance-pay-paypay-japan-usdt-usdc/",
+      "/stablecoin/usdt/",
+      "/stablecoin/usdc/",
+      "/event/sog_ev_usdt_usdc_2026_09_binance_pay_paypay/",
+      "/updates/"
+    ]
+  },
+  {
     "id": "sog_update_2026_10_08_bithomp_rlusd_usdc_xrpl_swap_analysis",
     "date": "2026-10-08",
     "title": "Bithomp RLUSD-USDC XRPL swap analysis published",
