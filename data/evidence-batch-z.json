@@ -179,5 +179,69 @@
     "event_ids": [
       "sog_ev_usdb_blast_launch_pr358"
     ]
+  },
+  {
+    "id": "sog_src_usdb_blast_winddown_theblock_20261002",
+    "stablecoin_id": "sog_st_usdb",
+    "issuer_id": "sog_org_blast",
+    "event_id": "sog_ev_usdb_blast_wind_down_20261002",
+    "source_type": "news_report",
+    "title": "Ethereum layer-2 Blast is shutting down",
+    "url": "https://www.theblock.co/news/business/2026-10-02-blast-ethereum-layer-2-shutting-down-417583",
+    "publisher": "The Block",
+    "published_at": "2026-10-02",
+    "archived_url": "https://web.archive.org/web/*/https://www.theblock.co/news/business/2026-10-02-blast-ethereum-layer-2-shutting-down-417583",
+    "accessed_at": "2026-10-08",
+    "reliability": "high",
+    "claim_scope": "blast_wind_down_withdrawal_timetable_lido_unwind_and_l1_exit",
+    "stablecoin_ids": [
+      "sog_st_usdb"
+    ],
+    "organization_ids": [
+      "sog_org_blast"
+    ],
+    "claim_scopes": [
+      "lifecycle",
+      "redemption",
+      "income",
+      "deployment",
+      "event"
+    ],
+    "event_ids": [
+      "sog_ev_usdb_blast_wind_down_20261002"
+    ],
+    "is_primary": false,
+    "notes": "Independent report reproducing the material terms of Blast's official wind-down announcement, including the temporary Lido-unwind withdrawal interruption, 24-hour delay, October 26 interface boundary, and direct L1 bridge-contract exit afterward."
+  },
+  {
+    "id": "sog_src_usdb_blast_winddown_decrypt_20261002",
+    "stablecoin_id": "sog_st_usdb",
+    "issuer_id": "sog_org_blast",
+    "event_id": "sog_ev_usdb_blast_wind_down_20261002",
+    "source_type": "news_report",
+    "title": "Ethereum Layer-2 Blast Is Shutting Down",
+    "url": "https://decrypt.co/379972/ethereum-layer-2-blast-shutting-down",
+    "publisher": "Decrypt",
+    "published_at": "2026-10-02",
+    "archived_url": "https://web.archive.org/web/*/https://decrypt.co/379972/ethereum-layer-2-blast-shutting-down",
+    "accessed_at": "2026-10-08",
+    "reliability": "medium",
+    "claim_scope": "blast_shutdown_and_user_exit_context",
+    "stablecoin_ids": [
+      "sog_st_usdb"
+    ],
+    "organization_ids": [
+      "sog_org_blast"
+    ],
+    "claim_scopes": [
+      "lifecycle",
+      "redemption",
+      "event"
+    ],
+    "event_ids": [
+      "sog_ev_usdb_blast_wind_down_20261002"
+    ],
+    "is_primary": false,
+    "notes": "Independent corroboration of the Blast shutdown announcement and user exit process."
   }
 ]

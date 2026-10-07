@@ -37,23 +37,23 @@
       "Blast USDB",
       "Blast USD"
     ],
-    "status": "active",
+    "status": "discontinued",
     "issuer_id": "sog_org_blast",
     "peg_asset": "USD",
     "collateral_model": "protocol_bridged_stablecoin_with_native_rebase",
     "reserve_disclosure_status": "official_protocol_backing_description_no_asset_level_attestation",
     "redemption_status": "protocol_based",
-    "who_can_redeem": "Users may bridge USDB back to Ethereum for DAI through the Blast bridge, subject to bridge operation, protocol rules, and applicable access conditions.",
-    "retail_redemption": "protocol_bridge_available",
-    "institutional_redemption": "protocol_bridge_available",
+    "who_can_redeem": "Blast directed users to withdraw assets to Ethereum. Normal Blast-interface withdrawals are planned through October 26, 2026; afterward users can still withdraw by interacting directly with Blast bridge contracts on Ethereum L1, subject to bridge operation and protocol conditions.",
+    "retail_redemption": "protocol_bridge_wind_down_exit",
+    "institutional_redemption": "protocol_bridge_wind_down_exit",
     "minimum_redemption": "not_stated_in_reviewed_public_source",
-    "redemption_region_notes": "Protocol bridge access is not equivalent to a direct fiat redemption right and may depend on wallet, bridge, network, and interface availability.",
-    "redemption_notes": "Blast documentation describes USDB as an auto-rebasing native stablecoin received when bridging stablecoins and redeemable for DAI when bridging back to Ethereum. No direct fiat claim or legal issuer claim is inferred.",
+    "redemption_region_notes": "Blast is in an announced wind-down. Withdrawals were temporarily unavailable while Blast unwound Lido-linked assets; after that process Blast said the withdrawal delay would be 24 hours. October 26 is the normal interface deadline, not a stated final asset-recovery deadline.",
+    "redemption_notes": "Blast announced the L2 wind-down on October 2, 2026 and instructed users to exit to Ethereum. SOG records USDB as winding down, not collapsed: the announced process preserves a bridge-based DAI exit path, including direct L1 contract interaction after the normal UI is withdrawn.",
     "launch_date": "2024-02-29",
     "discontinued_date": null,
-    "summary": "Blast-native auto-rebasing USD-referenced stablecoin. Official protocol documentation describes DAI bridge redemption and yield historically sourced from MakerDAO on-chain T-bill infrastructure.",
+    "summary": "Blast-native auto-rebasing USD-referenced stablecoin now in wind-down with the Blast L2. The October 2, 2026 shutdown announcement directs users to exit to Ethereum and preserves a bridge-based DAI withdrawal path beyond the normal interface deadline.",
     "confidence": "high",
-    "last_verified_at": "2026-07-13",
-    "notes": "PR #358 full-record promotion. Legal claim counterparty, bridge custody terms, current yield-source allocation, and governance controls remain explicit known unknowns."
+    "last_verified_at": "2026-10-08",
+    "notes": "Blast USDB is distinct from Bridge USDB. SOG moved Blast USDB from active to legacy discontinued/wind-down compatibility state after Blast announced the L2 wind-down. No collapse, depeg, final loss, or October 26 asset-loss deadline is inferred."
   }
 ]

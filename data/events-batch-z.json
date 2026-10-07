@@ -26,5 +26,22 @@
     "source_count": 3,
     "event_status_effect": "active",
     "notes": "The event records protocol launch context and does not establish a direct fiat issuer claim."
+  },
+  {
+    "id": "sog_ev_usdb_blast_wind_down_20261002",
+    "stablecoin_id": "sog_st_usdb",
+    "issuer_id": "sog_org_blast",
+    "event_type": "wind_down_announced",
+    "event_date": "2026-10-02",
+    "title": "Blast announces L2 wind-down and USDB exit process",
+    "description": "Blast announced that it will wind down the L2, asked users to withdraw assets to Ethereum, and described a staged exit in which withdrawals are temporarily unavailable while Lido-linked assets are unwound, then resume with a 24-hour delay. Normal interface withdrawals are planned through October 26, after which users can interact directly with Blast bridge contracts on Ethereum L1.",
+    "impact_level": "critical",
+    "confidence": "high",
+    "source_count": 2,
+    "event_status_effect": "discontinued",
+    "recovered": null,
+    "recovery_date": null,
+    "failure_mechanism": "voluntary_shutdown",
+    "notes": "SOG treats this as a wind-down announcement, not a collapse or completed redemption failure. October 26 is an interface boundary, not a stated final asset-recovery deadline."
   }
 ]

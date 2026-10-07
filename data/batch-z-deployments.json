@@ -66,12 +66,15 @@
     "mint_authority_type": "bridge_and_protocol_controlled",
     "verification_status": "verified",
     "control_event_ids": [
-      "sog_ev_usdb_blast_launch_pr358"
+      "sog_ev_usdb_blast_launch_pr358",
+      "sog_ev_usdb_blast_wind_down_20261002"
     ],
     "evidence_ids": [
       "sog_src_usdb_contract_pr358",
-      "sog_src_usdb_docs_pr358"
+      "sog_src_usdb_docs_pr358",
+      "sog_src_usdb_blast_winddown_theblock_20261002",
+      "sog_src_usdb_blast_winddown_decrypt_20261002"
     ],
-    "notes": "Blast documentation publishes this USDB mainnet contract and describes native rebasing and bridge redemption."
+    "notes": "Blast's USDB deployment remains the canonical Blast contract during the announced wind-down. Blast directed users to exit to Ethereum, with normal interface withdrawals planned through 2026-10-26 and direct L1 bridge-contract withdrawal afterward. Deployment status remains active until an effective chain/deployment termination is verified."
   }
 ]

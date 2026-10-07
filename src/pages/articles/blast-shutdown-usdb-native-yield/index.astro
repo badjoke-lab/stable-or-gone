@@ -1,0 +1,92 @@
+---
+import ArticleLayout from '../../../layouts/ArticleLayout.astro';
+const headline = 'Blast Is Winding Down: What Happens to USDB, Native Yield, and Withdrawals';
+const title = `${headline} — Stable or Gone`;
+const description = 'Blast announced an orderly L2 wind-down. SOG records Blast USDB as winding down, separates the temporary Lido-unwind withdrawal interruption from permanent redemption failure, and explains the October 26 interface boundary.';
+const canonicalPath = '/articles/blast-shutdown-usdb-native-yield/';
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline,
+  description,
+  url: `https://www.stableorgone.com${canonicalPath}`,
+  inLanguage: 'en',
+  datePublished: '2026-10-08',
+  dateModified: '2026-10-08',
+  isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://www.stableorgone.com/' },
+  about: ['Blast', 'USDB', 'native yield', 'Lido', 'Ethereum', 'stablecoin wind-down']
+};
+---
+<ArticleLayout
+  title={title}
+  description={description}
+  canonicalPath={canonicalPath}
+  headline={headline}
+  sectionLabel="Lifecycle and redemption"
+  deck="Blast is not simply disappearing on October 26. The L2 has entered an announced wind-down, its yield infrastructure is being unwound, and users have been given a staged Ethereum exit path. That changes USDB's lifecycle state without establishing a collapse or final redemption failure."
+  publishedAt="October 8, 2026"
+  treatment="Canonical lifecycle event + analysis"
+  scope="Blast USDB / native yield / withdrawals"
+  jsonLd={jsonLd}
+>
+  <section class="panel registry">
+    <div class="bar">What changed</div>
+    <p><strong>Blast announced on October 2 that the L2 will wind down.</strong> The stated reason is economic: continuing operating costs exceed L2 revenue and the team does not see a credible path to sustainable operation.</p>
+    <p>Blast asked users to withdraw assets to Ethereum. For SOG, that is a material lifecycle change for Blast USDB because USDB is a Blast-native, protocol-bridged, auto-rebasing stable asset whose exit path depends on Blast's bridge and network operation.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">The withdrawal process is staged</div>
+    <p>Blast said it would first unwind Lido-linked assets. During that process, withdrawals are temporarily unavailable. The process was expected to take roughly one week.</p>
+    <p>After the unwind, Blast said the withdrawal delay would be reduced to 24 hours. Users can use the normal Blast interface through October 26, 2026.</p>
+    <p><strong>October 26 is therefore an interface deadline, not a stated final asset-recovery deadline.</strong> Blast said that afterward users can still withdraw by interacting directly with the Blast bridge contracts on Ethereum L1.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">SOG changes Blast USDB to winding down</div>
+    <p>SOG now records Blast USDB in a <strong>winding-down lifecycle state</strong>. The legacy compatibility field is moved out of active status, while the Blast deployment itself remains operational until effective termination is verified.</p>
+    <p>This is deliberately different from classifying USDB as failed or collapsed. The reviewed sources establish a shutdown process and an exit path; they do not establish a permanent loss of redemption, a peg failure, or a completed chain termination as of October 8.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Native yield is also entering an unwind</div>
+    <p>Blast's design embedded yield into ETH and stablecoin balances rather than treating yield as a separate optional product. The shutdown therefore affects not only network access but also the operating context for native yield.</p>
+    <p>The announced Lido unwind is especially important for ETH-linked yield. For USDB, SOG also stops assuming that historical reserve-income and rebasing conditions continue unchanged through shutdown. The exact end of yield accrual and final post-shutdown mechanics remain follow-up questions.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">What SOG is not claiming</div>
+    <table>
+      <thead><tr><th>Question</th><th>SOG treatment</th></tr></thead>
+      <tbody>
+        <tr><td>Has Blast announced a wind-down?</td><td>Yes. Canonical lifecycle event recorded.</td></tr>
+        <tr><td>Is USDB classified as winding down?</td><td>Yes.</td></tr>
+        <tr><td>Has USDB collapsed?</td><td>No such conclusion is supported.</td></tr>
+        <tr><td>Is October 26 the last day assets can ever be withdrawn?</td><td>No. Blast described a direct Ethereum L1 bridge-contract path afterward.</td></tr>
+        <tr><td>Are withdrawals uninterrupted during the transition?</td><td>No. Blast described a temporary interruption while Lido-linked assets are unwound.</td></tr>
+        <tr><td>Has all native yield already ended?</td><td>Not established. SOG marks the mechanism for follow-up rather than inventing a terminal yield date.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">What to watch next</div>
+    <ul>
+      <li>completion of the Lido-asset unwind and resumption of withdrawals;</li>
+      <li>the effective shutdown state of the Blast L2 and normal interface after October 26;</li>
+      <li>continued operability of the Ethereum L1 bridge contracts;</li>
+      <li>the final state of USDB rebasing and yield accrual;</li>
+      <li>any later depeg, bridge failure, asset-loss, or contract-access issue, which would require a separate incident review.</li>
+    </ul>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Sources</div>
+    <ul>
+      <li><a href="https://www.theblock.co/news/business/2026-10-02-blast-ethereum-layer-2-shutting-down-417583" rel="noreferrer">The Block — Ethereum layer-2 Blast is shutting down</a> — shutdown rationale, Lido unwind, withdrawal timing, October 26 interface boundary, and later L1 bridge-contract exit.</li>
+      <li><a href="https://decrypt.co/379972/ethereum-layer-2-blast-shutting-down" rel="noreferrer">Decrypt — Ethereum Layer-2 Blast Is Shutting Down</a> — independent corroboration of the wind-down and exit process.</li>
+      <li><a href="https://docs.blast.io/about-blast" rel="noreferrer">Blast documentation — About Blast</a> — historical USDB mechanics, rebasing, and bridge-redemption context.</li>
+      <li><a href="https://blast.io/en/about" rel="noreferrer">Blast — native yield overview</a> — historical native-yield product context.</li>
+    </ul>
+  </section>
+</ArticleLayout>
