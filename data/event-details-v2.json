@@ -583,7 +583,10 @@
       "sog_st_usdt",
       "sog_st_usdc"
     ],
-    "subject_organization_ids": [],
+    "subject_organization_ids": [
+      "sog_issuer_tether",
+      "sog_issuer_circle"
+    ],
     "evidence_ids": [
       "sog_src_binance_pay_paypay_japan_faq_20260929",
       "sog_src_paypay_binance_pay_hivex_20260930"
