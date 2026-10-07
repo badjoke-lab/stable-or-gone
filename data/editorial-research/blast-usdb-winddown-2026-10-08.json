@@ -1,0 +1,56 @@
+{
+  "research_id": "sog_research_blast_usdb_winddown_20261008",
+  "status": "reviewed_canonical_update_and_editorial",
+  "observed_at": "2026-10-08",
+  "subject_assets": [
+    "sog_st_usdb"
+  ],
+  "development": "Blast announced on 2026-10-02 that the L2 will wind down, with a staged Ethereum withdrawal process that directly affects Blast USDB lifecycle, redemption operations, and native-yield context.",
+  "confirmed": [
+    "Blast announced an orderly L2 wind-down.",
+    "Users were instructed to withdraw assets to Ethereum.",
+    "Blast said withdrawals would be temporarily unavailable while Lido-linked assets were unwound, a process expected to take about one week.",
+    "Blast said the withdrawal delay would be reduced to 24 hours after the Lido unwind.",
+    "Normal Blast-interface withdrawals are planned through October 26, 2026.",
+    "After October 26, Blast said users can still withdraw by interacting directly with the bridge contracts on Ethereum L1."
+  ],
+  "not_inferred": [
+    "USDB collapse",
+    "USDB depeg",
+    "asset loss on October 26",
+    "completed Blast chain shutdown as of October 8",
+    "final end date for all USDB yield accrual",
+    "universal withdrawal success for every contract or user configuration"
+  ],
+  "canonical_decision": {
+    "stablecoin_status": "discontinued_legacy_compatibility",
+    "lifecycle_status": "winding_down",
+    "event_added": "sog_ev_usdb_blast_wind_down_20261002",
+    "deployment_status": "active_pending_effective_shutdown",
+    "article_authorized": true,
+    "reason": "The network wind-down materially changes Blast USDB lifecycle, withdrawal operations, and native-yield context while preserving a stated bridge exit path."
+  },
+  "sources": [
+    {
+      "type": "news_report",
+      "url": "https://www.theblock.co/news/business/2026-10-02-blast-ethereum-layer-2-shutting-down-417583",
+      "role": "wind_down_terms_and_withdrawal_timetable"
+    },
+    {
+      "type": "news_report",
+      "url": "https://decrypt.co/379972/ethereum-layer-2-blast-shutting-down",
+      "role": "independent_wind_down_corroboration"
+    },
+    {
+      "type": "official_documentation",
+      "url": "https://docs.blast.io/about-blast",
+      "role": "historical_usdb_mechanics"
+    },
+    {
+      "type": "official_website",
+      "url": "https://blast.io/en/about",
+      "role": "historical_native_yield_context"
+    }
+  ],
+  "notes": "Canonical lifecycle state is winding_down. SOG keeps the Blast deployment operational until effective termination is independently verified."
+}
