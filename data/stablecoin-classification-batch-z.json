@@ -31,7 +31,7 @@
   },
   {
     "id": "sog_st_usdb",
-    "lifecycle_status": "active",
+    "lifecycle_status": "winding_down",
     "issuance_status": "protocol_based",
     "peg_reference": {
       "kind": "fiat",
@@ -55,8 +55,8 @@
       "accrual_mechanism": "balance_rebase",
       "rate_type": "protocol_determined",
       "rate_source": "Blast protocol documentation",
-      "notes": "USDB balances rebase automatically. Historical documentation identifies MakerDAO on-chain T-bill infrastructure as the yield source, while allowing future replacement."
+      "notes": "USDB was designed to rebase automatically from protocol reserve income. Blast announced the L2 wind-down on 2026-10-02 and began unwinding Lido-linked assets as part of the exit process. SOG does not assume that native-yield accrual continues unchanged through or after chain shutdown."
     },
-    "classification_notes": "Protocol-native, bridge-issued, auto-rebasing stablecoin with DAI bridge redemption and external yield-source dependency."
+    "classification_notes": "Protocol-native, bridge-issued, auto-rebasing stablecoin now in announced wind-down with Blast. The DAI bridge exit remains part of the announced withdrawal path; no collapse or irreversible redemption failure is inferred."
   }
 ]
