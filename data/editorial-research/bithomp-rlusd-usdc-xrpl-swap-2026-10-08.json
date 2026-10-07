@@ -1,0 +1,68 @@
+{
+  "research_id": "sog_research_bithomp_rlusd_usdc_xrpl_swap_20261008",
+  "status": "reviewed_noncanonical_editorial",
+  "observed_at": "2026-10-08",
+  "subject_assets": [
+    "sog_st_rlusd",
+    "sog_st_usdc"
+  ],
+  "development": "Bithomp announced a wallet-connected RLUSD/USDC swap route through Bithomp DeFi on the XRP Ledger, including Ledger Wallet and other XRPL-compatible wallets.",
+  "confirmed": [
+    "Bithomp publicly announced RLUSD ↔ USDC swap access through its DeFi interface.",
+    "Bithomp documents XRPL DEX swaps as AMM-based or order-book-offer based.",
+    "An RLUSD/USDC XRPL AMM pool predates the announcement.",
+    "RLUSD and USDC were already deployed on the XRP Ledger before this Bithomp interface announcement."
+  ],
+  "not_inferred": [
+    "new RLUSD launch",
+    "new USDC launch",
+    "new XRPL deployment for either asset",
+    "new RLUSD/USDC market creation",
+    "reserve or redemption change",
+    "lifecycle status change",
+    "jurisdiction-wide market access",
+    "universal wallet or user eligibility"
+  ],
+  "canonical_decision": {
+    "stablecoin_delta": 0,
+    "event_delta": 0,
+    "evidence_delta": 0,
+    "market_access_delta": 0,
+    "deployment_delta": 0,
+    "article_authorized": true,
+    "reason": "Material as an access/interface development, but the reviewed evidence does not establish a stablecoin lifecycle, deployment, reserve, redemption, legal, or jurisdiction-scoped market-access change."
+  },
+  "sources": [
+    {
+      "type": "official_social",
+      "url": "https://x.com/bithomp/status/2107229264030617838",
+      "role": "feature_announcement"
+    },
+    {
+      "type": "provider_product",
+      "url": "https://bithomp.com/amm/F3AA3D4A817E8DE170F6CFC5308AB1CF1F7EDDA2BF357BEFE74CA4F7FB6AB9FD",
+      "role": "preexisting_pair_and_liquidity"
+    },
+    {
+      "type": "provider_docs",
+      "url": "https://docs.bithomp.com/",
+      "role": "dex_swap_execution_model"
+    },
+    {
+      "type": "provider_docs",
+      "url": "https://bithomp.com/learn/amm",
+      "role": "amm_orderbook_interoperability"
+    },
+    {
+      "type": "issuer_docs",
+      "url": "https://docs.ripple.com/products/stablecoin/developer-resources/rlusd-on-the-xrpl",
+      "role": "rlusd_xrpl_deployment"
+    },
+    {
+      "type": "issuer_docs",
+      "url": "https://www.circle.com/multi-chain-usdc/xrpl",
+      "role": "usdc_xrpl_deployment"
+    }
+  ],
+  "notes": "Public article may explain the access-layer change. This research checkpoint is not canonical Evidence and must not be promoted automatically."
+}
