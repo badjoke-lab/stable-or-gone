@@ -1,0 +1,99 @@
+---
+import ArticleLayout from '../../../layouts/ArticleLayout.astro';
+const headline = 'Bithomp Adds RLUSD–USDC Swap Access Through XRPL DeFi';
+const title = `${headline} — Stable or Gone`;
+const description = 'Bithomp added a wallet-connected route for swapping RLUSD and USDC on the XRP Ledger. SOG treats the change as a non-canonical access and interface development, not a new stablecoin launch, deployment, redemption change, or jurisdiction-wide market-access record.';
+const canonicalPath = '/articles/bithomp-rlusd-usdc-xrpl-swap/';
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline,
+  description,
+  url: `https://www.stableorgone.com${canonicalPath}`,
+  inLanguage: 'en',
+  datePublished: '2026-10-08',
+  dateModified: '2026-10-08',
+  isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://www.stableorgone.com/' },
+  about: ['RLUSD', 'USDC', 'XRP Ledger', 'XRPL DEX', 'Bithomp', 'stablecoin trading']
+};
+---
+<ArticleLayout
+  title={title}
+  description={description}
+  canonicalPath={canonicalPath}
+  headline={headline}
+  sectionLabel="Trading access and infrastructure"
+  deck="The material change is an easier wallet-connected trading route, not a new stablecoin or a new XRPL market. Bithomp is exposing RLUSD ↔ USDC swaps through its DeFi interface while the underlying XRP Ledger DEX and RLUSD/USDC liquidity already existed."
+  publishedAt="October 8, 2026"
+  treatment="Non-canonical analysis"
+  scope="RLUSD / USDC / XRP Ledger / Bithomp DeFi"
+  jsonLd={jsonLd}
+>
+  <section class="panel registry">
+    <div class="bar">What changed</div>
+    <p><strong>Bithomp announced a direct user interface for swapping RLUSD and USDC on the XRP Ledger using Ledger Wallet or another XRPL-compatible wallet.</strong> The development is about access to existing XRPL trading infrastructure through Bithomp DeFi.</p>
+    <p>Bithomp already exposes XRP Ledger token activity and DEX swap data through its API. Its documentation distinguishes DEX swaps executed through an AMM from swaps matched through order-book offers, which is consistent with the interface sitting on top of native XRPL trading infrastructure rather than creating a separate off-chain market.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">This is not a new RLUSD/USDC market</div>
+    <p>The RLUSD/USDC pair was not created by this announcement. Bithomp already exposes an XRPL AMM pool for RLUSD and USDC, including reserves, trading fee, LP supply and swap history.</p>
+    <p>That distinction matters for historical treatment. SOG should not describe this as an RLUSD launch, a USDC launch, a new XRP Ledger deployment, or the creation of the first RLUSD/USDC market. The new information is the Bithomp-facing wallet and swap route.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Both assets were already on the XRP Ledger</div>
+    <p>Ripple documentation identifies RLUSD as an XRP Ledger issued token and provides the XRPL mainnet issuer account. Circle separately describes USDC on XRPL as a native form of USDC and documents XRPL-specific access through Circle Mint and ecosystem applications.</p>
+    <p>The Bithomp feature therefore connects two already-existing XRPL stablecoin deployments. It does not establish a new chain deployment for either asset.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">What the interface changes</div>
+    <p>For users, the important change is operational: a person can connect an XRPL-compatible wallet, select RLUSD and USDC, and submit a swap through a dedicated trading interface rather than manually navigating an order book or AMM pool.</p>
+    <p>Bithomp's XRPL AMM documentation explains that XRPL AMMs can interoperate with the traditional order-book DEX. Its API documentation likewise identifies DEX swaps as either AMM-based or order-book-offer based. The interface can therefore be understood as an access layer over native XRPL liquidity rather than a new custodied exchange balance.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Why SOG is not creating a canonical event</div>
+    <p><strong>Current SOG treatment: article-only, non-canonical infrastructure and access development.</strong></p>
+    <p>The announcement does not change RLUSD or USDC lifecycle status, reserve backing, issuer identity, redemption terms, peg state, or chain deployment. It also does not provide the jurisdiction-specific evidence required for a canonical SOG Market Access record.</p>
+    <p>SOG therefore keeps the development outside the canonical Event and Market Access layers for now. A wallet or interface improvement can be historically useful without automatically becoming a stablecoin lifecycle event.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Confirmed facts and boundaries</div>
+    <table>
+      <thead><tr><th>Question</th><th>SOG treatment</th></tr></thead>
+      <tbody>
+        <tr><td>Can Bithomp users access an RLUSD ↔ USDC swap interface?</td><td>Yes. Bithomp announced the route and linked its DeFi trading interface.</td></tr>
+        <tr><td>Can Ledger Wallet be used?</td><td>Yes, according to Bithomp's announcement; other XRPL-compatible wallets are also described as supported.</td></tr>
+        <tr><td>Was the RLUSD/USDC XRPL market created by this announcement?</td><td>No. An RLUSD/USDC AMM pool already existed on XRPL.</td></tr>
+        <tr><td>Did either stablecoin receive a new XRPL deployment?</td><td>No. RLUSD and USDC were already available on XRPL.</td></tr>
+        <tr><td>Did reserve or redemption terms change?</td><td>No such change is established by the reviewed material.</td></tr>
+        <tr><td>Does this prove universal access in every jurisdiction?</td><td>No. No country-wide or jurisdiction-wide availability inference is made.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">What would trigger a later canonical review</div>
+    <ul>
+      <li>a dated, material change to RLUSD or USDC issuance, redemption, reserve, legal, or lifecycle state;</li>
+      <li>a new chain deployment or migration supported by issuer documentation;</li>
+      <li>a provider-specific market-access change with explicit jurisdiction, function, effective date and network scope;</li>
+      <li>a material XRPL liquidity or trading change that crosses SOG's event threshold rather than only improving the user interface.</li>
+    </ul>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Sources</div>
+    <ul>
+      <li><a href="https://x.com/bithomp/status/2107229264030617838" rel="noreferrer">Bithomp on X — RLUSD ↔ USDC swap announcement</a> — first-party announcement for the Ledger Wallet and XRPL-wallet trading route.</li>
+      <li><a href="https://bithomp.com/amm/F3AA3D4A817E8DE170F6CFC5308AB1CF1F7EDDA2BF357BEFE74CA4F7FB6AB9FD" rel="noreferrer">Bithomp — RLUSD/USDC AMM pool</a> — first-party Bithomp surface showing the pre-existing XRPL AMM market.</li>
+      <li><a href="https://docs.bithomp.com/" rel="noreferrer">Bithomp API reference</a> — documents XRPL DEX swap activity and the distinction between AMM and order-book offer execution.</li>
+      <li><a href="https://bithomp.com/learn/amm" rel="noreferrer">Bithomp — XRPL AMM guide</a> — explains AMM and order-book DEX interoperability on XRPL.</li>
+      <li><a href="https://docs.ripple.com/products/stablecoin/developer-resources/rlusd-on-the-xrpl" rel="noreferrer">Ripple — RLUSD on the XRP Ledger</a> — issuer documentation for the existing RLUSD XRPL deployment.</li>
+      <li><a href="https://www.circle.com/multi-chain-usdc/xrpl" rel="noreferrer">Circle — USDC on the XRPL</a> — issuer documentation for native USDC on XRPL.</li>
+    </ul>
+  </section>
+</ArticleLayout>
