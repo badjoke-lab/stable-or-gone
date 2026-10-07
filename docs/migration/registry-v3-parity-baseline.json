@@ -1,11 +1,11 @@
 {
   "schema_version": "3.0-parity-baseline",
   "status": "current",
-  "baseline_id": "sog_registry_v3_parity_binance_pay_paypay_usdt_usdc_144_assets_2026_10_08",
+  "baseline_id": "sog_registry_v3_parity_blast_usdb_winddown_144_assets_2026_10_08",
   "recorded_at": "2026-10-08",
-  "data_checkpoint_commit": "content/binance-pay-paypay-usdt-usdc-20261008",
-  "source_baseline_id": "sog_registry_v3_parity_sofiusd_mastercard_settlement_144_assets_2026_09_26",
-  "canonical_checkpoint_id": "sog_binance_pay_paypay_usdt_usdc_144_2026_10_08",
+  "data_checkpoint_commit": "update/blast-winddown-20261008-r2",
+  "source_baseline_id": "sog_registry_v3_parity_binance_pay_paypay_usdt_usdc_144_assets_2026_10_08",
+  "canonical_checkpoint_id": "sog_blast_usdb_winddown_144_2026_10_08",
   "v2_composed_baseline": "docs/migration/registry-v2-baseline.json",
   "v3_foundation": "docs/migration/registry-v3-foundation.json",
   "v3_income_profiles": "docs/migration/registry-v3-income-profiles.json",
@@ -15,10 +15,10 @@
     "relationships": 156,
     "classifications": 144,
     "profiles": 144,
-    "events": 225,
-    "event_details": 225,
-    "evidence": 649,
-    "evidence_relations": 649,
+    "events": 226,
+    "event_details": 226,
+    "evidence": 651,
+    "evidence_relations": 651,
     "reserve_reports": 131,
     "known_unknowns": 381,
     "regulatory_notes": 9,
@@ -55,5 +55,5 @@
   },
   "audit_report": "docs/audits/registry-v2-v3-machine-readable-parity-100-assets.md",
   "validator": "scripts/validate-registry-v2-v3-machine-readable-parity.mjs",
-  "notes": "Current parity baseline preserves the reviewed 144-asset corpus while adding one multi-asset Binance Pay–PayPay payment-adoption event for USDT and USDC and two first-party Evidence records. The event is scoped to eligible overseas Binance Pay users visiting Japan; merchants receive JPY, and no reserve, redemption, peg, legal, lifecycle, deployment, or canonical Market Access Record state is changed."
+  "notes": "Current parity baseline preserves the reviewed 144-asset corpus and the Binance Pay-PayPay adoption checkpoint while adding Blast USDB's October 2026 wind-down as one canonical lifecycle event with two evidence records."
 }
