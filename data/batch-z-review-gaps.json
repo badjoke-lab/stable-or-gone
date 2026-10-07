@@ -36,7 +36,7 @@
     "topic": "legal_claim_counterparty",
     "description": "Official protocol documentation establishes USDB mechanics but does not establish a direct legal issuer or corporate claim counterparty.",
     "severity": "high",
-    "last_checked_at": "2026-07-13",
+    "last_checked_at": "2026-10-08",
     "notes": "Blast is modeled as protocol operator only."
   },
   {
@@ -44,9 +44,9 @@
     "stablecoin_id": "sog_st_usdb",
     "issuer_id": "sog_org_blast",
     "topic": "bridge_custody_and_redemption_terms",
-    "description": "DAI bridge redemption is documented, but complete bridge custody, failure, fee, delay, governance, and recovery terms remain unresolved.",
+    "description": "Blast's wind-down announcement now documents the broad exit timetable: temporary withdrawal interruption during the Lido unwind, a later 24-hour delay, normal interface withdrawals through 2026-10-26, and direct L1 bridge-contract interaction afterward. Complete custody, fee, smart-contract failure, governance, and post-shutdown recovery mechanics remain unresolved.",
     "severity": "high",
-    "last_checked_at": "2026-07-13",
+    "last_checked_at": "2026-10-08",
     "notes": "Protocol redemption is not treated as fiat redemption."
   },
   {
@@ -54,9 +54,9 @@
     "stablecoin_id": "sog_st_usdb",
     "issuer_id": "sog_org_blast",
     "topic": "yield_source_and_governance",
-    "description": "Historical documentation identifies MakerDAO on-chain T-bill infrastructure as the yield source while allowing future replacement; current allocation, counterparties, rate policy, and governance controls require continuing review.",
+    "description": "Blast announced the L2 wind-down and the unwind of Lido-linked assets. The exact end of USDB native-yield accrual, current reserve-income allocation, counterparties, rate policy, and post-shutdown governance/control state still require follow-up.",
     "severity": "high",
-    "last_checked_at": "2026-07-13",
+    "last_checked_at": "2026-10-08",
     "notes": "No fixed or risk-free yield claim is recorded."
   }
 ]
