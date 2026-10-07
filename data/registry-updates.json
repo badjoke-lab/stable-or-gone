@@ -1,5 +1,18 @@
 [
   {
+    "id": "sog_update_2026_10_08_blast_usdb_winddown",
+    "date": "2026-10-08",
+    "title": "Blast USDB moved into winding-down lifecycle state",
+    "category": "data",
+    "summary": "Recorded Blast's October 2 L2 wind-down as a canonical USDB lifecycle event, moved Blast USDB from active into winding-down compatibility state, updated redemption and native-yield context, and published a source-backed analysis. The update does not classify USDB as collapsed and does not treat October 26 as a final asset-recovery deadline.",
+    "related_paths": [
+      "/articles/blast-shutdown-usdb-native-yield/",
+      "/stablecoin/blast-usdb/",
+      "/event/sog_ev_usdb_blast_wind_down_20261002/",
+      "/updates/"
+    ]
+  },
+  {
     "id": "sog_update_2026_10_08_bithomp_rlusd_usdc_xrpl_swap_analysis",
     "date": "2026-10-08",
     "title": "Bithomp RLUSD-USDC XRPL swap analysis published",
