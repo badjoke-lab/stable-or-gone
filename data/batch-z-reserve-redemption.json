@@ -45,35 +45,39 @@
         "stablecoin_collateral",
         "tokenized_fund"
       ],
-      "summary": "Blast documentation describes USDB as issued when users bridge stablecoins, historically linked to DAI and MakerDAO on-chain T-bill yield. This is a protocol backing description, not an issuer reserve attestation.",
+      "summary": "Blast documentation historically described USDB as issued when users bridge stablecoins, linked to DAI and protocol reserve income. Blast's October 2026 wind-down materially changes the operating context: the network is unwinding yield infrastructure and directing users to exit to Ethereum. This remains a protocol backing description, not an issuer reserve attestation.",
       "disclosure_status": "official_protocol_description_no_asset_level_attestation",
-      "as_of_date": "2026-07-13",
+      "as_of_date": "2026-10-08",
       "latest_report_id": "sog_rr_usdb_protocol_backing_pr358",
       "confidence": "high",
       "evidence_ids": [
         "sog_src_usdb_docs_pr358",
-        "sog_src_usdb_about_pr358"
+        "sog_src_usdb_about_pr358",
+        "sog_src_usdb_blast_winddown_theblock_20261002"
       ]
     },
     "redemption_profile": {
       "status": "protocol_based",
-      "settlement_asset": "DAI",
-      "eligible_parties": "Users able to access and operate the Blast bridge.",
-      "retail_access": "protocol_bridge_available",
-      "institutional_access": "protocol_bridge_available",
+      "settlement_asset": "DAI / Ethereum exit path",
+      "eligible_parties": "Users able to access and operate the Blast withdrawal/bridge flow or, after the normal interface is withdrawn, interact directly with the Blast bridge contracts on Ethereum L1.",
+      "retail_access": "wind_down_exit_available_subject_to_bridge_operation",
+      "institutional_access": "wind_down_exit_available_subject_to_bridge_operation",
       "minimum_amount_text": "Not established in the reviewed public source set.",
-      "fee_text": "Bridge and network fees may apply; exact terms require current bridge review.",
-      "settlement_time_text": "Depends on bridge and network operation.",
+      "fee_text": "Bridge and network fees may apply; exact current terms require live bridge review.",
+      "settlement_time_text": "Blast announced a temporary withdrawal interruption while Lido-linked assets are unwound, followed by a 24-hour withdrawal delay. Normal interface withdrawals are planned through 2026-10-26; direct L1 bridge-contract withdrawal is described for afterward.",
       "jurisdiction_restrictions": [
         "Protocol and interface access conditions apply.",
-        "DAI bridge redemption is not direct fiat redemption."
+        "DAI bridge redemption is not direct fiat redemption.",
+        "The October 26 interface deadline is not treated as a final asset-recovery deadline."
       ],
       "redemption_url": null,
-      "as_of_date": "2026-07-13",
+      "as_of_date": "2026-10-08",
       "confidence": "high",
       "evidence_ids": [
         "sog_src_usdb_docs_pr358",
-        "sog_src_usdb_about_pr358"
+        "sog_src_usdb_about_pr358",
+        "sog_src_usdb_blast_winddown_theblock_20261002",
+        "sog_src_usdb_blast_winddown_decrypt_20261002"
       ]
     }
   }
