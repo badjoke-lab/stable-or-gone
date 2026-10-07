@@ -1,5 +1,19 @@
 [
   {
+    "id": "sog_update_2026_10_08_bithomp_rlusd_usdc_xrpl_swap_analysis",
+    "date": "2026-10-08",
+    "title": "Bithomp RLUSD-USDC XRPL swap analysis published",
+    "category": "content",
+    "summary": "Published a source-backed analysis of Bithomp's wallet-connected RLUSD ↔ USDC swap route on the XRP Ledger. The article records the interface and access development without creating a canonical Event, Evidence, Market Access, Deployment, reserve, redemption, or lifecycle change because the underlying pair and both XRPL asset deployments already existed.",
+    "related_paths": [
+      "/articles/bithomp-rlusd-usdc-xrpl-swap/",
+      "/stablecoin/rlusd/",
+      "/stablecoin/usdc/",
+      "/articles/",
+      "/updates/"
+    ]
+  },
+  {
     "id": "sog_update_2026_09_26_sofiusd_mastercard_settlement",
     "date": "2026-09-26",
     "title": "SoFiUSD Mastercard production settlement recorded",
