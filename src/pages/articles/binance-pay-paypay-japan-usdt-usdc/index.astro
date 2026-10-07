@@ -1,0 +1,85 @@
+---
+import ArticleLayout from '../../../layouts/ArticleLayout.astro';
+const headline = 'Binance Pay Opens PayPay Merchant Payments in Japan With USDT and USDC Support';
+const title = `${headline} — Stable or Gone`;
+const description = 'Eligible overseas Binance Pay users can pay at PayPay merchants in Japan with supported crypto balances including USDT and USDC, while merchants receive JPY through the HIVEX-connected flow.';
+const canonicalPath = '/articles/binance-pay-paypay-japan-usdt-usdc/';
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline,
+  description,
+  url: `https://www.stableorgone.com${canonicalPath}`,
+  inLanguage: 'en',
+  datePublished: '2026-10-08',
+  dateModified: '2026-10-08',
+  isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://www.stableorgone.com/' },
+  about: ['USDT', 'USDC', 'Binance Pay', 'PayPay', 'HIVEX', 'Japan', 'stablecoin payments', 'merchant payments']
+};
+---
+<ArticleLayout
+  title={title}
+  description={description}
+  canonicalPath={canonicalPath}
+  headline={headline}
+  sectionLabel="Payments and merchant access"
+  deck="The September 30 launch connects eligible overseas Binance Pay users to PayPay merchants across Japan through HIVEX. Binance names USDT and USDC among the supported payment assets, but PayPay merchants receive Japanese yen rather than stablecoins."
+  publishedAt="October 8, 2026"
+  treatment="Canonical multi-asset adoption event + analysis"
+  scope="Japan / Binance Pay / PayPay / USDT and USDC / HIVEX"
+  jsonLd={jsonLd}
+>
+  <section class="panel registry">
+    <div class="bar">What launched on September 30</div>
+    <p><strong>PayPay and Binance Pay activated a cross-border QR-payment route for eligible overseas Binance Pay users visiting Japan.</strong> PayPay says the connection runs through HIVEX and is available across PayPay merchants nationwide, subject to merchant-level availability.</p>
+    <p>The service supports both common PayPay checkout patterns: the user can present a payment code for the merchant to scan, or scan a merchant PayPay QR code from the Binance app.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">USDT and USDC are supported payment assets</div>
+    <p>Binance's first-party FAQ says users can pay from their crypto balance and that Binance supports more than 100 cryptocurrencies for the feature, explicitly including <strong>USDT and USDC</strong> alongside BTC, ETH and BNB. Its scan-to-pay example shows the order amount in JPY and the payment amount in USDT before confirmation.</p>
+    <p>This is why SOG records the launch against both USDT and USDC as a payment-adoption event. It is not evidence that every PayPay merchant directly accepts, holds, or settles in either stablecoin.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">The merchant receives JPY</div>
+    <table>
+      <thead><tr><th>Layer</th><th>Reviewed treatment</th></tr></thead>
+      <tbody>
+        <tr><td>Payer</td><td>Eligible Binance Pay user can select a supported crypto balance, including USDT or USDC.</td></tr>
+        <tr><td>Conversion</td><td>Binance says the selected crypto is automatically converted to JPY and the exchange rate is shown before confirmation.</td></tr>
+        <tr><td>Acceptance rail</td><td>PayPay merchant acceptance is connected through HIVEX.</td></tr>
+        <tr><td>Merchant settlement</td><td>PayPay states that participating merchants receive their sales proceeds in JPY.</td></tr>
+      </tbody>
+    </table>
+    <p>The distinction matters: this is a crypto-funded merchant-payment route, not evidence that PayPay has turned merchant balances into USDT or USDC settlement accounts.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Who can use it</div>
+    <p>Binance limits the PayPay QR feature to tourists visiting Japan who are physically located in Japan with a Japan IP address, have completed Binance identity verification, and use the current Binance app. Both Binance and PayPay state that the feature is not available to residents of Japan through Binance Japan.</p>
+    <p>Some PayPay merchants are also excluded or may not support the route in practice. SOG therefore does not translate this launch into a blanket claim that USDT or USDC is universally spendable in Japan.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Stable or Gone treatment</div>
+    <p><strong>Current SOG treatment: one canonical multi-asset payment-adoption event for USDT and USDC, backed by Binance and PayPay first-party evidence.</strong></p>
+    <p>The event uses the canonical <code>payment_settlement_launch</code> subtype and has no lifecycle-status effect. Nothing in the reviewed sources changes USDT or USDC backing, issuer redemption, peg state, reserve state, or legal classification.</p>
+    <p>SOG does not force this development into the current Market Access Record v1 function model. That schema presently covers buy/sell, deposit, withdrawal, external-wallet transfer, and direct issuer mint/redemption; merchant payment is a different function and would require a separately reviewed schema extension rather than being mislabeled as one of those functions.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">What this changes</div>
+    <p>The material change is distribution and payment usability for a defined customer population: eligible overseas Binance Pay users can now use supported stablecoin balances through a large existing Japanese merchant-acquiring network without first holding JPY in their Binance account.</p>
+    <p>The development is therefore relevant to stablecoin adoption even though the merchant-side settlement asset remains JPY. SOG separates those two layers instead of describing the launch as direct PayPay settlement in USDT or USDC.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Sources</div>
+    <ul>
+      <li><a href="https://www.binance.com/fr-AF/support/faq/detail/7e1aa76f8d0e497e9ab46a3976718377" rel="noreferrer">Binance, September 29, 2026 — How to Pay with Binance Pay at a PayPay Merchant in Japan as a Visitor?</a> — eligibility, checkout flow, supported assets including USDT and USDC, and automatic conversion to JPY.</li>
+      <li><a href="https://www.binance.com/en/support/announcement/detail/a06effca2686446a9d81ff112d5ba371" rel="noreferrer">Binance, September 30, 2026 — Binance Pay Brings PayPay QR Payments to Tourists in Japan</a> — launch scope, PayPay merchant coverage, cross-border checkout, and automatic JPY conversion.</li>
+      <li><a href="https://about.paypay.ne.jp/en/pr/20260930/01/" rel="noreferrer">PayPay Corporation, September 30, 2026 — PayPay Adds “Binance Pay” Across Its Inbound Merchant Partner Network</a> — HIVEX connection, nationwide PayPay merchant acceptance, JPY merchant settlement, and Japan-resident exclusion.</li>
+    </ul>
+  </section>
+</ArticleLayout>

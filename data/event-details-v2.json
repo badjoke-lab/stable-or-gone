@@ -576,5 +576,21 @@
       "sog_src_binance_circle_usdc_partnership_20260922"
     ],
     "event_detail_kind": "other"
+  },
+  {
+    "id": "sog_ev_usdt_usdc_2026_09_binance_pay_paypay",
+    "subject_stablecoin_ids": [
+      "sog_st_usdt",
+      "sog_st_usdc"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_tether",
+      "sog_issuer_circle"
+    ],
+    "evidence_ids": [
+      "sog_src_binance_pay_paypay_japan_faq_20260929",
+      "sog_src_paypay_binance_pay_hivex_20260930"
+    ],
+    "event_detail_kind": "other"
   }
 ]

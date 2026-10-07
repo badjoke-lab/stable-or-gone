@@ -66,5 +66,21 @@
     "confidence": "high",
     "source_count": 2,
     "notes": "Primary Circle and Binance announcements confirm the equity investment and five-year USDC commercial agreement. The event records distribution/adoption context only; no reserve, redemption, lifecycle, peg, or country-wide availability change is inferred."
+  },
+  {
+    "id": "sog_ev_usdt_usdc_2026_09_binance_pay_paypay",
+    "stablecoin_id": "sog_st_usdt",
+    "event_type": "payment_settlement_launch",
+    "event_date": "2026-09-30",
+    "title": "Binance Pay opens PayPay merchant payments in Japan with USDT and USDC support",
+    "description": "Binance Pay opened cross-border payments at PayPay-supported merchants in Japan for eligible overseas visitors, with USDT and USDC among the supported Binance Pay assets. Binance states that the payer's crypto is automatically converted to JPY, while PayPay states that merchants receive their sales proceeds in JPY through the HIVEX-connected payment flow. SOG records this as payment-adoption and distribution context, not as a change to either stablecoin's backing, redemption, peg, legal status, or lifecycle state.",
+    "impact_level": "medium",
+    "event_status_effect": "none",
+    "recovered": null,
+    "recovery_date": null,
+    "failure_mechanism": "payment_network_distribution_expansion",
+    "confidence": "high",
+    "source_count": 2,
+    "notes": "Provider- and customer-scope matter: the reviewed launch is for eligible overseas Binance Pay users visiting Japan and is not available to residents of Japan. The PayPay merchant receives JPY; this record does not claim that PayPay merchants directly custody or settle in USDT or USDC, nor that either asset has universal Japan-wide access."
   }
 ]
