@@ -53,5 +53,32 @@
         "sog_org_blast"
       ]
     }
+  },
+  {
+    "id": "sog_ev_usdb_blast_wind_down_20261002",
+    "title": "Blast announces L2 wind-down and USDB exit process",
+    "subject_stablecoin_ids": [
+      "sog_st_usdb"
+    ],
+    "subject_organization_ids": [
+      "sog_org_blast"
+    ],
+    "evidence_ids": [
+      "sog_src_usdb_blast_winddown_theblock_20261002",
+      "sog_src_usdb_blast_winddown_decrypt_20261002"
+    ],
+    "event_detail_kind": "termination",
+    "termination_detail": {
+      "summary": "Blast entered an announced orderly wind-down. USDB holders were directed to exit to Ethereum; normal interface withdrawals are planned through 2026-10-26, with direct Ethereum L1 bridge-contract interaction available afterward.",
+      "status": "winding_down",
+      "affected_deployment_ids": [
+        "sog_dep_usdb_blast_pr358"
+      ],
+      "related_organization_ids": [
+        "sog_org_blast"
+      ],
+      "loss_or_exposure_text": null,
+      "resolution_date": null
+    }
   }
 ]
