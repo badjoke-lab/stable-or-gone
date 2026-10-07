@@ -3,7 +3,7 @@
   "contract_id": "sog_facet_freshness_contract_pr342_v1",
   "status": "canonical_internal_derivation_contract",
   "as_of_date": "2026-10-08",
-  "review_checkpoint_id": "sog_binance_pay_paypay_usdt_usdc_144_2026_10_08",
+  "review_checkpoint_id": "sog_blast_usdb_winddown_144_2026_10_08",
   "comparison_contract_id": "sog_comparison_readiness_contract_pr336_v1",
   "market_access_governance_id": "sog_market_access_governance_v1_pr341",
   "freshness_states": [

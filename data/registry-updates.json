@@ -1,5 +1,18 @@
 [
   {
+    "id": "sog_update_2026_10_08_blast_usdb_winddown",
+    "date": "2026-10-08",
+    "title": "Blast USDB wind-down recorded",
+    "category": "data",
+    "summary": "Recorded Blast's October 2 L2 wind-down as a canonical USDB lifecycle event, updated the Ethereum exit process and native-yield context, and published a source-backed analysis.",
+    "related_paths": [
+      "/articles/blast-shutdown-usdb-native-yield/",
+      "/stablecoin/blast-usdb/",
+      "/event/sog_ev_usdb_blast_wind_down_20261002/",
+      "/updates/"
+    ]
+  },
+  {
     "id": "sog_update_2026_10_08_binance_pay_paypay_usdt_usdc",
     "date": "2026-10-08",
     "title": "Binance Pay–PayPay USDT and USDC payment access recorded",

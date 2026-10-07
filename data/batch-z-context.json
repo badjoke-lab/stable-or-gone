@@ -27,6 +27,6 @@
     "url": "https://docs.blast.io/about-blast",
     "archived_url": "https://web.archive.org/web/*/https://docs.blast.io/about-blast",
     "confidence": "high",
-    "notes": "Official protocol documentation describes DAI bridge redemption and historical MakerDAO T-bill yield sourcing. This is not an audited asset-level reserve report."
+    "notes": "Official protocol documentation described DAI bridge redemption and historical reserve-yield sourcing. Blast's October 2026 wind-down adds a staged Ethereum exit process and yield-infrastructure unwind; this record still does not represent an audited asset-level reserve report."
   }
 ]

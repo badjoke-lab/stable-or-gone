@@ -22,8 +22,9 @@
     ],
     "evidence_ids": [
       "sog_src_usdb_docs_pr358",
-      "sog_src_usdb_about_pr358"
+      "sog_src_usdb_about_pr358",
+      "sog_src_usdb_blast_winddown_theblock_20261002"
     ],
-    "notes": "USDB is described as auto-rebasing. Historical documentation names MakerDAO on-chain T-bill infrastructure as the yield source and allows future replacement; no fixed rate is asserted."
+    "notes": "USDB was designed as an auto-rebasing asset sourced from protocol reserve income. Blast's 2026-10-02 wind-down announcement states that Lido-linked assets are being unwound as part of the exit process. SOG does not assume that historical native-yield accrual or the same rate mechanism continues unchanged through shutdown."
   }
 ]

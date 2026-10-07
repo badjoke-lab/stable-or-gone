@@ -30,12 +30,13 @@
     "liquidity_class": "unknown",
     "maturity_bucket": "unknown",
     "custodian_organization_id": null,
-    "as_of_date": "2026-07-13",
+    "as_of_date": "2026-10-08",
     "confidence": "high",
     "evidence_ids": [
       "sog_src_usdb_docs_pr358",
-      "sog_src_usdb_about_pr358"
+      "sog_src_usdb_about_pr358",
+      "sog_src_usdb_blast_winddown_theblock_20261002"
     ],
-    "notes": "This component records documented protocol dependency without asserting asset-level custody, allocation percentage, or bankruptcy protection."
+    "notes": "This component records the documented protocol dependency and the 2026 wind-down context without asserting asset-level custody, allocation percentage, bankruptcy protection, or uninterrupted yield through shutdown."
   }
 ]
