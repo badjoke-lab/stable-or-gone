@@ -46,5 +46,47 @@
       "verification_status": "onchain_details_pending",
       "summary": "A reported exercise of issuer-controlled blacklist authority over a specific TRON address. Blacklisting is not recorded as seizure, burn, reserve impairment, redemption suspension, or depeg."
     }
+  },
+{
+  "id": "sog_ev_usdt_2026_10_09_cryptobilis_blacklist",
+  "subject_stablecoin_ids": [
+    "sog_st_usdt"
+  ],
+  "subject_organization_ids": [
+    "sog_issuer_tether"
+  ],
+  "evidence_ids": [
+    "sog_src_usdt_cryptobilis_bitquery_20261015",
+    "sog_src_usdt_cryptobilis_coindesk_20261012",
+    "sog_src_usdt_cryptobilis_unchained_20261012"
+  ],
+  "event_detail_kind": "issuer_control",
+  "issuer_control_detail": {
+    "event_subtype": "address_blacklisting",
+    "related_category": "issuer_control",
+    "deployment_id": "sog_dep_usdt_tron",
+    "network": "TRON",
+    "token_standard": "TRC-20",
+    "affected_addresses": [],
+    "blacklist_transaction_hash": null,
+    "related_transaction_hashes": [],
+    "reported_frozen_amount": {
+      "value": 10000000,
+      "symbol": "USDT",
+      "display_text": "Approximately 10 million USDT across 20 addresses (Bitquery estimate)",
+      "is_approximate": true
+    },
+    "trigger": "suspected_illicit_activity",
+    "legal_basis": "unknown",
+    "requesting_authority": "unknown",
+    "source_incident": "October 9, 2026 CryptoBilis-associated Ledger hardware-wallet drain reports",
+    "status_effect": "none",
+    "market_status_effect": "none_confirmed",
+    "reserve_effect": "none_known",
+    "redemption_effect": "none_known",
+    "depeg_effect": "none_known",
+    "verification_status": "onchain_details_pending",
+    "summary": "Bitquery attributes 37 TRON USDT blacklist actions to Tether on October 9, with about 10 million USDT immobilized at 20 funded addresses. Four temporary blacklists were reportedly lifted later the same day. Exact blocklist transactions and addresses remain unverified by SOG; restrictions are not returned funds or issuer-wide distress."
   }
+}
 ]
