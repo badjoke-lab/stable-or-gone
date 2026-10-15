@@ -15,5 +15,22 @@
     "confidence": "medium",
     "source_count": 7,
     "notes": "Issuer-control event only. No known reserve, redemption, depeg, insolvency, Tron network, or Monero protocol effect is recorded."
-  }
+  },
+{
+  "id": "sog_ev_usdt_2026_10_09_cryptobilis_blacklist",
+  "stablecoin_id": "sog_st_usdt",
+  "issuer_id": "sog_issuer_tether",
+  "event_type": "issuer_freeze",
+  "event_date": "2026-10-09",
+  "title": "Reported Tether freeze of approximately 10 million USDT linked to CryptoBilis wallet thefts",
+  "description": "Bitquery's blockchain analysis reports that Tether blacklisted 37 TRON addresses linked to the October 2026 CryptoBilis-associated hardware-wallet drain, including 20 addresses holding approximately 10 million USDT. The restrictions were reported on October 9, and Bitquery says four temporarily blacklisted addresses later identified as THORChain vaults were unblocked. These are externally reported issuer-control actions; SOG does not equate freezing balances with returning funds to victims.",
+  "impact_level": "high",
+  "event_status_effect": "none",
+  "recovered": null,
+  "recovery_date": null,
+  "failure_mechanism": "issuer_address_blacklisting",
+  "confidence": "medium",
+  "source_count": 3,
+  "notes": "Scope is issuer-controlled USDT address blacklisting on TRON only. The estimate comes from Bitquery's Oct 15 updated tracing, corroborated in Oct 12 reporting; the individually affected blacklist addresses and transaction hashes have not been independently reproduced by SOG. Tether's first-party confirmation, legal basis, permanent duration, and recipient return remain unknown. No peg, reserves, issuance, redemption, or USDT lifecycle impairment is asserted. The separate Ledger device compromise is not classified by SOG."
+}
 ]

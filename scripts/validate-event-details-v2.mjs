@@ -97,7 +97,10 @@ for (const overlay of overlays) {
     if (!issuerControlSubtypes.has(detail.event_subtype)) failures.push(`${overlay.id}: invalid issuer-control subtype ${detail.event_subtype}`);
     if (detail.related_category !== undefined && detail.related_category !== 'issuer_control') failures.push(`${overlay.id}: related_category must be issuer_control`);
     if (detail.deployment_id && !deploymentIds.has(detail.deployment_id)) failures.push(`${overlay.id}: missing deployment ${detail.deployment_id}`);
-    ids(detail.affected_addresses, `${overlay.id}: affected_addresses`);
+    // An unresolved issuer freeze can be recorded without inventing a blacklist address.
+    if (detail.verification_status === 'reported_only' || detail.verification_status === 'onchain_details_pending') {
+      if (!Array.isArray(detail.affected_addresses) || detail.affected_addresses.some((item) => typeof item !== 'string' || !item)) failures.push(`${overlay.id}: affected_addresses must be a string array`);
+    } else ids(detail.affected_addresses, `${overlay.id}: affected_addresses`);
     optionalString(detail.blacklist_transaction_hash, `${overlay.id}: blacklist_transaction_hash`);
     if (detail.related_transaction_hashes !== undefined && (!Array.isArray(detail.related_transaction_hashes) || detail.related_transaction_hashes.some((item) => typeof item !== 'string'))) failures.push(`${overlay.id}: related_transaction_hashes must be a string array`);
     amount(detail.reported_frozen_amount, `${overlay.id}: reported_frozen_amount`);
