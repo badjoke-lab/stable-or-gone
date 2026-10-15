@@ -138,5 +138,95 @@
     "event_ids": ["sog_ev_usdt_2026_06_12_tron_blacklist"],
     "claim_scopes": ["review_snapshot", "known_unknowns"],
     "notes": "Repository snapshot preserving the reviewed source list, verified values, and unresolved primary-evidence gaps."
-  }
+  },
+{
+  "id": "sog_src_usdt_cryptobilis_bitquery_20261015",
+  "stablecoin_id": "sog_st_usdt",
+  "issuer_id": "sog_issuer_tether",
+  "event_id": "sog_ev_usdt_2026_10_09_cryptobilis_blacklist",
+  "source_type": "investigator_report",
+  "title": "Ledger CryptoBilis Hack: $102.0M Drained, Where It Went — on-chain freeze investigation",
+  "url": "https://www.bitquery.io/investigations/ledger-cryptobilis-hack",
+  "publisher": "Bitquery Investigations",
+  "published_at": "2026-10-09",
+  "archived_url": null,
+  "accessed_at": "2026-10-15",
+  "reliability": "high",
+  "claim_scope": "onchain_analyst_report",
+  "stablecoin_ids": [
+    "sog_st_usdt"
+  ],
+  "organization_ids": [
+    "sog_issuer_tether"
+  ],
+  "event_ids": [
+    "sog_ev_usdt_2026_10_09_cryptobilis_blacklist"
+  ],
+  "claim_scopes": [
+    "onchain_analyst_report",
+    "reported_frozen_amount",
+    "issuer_control_scope"
+  ],
+  "notes": "Bitquery's evolving investigation, updated October 15, reports 37 TRON blacklist actions on October 9 and approximately 10 million USDT immobilized in 20 addresses, with four later unblacklisted THORChain vaults. SOG has not independently reconstructed exact contract transactions or addresses. Analyst claims must not be mistaken for a Tether first-party announcement."
+},
+{
+  "id": "sog_src_usdt_cryptobilis_coindesk_20261012",
+  "stablecoin_id": "sog_st_usdt",
+  "issuer_id": "sog_issuer_tether",
+  "event_id": "sog_ev_usdt_2026_10_09_cryptobilis_blacklist",
+  "source_type": "news_article",
+  "title": "Ledger claims CryptoBilis cases are limited as up to $93M is traced, $10M frozen",
+  "url": "https://www.coindesk.com/tech/2026/10/12/ledger-claims-cryptobilis-cases-are-limited-as-up-to-usd93m-is-traced-usd10m-frozen",
+  "publisher": "CoinDesk",
+  "published_at": "2026-10-12",
+  "archived_url": null,
+  "accessed_at": "2026-10-15",
+  "reliability": "medium",
+  "claim_scope": "secondary_freeze_report",
+  "stablecoin_ids": [
+    "sog_st_usdt"
+  ],
+  "organization_ids": [
+    "sog_issuer_tether"
+  ],
+  "event_ids": [
+    "sog_ev_usdt_2026_10_09_cryptobilis_blacklist"
+  ],
+  "claim_scopes": [
+    "secondary_freeze_report",
+    "reported_frozen_amount",
+    "issuer_control_scope"
+  ],
+  "notes": "CoinDesk attributes the approximately 10 million USDT freeze to blockchain investigation; it reports that Tether did not immediately respond to requests for confirmation. The theft loss total is not independently endorsed by SOG."
+},
+{
+  "id": "sog_src_usdt_cryptobilis_unchained_20261012",
+  "stablecoin_id": "sog_st_usdt",
+  "issuer_id": "sog_issuer_tether",
+  "event_id": "sog_ev_usdt_2026_10_09_cryptobilis_blacklist",
+  "source_type": "news_article",
+  "title": "Ledger Says All Confirmed Cases Trace to Reseller CryptoBilis, Gives No Loss Total",
+  "url": "https://unchainedcrypto.com/ledger-says-all-confirmed-cases-trace-to-reseller-cryptobilis-gives-no-loss-total/",
+  "publisher": "Unchained",
+  "published_at": "2026-10-12",
+  "archived_url": null,
+  "accessed_at": "2026-10-15",
+  "reliability": "medium",
+  "claim_scope": "secondary_freeze_report",
+  "stablecoin_ids": [
+    "sog_st_usdt"
+  ],
+  "organization_ids": [
+    "sog_issuer_tether"
+  ],
+  "event_ids": [
+    "sog_ev_usdt_2026_10_09_cryptobilis_blacklist"
+  ],
+  "claim_scopes": [
+    "secondary_freeze_report",
+    "reported_frozen_amount",
+    "issuer_control_scope"
+  ],
+  "notes": "Unchained cites Bitquery for 37 blocked addresses and approximately 10 million USDT frozen across 20 of them. This corroborates publication of the attribution but is not an independent blockchain validation."
+}
 ]
