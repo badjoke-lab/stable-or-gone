@@ -28,5 +28,25 @@
     "severity": "medium",
     "last_checked_at": "2026-06-14",
     "notes": "Any unfreeze, burn, reissuance, or return of funds must be recorded as a separate event."
-  }
+  },
+{
+  "id": "sog_unk_usdt_cryptobilis_blacklist_transactions_202610",
+  "stablecoin_id": "sog_st_usdt",
+  "issuer_id": "sog_issuer_tether",
+  "topic": "blacklist_addresses_and_transaction_hashes",
+  "description": "The exact October 9 USDT contract blacklist and subsequent unblacklist transaction hashes and all 37 implicated TRON addresses have not yet been independently reconstructed by SOG. Bitquery reports that 20 of the blacklisted addresses held approximately 10 million USDT and that four THORChain vault addresses were later unblocked.",
+  "severity": "high",
+  "last_checked_at": "2026-10-15",
+  "notes": "Do not fabricate address lists or substitute drain transfers for issuer blacklist transactions. Source of the count is Bitquery."
+},
+{
+  "id": "sog_unk_usdt_cryptobilis_legal_basis_and_funds_outcome_202610",
+  "stablecoin_id": "sog_st_usdt",
+  "issuer_id": "sog_issuer_tether",
+  "topic": "issuer_freeze_legal_basis_and_final_outcome",
+  "description": "The exact requesting authority, legal basis, Tether first-party confirmation of the reported USDT freeze, duration of the remaining restrictions, and any later burns, reissuance, or victim reimbursements have not been independently established for the October 2026 CryptoBilis-linked addresses.",
+  "severity": "high",
+  "last_checked_at": "2026-10-15",
+  "notes": "Freeze does not equal seizure, restitution, or recovered victim funds. Any future unfreeze, return, burn, or reissuance needs a separately dated supported event."
+}
 ]
