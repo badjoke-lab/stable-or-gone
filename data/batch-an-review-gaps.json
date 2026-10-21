@@ -1,0 +1,12 @@
+[
+  {
+    "id": "sog_ku_standx_dusd_remaining_reserves_exit_20261022",
+    "stablecoin_id": "sog_st_dusd_standx",
+    "issuer_id": "sog_issuer_standx",
+    "topic": "redemption_capacity_contract_identity_remaining_reserves_and_final_exit",
+    "description": "Issuer legal identity and jurisdiction, chain-specific canonical DUSD token addresses, reserves at announcement and post-wind-down, direct eligibility or operational enforcement of mint-stop, redemption requests completed by deadline, settlement finality and liquidity after January 31 are not independently established. Historic yield claims must not imply ongoing yield after October 15.",
+    "severity": "high",
+    "last_checked_at": "2026-10-22",
+    "notes": "Require fresh first-party operator statement, live contract verification, or independently verifiable redemption evidence for final-state changes."
+  }
+]
