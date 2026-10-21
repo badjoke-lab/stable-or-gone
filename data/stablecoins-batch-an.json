@@ -1,0 +1,31 @@
+[
+  {
+    "id": "sog_st_dusd_standx",
+    "slug": "standx-dusd",
+    "name": "StandX DUSD",
+    "symbol": "DUSD",
+    "aliases": [
+      "DUSD",
+      "StandX Dollar",
+      "StandX DUSD"
+    ],
+    "status": "limited",
+    "issuer_id": "sog_issuer_standx",
+    "peg_asset": "USD",
+    "collateral_model": "yield_bearing",
+    "reserve_disclosure_status": "unknown",
+    "redemption_status": "wind_down",
+    "who_can_redeem": "StandX documentation describes DUSD redemption by holders through the official portfolio interface, subject to signed orders, minimum amounts, fees and processing. The precise legal holder/issuer redemption claim is not independently established.",
+    "retail_redemption": "standx_protocol_redemption_subject_to_process",
+    "institutional_redemption": "unknown",
+    "minimum_redemption": "10 DUSD (per operator documentation; reconfirm availability)",
+    "redemption_region_notes": "No complete country/eligibility list independently established.",
+    "redemption_notes": "StandX documentation states a standard seven-day redemption processing period and a minimum 10 DUSD request. Contemporary October 15 wind-down reports place the last request and withdrawal date at January 31, 2027. Seven-day processing and submission deadline are distinct; final settlements must be checked separately.",
+    "launch_date": null,
+    "discontinued_date": null,
+    "summary": "StandX's yield-bearing USD-targeted DUSD, used within its BNB Chain and Solana perpetual trading ecosystem, is in an announced phased wind-down. Minting is reportedly ending and DUSD redemption requests and platform withdrawals are scheduled to close January 31, 2027.",
+    "confidence": "medium",
+    "last_verified_at": "2026-10-22",
+    "notes": "Do not confuse with other assets bearing DUSD ticker. Treat this as limited, not discontinued or failed, while redemption remains scheduled/available. Source review supports redemption methods but not an independent assessment of present reserves or completed payment to all holders."
+  }
+]

@@ -1,0 +1,31 @@
+[
+  {
+    "id": "sog_st_dusd_standx",
+    "lifecycle_status": "restricted",
+    "issuance_status": "paused",
+    "peg_reference": {
+      "kind": "fiat",
+      "asset": "USD",
+      "target_value": 1,
+      "notes": "DUSD is USD-targeted according to the operator; current peg stability and exact reserve capacity not independently verified."
+    },
+    "backing_types": [
+      "unknown"
+    ],
+    "stabilization_mechanism": "delta_neutral",
+    "governance_model": "protocol_governed",
+    "asset_class": "stablecoin",
+    "reference_target": "fiat",
+    "redemption_or_exit_model": "protocol_redemption",
+    "yield_or_rebase_profile": {
+      "mode": "unknown",
+      "accrual_target": "unknown",
+      "yield_source": "unknown",
+      "accrual_mechanism": "unknown",
+      "rate_type": "unknown",
+      "rate_source": null,
+      "notes": "Past yield features do not establish a current or future entitlement during the 2026-2027 wind-down."
+    },
+    "classification_notes": "Limited/winding-down asset with documented operator redemption paths; protocol redemption differs from established fiat issuer redemption, which is not inferred."
+  }
+]

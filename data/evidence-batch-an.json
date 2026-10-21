@@ -1,0 +1,117 @@
+[
+  {
+    "id": "sog_src_standx_dusd_redeem_docs_20261022",
+    "stablecoin_id": "sog_st_dusd_standx",
+    "issuer_id": "sog_issuer_standx",
+    "event_id": null,
+    "source_type": "official_documentation",
+    "title": "Redeeming DUSD",
+    "url": "https://docs.standx.com/docs/dusd-solutions/redeeming-dusd",
+    "publisher": "StandX",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://docs.standx.com/docs/dusd-solutions/redeeming-dusd",
+    "accessed_at": "2026-10-22",
+    "reliability": "high",
+    "claim_scope": "redemption_rules_minimum_lock_processing",
+    "stablecoin_ids": [
+      "sog_st_dusd_standx"
+    ],
+    "organization_ids": [
+      "sog_issuer_standx"
+    ],
+    "claim_scopes": [
+      "redemption",
+      "current_state"
+    ],
+    "event_ids": [],
+    "is_primary": true
+  },
+  {
+    "id": "sog_src_standx_dusd_docs_faq_20261022",
+    "stablecoin_id": "sog_st_dusd_standx",
+    "issuer_id": "sog_issuer_standx",
+    "event_id": null,
+    "source_type": "official_documentation",
+    "title": "StandX Product FAQ",
+    "url": "https://docs.standx.com/docs/dusd-overview/product-faq",
+    "publisher": "StandX",
+    "published_at": null,
+    "archived_url": "https://web.archive.org/web/*/https://docs.standx.com/docs/dusd-overview/product-faq",
+    "accessed_at": "2026-10-22",
+    "reliability": "high",
+    "claim_scope": "historic_minting_and_redemption_terms",
+    "stablecoin_ids": [
+      "sog_st_dusd_standx"
+    ],
+    "organization_ids": [
+      "sog_issuer_standx"
+    ],
+    "claim_scopes": [
+      "identity",
+      "backing",
+      "redemption"
+    ],
+    "event_ids": [],
+    "is_primary": true
+  },
+  {
+    "id": "sog_src_standx_dusd_winddown_defiprime_20261015",
+    "stablecoin_id": "sog_st_dusd_standx",
+    "issuer_id": "sog_issuer_standx",
+    "event_id": "sog_ev_standx_dusd_wind_down_20261015",
+    "source_type": "news_report",
+    "title": "StandX sets January closure and DUSD exit dates",
+    "url": "https://defiprime.com/standx-sets-january-closure-and-dusd-exit-dates",
+    "publisher": "DeFi Prime",
+    "published_at": "2026-10-15",
+    "archived_url": null,
+    "accessed_at": "2026-10-22",
+    "reliability": "medium",
+    "claim_scope": "wind_down_deadlines_and_minting_restrictions",
+    "stablecoin_ids": [
+      "sog_st_dusd_standx"
+    ],
+    "organization_ids": [
+      "sog_issuer_standx"
+    ],
+    "claim_scopes": [
+      "lifecycle",
+      "redemption",
+      "current_state"
+    ],
+    "event_ids": [
+      "sog_ev_standx_dusd_wind_down_20261015"
+    ],
+    "is_primary": false
+  },
+  {
+    "id": "sog_src_standx_dusd_winddown_tokenpost_20261015",
+    "stablecoin_id": "sog_st_dusd_standx",
+    "issuer_id": "sog_issuer_standx",
+    "event_id": "sog_ev_standx_dusd_wind_down_20261015",
+    "source_type": "news_report",
+    "title": "StandX Begins Wind-Down, Ends Yield Payments and Rules Out a Token",
+    "url": "https://www.tokenpost.com/news/business/32326",
+    "publisher": "TokenPost",
+    "published_at": "2026-10-15",
+    "archived_url": null,
+    "accessed_at": "2026-10-22",
+    "reliability": "medium",
+    "claim_scope": "wind_down_DUSD_yield_and_redemption_deadlines",
+    "stablecoin_ids": [
+      "sog_st_dusd_standx"
+    ],
+    "organization_ids": [
+      "sog_issuer_standx"
+    ],
+    "claim_scopes": [
+      "lifecycle",
+      "redemption",
+      "yield"
+    ],
+    "event_ids": [
+      "sog_ev_standx_dusd_wind_down_20261015"
+    ],
+    "is_primary": false
+  }
+]

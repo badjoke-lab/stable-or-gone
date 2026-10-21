@@ -1,0 +1,18 @@
+[
+  {
+    "id": "sog_rel_standx_dusd_protocol_operator_20261022",
+    "stablecoin_id": "sog_st_dusd_standx",
+    "organization_id": "sog_issuer_standx",
+    "role": "protocol_operator",
+    "start_date": null,
+    "end_date": null,
+    "status": "active",
+    "evidence_ids": [
+      "sog_src_standx_dusd_redeem_docs_20261022",
+      "sog_src_standx_dusd_docs_faq_20261022",
+      "sog_src_standx_dusd_winddown_defiprime_20261015",
+      "sog_src_standx_dusd_winddown_tokenpost_20261015"
+    ],
+    "notes": "Operational relationship to StandX is verified from official product documents; no assertion of legally verified issuer or obligor."
+  }
+]

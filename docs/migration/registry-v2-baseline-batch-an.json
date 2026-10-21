@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0",
+  "base_manifest": "docs/migration/registry-v2-baseline.json",
+  "batch_id": "standx_dusd_winddown_20261022",
+  "captured_at": "2026-10-22",
+  "minimum_counts": {},
+  "data_group_additions": {
+    "stablecoins": [
+      "data/stablecoins-batch-an.json"
+    ],
+    "organizations": [
+      "data/organizations-batch-an.json"
+    ],
+    "relationships": [
+      "data/relationships-batch-an.json"
+    ],
+    "classifications": [
+      "data/stablecoin-classification-batch-an.json"
+    ],
+    "events": [
+      "data/events-batch-an.json"
+    ],
+    "event_details": [
+      "data/event-details-batch-an.json"
+    ],
+    "evidence": [
+      "data/evidence-batch-an.json"
+    ],
+    "evidence_relations": [
+      "data/evidence-batch-an.json"
+    ],
+    "known_unknowns": [
+      "data/batch-an-review-gaps.json"
+    ]
+  },
+  "notes": "Reviewed candidate layer for StandX DUSD. No unreviewed watchlist material. Pending exact CI and final manual merge."
+}

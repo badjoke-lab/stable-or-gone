@@ -1,0 +1,39 @@
+[
+  {
+    "id": "sog_st_dusd_standx",
+    "reserve_profile": {
+      "backing_types": [
+        "other"
+      ],
+      "summary": "StandX describes DUSD as backed by base assets including USDT and managed through hedged positions; available documentation alone does not establish current total reserves, custody details, auditor assurance or redemption capacity following the wind-down announcement.",
+      "disclosure_status": "unknown",
+      "as_of_date": "2026-10-22",
+      "latest_report_id": null,
+      "confidence": "low",
+      "evidence_ids": [
+        "sog_src_standx_dusd_redeem_docs_20261022",
+        "sog_src_standx_dusd_docs_faq_20261022"
+      ]
+    },
+    "redemption_profile": {
+      "status": "wind_down",
+      "settlement_asset": "USDT or supported assets, subject to operator process",
+      "eligible_parties": "StandX documentation says DUSD is redeemable regardless of acquisition method, subject to portfolio/wallet, minimum, fees and operator order validation.",
+      "retail_access": "redemption_interface_documented_availability_not_transaction_tested",
+      "institutional_access": "unknown",
+      "minimum_amount_text": "10 DUSD",
+      "fee_text": "Protocol redemption fees may apply and actual amounts are shown before confirmation. Official FAQ refers to 0.1%, while redemption documentation describes variable fee components.",
+      "settlement_time_text": "Standard seven-day lock period after requesting redemption per operator documentation; closure announcement gives January 31, 2027 as the latest redemption request deadline.",
+      "jurisdiction_restrictions": [
+        "jurisdiction_and_current_eligibility_unverified"
+      ],
+      "as_of_date": "2026-10-22",
+      "confidence": "medium",
+      "evidence_ids": [
+        "sog_src_standx_dusd_redeem_docs_20261022",
+        "sog_src_standx_dusd_docs_faq_20261022",
+        "sog_src_standx_dusd_winddown_defiprime_20261015"
+      ]
+    }
+  }
+]
