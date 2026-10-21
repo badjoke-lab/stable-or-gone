@@ -1,0 +1,15 @@
+[
+  {
+    "id": "sog_issuer_standx",
+    "slug": "standx",
+    "name": "StandX",
+    "organization_type": "issuer",
+    "jurisdiction": "unknown",
+    "official_url": "https://standx.com/",
+    "status": "limited",
+    "summary": "Protocol operator behind StandX DUSD and its phased 2026-2027 mint and redemption wind-down. The legal entity obligated on DUSD holder claims has not been independently established.",
+    "confidence": "medium",
+    "last_verified_at": "2026-10-22",
+    "notes": "Canonical organization counterpart to legacy issuer compatibility row sog_issuer_standx. This does not assert a verified corporate legal person or that all DUSD redemptions completed."
+  }
+]
