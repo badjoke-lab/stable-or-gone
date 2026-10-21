@@ -1,0 +1,17 @@
+[
+  {
+    "id": "sog_issuer_standx",
+    "slug": "standx",
+    "name": "StandX",
+    "issuer_type": "protocol",
+    "jurisdiction": "unknown",
+    "related_stablecoins": [
+      "standx-dusd"
+    ],
+    "official_url": "https://standx.com/",
+    "summary": "Operator and protocol behind DUSD issuance and redemption mechanisms; issuer legal entity and jurisdiction are not independently established in the reviewed sources.",
+    "confidence": "medium",
+    "last_verified_at": "2026-10-22",
+    "notes": "Issuer relationship here is operational/protocol based and does not establish the contractual legal obligor for DUSD holder claims."
+  }
+]
