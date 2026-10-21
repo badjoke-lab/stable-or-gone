@@ -1,0 +1,16 @@
+[
+  {
+    "id": "sog_ev_standx_dusd_wind_down_20261015",
+    "stablecoin_id": "sog_st_dusd_standx",
+    "issuer_id": "sog_issuer_standx",
+    "event_type": "wind_down_announced",
+    "event_date": "2026-10-15",
+    "title": "StandX announces DUSD minting restriction and final redemption window",
+    "description": "StandX announced its phased closure; contemporaneous reports state DUSD minting and new registration would close October 20, 2026, and redemption requests and platform withdrawals would close January 31, 2027. The 2027 deadline is future-dated and is not evidence that redemption has already ended.",
+    "impact_level": "critical",
+    "confidence": "medium",
+    "source_count": 2,
+    "event_status_effect": "limited",
+    "notes": "No verified proof of completed redemptions, reserves or final shutdown. Do not set discontinued_date before actual cessation is evidenced."
+  }
+]
