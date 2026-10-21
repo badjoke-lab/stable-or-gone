@@ -152,12 +152,18 @@ export const guides: GuideEntry[] = [
   {
     slug: 'genius-act-stablecoins',
     title: 'GENIUS Act and Stablecoins',
-    summary: 'A beginner-friendly guide to the U.S. payment-stablecoin law, its implementation timeline, and the questions it creates for representative dollar stablecoins.',
+    summary: 'The U.S. stablecoin law, the October 21, 2026 OCC final rule, its January 2027 effective date, and unresolved issuer-specific authorization questions.',
     category: 'regulation',
     publishedAt: '2026-06-25',
-    informationCurrentThrough: '2026-06-25',
-    updatedAt: null,
-    revisions: [],
+    informationCurrentThrough: '2026-10-21',
+    updatedAt: '2026-10-21',
+    revisions: [
+      {
+        date: '2026-10-21',
+        note: 'Updated the timeline for OCC final implementing rule 2026-50, separate AML/sanctions rulemaking, application and waiver guidance 2026-51, and revised proposed reporting forms 2026-52. No named stablecoin approval or lifecycle change is inferred.',
+        kind: 'update'
+      }
+    ],
     featured: true,
     theme: 'us',
     regionLabel: 'United States'
