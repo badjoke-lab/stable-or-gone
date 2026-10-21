@@ -1,0 +1,17 @@
+[
+  {
+    "id": "sog_ev_standx_dusd_wind_down_20261015",
+    "title": "StandX DUSD redemption and minting wind-down announced",
+    "subject_stablecoin_ids": [
+      "sog_st_dusd_standx"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_standx"
+    ],
+    "evidence_ids": [
+      "sog_src_standx_dusd_winddown_defiprime_20261015",
+      "sog_src_standx_dusd_winddown_tokenpost_20261015"
+    ],
+    "event_detail_kind": "other"
+  }
+]
