@@ -1,0 +1,110 @@
+---
+import ArticleLayout from '../../../layouts/ArticleLayout.astro';
+const headline = 'OCC Finalizes GENIUS Act Stablecoin Rule: What Changes in January 2027';
+const title = `${headline} — Stable or Gone`;
+const description = 'On October 21, 2026, the OCC finalized its GENIUS Act implementing rule for payment stablecoin issuers under its jurisdiction. The rule takes effect January 18, 2027; separate AML rules and issuer approvals are not yet settled.';
+const canonicalPath = '/articles/occ-genius-act-final-rule-october-2026/';
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'NewsArticle',
+  headline,
+  description,
+  url: `https://www.stableorgone.com${canonicalPath}`,
+  inLanguage: 'en',
+  datePublished: '2026-10-21',
+  dateModified: '2026-10-21',
+  isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://www.stableorgone.com/' },
+  about: ['GENIUS Act', 'Office of the Comptroller of the Currency', 'OCC', 'payment stablecoins', 'issuer regulation', 'stablecoin reserves', 'redemption']
+};
+---
+<ArticleLayout
+  title={title}
+  description={description}
+  canonicalPath={canonicalPath}
+  headline={headline}
+  sectionLabel="United States / payment stablecoin regulation"
+  deck="The OCC issued a final implementation rule on October 21, 2026. It is a material step from proposed requirements to a finalized federal supervisory framework for issuers within the OCC's jurisdiction—not a blanket approval of existing dollar stablecoins or the completion of every U.S. rulemaking."
+  publishedAt="October 21, 2026"
+  treatment="Regulatory analysis / no asset-level canonical change"
+  scope="GENIUS Act / OCC final rule / issuers / reserves / redemption / reporting"
+  jsonLd={jsonLd}
+>
+  <section class="panel registry">
+    <div class="bar">What happened on October 21</div>
+    <p><strong>The Office of the Comptroller of the Currency issued a final rule implementing the GENIUS Act for payment stablecoin issuance and certain related activities within its jurisdiction.</strong> The OCC announced it in News Release 2026-92 and published Bulletin 2026-50. The final rule and the Act are scheduled to take effect on <strong>January 18, 2027</strong>, according to the OCC.</p>
+    <p>The GENIUS Act itself was enacted on July 18, 2025. October 21, 2026 is the date of this OCC <em>final implementing rule</em>, not a second enactment of the statute and not a new federal licence granted to any named token issuer.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">What is final—and what is not</div>
+    <table>
+      <thead><tr><th>Regulatory item</th><th>Confirmed October 21 position</th></tr></thead>
+      <tbody>
+        <tr><td>OCC implementing rule</td><td>Final rule issued for covered payment stablecoin issuers and certain custody activities within OCC jurisdiction; effective January 18, 2027.</td></tr>
+        <tr><td>Bank Secrecy Act, AML and OFAC sanctions rules</td><td>Not included in this final OCC rule; the OCC says they will be addressed in a separate rulemaking coordinated with Treasury.</td></tr>
+        <tr><td>Issuer applications and waiver requests</td><td>OCC Bulletin 2026-51 gives submission guidance, but the OCC says it will announce separately when it begins accepting and processing applications and waivers.</td></tr>
+        <tr><td>Weekly and quarterly issuer reports</td><td>Bulletin 2026-52 publishes revised reporting forms for public comment, rather than declaring those revised forms fully approved and final.</td></tr>
+        <tr><td>Other U.S. regulatory agencies</td><td>The OCC is continuing coordination; this announcement does not make every other agency's proposed rule final.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Who falls inside the OCC framework?</div>
+    <p>The final rule is directed at the entities for which the OCC has authority, including relevant national banks and federal savings associations and their subsidiaries, eligible federal nonbank payment stablecoin issuers, certain foreign issuers, and state-qualified issuers where the Act gives the OCC supervisory or enforcement authority. It also covers certain custody activities of OCC-supervised institutions.</p>
+    <p>This is not a single universal authorization path for every stablecoin. Whether an asset is within a permitted issuer structure depends on the <strong>actual legal issuer</strong>, its regulator, applicable approvals or registrations, and the relevant jurisdiction. A familiar brand name alone cannot establish these facts.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Reserves, redemption and operational controls</div>
+    <p>The OCC describes the rule as setting standards for reserve backing, redemption and risk management. It implements the payment-stablecoin issuer regime established by the GENIUS Act, including the legal and supervisory framework around qualifying issuer activity and custody. Reserve and redemption obligations should be read against the final rule and each issuer's actual terms—not inferred from a token's ability to trade near one dollar.</p>
+    <p>Investors and users should also distinguish the token issuer's legal obligation to redeem from the ability to sell on an exchange, and an issuer's direct obligations from any yield, lending, staking or exchange reward offered by a separate platform. A final rule is not a guarantee against depegging, insolvency or operational disruption.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">What it does—and does not—say about USDC, USDT, PYUSD and RLUSD</div>
+    <table>
+      <thead><tr><th>Asset</th><th>What SOG can conclude from this OCC release alone</th></tr></thead>
+      <tbody>
+        <tr><td><a href="/stablecoin/usdc/">USDC</a></td><td>The issuer's applicable route and any final authorization require issuer- and regulator-specific evidence. The OCC announcement itself is not an approval certificate for USDC.</td></tr>
+        <tr><td><a href="/stablecoin/usdt/">USDT</a></td><td>Foreign-issuer and U.S. distribution questions remain distinct; the release does not establish a new U.S. approval, ban or automatic delisting.</td></tr>
+        <tr><td><a href="/stablecoin/pyusd/">PYUSD</a></td><td>Existing issuer arrangements must be assessed under the applicable permitted-issuer pathway; the announcement alone does not change PYUSD's lifecycle.</td></tr>
+        <tr><td><a href="/stablecoin/rlusd/">RLUSD</a></td><td>Any determination of a specific issuer's approval or legal status requires a separate, named source. The final rule does not certify RLUSD by name.</td></tr>
+      </tbody>
+    </table>
+    <p>Other dollar-denominated, offshore and protocol-governed stable assets also require individual analysis. Sector-wide regulation must not be converted into token-specific regulatory, reserve or redemption claims without evidence.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">What changes in SOG?</div>
+    <p><strong>Public regulatory coverage changes; individual stablecoin lifecycle status does not change from this announcement alone.</strong> The October 21 rule is sufficiently material for an editorial analysis and a revision to the <a href="/guides/genius-act-stablecoins/">GENIUS Act guide</a>. It does not justify changing asset statuses, issuer approval fields, reserve reports, redemption terms, or canonical events without direct evidence for a named asset or entity.</p>
+    <p>For chronology, this is the successor to the OCC's February/March 2026 proposed implementing rule, not a second copy of that proposal. The earlier rulemaking and this final action must remain distinguishable.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">What comes next?</div>
+    <ul>
+      <li>The January 18, 2027 effective date and practical transition into the OCC regime;</li>
+      <li>the OCC's separate opening notice for issuer applications and waiver requests;</li>
+      <li>final treatment of the revised weekly and quarterly reporting forms, which remain open for comment in Bulletin 2026-52;</li>
+      <li>further BSA, AML and OFAC sanctions rulemaking and remaining actions by other relevant regulators;</li>
+      <li>named-issuer approvals, registrations, restructuring or access changes supported by first-party records.</li>
+    </ul>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Primary sources</div>
+    <ul>
+      <li><a href="https://www.occ.gov/news-issuances/news-releases/2026/nr-occ-2026-92.html" rel="noreferrer">OCC News Release 2026-92, October 21, 2026</a> — final rule announcement, remaining separate AML/sanctions work, application timing and effective date.</li>
+      <li><a href="https://www.occ.gov/news-issuances/bulletins/2026/bulletin-2026-50.html" rel="noreferrer">OCC Bulletin 2026-50, October 21, 2026</a> — GENIUS Act regulations: final rule and jurisdictional scope.</li>
+      <li><a href="https://www.occ.gov/news-issuances/bulletins/2026/bulletin-2026-51.html" rel="noreferrer">OCC Bulletin 2026-51, October 21, 2026</a> — waivers and application-submission guidance.</li>
+      <li><a href="https://www.occ.gov/news-issuances/bulletins/2026/bulletin-2026-52.html" rel="noreferrer">OCC Bulletin 2026-52, October 21, 2026</a> — revised reporting forms and instructions published for comment.</li>
+      <li><a href="https://www.congress.gov/119/plaws/publ27/PLAW-119publ27.htm" rel="noreferrer">Public Law 119-27, July 18, 2025</a> — GENIUS Act statute.</li>
+    </ul>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Editorial and evidence boundary</div>
+    <p>This article is a source-backed account of U.S. regulatory developments, not a claim that SOG has independently verified any named issuer's authorization, financial soundness or token-specific legal status. It is not financial or legal advice. Subsequent regulator decisions and issuer disclosures may change the facts.</p>
+  </section>
+</ArticleLayout>
