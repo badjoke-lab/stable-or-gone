@@ -1,0 +1,11 @@
+{
+  "batch_id": "2026-10-30-binance-issuer-control",
+  "captured_at": "2026-10-30",
+  "minimum_counts": {
+    "events": 226,
+    "event_details": 226,
+    "evidence": 651,
+    "evidence_relations": 651
+  },
+  "data_group_additions": {}
+}
