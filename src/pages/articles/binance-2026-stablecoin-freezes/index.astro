@@ -1,0 +1,95 @@
+---
+import ArticleLayout from '../../../layouts/ArticleLayout.astro';
+const headline = 'Binance Wallet Incident: Why Tether and Circle Froze Billions in Stablecoins';
+const title = `${headline} — Stable or Gone`;
+const description = 'Binance disclosed a major wallet security incident in October 2026. Tether and Circle froze incident-linked USDT and USDC, but issuer blacklisting is not the same as recovery, redemption failure, or a stablecoin depeg.';
+const canonicalPath = '/articles/binance-2026-stablecoin-freezes/';
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline,
+  description,
+  url: `https://www.stableorgone.com${canonicalPath}`,
+  inLanguage: 'en',
+  datePublished: '2026-10-30',
+  dateModified: '2026-10-30',
+  isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://www.stableorgone.com/' },
+  about: ['Binance', 'USDT', 'USDC', 'Tether', 'Circle', 'issuer blacklisting', 'stablecoin freeze', 'Aave']
+};
+---
+<ArticleLayout
+  title={title}
+  description={description}
+  canonicalPath={canonicalPath}
+  headline={headline}
+  sectionLabel="Security incident and issuer control"
+  deck="Tether and Circle responded to an October 29 Binance wallet incident by immobilizing balances attributed to affected addresses. SOG distinguishes the reported amount frozen from verified recoveries, the issuer's address-level control from an asset-wide restriction, and DeFi collateral risks from a confirmed Aave loss."
+  publishedAt="October 30, 2026"
+  treatment="Canonical USDT/USDC issuer-control events + analysis"
+  scope="Binance / Tether USDT / Circle USDC / issuer freeze and DeFi spillover"
+  jsonLd={jsonLd}
+>
+  <section class="panel registry">
+    <div class="bar">The incident and what Binance has confirmed</div>
+    <p><strong>Binance reported unauthorized transfers involving its wallets on October 29, 2026.</strong> Its October 30 preliminary statement estimated approximately USD 6.3 billion of affected assets, with approximately USD 3 billion frozen on-chain during containment. These are preliminary figures; neither amount represents a verified final loss or the amount returned to customers.</p>
+    <p>Binance said an initial investigation pointed to unauthorized access involving a DevOps engineer's laptop and a service container, while evidence of wallet private-key leakage had not been found. The final technical root cause and attribution remain under investigation. Binance announced temporary deposit and withdrawal restrictions and pledged to cover users' losses using its emergency fund and corporate resources.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">What the stablecoin issuers froze</div>
+    <table>
+      <thead><tr><th>Issuer / asset</th><th>Reported amount immobilized</th><th>Interpretation</th></tr></thead>
+      <tbody>
+        <tr><td>Tether / USDT</td><td>More than 1.567 billion USDT</td><td>Reported issuer-controlled restrictions on incident-linked balances, not a token-wide suspension.</td></tr>
+        <tr><td>Circle / USDC</td><td>More than 800 million USDC</td><td>Reported issuer-controlled restrictions on incident-linked balances, not evidence that USDC redemption stopped.</td></tr>
+        <tr><td>Binance aggregate</td><td>Approximately USD 3 billion frozen on-chain</td><td>Cross-asset, cross-participant company estimate. Do not add this to issuer amounts.</td></tr>
+      </tbody>
+    </table>
+    <p>These amounts are drawn from contemporary issuer-attributed reporting and Binance's initial statement, not an independently reconciled token-by-token inventory of blacklist contracts. Exact blacklisted addresses, transaction hashes, blockchain distribution, subsequent unfreezes and ultimate restitution remain subject to source verification.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">A freeze is not a recovery</div>
+    <p>Issuer blacklist controls can prevent certain tokens from transferring at specified addresses or contracts. The balance can still appear on-chain, but an immobilized token is not thereby restored to Binance or to the original customer. Recovering value, identifying its lawful owner, changing the restrictions and settling claims are separate processes.</p>
+    <p>This is also not proof that the USDT or USDC peg failed, that reserves were impaired, or that normal direct redemption through the issuer was unavailable to eligible customers. SOG tracks these as distinct layers and leaves the stablecoins' lifecycle states unchanged on the basis of this incident alone.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Why DeFi lending complicates containment</div>
+    <p>According to the Aave ecosystem risk report, a wallet linked to the Binance-incident cluster supplied approximately 60 million USDT to Aave V3 Ethereum Core and borrowed 19,762 WETH. WETH is not a Tether-issued token, so Tether's USDT blacklist does not itself immobilize borrowed WETH.</p>
+    <p>However, describing the trade as an established Aave loan default would be misleading. LlamaRisk reported that the position was overcollateralized at its October 30 review time and did not place Aave suppliers at risk. Aave subsequently froze new supply and borrowing on numerous V3 and V4 reserves while keeping repayments, withdrawals and liquidations available. Those measures are not evidence that every Aave market was fully shut down or that Aave's lending protocol was itself exploited.</p>
+    <p>The narrower lesson is that an issuer can restrict its own tokens, but cannot automatically reverse collateral-backed loans or directly freeze assets issued or controlled by another system. Any realized shortfall would require independent proof.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Verified, reported and still unknown</div>
+    <table>
+      <thead><tr><th>Question</th><th>Evidence boundary as of October 30</th></tr></thead>
+      <tbody>
+        <tr><td>Was a Binance security event reported?</td><td>Yes. Binance has issued a preliminary incident statement and described temporary service restrictions.</td></tr>
+        <tr><td>Did Tether and Circle freeze incident-linked balances?</td><td>Yes, in issuer-attributed reporting. Exact on-chain address-level reconciliation is still incomplete.</td></tr>
+        <tr><td>Were all affected assets stolen and unrecoverable?</td><td>Not established. Reported affected transfers, blacklist freezes, realized loss and customer restitution are different metrics.</td></tr>
+        <tr><td>Were the issuers' reserve backing or redemption mechanisms impaired?</td><td>No such impairment is established by these reports.</td></tr>
+        <tr><td>Did the Aave borrowing create confirmed bad debt?</td><td>No. The Aave risk report describes the identified position as overcollateralized at the review checkpoint.</td></tr>
+        <tr><td>Is the attacker's identity or the final exploit path confirmed?</td><td>No. Preliminary mechanism descriptions and attribution theories require later verification.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Stable or Gone treatment</div>
+    <p><strong>SOG records separate issuer-control events for USDT and USDC.</strong> The canonical record identifies the issuer, asset, incident date, reported freeze, sources and unresolved transaction-level details. The issuer-freeze events have no automatic effect on each asset's peg, reserve, redemption or lifecycle classification.</p>
+    <p>This editorial analysis adds context but does not itself create new canonical facts. Any later release of blacklisted tokens, victim reimbursement, adverse market-structure effect or protocol bad debt must be recorded from newer, independently reviewable evidence.</p>
+    <p>Related canonical records: <a href="/stablecoin/usdt/">USDT</a> and <a href="/stablecoin/usdc/">USDC</a>. Related official incident record: <a href="https://hei.badjoke-lab.com/exchange/binance/">Binance on Historical Exchange Index</a>.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Sources</div>
+    <ul>
+      <li><a href="https://www.binance.com/en/support/announcement/detail/c5a8729a97ac486d963784d96c5642d7" rel="noreferrer">Binance, October 30, 2026 — Security Incident Update</a> — preliminary affected assets, frozen amount, initial investigation and response; not final loss accounting.</li>
+      <li><a href="https://www.reuters.com/legal/transactional/tether-circle-freeze-238-billion-after-binance-reports-security-incident-2026-10-29/" rel="noreferrer">Reuters, October 29–30, 2026 — Tether and Circle freeze funds tied to Binance incident</a> — issuer-attributed freeze amounts and independent response context.</li>
+      <li><a href="https://governance.aave.com/t/binance-hot-wallet-exploit-aaves-response/25954" rel="noreferrer">LlamaRisk / Aave Governance, October 30, 2026 — Binance Hot Wallet Exploit: Aave's Response</a> — first-party Aave operational report on collateral, borrowing, emergency freezes and supplier-risk assessment.</li>
+      <li><a href="https://governance.aave.com/t/risk-stewards-temporary-slope2-reductions-on-aave-v3-and-aave-v4-2026-10-30/25955" rel="noreferrer">Aave Governance, October 30, 2026 — Temporary Slope2 Reduction Proposal</a> — interest-utilization response proposal, not proof of execution.</li>
+    </ul>
+  </section>
+</ArticleLayout>
