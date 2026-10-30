@@ -1,9 +1,9 @@
 {
   "schema_version": "1.0",
   "status": "current",
-  "baseline_id": "sog_release_integrity_usdt_cryptobilis_freeze_144_assets_2026_10_15",
-  "recorded_at": "2026-10-15",
-  "source_checkpoint_commit": "record/usdt-cryptobilis-freeze-20261016",
+  "baseline_id": "sog_release_integrity_binance_issuer_freezes_2026_10_30",
+  "recorded_at": "2026-10-30",
+  "source_checkpoint_commit": "records/binance-issuer-freezes-20261030",
   "registry_parity_baseline": "docs/migration/registry-v3-parity-baseline.json",
   "expected_v2_counts": {
     "stablecoins": 144,
@@ -11,10 +11,10 @@
     "relationships": 156,
     "classifications": 144,
     "profiles": 144,
-    "events": 227,
-    "event_details": 227,
-    "evidence": 654,
-    "evidence_relations": 654,
+    "events": 229,
+    "event_details": 229,
+    "evidence": 658,
+    "evidence_relations": 658,
     "reserve_reports": 131,
     "known_unknowns": 383,
     "regulatory_notes": 9,
@@ -28,14 +28,14 @@
   },
   "expected_public_record_counts": {
     "primary_records": 144,
-    "events": 227,
-    "evidence": 654
+    "events": 229,
+    "evidence": 658
   },
   "expected_public_breakdown_counts": {
     "stablecoins": 144,
     "organizations": 124,
     "relationships": 156,
-    "evidence_relations": 654,
+    "evidence_relations": 658,
     "reserve_reports": 131,
     "known_unknowns": 383,
     "regulatory_notes": 9,
@@ -44,8 +44,8 @@
   "expected_route_counts": {
     "stablecoin_detail": 144,
     "organization_detail": 124,
-    "event_detail": 227,
-    "total_detail": 495,
+    "event_detail": 229,
+    "total_detail": 497,
     "declared_main_routes": 13
   },
   "machine_readable_contract": {
@@ -77,15 +77,15 @@
     "archive_index_count": 493,
     "archive_not_recorded_count": 137,
     "archive_partition_complete": true,
-    "new_evidence_records": 3,
+    "new_evidence_records": 4,
     "source_replacements": 0,
     "all_new_evidence_primary": false
   },
   "validator": "scripts/validate-counts-manifest-version-provenance-integrity.mjs",
   "audit_report": "docs/audits/counts-manifest-version-provenance-integrity-100-assets.md",
-  "source_pr": 687,
-  "source_commit": "record/usdt-cryptobilis-freeze-20261016",
-  "captured_at": "2026-10-15",
+  "source_pr": 690,
+  "source_commit": "records/binance-issuer-freezes-20261030",
+  "captured_at": "2026-10-30",
   "expected_market_access_records": 17,
-  "expected_detail_routes": 495
+  "expected_detail_routes": 497
 }
