@@ -1,8 +1,12 @@
 [
   {
     "id": "sog_ev_usdt_2026_06_12_tron_blacklist",
-    "subject_stablecoin_ids": ["sog_st_usdt"],
-    "subject_organization_ids": ["sog_issuer_tether"],
+    "subject_stablecoin_ids": [
+      "sog_st_usdt"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_tether"
+    ],
     "evidence_ids": [
       "sog_src_usdt_tron_initial_flow_2026",
       "sog_src_usdt_tron_blacklist_alert_2026",
@@ -19,9 +23,13 @@
       "deployment_id": "sog_dep_usdt_tron",
       "network": "TRON",
       "token_standard": "TRC-20",
-      "affected_addresses": ["T8zrPEsStbZAUx2SBhD4oHz8UW3FX9Ak9W"],
+      "affected_addresses": [
+        "T8zrPEsStbZAUx2SBhD4oHz8UW3FX9Ak9W"
+      ],
       "blacklist_transaction_hash": null,
-      "related_transaction_hashes": ["516109e27db098f540d3f11d12222ceac95dac39de47f783313a25e60746c6c2"],
+      "related_transaction_hashes": [
+        "516109e27db098f540d3f11d12222ceac95dac39de47f783313a25e60746c6c2"
+      ],
       "reported_frozen_amount": {
         "value": 72030295.55,
         "symbol": "USDT",
@@ -47,46 +55,128 @@
       "summary": "A reported exercise of issuer-controlled blacklist authority over a specific TRON address. Blacklisting is not recorded as seizure, burn, reserve impairment, redemption suspension, or depeg."
     }
   },
-{
-  "id": "sog_ev_usdt_2026_10_09_cryptobilis_blacklist",
-  "subject_stablecoin_ids": [
-    "sog_st_usdt"
-  ],
-  "subject_organization_ids": [
-    "sog_issuer_tether"
-  ],
-  "evidence_ids": [
-    "sog_src_usdt_cryptobilis_bitquery_20261015",
-    "sog_src_usdt_cryptobilis_coindesk_20261012",
-    "sog_src_usdt_cryptobilis_unchained_20261012"
-  ],
-  "event_detail_kind": "issuer_control",
-  "issuer_control_detail": {
-    "event_subtype": "address_blacklisting",
-    "related_category": "issuer_control",
-    "deployment_id": "sog_dep_usdt_tron",
-    "network": "TRON",
-    "token_standard": "TRC-20",
-    "affected_addresses": [],
-    "blacklist_transaction_hash": null,
-    "related_transaction_hashes": [],
-    "reported_frozen_amount": {
-      "value": 10000000,
-      "symbol": "USDT",
-      "display_text": "Approximately 10 million USDT across 20 addresses (Bitquery estimate)",
-      "is_approximate": true
-    },
-    "trigger": "suspected_illicit_activity",
-    "legal_basis": "unknown",
-    "requesting_authority": "unknown",
-    "source_incident": "October 9, 2026 CryptoBilis-associated Ledger hardware-wallet drain reports",
-    "status_effect": "none",
-    "market_status_effect": "none_confirmed",
-    "reserve_effect": "none_known",
-    "redemption_effect": "none_known",
-    "depeg_effect": "none_known",
-    "verification_status": "onchain_details_pending",
-    "summary": "Bitquery attributes 37 TRON USDT blacklist actions to Tether on October 9, with about 10 million USDT immobilized at 20 funded addresses. Four temporary blacklists were reportedly lifted later the same day. Exact blocklist transactions and addresses remain unverified by SOG; restrictions are not returned funds or issuer-wide distress."
+  {
+    "id": "sog_ev_usdt_2026_10_09_cryptobilis_blacklist",
+    "subject_stablecoin_ids": [
+      "sog_st_usdt"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_tether"
+    ],
+    "evidence_ids": [
+      "sog_src_usdt_cryptobilis_bitquery_20261015",
+      "sog_src_usdt_cryptobilis_coindesk_20261012",
+      "sog_src_usdt_cryptobilis_unchained_20261012"
+    ],
+    "event_detail_kind": "issuer_control",
+    "issuer_control_detail": {
+      "event_subtype": "address_blacklisting",
+      "related_category": "issuer_control",
+      "deployment_id": "sog_dep_usdt_tron",
+      "network": "TRON",
+      "token_standard": "TRC-20",
+      "affected_addresses": [],
+      "blacklist_transaction_hash": null,
+      "related_transaction_hashes": [],
+      "reported_frozen_amount": {
+        "value": 10000000,
+        "symbol": "USDT",
+        "display_text": "Approximately 10 million USDT across 20 addresses (Bitquery estimate)",
+        "is_approximate": true
+      },
+      "trigger": "suspected_illicit_activity",
+      "legal_basis": "unknown",
+      "requesting_authority": "unknown",
+      "source_incident": "October 9, 2026 CryptoBilis-associated Ledger hardware-wallet drain reports",
+      "status_effect": "none",
+      "market_status_effect": "none_confirmed",
+      "reserve_effect": "none_known",
+      "redemption_effect": "none_known",
+      "depeg_effect": "none_known",
+      "verification_status": "onchain_details_pending",
+      "summary": "Bitquery attributes 37 TRON USDT blacklist actions to Tether on October 9, with about 10 million USDT immobilized at 20 funded addresses. Four temporary blacklists were reportedly lifted later the same day. Exact blocklist transactions and addresses remain unverified by SOG; restrictions are not returned funds or issuer-wide distress."
+    }
+  },
+  {
+    "id": "sog_ev_usdt_2026_10_29_binance_security_freeze",
+    "subject_stablecoin_ids": [
+      "sog_st_usdt"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_tether"
+    ],
+    "evidence_ids": [
+      "sog_src_binance_usdt_reuters_20261030",
+      "sog_src_binance_usdt_ap_20261030"
+    ],
+    "event_detail_kind": "issuer_control",
+    "issuer_control_detail": {
+      "event_subtype": "address_blacklisting",
+      "related_category": "issuer_control",
+      "deployment_id": null,
+      "network": "not yet established for each affected token",
+      "token_standard": "unverified across reported freezes",
+      "affected_addresses": [],
+      "blacklist_transaction_hash": null,
+      "related_transaction_hashes": [],
+      "reported_frozen_amount": {
+        "value": 1567000000,
+        "symbol": "USDT",
+        "display_text": "More than 1.567 billion USDT (issuer-reported)",
+        "is_approximate": true
+      },
+      "trigger": "suspected_illicit_activity",
+      "legal_basis": "unknown",
+      "requesting_authority": "unknown",
+      "source_incident": "Binance 2026-10-29 hot-wallet security incident",
+      "status_effect": "none",
+      "market_status_effect": "none_confirmed",
+      "reserve_effect": "none_known",
+      "redemption_effect": "none_known",
+      "depeg_effect": "none_known",
+      "verification_status": "onchain_details_pending",
+      "summary": "Issuer-reported freeze of incident-linked USDT in response to Binance wallet unauthorized withdrawals. Blacklisting is neither recovered victim funds nor impairment of the entire stable asset."
+    }
+  },
+  {
+    "id": "sog_ev_usdc_2026_10_29_binance_security_freeze",
+    "subject_stablecoin_ids": [
+      "sog_st_usdc"
+    ],
+    "subject_organization_ids": [
+      "sog_issuer_circle"
+    ],
+    "evidence_ids": [
+      "sog_src_binance_usdc_reuters_20261030",
+      "sog_src_binance_usdc_ap_20261030"
+    ],
+    "event_detail_kind": "issuer_control",
+    "issuer_control_detail": {
+      "event_subtype": "address_blacklisting",
+      "related_category": "issuer_control",
+      "deployment_id": null,
+      "network": "not yet established for each affected token",
+      "token_standard": "unverified across reported freezes",
+      "affected_addresses": [],
+      "blacklist_transaction_hash": null,
+      "related_transaction_hashes": [],
+      "reported_frozen_amount": {
+        "value": 800000000,
+        "symbol": "USDC",
+        "display_text": "More than 800 million USDC (issuer-reported)",
+        "is_approximate": true
+      },
+      "trigger": "suspected_illicit_activity",
+      "legal_basis": "unknown",
+      "requesting_authority": "unknown",
+      "source_incident": "Binance 2026-10-29 hot-wallet security incident",
+      "status_effect": "none",
+      "market_status_effect": "none_confirmed",
+      "reserve_effect": "none_known",
+      "redemption_effect": "none_known",
+      "depeg_effect": "none_known",
+      "verification_status": "onchain_details_pending",
+      "summary": "Issuer-reported freeze of incident-linked USDC in response to Binance wallet unauthorized withdrawals. Blacklisting is neither recovered victim funds nor impairment of the entire stable asset."
+    }
   }
-}
 ]
