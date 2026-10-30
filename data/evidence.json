@@ -1005,5 +1005,125 @@
       "customer_scope"
     ],
     "is_primary": true
+  },
+  {
+    "id": "sog_src_binance_usdt_reuters_20261030",
+    "stablecoin_id": "sog_st_usdt",
+    "issuer_id": "sog_issuer_tether",
+    "event_id": "sog_ev_usdt_2026_10_29_binance_security_freeze",
+    "source_type": "news_article",
+    "title": "Crypto exchange Binance freezes assets after $6.3 billion security breach",
+    "url": "https://www.reuters.com/legal/transactional/tether-circle-freeze-238-billion-after-binance-reports-security-incident-2026-10-29/",
+    "publisher": "Reuters",
+    "published_at": "2026-10-30",
+    "archived_url": "https://web.archive.org/web/*/https://www.reuters.com/legal/transactional/tether-circle-freeze-238-billion-after-binance-reports-security-incident-2026-10-29/",
+    "accessed_at": "2026-10-30",
+    "reliability": "high",
+    "claim_scope": "event",
+    "notes": "Independent reporting attributes the reported USDT freeze amount to issuer leadership; addresses, chain coverage and restitution not established.",
+    "stablecoin_ids": [
+      "sog_st_usdt"
+    ],
+    "organization_ids": [
+      "sog_issuer_tether"
+    ],
+    "event_ids": [
+      "sog_ev_usdt_2026_10_29_binance_security_freeze"
+    ],
+    "claim_scopes": [
+      "issuer_control",
+      "incident_response"
+    ],
+    "is_primary": false
+  },
+  {
+    "id": "sog_src_binance_usdt_ap_20261030",
+    "stablecoin_id": "sog_st_usdt",
+    "issuer_id": "sog_issuer_tether",
+    "event_id": "sog_ev_usdt_2026_10_29_binance_security_freeze",
+    "source_type": "news_article",
+    "title": "Binance flags 'potential security issue,' says approximately $6.3 billion impacted",
+    "url": "https://apnews.com/article/39cda8ceb8095e036334a18549d3d20d",
+    "publisher": "Associated Press",
+    "published_at": "2026-10-30",
+    "archived_url": "https://web.archive.org/web/*/https://apnews.com/article/39cda8ceb8095e036334a18549d3d20d",
+    "accessed_at": "2026-10-30",
+    "reliability": "high",
+    "claim_scope": "event",
+    "notes": "Independent reporting attributes the reported USDT freeze amount to issuer leadership; addresses, chain coverage and restitution not established.",
+    "stablecoin_ids": [
+      "sog_st_usdt"
+    ],
+    "organization_ids": [
+      "sog_issuer_tether"
+    ],
+    "event_ids": [
+      "sog_ev_usdt_2026_10_29_binance_security_freeze"
+    ],
+    "claim_scopes": [
+      "issuer_control",
+      "incident_response"
+    ],
+    "is_primary": false
+  },
+  {
+    "id": "sog_src_binance_usdc_reuters_20261030",
+    "stablecoin_id": "sog_st_usdc",
+    "issuer_id": "sog_issuer_circle",
+    "event_id": "sog_ev_usdc_2026_10_29_binance_security_freeze",
+    "source_type": "news_article",
+    "title": "Crypto exchange Binance freezes assets after $6.3 billion security breach",
+    "url": "https://www.reuters.com/legal/transactional/tether-circle-freeze-238-billion-after-binance-reports-security-incident-2026-10-29/",
+    "publisher": "Reuters",
+    "published_at": "2026-10-30",
+    "archived_url": "https://web.archive.org/web/*/https://www.reuters.com/legal/transactional/tether-circle-freeze-238-billion-after-binance-reports-security-incident-2026-10-29/",
+    "accessed_at": "2026-10-30",
+    "reliability": "high",
+    "claim_scope": "event",
+    "notes": "Independent reporting attributes the reported USDC freeze amount to issuer leadership; addresses, chain coverage and restitution not established.",
+    "stablecoin_ids": [
+      "sog_st_usdc"
+    ],
+    "organization_ids": [
+      "sog_issuer_circle"
+    ],
+    "event_ids": [
+      "sog_ev_usdc_2026_10_29_binance_security_freeze"
+    ],
+    "claim_scopes": [
+      "issuer_control",
+      "incident_response"
+    ],
+    "is_primary": false
+  },
+  {
+    "id": "sog_src_binance_usdc_ap_20261030",
+    "stablecoin_id": "sog_st_usdc",
+    "issuer_id": "sog_issuer_circle",
+    "event_id": "sog_ev_usdc_2026_10_29_binance_security_freeze",
+    "source_type": "news_article",
+    "title": "Binance flags 'potential security issue,' says approximately $6.3 billion impacted",
+    "url": "https://apnews.com/article/39cda8ceb8095e036334a18549d3d20d",
+    "publisher": "Associated Press",
+    "published_at": "2026-10-30",
+    "archived_url": "https://web.archive.org/web/*/https://apnews.com/article/39cda8ceb8095e036334a18549d3d20d",
+    "accessed_at": "2026-10-30",
+    "reliability": "high",
+    "claim_scope": "event",
+    "notes": "Independent reporting attributes the reported USDC freeze amount to issuer leadership; addresses, chain coverage and restitution not established.",
+    "stablecoin_ids": [
+      "sog_st_usdc"
+    ],
+    "organization_ids": [
+      "sog_issuer_circle"
+    ],
+    "event_ids": [
+      "sog_ev_usdc_2026_10_29_binance_security_freeze"
+    ],
+    "claim_scopes": [
+      "issuer_control",
+      "incident_response"
+    ],
+    "is_primary": false
   }
 ]
