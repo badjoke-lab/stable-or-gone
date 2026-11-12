@@ -1,0 +1,97 @@
+---
+import ArticleLayout from '../../../layouts/ArticleLayout.astro';
+const headline = 'Samsung Wallet Activates USDC on Solana for Eligible U.S. Galaxy Users';
+const title = `${headline} — Stable or Gone`;
+const description = 'Samsung Wallet activated a custodial USDC Stablecoin Account on Solana in the United States on November 2, 2026. SOG separates the eligible-device footprint from actual adoption, live Solana support from announced Sui integration, and wallet transfers from future point-of-sale payments.';
+const canonicalPath = '/articles/samsung-wallet-usdc-solana-launch/';
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline,
+  description,
+  url: `https://www.stableorgone.com${canonicalPath}`,
+  inLanguage: 'en',
+  datePublished: '2026-11-12',
+  dateModified: '2026-11-12',
+  isPartOf: { '@type': 'WebSite', name: 'Stable or Gone', url: 'https://www.stableorgone.com/' },
+  about: ['USDC', 'Samsung Wallet', 'Solana', 'Sui', 'Bastion', 'Coinbase', 'stablecoin remittances']
+};
+---
+<ArticleLayout
+  title={title}
+  description={description}
+  canonicalPath={canonicalPath}
+  headline={headline}
+  sectionLabel="Stablecoin payments, wallets and distribution"
+  deck="The product is now live for eligible U.S. users, not just announced. Samsung Wallet brings USDC storage and transfers into a familiar Galaxy app, but 82 million compatible devices are not 82 million active stablecoin users, and a remittance feature is not yet a tap-to-pay stablecoin rollout."
+  publishedAt="November 12, 2026"
+  treatment="Source-backed distribution analysis; no automatic canonical asset or market-access change"
+  scope="USDC / Samsung Wallet Stablecoin Account / U.S. eligibility / Solana"
+  jsonLd={jsonLd}
+>
+  <section class="panel registry">
+    <div class="bar">What launched, and when</div>
+    <p><strong>Samsung Wallet's Stablecoin Account went live on November 2, 2026, for eligible Galaxy users in the United States, according to the Solana Foundation's November 5 launch notice.</strong> Samsung announced the planned integration on October 7; the November 5 reporting described a service already operating, not a second launch date.</p>
+    <p>Users can buy, hold, send and receive USDC within Samsung Wallet without installing a separate cryptocurrency application or managing their own private keys. The confirmed live blockchain flow in the November 5 notice uses Solana.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">82 million compatible devices is an availability footprint</div>
+    <p>Samsung and its partners describe approximately <strong>82 million compatible Galaxy devices</strong> in the United States. This is a potential device footprint, not evidence of 82 million account registrations, active USDC holders or completed transfers.</p>
+    <p>Eligibility requires a U.S. resident at least 18 years old, a Samsung Account, a compatible Galaxy device on Android 13 or later, and account and identity verification. New York residents are excluded from the initial service.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Custody and settlement are separate roles</div>
+    <p>Samsung describes the experience as integrated into Samsung Wallet. Bastion provides regulated stablecoin account and custody infrastructure, while Coinbase acts as sub-custodian for USDC through Coinbase Prime Vault. Solana provides the live on-chain USDC transfer network described in the November 5 notice.</p>
+    <p>This is a <strong>custodial stablecoin account embedded in Samsung Wallet</strong>, not a claim that Samsung itself issues USDC or that every user receives a self-custodied blockchain wallet.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Sending to wallets and bank accounts</div>
+    <p>Eligible U.S. users can send USDC to other supported Samsung Wallet accounts and compatible external cryptocurrency wallets. The Solana Foundation says Samsung does not charge a fee for these wallet transfers, while other providers may still charge fees.</p>
+    <p>The service also supports eligible transfers to bank accounts in more than 60 countries, with recipients potentially receiving local currency. Country eligibility, fees and conversion arrangements vary; this does not establish worldwide Samsung Wallet stablecoin-account availability.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Solana is live; Sui was also announced</div>
+    <p>Samsung's October 7 announcement named Solana and Sui among its blockchain infrastructure partners, and Sui published its own October 8 integration announcement. The first-party November 5 <em>live</em> notice, however, explicitly identifies USDC on Solana.</p>
+    <p>SOG therefore distinguishes an announced Sui integration from a verified Sui production activation inside the Samsung Wallet Stablecoin Account. A future dated, first-party live-service confirmation should be reviewed separately.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Payments at checkout are still a future capability</div>
+    <p>Samsung identified online and in-store stablecoin payments as areas to explore later, alongside expansion outside the United States. The announced availability of USDC storage, transfers and remittances should not be presented as proof that Samsung Pay already settles ordinary retail purchases with USDC.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">What this means for the stablecoin registry</div>
+    <p><strong>Current SOG treatment: material USDC distribution and wallet-access development, documented here as analysis.</strong> USDC is an existing stablecoin; Samsung Wallet does not introduce a new stable asset, a new issuer, or a change in USDC's reserve backing, redemption terms or peg condition.</p>
+    <p>Any future canonical adoption Event or Market Access record requires a separate review against the current SOG event and provider-specific jurisdiction/function evidence rules. This article alone does not assert a new canonical record or extend the U.S. launch scope to the 60-plus payout destinations.</p>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Confirmed and not established</div>
+    <table>
+      <thead><tr><th>Claim</th><th>Finding</th></tr></thead>
+      <tbody>
+        <tr><td>Stablecoin Account operating in the U.S.</td><td>Yes; first-party Solana notice gives November 2, 2026 as the live date.</td></tr>
+        <tr><td>USDC on Solana available through the feature</td><td>Yes, for eligible U.S. users.</td></tr>
+        <tr><td>82 million active users</td><td>Not established; the figure concerns compatible devices.</td></tr>
+        <tr><td>Sui support already live in the same service</td><td>Not established by the cited November 5 live announcement.</td></tr>
+        <tr><td>USDC tap-to-pay retail checkout launched</td><td>No such launch is established by the sources reviewed.</td></tr>
+        <tr><td>Samsung Wallet Stablecoin Account available worldwide</td><td>No; the initial account eligibility is U.S.-specific.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="panel registry">
+    <div class="bar">Sources</div>
+    <ul>
+      <li><a href="https://solana.com/news/stablecoin-account-goes-live-in-samsung-wallet-bringing-usdc-on-solana-to-eligible-u-s-galaxy-users" rel="noreferrer">Solana Foundation — Stablecoin Account Goes Live in Samsung Wallet (November 5, 2026)</a> — operational date, eligible devices, custody arrangement, payment methods and Solana network.</li>
+      <li><a href="https://news.samsung.com/us/samsung-wallet-bring-stablecoin-access-eligible-galaxy-users-us/" rel="noreferrer">Samsung Electronics America — Samsung Wallet to Bring Stablecoin Access (October 7, 2026)</a> — original announcement, eligibility, partners and proposed future payments.</li>
+      <li><a href="https://www.coinbase.com/blog/coinbase-and-samsung-bring-usdc-to-samsung-wallet" rel="noreferrer">Coinbase — Coinbase and Samsung Bring USDC to Samsung Wallet (October 8, 2026)</a> — Coinbase Prime Vault sub-custody role.</li>
+      <li><a href="https://www.sui.io/blog/samsung-collaborates-with-sui-to-bring-usdc-to-samsung-wallet-on-82-million-u-s-galaxy-devices" rel="noreferrer">Sui — Samsung Collaborates with Sui (October 8, 2026)</a> — Sui integration announcement, distinguished from the subsequent Solana live notice.</li>
+    </ul>
+  </section>
+</ArticleLayout>
